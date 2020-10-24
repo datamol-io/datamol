@@ -1,0 +1,19 @@
+[tool.black]
+line-length = 100
+target-version = ['py37', 'py38']
+include = '\.pyi?$'
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+nb_test_files = false # buggy at the moment
+addopts = "--verbose --cov --cov-report xml --cov-report term"
+testpaths = ["tests", "notebooks"]
+
+[tool.coverage.run]
+omit = [
+    "setup.py",
+    "tests/*",
+]
+
+[tool.coverage.xml]
+output = "cov.xml"

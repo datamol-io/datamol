@@ -1,0 +1,31 @@
+name: Lint with Black
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  lint-source-code:
+    name: Lint with Black
+    runs-on: "ubuntu-latest"
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.7
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Install black
+        run: |
+          pip install black==20.8b1
+
+      - name: Lint
+        run: |
+          black --check .

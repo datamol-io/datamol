@@ -1,0 +1,7 @@
+include README.md
+include LICENSE
+include *.py
+graft datamol/data
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
+recursive-exclude * .ipynb_checkpoints/*
