@@ -1,5 +1,9 @@
 from ._version import __version__
 
+from .utils import parallelized
+
+from .data import freesolv
+
 from .log import disable_rdkit_log
 
 from .mol import PERIODIC_TABLE
