@@ -2,7 +2,7 @@
 
 **IMPORTANT: Still WIP. DO NOT USE.**
 
-`datamol` is a pythonic library to manipulate molecules. It's a layer built on top of [`rdkit`](https://www.rdkit.org/) and aims to be as light as possible.
+`datamol` is a python library to work molecules. It's a layer built on top of [`rdkit`](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
@@ -28,10 +28,6 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf")
 df = dm.read_csv("/home/data/dataset.csv")
 ```
 
-## Changelogs
-
-See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
-
 ## Install
 
 Use conda:
@@ -47,6 +43,10 @@ TODO (try [mkdocs?](https://www.mkdocs.org/))
 ## Examples
 
 See examples provided as a serie of [notebooks](./notebooks) (TODO).
+
+## Changelogs
+
+See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
 
 ## License
 
