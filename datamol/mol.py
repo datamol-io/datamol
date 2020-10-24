@@ -1,6 +1,7 @@
 from typing import Union
 
 import random
+import re
 
 from rdkit import Chem
 import selfies as sf
@@ -222,3 +223,38 @@ def from_selfies(selfies: str, as_mol: bool = False):
         return to_mol(smiles)
 
     return smiles
+
+
+def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
+    """Convert a molecule to a smarts.
+
+    Args:
+        mol (Chem.Mol): a molecule.
+        keep_hs (bool, optional): Whether to keep hydrogen. This will increase the count of H atoms
+            for atoms with attached hydrogens to create a valid smarts.
+            e.g. [H]-[CH2]-[*] -> [H]-[CH3]-[*]
+
+    Returns:
+        smarts of the molecule
+    """
+
+    if mol is None:
+        return None
+
+    # Change the isotope to 42
+    for atom in mol.GetAtoms():
+        if keep_hs:
+            s = sum(na.GetAtomicNum() == 1 for na in atom.GetNeighbors())
+            if s:
+                atom.SetNumExplicitHs(atom.GetTotalNumHs() + s)
+        atom.SetIsotope(42)
+
+    # Print out the smiles, all the atom attributes will be fully specified
+    smarts = to_smiles(mol, isomeric=True, explicit_bonds=True)
+
+    if smarts is None:
+        return None
+
+    # Remove the 42 isotope labels
+    smarts = re.sub(r"\[42", "[", smarts)
+    return smarts

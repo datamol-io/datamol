@@ -120,3 +120,15 @@ class TestMol(unittest.TestCase):
 
         mol = dm.from_selfies(selfies, as_mol=True)
         assert dm.to_smiles(mol) == "CC(=O)Oc1ccccc1C(=O)O"
+
+    def to_smarts(self):
+        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        mol = dm.to_mol(smiles)
+
+        smarts = dm.to_smarts(mol, keep_hs=True)
+        assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
+
+        smarts = dm.to_smarts(mol, keep_hs=False)
+        assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
+
+        assert dm.to_smarts(None) is None

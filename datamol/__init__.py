@@ -11,6 +11,7 @@ from .mol import reorder_atoms
 from .mol import randomize_atoms
 from .mol import to_neutral
 from .mol import sanitize_mol
+from .mol import to_smarts
 
 from .fp import to_fp
 from .fp import fp_to_array
