@@ -121,7 +121,7 @@ class TestMol(unittest.TestCase):
         mol = dm.from_selfies(selfies, as_mol=True)
         assert dm.to_smiles(mol) == "CC(=O)Oc1ccccc1C(=O)O"
 
-    def to_smarts(self):
+    def test_to_smarts(self):
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
         mol = dm.to_mol(smiles)
 
@@ -132,3 +132,20 @@ class TestMol(unittest.TestCase):
         assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
 
         assert dm.to_smarts(None) is None
+
+    def test_inchi(self):
+        smiles = "CC(=O)Oc1ccccc1C(=O)O"
+        mol = dm.to_mol(smiles)
+
+        inchi = dm.to_inchi(mol)
+        assert inchi == "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)"
+
+        inchikey = dm.to_inchikey(mol)
+        assert inchikey == "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+
+        new_mol = dm.from_inchi(inchi)
+        assert dm.to_smiles(new_mol) == smiles
+
+        assert dm.to_inchi(None) is None
+        assert dm.to_inchikey(None) is None
+        assert dm.from_inchi(None) is None

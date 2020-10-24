@@ -241,6 +241,9 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
     if mol is None:
         return None
 
+    if isinstance(mol, str):
+        mol = to_mol(mol)
+
     # Change the isotope to 42
     for atom in mol.GetAtoms():
         if keep_hs:
@@ -258,3 +261,52 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
     # Remove the 42 isotope labels
     smarts = re.sub(r"\[42", "[", smarts)
     return smarts
+
+
+def to_inchi(mol: Union[str, Chem.Mol]):
+    """Convert a mol to Inchi.
+
+    Args:
+        mol (Union[str, Chem.Mol]): [description]
+    """
+
+    if mol is None:
+        return None
+
+    if isinstance(mol, str):
+        mol = to_mol(mol)
+
+    return Chem.MolToInchi(mol)
+
+
+def to_inchikey(mol: Union[str, Chem.Mol]):
+    """Convert a mol to Inchi key.
+
+    Args:
+        mol (Union[str, Chem.Mol]): [description]
+    """
+
+    if mol is None:
+        return None
+
+    if isinstance(mol, str):
+        mol = to_mol(mol)
+
+    return Chem.MolToInchiKey(mol)
+
+
+def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True):
+    """Convert a SEFLIES to a smiles or a mol.
+
+    Args:
+        inchi (str): a selfies.
+        sanitize (bool, optional): do sanitize.
+        remove_hs (bool, optional): do remove hs.
+
+    Returns:
+        smiles or mol (str, Chem.Mol))
+    """
+    if inchi is None:
+        return None
+
+    return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
