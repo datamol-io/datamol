@@ -1,1 +1,2 @@
-from ._viz import conformers
+from ._viz import to_image
+from ._conformers import conformers
