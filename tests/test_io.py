@@ -31,7 +31,7 @@ class TestIO(unittest.TestCase):
 
     def test_read_excel(self):
         data_path = self.get_freesolv_excel_path()
-        df = dm.read_excel(data_path)
+        df = dm.read_excel(data_path, engine="openpyxl")
         assert df.shape == (642, 4)
         assert list(df.columns) == ["iupac", "smiles", "expt", "calc"]
 
