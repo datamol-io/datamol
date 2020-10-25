@@ -1,7 +1,10 @@
 from typing import Union
+from typing import List
 
 import random
 import re
+
+import pandas as pd
 
 from rdkit import Chem
 import selfies as sf
@@ -310,3 +313,53 @@ def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True):
         return None
 
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
+
+
+def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles"):
+    """Convert a list of mols to a dataframe using each mol properties
+    as a column.
+
+    Args:
+        mols (list of Chem.Mol
+        smiles_column (str, optional): name of the SMILES column.
+            Default to "smiles".
+    """
+    df = [mol.GetPropsAsDict() for mol in mols]
+    df = pd.DataFrame(df)
+
+    # Add the smiles column and move it to the first position
+    smiles = [to_smiles(mol) for mol in mols]
+    df[smiles_column] = smiles
+    col = df.pop(smiles_column)
+    df.insert(0, col.name, col)
+
+    return df
+
+
+def from_df(df: pd.DataFrame, smiles_column: str = "smiles"):
+    """Convert a dataframe to a list of mols.
+
+    Args:
+        df (pd.dataframe): a dataframe.
+        smiles_column (str, optional): Column name to use for smiles.
+            Default to "smiles".
+    """
+
+    def _row_to_mol(row):
+        mol = to_mol(row[smiles_column])
+
+        if mol is None:
+            return None
+
+        for k, v in row.to_dict().items():
+            if isinstance(v, int):
+                mol.SetIntProp(k, v)
+            elif isinstance(v, float):
+                mol.SetDoubleProp(k, v)
+            elif isinstance(v, bool):
+                mol.SetBoolProp(k, v)
+            else:
+                mol.SetProp(k, str(v))
+        return mol
+
+    return df.apply(_row_to_mol, axis=1).tolist()

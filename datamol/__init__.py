@@ -20,6 +20,8 @@ from .mol import to_smarts
 from .mol import to_inchi
 from .mol import to_inchikey
 from .mol import from_inchi
+from .mol import to_df
+from .mol import from_df
 
 from .fp import to_fp
 from .fp import fp_to_array

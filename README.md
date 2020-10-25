@@ -20,7 +20,9 @@ selfies = dm.to_selfies(mol)
 inchi = dm.to_inchi(mol)
 
 # Generate conformers
-mol_with_conformers = dm.add_confs(mol)
+smiles = "O=C(C)Oc1ccccc1C(=O)O"
+mol = dm.to_mol(smiles)
+mol_with_conformers = dm.conformers.generate(mol)
 
 # Easy IO
 mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
