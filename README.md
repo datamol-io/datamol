@@ -57,10 +57,6 @@ See examples provided as a serie of [notebooks](./notebooks):
 
 1. [The Basics](notebooks/1_The_Basics.ipynb)
 
-## Documentation
-
-TODO (try [mkdocs?](https://www.mkdocs.org/))
-
 ## Changelogs
 
 See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
