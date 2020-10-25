@@ -13,19 +13,30 @@ class JobRunner:
     allows taking advantage of its features, while the progress bar use tqdm
 
     Args:
-        n_jobs (int, optional): number of process (see joblib). Use 0 or None to force sequential
+        n_jobs (int, optional): number of process (see joblib). Use 0 or None to force sequential.
+        prefer (int, optional): Choose from ['processes', 'threads'] or None. Default to None.
+            Soft hint to choose the default backend if no specific backend
+            was selected with the parallel_backend context manager. The
+            default process-based backend is 'loky' and the default
+            thread-based backend is 'threading'. Ignored if the ``backend``
+            parameter is specified.
         progress (bool, optional): whether to display progress bar
         job_kwargs (dict, optional): Any additional keyword argument supported by joblib.Parallel.
 
     Example:
-        >>> runner = JobRunner(n_jobs=4, progress=True, prefer="threads")
-        >>> results = runner(my_function, my_data)
+
+    ```python
+    import datamol as dm
+    runner = dm.JobRunner(n_jobs=4, progress=True, prefer="threads")
+    results = runner(lambda x: x**2, [1, 2, 3, 4])
+    ```
     """
 
-    def __init__(self, n_jobs: int = 0, progress: bool = False, **job_kwargs):
+    def __init__(self, n_jobs: int = 0, prefer: str = None, progress: bool = False, **job_kwargs):
         self.n_jobs = n_jobs
+        self.prefer = prefer
         self.job_kwargs = job_kwargs
-        self.job_kwargs.update(n_jobs=self.n_jobs)
+        self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer)
         self.no_progress = not progress
 
     @property
