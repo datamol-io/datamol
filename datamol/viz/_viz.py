@@ -6,9 +6,6 @@ import ipywidgets as widgets
 from rdkit import Chem
 
 
-__all__ = ["conformers"]
-
-
 def _get_nglview():
     try:
         import nglview as nv

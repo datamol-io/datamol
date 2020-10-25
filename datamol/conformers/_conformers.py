@@ -19,11 +19,6 @@ from rdkit.ML.Cluster import Butina
 import datamol as dm
 
 
-# NOTE(hadim): Unfortunately __all__ is not well respected by
-# various tools such as VSCode, ipython, etc.
-__all__ = ["generate", "cluster", "sasa", "rmsd"]
-
-
 def generate(
     mol: Chem.Mol,
     n_confs: int = None,
