@@ -1,10 +1,14 @@
 - name: Emmanuel Noutahi
   email: emmanuel.noutahi@hotmail.ca
   aliases:
-    - maclandrol
+  - maclandrol
+  num_commits: 5
+  first_commit: 2020-10-25 10:15:22
 - name: Hadrien Mary
   email: hadrien.mary@gmail.com
   aliases:
-    - hadim
+  - hadim
   alternate_emails:
-    - hadim@users.noreply.github.com
+  - hadim@users.noreply.github.com
+  num_commits: 35
+  first_commit: 2020-10-24 11:46:22
