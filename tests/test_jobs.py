@@ -67,6 +67,10 @@ class TestJobs(unittest.TestCase):
 
         # test parallel vs sequential
         jobrunner = dm.JobRunner(n_jobs=4, progress=False)  # use loky backend
-        o_seq = jobrunner(random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul")
-        o_par = jobrunner(random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul")
+        o_seq = jobrunner.sequential(
+            random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul"
+        )
+        o_par = jobrunner.parallel(
+            random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul"
+        )
         self.assertEqual(o_seq, o_par)
