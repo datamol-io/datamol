@@ -25,11 +25,12 @@ class JobRunner:
 
     Example:
 
-    ```python
-    import datamol as dm
-    runner = dm.JobRunner(n_jobs=4, progress=True, prefer="threads")
-    results = runner(lambda x: x**2, [1, 2, 3, 4])
-    ```
+        .. code-block:: python
+
+            import datamol as dm
+            runner = dm.JobRunner(n_jobs=4, progress=True, prefer="threads")
+            results = runner(lambda x: x**2, [1, 2, 3, 4])
+
     """
 
     def __init__(self, n_jobs: int = 0, prefer: str = None, progress: bool = False, **job_kwargs):
@@ -42,7 +43,7 @@ class JobRunner:
     @property
     def is_sequential(self):
         """Check whether the job is sequential or parallel"""
-        return (self.n_jobs is None) or (self.n_jobs == 0)
+        return (self.n_jobs is None) or (self.n_jobs in [0, 1])
 
     @staticmethod
     def wrap_fn(fn: Callable, arg_type: Optional[str] = None, **fn_kwargs):
