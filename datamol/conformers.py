@@ -159,7 +159,7 @@ def generate(
         # so the lowest energies conformers are first.
         ordered_conformers = [conf for _, conf in sorted(zip(energies, mol.GetConformers()))]
         mol.RemoveAllConformers()
-        [mol.AddConformer(conf) for conf in ordered_conformers]
+        [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
     return mol
 
@@ -228,7 +228,7 @@ def cluster(
         # Keep only centroid conformers
         confs = [mol.GetConformers()[i] for i in centroids]
         mol.RemoveAllConformers()
-        [mol.AddConformer(conf) for conf in confs]
+        [mol.AddConformer(conf, assignId=True) for conf in confs]
         return mol
 
     else:
@@ -237,7 +237,7 @@ def cluster(
         for cluster in conf_clusters:
             m = copy.deepcopy(mol)
             m.RemoveAllConformers()
-            [m.AddConformer(mol.GetConformer(c)) for c in cluster]
+            [m.AddConformer(mol.GetConformer(c), assignId=True) for c in cluster]
             mols.append(m)
         return mols
 
