@@ -4,7 +4,7 @@
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Good default: manipulating molecules often rely on a lot different options, datamol provides good default options.
+- ✅ Manipulating molecules often rely on many options, datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
