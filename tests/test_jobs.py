@@ -74,3 +74,36 @@ class TestJobs(unittest.TestCase):
             random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul"
         )
         self.assertEqual(o_seq, o_par)
+
+    def test_parallelized(self):
+        def fn(x):
+            return x ** 2
+
+        results = dm.parallelized(
+            fn,
+            [{"x": i} for i in range(10)],
+            scheduler="processes",
+            n_jobs=None,
+            arg_type="kwargs",
+            progress=True,
+        )
+        assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+        results = dm.parallelized(
+            fn,
+            [[i] for i in range(10)],
+            scheduler="processes",
+            n_jobs=None,
+            arg_type="args",
+            progress=True,
+        )
+        assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+        results = dm.parallelized(
+            fn,
+            [i for i in range(10)],
+            scheduler="processes",
+            n_jobs=None,
+            progress=False,
+        )
+        assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]

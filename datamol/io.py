@@ -55,7 +55,10 @@ def read_excel(
     return df
 
 
-def read_sdf(file_uri: Union[str, pathlib.Path], as_df: bool = False) -> Union[list, pd.DataFrame]:
+def read_sdf(
+    file_uri: Union[str, pathlib.Path],
+    as_df: bool = False,
+) -> Union[list, pd.DataFrame]:
     """Read an SDF file.
 
     Args:
@@ -74,17 +77,7 @@ def read_sdf(file_uri: Union[str, pathlib.Path], as_df: bool = False) -> Union[l
         mols = [mol for mol in supplier if mol is not None]
 
     if as_df:
-        # Convert mol to a dataframe
-        df = [mol.GetPropsAsDict() for mol in mols]
-        df = pd.DataFrame(df)
-
-        # Add the smiles column and move it to the first position
-        smiles = [dm.to_smiles(mol) for mol in mols]
-        df["smiles"] = smiles
-        col = df.pop("smiles")
-        df.insert(0, col.name, col)
-
-        return df
+        return dm.to_df(mols)
 
     return mols
 
@@ -107,25 +100,8 @@ def to_sdf(
         df: a `pandas.DataFrame`
     """
 
-    def _convert_to_mol(row):
-        mol = dm.to_mol(row[smiles_column])
-
-        if mol is None:
-            return None
-
-        for k, v in row.to_dict().items():
-            if isinstance(v, int):
-                mol.SetIntProp(k, v)
-            elif isinstance(v, float):
-                mol.SetDoubleProp(k, v)
-            elif isinstance(v, bool):
-                mol.SetBoolProp(k, v)
-            else:
-                mol.SetProp(k, str(v))
-        return mol
-
     if isinstance(mols, pd.DataFrame):
-        mols = mols.apply(_convert_to_mol, axis=1).tolist()
+        mols = dm.from_df(mols, smiles_column=smiles_column)
 
     with fsspec.open(file_uri, mode="w") as f:
         writer = Chem.SDWriter(f)

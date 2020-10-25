@@ -20,6 +20,8 @@ from .mol import to_smarts
 from .mol import to_inchi
 from .mol import to_inchikey
 from .mol import from_inchi
+from .mol import to_df
+from .mol import from_df
 
 from .fp import to_fp
 from .fp import fp_to_array
@@ -33,3 +35,6 @@ from .io import read_csv
 from .io import read_excel
 from .io import read_sdf
 from .io import to_sdf
+
+from . import conformers
+from . import viz

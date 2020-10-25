@@ -10,10 +10,7 @@ addopts = "--verbose --cov --cov-report xml --cov-report term"
 testpaths = ["tests", "notebooks"]
 
 [tool.coverage.run]
-omit = [
-    "setup.py",
-    "tests/*",
-]
+omit = ["setup.py", "tests/*"]
 
 [tool.coverage.xml]
 output = "cov.xml"
