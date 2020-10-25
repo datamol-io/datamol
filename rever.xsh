@@ -1,8 +1,8 @@
 # Configuration
 
-$PROJECT = $GITHUB_REPO  = 'pantagruel'
+$PROJECT = $GITHUB_REPO  = 'datamol'
 $GITHUB_ORG = 'invivoai-platform'
-$PUSH_TAG_REMOTE = 'git@github.com:invivoai-platform/pantagruel.git'
+$PUSH_TAG_REMOTE = 'git@github.com:invivoai-platform/datamol.git'
 
 # Logic
 
