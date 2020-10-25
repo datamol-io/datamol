@@ -48,3 +48,13 @@ class TestConformers(unittest.TestCase):
         mol = dm.conformers.generate(mol)
         rmsd = dm.conformers.rmsd(mol)
         assert rmsd.shape == (50, 50)
+
+    def test_cluster(self):
+
+        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        mol = dm.to_mol(smiles)
+        mol = dm.conformers.generate(mol)
+        mol.GetNumConformers()
+
+        clustered_mol = dm.conformers.cluster(mol, return_centroids=True)
+        assert clustered_mol.GetNumConformers() == 3
