@@ -1,7 +1,5 @@
 # `datamol`
 
-**IMPORTANT: Still WIP. DO NOT USE.**
-
 `datamol` is a python library to work molecules. It's a layer built on top of [`rdkit`](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
