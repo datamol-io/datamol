@@ -1,5 +1,7 @@
 from typing import Union
 from typing import List
+from typing import Dict
+from typing import Any
 
 import copy
 
@@ -164,74 +166,70 @@ def generate(
 
 def cluster(
     mol: Chem.Mol,
-    n_confs: int = None,
-    random_seed: int = 19,
-    method: str = "ETKDGv3",
-    do_clustering: bool = True,
-    cluster_mode: str = "RMS",
+    method: str = None,
     distance_threshold: float = 1,
-    max_iterations: int = 500,
-    warning_not_converged: int = 10,
     return_centroids: bool = True,
+    method_kwargs: Dict[Any, Any] = None,
 ):
-    """Compute conformers of a molecule.
+    """Cluster molecule's conformers.
 
     Args:
         mol (Chem.Mol): a molecule
-        n_confs (int, optional): Number of conformers to generate. Depends on the
-            number of rotatable bonds by default. Defaults to None.
-        random_seed (int, optional): Set to None to disable. Defaults to 19.
-        do_clustering (bool, optional): Whether to do clustering or not.
-        cluster_mode (str, optional): Clustering mode. Use "RMS" or "TFD". Defaults to "RMS".
+        method (str, optional): Distance method to use from ["RMS", "TFD"].
+            Use None for "RMS", Defaults to None.
+            - TFD uses `TorsionFingerprints.GetTFDMatrix`.
+            - RMS uses `AllChem.GetConformerRMSMatrix`.
         distance_threshold (float, optional): Threshold for the clustering. Defaults to 1.
-        max_iterations (int, optional): Maximum number of iterations during UFF minimization.
-            Defaults to 500.
-        warning_not_converged (int, optional): Display a warning if n conformers did not
-            converged during minimization. Defaults to 10.
         return_centroids (bool, optional): If True, return one molecule with centroid conformers
-            only sorted by lowest energy. If False return a list of molecules per cluster with all
-            the cluster conformers. Defaults to True.
-    Returns:
-        [type]: [description]
+            only. If False return a list of molecules per cluster with all the conformers of the cluster.
+            Defaults to True.
+        method_kwargs (dict, optional): Additional method to pass to the clustering function.
     """
 
-    if not do_clustering:
-        # Sort conformers by energies
-        indices = np.argsort(energies)
-        confs = [mol.GetConformers()[i] for i in indices]
-        mol.RemoveAllConformers()
-        [mol.AddConformer(conf, assignId=True) for conf in confs]
-        return mol
+    AVAILABLE_METHODS = ["RMS", "TFD"]
 
-    # Cluster conformers
-    if cluster_mode == "TFD":
-        dmat = TorsionFingerprints.GetTFDMatrix(
-            mol, useWeights=False, maxDev="equal", symmRadius=2, ignoreColinearBonds=True
-        )
-    elif cluster_mode == "RMS":
+    # Clone molecule
+    mol = copy.deepcopy(mol)
+
+    if method_kwargs is None:
+        method_kwargs = {}
+
+    if method is None:
+        method = "RMS"
+
+    if method == "TFD":
+        kwargs = {}
+        kwargs["useWeights"] = False
+        kwargs["maxDev"] = "equal"
+        kwargs["symmRadius"] = 2
+        kwargs["ignoreColinearBonds"] = True
+        kwargs.update(method_kwargs)
+        dmat = TorsionFingerprints.GetTFDMatrix(mol, **kwargs)
+    elif method == "RMS":
+        kwargs = {}
+        kwargs["prealigned"] = False
+        kwargs.update(method_kwargs)
         dmat = AllChem.GetConformerRMSMatrix(mol, prealigned=False)
     else:
-        raise ValueError(f"{cluster_mode} wrong mode")
+        raise ValueError(f"The method {method} is not supported. Use from {AVAILABLE_METHODS}")
 
     conf_clusters = Butina.ClusterData(
-        dmat, nPts=len(confs), distThresh=distance_threshold, isDistData=True, reordering=False
+        dmat,
+        nPts=mol.GetNumConformers(),
+        distThresh=distance_threshold,
+        isDistData=True,
+        reordering=False,
     )
 
     # Collect centroid of each cluster (first element of the list)
     centroids = [indices[0] for indices in conf_clusters]
 
     if return_centroids:
-        # Get energy for centroids
-        centroid_energies = [energies[i] for i in centroids]
-
-        # Sort centroids by lowest energy
-        centroid_indices = np.argsort(centroid_energies)
-
         # Keep only centroid conformers
-        confs = [mol.GetConformers()[centroids[i]] for i in centroid_indices]
+        confs = [mol.GetConformers()[i] for i in centroids]
         mol.RemoveAllConformers()
-        [mol.AddConformer(conf, assignId=True) for conf in confs]
-        return Chem.RemoveHs(mol)
+        [mol.AddConformer(conf) for conf in confs]
+        return mol
 
     else:
         # Create a new molecule for each cluster and add conformers to it.
@@ -239,8 +237,8 @@ def cluster(
         for cluster in conf_clusters:
             m = copy.deepcopy(mol)
             m.RemoveAllConformers()
-            [m.AddConformer(mol.GetConformer(c), assignId=True) for c in cluster]
-            mols.append(Chem.RemoveHs(m))
+            [m.AddConformer(mol.GetConformer(c)) for c in cluster]
+            mols.append(m)
         return mols
 
 
