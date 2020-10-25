@@ -1,10 +1,6 @@
 import unittest
-import pathlib
 
 import datamol as dm
-
-ROOT_DIR = pathlib.Path(__file__).parent.resolve()
-DATA_DIR = ROOT_DIR / "data"
 
 
 class TestMol(unittest.TestCase):

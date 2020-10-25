@@ -27,3 +27,8 @@ from .similarity import pdist
 
 from .graph import to_graph
 from .graph import get_all_path_between
+
+from .io import read_csv
+from .io import read_excel
+from .io import read_sdf
+from .io import to_sdf
