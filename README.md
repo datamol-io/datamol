@@ -19,10 +19,24 @@ fp = dm.to_fp(mol)
 selfies = dm.to_selfies(mol)
 inchi = dm.to_inchi(mol)
 
+# Dataframe manipulation
+df = dm.data.freesolv()
+mols = dm.from_df(df)
+
+# 2D viz
+legends = [dm.to_smiles(mol) for mol in mols[:10]]
+dm.viz.to_image(mols[:10], legends=legends)
+
 # Generate conformers
 smiles = "O=C(C)Oc1ccccc1C(=O)O"
 mol = dm.to_mol(smiles)
 mol_with_conformers = dm.conformers.generate(mol)
+
+# 3D viz (using nglview)
+dm.viz.conformers(mol, n_confs=10)
+
+# Compute SASA from conformers
+sasa = dm.conformers.sasa(mol_with_conformers)
 
 # Easy IO
 mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
