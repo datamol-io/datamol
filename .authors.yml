@@ -1,6 +1,10 @@
 - name: Emmanuel Noutahi
   email: emmanuel.noutahi@hotmail.ca
+  aliases:
+    - maclandrol
 - name: Hadrien Mary
   email: hadrien.mary@gmail.com
+  aliases:
+    - hadim
   alternate_emails:
     - hadim@users.noreply.github.com
