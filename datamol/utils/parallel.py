@@ -12,7 +12,7 @@ def parallelized(
     fn: Callable,
     inputs_list: Iterable[Any],
     scheduler: str = "processes",
-    max_workers: Optional[int] = None,
+    n_jobs: Optional[int] = None,
     progress: bool = False,
     arg_type: str = "arg",
     _progress_auto: bool = True,
@@ -25,7 +25,7 @@ def parallelized(
         inputs_list (List[Any]): List of inputs to pass to `fn`.
         scheduler (str, optional): Choose between ["processes", "threads"]. Defaults
             to "processes".
-        max_workers (Optional[int], optional): Number of workers. If None, it will default
+        n_jobs (Optional[int], optional): Number of workers. If None, it will default
             to the number of processors on the machine. Defaults to None.
         progress (bool, optional): Display a progress bar. Defaults to False.
         arg_type (str, optional): One of ["arg", "args", "kwargs]:
@@ -50,12 +50,12 @@ def parallelized(
 
     if scheduler == "processes":
         pool_executor_cls = futures.ProcessPoolExecutor
-        executor_kwargs = dict(max_workers=max_workers)
+        executor_kwargs = dict(max_workers=n_jobs)
         as_completed_fn = futures.as_completed
 
     elif scheduler == "threads":
         pool_executor_cls = futures.ThreadPoolExecutor
-        executor_kwargs = dict(max_workers=max_workers)
+        executor_kwargs = dict(max_workers=n_jobs)
         as_completed_fn = futures.as_completed
 
     else:

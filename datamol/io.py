@@ -15,6 +15,9 @@ import datamol as dm
 def read_csv(file_uri: Union[str, pathlib.Path], **kwargs):
     """Read a CSV file.
 
+    NOTE(hadim): not sure this function add a real value. fsspec is also
+    supported by pandas. Consider removing it.
+
     Args:
         file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
             path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
@@ -34,6 +37,9 @@ def read_excel(
     **kwargs,
 ):
     """Read an excel file.
+
+    NOTE(hadim): not sure this function add a real value. fsspec is also
+    supported by pandas. Consider removing it.
 
     Args:
         file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local

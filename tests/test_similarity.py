@@ -16,3 +16,11 @@ class TestSimilarity(unittest.TestCase):
 
         assert valid_idx.shape == (3,)
         assert valid_idx.sum() == 3
+
+        dist_mat, valid_idx = dm.pdist(mols, n_jobs=None)
+
+        assert dist_mat.shape == (3, 3)
+        assert dist_mat.sum() == 5.661904761904761
+
+        assert valid_idx.shape == (3,)
+        assert valid_idx.sum() == 3

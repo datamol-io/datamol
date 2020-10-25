@@ -11,21 +11,21 @@
 
 ## API
 
-_NOTE(hadim): the below snippet is important. It allows people to have a quick idea of datamol's API. Let's make it nice (and short)!._
-
 ```python
 import datamol as dm
 
-# Convenient functions
+# Common functions
 mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O", sanitize=True)
-fp = dm.as_fp(mol)
+fp = dm.to_fp(mol)
+selfies = dm.to_selfies(mol)
+inchi = dm.to_inchi(mol)
 
+# Generate conformers
 mol_with_conformers = dm.add_confs(mol)
 
 # Easy IO
-mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf")
-
-df = dm.read_csv("/home/data/dataset.csv")
+mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
+dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
 ## Install
@@ -36,13 +36,15 @@ Use conda:
 conda install -c invivoai datamol
 ```
 
+## Examples
+
+See examples provided as a serie of [notebooks](./notebooks):
+
+1. [The Basics](notebooks/1_The_Basics.ipynb)
+
 ## Documentation
 
 TODO (try [mkdocs?](https://www.mkdocs.org/))
-
-## Examples
-
-See examples provided as a serie of [notebooks](./notebooks) (TODO).
 
 ## Changelogs
 

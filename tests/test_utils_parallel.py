@@ -14,7 +14,7 @@ class TestParallel(unittest.TestCase):
             fn,
             [{"x": i} for i in range(10)],
             scheduler="processes",
-            max_workers=None,
+            n_jobs=None,
             arg_type="kwargs",
             progress=True,
         )
@@ -24,7 +24,7 @@ class TestParallel(unittest.TestCase):
             fn,
             [[i] for i in range(10)],
             scheduler="processes",
-            max_workers=None,
+            n_jobs=None,
             arg_type="args",
             progress=True,
         )
@@ -34,7 +34,7 @@ class TestParallel(unittest.TestCase):
             fn,
             [i for i in range(10)],
             scheduler="processes",
-            max_workers=None,
+            n_jobs=None,
             progress=False,
         )
         assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
