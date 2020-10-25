@@ -1,6 +1,7 @@
 from ._version import __version__
 
 from .utils import parallelized
+from .utils import JobRunner
 
 from .data import freesolv
 
