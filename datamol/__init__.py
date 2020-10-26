@@ -37,6 +37,8 @@ from .mol import set_dative_bonds
 from .cluster import cluster_mols
 from .cluster import pick_diverse
 
+from . import fragment
+
 from .convert import to_smiles
 from .convert import to_selfies
 from .convert import from_selfies
