@@ -12,18 +12,4 @@ from ._actions import all_fragment_update
 from ._actions import all_mmpa_assemble
 from ._actions import all_fragment_assemble
 from ._actions import all_transform_apply
-
-from ._actions import random_transform_apply
-from ._actions import random_bond_decrease
-from ._actions import random_atom_add
-from ._actions import random_atom_replace
-from ._actions import random_fragment_add
-from ._actions import random_fragment_del
-from ._actions import random_bond_cut
-from ._actions import random_fragment_replace
-from ._actions import random_fragment_mutation
-from ._actions import random_fragment_exchange
 from ._actions import mmpa_fragment_exchange
-from ._actions import random_prune_mol
-from ._actions import random_reaction_apply
-from ._actions import random_reaction_merge
