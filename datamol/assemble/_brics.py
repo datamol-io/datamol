@@ -206,7 +206,7 @@ def get_reactions_list():
     all_rxns = []
     all_rxns_retro = []
     all_rxns_type = []
-    with pkg_resources.resource_stream("datamol", "data/reactions_brics.json") as IN:
+    with pkg_resources.resource_stream("datamol", "data/reactions.json") as IN:
         rxns = json.load(IN)
         for k, data in rxns.items():
             try:
