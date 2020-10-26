@@ -49,6 +49,16 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
+## Available modules
+
+- `dm`: top-level module that contains common functions.
+- `dm.assemble`: functions to assemble molecules from a list of fragments.
+- `dm.conformers`: generate and perform computation on conformers.
+- `dm.data`: get some common data (mainly for dev purposes).
+- `dm.fragment`: fragment molecules in a list of fragments.
+- `dm.scaffold`: get representative scaffolds from a list of molecules.
+- `dm.viz`: 2D/3D visualization functions.
+
 ## Install
 
 Use conda:

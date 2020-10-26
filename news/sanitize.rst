@@ -5,6 +5,7 @@
 * Add fragment module.
 * Add scaffold module.
 * Add cluster module.
+* Add assemble module.
 
 **Changed:**
 
