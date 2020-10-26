@@ -8,6 +8,7 @@
 * Add assemble module.
 * Add actions module.
 * Add reactions module.
+* Add dm.viz.circle_grid function
 
 **Changed:**
 
