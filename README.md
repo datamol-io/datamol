@@ -19,6 +19,12 @@ fp = dm.to_fp(mol)
 selfies = dm.to_selfies(mol)
 inchi = dm.to_inchi(mol)
 
+# Standardize and sanitize
+mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O")
+mol = dm.fix_mol(mol)
+mol = dm.sanitize_mol(mol)
+mol = dm.standardized_mol(mol)
+
 # Dataframe manipulation
 df = dm.data.freesolv()
 mols = dm.from_df(df)

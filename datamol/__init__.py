@@ -8,20 +8,41 @@ from .data import freesolv
 from .log import disable_rdkit_log
 
 from .mol import PERIODIC_TABLE
+from .mol import TRIPLE_BOND
+from .mol import DOUBLE_BOND
+from .mol import SINGLE_BOND
+from .mol import AROMATIC_BOND
+
 from .mol import to_mol
-from .mol import to_smiles
-from .mol import to_selfies
-from .mol import from_selfies
 from .mol import reorder_atoms
 from .mol import randomize_atoms
 from .mol import to_neutral
 from .mol import sanitize_mol
-from .mol import to_smarts
-from .mol import to_inchi
-from .mol import to_inchikey
-from .mol import from_inchi
-from .mol import to_df
-from .mol import from_df
+from .mol import sanitize_best
+from .mol import sanitize_smiles
+from .mol import standardize_smiles
+from .mol import standardize_mol
+from .mol import fix_valence_charge
+from .mol import incorrect_valence
+from .mol import decrease_bond
+from .mol import fix_valence
+from .mol import adjust_singleton
+from .mol import remove_dummies
+from .mol import fix_mol
+from .mol import replace_dummies_atoms
+from .mol import keep_largest_fragment
+from .mol import is_transition_metal
+from .mol import set_dative_bonds
+
+from .convert import to_smiles
+from .convert import to_selfies
+from .convert import from_selfies
+from .convert import to_smarts
+from .convert import to_inchi
+from .convert import to_inchikey
+from .convert import from_inchi
+from .convert import to_df
+from .convert import from_df
 
 from .fp import to_fp
 from .fp import fp_to_array
