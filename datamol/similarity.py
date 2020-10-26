@@ -26,14 +26,11 @@ def pdist(mols: List[Chem.Mol], n_jobs: Optional[int] = 1, **fp_args):
             to fingerprint.
     """
 
-    if n_jobs == 1:
-        fps = [dm.to_fp(mol, as_array=False, **fp_args) for mol in mols]
-    else:
-        fps = dm.parallelized(
-            functools.partial(dm.to_fp, as_array=False, **fp_args),
-            mols,
-            n_jobs=n_jobs,
-        )
+    fps = dm.parallelized(
+        functools.partial(dm.to_fp, as_array=False, **fp_args),
+        mols,
+        n_jobs=n_jobs,
+    )
 
     valid_idx, fps = zip(*[(i, fp) for i, fp in enumerate(fps) if fp is not None])
     fps = list(fps)

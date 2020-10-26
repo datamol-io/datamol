@@ -29,8 +29,6 @@ def to_mol(
 ):
     """Convert an input molecule (smiles representation) into a `Chem.Mol`.
 
-    NOTE(hadim): should we support SELFIES here (deepsmiles)?
-
     Args:
         mol (str): SMILES of a molecule or a molecule.
         add_hs (bool, optional): Whether hydrogens should be added the molecule. Default to False.

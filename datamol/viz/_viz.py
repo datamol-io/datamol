@@ -11,16 +11,21 @@ def to_image(
     legends: Union[List[str], str] = None,
     n_cols: int = 4,
     use_svg: bool = False,
-    mol_size: Tuple[int, int] = (300, 300),
+    mol_size: Tuple[int, int] = (200, 200),
     highlight_atom: List[List[int]] = None,
     highlight_bond: List[List[int]] = None,
+    max_mols: int = 50,
 ):
+    """Generate an image out of a molecule or a list of molecule."""
 
     if isinstance(mols, Chem.Mol):
         mols = [mols]
 
     if isinstance(legends, str):
         legends = [legends]
+
+    if max_mols is not None:
+        mols = mols[:max_mols]
 
     _highlight_atom = highlight_atom
     if highlight_atom is not None and isinstance(highlight_atom[0], int):

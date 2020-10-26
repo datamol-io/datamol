@@ -63,6 +63,7 @@ See examples provided as a serie of [notebooks](./notebooks):
 
 1. [The Basics](notebooks/1_The_Basics.ipynb)
 2. [Preprocessing Molecules](notebooks/2_Preprocessing_Molecules.ipynb)
+3. [Cluster Molecules](notebooks/3_Cluster_Molecules.ipynb)
 
 ## Changelogs
 

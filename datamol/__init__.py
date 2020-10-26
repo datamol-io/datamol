@@ -34,6 +34,9 @@ from .mol import keep_largest_fragment
 from .mol import is_transition_metal
 from .mol import set_dative_bonds
 
+from .cluster import cluster_mols
+from .cluster import pick_diverse
+
 from .convert import to_smiles
 from .convert import to_selfies
 from .convert import from_selfies
