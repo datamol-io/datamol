@@ -36,7 +36,6 @@ extra_css:
 markdown_extensions:
   - admonition
   - mkautodoc
-  - markdown_include.include
   - pymdownx.emoji
   - pymdownx.magiclink
   - pymdownx.superfences
