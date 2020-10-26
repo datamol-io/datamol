@@ -73,10 +73,10 @@ conda install -c invivoai datamol
 
 See examples provided as a serie of [notebooks](./notebooks):
 
-1. [The Basics](notebooks/1_The_Basics.ipynb)
-2. [Preprocessing Molecules](notebooks/2_Preprocessing_Molecules.ipynb)
-3. [Cluster Molecules](notebooks/3_Cluster_Molecules.ipynb)
-4. [Fragment and scaffold](notebooks/4_Fragment_and_Scaffold.ipynb)
+- [The Basics](docs/examples/The_Basics.ipynb)
+- [Preprocessing Molecules](docs/examples/Preprocessing_Molecules.ipynb)
+- [Cluster Molecules](docs/examples/Cluster_Molecules.ipynb)
+- [Fragment and scaffold](docs/examples/Fragment_and_Scaffold.ipynb)
 
 ## Changelogs
 

@@ -3,32 +3,49 @@ site_description: "A python library to work with molecules. Built on top of rdki
 site_url: "https://github.com/invivoai-platform/datamol"
 repo_url: "https://github.com/invivoai-platform/datamol"
 repo_name: "invivoai-platform/datamol"
+copyright: Copyright 2020 - 2021 InvivoAI
+
+docs_dir: "docs"
 
 nav:
   - Overview: index.md
+  - Installation: installation.md
   - Usage: usage.md
+  - Examples:
+      - The Basics: examples/The_Basics.ipynb
+      - Preprocessing Molecules: examples/Preprocessing_Molecules.ipynb
+      - Cluster Molecules: examples/Cluster_Molecules.ipynb
+      - Fragment and Scaffold: examples/Fragment_and_Scaffold.ipynb
   - API Reference:
       - datamol: reference/datamol.md
+      - datamol.fragment: reference/datamol.fragment.md
   - License: license.md
 
 theme:
   name: material
+  custom_dir: docs/_theme
+  # favicon: assets/img/favicon.png
+  # logo: assets/img/icon.png
   palette:
     primary: teal
     accent: purple
 
 extra_css:
-  - css/mkdocstrings.css
+  - _assets/css/mkautodoc.css
+
+markdown_extensions:
+  - admonition
+  - mkautodoc
+  - markdown_include.include
+  - pymdownx.emoji
+  - pymdownx.magiclink
+  - pymdownx.superfences
+  - pymdownx.tabbed
+  - pymdownx.tasklist
+  - toc:
+      permalink: "¤"
 
 plugins:
   - search
   - mkdocs-jupyter:
-      execute: True
-  - mkdocstrings:
-      handlers:
-        python:
-          setup_commands:
-            - import sys
-            - sys.path.append("docs")
-          selection:
-            new_path_syntax: yes
+      execute: False
