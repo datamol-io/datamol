@@ -6,6 +6,8 @@
 * Add scaffold module.
 * Add cluster module.
 * Add assemble module.
+* Add actions module.
+* Add reactions module.
 
 **Changed:**
 
