@@ -2,6 +2,9 @@
 
 * Add all the common sanitize functions.
 * Add the 2_Preprocessing_Molecules notebook.
+* Add fragment module.
+* Add scaffold module.
+* Add cluster module.
 
 **Changed:**
 
