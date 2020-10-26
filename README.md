@@ -90,6 +90,16 @@ Under BSD license. See [LICENSE](LICENSE).
 
 See [AUTHORS.rst](./AUTHORS.rst).
 
+## Development Lifecycle
+
+## Build the documentation
+
+You can build and serve the documentation locally with:
+
+```bash
+mkdocs serve
+```
+
 ## Release a new version
 
 - Install [rever](https://regro.github.io/rever-docs): `conda install -y rever`.

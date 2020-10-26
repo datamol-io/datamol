@@ -1,0 +1,34 @@
+site_name: "datamol"
+site_description: "A python library to work with molecules. Built on top of rdkit."
+site_url: "https://github.com/invivoai-platform/datamol"
+repo_url: "https://github.com/invivoai-platform/datamol"
+repo_name: "invivoai-platform/datamol"
+
+nav:
+  - Overview: index.md
+  - Usage: usage.md
+  - API Reference:
+      - datamol: reference/datamol.md
+  - License: license.md
+
+theme:
+  name: material
+  palette:
+    primary: teal
+    accent: purple
+
+extra_css:
+  - css/mkdocstrings.css
+
+plugins:
+  - search
+  - mkdocs-jupyter:
+      execute: True
+  - mkdocstrings:
+      handlers:
+        python:
+          setup_commands:
+            - import sys
+            - sys.path.append("docs")
+          selection:
+            new_path_syntax: yes
