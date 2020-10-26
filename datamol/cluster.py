@@ -15,25 +15,38 @@ from rdkit.SimDivFilters.rdSimDivPickers import MaxMinPicker
 import datamol as dm
 
 
-def cluster_mols(mols: List[Chem.Mol], cutoff: float = 0.2):
+def cluster_mols(
+    mols: List[Chem.Mol],
+    cutoff: float = 0.2,
+    feature_fn: Callable = None,
+    n_jobs: Optional[int] = 1,
+):
     """Cluster a set of molecules using the butina clustering algorithm and a given threshold.
 
     Args:
         mols (List[Chem.Mol]): a list of molecules.
         cutoff (float, optional): Cuttoff for the clustering. Default to 0.2.
+        feature_fn (callable, optional): A feature function that takes a Chem.Mol object
+            and return molecular features. By default, the `dm.to_fp()` is used.
+            Default to None.
+        n_jobs (int): Number of jobs for parallelization. Let to 1 for no
+            parallelization. Set to None to use all available cores.
     """
 
-    # first generate the distance matrix
-    fps = [dm.to_fp(mol, as_array=False) for mol in mols]
-    dists = []
-    nfps = len(fps)
+    if feature_fn is None:
+        feature_fn = functools.partial(dm.to_fp, as_array=False)
 
-    for i in range(1, nfps):
-        dist = DataStructs.BulkTanimotoSimilarity(fps[i], fps[:i], returnDistance=True)
+    features = dm.parallelized(feature_fn, mols, n_jobs=n_jobs)
+
+    dists = []
+    n_mols = len(mols)
+
+    for i in range(1, n_mols):
+        dist = DataStructs.BulkTanimotoSimilarity(features[i], features[:i], returnDistance=True)
         dists.extend([x for x in dist])
 
     # now cluster the data
-    cluster_indices = Butina.ClusterData(dists, nfps, cutoff, isDistData=True)
+    cluster_indices = Butina.ClusterData(dists, n_mols, cutoff, isDistData=True)
     cluster_mols = [operator.itemgetter(*cluster)(mols) for cluster in cluster_indices]
 
     # Make single mol cluster a list
