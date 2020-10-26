@@ -6,6 +6,7 @@ from .utils import JobRunner
 from .data import freesolv
 
 from .log import disable_rdkit_log
+from .log import without_rdkit_log
 
 from .mol import PERIODIC_TABLE
 from .mol import TRIPLE_BOND
@@ -38,6 +39,7 @@ from .cluster import cluster_mols
 from .cluster import pick_diverse
 
 from . import fragment
+from . import scaffold
 
 from .convert import to_smiles
 from .convert import to_selfies

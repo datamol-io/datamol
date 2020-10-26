@@ -6,6 +6,7 @@ import copy
 import random
 
 from rdkit import Chem
+from rdkit.Chem import rdmolops
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 
