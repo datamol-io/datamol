@@ -47,7 +47,7 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: |
-          pytest .
+          pytest -v tests/
 
       - name: Test building the doc
         shell: bash -l {0}
