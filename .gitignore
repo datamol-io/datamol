@@ -56,4 +56,8 @@ MANIFEST
 # Rever
 rever/
 
+# Dev notebook
 dev.ipynb
+
+# MkDocs
+site/

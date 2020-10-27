@@ -9,7 +9,6 @@ docs_dir: "docs"
 
 nav:
   - Overview: index.md
-  - Installation: installation.md
   - Usage: usage.md
   - Examples:
       - The Basics: examples/The_Basics.ipynb
@@ -17,19 +16,12 @@ nav:
       - Cluster Molecules: examples/Cluster_Molecules.ipynb
       - Fragment and Scaffold: examples/Fragment_and_Scaffold.ipynb
   - API:
-      - datamol.mol: api/datamol.mol.md
-      - datamol.fragment: api/datamol.fragment.md
+      - datamol: api/datamol.md
       - datamol.actions: api/datamol.actions.md
-      - datamol.cluster: api/datamol.cluster.md
-      - datamol.convert: api/datamol.convert.md
-      - datamol.data: api/datamol.data.md
-      - datamol.fp: api/datamol.fp.md
-      - datamol.graph: api/datamol.graph.md
-      - datamol.io: api/datamol.io.md
-      - datamol.log: api/datamol.log.md
+      - datamol.conformers: api/datamol.conformers.md
+      - datamol.fragment: api/datamol.fragment.md
       - datamol.reactions: api/datamol.reactions.md
       - datamol.scaffold: api/datamol.scaffold.md
-      - datamol.similarity: api/datamol.similarity.md
       - datamol.utils: api/datamol.utils.md
       - datamol.viz: api/datamol.viz.md
 
@@ -62,5 +54,6 @@ plugins:
   - search
   - mkapi:
       src_dirs: [datamol]
+      on_config: _mkdocs_introspector.on_config
   - mkdocs-jupyter:
       execute: False
