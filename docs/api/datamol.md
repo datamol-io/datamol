@@ -4,76 +4,76 @@ All the below functions are accessible under `datamol.FUNCTION_NAME`.
 
 ## `datamol.cluster`
 
-![mkapi](datamol.cluster_mols)
-![mkapi](datamol.pick_diverse)
+::: datamol:cluster_mols
+::: datamol:pick_diverse
 
 ## `datamol.convert`
 
-![mkapi](datamol.from_df)
-![mkapi](datamol.from_inchi)
-![mkapi](datamol.from_selfies)
-![mkapi](datamol.to_df)
-![mkapi](datamol.to_inchi)
-![mkapi](datamol.to_inchikey)
-![mkapi](datamol.to_selfies)
-![mkapi](datamol.to_smarts)
-![mkapi](datamol.to_smiles)
+::: datamol:from_df
+::: datamol:from_inchi
+::: datamol:from_selfies
+::: datamol:to_df
+::: datamol:to_inchi
+::: datamol:to_inchikey
+::: datamol:to_selfies
+::: datamol:to_smarts
+::: datamol:to_smiles
 
 ## `datamol.data`
 
-![mkapi](datamol.freesolv)
+::: datamol:freesolv
 
 ## `datamol.fp`
 
-![mkapi](datamol.fp_to_array)
-![mkapi](datamol.to_fp)
+::: datamol:fp_to_array
+::: datamol:to_fp
 
 ## `datamol.graph`
 
-![mkapi](datamol.get_all_path_between)
-![mkapi](datamol.to_graph)
+::: datamol:get_all_path_between
+::: datamol:to_graph
 
 ## `datamol.io`
 
-![mkapi](datamol.read_csv)
-![mkapi](datamol.read_excel)
-![mkapi](datamol.read_sdf)
-![mkapi](datamol.to_sdf)
+::: datamol:read_csv
+::: datamol:read_excel
+::: datamol:read_sdf
+::: datamol:to_sdf
 
 ## `datamol.jobs`
 
-![mkapi](datamol.JobRunner)
-![mkapi](datamol.parallelized)
+::: datamol:JobRunner
+::: datamol:parallelized
 
 ## `datamol.log`
 
-![mkapi](datamol.disable_rdkit_log)
-![mkapi](datamol.without_rdkit_log)
+::: datamol:disable_rdkit_log
+::: datamol:without_rdkit_log
 
 ## `datamol.mol`
 
-![mkapi](datamol.adjust_singleton)
-![mkapi](datamol.decrease_bond)
-![mkapi](datamol.fix_mol)
-![mkapi](datamol.fix_valence)
-![mkapi](datamol.fix_valence_charge)
-![mkapi](datamol.incorrect_valence)
-![mkapi](datamol.is_transition_metal)
-![mkapi](datamol.keep_largest_fragment)
-![mkapi](datamol.randomize_atoms)
-![mkapi](datamol.remove_dummies)
-![mkapi](datamol.reorder_atoms)
-![mkapi](datamol.replace_dummies_atoms)
-![mkapi](datamol.sanitize_best)
-![mkapi](datamol.sanitize_mol)
-![mkapi](datamol.sanitize_smiles)
-![mkapi](datamol.set_dative_bonds)
-![mkapi](datamol.standardize_mol)
-![mkapi](datamol.standardize_smiles)
-![mkapi](datamol.to_mol)
-![mkapi](datamol.to_neutral)
+::: datamol:adjust_singleton
+::: datamol:decrease_bond
+::: datamol:fix_mol
+::: datamol:fix_valence
+::: datamol:fix_valence_charge
+::: datamol:incorrect_valence
+::: datamol:is_transition_metal
+::: datamol:keep_largest_fragment
+::: datamol:randomize_atoms
+::: datamol:remove_dummies
+::: datamol:reorder_atoms
+::: datamol:replace_dummies_atoms
+::: datamol:sanitize_best
+::: datamol:sanitize_mol
+::: datamol:sanitize_smiles
+::: datamol:set_dative_bonds
+::: datamol:standardize_mol
+::: datamol:standardize_smiles
+::: datamol:to_mol
+::: datamol:to_neutral
 
 ## `datamol.similarity`
 
-![mkapi](datamol.pdist)
+::: datamol:pdist
 

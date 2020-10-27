@@ -2,8 +2,8 @@
 
 All the below functions are accessible under `datamol.conformers`.
 
-![mkapi](datamol.conformers.cluster)
-![mkapi](datamol.conformers.generate)
-![mkapi](datamol.conformers.rmsd)
-![mkapi](datamol.conformers.sasa)
+::: datamol.conformers:cluster
+::: datamol.conformers:generate
+::: datamol.conformers:rmsd
+::: datamol.conformers:sasa
 

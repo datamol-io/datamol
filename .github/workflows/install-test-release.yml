@@ -48,3 +48,15 @@ jobs:
         shell: bash -l {0}
         run: |
           pytest .
+
+      - name: Test building the doc
+        shell: bash -l {0}
+        run: |
+          # To remove once in conda-forge
+          pip install --no-deps mkdocs-jupyter
+
+          # Regenerate the API doc
+          python -m datamol._mkdocs
+
+          # Build and serve the doc
+          mkdocs build

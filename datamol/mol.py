@@ -495,10 +495,10 @@ def replace_dummies_atoms(
     dummy: str = "*",
     replace_all: bool = True,
 ):
-    r"""Remove dummy atoms from molecules.
+    """Remove dummy atoms from molecules.
 
     Args:
-        mol: <Chem.Mol>): molecule with dummies
+        mol (<Chem.Mol>): molecule with dummies
         atom (str, optional): replacement atom, default is carbon
             Default to'C'
         dummy (str, optional): dummy atom representation
