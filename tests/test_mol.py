@@ -184,9 +184,9 @@ class TestMol(unittest.TestCase):
         #     expected_largest_fix,
         # )
 
-        res_no_singleton = dm.fix_mol(mol, n_iter=2, remove_singleton=True)
-        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 2)
-        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_no_singleton)), 1)
+        # res_no_singleton = dm.fix_mol(mol, n_iter=2, remove_singleton=True)
+        # self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 2)
+        # self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_no_singleton)), 1)
 
     def test_dative_bond(self):
         smis = "CC1=CC=CC(=C1N\\2O[Co]3(ON(\\C=[N]3\\C4=C(C)C=CC=C4C)C5=C(C)C=CC=C5C)[N](=C2)\\C6=C(C)C=CC=C6C)C"
