@@ -5,6 +5,8 @@ repo_url: "https://github.com/invivoai-platform/datamol"
 repo_name: "invivoai-platform/datamol"
 copyright: Copyright 2020 - 2021 InvivoAI
 
+remote_branch: "privpage"
+use_directory_urls: false
 docs_dir: "docs"
 
 nav:

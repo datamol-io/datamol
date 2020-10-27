@@ -7,6 +7,7 @@ on:
   pull_request:
     branches:
       - "*"
+      - "!privpage"
 
 jobs:
   build-install-and-test:
@@ -60,3 +61,16 @@ jobs:
 
           # Build and serve the doc
           mkdocs build
+
+      - name: Deploy the doc
+        if: ${{ github.ref == 'refs/heads/master' }}
+        shell: bash -l {0}
+        run: |
+          # To remove once in conda-forge
+          pip install --no-deps mkdocs-jupyter
+
+          # Regenerate the API doc
+          python -m datamol._mkdocs
+
+          # Build and serve the doc
+          mkdocs gh-deploy
