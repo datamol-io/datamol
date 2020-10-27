@@ -1,5 +1,6 @@
 import pathlib
 import unittest
+import copy
 
 from rdkit import Chem
 
@@ -58,15 +59,18 @@ class TestMol(unittest.TestCase):
 
     def test_to_neutral(self):
 
-        # NOTE(hadim): add a more complex test.
         smiles = "[NH4+]"
         mol = dm.to_mol(smiles, add_hs=False, explicit_only=False)
 
         smiles = dm.to_smiles(dm.to_neutral(mol))
         assert smiles == "[NH4]"
 
-    def sanitize_mol(self):
-        # NOTE(hadim): not testing much here. Improve me please.
+        smiles = "O=C(c1ccccc1)[O-]"
+        mol = dm.to_mol(smiles, add_hs=False, explicit_only=False)
+        uncharged_mol = dm.to_neutral(mol)
+        assert sum([a.GetFormalCharge() for a in uncharged_mol.GetAtoms()]) == 0
+
+    def test_sanitize(self):
         smiles = "CC(=O)Oc1ccccc1C(=O)O"
         mol = dm.to_mol(smiles, sanitize=False)
         mol = dm.sanitize_mol(mol, charge_neutral=True)
@@ -75,156 +79,121 @@ class TestMol(unittest.TestCase):
         mol = dm.sanitize_mol(None, charge_neutral=True)
         assert mol is None
 
-    def test_to_smiles(self):
-
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
-
-        smiles = dm.to_smiles(
-            mol,
-            isomeric=True,
-            ordered=True,
-            explicit_bonds=False,
-            explicit_hs=False,
+        smiles_list = (
+            "CC.[H][N:1]1(C)=CC(O)=CC2CCCCC12",  # broken
+            "O=c1ccc2ccccc2n1",  # sanitize
+            "Cc1nnnn1C",  # none
+            "CCc1ccc2nc(=O)c(cc2c1)Cc1nnnn1C1CCCCC1",  # sanitize
+            "c1cnc2cc3ccnc3cc12",  # none
+            "c1cc2cc3ccnc3cc2n1",  # none
+            "O=c1ccnc(c1)-c1cnc2cc3ccnc3cc12",  # sanitize
+            "O=c1ccnc(c1)-c1cc1",  # broken
         )
-        assert smiles == "CC(=O)Oc1ccccc1C(=O)O"
 
-        smiles = dm.to_smiles(
-            mol,
-            isomeric=True,
-            ordered=False,
-            explicit_bonds=True,
-            explicit_hs=False,
-        )
-        assert smiles == "C-C(=O)-O-c1:c:c:c:c:c:1-C(=O)-O"
+        # check sanitize_mol
+        assert dm.to_mol(smiles_list[1]) is None
+        assert dm.to_mol(smiles_list[2]) is not None
+        assert dm.sanitize_mol(None) is None
+        assert dm.sanitize_mol(dm.to_mol(smiles_list[0], sanitize=False)) is None
+        assert dm.sanitize_mol(dm.to_mol(smiles_list[1], sanitize=False)) is not None
+        assert dm.sanitize_mol(dm.to_mol(smiles_list[2], sanitize=False)) is not None
 
-        smiles = dm.to_smiles(
-            mol,
-            isomeric=True,
-            ordered=False,
-            explicit_bonds=False,
-            explicit_hs=True,
-        )
-        assert smiles == "[CH3][C](=[O])[O][c]1[cH][cH][cH][cH][c]1[C](=[O])[OH]"
+        mol_2 = dm.sanitize_mol(dm.to_mol(smiles_list[1], sanitize=False))
+        assert Chem.MolToSmiles(mol_2) == dm.sanitize_smiles("O=c1ccc2ccccc2[nH]1")
 
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
-        randomized_smiles = dm.to_smiles(mol, randomize=True)
-        randomized_mol = dm.to_mol(randomized_smiles)
+        fixed_smiles = [dm.sanitize_smiles(smiles) for smiles in smiles_list]
+        assert len([x for x in fixed_smiles if x is not None]) == 6
 
-        assert dm.to_smiles(randomized_mol) == dm.to_smiles(mol)
+    def test_sanitize_best(self):
 
-    def test_to_selfies(self):
-        smiles = "CC(=O)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
-
-        true_sf = "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
-
-        selfies = dm.to_selfies(smiles)
-        assert selfies == true_sf
-
-        selfies = dm.to_selfies(mol)
-        assert selfies == true_sf
-
-    def test_from_selfies(self):
-        selfies = "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
-
-        smiles = dm.from_selfies(selfies, as_mol=False)
-        assert smiles == "CC(=O)OC1=CC=CC=C1C(=O)O"
-
-        mol = dm.from_selfies(selfies, as_mol=True)
+        smiles = ["fake_smiles", "CC(=O)Oc1ccccc1C(=O)O"]
+        mols = [dm.to_mol(s) for s in smiles]
+        mol = dm.sanitize_best(mols)
         assert dm.to_smiles(mol) == "CC(=O)Oc1ccccc1C(=O)O"
 
-    def test_to_smarts(self):
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
+    def test_standardize_mol(self):
+        sm = "[Na]OC1=CC2CCCCC2N=C1"
+        sm_standard = dm.to_smiles(dm.standardize_smiles(sm))
+        standard_mol = dm.standardize_mol(dm.to_mol(sm), disconnect_metals=True, uncharge=True)
+        mol_standard = dm.to_smiles(Chem.MolToSmiles(standard_mol))
+        assert sm_standard == mol_standard
 
-        smarts = dm.to_smarts(mol, keep_hs=True)
-        assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
+    def test_fix_valence(self):
+        sm = "Cl.[H][N:1]1=CC(O)=CC2CCCCC12"
+        mol = Chem.MolFromSmiles(sm, sanitize=False)
+        mol.UpdatePropertyCache(False)
+        mol_copy = copy.copy(mol)
 
-        smarts = dm.to_smarts(mol, keep_hs=False)
-        assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
+        nitrogen_atom = [a for a in mol.GetAtoms() if a.GetAtomMapNum() == 1][0]
+        nitrogen_valence = nitrogen_atom.GetExplicitValence()
+        self.assertTrue(dm.incorrect_valence(nitrogen_atom, True))
 
-        assert dm.to_smarts(None) is None
+        fixed_mol = dm.fix_valence_charge(mol, inplace=False)
+        self.assertIsNotNone(dm.to_mol(Chem.MolToSmiles(fixed_mol)))
 
-    def test_inchi(self):
-        smiles = "CC(=O)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
+        # expect nitrogen atom to still be incorrect
+        self.assertTrue(dm.incorrect_valence(nitrogen_atom, True))
 
-        inchi = dm.to_inchi(mol)
-        assert inchi == "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)"
+        # in place fix
+        fixed_mol = dm.fix_valence_charge(mol, inplace=True)
+        # nitrogen should be charged positively if this was fixed.
+        self.assertTrue(nitrogen_atom.GetFormalCharge() == 1)
 
-        inchikey = dm.to_inchikey(mol)
-        assert inchikey == "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+        fixed_mol2 = dm.fix_valence(mol_copy)
+        fixed_nitrogen_atom = [a for a in fixed_mol2.GetAtoms() if a.GetAtomMapNum() == 1][0]
+        self.assertLess(fixed_nitrogen_atom.GetExplicitValence(), nitrogen_valence)
 
-        new_mol = dm.from_inchi(inchi)
-        assert dm.to_smiles(new_mol) == smiles
+        # mol should be fixed
+        self.assertIsNotNone(dm.to_mol(Chem.MolToSmiles(fixed_mol2)))
 
-        assert dm.to_inchi(None) is None
-        assert dm.to_inchikey(None) is None
-        assert dm.from_inchi(None) is None
+    def test_adjust_singleton(self):
+        sm = "Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C"
+        mol = dm.to_mol(sm)
+        fixed_mol = dm.adjust_singleton(mol)
+        self.assertEqual(len(Chem.rdmolops.GetMolFrags(fixed_mol)), 2)
+        self.assertTrue(
+            fixed_mol.HasSubstructMatch(Chem.MolFromSmiles("CC"))
+        )  # assert ethyl is there
 
-    def test_to_df(self):
-        smiles = "CC(=O)Oc1ccccc1C(=O)O"
-        mol = dm.to_mol(smiles)
+    def test_fixmol(self):
+        sm = "C.Cl.CC.[H][N:1]1(C)=CC(O)=CC2CCCCC12"
+        mol = Chem.MolFromSmiles(sm, sanitize=False)
+        # mol.UpdatePropertyCache(False)
+        # Chem.Kekulize(mol)
+        res = dm.fix_mol(mol, n_iter=1)  # copy by default
 
-        inchi = dm.to_inchi(mol)
-        assert inchi == "InChI=1S/C9H8O4/c1-6(10)13-8-5-3-2-4-7(8)9(11)12/h2-5H,1H3,(H,11,12)"
+        # should still be invalid in term of valence for nitrogen
+        self.assertFalse(dm.incorrect_valence(res))
 
-        inchikey = dm.to_inchikey(mol)
-        assert inchikey == "BSYNRYMUTXBXSQ-UHFFFAOYSA-N"
+        res2 = dm.fix_mol(mol, n_iter=2)
+        # not expecting difference between res2 and res3
+        self.assertEqual(Chem.MolToSmiles(res), Chem.MolToSmiles(res2))
 
-        new_mol = dm.from_inchi(inchi)
-        assert dm.to_smiles(new_mol) == smiles
+        # only largest expected_here
+        res_largest = dm.fix_mol(mol, largest_only=True)
 
-        assert dm.to_inchi(None) is None
-        assert dm.to_inchikey(None) is None
-        assert dm.from_inchi(None) is None
+        dm.fix_mol(mol, remove_singleton=True, largest_only=True)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 1)
 
-    def test_to_df(self):
-
-        data_path = self.get_tubb3_sdf_path()
-        mols = dm.read_sdf(data_path)
-        df = dm.to_df(mols)
-
-        assert df.shape == (10, 12)
-        assert list(df.columns) == [
-            "smiles",
-            "zinc_id",
-            "ortholog_name",
-            "gene_name",
-            "affinity",
-            "chembldocid",
-            "title",
-            "reference.pubmed_id",
-            "reference.doi",
-            "reference.chembl_id",
-            "reference.journal",
-            "reference.year",
-        ]
-
-    def test_from_df(self):
-        data_path = self.get_tubb3_sdf_path()
-        df = dm.read_sdf(data_path, as_df=True)
-
-        mols = dm.from_df(df)
-
-        assert len(mols) == 10
-        assert isinstance(mols[0], Chem.Mol)
-
-        assert set(mols[0].GetPropsAsDict().keys()) == set(
-            [
-                "smiles",
-                "zinc_id",
-                "ortholog_name",
-                "gene_name",
-                "affinity",
-                "chembldocid",
-                "title",
-                "reference.pubmed_id",
-                "reference.doi",
-                "reference.chembl_id",
-                "reference.journal",
-                "reference.year",
-            ]
+        expected_largest_fix = dm.standardize_smiles("OC1=CC2CCCCC2[N:1]=C1")
+        self.assertEqual(
+            dm.standardize_smiles(Chem.MolToSmiles(res_largest)),
+            expected_largest_fix,
         )
+
+        res_no_singleton = dm.fix_mol(mol, n_iter=2, remove_singleton=True)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 2)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_no_singleton)), 1)
+
+    def test_dative_bond(self):
+        smis = "CC1=CC=CC(=C1N\\2O[Co]3(ON(\\C=[N]3\\C4=C(C)C=CC=C4C)C5=C(C)C=CC=C5C)[N](=C2)\\C6=C(C)C=CC=C6C)C"
+        expected_result = "CC1=CC=CC(C)=C1N1C=N(C2=C(C)C=CC=C2C)->[Co]2(<-N(C3=C(C)C=CC=C3C)=CN(C3=C(C)C=CC=C3C)O2)O1"
+
+        self.assertTrue(dm.is_transition_metal(Chem.Atom("Co")))
+
+        # sodium is not a transition metal
+        self.assertFalse(dm.is_transition_metal(Chem.Atom("Na")))
+
+        mol = dm.set_dative_bonds(Chem.MolFromSmiles(smis, sanitize=False))
+        self.assertEqual(Chem.MolToSmiles(mol), expected_result)
+        self.assertIsNotNone(dm.to_mol(Chem.MolToSmiles(mol)))

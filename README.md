@@ -19,6 +19,12 @@ fp = dm.to_fp(mol)
 selfies = dm.to_selfies(mol)
 inchi = dm.to_inchi(mol)
 
+# Standardize and sanitize
+mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O")
+mol = dm.fix_mol(mol)
+mol = dm.sanitize_mol(mol)
+mol = dm.standardized_mol(mol)
+
 # Dataframe manipulation
 df = dm.data.freesolv()
 mols = dm.from_df(df)
@@ -43,6 +49,17 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
+## Available modules
+
+- `dm`: top-level module that contains common functions.
+- `dm.actions`: functions to edit molecules.
+- `dm.conformers`: generate and perform computation on conformers.
+- `dm.data`: get some common data (mainly for dev purposes).
+- `dm.fragment`: fragment molecules in a list of fragments.
+- `dm.reactions`: functions to work with reactions.
+- `dm.scaffold`: get representative scaffolds from a list of molecules.
+- `dm.viz`: 2D/3D visualization functions.
+
 ## Install
 
 Use conda:
@@ -55,7 +72,10 @@ conda install -c invivoai datamol
 
 See examples provided as a serie of [notebooks](./notebooks):
 
-1. [The Basics](notebooks/1_The_Basics.ipynb)
+- [The Basics](docs/examples/The_Basics.ipynb)
+- [Preprocessing Molecules](docs/examples/Preprocessing_Molecules.ipynb)
+- [Cluster Molecules](docs/examples/Cluster_Molecules.ipynb)
+- [Fragment and scaffold](docs/examples/Fragment_and_Scaffold.ipynb)
 
 ## Changelogs
 
@@ -68,6 +88,16 @@ Under BSD license. See [LICENSE](LICENSE).
 ## Authors
 
 See [AUTHORS.rst](./AUTHORS.rst).
+
+## Development Lifecycle
+
+## Build the documentation
+
+You can build and serve the documentation locally with:
+
+```bash
+mkdocs serve
+```
 
 ## Release a new version
 

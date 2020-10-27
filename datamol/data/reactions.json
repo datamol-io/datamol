@@ -1,0 +1,2414 @@
+{
+    "123-triazole-1": {
+        "description": "Copper-catalyzed Huisgen cycloaddition of an alkyne and an azide to form a 123-triazole (implicit azide formation from primary and secondary halides).",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#6].[#6:102]-[#7]=[#7+]=[#7-]>>[#7]1-[#6](-[#6:101])=[#6]-[#7](-[#6:102])-[#7]=1"
+        },
+        "long_name": "Huisgen Cycloaddition (1,4 regio)",
+        "retro_smarts": "[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):3]-[#7]1:[#6;H1:1]:[#6:2](-!@[#6:4]):[#7]:[#7]:1>>[#6:4]-[#6:2]#[#6:1].[#6:3]-Br",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "halides-primsec"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#6;H1:2].[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):102]-[Cl,Br,I,N&$([N]=[N+]=[N-])]>>[#6:102]-[#7]1-[#6:2]=[#6:1](-[#6:101])-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "click",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "123-triazole-2": {
+        "description": "Copper-catalyzed Huisgen cycloaddition of an alkyne and an azide to form a 123-triazole.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#6].[#6:102]-[#7]=[#7+]=[#7-]>>[#7]1-[#6](-[#6:101])=[#6]-[#7](-[#6:102])-[#7]=1"
+        },
+        "long_name": "Huisgen Cycloaddition (1,4 regio)",
+        "retro_smarts": "[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):3]-[#7:5]1:[#6;H1:1]:[#6:2](-!@[#6:4]):[#7:7]:[#7:6]:1>>[#6:4]-[#6:2]#[#6:1].[#6:3]-[N:5]=[N+:6]=[N-:7]",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "azides"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#6;H1:2].[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):102]-[N&$([N]=[N+]=[N-])]>>[#6:102]-[#7]1-[#6:2]=[#6:1](-[#6:101])-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "click",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "123-triazole-3": {
+        "description": "Ruthenium-catalyzed Huisgen cycloaddition of an alkyne and an azide to form a 123-triazole (implicit azide formation from primary and secondary halides).",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#6].[#6:102]-[#7]=[#7+]=[#7-]>>[#7]1-[#6]=[#6](-[#6:101])-[#7](-[#6:102])-[#7]=1"
+        },
+        "long_name": "Huisgen Cycloaddition (1,5 regio)",
+        "retro_smarts": "[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):3]-[#7]1:[#6:2](-!@[#6:4]):[#6;H1:1]:[#7]:[#7]:1>>[#6:4]-[#6:2]#[#6:1].[#6:3]-Br",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "halides-primsec"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#6;H1:2].[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):102]-[Cl,Br,I,N&$([N]=[N+]=[N-])]>>[#6:102]-[#7]1-[#6:1](-[#6:101])=[#6:2]-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "click",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "123-triazole-4": {
+        "description": "Ruthenium-catalyzed Huisgen cycloaddition of an alkyne and an azide to form a 123-triazole.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#6].[#6:102]-[#7]=[#7+]=[#7-]>>[#7]1-[#6]=[#6](-[#6:101])-[#7](-[#6:102])-[#7]=1"
+        },
+        "long_name": "Huisgen Cycloaddition (1,5 regio)",
+        "retro_smarts": "[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):3]-[#7:5]1:[#6:2](-!@[#6:4]):[#6;H1:1]:[#7:7]:[#7:6]:1>>[#6:4]-[#6:2]#[#6:1].[#6:3]-[N:5]=[N+:6]=[N-:7]",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "azides"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#6;H1:2].[#6;!$(C(-C)(-C)-C);!$(C=[C,N,O,S]):102]-[N&$([N]=[N+]=[N-])]>>[#6:102]-[#7]1-[#6:1](-[#6:101])=[#6:2]-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "click",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "124-triazole-1": {
+        "description": "124-triazole from an aryl nitrile and an amidine.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#6]#[#7].[#6:101]-[#6](=[#7])-[#7]>>[#6:201]-[#6]1-[#7]=[#6](-[#6:101])-[#7]-[#7]=1"
+        },
+        "long_name": "3,5-Disubstituted 1,2,4-Triazole formation from aryl nitriles and amidines",
+        "retro_smarts": "[c:101]-[#6:1]1:[#7;D2:4]:[#6:5](-[#6;!$(C=[C,N,S,O]):102]):[#7;D2:3]:[#7;D2:2]:1>>[c:101]-[#6:1]#[#7:2].[#6;!$(C=[C,N,S,O]):102]-[#6:5](=[#7;H1:3])-[#7;H2:4]",
+        "rhs_classes": [
+            "nitriles-aryl",
+            "amidines"
+        ],
+        "syn_smarts": "[c:101]-[#6:1]#[#7:2].[#6;!$(C=[C,N,S,O]):102]-[#6:5](=[#7;H1:3])-[#7;H2:4]>>[c:101]-[#6:1]1-[#7;H0:4]=[#6:5](-[#6:102])-[#7;H1:3]-[#7:2]=1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "124-triazole-2": {
+        "description": "124-triazole from a nitrile and hydrazide.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#7].[#7]-[#7]-[#6](=O)-[#6:102]>>[#6](-[#6:101])1-[#7]=[#6](-[#6:102])-[#7]-[#7]=1"
+        },
+        "long_name": "3,5-Disubstituted 1,2,4-Triazole formation from hydrazides",
+        "retro_smarts": "[#6:1](-[#6:101])1:[#7;D2:2]:[#6:5](-[#6;!$(C=[C,N,S,O]):102]):[#7;D2:4]:[#7;D2:3]:1>>[#6:101]-[#6:1]#[#7:2].[#7;H2:3]-[#7;H1:4]-[#6:5](=O)-[#6:102]",
+        "rhs_classes": [
+            "nitriles",
+            "hydrazides"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#7:2].[#7;H2:3]-[#7;H1:4]-[#6:5](=O)-[#6;!$(C=[C,N,S,O]):102]>>[#6:1](-[#6:101])1-[#7:2]=[#6:5](-[#6:102])-[#7;H1:4]-[#7;H0:3]=1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "124-triazole-3": {
+        "description": "124-triazole from a nitrile and a carboxylate using hydrazine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#7].[#6:102]-[#6](=O)-O>>[#6](-[#6:101])1=[#7]-[#6](-[#6:102])=[#7]-[#7]-1"
+        },
+        "long_name": "3,5-Disubstituted 1,2,4-Triazole formation from carboxylates",
+        "retro_smarts": "[#6:1](-[#6:101])1:[#7;D2:2]:[#6:5](-[#6;!$(C=[C,N,S,O]):102]):[#7;D2]:[#7;D2]:1>>[#6:101]-[#6:1]#[#7:2].[#6:102]-[#6:5](=O)-[O;H1]",
+        "rhs_classes": [
+            "nitriles",
+            "carboxylates"
+        ],
+        "syn_smarts": "[#6:101]-[#6:1]#[#7:2].[#6;!$(C=[C,N,O,S]):102]-[C:3](=O)-[O;H1]>>[#6:1](-[#6:101])1=[#7:2]-[#6:3](-[#6:102])=[#7]-[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "triazole",
+            "cyclization"
+        ],
+        "tier": 1
+    },
+    "5-het-amination": {
+        "description": "Amination of 5-member heterocycles (n-alkyl-imidazole, thiazole, oxazole, isoxazole, benzothiazole, benzimidazole, and benzoxazole).",
+        "ld_data": {
+            "display_smarts": "[#35]-C1=N-C2-C=C-C=C-C=2-N(-[#6])-1.[#7]-[#6:101]>>[#6:101]-[#7]-C1=N-C2-C=C-C=C-C=2-N(-[#6])-1"
+        },
+        "long_name": "Amination of 5-member heterocycles (n-alkyl-imidazole, thiazole, oxazole, isoxazole, benzothiazole, benzimidazole, and benzoxazole)",
+        "retro_smarts": "[c;r5;$(c1n(-[#6])ccn1),$(c1sccn1),$(c1occn1),$(c1sc2ccccc2n1),$(c1n(-[#6])c2ccccc2n1),$(c1[n;H1]c2ccccc2n1),$(c1oc2ccccc2n1),$(c1ccon1),$(c1c2ccccc2on1):1]-!@[N;$([N;H0](-[#6;!$(C=[C,N,O,S])])(-[c:1])-[#6;!$(C=[C,N,O,S])]),$([N;H1](-[c:1])-[#6;!$(C=[C,N,O,S])]);!$(N-[C,N,O,S]=[C,N,O,S]);!$(N~[N,O,S]):2]>>[c:1]-[#17].[#7:2]",
+        "rhs_classes": [
+            "halides-5het",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#17,#35]-[c;r5;$(c1n(-[#6])ccn1),$(c1sccn1),$(c1occn1),$(c1sc2ccccc2n1),$(c1n(-[#6])c2ccccc2n1),$(c1[n;H1]c2ccccc2n1),$(c1oc2ccccc2n1),$(c1ccon1),$(c1c2ccccc2on1):1].[N;$([N;H1](-[#6;!$(C=[C,N,O,S])])-[#6;!$(C=[C,N,O,S])]),$([N;H2]-[#6;!$(C=[C,N,O,S])]);!$(N-[C,N,O,S]=[C,N,O,S]);!$(N~[N,O,S]):2]>>[c:1]-[#7:2]",
+        "tags": [
+            "C-N bond formation",
+            "C-N",
+            "heterocycle",
+            "amination"
+        ],
+        "tier": 1
+    },
+    "5-het-arylation": {
+        "description": "Arylation of 5-member heterocycles, including: thiophene, n-methyl-imidazole, 4-methyl-thiazole, 2-methyl-furan, benzothiophene, and benzothiazole.",
+        "ld_data": {
+            "display_smarts": "[H]-[#6]-1=[#6,#7]-[#6,#7]=C-[#7,#8,#16]-1.Br-[#6:201]>>[#6:201]-C-1=[#6,#7]-[#6,#7]=C-[#7,#8,#16]-1 |$;;;;;;;Aryl_p;Aryl_p;;;;;$|"
+        },
+        "long_name": "5-Member heterocycle arylation from aryl bromides",
+        "retro_smarts": "[c;r5;$(c1sc(-[#6])[c;H1][c;H1]1),$(c1s[c;H1][c;H1][c;H1]1),$(c1[n;H1][c;H1]n[c;H1]1),$(c1n(-[#6])[c;H1]n[c;H1]1),$(c1s[c;H1]nc(-[#6])1),$(c1oc(-[#6])[c;H1][c;H1]1),$(c1sc2ccccc2[c;H1]1),$(c1sc2ccccc2n1):1]-!@[c:2]>>[c;H1:1].[c:2]-Br",
+        "rhs_classes": [
+            "5het-H1",
+            "bromides-aryl"
+        ],
+        "syn_smarts": "[c;H1;r5;$(c1sc(-[#6])[c;H1][c;H1]1),$(c1s[c;H1][c;H1][c;H1]1),$(c1[n;H1][c;H1]n[c;H1]1),$(c1n(-[#6])[c;H1]n[c;H1]1),$(c1s[c;H1]nc(-[#6])1),$(c1oc(-[#6])[c;H1][c;H1]1),$(c1sc2ccccc2[c;H1]1),$(c1sc2ccccc2n1):1].[c:2]-Br>>[c:1]-[c:2]",
+        "tags": [
+            "C-C bond formation",
+            "C-C",
+            "heterocycle",
+            "arylation"
+        ],
+        "tier": 1
+    },
+    "BOC-deprotection": {
+        "description": "Deprotection of a Boc-protected amine",
+        "ld_data": {
+            "display_smarts": "[#6]-[#6](-[#6])(-[#6])-O-C(=O)-N-[#6:101]>>[#7]-[#6:101]"
+        },
+        "long_name": "Deprotection of a BOC-protected amine",
+        "retro_smarts": "[#6;!$([#6]=[C,N,O,S]):101]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):101])-[#6;!$([#6]=[C,N,O,S]):103]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):2]>>[#6:101]-[N;$([N;H1](-C=O)-[#6:101]),$([N;H0](-C=O)(-[#6:103])-[#6:101]):2]-C(=O)-O-C(-C)(-C)-C",
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;$([N;H1](-C=O)-[#6;!$([#6]=[#6,#7,#8,#16]):101]),$([N;H0](-C=O)(-[#6;!$([#6]=[#6,#7,#8,#16]):103])-[#6;!$([#6]=[#6,#7,#8,#16]):101]):2]-!@C(=O)-O-C(-[C;H3])(-[C;H3])-[C;H3]>>[#6:101]-[N:2]",
+        "tags": [
+            "Boc",
+            "Boc-deprotection",
+            "protecting group",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "BOC-protection": {
+        "description": "Protection of a primary or secondary amine with a Boc-group",
+        "ld_data": {
+            "display_smarts": "[#7]-[#6:101]>>[#6]-[#6](-[#6])(-[#6])-O-C(=O)-N-[#6:101]"
+        },
+        "long_name": "Protection of a primary or secondary amine with a Boc-group",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;$([N;H1](-C=O)-[#6;!$([#6]=[#6,#7,#8,#16]):101]),$([N;H0](-C=O)(-[#6;!$([#6]=[#6,#7,#8,#16]):103])-[#6;!$([#6]=[#6,#7,#8,#16]):101]):2]-!@C(=O)-O-C(-[C;H3])(-[C;H3])-[C;H3]>>[#6:101]-[N:2]",
+        "rhs_classes": [
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[C,N,O,S]):101]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):101])-[#6;!$([#6]=[C,N,O,S]):103]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):2]>>[#6:101]-[N;$([N;H1](-C=O)-[#6:101]),$([N;H0](-C=O)(-[#6:103])-[#6:101]):2]-C(=O)-O-C(-C)(-C)-C",
+        "tags": [
+            "Boc",
+            "Boc-protection",
+            "protecting group",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "N-azole-arylation": {
+        "description": "N-arylation of azoles, including: indole, pyrazole, imidazole, triazole, tetrazole, benzimidazole, and indazoles.",
+        "ld_data": {
+            "display_smarts": "[#8]-[#5](-[#8])-[#6:201].[H]-[#7]-1-[C,N]=[C,N]-C=[C,N]-1>>[#6:201]-N-1-[C,N]=[C,N]-C=[C,N]-1 |$;;;Aryl_p;;;;;;;Aryl_p;;;;;$|"
+        },
+        "long_name": "N-Arylation of azoles from boronic acids/esters",
+        "retro_smarts": "[c:1]-!@[n;$(n1nccc1),$(n1cccc1),$(n1cncc1),$(n1ncnc1),$(n1cnnc1),$(n1nccn1):2]>>[c:1]-B(-O)-O.[n;H1:2]",
+        "rhs_classes": [
+            "boronates-aryl",
+            "azoles-nH"
+        ],
+        "syn_smarts": "[c:1]-B(-O)-O.[n;$(n1nccc1),$(n1cccc1),$(n1cncc1),$(n1ncnc1),$(n1cnnc1),$(n1nccn1);D2;H1:2]>>[c:1]-[n;D3;H0:2]",
+        "tags": [
+            "azole",
+            "N-arylation"
+        ],
+        "tier": 1
+    },
+    "acylation-1": {
+        "description": "Acylation of an alkyne with an acid chloride.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[C]#[#6].[#6:102]-C(=O)-Cl>>[#6:102]-C(=O)-C#C-[#6:101]"
+        },
+        "long_name": "Ynone synthesis from alkynes and acid chlorides",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):1]-[C:2]#[C:3]-!@[#6:4](=[O:5])-[#6;!$([#6]=[#6,#7,#8,#16]):6]>>[#6:1]-[C:2]#[C:3].[#6:6]-[#6:4](=[O:5])-Cl",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "acid_chlorides"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):101]-[C:2]#[C;H1:3].[#6;!$([#6]=[#6,#7,#8,#16]):102]-[C:4](=O)-Cl>>[#6:101]-[C:2]#[C;H0:3]-[C:4](=O)-[#6:102]",
+        "tags": [
+            "acylation",
+            "alkyne"
+        ],
+        "tier": 1
+    },
+    "alkylation-1": {
+        "description": "Alkylation of a primary or secondary amine using a primary or secondary alkyl halide.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-Br.[#6:102]-[#7]>>[#6:101]-N-[#6:102]"
+        },
+        "long_name": "Alkylation of amines using alkyl halides",
+        "retro_smarts": "[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(C#N);!$(c):1]-!@[#7;!$(N-C#N);$([N;H0](-[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(c):1])(-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):3])-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0])]),$([N;H1](-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):3])-[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(c):1]):2]-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):3]>>[#6:1]-Br.[#7:2]-[#6:3]",
+        "rhs_classes": [
+            "halides-primsec",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(C#N);!$(c):101]-[Cl,Br,I].[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):102]-[#7;!$(N-C#N);$([N;H1](-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0])])-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):102]),$([N;H2]-[#6;!$(C=[C,N,O,S]);$(c),$([#6;!H0]):102]):2]>>[#6:101]-[#7:2]-[#6:102]",
+        "tags": [
+            "amine",
+            "alkylation",
+            "C-N bond formation",
+            "C-N"
+        ],
+        "tier": 1
+    },
+    "alkylation-2": {
+        "description": "N-Alkylation of heterocycles using a primary or secondary alkyl halide.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-Br.[H]-N-1-C=C-C=C-1>>[#6:101]-N1-C=C-C=C-1"
+        },
+        "long_name": "N-Alkylation of heterocycles using alkyl halides",
+        "retro_smarts": "[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(C#N);!$(c):1]-!@[n;$(n1[c,n][c,n][c,n]c1),$(n1c(=O)[c,n][c,n][c,n][c,n]1),$(n1[c,n][c,n]c(=O)[c,n][c,n]1):2]>>[#6:1]-Br.[n;H1:2]",
+        "rhs_classes": [
+            "halides-primsec",
+            "heterocycles-NH"
+        ],
+        "syn_smarts": "[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);!$(C#N);!$(c):101]-[Cl,Br,I].[n;$([n;H1]1[c,n][c,n][c,n]c1),$([n;H1]1c(=O)[c,n][c,n][c,n][c,n]1),$([n;H1]1[c,n][c,n]c(=O)[c,n][c,n]1):2]>>[#6:101]-[n;H0:2]",
+        "tags": [
+            "heterocycle",
+            "alkylation",
+            "C-N bond formation",
+            "C-N"
+        ],
+        "tier": 1
+    },
+    "amide_coupling-1": {
+        "description": "Traditional amide coupling using a carboxylic acid and a primary or secondary amine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-O.[#7]-[#6:102]>>[#6:102]-N-C(=O)-[#6:101]"
+        },
+        "long_name": "Amide synthesis from carboxylic acids and primary or secondary amines",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[N;$([N;H0](-[#6;!$(C=[C,N,O,S]):1])-[#6;!$(C=[C,N,O,S])]),$([N;H1]);!$(N=*);!$([N-]);!$(N#*);!$([ND4]);!$(N[O,N]):2]-!@[C;!R:3](=[O:5])-[#6;!$(C=[C,N,O,S]):4]>>[#6:4]-[C:3](=[O:5])-[O;H1].[N:2]-[#6:1]",
+        "rhs_classes": [
+            "carboxylates",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C:2](=O)-[O;H1].[N;$([N;H1](-[#6;!$(C=[C,N,O,S])])-[#6;!$(C=[C,N,O,S])]),$([N;H2]-[#6;!$(C=[C,N,O,S])]);!$(N-[C,N,O,S]=[C,N,O,S]):3]-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-[C:2](=O)-[N:3]-[#6:102]",
+        "tags": [
+            "amide coupling",
+            "amide"
+        ],
+        "tier": 1
+    },
+    "amide_coupling-2": {
+        "description": "Schotten-Baumann: Amide coupling using an acid chloride and a primary or secondary amine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-Cl.[#7]-[#6:102]>>[#6:102]-N-C(=O)-[#6:101]"
+        },
+        "long_name": "Schotten-Baumann amide synthesis from acid chlorides and primary or secondary amines",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[N;$([N;H0](-[#6;!$(C=[C,N,O,S]):1])-[#6;!$(C=[C,N,O,S])]),$([N;H1]);!$(N=*);!$([N-]);!$(N#*);!$([ND4]);!$(N[O,N]):2]-!@[C;!R:3](=[O:5])-[#6;!$(C=[C,N,O,S]):4]>>[#6:4]-[C:3](=[O:5])-Cl.[N:2]-[#6:1]",
+        "rhs_classes": [
+            "acid_chlorides",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C:2](=O)-Cl.[N;$([N;H1](-[#6;!$(C=[C,N,O,S])])-[#6;!$(C=[C,N,O,S])]),$([N;H2]-[#6;!$(C=[C,N,O,S])]);!$(N-[C,N,O,S]=[C,N,O,S]):3]-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-[C:2](=O)-[N:3]-[#6:102]",
+        "tags": [
+            "amide coupling",
+            "amide"
+        ],
+        "tier": 1
+    },
+    "amide_coupling-3": {
+        "description": "Intramolecular amide coupling",
+        "ld_data": {
+            "display_smarts": "[#7]-[#6]-[#6]-[#6]-[#6](-[#8])=[O]>>[O]=[#6]-1-[#6]-[#6]-[#6]-[#7]-1 |Sg:n:2::ht,Sg:n:10::ht|"
+        },
+        "long_name": "Intramolecular amide coupling to form lactams",
+        "retro_smarts": "[#6:3]@[#6:4]@[#6:5](=[#8:6])@[#7;$([#7;H0]([#6;$([#6]=O)])([#6])[#6;!$([#6]=[C,N,O,S]):2]),$([#7;H1]([#6;$([#6]=O)])[#6;!$([#6]=[C,N,O,S]):2]):1]@[#6;!$([#6]=[C,N,O,S]):2]>>([N:1][#6:2].[#6:3][#6:4][C:5](=[O:6])-[O;H1])",
+        "syn_smarts": "([N;$([N;H1](-[#6])-[#6;!$([#6]=[C,N,O,S]):2]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):2]):1][#6;!$([#6]=[C,N,O,S]):2].[#6:3]~[#6:4][#6;!R:5](=[O:6])-O)>>[#6:3][#6:4][#6:5](=[O:6])[#7:1][#6:2]",
+        "tags": [
+            "amide coupling",
+            "amide",
+            "lactam",
+            "macrolactamization",
+            "transformation",
+            "intramolecular"
+        ],
+        "tier": 1
+    },
+    "amide_coupling-4": {
+        "description": "Intramolecular amide coupling",
+        "ld_data": {
+            "display_smarts": "[#7]-C=1-C=C-C=C-C=1/C=C\\C(=O)-O>>C=1-2-C=C-C=C-C=1-N-C(=O)-C=C-2"
+        },
+        "long_name": "Intramolecular amide coupling to form quinolinones",
+        "retro_smarts": "[c;$(c(a)(c)c):7]1[c;$([c;H1]),$(c-[#6]):3][c;$([c;H1]),$(c-[#6]):4][c:5](=[O:6])[n;$([n;H0]([c;$(c=O)])(-[#6])[c;$(c(a)(c)c):2]),$([n;H1]([c;$(c=O)])[c:2]):1][c:2]1>>[N:1]-[c:2][c:7]/[C:3]=[C:4]\\[C:5](=[O:6])-[O;H1]",
+        "syn_smarts": "[N;$([N;H1](-[#6])-[c:2]),$([N;H2]-[c:2]):1]-[c:2][c:7]/[C;$([C;H1]),$([C;H0](-[c:7])-[#6]):3]=[C;$([C;H1]),$([C;H0](-[C:5]=O)-[#6]):4]\\[C:5](=[O:6])-[O;H1]>>[c:7]1[c:3][c:4][c:5](=[O:6])[#7:1][c:2]1",
+        "tags": [
+            "amide coupling",
+            "amide",
+            "lactam",
+            "macrolactamization",
+            "transformation",
+            "intramolecular"
+        ],
+        "tier": 1
+    },
+    "amination-1": {
+        "description": "Buchwald-Hartwig Amination: N-arylation of primary and secondary amines using aryl halides.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6:201].[#7]-[#6:101]>>[#6:101]-[#7]-[#6:201] |$;Aryl_p;;;;;Aryl_p$|"
+        },
+        "long_name": "Buchwald-Hartwig amination from aryl halides and primary or secondary amines",
+        "retro_smarts": "[c;$(c1[c,n][c,n][c,n][c,n][c,n]1),$(c1[c,n,o,s][c,n][c,n][c,n]1),$(c1[c,n][c,n,o,s][c,n][c,n]1):1]!@[N;$([N;H0](-c)(-[#6;!$([#6]=[C,N,O,S])])-[#6;!$([#6]=[C,N,O,S])]),$([N;H1](-c)-[#6;!$([#6]=[C,N,O,S])])!$(N~[O,S,P]);!$(N=*);!$([N-]);!$(N#*);!$([ND4]);!$(N-[C,N,O,S]=[C,N,O,S]):2]>>Cl-[c:1].[N:2]",
+        "rhs_classes": [
+            "halides-aryl",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[Cl,Br,I]-[c;$(c1[c,n][c,n][c,n][c,n][c,n]1),$(c1[c,n,o,s][c,n][c,n][c,n]1),$(c1[c,n][c,n,o,s][c,n][c,n]1):101].[#6;!$([#6]=[#6,#7,#8,#16]):102]-[N;$([N;H1](-[#6;!$([#6]=[#6,#7,#8,#16]):103])-[#6;!$([#6]=[#6,#7,#8,#16]):102]),$([N;H2]-[#6;!$([#6]=[#6,#7,#8,#16]):102]);!$(N~[O,S,P]);!$(N=*);!$([N-]);!$(N#*);!$([ND4]);!$(N-[C,N,O,S]=[C,N,O,S]):2]>>[c:101]-[N:2]-[#6:102]",
+        "tags": [
+            "Buchwald-Hartwig",
+            "amination",
+            "N-arylation"
+        ],
+        "tier": 1
+    },
+    "amination-2": {
+        "description": "Reductive Amination: Alkylation of primary or secondary amines with a ketone or an aldehyde.",
+        "ld_data": {
+            "display_smarts": "O=C-[#6:101].[#6:102]-[#7]>>[#6:102]-N-C-[#6:101]"
+        },
+        "long_name": "Reductive amination",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C;$([C;H2]-[#6;!$(C=[C,N,O,S])]),$([C;H1](-[#6;!$(C=[C,N,O,S])])-[#6;!$(C=[C,N,O,S])]):1]-!@[N;$([N;H1]-[#6;!$([#6]=[#6,#7,#8,#16]):102]),$([N;H0](-[#6;!$([#6]=[#6,#7,#8,#16]):104])-[#6;!$([#6]=[#6,#7,#8,#16]):102]);!$(N-[C,N,O,S]=[C,N,O,S]);!$(N-[N,O,S]):2]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-[C:1]=O.[#7:2]-[#6:102]",
+        "rhs_classes": [
+            "aldehydes-ketones",
+            "amines-primsec"
+        ],
+        "syn_smarts": "O=[C;!$(C-[N,O,S]);!$(C-C=[C,N,O,S]);$([C;H1]-[#6;!$(C=[C,N,O,S]):101]),$([C;H0](-[#6;!$(C=[C,N,O,S]):103])-[#6;!$(C=[C,N,O,S]):101]):1]-[#6;!$(C=[C,N,O,S]):101].[#6;!$([C]=[C,N,O,S]):102]-[N;$([N;H1](-[#6;!$([C]=[C,N,O,S]):104])-[#6;!$([C]=[C,N,O,S]):102]),$([N;H2]-[#6;!$([C]=[C,N,O,S]):102]);!$(N-[N,O,S]);!$(N-[C,N,O,S]=[C,N,O,S]):2]>>[#6:101]-[C:1]-[N:2]-[#6:102]",
+        "tags": [
+            "reductive amination",
+            "amination"
+        ],
+        "tier": 1
+    },
+    "aminothiophene-1": {
+        "description": "Gewald Aminothiophene synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-[#6:102].N#C-C-C(=O)-O-[#6:103]>>[#6:102]-C-1=C(-[#6:101])-C(-C(=O)-O-[#6:103])=C(-[#7])-S-1"
+        },
+        "long_name": "Gewald aminothiophene synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[c:2]1[c:3](-[#6;!$(C=[C,N,O,S]):4])[c:5](-[#6:6](=[O:10])-[O:11]-[C;!$([#6]=[#6,#7,#8,#16]):7])[c:8](-[N;H2:9])s1>>[#6:1]-[#6:2]-[#6:3](=O)-[#6:4].[#7;H0:9]#[C:8]-[C:5]-[#6:6](=[O:10])-[O:11]-[C:7]",
+        "rhs_classes": [
+            "ketones-2unsub",
+            "esters-2cyano"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[#6;H2:2]-[#6:3](=O)-[#6;!$(C=[C,N,O,S]):102].N#C-[C;H2:5]-[#6:6](=O)-O-[C;!$([#6]=[#6,#7,#8,#16]):103]>>[#6:101]-[c;H0:2]1[c:3](-[#6:102])[c;H0:5](-[#6:6](=O)-O-[#6:103])c(-[#7;H2])s1",
+        "tags": [
+            "heterocycle formation",
+            "aminothiophene",
+            "cyclization",
+            "thiophene"
+        ],
+        "tier": 1
+    },
+    "barton-zard-1": {
+        "description": "Synthesis of a substituted pyrrole from an isocyanoacetate and a nitroalkene",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[O]-[#6](=[O])-[#6]-[#7;+]#[#6;-].C(/[#6:102])=C(/[#6:103])-[#7;+](=O)-[O;-]>>[#6:101]-[O]-[#6](=[O])-[#6]1=[#6](-[#6:102])-[#6](-[#6:103])=[#6]-[#7]-1"
+        },
+        "long_name": "Barton-Zard pyrrole synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[O:2]-[#6:3](=[O:4])!@-[c:5]1[c;$([c;H1]),$(c-[#6;!$(C=[C,N,O,S])]):6][c;$([c;H1]),$(c-[#6;!$(C=[C,N,O,S])]):7][c;H1:8][n;H1:9]1>>[#6:1]-[O:2]-[#6:3](=[O:4])-[C:5]-[N;H0;+:9]#[C;H0;-:8].[#6:6]=[#6:7]-[N;+](=O)[O-]",
+        "rhs_classes": [
+            "isocyanoacetates",
+            "nitroalkenes"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):1]-[O:2]-[C:3](=[O:4])-[C;H2:5]-[N;+:6]#[C;-:7].[C;$([C;H2]),$([C;H1]-[#6;!$(C=[C,N,O,S])]):8]=[C;$([C;H1]),$(C-[#6;!$(C=[C,N,O,S])]):9]-[N;+](=O)[O;-]>>[#6:1]-[O:2]-[C:3](=[O:4])-[c:5]:1:[c:8]:[c:9]:[c;H1;+0:7]:[n;H1;+0:6]:1",
+        "tags": [
+            "Barton-Zard",
+            "pyrrole",
+            "heterocycle formation",
+            "heterocycle"
+        ],
+        "tier": 1
+    },
+    "barton-zard-2": {
+        "description": "Synthesis of a substituted pyrrole from an isocyanoacetate and a nitrobenzene",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[O]-[#6](=[O])-[#6]-[#7;+]#[#6;-].[#6]=1-[#6]=[#6]-[#6]=[#6]-[#6]=1-[#7;+](=O)-[O-]>>[#6:101]-[O]-[#6](=O)-[#6]-1=[#6]-2-[#6]=[#6]-[#6]=[#6]-[#6]-2=[#6]-[#7]-1"
+        },
+        "long_name": "Aromatic Barton-Zard pyrrole synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[O:2]-[C:3](=[O:4])!@-[#6:5]1[#6:9]2[a:10][a:11][a:12][a:13][#6:8]2[#6;H1:7][#7;H1:6]1>>[#6:1]-[O:2]-[#6:3](=[O:4])-[C;H2:5]-[N;H0;+:6]#[C;H0;-:7].[c;H1:9]1[a:10][a:11][a:12][a:13][c:8]1-[#7;+](=O)[O-]",
+        "rhs_classes": [
+            "isocyanoacetates",
+            "nitrobenzenes-2H"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):1]-[O:2]-[C:3](=[O:4])-[C;H2:5]-[N;+:6]#[C;-:7].[c;H1:8]:1:[a:9]:[a:10]:[a:11]:[a:12]:[c:13]:1-[N;+](=O)[O-]>>[#6;!$(C=[C,N,O,S]):1]-[O:2]-[C:3](=[O:4])-[c:5]:1:[c:8]:2:[a:9]:[a:10]:[a:11]:[a:12]:[c:13]:2:[c;H1;+0:7]:[n;H1;+0:6]:1",
+        "tags": [
+            "Barton-Zard",
+            "pyrrole",
+            "heterocycle formation",
+            "heterocycle"
+        ],
+        "tier": 1
+    },
+    "benzimidazole-1": {
+        "allow_multiple_products": true,
+        "description": "Benzimidazole synthesis from an ortho-amino aniline and a carboxylic acid or ester.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#7])=[#6](-[#7])-1.[#6](=O)(-O)-[#6:101]>>[#6:101]-[#6]-1=[#7]-[#6]-2=[#6](-[#7]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "2-Substituted benzimidazole formation from carboxylic acids or esters",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[c:2]1[n;D2:3][c;!$(c-[C,N]);R2:4][c;!$(c-[C,N]);R2:5][n;D2:6]1>>[N:3][c:4][c:5][N:6].[C:2](=O)([O;H1])[#6:1]",
+        "rhs_classes": [
+            "anilines-2NH2",
+            "carboxylates"
+        ],
+        "syn_smarts": "[#7;H2:3]-[#6:1]:[#6:2]-[#7;H2:4].[O;H1]-[#6:5](=O)-[#6;!$(C=[C,N,O,S]):101]>>[#6:1]1:[#6:2]:[#7:4]:[#6:5](-[#6:101]):[#7;H1:3]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzimidazole"
+        ],
+        "tier": 1
+    },
+    "benzimidazole-2": {
+        "allow_multiple_products": true,
+        "description": "Benzimidazole synthesis from an ortho-amino aniline and an aldehyde.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#7])=[#6](-[#7])-1.O=[#6]-[#6:101]>>[#6:101]-[#6]-1=[#7]-[#6]-2=[#6](-[#7]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "2-Substituted benzimidazole formation from aldehydes",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-[c:2]1[n;D2:3][c;!$(c-[C,N]);R2:4][c;!$(c-[C,N]);R2:5][n;D2:6]1>>[N:3][c:4][c:5][N:6].[C:2](=O)[#6:1]",
+        "rhs_classes": [
+            "anilines-2NH2",
+            "aldehydes"
+        ],
+        "syn_smarts": "[#7;H2:3]-[#6:1]:[#6:2]-[#7;H2:4].[#6;H1:5](=O)-[#6;!$(C=[C,N,O,S]):101]>>[#6:1]1:[#6:2]:[#7:4]:[#6:5](-[#6:101]):[#7;H1:3]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzimidazole"
+        ],
+        "tier": 1
+    },
+    "benzimidazole-3": {
+        "allow_multiple_products": true,
+        "description": "2-Chloro-benzimidazole formation from 2-amino anilines.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#7])=[#6](-[#7])-1>>Cl-[#6]-1=[#7]-[#6]-2=[#6](-[#7]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "2-Chloro-benzimidazole formation",
+        "retro_smarts": "[#17]-c1[n;H1:1][c;!$(c-[C,N]):2][c;!$(c-[C,N]):3][n:4]1>>[#7;H2:1]-[c:2][c:3]-[#7;H2:4]",
+        "rhs_classes": [
+            "anilines-2NH2"
+        ],
+        "syn_smarts": "[#7;H2:1]-[c:2][c:3]-[#7;H2:4]>>[#7;H1:1]1-[c:2][c:3]-[#7:4]=C(-[#17])-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzimidazole",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "benzimidazole-4": {
+        "allow_multiple_products": true,
+        "description": "Benzimidazole formation from 2-amino anilines.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#7])=[#6](-[#7])-1>>[#7]-1-[#6]=[#7]-[#6]-2=[#6]-1-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "Benzimidazole formation",
+        "retro_smarts": "[c;H1]1[n;H1:1][c;!$(c-[C,N]):2][c;!$(c-[C,N]):3][n:4]1>>[#7;H2:1]-[c:2]:[c:3]-[#7;H2:4]",
+        "rhs_classes": [
+            "anilines-2NH2"
+        ],
+        "syn_smarts": "[#7;H2:1]-[c:2][c:3]-[#7;H2:4]>>[#7;H1:1]1-[c:2][c:3]-[#7:4]=[C;H1]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzimidazole",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "benzofuran-1": {
+        "description": "Benzofuran synthesis from a 2-iodo phenol and an alkyne.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#8])=[#6](-I)-1.[#6:101]-[#6]#[#6]>>[#6:101]-[#6]-1=[#6]-[#6]-2=[#6](-[#8]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "2-Substituted benzofuran synthesis from 2I-phenols and alkynes",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):10]-!@[c:8]1[c;H1:9][c;!$(cn):3]2[a:4][a:5][a:6][a:7][c;!$(cn):2]2[o:1]1>>[#8:1]-[c:2]1[a:7][a:6][a:5][a:4][c:3]1-I.[#6:10]-[#6:8]#[#6:9]",
+        "rhs_classes": [
+            "phenols-2I",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[c;r6;!$(c[o,n,s]):1](-[#8:2]):[c;r6;!$(c[o,n,s]):4]-I.[#6;!$([#6]=[#6,#7,#8,#16]):101]-[#6:6]#[#6;H1:7]>>[#6:1]1-[#8:2]-[#6:6](-[#6:101])=[#6;H1:7]-[#6:4]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzofuran"
+        ],
+        "tier": 1
+    },
+    "benzothiazole-1": {
+        "description": "Benzothiazole synthesis from a 2-thiol aniline and an aldehyde.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#16])=[#6](-[#7])-1.O=[#6]-[#6:101]>>[#6:101]-[#6]-1=[#7]-[#6]-2=[#6](-[#16]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "2-Substituted benzothiazole synthesis from 2SH-anilines and aldehydes",
+        "retro_smarts": "[#6:1]-!@[c:2]1[s;X2:3][c;!$(c-[C,N]);R2:4][c;!$(c-[C,N]);R2:5][n:6]1>>[#16;H1;X2:3]-[c:4][c:5]-[#7;H2:6].[#6;H1:2](=O)-[#6:1]",
+        "rhs_classes": [
+            "anilines-2SH",
+            "aldehydes"
+        ],
+        "syn_smarts": "[#7;H2:3]-[#6:2]:[#6:1]-[#16;H1;X2:4].O=[#6;H1:5]-[#6:101]>>[#6:1]1:[#6:2]:[#7;H0:3]:[#6;H0:5](-[#6:101]):[#16;H0;X2:4]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzothiazole"
+        ],
+        "tier": 1
+    },
+    "benzothiophene": {
+        "description": "Benzothiophene synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6]-[#16]-C-1=C(-[#53])-C=C-C=C-1.[#6:101]-[#6]#[#6]>>[#6:101]-[#6]-1=[#6]-[#6]-2=[#6](-[#16]-1)-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "Benzothiophene synthesis",
+        "retro_smarts": "[c:1]12[a:6][a:5][a:4][a:3][c:2]1[c;H1:10][c:9](-!@[#6:101])[s;X2:8]2>>C[#16:8]-[c:1]1[c:2](-[#53])[a:3][a:4][a:5][a:6]1.[#6:101]-[C:9]#[C;H1:10]",
+        "rhs_classes": [
+            "thioanisoles-2I",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[C;H3]-[#16;X2:8]-[c:1]1[c:2](-[#35,#53])[a:3][a:4][a:5][a:6]1.[#6:101]-[C:9]#[C;H1:10]>>[c:1]12[a:6][a:5][a:4][a:3][c:2]1[c;H1:10][c:9](-[#6:101])[#16;X2:8]2",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzothiophene"
+        ],
+        "tier": 1
+    },
+    "benzoxazole-1": {
+        "description": "Benzoxazole synthesis from a 2-amino phenol and a carboxylic acid.",
+        "ld_data": {
+            "display_smarts": "[#6]-1=[#6]-[#6]=[#6]-[#6](-[#8])=[#6](-[#7])-1.[O;H1]-[#6](=O)-[#6:101]>>[#6]-1=[#6]-[#6]=[#6]-[#6]=2-[#8]-[#6](-[#6:101])=[#7]-[#6]=2-1"
+        },
+        "long_name": "2-Substituted benzoxazole synthesis from 2NH-phenols and carboxylic acids or esters",
+        "retro_smarts": "[#6:6]-!@[#6:5]1:[#7:4]:[c;!$(c-[C,N]);R2:3]:[c;!$(c-[C,N]);R2:1]:[#8:2]:1>>[#7;H2:4]-[c:3]:[c:1]-[#8;H1:2].[#6:6]-[#6:5](=O)-[O;H1]",
+        "rhs_classes": [
+            "anilines-2OH",
+            "carboxylates"
+        ],
+        "syn_smarts": "[#7;H2:4]-[c:3]:[c:1]-[#8;H1:2].[#6:101]-[#6:5](=O)-[O;H1]>>[#6:101]-[#6:5]1:[#7;H0:4]:[c:3]:[c:1]:[#8;H0:2]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzoxazole"
+        ],
+        "tier": 1
+    },
+    "benzoxazole-2": {
+        "description": "Benzoxazole synthesis from a 2-amino phenol and an aryl aldehyde.",
+        "ld_data": {
+            "display_smarts": "[#7]-[#6]-1=[#6](-[#8])-[#6]=[#6]-[#6]=[#6]-1.[#6:201]-[#6]=O>>[#6:201]-[#6]-1=[#7]-[#6]-2=[#6](-[#8]-1)-[#6]=[#6]-[#6]=[#6]-2 |$;;;;;;;;Aryl_p;;;Aryl_p;;;;;;;;;$|"
+        },
+        "long_name": "2-Aryl benzoxazole synthesis from 2-aminophenols and aryl aldehydes",
+        "retro_smarts": "[c:1]-!@[c:2]1[o:3][c;!$(c-[C,N]);R2:4][c;!$(c-[C,N]);R2:5][n:6]1>>[#8;H1:3]-[c:4][c:5]-[#7;H2:6].[C;H1:2](=O)[c:1]",
+        "rhs_classes": [
+            "anilines-2OH",
+            "aldehydes-aryl"
+        ],
+        "syn_smarts": "[#8;H1:3]-[c:4]:[c:5]-[#7;H2:6].[#6;H1:2](=O)-[c:101]>>[c:101]-[#6;H0:2]1:[#8;H0:3]:[#6:4]:[#6:5]:[#7;H0:6]:1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "benzoxazole"
+        ],
+        "tier": 1
+    },
+    "carbamate": {
+        "description": "Carbamate synthesis from isocyanates and primary or secondary alcohols.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-N=C=O.[#6:102]-[#8]>>[#6:102]-O-C(=O)-N-[#6:101]"
+        },
+        "long_name": "Carbamate synthesis from isocyanates and primary or secondary alcohols",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H1:1]-[C;!R:3](=[O:4])-!@[O:2]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-[N;H0:1]=[C:3]=[O:4].[O;H1:2]-[#6:102]",
+        "rhs_classes": [
+            "isocyanates",
+            "alcohols-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N:2]=[C;!R]=O.[#6;!$([#6]=[#7,#8,#16]):102]-[O;H1;!$(O-[C,N,O,S]=[C,N,O,S]):3]>>[#6:101]-[N;H1:2]-C(=O)-[O;H0:3]-[#6:102]",
+        "tags": [
+            "carbamate"
+        ],
+        "tier": 1
+    },
+    "carbamate-2": {
+        "description": "Carbamate synthesis from primary or secondary amines and primary or secondary alcohols.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#7].[#6:102]-[#8]>>[#6:102]-O-C(=O)-N-[#6:101]"
+        },
+        "long_name": "Carbamate synthesis from primary or secondary amines and primary or secondary alcohol",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;$([N;H1](-C=O)-[#6;!$([#6]=[#6,#7,#8,#16]):101]),$([N;H0](-C=O)(-[#6;!$([#6]=[#6,#7,#8,#16]):103])-[#6;!$([#6]=[#6,#7,#8,#16]):101]):2]-!@C(=O)-[O;H0:3]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-[N:2].[O;H1:3]-[#6:102]",
+        "rhs_classes": [
+            "amines-primsec",
+            "alcohols-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[C,N,O,S]):101]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):101])-[#6;!$([#6]=[C,N,O,S]):103]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):2].[#6;!$([#6]=[#7,#8,#16]):102]-[O;H1;!$(O-[C,N,O,S]=[C,N,O,S]):3]>>[#6:101]-[N;$([N;H1](-C=O)-[#6:101]),$([N;H0](-C=O)(-[#6:103])-[#6:101]):2]-C(=O)-[O;H0:3]-[#6:102]",
+        "tags": [
+            "carbamate"
+        ],
+        "tier": 1
+    },
+    "castro-stephens-1": {
+        "description": "Castro-Stephens coupling: synthesis of indoles.",
+        "ld_data": {
+            "display_smarts": "[#7]-C-1=C(-[#53])-C=C-C=C-1.[#6:101]-[#6]#[#6]>>C=1-2-C=C-C=C-C=1-C=C(-[#6:101])-N-2"
+        },
+        "long_name": "Castro-Stephens coupling: synthesis of indoles",
+        "retro_smarts": "[c:1]12[a:6][a:5][a:4][a:3][c:2]1[c;H1:10][c:9](-!@[#6:101])[n;H1:8]2>>[#7;H2:8]-[c:1]1[c:2](-[#53])[a:3][a:4][a:5][a:6]1.[#6:101]-[C:9]#[C;H1:10]",
+        "rhs_classes": [
+            "anilines-2I",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[#7;H2:8]-[c:1]1[c:2](-[#35,#53])[a:3][a:4][a:5][a:6]1.[#6:101]-[C:9]#[C;H1:10]>>[c:1]12[a:6][a:5][a:4][a:3][c:2]1[c:10][c:9](-[#6:101])[n;H1:8]2",
+        "tags": [
+            "Castro-Stephens",
+            "heterocycle formation",
+            "heterocycle",
+            "indole"
+        ],
+        "tier": 1
+    },
+    "castro-stephens-2": {
+        "description": "Castro-Stephens coupling: synthesis of disubstituted acetylenes.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#35].[#6:101]-[#6]#[#6]>>[#6:201]-[#6]#[#6]-[#6:101] |$Aryl_p;;;;;Aryl_p;;;$|"
+        },
+        "long_name": "Castro-Stephens coupling: synthesis of disubstituted acetylenes",
+        "retro_smarts": "[#6;$(c),$(C=C):101]-!@[C:3]#[C:2]-[#6:102]>>[#6:101]-[#35].[#6:102]-[C:2]#[C;H1:3]",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C):101]-[#35,#53].[#6:102]-[C:2]#[C;H1:3]>>[#6:101]-[C;H0:3]#[C:2]-[#6:102]",
+        "tags": [
+            "Castro-Stephens",
+            "alkyne",
+            "acetylene"
+        ],
+        "tier": 1
+    },
+    "chan-lam-1": {
+        "description": "Chan-Lam coupling: N-arylation of anilines with boronic acids.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#7].[#6:202]-B(-O)-O>>[#6:201]-[#7]-[#6:202] |$Aryl_p;;Aryl_p;;;;Aryl_p;;Aryl_p$|"
+        },
+        "long_name": "Chan-Lam coupling: N-arylation of anilines with boronic acids",
+        "retro_smarts": "[c;r6:1]-[N;H1:2]-!@[c;r6:3]>>[c:1]-[N;H2:2].[c:3]-B(-O)-O",
+        "rhs_classes": [
+            "anilines-prim",
+            "boronates-aryl"
+        ],
+        "syn_smarts": "[c;r6:201]-[N;H2:2].[c;r6:202]-B(~O)~O>>[c:201]-[N;H1:2]-[c:202]",
+        "tags": [
+            "Chan-Lam",
+            "C-N bond formation",
+            "C-N",
+            "N-arylation"
+        ],
+        "tier": 1
+    },
+    "chan-lam-2": {
+        "description": "Chan-Lam coupling: O-arylation of phenols with boronic acids.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#8].[#6:202]-B(-O)-O>>[#6:201]-[#8]-[#6:202] |$Aryl_p;;Aryl_p;;;;Aryl_p;;Aryl_p$|"
+        },
+        "long_name": "Chan-Lam coupling: O-arylation of phenols with boronic acids",
+        "retro_smarts": "[c;r6:1]-[O;H0:2]-!@[c;r6:3]>>[c:1]-[O;H1:2].[c:3]-B(-O)-O",
+        "rhs_classes": [
+            "phenols",
+            "boronates-aryl"
+        ],
+        "syn_smarts": "[c;r6:201]-[O;H1:2].[c;r6:202]-B(~O)~O>>[c:201]-[O;H0:2]-[c:202]",
+        "tags": [
+            "Chan-Lam",
+            "C-O bond formation",
+            "C-O",
+            "O-arylation"
+        ],
+        "tier": 1
+    },
+    "chan-lam-3": {
+        "description": "Chan-Lam coupling: S-arylation of thiophenols with boronic acids.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#16].[#6:202]-B(-O)-O>>[#6:201]-[#16]-[#6:202] |$Aryl_p;;Aryl_p;;;;Aryl_p;;Aryl_p$|"
+        },
+        "long_name": "Chan-Lam coupling: S-arylation of thiophenols with boronic acids",
+        "retro_smarts": "[c;r6:1]-[S;H0;X2:2]-!@[c;r6:3]>>[c:1]-[S;H1;X2:2].[c:3]-B(-O)-O",
+        "rhs_classes": [
+            "thiophenols",
+            "boronates-aryl"
+        ],
+        "syn_smarts": "[c;r6:201]-[S;H1;X2:2].[c;r6:202]-B(~O)~O>>[c:201]-[S;H0;X2:2]-[c:202]",
+        "tags": [
+            "Chan-Lam",
+            "C-S bond formation",
+            "C-S",
+            "S-arylation"
+        ],
+        "tier": 1
+    },
+    "claisen-1": {
+        "description": "Crossed Claisen condensation: 1,3-diketone synthesis from an enolizable ketone and a non-enolizable ester.",
+        "ld_data": {
+            "display_smarts": "[#6:102]-C-C(=O)-[#6:101].[#6]-[#8]-[#6](-[#6:103])=O>>[#6:101]-C(=O)-C(-[#6:102])-[#6](-[#6:103])=O"
+        },
+        "long_name": "Crossed Claisen condensation",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):1]-[#6:2](=[O:6])-[#6;H1,H2;!$([#6]=[#6,#7,#8,#16]):3]-!@[#6;!R:4](=[O:7])-[#6;$(C#C),$(c):5]>>[#6:1]-[#6:2](=[O:6])-[#6:3].[#6:5]-[#6:4](=[O:7])-O-C",
+        "rhs_classes": [
+            "ketones-enolizable",
+            "esters-non-enolizable"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):102]-[#6:2](=O)-[#6;$([C;H2]),$([C;H3]);!$([#6]=[#6,#7,#8,#16]):10].[#6;$(C#C),$(c):101]-[#6;!R:3](=O)-O-[C;!$([#6]=[#6,#7,#8,#16])]>>[#6:102]-[#6:2](=O)-[#6:10]-[#6:3](=O)-[#6:101]",
+        "tags": [
+            "Claisen",
+            "condensation",
+            "diketone"
+        ],
+        "tier": 2
+    },
+    "claisen-2": {
+        "description": "Claisen condensation: beta-keto ester synthesis from an enolizable ester and a non-enolizable ester.",
+        "ld_data": {
+            "display_smarts": "[#6]-[#6](=O)-[#8]-[#6:101].[#6:201]-[#6](=O)-O-[#6]>>[#6:201]-[#6](=O)-[#6]-[#6](=O)-[#8]-[#6:101] |$;;;;;Aryl_p;;;;;Aryl_p;;;;$|"
+        },
+        "long_name": "Claisen condensation",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):1]-[O:2]-[C:3](=[O:7])-[#6;!$([#6]=[#6,#7,#8,#16]):4]-!@[#6:5](=[O:8])-[#6;$(C#C),$(c):6]>>[#6:1]-[O:2]-[C:3](=[O:7])-[#6:4].CO-[#6:5](=[O:8])-[#6:6]",
+        "rhs_classes": [
+            "esters-enolizable",
+            "esters-non-enolizable"
+        ],
+        "syn_smarts": "[#6;$([C;H2]),$([C;H3]);!$([#6]=[#6,#7,#8,#16]);!$([#6]-[#9,#17,#35,#53]):1]-[#6:3](=O)-[O:5]-[#6;!$([#6]=[#6,#7,#8,#16]):102].[#6;$(C#C),$(c):103]-[#6:2](=O)-O-[C;!$([#6]=[#6,#7,#8,#16])]>>[#6:103]-[#6:2](=O)-[#6:1]-[#6:3](=O)-[#8:5]-[#6:102]",
+        "tags": [
+            "Claisen",
+            "condensation",
+            "beta-ketoester",
+            "ester"
+        ],
+        "tier": 2
+    },
+    "conrad-limpach": {
+        "description": "Conrad-Limpach synthesis of substituted 4-hydroxyquinolines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[#6]-[#6](=O)-O-[#6].[#7]-C-1=C-C=C-C=C-1>>C=1-2-C=C-C=C-C=1-C(-[#8])=C-C(-[#6:101])=N-2"
+        },
+        "long_name": "Conrad-Limpach synthesis of substituted 4-hydroxyquinolines",
+        "retro_smarts": "[c;!$(c-[C,N]);R2:6]2[c;!$(c-[C,N]);R2:7][c:4](-[O;H1:8])[c:3][c:2](-[#6:101])[n:5]2>>[#6:101]-[#6:2](=O)-[#6:3]-[#6:4](=[O;H0:8])-O-C.[N;H2:5]-[c;R1:6][c;R1;H1:7]",
+        "rhs_classes": [
+            "esters-3keto",
+            "anilines-2H"
+        ],
+        "syn_smarts": "[#6:101]-[#6:2](=O)-[C;$([C;H2]),$([C;H1](-C=O)(-C=O)-[C;!H0;!$(C=N)]):3]-[#6:4](=O)-O-C.[N;H2:5]-[c;R1:6][c;R1;H1:7]>>[c;R2:6]2[c;R2;H0:7]-[C:4](-[O;H1])=[C:3]-[C:2](-[#6:101])=[N;H0:5]-2",
+        "tags": [
+            "Conrad-Limpach",
+            "heterocycle formation",
+            "heterocycle",
+            "4-hydroxyquinoline",
+            "quinoline"
+        ],
+        "tier": 1
+    },
+    "corey-chaykovsky-1": {
+        "description": "Corey-Chaykovsky synthesis of an epoxide from an aldehyde or a ketone.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-[#6:102]>>[#6:101]-C(-[#6:102])-1-O-C-1"
+        },
+        "long_name": "Corey-Chaykovsky epoxidation",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C;$([C;H0](-[C;H2])(-[#6;!$(C=[C,N,O,S]):101])-[#6;!$(C=[C,N,O,S]):102]),$([C;H1](-[#6;!$(C=[C,N,O,S]):101])-[C;H2]):2]1-[O:3]-[C;H2]1>>[#6:101]-[C:2]=[O:3]",
+        "rhs_classes": [
+            "aldehydes-ketones"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C;$([C;H0](-[#6;!$(C=[C,N,O,S]):101])-[#6;!$(C=[C,N,O,S]):102]),$([C;H1]-[#6;!$(C=[C,N,O,S]):101]):2]=O>>[#6:101]-[C:2]1-O-[C;H2]1",
+        "tags": [
+            "Corey-Chaykovsky",
+            "epoxide",
+            "epoxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "corey-chaykovsky-2": {
+        "description": "Corey-Chaykovsky cyclopropane synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)/C=C/[#6:102]>>[#6:101]-C(=O)-C-1-C-C-1(-[#6:102])"
+        },
+        "long_name": "Corey-Chaykovsky cyclopropanation",
+        "retro_smarts": "[#6:101]-[C:2](=[O:1])-[C;H1:3]1-[C;H2]-[C;$([C;H1](-[C;H2])(-[C:3])-[#6:102]),$([C;H2](-[C;H2])-[C:3]):4]-1>>[#6:101]-[C:2](=[O:1])-[C:3]=[C:4]",
+        "rhs_classes": [
+            "ketones-unsaturated"
+        ],
+        "syn_smarts": "[#6:101]-[C:2](=O)-[C;H1:3]=[C;$([C;H2]),$([C;H1]-[#6:102]):4]>>[#6:101]-[C:2](=O)-[C:3]1-[C;H2]-[C:4]1",
+        "tags": [
+            "Corey-Chaykovsky",
+            "cyclopropane",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "coumarin": {
+        "description": "Pechmann condensation: Coumarin synthesis from a phenol and a beta-keto ester.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[#6]-[#6](=O)-O-[#6].[#6](-[#8])1-[#6]=[#6]-[#6]=[#6]-[#6]=1>>[#6:101]-[#6]-1=[#6]-[#6](=O)-[#8]-[#6]-2=[#6]-1-[#6]=[#6]-[#6]=[#6]-2"
+        },
+        "long_name": "Pechmann coumarin synthesis",
+        "retro_smarts": "[#6:1]-!@[c:2]1[c;H1:3][c:4](=[O:12])[o:6][c:5]2[c:7][c:8][c:9][c:10][c:11]21>>[#6:1]-[C:2](=O)-[C:3]-[C:4](=[O:12])-OC.[c:5](-[O;H1:6])1[c:7][c:8][c:9][c:10][c;H1:11]1",
+        "rhs_classes": [
+            "esters-3keto",
+            "phenols-2H"
+        ],
+        "syn_smarts": "[#6:101]-[#6:2](=O)-[#6;H2:3]-[#6:4](=O)-O-C.[c:5](-[#8;H1:6])1[c:7][c:8][c:9][c:10][c;H1:11]1>>[#6:101]-[#6:2]1=[#6;H1:3]-[#6:4](=O)-[#8;H0:6]-[#6:5]2-[#6:7]=[#6:8]-[#6:9]=[#6:10]-[#6;H0:11]=2-1",
+        "tags": [
+            "Pechmann",
+            "heterocycle formation",
+            "heterocycle",
+            "coumarin"
+        ],
+        "tier": 1
+    },
+    "curtius-1": {
+        "description": "Curtius rearrangement: ureas via isocyanates formed from carboxylates",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[O;H1].[#7]-[#6:102]>>[#6:101]-[#7]-[#6](=[#8])-[#7]-[#6:102]"
+        },
+        "long_name": "Curtius rearrangement of carboxylates to isocynates and addition of amines to form carbamates and carbonates",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H1]-!@[C:2](=[O:3])-!@[N;$([N;H0](-[#6;!$([#6]=[C,N,O,S]):104])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H1]-[#6;!$([#6]=[C,N,O,S]):102]):4]-[#6;!$([#6]=[C,N,O,S]):102]>>[#6:101]-[C:2](=[O:3])-[O;H1].[#7:4]-[#6:102]",
+        "rhs_classes": [
+            "carboxylates",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#6:2](=[#8:3])-[O;H1].[#6;!$([#6]=[C,N,O,S]):102]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):102])-[#6;!$([#6]=[C,N,O,S]):104]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):4]>>[#6:101]-[#7;H1]-[#6:2](=[#8:3])-[#7:4]-[#6:102]",
+        "tags": [
+            "Curtius Rearrangement",
+            "ureas"
+        ],
+        "tier": 1
+    },
+    "curtius-2": {
+        "description": "Curtius rearrangement: carbamates via isocyanates formed from carboxylates",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[O;H1].[#8;H1](-[#6:102])>>[#6:101]-[#7;H1]-[#6](=[#8])-[#8](-[#6:102])"
+        },
+        "long_name": "Curtius rearrangement of carboxylates to isocynates and addition of alcohols to form carbamates",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H1]-!@[C:2](=[O:3])-!@[#8;H0:4]-[#6;!$([#6]=[C,N,O,S]):102]>>[#6:101]-[C:2](=[O:3])-[O;H1].[#8;H1:4]-[#6:102]",
+        "rhs_classes": [
+            "carboxylates",
+            "alcohols-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#6:2](=[O:3])-[O;H1].[#6;!$([#6]=[#7,#8,#16]):102]-[O;H1;!$(O-[C,N,O,S]=[C,N,O,S]):4]>>[#6:101]-[#7;H1]-[#6:2](=[O:3])-[O;H0:4]-[#6:102]",
+        "tags": [
+            "Curtius Rearrangement",
+            "carbamates"
+        ],
+        "tier": 1
+    },
+    "curtius-3": {
+        "description": "Curtius rearrangement: formation of primary amines via hydrolysis of isocyanates formed from carboxylates",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=[#8])-[#8]>>[#6:101]-[#7]"
+        },
+        "long_name": "Hydrolysis of isocyanates formed by Curtius rearrangement starting from carboxylates",
+        "retro_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#7;H2]>>[#6:101]-[#6](=[#8])-[O;H1]",
+        "rhs_classes": [
+            "carboxylates"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#16]):101]-C(=O)-[O;H1]>>[#6:101]-[#7;H2]",
+        "tags": [
+            "Curtius Rearrangement",
+            "amines",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "cyanohydrin": {
+        "description": "Cyanohydrin formation from an aldehyde.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]=[#8]>>[#6:101]-[#6](-[#8])-C#N"
+        },
+        "long_name": "Cyanohydrin formation from an aldehyde",
+        "retro_smarts": "[#6!$(C=[C,N,O,S]):101]-[#6:1](-[O;H1:2])-C#N>>[#6:101]-[#6;H1:1]=[#8;H0:2]",
+        "rhs_classes": [
+            "aldehydes"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[#6;$([C;H1]):1]=[#8:2]>>[#6:101]-[#6:1](-[#8;H1:2])-C#N",
+        "tags": [
+            "cyanohydrin",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "decarboxylative_coupling-1": {
+        "description": "Aryl C-C bond formation from an aryl carboxylic acid and an aryl halide.",
+        "ld_data": {
+            "display_smarts": "[#8]-C(-[#6:201])=O.[#35]-[#6:202]>>[#6:201]-[#6:202] |$;;Aryl_p;;;Aryl_p;Aryl_p;Aryl_p$|"
+        },
+        "long_name": "Decarboxylative cross coupling reaction",
+        "retro_smarts": "[c;r6:1]-!@[c;r6:2]>>[#6:1]-C(=O)-[O;H1].[#6:2]-Cl",
+        "rhs_classes": [
+            "carboxylates-aryl",
+            "halides-aryl"
+        ],
+        "syn_smarts": "[c;r6:101]-C(=O)-[O;H1].[c;r6:102]-[Cl,Br,I]>>[c:101]-[c:102]",
+        "tags": [
+            "C-C bond formation",
+            "C-C",
+            "cross coupling"
+        ],
+        "tier": 1
+    },
+    "diyne": {
+        "description": "Heterocoupling of two alkynes to form a 1,3-diyne (implicit formation of a haloalkyne).",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C#C.[#6:102]-C#C>>[#6:101]-C#C-C#C-[#6:102]"
+        },
+        "long_name": "Heterocoupling of two alkynes to form a 1,3-diyne (implicit formation of a haloalkyne)",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C:2]#[C:3]-!@[C:5]#[C:4]-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-[C:2]#[C;H1:3].[#6:102]-[C:4]#[C;H1:5]",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[C:2]#[C;H1:3].[#6;!$(C=[C,N,O,S]):102]-[C:4]#[C;H1:5]>>[#6:101]-[C:2]#[C;H0:3]-[C;H0:5]#[C:4]-[#6:102]",
+        "tags": [
+            "diyne"
+        ],
+        "tier": 1
+    },
+    "epoxidation": {
+        "description": "Epoxidation of alkenes.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C=C(-[#6:102])-[#6:103]>>[#6:101]-C-1-O-C-1(-[#6:102])-[#6:103]"
+        },
+        "long_name": "Epoxidation of alkenes",
+        "retro_smarts": "[C;$([C;H2:2](-O)-[C:3]),$([C;H1:2](-[C:3])(-O)-[#6:101]),$([C;H0:2](-[#6:104])(-[C:3])(-O)-[#6:101]):2]1-O-[C;$([C;H1:3](-[C:2])(-O)-[#6:103]),$([C;H0:3](-[#6:102])(-[C:2])(-O)-[#6:103]):3]1-!@[#6;$(c),$([C;!H0]),$(C(=O)OC):103]>>[C:2]=[C:3]-[#6:103]",
+        "syn_smarts": "[C;$([C;H2:2]),$([C;H1:2]-[#6:103]),$([C;H0](-[#6:104])-[#6:103]):2]=[C;$([C;H1:3]),$([C;H0:3](-[#6:102])-[#6:101]):3]-[#6;$(c),$([C;!H0]),$(C(=O)OC):101]>>[C:2]1-O-[C:3]1-[#6:101]",
+        "tags": [
+            "epoxide",
+            "epoxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "erlenmeyer-plochl": {
+        "description": "Erlenmeyer-Plochl azlactone synthesis from aldehydes or ketones and N-acyl glycine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-[#6:102].[#8]-[#6](=O)-C-[#7]-[#6](=O)-[#6:103]>>[#6:101]-[#6](-[#6:102])=[#6]-1-[#7]=[#6](-[#6:103])-[#8]-[#6]-1=O"
+        },
+        "long_name": "Erlenmeyer-Plochl azlactone synthesis from aldehydes or ketones and N-acyl glycine",
+        "retro_smarts": "[#6;$([#6;H2]),$([#6;H1]-[#6;!$(C-C=[O,N,S]):102]),$([#6;H0](-[#6;!$(C-C=[O,N,S]):103])-[#6;!$(C-C=[O,N,S]):102]):1]=[#6;H0:4]-1-[#7;H0:5]=[#6:6](-[#6;!$(C(-C=N)-C=[O,N,S]):101])-[#8:2]-[#6:3]-1=[O:7]>>[#6:1]=O.[#8;H1:2]-[#6:3](=[O:7])[C;H2:4]-[#7;H1:5]-[#6:6](=O)-[#6:101]",
+        "rhs_classes": [
+            "aldehydes-ketones",
+            "glycines-N-acyl"
+        ],
+        "syn_smarts": "[#6;$([#6;H2]),$([#6;H1]-[#6;!$(C-C=[O,N,S]):102]),$([#6;H0](-[#6;!$(C-C=[O,N,S]):103])-[#6;!$(C-C=[O,N,S]):102]):1]=O.[#8;H1:2]-[#6:3](=O)[C;H2:4]-[#7;H1:5]-[#6:6](=O)-[#6;!$(C-C=[O,N,S]):101]>>[#6:1]=[#6;H0:4]-1-[#7;H0:5]=[#6:6](-[#6:101])-[#8;H0:2]-[#6:3]-1=O",
+        "tags": [
+            "Erlenmeyer-Plochl",
+            "heterocycle formation",
+            "heterocycle",
+            "azlactone"
+        ],
+        "tier": 1
+    },
+    "ester-hydrolysis-1": {
+        "description": "Hydrolysis of an ester to the parent carboxylic acid.",
+        "ld_data": {
+            "display_smarts": "[#6]-O-C(=O)-[#6:101]>>[#6:101]-C(=O)-O"
+        },
+        "long_name": "Hydrolysis of an ester to the parent carboxylic acid.",
+        "retro_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#6:2](=[O:1])-[O;H1]>>[#6]-O-[#6:2](=[O:1])-[#6:101]",
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16])]-O-!@[#6:2](=O)-[#6;!$([#6]=[#7,#16]):1]>>[#6:1]-[#6:2](=O)-[O;H1]",
+        "tags": [
+            "hydrolysis",
+            "ester",
+            "acid",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "ester-hydrolysis-2": {
+        "description": "Hydrolysis of an ester to the parent alcohol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O-C(=O)-[#6:102]>>O-[#6:101]"
+        },
+        "long_name": "Hydrolysis of an ester to the parent alcohol.",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):4]-[#8;H1:3]>>[#6:4]-[#8;H0:3]-C(=O)-[#6]",
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):4]-[#8;H0:3]-!@[#6](=O)-[#6;!$([#6]=[#7,#16])]>>[#6:4]-[#8;H1:3]",
+        "tags": [
+            "hydrolysis",
+            "ester",
+            "alcohol",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "esterification-1": {
+        "description": "Esterification of an alcohol using an acid chloride.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-Cl.[#6:102]-O>>[#6:102]-O-C(=O)-[#6:101]"
+        },
+        "long_name": "Esterification reaction from alcohols and acid chlorides",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):4]-[#8;H0:3]-!@[#6:2](=[O:5])-[#6;!$([#6]=[#7,#16]):1]>>[#6:1]-[#6:2](=[O:5])-Cl.[#6:4]-[#8;H1:3]",
+        "rhs_classes": [
+            "acid_chlorides",
+            "alcohols"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#6:2](=O)-Cl.[#6;!$([#6]=[#6,#7,#8,#16]):102]-[#8;H1:3]>>[#6:102]-[#8;H0:3]-[#6:2](=O)-[#6:101]",
+        "tags": [
+            "esterification",
+            "ester"
+        ],
+        "tier": 1
+    },
+    "esterification-2": {
+        "description": "Esterification of an alcohol and a carboxylic acid.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-O.[#6:102]-O>>[#6:102]-O-C(=O)-[#6:101]"
+        },
+        "long_name": "Esterification reaction from alcohols and a carboxylic acid",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):4]-[#8;H0:3]-!@[#6:2](=[O:5])-[#6;!$([#6]=[#7,#16]):1]>>[#6:1]-[#6:2](=[O:5])-[O;H1].[#6:4]-[#8;H1:3]",
+        "rhs_classes": [
+            "carboxylates",
+            "alcohols"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#16]):101]-[#6:2](=O)-[O;H1].[#6;!$([#6]=[#6,#7,#8,#16]):102]-[#8;H1:3]>>[#6:102]-[#8;H0:3]-[#6:2](=O)-[#6:101]",
+        "tags": [
+            "esterification",
+            "ester"
+        ],
+        "tier": 1
+    },
+    "ether-1": {
+        "description": "Ullmann aryl ether synthesis: gives a biaryl ether from an aryl halide and a phenol.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6:201].[#8]-[#6:202]>>[#6:201]-O-[#6:202] |$;Aryl_p;;Aryl_p;Aryl_p;;Aryl_p$|"
+        },
+        "long_name": "Ullmann aryl ether synthesis",
+        "retro_smarts": "[c;r6:1]-!@[#8;H0:3]-[c;r6:2]>>[c:1]-Cl.[c:2]-[#8;H1:3]",
+        "rhs_classes": [
+            "halides-aryl",
+            "phenols"
+        ],
+        "syn_smarts": "[c;r6:101]-[Cl,Br,I].[c;r6:102]-[#8;H1:3]>>[c:101]-[#8;H0:3]-[c:102]",
+        "tags": [
+            "Ullmann",
+            "etherification",
+            "ether",
+            "biaryl"
+        ],
+        "tier": 1
+    },
+    "ether-2": {
+        "description": "Williamson ether synthesis: gives an ether from a primary or secondary halide and a primary, secondary or (hetero)aryl alcohol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-Br.[#6:102]-O>>[#6:101]-O-[#6:102]"
+        },
+        "long_name": "Williamson ether synthesis",
+        "retro_smarts": "[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]):1]-[#8;H0:2]-!@[C;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]);H1,H2:3]>>[C:3]-Br.[#6:1]-[#8;H1:2]",
+        "rhs_classes": [
+            "halides-primsec",
+            "alcohols"
+        ],
+        "syn_smarts": "[C;!$([#6](-[#6])(-[#6])-[#6]);!H0;!$(C=[C,N,O,S]):101]-[Cl,Br].[#6;!$([#6](-[#6])(-[#6])-[#6]);!$(C=[C,N,O,S]):102]-[#8;H1:2]>>[C:101]-[#8;H0:2]-[#6:102]",
+        "tags": [
+            "Williamson",
+            "etherification",
+            "ether"
+        ],
+        "tier": 1
+    },
+    "flavone": {
+        "description": "Flavone synthesis: gives a 2-aryl flavone from a 2-acyl phenol and an aryl acid chloride.",
+        "ld_data": {
+            "display_smarts": "[#6]-[#6](=O)-[#6]-1=[#6](-[#8])-[#6]=[#6]-[#6]=[#6]-1.Cl-[#6](-[#6:201])=O>>[#6:201]-[#6]-1=[#6]-[#6](=O)-[#6]-2=[#6](-[#8]-1)-[#6]=[#6]-[#6]=[#6]-2 |$;;;;;;;;;;;;Aryl_p;;Aryl_p;;;;;;;;;;;$|"
+        },
+        "long_name": "Flavone synthesis from 2-acyl phenols and aryl acid chlorides.",
+        "retro_smarts": "[c:7]12[c:1][c:2][c:3][c:4][c:8]1[c:13](=[O:9])[c;H1:5][c:6](-!@[c:101])[o:12]2>>[c:7](-[O;H1:12])1[c:1][c:2][c:3][c:4][c:8](-[C:13](=[O:9])-[#6;H3:5])1.[c:101]-[C:6](=O)-Cl",
+        "rhs_classes": [
+            "phenols-2keto",
+            "acid_chlorides-aryl"
+        ],
+        "syn_smarts": "[c:7](-[#8;H1:12])1[c:1][c:2][c:3][c:4][c:8](-[#6:13](=O)-[C;H3:5])1.[#6:6](=O)(-Cl)-[c:101]>>[#6:13](=O)1-[#6;H1:5]=[#6:6](-[c:101])-[#8;H0:12]-[#6:7]:2:[#6:1]:[#6:2]:[#6:3]:[#6:4]:[#6:8]-1:2",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "flavone"
+        ],
+        "tier": 1
+    },
+    "friedel-crafts-1": {
+        "description": "Friedel-Crafts acylation.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[H].[#6:101]-C(=O)-Cl>>[#6:201]-C(=O)-[#6:101] |$Aryl_p;;;;;;Aryl_p;;$|"
+        },
+        "long_name": "Friedel-Crafts acylation.",
+        "retro_smarts": "[c;$([c;H0]1[c;H1][c;H1][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][c;H1][c;H1]1),$([c;H0]1[c;H1][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][a]1):101]-[C:3](=[O:4])-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[c;H1:101].[#6:102]-[C:3](=[O:4])-Cl",
+        "rhs_classes": [
+            "friedel-crafts_substrates",
+            "acid_chlorides"
+        ],
+        "syn_smarts": "[c;$([c;H1]1[c;H1][c;H1][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][c;H1][c;H1]1),$([c;H1]1[c;H1][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][c;$([c;H1]),$(c-[#6]),$(c-[#7]),$(c-O-[#6]);!$(c-[#7](=O)=O);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F)][a]1):101].[#6;!$([#6]=[#6,#7,#8,#16]):102]-[C:3](=[O:4])-Cl>>[c;H0:101]-[C:3](=[O:4])-[#6:102]",
+        "tags": [
+            "Friedel-Crafts",
+            "acylation"
+        ],
+        "tier": 1
+    },
+    "furan-1": {
+        "description": "Feist-Benary furan synthesis from a beta-keto-ester and a 2-halo ketone.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O-[#6](=O)-[#6]-[#6](=O)-[#6:102].[#6:103]-[#6](=O)-[#6](-[#6:104])-[#35]>>[#6:101]-O-[#6](=O)-[#6]=1-[#6](-[#6:103])=[#6](-[#6:104])-[#8]-[#6](-[#6:102])=1"
+        },
+        "long_name": "Feist-Benary furan synthesis from 1,3-diketones and 2-halo ketones.",
+        "retro_smarts": "[#6:103]-[#8:6]-[#6:3](=[O:7])-[#6:4]1:[#6;R1:1](-[C:101]):[#6;$([#6;H0]-[#6;$(c),$([C;!H0])]),$([#6;H1]);R1:2]:[o:8]:[#6:5](-[#6:104]):1>>[#6:103]-[#8:6]-[#6:3](=[O:7])-[#6;H2:4]-[#6:5](=[O:8])-[#6:104].[C:101]-[#6:1](=O)-[#6:2]-[#35]",
+        "rhs_classes": [
+            "esters-3keto",
+            "ketones-2halo-aliphatic"
+        ],
+        "syn_smarts": "[#6:101]!@[O:5]-[#6:2](=O)-[#6;H2:3]-[#6:4](=O)-[#6:102].[C:103]-[#6;R0;!r3;!r4:7](=O)-[#6;$([#6;H2]),$([#6;H1](-[#6]=O)-[#6;$(c),$([C;!H0])]);R0:8]-[#17,#35,#53]>>[#6:101]-[O:5]-[#6:2](=O)-[#6;H0:3]1-[#6:7](-[C:103])=[#6:8]-[#8]-[#6:4](-[#6:102])=1",
+        "tags": [
+            "Feist-Benary",
+            "heterocycle formation",
+            "heterocycle",
+            "furan"
+        ],
+        "tier": 1
+    },
+    "goldberg-1": {
+        "description": "Goldberg reaction: Ullman condensation of an aryl halide with an aniline or acetanilide.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6:201].[#7]-[#6:202]>>[#6:201]-N-[#6:202] |$;Aryl_p;;Aryl_p;Aryl_p;;Aryl_p$|"
+        },
+        "long_name": "Goldberg reaction of an aryl halide with an aniline or acetanilide.",
+        "retro_smarts": "[c;r6:1]-!@[N;$([N;H1]),$([#7;H0](-[C,c])(-[c;r6:1])-[c;r6:2]):3]-[c;r6:2]>>[c:1]-Br.[c:2]-[N:3]",
+        "rhs_classes": [
+            "halides-aryl",
+            "anilines-goldberg"
+        ],
+        "syn_smarts": "[c;r6:101]-[Cl,Br,I].[c;r6:102]-[N;$([N;H2]),$([N;H1](-[C,c])-[c;r6:102]),$([N;H1](-C(=O)[#6])-[c;r6:102]):3]>>[c:101]-[N:3]-[c:102]",
+        "tags": [
+            "Goldberg",
+            "Ullman",
+            "condensation",
+            "diaryl amine"
+        ],
+        "tier": 1
+    },
+    "goldberg-2": {
+        "description": "Goldberg reaction: Ullman condensation of an aryl halide with a benzylpyrazolone.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6:201].C=1-2-C=C-C=C-C=1-N-N(-[#6:101])-C(=O)-2>>C=1-2-C=C-C=C-C=1-N(-[#6:201])-N(-[#6:101])-C(=O)-2 |$;Aryl_p;;;;;;;;;;;;;;;;;;;Aryl_p;;;$|"
+        },
+        "long_name": "Goldberg reaction of an aryl halide with a benzylpyrazolone.",
+        "retro_smarts": "[c;r6:1]-!@[n:3]1[n;H0:4][c:5](=[O:7])[c:6][c:2]1>>[c:1]-Br.[n;H1:3]1[n;H0:4][c:5](=[O:7])[c:6][c:2]1",
+        "rhs_classes": [
+            "halides-aryl",
+            "pyrazolones"
+        ],
+        "syn_smarts": "[c;r6:101]-[Cl,Br,I].[n;H1:3]1[n;H0:4][c:5](=O)[c:6][c:2]1>>[c;r6:101]-[n;H0:3]1[n;H0:4][c:5](=O)[c:6][c:2]1",
+        "tags": [
+            "Goldberg",
+            "Ullman",
+            "condensation",
+            "diaryl amine"
+        ],
+        "tier": 1
+    },
+    "heck": {
+        "allow_multiple_products": true,
+        "description": "Heck reaction: coupling of an activated alkene and aryl or vinyl halides.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[Br].[#6:102]-C=[#6]>>[#6:102]/C=C/[#6:101]"
+        },
+        "long_name": "Heck reaction",
+        "retro_smarts": "[#6;$([#6]=[#6]),$(c):4]/!@[C;$([C;H1]-[#6;$([#6]=[#6]),$(c):4]),$([C;H0](-[#6;$(c),$([C;!H0])])-[#6;$([#6]=[#6]),$(c):4]):1]=[C;$([C;H1]-[#6;$(c),$(C(=O)O),$(C#N):3]),$([C;H0](-[#6;$(c),$([C;!H0])])-[#6;$(c),$(C(=O)O),$(C#N):3]):2]/[#6;$(c),$(C(=O)O),$(C#N):3]>>[#6:4]-Br.[#6:3]-[#6:2]=[#6:1]",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "alkenes-disub"
+        ],
+        "syn_smarts": "[#6;$([#6]=[#6]),$(c):101]-[Cl,Br,I].[#6;$(c),$(C(=O)O),$(C#N):102]-[C;$([C;H1]-[#6;$(c),$(C(=O)O),$(C#N):102]),$([C;H0](-[#6;$(c),$([C;!H0])])-[#6;$(c),$(C(=O)O),$(C#N):102]):2]=[C;$([C;H1]-[#6;$(c),$([C;!H0]):4]),$([C;H2]):1]>>[#6:101]/[C:1]=[C:2]/[#6:102]",
+        "tags": [
+            "Heck",
+            "C-C bond formation",
+            "C-C"
+        ],
+        "tier": 1
+    },
+    "imidazole-1": {
+        "description": "Imidazole synthesis from an alpha-chloro aldehyde and an amidine.",
+        "ld_data": {
+            "display_smarts": "[Cl]-[#6](-[#6:101])-[#6]=O.[#7]-[#6](-[#6:102])=[#7]>>[#6]-1=[#6](-[#6:101])-[#7]=[#6](-[#6:102])-[#7]-1"
+        },
+        "long_name": "Synthesis of 2-substituted imidazoles",
+        "retro_smarts": "[#6;H1:4]1:[#6:5]:[#7;D2:3]:[#6;$([#6;H1]),$([#6;H0]-[#6,#7:101]):2]:[#7;D2:1]:1>>Br-[#6:5]-[#6;H1:4]=O.[#7:3]-[#6:2]=[#7:1]",
+        "rhs_classes": [
+            "aldehydes-2halo",
+            "amidines"
+        ],
+        "syn_smarts": "[Cl,Br]-[#6;H1,H2:5]-[#6;H1:4]=O.[#7;H2:3]-[#6;$([#6;H1]),$([#6;H0](-[#7;H2:3])-[#6,#7:101]):2]=[#7;H1:1]>>[#6:4]1=[#6:5]-[#7:3]=[#6;$([#6;H1]),$([#6;H0]-[#6:101]):2]-[#7:1]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "imidazole"
+        ],
+        "tier": 1
+    },
+    "imidazole-2": {
+        "description": "Imidazole synthesis from an aryl aldehyde, 2-halo ketone and a primary amine.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-[#6]=O.[#35]-[#6]-[#6](-[#6:202])=O.[#6:101]-[#7]>>[#6:101]-[#7]-1-[#6]=[#6](-[#6:202])-[#7]=[#6]-1-[#6:201] |$Aryl_p;;;;;;Aryl_p;;;;;;;;Aryl_p;;;Aryl_p$|"
+        },
+        "long_name": "Synthesis of 1,2,4-substituted imidazoles",
+        "retro_smarts": "[c:1]1(-!@[c:7])[n:8](-!@[#6;!$([#6]=[#6,#7,#8,#16]):9])[c;$([c;H1]),$([c;H0]-[#6;$(c),$([C;!H0])]):5][c:6](-[c:3])n1>>[c:7]-[#6;H1:1]=O.[C:5](-[Cl])-[C:6](=O)-[c:3].[#7:8]-[#6:9]",
+        "rhs_classes": [
+            "aldehydes-aryl",
+            "ketones-aryl-2halo",
+            "amines-prim"
+        ],
+        "syn_smarts": "[c:101]-[#6;H1:1]=O.[#6;$([#6;H2]),$([#6;H1](-[#6:6]=O)-[#6;$(c),$([C;!H0])]):5](-[Cl,Br])-[#6:6](=O)-[c:102].[#7;H2:8]-[#6;!$([#6]=[#6,#7,#8,#16]):103]>>[#6:101]-[#6;H0:1]1-[#7;H0:8](-[#6:103])-[#6:5]=[#6:6](-[#6:102])-[#7]=1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "imidazole"
+        ],
+        "tier": 1
+    },
+    "imidazole-3": {
+        "description": "Synthesis of triaryl-imidazoles.",
+        "ld_data": {
+            "display_smarts": "[#6:201]-C(=O)-C(=O)-[#6:202].[#6:203]-[#6]=O>>[#6:201]-C-1=C(-[#6:202])-N=C(-[#6:203])-N-1 |$Aryl_p;;;;;Aryl_p;Aryl_p;;;Aryl_p;;;Aryl_p;;;Aryl_p;$|"
+        },
+        "long_name": "Synthesis of triaryl-imidazoles",
+        "retro_smarts": "[c:101]-[c:2]1[c:3](-[c:102])n[c:4](-!@[c:103])n1>>[c:101]-[C:2](=O)-[C:3](=O)-[c:102].[c:103]-[C;H1:4]=O",
+        "rhs_classes": [
+            "diketones-diaryl",
+            "aldehydes-aryl"
+        ],
+        "syn_smarts": "[c:101]-[C:2](~O)-!@[C;H0:3](=O)-[c:102].[c:103]-[C;H1:4]=O>>[c:101]-[C;H0:2]1=[C;H0:3](-[c:102])-N=[C;H0:4](-[c:103])-N-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "imidazole"
+        ],
+        "tier": 1
+    },
+    "indole-1": {
+        "allow_multiple_products": true,
+        "description": "Bischler-Mohlau indole synthesis: gives a 2-aryl Indole from an aniline and a 2-halo aryl ketone.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6]-[#6](-[#6:201])=O.[#7]-[#6]-1=[#6]-[#6]=[#6]-[#6]=[#6]-1>>[#6:201]-[#6]-1=[#6]-[#6]-2=[#6](-[#7]-1)-[#6]=[#6]-[#6]=[#6]-2 |$;;;Aryl_p;;;;;;;;;Aryl_p;;;;;;;;;$|"
+        },
+        "long_name": "Bischler-Mohlau indole synthesis",
+        "retro_smarts": "[#6;H1:3]1:[#6:2](-!@[c:12]):[#7;D2:4]:[c:5]2:[c:6]:[c:7]:[c:8]:[c:9]:[c:1]:1:2>>Cl-[#6:2]-[#6:3](=O)-[c:12].[#7:4]-[c:5]1[c;H1:1][c:9][c:8][c:7][c:6]1",
+        "rhs_classes": [
+            "ketones-aryl-2halo",
+            "anilines-2H"
+        ],
+        "syn_smarts": "[Cl,Br,I]-[#6;H2:2]-[#6:3](=O)-[c:101].[#7;H2:4]-[c:5]1[c;H1:1][c:9][c:8][c:7][c:6]1>>[#6:3]1=[C;H0:2](-[c:101])-[#7;H1:4]-[c:5]2[c:6][c:7][c:8][c:9][c;H0:1]-12",
+        "tags": [
+            "Bischler-Mohlau",
+            "heterocycle formation",
+            "heterocycle",
+            "indole"
+        ],
+        "tier": 1
+    },
+    "indole-2": {
+        "allow_multiple_products": true,
+        "description": "Fischer indole: gives an indole from an aryl hydrazine and a ketone.",
+        "ld_data": {
+            "display_smarts": "[#6]=1-[#6]=[#6]-[#6]=[#6]-[#6]=1-[#7]-[#7].[#6:101]-[#6:9]-[#6](=O)-[#6:102]>>[#6]=1-2-[#6]=[#6]-[#6]=[#6]-[#6]=1-[#7]-[#6](-[#6:102])=[#6](-[#6:101])-2"
+        },
+        "long_name": "Fischer indole synthesis",
+        "retro_smarts": "[#6:1]:1:2:[#6:2]:[#6:3]:[#6:4]:[#6:5]:[#6:6]:1:[#7;D2:7]:[#6;!r4;!r3:10](-[#6;!$(C=[C,N,O,S]):11]):[#6:9](-[#6;!$(C=[C,N,O,S]):8]):2>>[c:1]1[c:2][c:3][c:4][c:5][c:6]1-[#7;H1:7]-[N;H2].[#6:8]-[#6;H2:9]-[#6:10](=O)-[#6:11]",
+        "rhs_classes": [
+            "hydrazines-aryl",
+            "ketones-2unsub"
+        ],
+        "syn_smarts": "[c;H1:1]1[c:2][c:3][c:4][c:5][c:6]1-[#7;H1:7]-[N;H2].[#6;!$(C=[C,N,O,S]):102]-[#6;H2:9]-[#6;!r4;!r3:10](=O)-[#6;!$(C=[C,N,O,S]):101]>>[c;H0:1]12[c:2][c:3][c:4][c:5][c:6]1[N:7][C:10](-[#6:101])=[C;H0:9](-[#6:102])2",
+        "tags": [
+            "Fischer",
+            "heterocycle formation",
+            "heterocycle",
+            "indole"
+        ],
+        "tier": 1
+    },
+    "isocyanate-1": {
+        "description": "Isocyanate formation from primary amines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#7]>>[#6:101]-[#7]=[#6]=[#8]"
+        },
+        "long_name": "Isocyanate formation from primary amines.",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N:2]=C=O>>[#6:101]-[N;H2:2]",
+        "rhs_classes": [
+            "amines-prim"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H2:2]>>[#6:101]-[N;H0:2]=C=O",
+        "tags": [
+            "isocyanate",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "isoxazole-1": {
+        "description": "Claisen isoxazole synthesis from a beta-ketoester and hydroxylamine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[#6](-[#6:102])-[#6](=O)-O-C>>[#6:101]-C=1-O-N=C(-O)-C(-[#6:102])=1"
+        },
+        "long_name": "Claisen isoxazole synthesis",
+        "retro_smarts": "[#6:101]-[c:1]1on[c:3](-[O;H1:4])[c;$([c;H1]),$([c;H0]-[C;!H0:102]):2]1>>[#6:101]-[C:1](=O)-[C:2]-[C:3](=[O;H0:4])-OC",
+        "rhs_classes": [
+            "esters-3keto"
+        ],
+        "syn_smarts": "[#6:101]-[C:1](=O)-[C;$([C;H2]),$([C;H1](-C=O)(-C=O)-[C;!H0;!$(C=N)]):2]-[C:3](=O)-[O;!R]-[#6]>>[#6:101]-[c:1]1on[c:3](-[O;H1])[c:2]1",
+        "tags": [
+            "Claisen",
+            "heterocycle formation",
+            "heterocycle",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "mitsunobu-1": {
+        "description": "Mitsunobu: gives an aryl ether from an alcohol and a phenol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#8].[#8]-[#6:201]>>[#6:201]-[#8]-[#6:101] |$;;;Aryl_p;;;Aryl_p$|"
+        },
+        "long_name": "Mitsunobu (alcohol)",
+        "retro_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-!@[O:2]-[c:102]>>[C:101]-O.[O:2]-[c:102]",
+        "rhs_classes": [
+            "alcohols-primsec",
+            "phenols-2H"
+        ],
+        "syn_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-[O;H1].[O;H1:2]-[c:102]>>[C:101]-[O;H0:2]-[c:102]",
+        "tags": [
+            "Mitsunobu",
+            "etherification",
+            "ether"
+        ],
+        "tier": 1
+    },
+    "mitsunobu-2": {
+        "description": "Mitsunobu: alkylation of a sulfonamide with a primary or secondary alcohol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O.[#7](-S(=O)(=O)-[#6:102])-[#6:103]>>[#6:101]-[#7](-S(=O)(=O)-[#6:102])-[#6:103]"
+        },
+        "long_name": "Mitsunobu (sulfonamide)",
+        "retro_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-!@[#7;$([N;H1]),$([N;H0](-[#6;!$(C=[C,N,O,S]):103])-[#6;!$(C=[C,N,O,S]):102]):2]-[S:3](=[O:4])(=[O:5])-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-O.[#7;$([N;H2]),$([N;H1]-[#6;!$(C=[C,N,O,S]):103]):2]-[S:3](=[O:4])(=[O:5])-[#6:102]",
+        "rhs_classes": [
+            "alcohols-primsec",
+            "sulfonamides-primsec"
+        ],
+        "syn_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-[O;H1].[#7;$([N;H2]),$([N;H1]-[#6;!$(C=[C,N,O,S]):103]):2]-[S:3](=O)(=O)-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-[#7;$([N;H1]),$([N;H0](-[#6:103])-[#6:102]):2]-[S:3](=O)(=O)-[#6:102]",
+        "tags": [
+            "Mitsunobu",
+            "alkylation",
+            "sulfonamide"
+        ],
+        "tier": 1
+    },
+    "mitsunobu-3": {
+        "description": "Mitsunobu: N-alkylation of a tetrazole with a primary or secondary alcohol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O.[#7]-1-[#7]=[#7]-[#6]=[#7]-1>>[#6:101]-[#7]-1-[#7]=[#7]-[#6]=[#7]-1"
+        },
+        "long_name": "Mitsunobu (2-substituted tetrazole)",
+        "retro_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):1]-!@[n:4]1[n:5][c:6][n:2][n:3]1>>[C:1]-O.[n:2]1[n:3][n;H1:4][n:5][c:6]1",
+        "rhs_classes": [
+            "alcohols-primsec",
+            "tetrazoles-2H"
+        ],
+        "syn_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-[O;H1].[nH:4]1[n:3][n:2][c:6][n:5]1>>[#6:101]-[#7;H0:4]1-[#7:3]=[#7:2]-[#6:6]=[#7:5]-1",
+        "tags": [
+            "Mitsunobu",
+            "alkylation",
+            "tetrazole"
+        ],
+        "tier": 1
+    },
+    "mitsunobu-4": {
+        "description": "Mitsunobu: N-alkylation of a tetrazole with a primary or secondary alcohol.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O.[#7]-1=[#7]-[#7]=[#6]-[#7]-1>>[#6:101]-[#7]-1-[#7]=[#7]-[#7]=[#6]-1"
+        },
+        "long_name": "Mitsunobu (1-substituted tetrazole)",
+        "retro_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):1]-!@[n:2]1[n:3][n:4][n:5][c:6]1>>[C:1]-O.[n;H1:2]1[n:3][n:4][n:5][c:6]1",
+        "rhs_classes": [
+            "alcohols-primsec",
+            "tetrazoles-1H"
+        ],
+        "syn_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-[O;H1].[n;H1:2]1[n:3][n:4][n:5][c:6]1>>[C:101]-[n;H0:2]1[n:3][n:4][n:5][c:6]1",
+        "tags": [
+            "Mitsunobu",
+            "alkylation",
+            "tetrazole"
+        ],
+        "tier": 1
+    },
+    "mitsunobu-5": {
+        "description": "Mitsunobu: esterification from an alcohol and a carboxylic acid.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O.[#6](=O)(-O)-[#6:102]>>[#6:101]-O-C(=O)-[#6:102]"
+        },
+        "long_name": "Mitsunobu (ester)",
+        "retro_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):1]-[#8:2]-!@[#6:3](=[O:5])-[#6;!$(C=[C,N,O,S]):4]>>[#6:1]-[#8:2].[#6:3](=[O:5])(-[O;H1])-[#6:4]",
+        "rhs_classes": [
+            "alcohols-primsec",
+            "carboxylates"
+        ],
+        "syn_smarts": "[C;$([C;H1](-[#6;$(c),$([C;!H0])])-[#6;$(c),$([C;!H0])]),$([C;H2]-[#6;$(c),$([C;!H0])]),$([C;H3]);!$(C=[C,N,O,S]):101]-[O;H1:2].[O;H1]-[#6:3](=[O:4])-[#6;!$(C=[C,N,O,S]):102]>>[#6:101]-[#8;H0:2]-[#6:3](=[O:4])-[#6:102]",
+        "tags": [
+            "Mitsunobu",
+            "esterification",
+            "ester"
+        ],
+        "tier": 1
+    },
+    "miyaura-borylation": {
+        "description": "Miyaura borylation.",
+        "ld_data": {
+            "display_smarts": "[#35]-[#6:201]>>[#6:201]-B-1-O-C(-[#6])(-[#6])-C(-[#6])(-[#6])-O-1 |$;Aryl_p;Aryl_p;;;|"
+        },
+        "long_name": "Miyaura borylation",
+        "retro_smarts": "[#6;!R2;$(c),$(C=C):101]-!@B(-O)O>>[#6:101]-[#35]",
+        "rhs_classes": [
+            "halides-aryl-vinyl"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C):101]-[#35,#53]>>[#6:101]-B1OC(-C)(-C)C(-C)(-C)O1",
+        "tags": [
+            "Miyaura",
+            "borylation",
+            "boronic ester",
+            "boronate",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "negishi": {
+        "description": "Negishi: aryl C-C coupling from two halides (one will be prepared as an organozinc).",
+        "ld_data": {
+            "display_smarts": "Cl-[#6:201].[#6:202]-Cl>>[#6:201]-[#6:202] |$;Aryl_p;Aryl_p;;Aryl_p;Aryl_p$|"
+        },
+        "long_name": "Negishi Coupling",
+        "retro_smarts": "[#6;!R2;$(c),$(C=C),$(C#C);!$([#6]~[S,N,O,P]):2]-!@[#6;!R2;$(c),$(C=C);!$([#6]~[S,N,O,P]):1]>>[#6:2]-Cl.Cl-[#6:1]",
+        "rhs_classes": [
+            "halides-aryl-vinyl-alkynyl",
+            "halides-aryl-vinyl"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C),$(C#C);!$([#6]~[S,N,O,P]):101]-[Cl,Br,I].[#6;$(c),$(C=C);!$([#6]~[S,N,O,P]):102]-[Cl,Br,I]>>[#6:101]-[#6:102]",
+        "tags": [
+            "Negishi",
+            "C-C bond formation",
+            "C-C"
+        ],
+        "tier": 1
+    },
+    "oxadiazole-1": {
+        "description": "Oxadiazole synthesis from a nitrile (converted to an amidoxime) and a carboxylic acid.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6]#[#7].[#6:102]-C(=O)-O>>[#6:101]-[#6]-1=N-O-C(-[#6:102])=N-1"
+        },
+        "long_name": "Oxadiazole synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):101]-!@[c:2]1[n:3][o:5][c:4](-!@[#6;!$(C=[C,N,O,S]):102])n1>>[#6:101]-[#6:2]#[#7:3].[#6:102]-[C:4](=O)-[O;H1:5]",
+        "rhs_classes": [
+            "nitriles",
+            "carboxylates"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[#6:2]#[#7:3].[#6;!$(C=[C,N,O,S]):102]-[C:4](=O)-[O;H1]>>[#6:101]-[#6:2]1=[#7:3]-O-[C:4](-[#6:102])=N-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "oxadiazole"
+        ],
+        "tier": 1
+    },
+    "oxazole-1": {
+        "description": "Fischer Oxazole Synthesis: Generates an oxazole from an aldehyde and a cyanohydrin.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C=O.N#C-C(-O)-[#6:102]>>C=1(-[#6:101])-O-C(-[#6:102])=C-N=1"
+        },
+        "long_name": "Fischer oxazole synthesis",
+        "retro_smarts": "[#6:1]1(-!@[#6;!$(C=[C,N,O,S]):6]):[#8:2]:[#6:3](-!@[#6;!$(C=[C,N,O,S]):7]):[#6:5]:[#7:4]:1>>[#6:6]-[#6;H1:1]=[#8:2].[#7:4]#[#6:5]-[#6:3](-O)-[#6:7]",
+        "rhs_classes": [
+            "aldehydes",
+            "cyanohydrins"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[#6;H1:1]=O.[#7:4]#[#6:5]-[#6:3](-[#8;$([O;H1]):2])-[#6;!$(C=[C,N,O,S]):102]>>[#6;H0:1]1(-[#6:101])-[#8;H0:2]-[#6:3](-[#6:102])=[#6:5]-[#7:4]=1",
+        "tags": [
+            "Fischer",
+            "heterocycle formation",
+            "heterocycle",
+            "oxazole"
+        ],
+        "tier": 1
+    },
+    "oxazole-2": {
+        "description": "2,4-Disubstituted oxazole synthesis from monosubstituted alkynes and acetonitrile or proprionitrile (PhIO as oxygen source).",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C#C.N#C-[#6:102]>>[#6:101]-C-1=C-O-C(-[#6:102])=N-1"
+        },
+        "long_name": "2,4-Disubstituted oxazole synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):1]-!@[#6:2]1:[#6;H1:3]:[#8]:[#6:5](-!@[C;$([C;H3]),$([C;H2]-[C;H3]):6]):[#7:4]:1>>[#6:1]-[#6:2]#[#6:3].[#7:4]#[#6:5]-[C:6]",
+        "rhs_classes": [
+            "alkynes-monosub",
+            "nitriles-oxazoles"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]):101]-[#6:2]#[#6;H1:3].[#7:4]#[#6:5]-[C;$([C;H3]),$([C;H2]-[C;H3]):102]>>[#6:101]-[#6:2]1=[#6:3]-[#8]-[#6:5](-[C:102])=[#7:4]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "oxazole"
+        ],
+        "tier": 1
+    },
+    "phthalazinone": {
+        "description": "Phthalazinone synthesis from 2-acylbenzoic acid and a hydrazine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C=2-C=C-C=C-C=2-C(=O)-O.[#7]-N-[#6:102]>>[#6:101]-C=1-C=2-C=C-C=C-C=2-C(=O)-N(-[#6:102])-N=1"
+        },
+        "long_name": "Phthalazinone synthesis",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]):101]-!@[#6:2]1[c;!$(c-[C,N]);R2:3][c;!$(c-[C,N]);R2:4][#6:5](=[O:8])[#7:7](-!@[#6;!$([#6]=[#6,#7,#8,#16]):102])[#7:6]1>>[#6:101]-[C:2](=O)-[c:3][c:4]-[C:5](=[O:8])-O.[#7;H2:6]-[#7;H1:7]-[#6:102]",
+        "rhs_classes": [
+            "benzoicacids-2acyl",
+            "hydrazines"
+        ],
+        "syn_smarts": "[#6;!$(C-[#17,#35,#53]);!$(C=[C,N,O,S]):101]!@-[C:2](=O)-[c:3][c:4]-[C:5](=O)-[O;H1].[#7;H2:6]-[#7;H1:7]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-[C:2]2-[c:3][c:4]-[C:5](=O)-[#7;H0:7](-[#6:102])-[#7;H0:6]=2",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "phthalazinone"
+        ],
+        "tier": 1
+    },
+    "pictet-spengler": {
+        "allow_multiple_products": true,
+        "description": "Pictet-Spengler reaction.",
+        "ld_data": {
+            "display_smarts": "C=1-C=C-C=C-C=1-C-C-[#7].[#6:101]-[#6](=O)>>C=1-2-C=C-C=C-C=1-C-C-[#7]-C(-[#6:101])-2"
+        },
+        "long_name": "Pictet-Spengler cyclization",
+        "retro_smarts": "[c;R2:1]1:[c;R2:2]-[C!H0:3]-[C;!H0:4]-[N;H1:5]-[#6:6](-!@[#6:7])-1>>[#6:1]:[#6:2]-[C:3]-[C:4]-[N:5].[#6:7]-[#6;H1:6]=O",
+        "rhs_classes": [
+            "amines-arylethyl",
+            "aldehydes"
+        ],
+        "syn_smarts": "[c;H1:1][c:2]-[C;!R;!H0:3]-[C;!H0:4]-[N;H2:5].[#6:7]-[C;H1:6](=O)>>[c;R2;H0:1]1:[c;R2:2]-[C:3]-[C:4]-[N;H1:5]-[#6:6](-[#6:7])-1",
+        "tags": [
+            "Pictet-Spengler",
+            "heterocycle formation",
+            "heterocycle"
+        ],
+        "tier": 1
+    },
+    "pomeranz-fritsch": {
+        "allow_multiple_products": true,
+        "description": "Pomeranz-Fritsch synthesis of isoquinolines.",
+        "ld_data": {
+            "display_smarts": "C=1-C=C-C=C-C=1-C(=O)-[#6:101]>>[#6:101]-C-1=N-C=C-C-2=C-1-C=C-C=C-2"
+        },
+        "long_name": "Pomeranz-Fritsch synthesis of isoquinolines",
+        "retro_smarts": "[c:1]12[c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):4][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):5][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):6][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):7][c:2]2[c;!R2;$(c-[#6:102]),$([c;H1]);!$(c-C=*);!$(c-C#*):3][n;D2][c;D2][c;D2]1>>[c:1]1:[c:4]:[c:5]:[c:6]:[c:7]:[c:2]:1-[#6:3]=O",
+        "rhs_classes": [
+            "arylketones-aldehydes-2H-EDG"
+        ],
+        "syn_smarts": "O=[C;!R;$([C;H1:3]),$([C;H0](-c)-[#6:102]);!$(C-C=*);!$(C-C#*):3]-[c:2]1[c;H1:1][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):4][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):5][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):6][c;$([c;H1]),$(c(c)(c)-[#6]),$(c-[#17,#35]),$(c-O-[#6]);!$(c-C=O);!$(c-C#N);!$(c-C(F)(F)F):7]1>>[#6;H0:1]12-[#6]=[#6]-[#7]=[#6:3]-[#6:2]=1-[#6:7]=[#6:6]-[#6:5]=[#6:4]-2",
+        "tags": [
+            "Pomeranz-Fritsch",
+            "heterocycle formation",
+            "heterocycle",
+            "isoquinoline",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "pyrazole-1": {
+        "allow_multiple_products": true,
+        "description": "Pyrazole synthesis from 1,3-diketones and hydrazines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-C(=O)-[#6:102].[#7]-[#7]-[#6:103]>>[#6:101]-C=1-C=C(-[#6:102])-[#7](-[#6:103])-[#7]=1"
+        },
+        "long_name": "Pyrazole synthesis from 1,3-diketones and hydrazine",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):4]-!@[#6;!R2:1]1:[#6:2]:[#6;!R2:3](-[#6;!$([#6]=[#7,#8,#16]):5]):[#7;$([#7;H1]),$([#7;H0]-[#6;!$([#6]=[#6,#7,#8,#16]):103]):7]:[#7:6]:1>>[#6:4]-[#6:1](=O)-[#6:2]-[#6:3](=O)(-[#6:5]).[#7:6]-[#7:7]",
+        "rhs_classes": [
+            "ketones-3keto",
+            "hydrazines"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[#6:1](=O)-[#6;H1,H2:2]-!@[#6:3](=O)-[#6;!$([#6]=[#7,#8,#16]):102].[#7;H2:6]-[#7;$([#7;H2]),$([#7;H1]-[#6;!$([#6]=[#6,#7,#8,#16]):103]):7]>>[#6:101]-[#6:1]1-[#6:2]=[#6:3](-[#6:102])-[#7:7]-[#7:6]=1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "pyrazole"
+        ],
+        "tier": 1
+    },
+    "pyridine-1": {
+        "description": "Hantzsch pyridine synthesis from two beta-ketoesters, an aldehyde, and ammonia (stepwise).",
+        "ld_data": {
+            "display_smarts": "[#6:101]-O-C(=O)-C-C(=O)-[#6:102].[#6:104]-O-C(=O)-C-C(=O)-[#6:105].O=C-[#6:103]>>[#6:101]-O-C(=O)-C=1-C(-[#6:102])=N-C(-[#6:105])=C(-C(=O)-O-[#6:104])-C(-[#6:103])=1"
+        },
+        "long_name": "Hantzsch pyridine synthesis from two beta-ketoesters, an aldehyde, and ammonia (stepwise).",
+        "retro_smarts": "[C;!$([#6]=[#7,#8,#16]):101]-O-[#6:1](=[O:8])-!@[#6:2]1:[#6:3](-!@[#6;!$([#6]=[#7,#8,#16]):102]):[#7]:[#6:7](-!@[#6;!$([#6]=[#7,#8,#16]):105]):[#6:6](-!@[#6:5](=[O:9])-O-[#6;!$([#6]=[#7,#8,#16]):104]):[#6:4](-!@[#6;!$([#6]=[#7,#8,#16]):103]):1>>[C:101]-O-[#6:1](=[O:8])-[#6;H2:2]-[#6:3](=O)-[#6:102].[C:104]-O-[#6:5](=[O:9])-[#6;H2:6]-[#6:7](=O)-[#6:105].O=[#6;H1:4]-[#6:103]",
+        "rhs_classes": [
+            "esters-3keto",
+            "esters-3keto",
+            "aldehydes"
+        ],
+        "syn_smarts": "[C;!$([#6]=[#7,#8,#16]):101]-O-[#6:1](=O)-!@[#6;H2:2]-!@[#6:3](=O)-[#6;!$([#6]=[#7,#8,#16]):102].[C;!$([#6]=[#7,#8,#16]):104]-O-[#6:5](=O)-!@[#6;H2:6]-!@[#6:7](=O)-[#6;!$([#6]=[#7,#8,#16]):105].O=[#6;H1:4]-[#6;!$([#6]=[#7,#8,#16]):103]>>[#6:101]-O-[#6:1](=O)-[#6;H0:2]1-[#6:3](-[#6:102])=[#7]-[#6:7](-[#6:105])=[#6;H0:6](-[#6:5](=O)-O-[#6:104])-[#6;H0:4](-[#6:103])=1",
+        "tags": [
+            "Hantzsch",
+            "heterocycle formation",
+            "heterocycle",
+            "pyridine"
+        ],
+        "tier": 1
+    },
+    "pyridine-2": {
+        "description": "Krohnke pyridine synthesis from a 2-halo ketone and an alfa,beta-unsaturated ketone.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-[#35].[#6:102]-C=C-C(=O)-[#6:103]>>[#6:101]-C=1-C=C(-[#6:102])-C=C(-[#6:103])-N=1"
+        },
+        "long_name": "Krohnke pyridine synthesis from 2-halo ketone and an alfa,beta-unsaturated ketone",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):101]-[c:1]1[c;H1:2][c;$([c;H0]-[#6]),$([c;H1]):3][c;$([c;H0]-[#6]),$([c;H1]):4][c:5](-!@[#6;$(c),$([C;!H0]),$(C(=O)-[O;H1]),$(C(=O)-OC):102])n1>>[#6:101]-[#6:1](=O)-[#6;H2:2]-[#17].[C:3]=[C:4]-[#6:5](=O)-[#6:102]",
+        "rhs_classes": [
+            "ketones-2halo",
+            "ketones-unsaturated"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]):101]-[#6:1](=O)-[#6;H2:2]-[#17,#35,#53].[C;$([C;H1]-[#6:103]),$([C;H2]):3]=!@[C;$([C;H1]),$([C;H0](=[C:3])(-[#6])-[#6:5]=O):4]-[#6:5](=O)-[#6;$(c),$([C;!H0]),$(C(=O)-[O;H1]),$(C(=O)-OC):102]>>[#6:101]-[#6:1]1=[#6;H1:2]-[#6:3]=[#6:4]-[#6:5](-[#6:102])=[#7]-1",
+        "tags": [
+            "Krohnke",
+            "heterocycle formation",
+            "heterocycle",
+            "pyridine"
+        ],
+        "tier": 1
+    },
+    "pyridine-3": {
+        "description": "Guareshi-Thorpe pyridine synthesis from a beta-ketoester, and a cyanoacetic ester.",
+        "ld_data": {
+            "display_smarts": "[#6]-O-C(=O)-C-C(=O)-[#6:101].N#C-[C:5]-[#6:6](=O)-O-[#6]>>O-C-1=C-C(-[#6:101])=C(-C#N)-C(-O)=N-1"
+        },
+        "long_name": "Guareshi-Thorpe pyridine synthesis",
+        "retro_smarts": "[O;H1:8]-[c:1]1[c:2][c:3](-[#6:101])[c:6](-[C:5]#[N:4])[c:7](-[O;H1:9])[n;D2]1>>CO-[#6:1](=[O;H0:8])-[#6:2]-[#6:3](=O)-[#6:101].[N:4]#[C:5]-[C:6]-[#6:7](=[O;H0:9])-OC",
+        "rhs_classes": [
+            "esters-3keto",
+            "esters-2cyano"
+        ],
+        "syn_smarts": "[C]-O-[#6:1](=O)-[C;$([C;H2]),$([C;H1](-C=O)(-C=O)-[C;!H0;!$(C=N)]):2]-[#6:3](=O)-[#6:101].[N:4]#[C:5]-[C;H2:6]-[#6:7](=O)-O-[C;!$([#6]=[#6,#7,#8,#16])]>>[O;H1]-[#6:1]1=[#6:2]-[#6:3](-[#6:101])=[#6;H0:6](-[C:5]#[N:4])-[#6:7](-O)=[#7]-1",
+        "tags": [
+            "Guareshi-Thorpe",
+            "heterocycle formation",
+            "heterocycle",
+            "pyridine"
+        ],
+        "tier": 1
+    },
+    "pyridone-1": {
+        "allow_multiple_products": true,
+        "description": "Pyridone synthesis from cyanoacetamide and 1,3-diketones.",
+        "ld_data": {
+            "display_smarts": "[#7]-C(=O)-C-C#N.[#6:101]-C(=O)-C-C(=O)-[#6:102]>>N#C-C=1-C(=O)-N-C(-[#6:101])=C-C(-[#6:102])=1"
+        },
+        "long_name": "Pyridone synthesis from cyanoacetamide and 1,3-diketones",
+        "retro_smarts": "[#6;!$([#6](-C=O)-C=O);!$(C=[C,N,O,S]):8]-[#6:5]1:[#6;!$([#6]-[#7,#8,#16]):6]:[#6:7](-[#6;!$([#6](-C=O)-C=O);!$(C=[C,N,O,S]):9]):[#6:2](-[#6:1]#N):[#6:3](=[O:10]):[#7;H1:4]:1>>[#7:4]-[#6:3](=[O:10])-[#6:2]-[#6:1]#N.[#6:9]-[#6:7](=O)-[#6:6]-[#6:5](-[#6:8])=O",
+        "rhs_classes": [
+            "cyanoacetamides",
+            "ketones-3keto"
+        ],
+        "syn_smarts": "[#7;H2:4]-[#6:3](=O)-[#6;H2:2]-[#6:1]#N.[#6;!$([#6](-C=O)-C=O);!$(C=[C,N,O,S]):101]-[#6:5](=O)-[#6;H1,H2;!$([#6]-[#7,#8,#16]):6]-[#6;!R:7](=O)-[#6;!$([#6](-C=O)-C=O);!$(C=[C,N,O,S]):102]>>N#[#6:1]-[#6;H0:2]1-[#6:3](=O)-[#7;H1:4]-[#6:5](-[#6:101])=[#6:6]-[#6:7](-[#6:102])=1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "pyridone"
+        ],
+        "tier": 1
+    },
+    "pyrimidine-1": {
+        "description": "Pinner pyrimidine synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-C(=O)-[#6:102].[#6:103]-C(=[#7])-[#7]>>[#6:101]-C=1-N=C(-[#6:103])-N=C(-[#6:102])-C=1"
+        },
+        "long_name": "Pinner pyrimidine synthesis from a 1,3-diketones and an amidine",
+        "retro_smarts": "[#6:5]-[c:4]1[c;$(c-[#6;$(c),$([C;!H0])]),$([c;H1]):3][c:2](-[#6:1])[n:8][c:7](-!@[#6;!$(C=[C,N,S,O]):6])[n:9]1>>[#6:1]-[#6:2](=O)-[#6:3]-[#6:4](=O)-[#6:5].[#6:6]-[#6:7](=[#7:8])-[#7:9]",
+        "rhs_classes": [
+            "ketones-3keto",
+            "amidines"
+        ],
+        "syn_smarts": "[#6:101]-!@[#6:2](=O)-!@[#6;$([C;H2]),$([C;H1]-[#6;$(c),$([C;!H0])]):3]-!@[#6:4](=O)-!@[#6:102].[#6;!$(C=[C,N,S,O]):103]-[#6:6](=[#7;H1:7])-[#7;H2:8]>>[#6:101]-[#6:2]1=[#7;H0:7]-[#6:6](-[#6:103])=[#7;H0:8]-[#6:4](-[#6:102])=[#6:3]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "pyrimidine"
+        ],
+        "tier": 1
+    },
+    "pyrimidinedione-1": {
+        "description": "Pyrimidinedione synthesis from amino-acrylates and isocyanates.",
+        "ld_data": {
+            "display_smarts": "[#7]-C=C-C(=O)-O-C.[#6:101]-N=C=O>>N-1-C=C-C(=O)-N(-[#6:101])-C(=O)-1"
+        },
+        "long_name": "Pyrimidinedione synthesis from amino-acrylates and isocyanates",
+        "retro_smarts": "[#7;$([#7;H1]),$([#7;H0][#6;!$(C=[O,N,S])]):1]1:[#6;!$(c(:a)(:a):a):6]:[#6;!$(c(:a)(:a):a):7]:[#6:2](=[O:8]):[#7:4](-!@[#6:3]):[#6:5]:1(=[O:9])>>[#7:1]-[#6:6]=[#6:7]-[#6:2](=[O:8])-O-C.[#6:3]-[#7:4]=[#6:5]=[O:9]",
+        "rhs_classes": [
+            "acrylates-amino",
+            "isocyanates"
+        ],
+        "syn_smarts": "[#7;$([#7;H1](-[#6;!$(C=[C,O,N,S]);!$([c;R2])])-[#6;$([#6]=[#6]);!$(C=[O,N,S]):6]),$([#7;H2]):1]-[#6:6]=[#6:7]-[#6:2](=O)-O-[C;!$(C=[O,N,S])].[#6:101]-[#7:4]=[#6:5]=O>>[#7:1]1-[#6:6]=[#6:7]-[#6:2](=O)-[#7:4](-[#6:101])-[#6:5](=O)-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "pyrimidinedione"
+        ],
+        "tier": 1
+    },
+    "pyrimidinedione-2": {
+        "description": "Bicyclic pyrimidinedione synthesis from 2-aminobenzoates and isocyanates.",
+        "ld_data": {
+            "display_smarts": "[#7]-C=1-C=C-C=C-C=1-C(=O)-O-[#6].[#6:101]-N=C=O>>N-1-C=2-C=C-C=C-C=2-C(=O)-N(-[#6:101])-C(=O)-1"
+        },
+        "long_name": "Bicyclic pyrimidinedione synthesis from 2-aminobenzoates and isocyanates",
+        "retro_smarts": "[#7;$([#7;H1]),$([#7;H0]-[#6;!$(C=[O,N,S])]):1]1:[c;R2,R3:6]:[c;R2:7]:[#6:2](=[O:8]):[#7:4](-!@[#6:3]):[#6:5]:1(=[O:9])>>[#7:1]-[c:6][c:7]-[#6:2](=[O:8])-O-C.[#6:3]-[#7:4]=[#6:5]=[O:9]",
+        "rhs_classes": [
+            "benzoates-2amino",
+            "isocyanates"
+        ],
+        "syn_smarts": "[#7;$([#7;H1](-[#6;!$(C=[O,N,S])])-[c:6]),$([#7;H2]):1]-[c:6][c:7]-[#6:2](=O)-O-[C;!$(C=[O,N,S])].[#6:101]-[#7:4]=[#6:5]=O>>[#7:1]1-[c:6][c:7]-[#6:2](=O)-[#7:4](-[#6:101])-[#6:5](=O)-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "pyrimidinedione"
+        ],
+        "tier": 1
+    },
+    "pyrimidone-1": {
+        "description": "Biginelli 2-pyrimidone synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-C(=O)-O-[#6].[#6:102]-C(=O)>>[#6:101]-C=1-N-C(=O)-N-C(-[#6:102])-C(-C(=O)-O-[#6])=1"
+        },
+        "long_name": "Biginelli synthesis of 2-pyrimidones from a beta-ketoester, an aldehyde and urea",
+        "retro_smarts": "[#6:101]-[#6:2]1-N-C(=O)-N-[#6:5](-!@[#6:102])-[#6:3](-[#6;!R:4](=[O:7])-[O:8]-[#6:6])=1>>[#6:101]-[#6:2](=O)-[#6:3]-[#6:4](=[O:7])-[O:8]-[#6:6].[#6:102]-[#6;H1:5](=O)",
+        "rhs_classes": [
+            "esters-3keto",
+            "aldehydes"
+        ],
+        "syn_smarts": "[#6:101]-[#6:2](=O)-[#6;H2:3]-[#6;!R:4](=O)-O-[#6:6].[#6:102]-[C;H1:5]=O>>[#6:101]-[#6:2]1-N-C(=O)-N-[#6:5](-[#6:102])-[#6;H0:3](-[#6:4](=O)-O-[#6:6])=1",
+        "tags": [
+            "Biginelli",
+            "heterocycle formation",
+            "heterocycle",
+            "pyrimidone"
+        ],
+        "tier": 1
+    },
+    "pyrimidone-2": {
+        "description": "Biginelli 2-mercaptopyrimidine synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-C(=O)-O-[#6].[#6:102]-C=O>>[#6:101]-C=1-N-C(=S)-N-C(-[#6:102])-C(-C(=O)-O-[#6])=1"
+        },
+        "long_name": "Biginelli synthesis of 2-mercaptopyrimidines from a beta-ketoester, an aldehyde and thiourea",
+        "retro_smarts": "[#6:101]-[#6:2]1-[#7;D2;H1]-[#6](=[S;X1])-[#7;D2;H1]-[#6:5](-!@[#6:102])-[#6:3](-[#6;!R:4](=[O:7])-[O:8]-[#6:6])=1>>[#6:101]-[#6:2](=O)-[#6:3]-[#6:4](=[O:7])-[O:8]-[#6:6].[#6:102]-[#6;H1:5](=O)",
+        "rhs_classes": [
+            "esters-3keto",
+            "aldehydes"
+        ],
+        "syn_smarts": "[#6:101]-[#6:2](=O)-[#6;H2:3]-[#6;!R:4](=O)-O-[#6:6].[#6:102]-[C;H1:5]=O>>[#6:101]-[#6:2]1-N-C(=S)-N-[#6:5](-[#6:102])-[#6;H0:3](-[#6:4](=O)-O-[#6:6])=1",
+        "tags": [
+            "Biginelli",
+            "heterocycle formation",
+            "heterocycle",
+            "pyrimidone"
+        ],
+        "tier": 1
+    },
+    "pyrrole-1": {
+        "description": "Knorr pyrrole synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#6](=O)-[#6]-[#6](=O)-O-[#6].[#6:102]-[#6](=O)-[#6]-[#6](=O)-O-[#6]>>[#6:101]-[#6]=1-[#6](-C(=O)-O-[#6])=[#6](-[#6:102])-N-[#6](-C(=O)-O-[#6])=1"
+        },
+        "long_name": "Knorr pyrrole synthesis from two beta-ketoesters",
+        "retro_smarts": "[#6:101]-[c:2]1[c:7](-[#6:8](=[O:12])-[#8:13]-[#6:9])[c:6](-[#6:102])[n;D2][c:3](-[#6:4](=[O:10])-[#8:11]-[#6:5])1>>[#6:101]-[C:2](=O)-[C:3]-[C:4](=[O:10])-[O:11]-[C:5].[#6:102]-[C:6](=O)-[C:7]-[C:8](=[O:12])-[O:13]-[C:9]",
+        "rhs_classes": [
+            "esters-3keto",
+            "esters-3keto"
+        ],
+        "syn_smarts": "[#6:101]-[C:2](=O)-[C;H2:3]-[C:4](=O)-O-[C:5].[#6:102]-[C:6](=O)-[C;H2:7]-[C:8](=O)-O-[C:9]>>[#6:101]-[#6:2]1-[#6;H0:7](-[#6:8](=O)-O-[C:9])=[#6:6](-[#6:102])-[N;H1]-[#6;H0:3](-[#6:4](=O)-O-[#6:5])=1",
+        "tags": [
+            "Knorr",
+            "heterocycle formation",
+            "heterocycle",
+            "pyrrole"
+        ],
+        "tier": 1
+    },
+    "pyrrole-2": {
+        "description": "Paal-Knorr pyrrole synthesis.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-C-C(=O)-[#6:102].[#6:103]-[#7]>>[#6:101]-C-1=C-C=C(-[#6:102])-N(-[#6:103])-1"
+        },
+        "long_name": "Paal-Knorr pyrrole synthesis",
+        "retro_smarts": "[#6:101]-[#6:2]1:[#6:3]:[#6:4]:[#6:5](-!@[#6:102]):[#7:6](-!@[#6:103]):1>>[#6:101]-[C:2](=O)-[C:3]-[C:4]-[C:5](=O)-[#6:102].[#6:103]-[N:6]",
+        "rhs_classes": [
+            "ketones-4keto",
+            "amines-prim"
+        ],
+        "syn_smarts": "[#6:101]-[C;!R:2](=O)-[C;!R;H1,H2:3]-[C;H1,H2:4]-[C:5](=O)-[#6:102].[#6;!$([#6]=[#6,#7,#8,#16]):103]-[N;H2:6]>>[#6:101]-[#6:2]1=[#6:3]-[#6:4]=[#6:5](-[#6:102])-[#7;H0:6](-[#6:103])-1",
+        "tags": [
+            "Paal-Knorr",
+            "heterocycle formation",
+            "heterocycle",
+            "pyrrole"
+        ],
+        "tier": 1
+    },
+    "quinazoline-1": {
+        "description": "Quinazoline synthesis from a quinazolinone and a primary or secondary amine.",
+        "ld_data": {
+            "display_smarts": "O=C-1-N-C=N-C-2=C-1-C=C-C=C-2.[#6:101]-[#7]>>[#6:101]-N-C-1=N-C=N-C-2=C-1-C=C-C=C-2"
+        },
+        "long_name": "Quinazoline synthesis from a quinazolinone and a primary or secondary amine",
+        "retro_smarts": "[#7;$([#7;H2]),$([#7;H1](-c)-[#6;!$(C=[C,N,O,S]):12]),$([#7;H0](-c)(-[#6;!$(C=[C,N,O,S]):12])-[#6;!$(C=[C,N,O,S])]):11]-!@[c:10]1[n:9][c:8][n:7][c:6]2[a:5][a:4][a:3][a:2][c:1]12>>O=[c:10]1[n;H1:9][c:8][n:7][c:6]2[a:5][a:4][a:3][a:2][c:1]12.[#7:11]",
+        "rhs_classes": [
+            "quinazolinones",
+            "amines-primsec"
+        ],
+        "syn_smarts": "O=[c:1]1[n:2][c;!$(c=[C,N,O,S]):3][n:4][c:5]2[c:6]1[a:7][a:8][a:9][a:10]2.[#7;$([#7;H3]),$([#7;H2]-[#6;!$(C=[C,N,O,S]):101]),$([#7;H1](-[#6;!$(C=[C,N,O,S])])-[#6;!$(C=[C,N,O,S]):101]):13]>>[#7:13]-[c:1]1[n;H0:2][c:3][n:4][c:5]2[c:6]1[a:7][a:8][a:9][a:10]2",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "quinazoline"
+        ],
+        "tier": 1
+    },
+    "quinazolinone-1": {
+        "description": "Quinazolinone synthesis from a 2-carboxy aniline, a primary amine, and an aldehyde.",
+        "ld_data": {
+            "display_smarts": "[#7]-C=1-C=C-C=C-C=1-C(-[#8])=O.[#6:101]-[#7].C(=O)-[#6:102]>>[#6:101]-N-1-C(-[#6:102])=N-C=2-C=C-C=C-C=2-C-1=O"
+        },
+        "long_name": "Quinazolinone Synthesis from a 2-carboxy aniline, a primary amine, and an aldehyde",
+        "retro_smarts": "[#8:9]=[#6:7]1:[#7;$([#7;H1]),$([#7;H0]-!@[#6;!$(C=[C,N,O,S]):101]):11]:[#6;$([#6;H1]),$([#6;H0]-!@[#6;!$(C=[C,N,O,S]):102]):12]:[#7:8]:[#6:2]:2:[a:3]:[a:4]:[a:5]:[a:6]:[#6:1]:1:2>>[#7:8]-[#6:2]1:[a:3]:[a:4]:[a:5]:[a:6]:[#6:1]:1-[#6:7](-[#8])=[#8:9].[#7:11].[#6:12]=O",
+        "rhs_classes": [
+            "anilines-2COOH",
+            "amines-primsec",
+            "aldehydes"
+        ],
+        "syn_smarts": "[#7;H2:7]-[c:5]1[a:4][a:3][a:2][a:1][c:6]1-[#6:10](-[#8;H1])=[O:11].[#7;$([#7;H3]),$([#7;H2]-[#6;!$(C=[C,N,O,S]):101]):9].[#6;$([#6;H2]),$([#6;H1]-[#6;!$(C=[C,N,O,S]):102]):8]=O>>[#7:9]1-[#6:8]=[#7;H0:7]-[#6:5]2:[a:4]:[a:3]:[a:2]:[a:1]:[#6:6]:2-[#6:10](=[#8:11])-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "quinazolinone"
+        ],
+        "tier": 1
+    },
+    "quinazolinone-2": {
+        "description": "Niementowski quinazolinone synthesis from a 2-carboxy aniline, and a primary amide.",
+        "ld_data": {
+            "display_smarts": "[#7]-C=1-C=C-C=C-C(-C(=O)-O)=1.[#7]-C(=O)-[#6:101]>>C=1-2-C(=O)-N-C(-[#6:101])=N-C=1-C=C-C=C-2"
+        },
+        "long_name": "Niementowski quinazolinone synthesis",
+        "retro_smarts": "[#8:9]=[#6:7]1:[#7;$([#7;H1]):11]:[#6;$([#6;H1]),$([#6;H0]-!@[#6;!$(C=[C,N,O,S]):101]):12]:[#7:8]:[#6:2]:2:[a:3]:[a:4]:[a:5]:[a:6]:[#6:1]:1:2>>[#7:8]-[#6:2]1:[a:3]:[a:4]:[a:5]:[a:6]:[#6:1]:1-[#6:7](-[#8])=[#8:9].[#7:11]-[#6:12]=O",
+        "rhs_classes": [
+            "anilines-2COOH",
+            "amides-prim"
+        ],
+        "syn_smarts": "[#7;H2:7]-[c:5]2[a:4][a:3][a:2][a:1][c:6]2-[#6:8](-[#8;H1])=O.[C;$([C;H1]),$([C;H0]-[#6;!$(C=[C,N,O,S]):102]):10](=O)-[#7;H2:9]>>[#7;H1:9]1-[#6:10]=[#7;H0:7]-[c:5]2[a:4][a:3][a:2][a:1][c:6]2-[#6:8](=O)-1",
+        "tags": [
+            "Niementowski",
+            "heterocycle formation",
+            "heterocycle",
+            "quinazolinone"
+        ],
+        "tier": 1
+    },
+    "quinoline-1": {
+        "description": "Quinoline synthesis from a 2-amino benzaldehyde and a ketone.",
+        "ld_data": {
+            "display_smarts": "[#7]-C-1=C-C=C-C=C-1-C=O.[#6:101]-C-C(=O)-[#6:102]>>N-1=C(-[#6:102])-C(-[#6:101])=C-C=2-C=C-C=C-C=2-1"
+        },
+        "long_name": "Quinoline synthesis",
+        "retro_smarts": "[c;$([c;H1]),$([c;H0]-[#6;!$(C=[C,N,O,S]):8]):3]1[c;H1:4][c;!$(c-[C,N]);R2:5][c;!$(c-[C,N]);R2:6][n:1][c:2]1-[#6:7]>>[#7:1]-[c:6][c:5]-[#6:4]=O.[#6:3]-[#6:2](=O)-[#6:7]",
+        "rhs_classes": [
+            "anilines-2formyl",
+            "ketones-2unsub"
+        ],
+        "syn_smarts": "[#7;H2:1]-[c:2][c:7]-[#6;H1:8]=O.[#6;$([#6;H3]),$([#6;H2]-[#6;!$(C=[C,N,O,S]):101]):10]-[#6:11](=O)-[#6:102]>>[#7;H0:1]1=[#6:11](-[#6:102])-[#6:10]=[#6:8]-[c:7][c:2]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "Friedlander",
+            "quinoline"
+        ],
+        "tier": 1
+    },
+    "quinoline-2": {
+        "description": "Niementowski quinoline synthesis from a 2-carboxy aniline and a ketone.",
+        "ld_data": {
+            "display_smarts": "[#7]-C-1=C-C=C-C=C-1-C(=O)-[#8].[#6:101]-C-C(=O)-[#6:102]>>N-1=C(-[#6:102])-C(-[#6:101])=C(-[#8])-C=2-C=C-C=C-C=2-1"
+        },
+        "long_name": "Niementowski quinoline synthesis",
+        "retro_smarts": "[c;$([c;H1]),$([c;H0]-[#6;!$(C=[C,N,O,S]):8]):3]1[c:4](-[#8;H1:8])[c;!$(c-[C,N]);R2:5][c;!$(c-[C,N]);R2:6][n:1][c:2]1-[#6;!$(C=[C,N,O,S]):7]>>[#7:1]-[c:6][c:5]-[#6:4](=O)-[#8;H1:8].[#6:3]-[#6:2](=O)-[#6:7]",
+        "rhs_classes": [
+            "anilines-2COOH",
+            "ketones-2unsub"
+        ],
+        "syn_smarts": "[#7;H2:1]-[c:2][c:7]-[#6:8](=[#8:9])-[O;H1].[#6;$([#6;H3]),$([#6;H2]-[#6;!$(C=[C,N,O,S]):101]):10]-[#6:11](=O)-[#6;!$(C=[C,N,O,S]):102]>>[#7;H0:1]1=[#6:11](-[#6:102])-[#6:10]=[#6:8](-[#8;H1:9])-[c:7][c:2]-1",
+        "tags": [
+            "Niementowski",
+            "heterocycle formation",
+            "heterocycle",
+            "quinoline"
+        ],
+        "tier": 1
+    },
+    "rubottom": {
+        "description": "Rubottom oxidation: alfa hydroxylation of an enolizable ketone via the corresponding silyl enol ether.",
+        "ld_data": {
+            "display_smarts": "[#6:102]-C-C(=O)-[#6:101]>>[#6:102]-C(-[#8])-C(=O)-[#6:101]"
+        },
+        "long_name": "Rubottom oxidation",
+        "retro_smarts": "[C;$([C;H1]),$([C;H0]-[#6;$(c),$([C;!H0]):101]):2](=[O:1])-[C;$([C;H2]),$([C;H1]-[#6;$(c),$([C;!H0]):102]):3]-[O;H1]>>[C:2](=[O:1])-[C:3]",
+        "rhs_classes": [
+            "ketones-enolizable"
+        ],
+        "syn_smarts": "[C;$([C;H1]),$([C;H0]-[#6;$(c),$([C;!H0]):101]):2](=O)-[C;$([C;H3]),$([C;H2]-[#6;$(c),$([C;!H0]):102]):3]>>[C:2](=O)-[C:3]-[O;H1]",
+        "tags": [
+            "Rubottom",
+            "oxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "sonogashira": {
+        "description": "Sonogashira Coupling: Arylation of an alkyne with an aryl/vinyl halide.",
+        "ld_data": {
+            "display_smarts": "Br-[#6:201].[#6:101]-C#C>>[#6:101]-C#C-[#6:201] |$;Aryl_p;;;;;;;Aryl_p$|"
+        },
+        "long_name": "Sonogashira coupling",
+        "retro_smarts": "[#6;$(c),$(C=C):101]-!@[#6:2]#[#6:3]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-Br.[#6;H1:2]#[#6:3]-[#6:102]",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "alkynes-monosub"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C):101]-[Cl,Br,I].[#6;H1:2]#[#6:3]-[#6;!$([#6]=[#6,#7,#8,#16]):102]>>[#6:101]-[#6;H0:2]#[#6:3]-[#6:102]",
+        "tags": [
+            "Sonagashira",
+            "C-C bond formation",
+            "C-C"
+        ],
+        "tier": 1
+    },
+    "spiro-chromanone": {
+        "description": "Spiro-chromanone synthesis from an o-hydroxyacetophenone and a cyclohexanone.",
+        "ld_data": {
+            "display_smarts": "[#8]-C=1-C=C-C=C-C=1-C(=O)-[#6].C-1(=O)-C-C-C-C-C-1>>O=C-1-C-C-2(-C-C-C-C-C-2)-O-C=2-C=C-C=C-C-1=2"
+        },
+        "long_name": "Spiro-chromanone Synthesis",
+        "retro_smarts": "[O:16]=[#6:8]-1-[#6;H2:9]-[#6:10]-2(-[C;H1,H2:11][C;!$(C=[#6,#7,#8,#16]):12][C,N,O:13][C;!$(C=[#6,#7,#8,#16]):14][C;H1,H2:15]-2)-[#8:1]-[c:2]2[a:3][a:4][a:5][a:6][c:7]-12>>[O:1]-[c:2]1[a:3][a:4][a:5][a:6][c:7]1(-[C:8](=[O:16])-[C:9]).[C:10]1(=O)[C:11][C:12][*:13][C:14][C:15]1",
+        "rhs_classes": [
+            "acetophenones-2OH",
+            "cyclohexanones"
+        ],
+        "syn_smarts": "[O;H1:1]-[c:2]1[a:3][a:4][a:5][a:6][c:7]1(-[C:8](=O)-[C;H3:9]).[C:10]1(=O)[C;H1,H2:11][C;!$(C=[#6,#7,#8,#16]):12][C,N,O:13][C;!$(C=[#6,#7,#8,#16]):14][C;H1,H2:15]1>>O=[#6:8]-1-[#6;H2:9]-[#6:10]-2(-[#6:11]-[#6:12]-[*:13]-[#6:14]-[#6:15]-2)-[#8;H0:1]-[c:2]2[a:3][a:4][a:5][a:6][c:7]-12",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "spiro-chromanone",
+            "chromanone"
+        ],
+        "tier": 1
+    },
+    "stille": {
+        "description": "Stille Coupling: aryl C-C coupling from an aryl or vinyl halide and an organostannane.",
+        "ld_data": {
+            "display_smarts": "Br-[#6:201].[#6]-C-C-C-[Sn](-[#6:202])(-C-C-C-[#6])-C-C-C-[#6]>>[#6:202]-[#6:201] |$;Aryl_p;;;;;;Aryl_p;;;;;;;;;Aryl_p;Aryl_p$|"
+        },
+        "long_name": "Stille coupling",
+        "retro_smarts": "[#6;$(c),$(C=C):1]-!@[#6;$(C=C),$(c):2]>>[#6:1]-Br.[#6:2]-[#50](-CCCC)(-CCCC)-CCCC",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "organostannanes"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C):101]-[Cl,Br,I].[#6;$([#6]=[#6]),$(c):102]-[#50](-CCCC)(-CCCC)-CCCC>>[#6:101]-[#6:102]",
+        "tags": [
+            "Stille",
+            "organostannane",
+            "C-C bond formation",
+            "C-C"
+        ],
+        "tier": 2
+    },
+    "stille-2": {
+        "description": "Stille Carbonylative Coupling: aryl C-C coupling with CO insertion from an aryl or vinyl halide and an organostannane.",
+        "ld_data": {
+            "display_smarts": "Br-[#6:201].[#6]-C-C-C-[Sn](-[#6:202])(-C-C-C-[#6])-C-C-C-[#6]>>[#6:202]-C(=O)-[#6:201] |$;Aryl_p;;;;;;Aryl_p;;;;;;;;;Aryl_p;;;Aryl_p$|"
+        },
+        "long_name": "Stille carbonylative coupling",
+        "retro_smarts": "[#6;$(c),$(C=C):1]-!@C(=O)-[#6;$(C=C),$(c):2]>>[#6:1]-Br.[#6:2]-[#50](-CCCC)(-CCCC)-CCCC",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "organostannanes"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C):101]-[Cl,Br,I].[#6;$(C=C),$(c):102]-[#50](-CCCC)(-CCCC)-CCCC>>[#6:101]-C(=O)-[#6:102]",
+        "tags": [
+            "Stille",
+            "organostannane",
+            "C-C bond formation",
+            "C-C",
+            "CO insertion"
+        ],
+        "tier": 2
+    },
+    "sulfonamide-1": {
+        "description": "Sulfonamide synthesis from a sulfonyl chloride and a primary or secondary amine.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[S](=O)(=O)-[Cl].[#7]-[#6:102]>>[#6:102]-N-S(=O)(=O)-[#6:101]"
+        },
+        "long_name": "Sulfonamide coupling",
+        "retro_smarts": "[#6:3]-[S:1](=[O:4])(=[O:5])-!@[N;$([N;H2]),$([N;H0](-[#6;!$(C=[C,N,O,S]):103])-[#6;!$(C=[C,N,O,S]):102]),$([N;H1]-[#6;!$(C=[C,N,O,S]):102]):2]>>[#6:3]-[S:1](=[O:4])(=[O:5])-Cl.[N:2]",
+        "rhs_classes": [
+            "sulfonyl_chlorides",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6:101]-[S:1](=O)(=O)-[Cl].[N;$([N;H3]),$([N;H1](-[#6;!$(C=[C,N,O,S]):103])-[#6;!$(C=[C,N,O,S]):102]),$([N;H2]-[#6;!$(C=[C,N,O,S]):102]):2]>>[#6:101]-[S:1](=O)(=O)-[N:2]",
+        "tags": [
+            "sulfonamide"
+        ],
+        "tier": 1
+    },
+    "sulfone-1": {
+        "description": "Oxidation of a thioether to a sulfone.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[S]-[#6:102]>>[#6:102]-[S](=O)(=O)-[#6:101]"
+        },
+        "long_name": "Oxidation of a thioether to a sulfone",
+        "retro_smarts": "[#6:101][#16;X4:2](=O)(=O)[#6:102]>>[#6:101][#16;X2:2][#6:102]",
+        "syn_smarts": "[#6:101][#16;X2:2][#6:102]>>[#6:101][#16;X4:2](=O)(=O)[#6:102]",
+        "tags": [
+            "sulfone",
+            "oxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "sulfone-2": {
+        "description": "Oxidation of a sulfoxide to a sulfone.",
+        "ld_data": {
+            "display_smarts": "[#6:102]-[S](=O)-[#6:101]>>[#6:101]-[S](=O)(=O)-[#6:102]"
+        },
+        "long_name": "Oxidation of a sulfoxide to a sulfone",
+        "retro_smarts": "[#6:101][#16;X4:2](=[O:3])(=O)[#6:102]>>[#6:101][#16;X3:2](=[O:3])[#6:102]",
+        "syn_smarts": "[#6:101][#16;X3:2](=O)[#6:102]>>[#6:101][#16;X4:2](=O)(=O)[#6:102]",
+        "tags": [
+            "sulfone",
+            "oxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "sulfoxide": {
+        "description": "Oxidation of a thioether to a sulfoxide.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[S]-[#6:102]>>[#6:102]-[S](=O)-[#6:101]"
+        },
+        "long_name": "Oxidation of a thioether to a sulfoxide",
+        "retro_smarts": "[#6:101][#16;X3:2](=O)[#6:102]>>[#6:101][#16;X2:2][#6:102]",
+        "syn_smarts": "[#6:101][#16;X2:2][#6:102]>>[#6:101][#16;X3:2](=O)[#6:102]",
+        "tags": [
+            "sulfoxide",
+            "oxidation",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "suzuki": {
+        "description": "Suzuki coupling: aryl C-C coupling from an aryl halide and an aryl/vinyl boronate.",
+        "ld_data": {
+            "display_smarts": "Br-[#6:201].[#8]-[#5](-[#8])-[#6:202]>>[#6:202]-[#6:201] |$;Aryl_p;;;;Aryl_p;Aryl_p;Aryl_p$|"
+        },
+        "long_name": "Suzuki coupling of aryl/vinyl boronates with aryl/vinyl halides",
+        "retro_smarts": "[#6;$(c),$(C=C);!$(C=C-[#6]=[#6,#7,#8,#16]):1]-!@[#6;$(c),$(C=C):2]>>[#6:1]-Br.[#6:2]-B(-O)-O",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "boronates-aryl-vinyl"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C);!$(C=C-[#6]=[#6,#7,#8,#16]):101]-[Cl,Br,I].[#6;$(c),$(C=C):102]-B(-O)O>>[#6:101]-[#6:102]",
+        "tags": [
+            "Suzuki",
+            "C-C bond formation",
+            "C-C",
+            "boronic acid",
+            "boronic ester",
+            "boronate"
+        ],
+        "tier": 1
+    },
+    "suzuki-2": {
+        "description": "Suzuki coupling: C-C coupling of an aryl halide and a trifluoroborate.",
+        "ld_data": {
+            "display_smarts": "Br-[#6:201].[#9]-[#5-](-[#9])(-[#9])-[#6:101]>>[#6:201]-[#6:101] |$;Aryl_p;;;;;;Aryl_p;$|"
+        },
+        "long_name": "Suzuki coupling of trifluoroborates and with aryl/vinyl halides",
+        "retro_smarts": "[#6;$(c),$(C=C);!$(C=C-[#6]=[#6,#7,#8,#16]):1]-!@[#6;$(c),$(C=C),$(C#C),$(C(=O)(-[#6;$(c),$(C=C):1])-[#6]),$(C(F)(F)F),$(C);!$(C(=O)-[#7,#8,#16]);!$(C(-[#6;$(c),$(C=C):1])-[#6]=[#6,#7,#8,#16]):2]>>[#6:1]-Br.[#6:2]-[#5;-](F)(F)F",
+        "rhs_classes": [
+            "halides-aryl-vinyl",
+            "trifluoroborates"
+        ],
+        "syn_smarts": "[#6;$(c),$(C=C);!$(C=C-[#6]=[#6,#7,#8,#16]):101]-[Cl,Br,I].[#6;$(c),$(C=C),$(C#C),$(C(=O)-[#6]),$(C(F)(F)F),$(C);!$(C(=O)-[#7,#8,#16]);!$(C-[#6]=[#6,#7,#8,#16]):102]-[#5;-](F)(F)F>>[#6:101]-[#6:102]",
+        "tags": [
+            "Suzuki",
+            "C-C bond formation",
+            "C-C",
+            "trifluoroborate"
+        ],
+        "tier": 1
+    },
+    "tetrahydroindole-1": {
+        "allow_multiple_products": true,
+        "description": "Tetrahydroindole synthesis from a cyclohexanone, 2-OH ketone and a primary amine.",
+        "ld_data": {
+            "display_smarts": "O=C-1-C-C-C-C-C-1.[#6:101]-C(-O)-C(=O)-[#6:102].[#7]-[#6:103]>>C=1-2-N(-[#6:103])-C(-[#6:102])=C(-[#6:101])-C=1-C-C-C-C-2"
+        },
+        "long_name": "Tetrahydroindole synthesis",
+        "retro_smarts": "[c:8]12[C:1][C:2][C:3][C:4][c:9]1[c:10](-[#6:5])[c:11](-[#6:6])[n:12](-!@[#6:7])2>>[C:8](=O)1[C:1][C:2][C:3][C:4][C:9]1.[#6:5]-[C;H1:10](-[O;H1])[C:11](=O)-[#6:6].[N;H2:12]-[#6:7]",
+        "rhs_classes": [
+            "cyclohexanones",
+            "ketones-2OH",
+            "amines-prim"
+        ],
+        "syn_smarts": "[#6:1](=O)1-[C:2]-[C:3]-[C:4]-[C:5]-[#6;H2:6]-1.[#6;!$([#6]=[#6,#7,#8,#16]):101]-[#6;H1:8](-[O;H1])-[#6:9](=O)-[#6;!$([#6]=[#6,#7,#8,#16]):102].[#7;H2:11]-[#6;!$([#6]=[#6,#7,#8,#16]):103]>>[#6:1]12:[#7;H0:11](-[#6:103]):[#6:9](-[#6:102]):[#6;H0:8](-[#6:101]):[#6;H0:6]:1-[#6:5]-[#6:4]-[#6:3]-[#6:2]-2",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "tetrahydroindole"
+        ],
+        "tier": 2
+    },
+    "tetrazole-1": {
+        "description": "Tetrazole from nitrile and alkyl halide; first regioisomer.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C#N.[#6:102]-[Br]>>[#6:102]-N-1-N=C(-[#6:101])-N=N-1"
+        },
+        "long_name": "2,5-disubstituted tetrazole synthesis",
+        "retro_smarts": "[C;!$(C=[C,N,O,S]):2]-!@[#7]1:[#7:4]:[#6:1](-!@[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):3]):[#7]:[#7]:1>>[#6:3]-[#6:1]#[#7:4].[C:2]-Br",
+        "rhs_classes": [
+            "nitriles",
+            "halides-primsec"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):101]-[#6:1]#[#7].[C;!$(C=[C,N,O,S]):102]-[Cl,Br,I]>>[#6:102]-[#7]1-[#7]=[#6:1](-[#6:101])-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "tetrazole"
+        ],
+        "tier": 1
+    },
+    "tetrazole-2": {
+        "description": "Tetrazole from nitrile and alkyl halide; second regioisomer.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C#N.[#6:102]-[Br]>>[#6:102]-N-1-C(-[#6:101])=N-N=N-1"
+        },
+        "long_name": "1,5-disubstituted tetrazole synthesis",
+        "retro_smarts": "[C;!$(C=[C,N,O,S]):4]-!@[#7]1:[#6:1](-!@[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):3]):[#7:2]:[#7]:[#7]:1>>[#6:3]-[#6:1]#[#7:2].[C:4]-Br",
+        "rhs_classes": [
+            "nitriles",
+            "halides-primsec"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):101]-[#6:1]#[#7:2].[C;!$(C=[C,N,O,S]):102]-[Cl,Br,I]>>[#6:102]-[#7]1-[#6:1](-[#6:101])=[#7:2]-[#7]=[#7]-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "tetrazole"
+        ],
+        "tier": 1
+    },
+    "tetrazole-3": {
+        "description": "Synthesis of a terminal tetrazole from a nitrile.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C#N>>[#6:101]-C-1=N-N-N=N-1"
+        },
+        "long_name": "Synthesis of a terminal tetrazole from a nitrile and sodium azide",
+        "retro_smarts": "[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):101]-[#6:2]:1:[#7:3]:[n;H1;D2]:[n;D2]:[n;D2]:1>>[#6:101]-[C:2]#[N:3]",
+        "rhs_classes": [
+            "nitriles"
+        ],
+        "syn_smarts": "[#6;!$(C=[C,N,O,S]);!$(C-[N,O,S]):101]-[C:2]#[N:3]>>[#6:101]-[C:2]1=[N:3]-[N;H1]-N=N-1",
+        "tags": [
+            "heterocycle formation",
+            "heterocycle",
+            "tetrazole",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "thiazole-1": {
+        "description": "Hantzsch thiazole synthesis from a thioamide and alpha-halo ketone.",
+        "ld_data": {
+            "display_smarts": "[#7]-C(=[#16])-[#6:101].[#6:102]-C(=O)-C-Cl>>N-1=C(-[#6:101])-S-C=C(-[#6:102])-1"
+        },
+        "long_name": "Hantzsch 2,5-disubstituted thiazole synthesis",
+        "retro_smarts": "[#6;$([c;H1]),$([c;H0](n)(c)[#6;!$([c;R2]):2]):1]2[n:6][c:3](-!@[#6;!$([#6]=[#7,#8,#16]):5])[s;X2:7][c;$([#6;H0]-[#6;!$(C=[C,N,O,S])]),$([#6;H1]):4]2>>[#7;H2:6]-[#6:3](-[#6:5])=[#16:7].[#6:1](=O)-[#6:4]-Cl",
+        "rhs_classes": [
+            "thioamides",
+            "ketones-2halo"
+        ],
+        "syn_smarts": "[#7;H2:1]-[#6:2](=[#16;X1:3])-[#6;!$([#6]=[#7,#8,#16]):101].[#6;$([#6;H1]-[#6;H1,H2:7]),$([#6;H0](-[#6;!$([c;R2]):102])-[#6;H1,H2:7]):6](=O)-[#6;$([#6;H2]),$([#6;H1](-C=O)-[#6;!$(C=[C,N,O,S])]):7]-[F,Cl,Br,I]>>[#7;H0:1]1=[#6:2](-[#6:101])-[#16:3]-[#6:7]=[#6:6]-1",
+        "tags": [
+            "Hantzsch",
+            "heterocycle formation",
+            "heterocycle",
+            "thiazole"
+        ],
+        "tier": 1
+    },
+    "thiazole-2": {
+        "description": "Hantzsch thiazole synthesis from thioformamide and an alpha-halo ketone.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-C(=O)-C-Cl>>N-1=C-S-C=C(-[#6:101])-1"
+        },
+        "long_name": "Hantzsch 5-substituted thiazole synthesis",
+        "retro_smarts": "[c;$([c;H1]),$([c;H0](n)(c)[#6;!$([c;R2]):2]):1]2n[c;H1][s;X2][c;$([#6;H0]-[#6;!$(C=[C,N,O,S])]),$([#6;H1]):4]2>>[#6:1](=O)-[#6:4]-Cl",
+        "rhs_classes": [
+            "ketones-2halo"
+        ],
+        "syn_smarts": "[#6;$([#6;H1]),$([#6;H0](-[#6;H1,H2:7])-[#6;!$([c;R2]):101]):6](=O)-[#6;$([#6;H2]),$([#6;H1](-[#6]=O)-[#6;!$(C=[C,N,O,S])]):7]-[F,Cl,Br,I]>>[#7]1=[#6]-[#16;X2]-[#6:7]=[#6:6]-1",
+        "tags": [
+            "Hantzsch",
+            "heterocycle formation",
+            "heterocycle",
+            "thiazole",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "thioether-1": {
+        "description": "Thioether synthesis from styrenes and thiols.",
+        "ld_data": {
+            "display_smarts": "[#6]=C-C-1=C-C=C-C=C-1.[#6:101]-[#16]>>[#6:101]-S-C-C-C-1=C-C=C-C=C-1"
+        },
+        "long_name": "Thioether synthesis with styrene",
+        "retro_smarts": "[#6:10]-[#16;X2:9]-!@[C;$([C;H2]),$([C;H1](-[#16:9])(-[C:7]-c)-[#6;!$(C=[C,N,O,S]);!$(C#[C,N])]):8]-[C;$([C;H2]),$([C;H1](-[c:1])(-[C:8]-[#16:9])-[#6;!$(C=[C,N,O,S]);!$(C#[C,N])]):7]-[c:1]>>[#6:8]=[#6:7]-[c:1].[#6:10]-[#16:9]",
+        "rhs_classes": [
+            "styrenes",
+            "thiols"
+        ],
+        "syn_smarts": "[C;$([C;H2]),$([C;H1]-[#6;!$(C=[C,N,O,S]);!$(C#[C,N])]):8]=[C;$([C;H1]),$([C;H0](-[c:1])-[#6;!$(C=[C,N,O,S]);!$(C#[C,N])]):7]-[c:1].[#6:101]-[#16;D1;H1;!$([#16]-[#6]=[C,N,O,S]):9]>>[#6:101]-[#16;H0:9]-[C:8]-[C:7]-[c:1]",
+        "tags": [
+            "thioether"
+        ],
+        "tier": 1
+    },
+    "thioether-2": {
+        "description": "Thioether synthesis from halides and thiols.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[Br].[#6:102]-[#16]>>[#6:102]-[#16]-[#6:101]"
+        },
+        "long_name": "Thioether synthesis with aryl or alkyl halides",
+        "retro_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]);!$([#6](-[#6])(-[#6])-[#6]):1]-!@[#16;X2:3]-[#6;!$([#6]=[#6,#7,#8,#16]):2]>>[#6:1]-Br.[#6:2]-[#16:3]",
+        "rhs_classes": [
+            "halides-aryl-primsec",
+            "thiols"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#6,#7,#8,#16]);!$([#6](-[#6])(-[#6])-[#6]):101]-[Cl,Br,I].[#6;!$([#6]=[#6,#7,#8,#16]):102]-[#16;X2;H1:3]>>[#6:101]-[#16;H0:3]-[#6:102]",
+        "tags": [
+            "thioether"
+        ],
+        "tier": 1
+    },
+    "thiourea-1": {
+        "description": "Thiourea synthesis from thioisocyanates and primary or secondary amines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-N=C=S.[#6:102]-[#7]>>[#6:102]-N-C(=S)-N-[#6:101]"
+        },
+        "long_name": "Thiourea synthesis from isocyanates",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H1:2]-[C;!R:3](=[S;X1:4])-!@[N;$([N;H0](-C=S)(-[#6;!$([#6]=[C,N,O,S]):103])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H1](-C=S)-[#6;!$([#6]=[C,N,O,S]):102]):5]>>[#6:101]-[N;H0:2]=[C:3]=[S;X1:4].[N:5]",
+        "rhs_classes": [
+            "thioisocyanates",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N:2]=[C;!R]=[S;X1].[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):103])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):102]):3]>>[#6:101]-[N:2]-C(=S)-[N:3]",
+        "tags": [
+            "thiourea"
+        ],
+        "tier": 1
+    },
+    "urea-1": {
+        "description": "Urea synthesis from isocyanates and primary or secondary amines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-N=C=O.[#6:102]-[#7]>>[#6:102]-N-C(=O)-N-[#6:101]"
+        },
+        "long_name": "Urea synthesis from isocyanates and primary or secondary amines",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;H1:2]-[C;!R:3](=[O;X1:4])-!@[N;$([N;H0](-C=O)(-[#6;!$([#6]=[C,N,O,S]):103])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H1](-C=O)-[#6;!$([#6]=[C,N,O,S]):102]):5]>>[#6:101]-[N:2]=[C:3]=[O;X1:4].[N:5]",
+        "rhs_classes": [
+            "isocyanates",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N:2]=[C;!R]=[O;X1].[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):103])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):102]):3]>>[#6:101]-[N:2]-C(=O)-[N:3]",
+        "tags": [
+            "urea"
+        ],
+        "tier": 1
+    },
+    "urea-2": {
+        "description": "Urea synthesis from primary or secondary amines and primary or secondary amines.",
+        "ld_data": {
+            "display_smarts": "[#6:101]-[#7].[#6:102]-[#7]>>[#6:102]-N-C(=O)-N-[#6:101]"
+        },
+        "long_name": "Urea synthesis from two primary or secondary amines",
+        "retro_smarts": "[#6;!$([#6]=[#7,#8,#16]):101]-[N;$([N;H1](-C=O)-[#6;!$([#6]=[#6,#7,#8,#16]):101]),$([N;H0](-C=O)(-[#6;!$([#6]=[#6,#7,#8,#16]):103])-[#6;!$([#6]=[#6,#7,#8,#16]):101]):2]-!@C(=O)-[N;$([N;H0](-[#6;!$([#6]=[C,N,O,S]):104])-[#6;!$([#6]=[C,N,O,S]):102]),$([N;H1]-[#6;!$([#6]=[C,N,O,S]):102]):3]-[#6;!$([#6]=[C,N,O,S]):102]>>[#6:101]-[N:2].[N:3]-[#6:102]",
+        "rhs_classes": [
+            "amines-primsec",
+            "amines-primsec"
+        ],
+        "syn_smarts": "[#6;!$([#6]=[C,N,O,S]):101]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):101])-[#6;!$([#6]=[C,N,O,S]):103]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):2].[#6;!$([#6]=[C,N,O,S]):102]-[N;$([N;H1](-[#6;!$([#6]=[C,N,O,S]):102])-[#6;!$([#6]=[C,N,O,S]):104]),$([N;H2]-[#6;!$([#6]=[C,N,O,S]):101]):3]>>[#6:101]-[N;$([N;H1](-C=O)-[#6:101]),$([N;H0](-C=O)(-[#6:103])-[#6:101]):2]-C(=O)-[N;$([N;H1](-C=O)-[#6:102]),$([N;H0](-C=O)(-[#6:104])-[#6:102]):3]-[#6:102]",
+        "tags": [
+            "urea"
+        ],
+        "tier": 1
+    },
+    "vinyl-reduction": {
+        "description": "Reduction of vinyl groups.",
+        "ld_data": {
+            "display_smarts": "[#6:101]/C=C/[#6:201]>>[#6:101]-C-C-[#6:201] |$;;;Aryl_p;;;;Aryl_p$|"
+        },
+        "long_name": "Reduction of arylvinyl groups",
+        "retro_smarts": "[c:101]-[C;$([C;H2]),$([C;H1](-[C;!$([#6]=[C,N,O,S]):3])(-[#6;!$([#6]=[C,N,O,S])])-[c:101]):2]-[C;$([C;H3]),$([C;H2](-[C;!$([#6]=[C,N,O,S]):2])-[c:102]),$([C;H1](-[C;!$([#6]=[C,N,O,S]):2])(-[#6;!$([#6]=[C,N,O,S])])-[c:102]):3]>>[c:101]-[C:2]=[C:3]",
+        "syn_smarts": "[c:101]-[C;$([C;H1]),$([C;H0](-[#6;!$([#6]=[C,N,O,S])])-[c:101]):2]=[C;$([C;H2]),$([C;H1]-[c:102]),$([C;H0](-[#6;!$([#6]=[C,N,O,S])])-[c:102]):3]>>[c:101]-[C:2]-[C:3]",
+        "tags": [
+            "reduction",
+            "arylvinyl",
+            "vinyl",
+            "transformation"
+        ],
+        "tier": 1
+    },
+    "yamaguchi": {
+        "description": "Yamaguchi macrolactonization.",
+        "ld_data": {
+            "display_smarts": "[#8]-C-C-C-C-C(-[#8])=O>>O=C-1-C-C-C-C-O-1 |Sg:n:12:n:ht,Sg:n:2:n:ht|"
+        },
+        "long_name": "Yamaguchi macrolactonization",
+        "retro_smarts": "[#6:4][#6:5]-[C;R:6](=[O:7])-[O:1]-[#6;!$([#6](-[#8])-[#8]):2][#6:3]>>([O;H1:1]-[#6:2][#6:3].[#6:4][#6:5]-[C:6](=[O:7])-[O;H1])",
+        "syn_smarts": "([O;H1:1]-[#6;!$([#6](-[#8])-[#8]):2][#6:3].[#6:4][#6:5]-[C;!R:6](=[O:7])-O)>>[#6:4]-[#6:5]-[C:6](=[O:7])-[O;H0:1]-[#6:2]-[#6:3]",
+        "tags": [
+            "Yamaguchi",
+            "esterification",
+            "lactone",
+            "macrolactonization",
+            "transformation",
+            "intramolecular"
+        ],
+        "tier": 1
+    }
+}
