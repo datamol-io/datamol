@@ -39,3 +39,19 @@ class TestFragment(unittest.TestCase):
         assert (
             "CCCOCc1cccc(-c2ccccn2)c1,C(C[*:2])[*:1],C[*:1].c1ccc(-c2cccc(CO[*:2])c2)nc1\n" in frags
         )
+
+    def test_assemble(self):
+
+        # Fragment a molecule
+        smiles = "CCCOCc1cc(c2ncccc2)ccc1"
+        mol = dm.to_mol(smiles)
+        frags = dm.fragment.brics(mol)
+
+        # Limit the number of fragments to work with because
+        # assembling is computationally intensive.
+        frags = frags[:2]
+
+        # Assemble molecules from the list of fragments
+        mols = list(dm.fragment.assemble_fragment_order(frags, max_n_mols=4))
+
+        assert len(mols) == 4

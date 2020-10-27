@@ -40,7 +40,6 @@ from .cluster import pick_diverse
 
 from . import fragment
 from . import scaffold
-from . import assemble
 from . import reactions
 from . import actions
 

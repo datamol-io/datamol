@@ -16,7 +16,6 @@ import itertools
 import random
 import numpy as np
 import re
-import os
 import pkg_resources
 
 from ete3 import Tree
@@ -274,7 +273,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
             yield mol, mSmi
 
 
-def fragment_brics(
+def break_mol(
     mol: Chem.Mol,
     minFragmentSize: int = 1,
     silent: bool = True,
@@ -418,7 +417,7 @@ def build(ll_mols, max_n_mols=float("inf"), mode="brics", frag_rxn=None, ADD_RNX
                     yield m
 
 
-def assemble_brics_order(
+def assemble_fragment_order(
     fragmentlist,
     seen=None,
     allow_incomplete: bool = False,
@@ -468,7 +467,7 @@ def assemble_brics_order(
             yield_counter += 1
 
 
-def assemble_brics_iter(
+def assemble_fragment_iter(
     fragmentlist,
     seens=None,
     scrambleReagents=False,
@@ -498,7 +497,7 @@ def assemble_brics_iter(
                         nextSteps.append(m)
 
         if nextSteps and len(seen) <= max_n_mols and maxdepth > 0:
-            for p in assemble_brics_iter(
+            for p in assemble_fragment_iter(
                 fragmentlist,
                 seens=nextSteps,
                 scrambleReagents=scrambleReagents,

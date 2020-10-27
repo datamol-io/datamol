@@ -52,7 +52,6 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ## Available modules
 
 - `dm`: top-level module that contains common functions.
-- `dm.assemble`: functions to assemble molecules from a list of fragments.
 - `dm.actions`: functions to edit molecules.
 - `dm.conformers`: generate and perform computation on conformers.
 - `dm.data`: get some common data (mainly for dev purposes).
