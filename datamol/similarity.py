@@ -55,7 +55,7 @@ def cdist(
 
     Args:
         mols1: list of molecules.
-        mols1: list of molecules.
+        mols2: list of molecules.
         n_jobs: Number of jobs for parallelization. Let to 1 for no
             parallelization. Set to None to use all available cores.
         **fp_args: list of args to pass to `to_fp()`.
