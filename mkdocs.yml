@@ -60,5 +60,6 @@ plugins:
             new_path_syntax: yes
           rendering:
             show_root_heading: yes
+            heading_level: 3
   - mkdocs-jupyter:
       execute: False
