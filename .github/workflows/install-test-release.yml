@@ -66,6 +66,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         shell: bash -l {0}
         run: |
+          git fetch origin
+
           # To remove once in conda-forge
           pip install --no-deps mkdocs-jupyter
 
