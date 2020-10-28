@@ -29,51 +29,50 @@ def generate(
     warning_not_converged: int = 10,
     random_seed: int = 19,
     verbose: bool = False,
-):
+) -> Chem.Mol:
     """Compute conformers of a molecule.
 
     Example:
 
-        .. code-block:: python
+    ```python
+    import datamol as dm
+    smiles = "O=C(C)Oc1ccccc1C(=O)O"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol)
 
-            import datamol as dm
-            smiles = "O=C(C)Oc1ccccc1C(=O)O"
-            mol = dm.to_mol(smiles)
-            mol = dm.conformers.generate(mol)
+    # Get all conformers as a list
+    conformers = mol.GetConformers()
 
-            # Get all conformers as a list
-            conformers = mol.GetConformers()
+    # Get the 3D atom positions of the first conformer
+    positions = mol.GetConformer(0).GetPositions()
 
-            # Get the 3D atom positions of the first conformer
-            positions = mol.GetConformer(0).GetPositions()
-
-            # If minimization has been enabled (default to True)
-            # you can access the computed energy.
-            conf = mol.GetConformer(0)
-            props = conf.GetPropsAsDict()
-            print(props)
-            # {'rdkit_uff_energy': 1.7649408317784008}
+    # If minimization has been enabled (default to True)
+    # you can access the computed energy.
+    conf = mol.GetConformer(0)
+    props = conf.GetPropsAsDict()
+    print(props)
+    # {'rdkit_uff_energy': 1.7649408317784008}
+    ```
 
     Args:
-        mol (Chem.Mol): a molecule
-        n_confs (int, optional): Number of conformers to generate. Depends on the
+        mol: a molecule
+        n_confs: Number of conformers to generate. Depends on the
             number of rotatable bonds by default. Defaults to None.
-        method (str, optional): RDKit method to use for embedding. Choose among
+        method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used. Default to None.
-        align_conformers (bool, optional): Wehther to align conformer. Note that this is done
+        align_conformers: Wehther to align conformer. Note that this is done
             BEFORE the energy minimization procedure. Defaults to True.
-        minimize_energy (bool, optional): Wether to minimize conformer's energies using UFF.
+        minimize_energy: Wether to minimize conformer's energies using UFF.
             Disable to generate conformers much faster. Defaults to True.
-        energy_iterations (int, optional): Maximum number of iterations during the energy minimization procedure.
+        energy_iterations: Maximum number of iterations during the energy minimization procedure.
             It corresponds to the `maxIters` argument in RDKit. Defaults to 500.
-        warning_not_converged (bool, optional): Wether to log a warning when the number of not converged conformers
-            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True.
-            Disable with 0. Defaults to 10.
-        random_seed (int, optional): Set to None or -1 to disable. Defaults to 19.
-        verbose (bool, optional): Wether to enable logs during the process.
+        warning_not_converged: Wether to log a warning when the number of not converged conformers
+            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True. Disable with 0. Defaults to 10.
+        random_seed: Set to None or -1 to disable. Defaults to 19.
+        verbose: Wether to enable logs during the process.
 
     Returns:
-        mol (Chem.Mol): the molecule with the conformers.
+        mol: the molecule with the conformers.
     """
 
     AVAILABLE_METHODS = ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]
@@ -165,20 +164,19 @@ def cluster(
     distance_threshold: float = 1,
     return_centroids: bool = True,
     method_kwargs: Dict[Any, Any] = None,
-):
+) -> Union[List[Chem.Mol], Chem.Mol]:
     """Cluster molecule's conformers.
 
     Args:
-        mol (Chem.Mol): a molecule
-        method (str, optional): Distance method to use from ["RMS", "TFD"].
+        mol: a molecule
+        method: Distance method to use from ["RMS", "TFD"].
             Use None for "RMS", Defaults to None.
             - TFD uses `TorsionFingerprints.GetTFDMatrix`.
             - RMS uses `AllChem.GetConformerRMSMatrix`.
-        distance_threshold (float, optional): Threshold for the clustering. Defaults to 1.
-        return_centroids (bool, optional): If True, return one molecule with centroid conformers
-            only. If False return a list of molecules per cluster with all the conformers of the cluster.
-            Defaults to True.
-        method_kwargs (dict, optional): Additional method to pass to the clustering function.
+        distance_threshold: Threshold for the clustering. Defaults to 1.
+        return_centroids: If True, return one molecule with centroid conformers
+            only. If False return a list of molecules per cluster with all the conformers of the cluster. Defaults to True.
+        method_kwargs: Additional method to pass to the clustering function.
     """
 
     AVAILABLE_METHODS = ["RMS", "TFD"]
@@ -237,7 +235,11 @@ def cluster(
         return mols
 
 
-def sasa(mol: Chem.Mol, conf_id: Union[int, List[int]] = None, n_jobs: int = 1):
+def sasa(
+    mol: Chem.Mol,
+    conf_id: Union[int, List[int]] = None,
+    n_jobs: int = 1,
+) -> np.array:
     """Compute Solvent Accessible Surface Area of all the conformers
     using FreeSASA (https://freesasa.github.io/). Values are returned
     as an array and also stored within each conformer as a property
@@ -245,39 +247,27 @@ def sasa(mol: Chem.Mol, conf_id: Union[int, List[int]] = None, n_jobs: int = 1):
 
     Example:
 
-        .. code-block:: python
+    ```python
+    smiles = "O=C(C)Oc1ccccc1C(=O)O"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol)
 
-            smiles = "O=C(C)Oc1ccccc1C(=O)O"
-            mol = dm.to_mol(smiles)
-            mol = dm.conformers.generate(mol)
+    # Compute SASA for all the conformers without parallelization
+    sasa_values = dm.conformers.sasa(mol, conf_id=None, n_jobs=1)
 
-            # Compute SASA for all the conformers without parallelization
-            sasa_values = dm.conformers.sasa(mol, conf_id=None, n_jobs=1)
-
-            # If minimization has been enabled (default to True)
-            # you can access the computed energy.
-            conf = mol.GetConformer(0)
-            props = conf.GetPropsAsDict()
-            print(props)
-            # {'rdkit_uff_energy': 1.7649408317784008}
+    # If minimization has been enabled (default to True)
+    # you can access the computed energy.
+    conf = mol.GetConformer(0)
+    props = conf.GetPropsAsDict()
+    print(props)
+    # {'rdkit_uff_energy': 1.7649408317784008}
+    ```
 
     Args:
-        mol (Chem.Mol): a molecule
-        n_confs (int, optional): Number of conformers to generate. Depends on the
-            number of rotatable bonds by default. Defaults to None.
-        method (str, optional): RDKit method to use for embedding. Choose among
-            ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used. Default to None.
-        align_conformers (bool, optional): Wehther to align conformer. Note that this is done
-            BEFORE the energy minimization procedure. Defaults to True.
-        minimize_energy (bool, optional): Wether to minimize conformer's energies using UFF.
-            Disable to generate conformers much faster. Defaults to True.
-        energy_iterations (int, optional): Maximum number of iterations during the energy minimization procedure.
-            It corresponds to the `maxIters` argument in RDKit. Defaults to 500.
-        warning_not_converged (bool, optional): Wether to log a warning when the number of not converged conformers
-            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True.
-            Disable with 0. Defaults to 10.
-        random_seed (int, optional): Set to None or -1 to disable. Defaults to 19.
-        verbose (bool, optional): Wether to enable logs during the process.
+        mol: a molecule
+        conf_id: Id of the conformers to compute. If None, compute all.
+        n_jobs: Number of jobs for parallelization. Set to 1 to disable
+            and -1 to use all cores.
 
     Returns:
         mol (Chem.Mol): the molecule with the conformers.
@@ -313,11 +303,11 @@ def sasa(mol: Chem.Mol, conf_id: Union[int, List[int]] = None, n_jobs: int = 1):
     return np.array(sasa_values)
 
 
-def rmsd(mol: Chem.Mol):
+def rmsd(mol: Chem.Mol) -> np.array:
     """Compute the RMSD between all the conformers of a molecule.
 
     Args:
-        mol (Chem.Mol): a molecule
+        mol: a molecule
     """
 
     if mol.GetNumConformers() <= 1:
