@@ -1,4 +1,6 @@
 from typing import Union
+from typing import Optional
+from typing import List
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -9,7 +11,7 @@ import numpy as np
 import datamol as dm
 
 
-def fp_to_array(fp, dtype=np.int):
+def fp_to_array(fp: DataStructs.ExplicitBitVect, dtype: type = np.int) -> np.ndarray:
     """Convert rdkit fingerprint to numpy array."""
     if isinstance(fp, np.ndarray):
         return fp
@@ -24,7 +26,7 @@ def to_fp(
     radius: int = 3,
     use_features: bool = True,
     as_array: bool = True,
-):
+) -> Optional[Union[np.ndarray, DataStructs.ExplicitBitVect]]:
     """Transform a molecule from smiles to morgan fingerprint.
 
     Args:

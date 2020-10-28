@@ -2,38 +2,43 @@ from typing import Iterable
 from typing import Callable
 from typing import Optional
 from typing import Any
+from typing import List
 
 from joblib import Parallel, delayed
 from tqdm.auto import tqdm
 
 
 class JobRunner:
-    """
-    JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which
-    allows taking advantage of its features, while the progress bar use tqdm
+    def __init__(
+        self,
+        n_jobs: Optional[int] = 0,
+        prefer: str = None,
+        progress: bool = False,
+        **job_kwargs,
+    ):
+        """
+        JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which
+        allows taking advantage of its features, while the progress bar use tqdm
 
-    Args:
-        n_jobs (int, optional): number of process (see joblib). Use 0 or None to force sequential.
-        prefer (int, optional): Choose from ['processes', 'threads'] or None. Default to None.
-            Soft hint to choose the default backend if no specific backend
-            was selected with the parallel_backend context manager. The
-            default process-based backend is 'loky' and the default
-            thread-based backend is 'threading'. Ignored if the ``backend``
-            parameter is specified.
-        progress: whether to display progress bar
-        job_kwargs (dict, optional): Any additional keyword argument supported by joblib.Parallel.
+        Args:
+            n_jobs: number of process (see joblib). Use 0 or None to force sequential.
+            prefer: Choose from ['processes', 'threads'] or None. Default to None.
+                Soft hint to choose the default backend if no specific backend
+                was selected with the parallel_backend context manager. The
+                default process-based backend is 'loky' and the default
+                thread-based backend is 'threading'. Ignored if the ``backend``
+                parameter is specified.
+            progress: whether to display progress bar
+            job_kwargs: Any additional keyword argument supported by joblib.Parallel.
 
-    Example:
+        Example:
 
-        .. code-block:: python
-
-            import datamol as dm
-            runner = dm.JobRunner(n_jobs=4, progress=True, prefer="threads")
-            results = runner(lambda x: x**2, [1, 2, 3, 4])
-
-    """
-
-    def __init__(self, n_jobs: int = 0, prefer: str = None, progress: bool = False, **job_kwargs):
+        ```python
+        import datamol as dm
+        runner = dm.JobRunner(n_jobs=4, progress=True, prefer="threads")
+        results = runner(lambda x: x**2, [1, 2, 3, 4])
+        ```
+        """
         self.n_jobs = n_jobs
         self.prefer = prefer
         self.job_kwargs = job_kwargs
@@ -146,21 +151,22 @@ def parallelized(
     n_jobs: Optional[int] = None,
     progress: bool = False,
     arg_type: str = "arg",
-):
+) -> Optional[List[Any]]:
     """Run a function in parallel.
 
     Args:
-        fn (Callable): The function to run in parallel.
-        inputs_list (List[Any]): List of inputs to pass to `fn`.
-        scheduler (str, optional): Choose between ["processes", "threads"]. Defaults
+        fn: The function to run in parallel.
+        inputs_list: List of inputs to pass to `fn`.
+        scheduler: Choose between ["processes", "threads"]. Defaults
             to None which uses the default joblib "loky" scheduler.
-        n_jobs (Optional[int], optional): Number of workers. If None, it will default
+        n_jobs: Number of workers. If None, it will default
             to the number of processors on the machine. Defaults to None.
         progress: Display a progress bar. Defaults to False.
-        arg_type (str, optional): One of ["arg", "args", "kwargs]:
+        arg_type: One of ["arg", "args", "kwargs]:
             - "arg": the input is passed as an argument: `fn(arg)` (default).
             - "args": the input is passed as a list: `fn(*args)`.
             - "kwargs": the input is passed as a map: `fn(**kwargs)`.
+
     Returns:
         The results of the execution as a list.
     """

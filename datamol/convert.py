@@ -25,7 +25,6 @@ def to_smiles(
 
     Args:
         mol: a molecule.
-        add_hs: Whether hydrogens should be added the SMILES. Default to False.
         canonical: if false no attempt will be made to canonicalize the molecule.
             Defaults to true.
         isomeric: whether to include information about stereochemistry in
