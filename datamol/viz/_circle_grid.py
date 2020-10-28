@@ -33,16 +33,6 @@ def circle_grid(
 
 
 class MolsCircleGrid:
-    """Show molecules in concentric rings, with one molecule at the center
-
-    Args:
-        center_mol: Molecule at center
-        circle_mols: List of molecule for each concentric circle around the center mol
-        mol_size: Tuple of width and height for each molecule
-        circle_margin: Margin between the circle layers
-        act_mapper: Map each molecule to a dictionary of activity
-    """
-
     def __init__(
         self,
         center_mol: Chem.Mol,
@@ -52,6 +42,15 @@ class MolsCircleGrid:
         circle_margin: int = 50,
         act_mapper: dict = None,
     ):
+        """Show molecules in concentric rings, with one molecule at the center
+
+        Args:
+            center_mol: Molecule at center
+            circle_mols: List of molecule for each concentric circle around the center mol
+            mol_size: Tuple of width and height for each molecule
+            circle_margin: Margin between the circle layers
+            act_mapper: Map each molecule to a dictionary of activity
+        """
         self.circle_mols = circle_mols
         self.circle_count = len(self.circle_mols)
         self.legend = legend or ""

@@ -1,3 +1,7 @@
+from typing import Set
+from typing import Optional
+from typing import Any
+
 from rdkit import Chem
 from rdkit.Chem import BRICS
 from rdkit.Chem import Recap
@@ -19,7 +23,7 @@ def brics(
     """Run BRICS on the molecules and potentially fix dummy atoms.
 
     Args:
-        mols (Chem.Mol): a molecule.
+        mol: a molecule.
         singlepass: Single pass for `BRICSDecompose`.
         remove_parent: Remove parent from the fragments.
         sanitize: Wether to sanitize the fragments.
@@ -49,7 +53,7 @@ def frag(
     """Fragment molecule using FraggleSim on all bonds.
 
     Args:
-        mols (Chem.Mol): a molecule.
+        mol: a molecule.
         remove_parent: Remove parent from the fragments.
         sanitize: Wether to sanitize the fragments.
         fix: Wether to fix the fragments.
@@ -84,7 +88,7 @@ def recap(
     """Fragment the molecule using the recap algorithm.
 
     Args:
-        mols (Chem.Mol): a molecule.
+        mol: a molecule.
         remove_parent: Remove parent from the fragments.
         sanitize: Wether to sanitize the fragments.
         fix: Wether to fix the fragments.
@@ -113,7 +117,7 @@ def anybreak(
     """Fragment molecule by applying brics first, then fall back to frag.
 
     Args:
-        mols (Chem.Mol): a molecule.
+        mol: a molecule.
         remove_parent: Remove parent from the fragments.
         sanitize: Wether to sanitize the fragments.
         fix: Wether to fix the fragments.
@@ -136,18 +140,17 @@ def mmpa_frag(
     max_cut: int = 1,
     max_bond_cut: int = 20,
     h_split: bool = False,
-):
+) -> Optional[Set[Chem.Mol]]:
     """Fragment molecule on specific bonds suitable for a MMPA analysis.
 
     Args:
-        mol (Chem.Mol): Molecule to fragment.
-        pattern (str, optional): Bond pattern to split on.
-            Will use default rdkit pattern '[#6+0;!$(*=,#[!#6])]!@!=!#[*]' if not provided
-        max_cut (int, optional): Number of cuts. Default to 3.
-        max_bond_cut (int, optional): Maximum number of bond to cut. Default to 20.
+        mol: Molecule to fragment.
+        pattern: Bond pattern to split on. Will use default rdkit pattern
+            '[#6+0;!$(*=,#[!#6])]!@!=!#[*]' if not provided.
+        max_cut: Number of cuts.
+        max_bond_cut: Maximum number of bond to cut. Default to 20.
         h_split:  Whether to split at hydrogen position too.
             This is equivalent to enabling the addition of new fragments.
-            Default to False.
 
     Returns:
         List of fragments
@@ -182,14 +185,13 @@ def mmpa_frag(
     return set(frags)
 
 
-def mmpa_cut(mol: Chem.Mol, rdkit_pattern: bool = False):
+def mmpa_cut(mol: Chem.Mol, rdkit_pattern: bool = False) -> Optional[Set[Any]]:
     """Cut molecules to perform mmpa analysis later
 
     Args:
-        mol (Chem.Mol or str): Molecule to fragment.
+        mol: Molecule to fragment.
         rdkit_pattern: Whether to perform the fragmentation
             using the default rdkit pattern: [#6+0;!$(*=, #[!#6])]!@!=!#[*]"
-            Default to False.
 
     Returns:
         List of 'smiles,core,chains'
