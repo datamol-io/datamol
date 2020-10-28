@@ -75,4 +75,4 @@ jobs:
           python -m datamol._mkdocs
 
           # Build and serve the doc
-          mkdocs gh-deploy --force
+          mkdocs gh-deploy
