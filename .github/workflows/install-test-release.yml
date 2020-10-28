@@ -66,11 +66,6 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         shell: bash -l {0}
         run: |
-          # Git things to make it work
-          git branch -D privpage
-          git checkout -t origin/privpage
-          git checkout master
-
           # To remove once in conda-forge
           pip install --no-deps mkdocs-jupyter
 
@@ -78,4 +73,4 @@ jobs:
           python -m datamol._mkdocs
 
           # Build and serve the doc
-          mkdocs gh-deploy
+          mkdocs gh-deploy --force
