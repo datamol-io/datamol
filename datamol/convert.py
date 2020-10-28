@@ -60,14 +60,14 @@ def to_smiles(
     return smiles
 
 
-def to_selfies(mol: Union[str, Chem.Mol]):
+def to_selfies(mol: Union[str, Chem.Mol]) -> Optional[str]:
     """Convert a mol to SELFIES.
 
     Args:
-        mol (Chem.Mol or str): a molecule or a SMILES.
+        mol: a molecule or a SMILES.
 
     Returns:
-        selfies (str): SELFIES string.
+        selfies: SELFIES string.
     """
     if mol is None:
         return None
@@ -78,15 +78,15 @@ def to_selfies(mol: Union[str, Chem.Mol]):
     return sf.encoder(mol)
 
 
-def from_selfies(selfies: str, as_mol: bool = False):
+def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.Mol]]:
     """Convert a SEFLIES to a smiles or a mol.
 
     Args:
-        selfies (str): a selfies.
+        selfies: a selfies.
         as_mol (str, optional): whether to return a mol or a smiles.
 
     Returns:
-        smiles or mol (str, Chem.Mol))
+        smiles or mol.
     """
     if selfies is None:
         return None
@@ -99,11 +99,11 @@ def from_selfies(selfies: str, as_mol: bool = False):
     return smiles
 
 
-def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
+def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
     """Convert a molecule to a smarts.
 
     Args:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
         keep_hs: Whether to keep hydrogen. This will increase the count of H atoms
             for atoms with attached hydrogens to create a valid smarts.
             e.g. [H]-[CH2]-[*] -> [H]-[CH3]-[*]
@@ -137,11 +137,11 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
     return smarts
 
 
-def to_inchi(mol: Union[str, Chem.Mol]):
+def to_inchi(mol: Union[str, Chem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi.
 
     Args:
-        mol (Union[str, Chem.Mol]): [description]
+        mol: a molecule.
     """
 
     if mol is None:
@@ -153,11 +153,11 @@ def to_inchi(mol: Union[str, Chem.Mol]):
     return Chem.MolToInchi(mol)
 
 
-def to_inchikey(mol: Union[str, Chem.Mol]):
+def to_inchikey(mol: Union[str, Chem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi key.
 
     Args:
-        mol (Union[str, Chem.Mol]): [description]
+        mol: a molecule
     """
 
     if mol is None:
@@ -169,16 +169,16 @@ def to_inchikey(mol: Union[str, Chem.Mol]):
     return Chem.MolToInchiKey(mol)
 
 
-def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True):
-    """Convert a SEFLIES to a smiles or a mol.
+def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True) -> Optional[Chem.Mol]:
+    """Convert an InChi to a mol.
 
     Args:
-        inchi (str): a selfies.
+        inchi: an inchi string.
         sanitize: do sanitize.
         remove_hs: do remove hs.
 
     Returns:
-        smiles or mol (str, Chem.Mol))
+        mol
     """
     if inchi is None:
         return None
@@ -186,12 +186,12 @@ def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True):
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
 
 
-def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles"):
+def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles") -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
     Args:
-        mols (list of Chem.Mol
+        mols: a molecule.
         smiles_column (str, optional): name of the SMILES column.
             Default to "smiles".
     """
@@ -207,12 +207,12 @@ def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles"):
     return df
 
 
-def from_df(df: pd.DataFrame, smiles_column: str = "smiles"):
+def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Chem.Mol]]:
     """Convert a dataframe to a list of mols.
 
     Args:
-        df (pd.dataframe): a dataframe.
-        smiles_column (str, optional): Column name to use for smiles.
+        df: a dataframe.
+        smiles_column: Column name to use for smiles.
             Default to "smiles".
     """
 
