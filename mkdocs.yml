@@ -33,6 +33,9 @@ theme:
   palette:
     primary: teal
     accent: purple
+  features:
+    - navigation.instant
+    - navigation.expand
 
 extra_css:
   - _assets/css/custom.css
@@ -45,7 +48,7 @@ markdown_extensions:
   - pymdownx.tabbed
   - pymdownx.tasklist
   - toc:
-      permalink: "¤"
+      permalink: true
 
 plugins:
   - search
@@ -63,3 +66,9 @@ plugins:
             heading_level: 3
   - mkdocs-jupyter:
       execute: False
+
+extra:
+  # Unused at the moment, waiting for `mkdocstrings`
+  # to release it.
+  version:
+    method: mike

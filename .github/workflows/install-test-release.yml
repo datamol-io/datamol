@@ -55,6 +55,8 @@ jobs:
         run: |
           # To remove once in conda-forge
           pip install --no-deps mkdocs-jupyter
+          pip install --no-deps markdown-include
+          pip install --no-deps mike
 
           # Regenerate the API doc
           python -m datamol._mkdocs
@@ -70,6 +72,8 @@ jobs:
 
           # To remove once in conda-forge
           pip install --no-deps mkdocs-jupyter
+          pip install --no-deps markdown-include
+          pip install --no-deps mike
 
           # Regenerate the API doc
           python -m datamol._mkdocs
