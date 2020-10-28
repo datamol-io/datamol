@@ -20,10 +20,10 @@ def brics(
 
     Args:
         mols (Chem.Mol): a molecule.
-        singlepass (bool, optional): Single pass for `BRICSDecompose`.
-        remove_parent (bool, optional): Remove parent from the fragments.
-        sanitize (bool, optional): Wether to sanitize the fragments.
-        fix (bool, optional): Wether to fix the fragments.
+        singlepass: Single pass for `BRICSDecompose`.
+        remove_parent: Remove parent from the fragments.
+        sanitize: Wether to sanitize the fragments.
+        fix: Wether to fix the fragments.
     """
     frags = BRICS.BRICSDecompose(mol, returnMols=True, singlePass=singlepass)
     frags = list(frags)
@@ -50,9 +50,9 @@ def frag(
 
     Args:
         mols (Chem.Mol): a molecule.
-        remove_parent (bool, optional): Remove parent from the fragments.
-        sanitize (bool, optional): Wether to sanitize the fragments.
-        fix (bool, optional): Wether to fix the fragments.
+        remove_parent: Remove parent from the fragments.
+        sanitize: Wether to sanitize the fragments.
+        fix: Wether to fix the fragments.
     """
     frags = FraggleSim.generate_fraggle_fragmentation(mol)
 
@@ -85,9 +85,9 @@ def recap(
 
     Args:
         mols (Chem.Mol): a molecule.
-        remove_parent (bool, optional): Remove parent from the fragments.
-        sanitize (bool, optional): Wether to sanitize the fragments.
-        fix (bool, optional): Wether to fix the fragments.
+        remove_parent: Remove parent from the fragments.
+        sanitize: Wether to sanitize the fragments.
+        fix: Wether to fix the fragments.
     """
     res = Recap.RecapDecompose(mol)
     frags = [dm.to_mol(x) for x in res.GetAllChildren().keys()]
@@ -114,9 +114,9 @@ def anybreak(
 
     Args:
         mols (Chem.Mol): a molecule.
-        remove_parent (bool, optional): Remove parent from the fragments.
-        sanitize (bool, optional): Wether to sanitize the fragments.
-        fix (bool, optional): Wether to fix the fragments.
+        remove_parent: Remove parent from the fragments.
+        sanitize: Wether to sanitize the fragments.
+        fix: Wether to fix the fragments.
     """
     frags = []
     try:
@@ -145,7 +145,7 @@ def mmpa_frag(
             Will use default rdkit pattern '[#6+0;!$(*=,#[!#6])]!@!=!#[*]' if not provided
         max_cut (int, optional): Number of cuts. Default to 3.
         max_bond_cut (int, optional): Maximum number of bond to cut. Default to 20.
-        h_split (bool, optional):  Whether to split at hydrogen position too.
+        h_split:  Whether to split at hydrogen position too.
             This is equivalent to enabling the addition of new fragments.
             Default to False.
 
@@ -187,7 +187,7 @@ def mmpa_cut(mol: Chem.Mol, rdkit_pattern: bool = False):
 
     Args:
         mol (Chem.Mol or str): Molecule to fragment.
-        rdkit_pattern (bool, optional): Whether to perform the fragmentation
+        rdkit_pattern: Whether to perform the fragmentation
             using the default rdkit pattern: [#6+0;!$(*=, #[!#6])]!@!=!#[*]"
             Default to False.
 

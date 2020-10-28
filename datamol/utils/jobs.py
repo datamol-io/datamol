@@ -20,7 +20,7 @@ class JobRunner:
             default process-based backend is 'loky' and the default
             thread-based backend is 'threading'. Ignored if the ``backend``
             parameter is specified.
-        progress (bool, optional): whether to display progress bar
+        progress: whether to display progress bar
         job_kwargs (dict, optional): Any additional keyword argument supported by joblib.Parallel.
 
     Example:
@@ -156,7 +156,7 @@ def parallelized(
             to None which uses the default joblib "loky" scheduler.
         n_jobs (Optional[int], optional): Number of workers. If None, it will default
             to the number of processors on the machine. Defaults to None.
-        progress (bool, optional): Display a progress bar. Defaults to False.
+        progress: Display a progress bar. Defaults to False.
         arg_type (str, optional): One of ["arg", "args", "kwargs]:
             - "arg": the input is passed as an argument: `fn(arg)` (default).
             - "args": the input is passed as a list: `fn(*args)`.

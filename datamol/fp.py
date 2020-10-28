@@ -31,8 +31,8 @@ def to_fp(
         mol (Chem.Mol or str): a molecule or a SMILES.
         fp_size (int, optional): Size of morgan fingerprint. Default to 2048.
         radius (int, optional): Radius of the morgan fingerprints. Default to 3.
-        use_features (bool, optional): Whether to use atom features. Default to True.
-        as_array (bool, optional): Whether to return a numpy array of an RDKit vec. Default to True.
+        use_features: Whether to use atom features. Default to True.
+        as_array: Whether to return a numpy array of an RDKit vec. Default to True.
 
     Returns:
         A fingerprint vector or None

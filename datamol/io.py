@@ -64,7 +64,7 @@ def read_sdf(
     Args:
         file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
             path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
-        as_df (bool, optional): Whether to return a list mol or a pandas DataFrame. Default to False.
+        as_df: Whether to return a list mol or a pandas DataFrame. Default to False.
 
     Returns:
         df: a `pandas.DataFrame`

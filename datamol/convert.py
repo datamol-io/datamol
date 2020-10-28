@@ -1,5 +1,6 @@
 from typing import Union
 from typing import List
+from typing import Optional
 
 import re
 
@@ -19,23 +20,23 @@ def to_smiles(
     explicit_bonds: bool = False,
     explicit_hs: bool = False,
     randomize: bool = False,
-):
+) -> Optional[str]:
     """Convert a mol to a SMILES.
 
     Args:
-        mol (Chem.Mol): a molecule.
-        add_hs (bool, optional): Whether hydrogens should be added the SMILES. Default to False.
-        canonical (bool, optional): if false no attempt will be made to canonicalize the molecule.
+        mol: a molecule.
+        add_hs: Whether hydrogens should be added the SMILES. Default to False.
+        canonical: if false no attempt will be made to canonicalize the molecule.
             Defaults to true.
-        isomeric (bool, optional): whether to include information about stereochemistry in
+        isomeric: whether to include information about stereochemistry in
             the SMILES. Defaults to True.
-        ordered (bool, optional): whether to force reordering of the atoms
+        ordered: whether to force reordering of the atoms
             first. Defaults to False.
-        explicit_bonds (bool, optional): if true, all bond orders will be explicitly indicated in
+        explicit_bonds: if true, all bond orders will be explicitly indicated in
             the output SMILES. Defaults to false.
-        explicit_hs (bool, optional): if true, all H counts will be explicitly indicated in the
+        explicit_hs: if true, all H counts will be explicitly indicated in the
             output SMILES. Defaults to false.
-        randomize (bool, optional): whether to randomize the generated smiles. Override `canonical`.
+        randomize: whether to randomize the generated smiles. Override `canonical`.
             Defaults to false.
     """
     if ordered:
@@ -103,7 +104,7 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True):
 
     Args:
         mol (Chem.Mol): a molecule.
-        keep_hs (bool, optional): Whether to keep hydrogen. This will increase the count of H atoms
+        keep_hs: Whether to keep hydrogen. This will increase the count of H atoms
             for atoms with attached hydrogens to create a valid smarts.
             e.g. [H]-[CH2]-[*] -> [H]-[CH3]-[*]
 
@@ -173,8 +174,8 @@ def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True):
 
     Args:
         inchi (str): a selfies.
-        sanitize (bool, optional): do sanitize.
-        remove_hs (bool, optional): do remove hs.
+        sanitize: do sanitize.
+        remove_hs: do remove hs.
 
     Returns:
         smiles or mol (str, Chem.Mol))

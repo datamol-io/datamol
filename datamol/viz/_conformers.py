@@ -38,12 +38,12 @@ def conformers(
         n_confs (Union[int, List[int]], optional): Can be a number of conformers
             to shows or a list of conformer indices. When None, only the first
             conformer is displayed. When -1, show all conformers. Defaults to None.
-        align_conf (bool, optional): Whether to align conformers together.
+        align_conf: Whether to align conformers together.
             Defaults to True.
         n_cols (int, optional): Number of columns. Defaults to 3.
-        sync_views (bool, optional): Wether to sync the multiple views.
+        sync_views: Wether to sync the multiple views.
             Defaults to True.
-        remove_hs (bool, optional): Wether to remove the hydrogens of the conformers.
+        remove_hs: Wether to remove the hydrogens of the conformers.
             Defaults to True.
         width (str, optional): The width of the returned view. Defaults to "auto".
     """

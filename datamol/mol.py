@@ -32,10 +32,10 @@ def to_mol(
 
     Args:
         mol (str): SMILES of a molecule or a molecule.
-        add_hs (bool, optional): Whether hydrogens should be added the molecule. Default to False.
-        explicit_only (bool, optional): Whether to only add explicit hydrogen or both
+        add_hs: Whether hydrogens should be added the molecule. Default to False.
+        explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True. Default to False.
-        ordered (bool, optional): Whether the atom should be ordered. This option is
+        ordered: Whether the atom should be ordered. This option is
             important if you want to ensure that the features returned will always maintain
             a single atom order for the same molecule, regardless of its original SMILES representation.
             Default to False.
@@ -128,8 +128,8 @@ def sanitize_mol(mol: Chem.Mol, charge_neutral: bool = False, sanifix: bool = Tr
 
     Args:
         mol (Chem.Mol): a molecule.
-        charge_neutral (bool, optional): whether charge neutralization should be applied.
-        sanifix (bool, optional): whether to run the sanifix from James Davidson
+        charge_neutral: whether charge neutralization should be applied.
+        sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens. Default to True.
 
     Returns:
@@ -193,8 +193,8 @@ def sanitize_best(mols: List[Chem.Mol], charge_neutral: bool = False, sanifix: b
 
     Args:
         mols (List[Chem.Mol]): a list of molecules.
-        charge_neutral (bool, optional): whether charge neutralization should be applied.
-        sanifix (bool, optional): whether to run the sanifix from James Davidson
+        charge_neutral: whether charge neutralization should be applied.
+        sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens. Default to True.
 
     Returns:
@@ -215,7 +215,7 @@ def standardize_smiles(smiles: str, tautomer: bool = False):
 
     Args:
         smiles (str): Smiles to standardize
-        tautomer (bool, optional): Whether to canonicalize tautomers
+        tautomer: Whether to canonicalize tautomers
 
     Returns:
         standard_smiles (str): the standardized smiles
@@ -241,15 +241,15 @@ def standardize_mol(
 
     Arguments:
         mol (Chem.Mol): The molecule to standardize.
-        disconnect_metals (bool, optional): Whether to disconnect the metallic atoms from non-metals
+        disconnect_metals: Whether to disconnect the metallic atoms from non-metals
             Default to False
-        normalizer (bool, optional): Whether to apply normalization (correct functional groups and recombine charges).
+        normalizer: Whether to apply normalization (correct functional groups and recombine charges).
             Default to True
-        reionize (bool, optional): Whether to apply molecule reionization
+        reionize: Whether to apply molecule reionization
             Default to True
-        uncharge (bool, optional): Whether to remove all charge from molecule
+        uncharge: Whether to remove all charge from molecule
             Default to False
-        stereo (bool, optional): Whether to attempt to assign stereochemistry
+        stereo: Whether to attempt to assign stereochemistry
             Default to True
 
     Returns:
@@ -283,7 +283,7 @@ def fix_valence_charge(mol: Chem.Mol, inplace: bool = False):
 
     Args:
         mol (Chem.Mol): Input molecule with incorrect valence for some atoms
-        inplace (bool, optional): Whether to modify in place or make a copy.
+        inplace: Whether to modify in place or make a copy.
             Default to False.
 
     Returns:
@@ -315,7 +315,7 @@ def incorrect_valence(a: Union[Chem.Mol, Chem.rdchem.Atom], update: bool = False
 
     Args:
         a (Chem.rdchem.Atom, Chem.Mol): atom or molecule to check for valence issue.
-        update (bool, optional): Update owning molecule property cache first.
+        update: Update owning molecule property cache first.
 
     Returns:
         Whether the input atom valence is correct.
@@ -352,9 +352,9 @@ def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False):
 
     Args:
         mol (Chem.Mol): input molecule with incorrect valence for some atoms
-        inplace (bool, optional): Whether to modify in place or make a copy
+        inplace: Whether to modify in place or make a copy
             Default to False.
-        allow_ring_break (bool, optional): Whether bond removal involving ring is allowed.
+        allow_ring_break: Whether bond removal involving ring is allowed.
             Default to False.
 
     Returns:
@@ -458,11 +458,11 @@ def fix_mol(
         mol (Chem.Mol): input molecule to fix
         n_iter (int, optional): Number of valence fix iteration to apply
             Default to 1.
-        remove_singleton (bool, optional): Whether `adjust_singleton` should be applied
+        remove_singleton: Whether `adjust_singleton` should be applied
             Default to False.
-        largest_only (bool, optional): Whether only the largest fragment should be kept
+        largest_only: Whether only the largest fragment should be kept
             Default to False.
-        inplace (bool, optional): Whether to return a copy of the mol or perform in place operation
+        inplace: Whether to return a copy of the mol or perform in place operation
             Default to False.
 
     Returns:
@@ -503,7 +503,7 @@ def replace_dummies_atoms(
             Default to'C'
         dummy (str, optional): dummy atom representation
             Default to '*'.
-        replace_all (bool, optional): Whether to replace all dummies
+        replace_all: Whether to replace all dummies
 
     Returns:
         mol (Chem.Mol): Molecule with dummy replaced

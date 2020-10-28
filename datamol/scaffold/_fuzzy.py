@@ -83,7 +83,7 @@ def fuzzy_scaffolding(
             Default to 8.
         additional_templates (List[Chem.Mol], optional): Additional template to use to
             generate scaffolds.
-        ignore_non_ring (bool, optional): Whether to ignore atom no in murcko ring system,
+        ignore_non_ring: Whether to ignore atom no in murcko ring system,
             even if they are in the framework. Default to False.
         mcs_params (dict): Arguments of MCS algorithm.
 

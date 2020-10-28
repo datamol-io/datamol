@@ -59,7 +59,7 @@ def get_all_path_between(
         mol (Chem.Mol): a molecule
         atom_idx_1 (int): Atom index 1.
         atom_idx_2 (int): Atom index 2.
-        ignore_cycle_basis (bool, optional): Whether to ignore cycle basis.
+        ignore_cycle_basis: Whether to ignore cycle basis.
             Defaults to False.
 
     Returns:
