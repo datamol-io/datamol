@@ -1,6 +1,7 @@
 from typing import Union
 from typing import List
 from typing import Tuple
+from typing import Optional
 
 import copy
 import random
@@ -27,11 +28,11 @@ def to_mol(
     explicit_only: bool = False,
     ordered: bool = False,
     sanitize: bool = True,
-):
+) -> Optional[Chem.Mol]:
     """Convert an input molecule (smiles representation) into a `Chem.Mol`.
 
     Args:
-        mol (str): SMILES of a molecule or a molecule.
+        mol: SMILES of a molecule or a molecule.
         add_hs: Whether hydrogens should be added the molecule. Default to False.
         explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True. Default to False.
@@ -39,7 +40,7 @@ def to_mol(
             important if you want to ensure that the features returned will always maintain
             a single atom order for the same molecule, regardless of its original SMILES representation.
             Default to False.
-        sanitize (bool optional): Whether to apply rdkit sanitization when input is a SMILES. Default to True.
+        sanitize: Whether to apply rdkit sanitization when input is a SMILES. Default to True.
 
     Returns:
         mol (rdkit.Chem.Mol): the molecule if some conversion have been made. If the conversion fails
@@ -50,31 +51,33 @@ def to_mol(
         raise ValueError(f"Input should be a Chem.Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
-        mol = Chem.MolFromSmiles(mol, sanitize=sanitize)
+        _mol = Chem.MolFromSmiles(mol, sanitize=sanitize)
 
-        if not sanitize and mol is not None:
-            mol.UpdatePropertyCache(False)
+        if not sanitize and _mol is not None:
+            _mol.UpdatePropertyCache(False)
+    else:
+        _mol = mol
 
     # Add hydrogens
-    if mol is not None and add_hs:
-        mol = Chem.AddHs(mol, explicitOnly=explicit_only)
+    if _mol is not None and add_hs:
+        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only)
 
     # Reorder atoms
-    if mol and ordered:
-        mol = reorder_atoms(mol)
+    if _mol and ordered:
+        _mol = reorder_atoms(_mol)
 
-    return mol
+    return _mol
 
 
-def reorder_atoms(mol: Chem.Mol):
+def reorder_atoms(mol: Chem.Mol) -> Optional[Chem.Mol]:
     """Reorder the atoms in a mol. It ensures a single atom order for the same molecule,
     regardless of its original representation.
 
     Args:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
 
     Returns:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
     """
     if mol.GetNumAtoms() == 0:
         return mol
@@ -84,14 +87,14 @@ def reorder_atoms(mol: Chem.Mol):
     return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])
 
 
-def randomize_atoms(mol: Chem.Mol):
+def randomize_atoms(mol: Chem.Mol) -> Optional[Chem.Mol]:
     """Randomize the position of the atoms in a mol.
 
     Args:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
 
     Returns:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
     """
     if mol.GetNumAtoms() == 0:
         return mol
@@ -101,14 +104,14 @@ def randomize_atoms(mol: Chem.Mol):
     return Chem.RenumberAtoms(mol, atom_indices)
 
 
-def to_neutral(mol: Chem.Mol):
+def to_neutral(mol: Chem.Mol) -> Optional[Chem.Mol]:
     """Neutralize the charge of a molecule.
 
     Args:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
 
     Returns:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
     """
     if mol is None:
         return mol
@@ -123,17 +126,19 @@ def to_neutral(mol: Chem.Mol):
     return mol
 
 
-def sanitize_mol(mol: Chem.Mol, charge_neutral: bool = False, sanifix: bool = True):
+def sanitize_mol(
+    mol: Chem.Mol, charge_neutral: bool = False, sanifix: bool = True
+) -> Optional[Chem.Mol]:
     """Sanitize molecule and fix common errors.
 
     Args:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
         charge_neutral: whether charge neutralization should be applied.
         sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens. Default to True.
 
     Returns:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
     """
     if mol is None:
         return mol
@@ -155,22 +160,16 @@ def sanitize_mol(mol: Chem.Mol, charge_neutral: bool = False, sanifix: bool = Tr
     return mol
 
 
-def sanitize_smiles(smiles: str, isomeric: bool = True):
+def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
     """
     Takes list of SMILES strings and returns list of their sanitized versions.
 
     Args:
-        smiles: iterator
-            List of smiles to be converted.
-        isomeric: bool, optional
-            Whether to include information about stereochemistry in the SMILES.
-            (Default value=True)
-        kwargs: dict
-            Any additional parameter to pass to the smile parser
+        smiles: smiles to be converted.
+        isomeric: Whether to include information about stereochemistry in the SMILES.
 
     Returns:
-        new_smiles: list
-            list of cleaned smiles. Invalid molecules are returned as None
+        sanitized smiles.
     """
     try:
         mol = Chem.MolFromSmiles(smiles, sanitize=False)
@@ -198,7 +197,7 @@ def sanitize_best(mols: List[Chem.Mol], charge_neutral: bool = False, sanifix: b
             (sanifix4.py) that try to adjust aromatic nitrogens. Default to True.
 
     Returns:
-        mol (Chem.Mol): a molecule.
+        mol: a molecule.
     """
     for mol in mols:
         mol = sanitize_mol(mol, charge_neutral=charge_neutral, sanifix=sanifix)
@@ -240,10 +239,10 @@ def standardize_mol(
     The process is apply in the order of the argument.
 
     Arguments:
-        mol (Chem.Mol): The molecule to standardize.
+        mol: The molecule to standardize.
         disconnect_metals: Whether to disconnect the metallic atoms from non-metals
             Default to False
-        normalizer: Whether to apply normalization (correct functional groups and recombine charges).
+        normalize: Whether to apply normalization (correct functional groups and recombine charges).
             Default to True
         reionize: Whether to apply molecule reionization
             Default to True
@@ -253,7 +252,7 @@ def standardize_mol(
             Default to True
 
     Returns:
-        mol (Chem.Mol): The standardized molecule.
+        mol: The standardized molecule.
     """
     mol = copy.copy(mol)
 
@@ -278,11 +277,11 @@ def standardize_mol(
     return mol
 
 
-def fix_valence_charge(mol: Chem.Mol, inplace: bool = False):
+def fix_valence_charge(mol: Chem.Mol, inplace: bool = False) -> Optional[Chem.Mol]:
     """Fix valence issues that are due to incorrect charges.
 
     Args:
-        mol (Chem.Mol): Input molecule with incorrect valence for some atoms
+        mol: Input molecule with incorrect valence for some atoms
         inplace: Whether to modify in place or make a copy.
             Default to False.
 
@@ -310,11 +309,11 @@ def fix_valence_charge(mol: Chem.Mol, inplace: bool = False):
     return mol
 
 
-def incorrect_valence(a: Union[Chem.Mol, Chem.rdchem.Atom], update: bool = False):
+def incorrect_valence(a: Union[Chem.Mol, Chem.rdchem.Atom], update: bool = False) -> bool:
     """Check if an atom connection is not valid or all the atom of a molecule.
 
     Args:
-        a (Chem.rdchem.Atom, Chem.Mol): atom or molecule to check for valence issue.
+        a: atom or molecule to check for valence issue.
         update: Update owning molecule property cache first.
 
     Returns:
@@ -333,7 +332,7 @@ def incorrect_valence(a: Union[Chem.Mol, Chem.rdchem.Atom], update: bool = False
     )
 
 
-def decrease_bond(bond: Chem.rdchem.Bond):
+def decrease_bond(bond: Chem.rdchem.Bond) -> Optional[Union[list, Chem.rdchem.Bond]]:
     """Remove one single bond from the input bond. Note that you should
     first kekulize your molecules and remove non-standard bond.
     """
@@ -346,12 +345,12 @@ def decrease_bond(bond: Chem.rdchem.Bond):
     return bond
 
 
-def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False):
+def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[Chem.Mol]:
     """Identify and try to fix valence issues by removing any supplemental bond
     that should not be in the graph.
 
     Args:
-        mol (Chem.Mol): input molecule with incorrect valence for some atoms
+        mol: input molecule with incorrect valence for some atoms
         inplace: Whether to modify in place or make a copy
             Default to False.
         allow_ring_break: Whether bond removal involving ring is allowed.
@@ -417,7 +416,7 @@ def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False):
     return m
 
 
-def adjust_singleton(mol: Chem.Mol):
+def adjust_singleton(mol: Chem.Mol) -> Optional[Chem.Mol]:
     """Remove all atoms that are essentially disconnected singleton nodes in the molecular graph.
     For example, the chlorine atom and methane fragment will be removed in Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C",
     but not the ethane fragment.
@@ -433,7 +432,7 @@ def adjust_singleton(mol: Chem.Mol):
     return em.GetMol()
 
 
-def remove_dummies(mol: Chem.Mol, dummy: str = "*"):
+def remove_dummies(mol: Chem.Mol, dummy: str = "*") -> Optional[Chem.Mol]:
     """Remove dummy atoms from molecules."""
     du = Chem.MolFromSmiles(dummy)
     out = mol
@@ -451,11 +450,11 @@ def fix_mol(
     remove_singleton: bool = False,
     largest_only: bool = False,
     inplace: bool = False,
-):
+) -> Optional[Chem.Mol]:
     """Fix error in molecule using a greedy approach.
 
     Args:
-        mol (Chem.Mol): input molecule to fix
+        mol: input molecule to fix
         n_iter (int, optional): Number of valence fix iteration to apply
             Default to 1.
         remove_singleton: Whether `adjust_singleton` should be applied
@@ -494,11 +493,11 @@ def replace_dummies_atoms(
     atom: str = "C",
     dummy: str = "*",
     replace_all: bool = True,
-):
+) -> Optional[Chem.Mol]:
     """Remove dummy atoms from molecules.
 
     Args:
-        mol (<Chem.Mol>): molecule with dummies
+        mol: molecule with dummies
         atom (str, optional): replacement atom, default is carbon
             Default to'C'
         dummy (str, optional): dummy atom representation
@@ -506,7 +505,7 @@ def replace_dummies_atoms(
         replace_all: Whether to replace all dummies
 
     Returns:
-        mol (Chem.Mol): Molecule with dummy replaced
+        mol: Molecule with dummy replaced
     """
     du = Chem.MolFromSmiles(dummy)
     replacement = Chem.MolFromSmiles(atom)
@@ -514,7 +513,7 @@ def replace_dummies_atoms(
     return out
 
 
-def keep_largest_fragment(mol: Chem.Mol):
+def keep_largest_fragment(mol: Chem.Mol) -> Optional[Chem.Mol]:
     """Only keep largest fragment of each molecule."""
     return max(
         rdmolops.GetMolFrags(mol, asMols=True),
@@ -523,18 +522,18 @@ def keep_largest_fragment(mol: Chem.Mol):
     )
 
 
-def is_transition_metal(at: Chem.rdchem.Atom):
+def is_transition_metal(at: Chem.rdchem.Atom) -> bool:
     """Check if atom is a transition metal."""
     n = at.GetAtomicNum()
     return (n >= 22 and n <= 29) or (n >= 40 and n <= 47) or (n >= 72 and n <= 79)
 
 
-def set_dative_bonds(mol: Chem.Mol, from_atoms: Tuple[int, int] = (7, 8)):
+def set_dative_bonds(mol: Chem.Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional[Chem.Mol]:
     """Replaces some single bonds between metals and atoms with atomic numbers in fromAtoms
     with dative bonds. The replacement is only done if the atom has "too many" bonds.
 
     Arguments:
-        mol (Chem.Mol): molecule with bond to modify
+        mol: molecule with bond to modify
         from_atoms (list or tuple): List of atoms  (symbol or atomic number) to consider for bond replacement.
             By default, only Nitrogen (7) and Oxygen (8) are considered.
 
