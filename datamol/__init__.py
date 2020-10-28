@@ -57,6 +57,7 @@ from .fp import to_fp
 from .fp import fp_to_array
 
 from .similarity import pdist
+from .similarity import cdist
 
 from .graph import to_graph
 from .graph import get_all_path_between
