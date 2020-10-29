@@ -4,6 +4,23 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.1
+====================
+
+**Added:**
+
+* Add `cdist` function to compute tanimoto sim between two list of molecules.
+
+**Fixed:**
+
+* Fix a bug in `dm.from_df` when the dataframe has a size of zero.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.0
 ====================
 
