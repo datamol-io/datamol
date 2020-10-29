@@ -1,6 +1,7 @@
 import pathlib
 import unittest
 
+import pandas as pd
 from rdkit import Chem
 
 import datamol as dm
@@ -175,3 +176,5 @@ class TestConvert(unittest.TestCase):
                 "reference.year",
             ]
         )
+
+        assert dm.from_df(pd.DataFrame()) == []
