@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* <news item>
+* Fix a bug in `dm.from_df` when the dataframe has a size of zero.
 
 **Security:**
 

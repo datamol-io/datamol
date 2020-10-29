@@ -215,6 +215,9 @@ def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Ch
             Default to "smiles".
     """
 
+    if len(df) == 0:
+        return []
+
     def _row_to_mol(row):
         mol = dm.to_mol(row[smiles_column])
 
