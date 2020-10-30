@@ -34,7 +34,7 @@ theme:
     primary: teal
     accent: purple
   features:
-    - navigation.instant
+    # - navigation.instant
     - navigation.expand
 
 extra_css:
@@ -66,6 +66,7 @@ plugins:
             heading_level: 3
   - mkdocs-jupyter:
       execute: False
+      # kernel_name: python3
 
 extra:
   # Unused at the moment, waiting for `mkdocstrings`
