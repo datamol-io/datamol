@@ -106,5 +106,6 @@ def to_sdf(
     with fsspec.open(file_uri, mode="w") as f:
         writer = Chem.SDWriter(f)
         for mol in mols:
-            writer.write(mol)
+            if mol is not None:
+                writer.write(mol)
         writer.close()
