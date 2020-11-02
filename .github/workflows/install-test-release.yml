@@ -53,11 +53,6 @@ jobs:
       - name: Test building the doc
         shell: bash -l {0}
         run: |
-          # To remove once in conda-forge
-          pip install --no-deps mkdocs-jupyter
-          pip install --no-deps markdown-include
-          pip install --no-deps mike
-
           # Regenerate the API doc
           python -m datamol._mkdocs
 
@@ -68,12 +63,8 @@ jobs:
         if: ${{ github.ref == 'refs/heads/master' }}
         shell: bash -l {0}
         run: |
-          git fetch origin
-
-          # To remove once in conda-forge
-          pip install --no-deps mkdocs-jupyter
-          pip install --no-deps markdown-include
-          pip install --no-deps mike
+          # Get the privpage branch
+          git fetch origin privpage
 
           # Regenerate the API doc
           python -m datamol._mkdocs

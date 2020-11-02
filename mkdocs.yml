@@ -42,6 +42,7 @@ extra_css:
 
 markdown_extensions:
   - admonition
+  - markdown_include.include
   - pymdownx.emoji
   - pymdownx.magiclink
   - pymdownx.superfences
@@ -67,9 +68,3 @@ plugins:
   - mkdocs-jupyter:
       execute: False
       # kernel_name: python3
-
-extra:
-  # Unused at the moment, waiting for `mkdocstrings`
-  # to release it.
-  version:
-    method: mike
