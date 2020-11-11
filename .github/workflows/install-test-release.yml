@@ -26,12 +26,14 @@ jobs:
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('environment.yml') }}
 
       - name: Setup conda
-        uses: goanpeca/setup-miniconda@v1
+        uses: conda-incubator/setup-miniconda@v2
         with:
-          channels: conda-forge
-          activate-environment: app-env
+          python-version: 3.7
           mamba-version: "*"
-          use-only-tar-bz2: true # requried for caching
+          channels: conda-forge,defaults
+          channel-priority: true
+          use-only-tar-bz2: true
+          activate-environment: app-env
 
       - name: List dependencies
         shell: bash -l {0}
@@ -48,7 +50,7 @@ jobs:
       - name: Run tests
         shell: bash -l {0}
         run: |
-          pytest -v tests/
+          pytest -v .
 
       - name: Test building the doc
         shell: bash -l {0}
