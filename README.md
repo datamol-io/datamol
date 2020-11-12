@@ -70,7 +70,7 @@ conda install -c invivoai datamol
 
 ## Examples
 
-See examples provided as a serie of [notebooks](./notebooks):
+See examples provided as a serie of notebooks:
 
 - [The Basics](docs/examples/The_Basics.ipynb)
 - [Preprocessing Molecules](docs/examples/Preprocessing_Molecules.ipynb)

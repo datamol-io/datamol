@@ -75,5 +75,6 @@ All the below functions are accessible under `datamol.FUNCTION_NAME`.
 
 ## `datamol.similarity`
 
+::: datamol:cdist
 ::: datamol:pdist
 
