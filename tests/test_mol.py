@@ -169,24 +169,21 @@ class TestMol(unittest.TestCase):
         # not expecting difference between res2 and res3
         self.assertEqual(Chem.MolToSmiles(res), Chem.MolToSmiles(res2))
 
-        # NOTE(hadim): Disabling the tests below as theyfail ONLY on
-        # Github Actions with a weird "Fatal Python error: Segmentation fault" error.
+        # only largest expected_here
+        res_largest = dm.fix_mol(mol, largest_only=True)
 
-        # # only largest expected_here
-        # res_largest = dm.fix_mol(mol, largest_only=True)
+        dm.fix_mol(mol, remove_singleton=True, largest_only=True)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 1)
 
-        # # dm.fix_mol(mol, remove_singleton=True, largest_only=True)
-        # # self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 1)
+        expected_largest_fix = dm.standardize_smiles("OC1=CC2CCCCC2[N:1]=C1")
+        self.assertEqual(
+            dm.standardize_smiles(Chem.MolToSmiles(res_largest)),
+            expected_largest_fix,
+        )
 
-        # expected_largest_fix = dm.standardize_smiles("OC1=CC2CCCCC2[N:1]=C1")
-        # self.assertEqual(
-        #     dm.standardize_smiles(Chem.MolToSmiles(res_largest)),
-        #     expected_largest_fix,
-        # )
-
-        # res_no_singleton = dm.fix_mol(mol, n_iter=2, remove_singleton=True)
-        # self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 2)
-        # self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_no_singleton)), 1)
+        res_no_singleton = dm.fix_mol(mol, n_iter=2, remove_singleton=True)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_largest)), 2)
+        self.assertTrue(len(Chem.rdmolops.GetMolFrags(res_no_singleton)), 1)
 
     def test_dative_bond(self):
         smis = "CC1=CC=CC(=C1N\\2O[Co]3(ON(\\C=[N]3\\C4=C(C)C=CC=C4C)C5=C(C)C=CC=C5C)[N](=C2)\\C6=C(C)C=CC=C6C)C"

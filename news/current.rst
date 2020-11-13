@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* <news item>
+* Force rdkit >=2020.03.6 to avoid thread-related bug in `rdMolStandardize`
 
 **Security:**
 
