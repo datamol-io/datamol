@@ -4,6 +4,23 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.2
+====================
+
+**Added:**
+
+* Test that execute the notebooks.
+
+**Fixed:**
+
+* Force rdkit >=2020.03.6 to avoid thread-related bug in `rdMolStandardize`
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.1
 ====================
 
