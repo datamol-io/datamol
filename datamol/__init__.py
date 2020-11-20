@@ -5,6 +5,7 @@ from .utils import JobRunner
 
 from .data import freesolv
 
+from .log import enable_rdkit_log
 from .log import disable_rdkit_log
 from .log import without_rdkit_log
 
