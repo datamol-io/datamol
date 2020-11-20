@@ -33,4 +33,3 @@ def test_rdkit_log(capfd):
     with dm.without_rdkit_log():
         check_logs_are_not_shown(capfd)
     check_logs_are_not_shown(capfd)
-
