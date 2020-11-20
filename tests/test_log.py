@@ -1,15 +1,36 @@
 import datamol as dm
 
 
-def test_without_rdkit_log(capfd):
-    """NOTE(hadim): unittest.TestCase does not workk with `unittest.TestCase`."""
+def check_logs_are_shown(capfd):
     smiles = "fake_smiles"
-    mol = dm.to_mol(smiles)
+    dm.to_mol(smiles)
     _, err = capfd.readouterr()
     assert "SMILES Parse Error: syntax error while parsing: fake_smiles" in err
 
+
+def check_logs_are_not_shown(capfd):
+    smiles = "fake_smiles"
+    dm.to_mol(smiles)
+    _, err = capfd.readouterr()
+    assert err == ""
+
+
+def test_rdkit_log(capfd):
+    """Test multiple rdkit log scenarios."""
+
+    check_logs_are_shown(capfd)
     with dm.without_rdkit_log():
-        smiles = "fake_smiles"
-        mol = dm.to_mol(smiles)
-        _, err = capfd.readouterr()
-        assert err == ""
+        check_logs_are_not_shown(capfd)
+    check_logs_are_shown(capfd)
+
+    dm.disable_rdkit_log()
+    check_logs_are_not_shown(capfd)
+
+    dm.enable_rdkit_log()
+    check_logs_are_shown(capfd)
+
+    dm.disable_rdkit_log()
+    with dm.without_rdkit_log():
+        check_logs_are_not_shown(capfd)
+    check_logs_are_not_shown(capfd)
+
