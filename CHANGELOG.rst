@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.3
+====================
+
+**Changed:**
+
+* Better rdkit log disable/enable.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.2
 ====================
 
