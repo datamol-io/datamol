@@ -3,7 +3,7 @@ from setuptools import find_packages
 
 setup(
     name="datamol",
-    version="0.2.3",
+    version="0.2.4",
     author="Hadrien Mary",
     author_email="hadrien.mary@gmail.com",
     url="https://github.com/invivoai-platform/datamol",
