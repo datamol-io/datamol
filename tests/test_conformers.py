@@ -3,62 +3,58 @@ import pytest
 
 import datamol as dm
 
-N_CONFS = 2
 
+class TestConformers(unittest.TestCase):
+    def test_generate(self):
 
-def test_generate():
+        with pytest.raises(ValueError):
+            smiles = "CCCC"
+            mol = dm.to_mol(smiles)
+            mol = dm.conformers.generate(mol, method="custom_method")
 
-    with pytest.raises(ValueError):
         smiles = "CCCC"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.generate(mol, n_confs=10, method="custom_method")
+        mol = dm.conformers.generate(mol)
+        assert mol.GetNumConformers() == 50
 
-    smiles = "CCCC"
-    mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
-    assert mol.GetNumConformers() == N_CONFS
+        conf = mol.GetConformer(0)
+        assert conf.GetPositions().shape == (14, 3)
 
-    conf = mol.GetConformer(0)
-    assert conf.GetPositions().shape == (14, 3)
+        props = conf.GetPropsAsDict()
+        assert "rdkit_uff_energy" in props
 
-    props = conf.GetPropsAsDict()
-    assert "rdkit_uff_energy" in props
+    def test_sasa(self):
 
+        with pytest.raises(ValueError):
+            smiles = "O=C(C)Oc1ccccc1C(=O)O"
+            mol = dm.to_mol(smiles)
+            mol = dm.conformers.sasa(mol)
 
-def test_sasa():
-
-    with pytest.raises(ValueError):
         smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.sasa(mol)
+        mol = dm.conformers.generate(mol)
+        sasa = dm.conformers.sasa(mol)
+        assert sasa.shape == (50,)
 
-    smiles = "CCCC=O"
-    mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
-    sasa = dm.conformers.sasa(mol)
-    assert sasa.shape == (N_CONFS,)
+    def test_rmsd(self):
 
+        with pytest.raises(ValueError):
+            smiles = "O=C(C)Oc1ccccc1C(=O)O"
+            mol = dm.to_mol(smiles)
+            mol = dm.conformers.rmsd(mol)
 
-def test_rmsd():
-
-    with pytest.raises(ValueError):
         smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.rmsd(mol)
+        mol = dm.conformers.generate(mol)
+        rmsd = dm.conformers.rmsd(mol)
+        assert rmsd.shape == (50, 50)
 
-    smiles = "CCCC=O"
-    mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
-    rmsd = dm.conformers.rmsd(mol)
-    assert rmsd.shape == (N_CONFS, N_CONFS)
+    def test_cluster(self):
 
+        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        mol = dm.to_mol(smiles)
+        mol = dm.conformers.generate(mol)
+        mol.GetNumConformers()
 
-def test_cluster():
-
-    smiles = "CCCC=O"
-    mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
-    mol.GetNumConformers()
-
-    clustered_mol = dm.conformers.cluster(mol, return_centroids=True)
-    assert clustered_mol.GetNumConformers() == 2
+        clustered_mol = dm.conformers.cluster(mol, return_centroids=True)
+        assert clustered_mol.GetNumConformers() == 3
