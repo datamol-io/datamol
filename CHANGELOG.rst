@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.4
+====================
+
+**Changed:**
+
+* Constraint rdkit to 2020.09 to get `rdBase.LogStatus()`
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.3
 ====================
 
