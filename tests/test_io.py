@@ -139,29 +139,29 @@ def test_to_from_text():
     ]
 
     # Save from text and read from text
-    dm.io.to_text(smiles_list, temp_file)
-    loaded_smiles = dm.io.read_text(temp_file, as_mol=False)
+    dm.to_text(smiles_list, temp_file)
+    loaded_smiles = dm.read_text(temp_file, as_mol=False)
     assert loaded_smiles == smiles_list
 
     # Save from mols and read from text
     mols = [dm.to_mol(m) for m in smiles_list]
-    dm.io.to_text(mols, temp_file)
-    loaded_mols = dm.io.read_text(temp_file, as_mol=False)
+    dm.to_text(mols, temp_file)
+    loaded_mols = dm.read_text(temp_file, as_mol=False)
     assert loaded_smiles == smiles_list
 
     # Save from mols and read text as mols
     mols = [dm.to_mol(m) for m in smiles_list]
-    dm.io.to_text(mols, temp_file)
-    loaded_mols = dm.io.read_text(temp_file, as_mol=True)
+    dm.to_text(mols, temp_file)
+    loaded_mols = dm.read_text(temp_file, as_mol=True)
     assert [dm.to_smiles(m) for m in loaded_mols] == smiles_list
 
     # Check an empty file can be saved
-    dm.io.to_text([], temp_file, error_if_empty=False)
+    dm.to_text([], temp_file, error_if_empty=False)
     with open(temp_file) as f:
         assert f.read() is ""
 
     # Check error raised when list is empty
     with pytest.raises(ValueError):
-        dm.io.to_text([], temp_file, error_if_empty=True)
+        dm.to_text([], temp_file, error_if_empty=True)
 
     temp_file.unlink()
