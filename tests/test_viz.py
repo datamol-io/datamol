@@ -39,7 +39,7 @@ class TestViz(unittest.TestCase):
 
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.generate(mol)
+        mol = dm.conformers.generate(mol, n_confs=2)
 
         # one conformer
         view = dm.viz.conformers(mol)

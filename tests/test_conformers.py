@@ -3,6 +3,8 @@ import pytest
 
 import datamol as dm
 
+N_CONFS = 2
+
 
 def test_generate():
 
@@ -13,8 +15,8 @@ def test_generate():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=10)
-    assert mol.GetNumConformers() == 10
+    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
+    assert mol.GetNumConformers() == N_CONFS
 
     conf = mol.GetConformer(0)
     assert conf.GetPositions().shape == (14, 3)
@@ -32,9 +34,9 @@ def test_sasa():
 
     smiles = "CCCC=O"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=10)
+    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
     sasa = dm.conformers.sasa(mol)
-    assert sasa.shape == (10,)
+    assert sasa.shape == (N_CONFS,)
 
 
 def test_rmsd():
@@ -46,16 +48,16 @@ def test_rmsd():
 
     smiles = "CCCC=O"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=10)
+    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
     rmsd = dm.conformers.rmsd(mol)
-    assert rmsd.shape == (10, 10)
+    assert rmsd.shape == (N_CONFS, N_CONFS)
 
 
 def test_cluster():
 
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=10)
+    mol = dm.conformers.generate(mol, n_confs=N_CONFS)
     mol.GetNumConformers()
 
     clustered_mol = dm.conformers.cluster(mol, return_centroids=True)
