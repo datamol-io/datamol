@@ -126,7 +126,6 @@ def test_to_from_text():
     temp_file = pathlib.Path(tempfile.mkstemp()[1])
 
     smiles_list = [
-        "CC1C=[NH+]CC1[O-]",
         "Cn1c(=S)ccc2nc[nH]c21",
         "Clc1n[nH]c2c1=[NH+]C(c1ccc[nH+]c1)C[NH+]=2",
         "Fc1ccsc1",
@@ -137,31 +136,16 @@ def test_to_from_text():
         "[NH-]Sc1cc2nc[nH+]cc2o1",
         "[NH3+]C12CNCCOC1(N1CCCCC1)C=C(F)NC2",
     ]
+    mols = [dm.to_mol(m) for m in smiles_list]
 
     # Save from text and read from text
-    dm.to_text(smiles_list, temp_file)
-    loaded_smiles = dm.read_text(temp_file, as_mol=False)
+    dm.to_smi(mols, temp_file)
+    loaded_mols = dm.read_smi(temp_file)
+    loaded_smiles = [dm.to_smiles(m) for m in loaded_mols]
     assert loaded_smiles == smiles_list
-
-    # Save from mols and read from text
-    mols = [dm.to_mol(m) for m in smiles_list]
-    dm.to_text(mols, temp_file)
-    loaded_mols = dm.read_text(temp_file, as_mol=False)
-    assert loaded_smiles == smiles_list
-
-    # Save from mols and read text as mols
-    mols = [dm.to_mol(m) for m in smiles_list]
-    dm.to_text(mols, temp_file)
-    loaded_mols = dm.read_text(temp_file, as_mol=True)
-    assert [dm.to_smiles(m) for m in loaded_mols] == smiles_list
-
-    # Check an empty file can be saved
-    dm.to_text([], temp_file, error_if_empty=False)
-    with open(temp_file) as f:
-        assert f.read() is ""
 
     # Check error raised when list is empty
     with pytest.raises(ValueError):
-        dm.to_text([], temp_file, error_if_empty=True)
+        dm.to_smi([], temp_file, error_if_empty=True)
 
     temp_file.unlink()

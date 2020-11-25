@@ -1,6 +1,6 @@
 **Added:**
 
-* Add `to_text` and `from_text` in the IO module.
+* Add `to_smi` and `from_smi` in the IO module.
 
 **Changed:**
 

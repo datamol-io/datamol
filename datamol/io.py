@@ -3,6 +3,7 @@ from typing import Optional
 from typing import List
 from typing import Sequence
 
+import tempfile
 import pathlib
 import gzip
 
@@ -20,8 +21,8 @@ def read_csv(urlpath: Union[str, pathlib.Path], **kwargs):
     supported by pandas. Consider removing it.
 
     Args:
-        urlpath: Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
         kwargs: Arguments to pass to `pd.read_csv()`.
 
     Returns:
@@ -43,8 +44,8 @@ def read_excel(
     supported by pandas. Consider removing it.
 
     Args:
-        urlpath: Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
         sheet_name: see `pandas.read_excel()` doc.
         kwargs: Arguments to pass to `pd.read_excel()`.
 
@@ -63,8 +64,8 @@ def read_sdf(
     """Read an SDF file.
 
     Args:
-        urlpath (Union[str, pathlib.Path]): Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
         as_df: Whether to return a list mol or a pandas DataFrame. Default to False.
 
     Returns:
@@ -92,8 +93,8 @@ def to_sdf(
 
     Args:
         mols:
-        urlpath: Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
         smiles_column: if `mols` is a dataframe, you must specify `smiles_column`
             for saving to sdf.
     """
@@ -101,60 +102,70 @@ def to_sdf(
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column)
 
+    # Filter out None values
+    mols = [mol for mol in mols if mol is not None]
+
     with fsspec.open(urlpath, mode="w") as f:
         writer = Chem.SDWriter(f)
         for mol in mols:
-            if mol is not None:
-                writer.write(mol)
+            writer.write(mol)
         writer.close()
 
 
-def to_text(
-    mols: Sequence[Union[Chem.Mol, str]],
+def to_smi(
+    mols: Sequence[Chem.Mol],
     urlpath: Union[str, pathlib.Path],
     error_if_empty: bool = False,
 ):
-    """Save a list of molecules or smiles in a text file. One smiles per line.
+    """Save a list of molecules in an `.smi` file.
 
     Args:
-        mols: can be either a molecule or a smiles. If the mol to smiles conversion must be customized
-            you should call `[dm.to_smiles(m, **custom_kargs) for m in mols]` before `dm.to_text`.
-        urlpath: Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        mols: a list of molecules.
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
         error_if_empty: whether to raise and error if the input list is empty.
     """
 
     if len(mols) == 0 and error_if_empty:
         raise ValueError("The list of mols/smiles provided is empty.")
 
-    if len(mols) > 0 and isinstance(mols[0], Chem.Mol):
-        mols = [dm.to_smiles(m) for m in mols]
+    # Filter out None values
+    mols = [mol for mol in mols if mol is not None]
 
-    with fsspec.open(urlpath, mode="w") as f:
-        for smiles in mols:
-            f.write(f"{smiles}\n")
+    with fsspec.open(urlpath, "w") as f:
+        writer = Chem.SmilesWriter(f, includeHeader=False, nameHeader="")
+        for mol in mols:
+            writer.write(mol)
+        writer.close()
 
 
-def read_text(
+def read_smi(
     urlpath: Union[str, pathlib.Path],
-    as_mol: bool = True,
-):
-    """Read a list of smiles from a text file. One smiles per line.
+) -> Sequence[Chem.Mol]:
+    """Read a list of smiles from am `.smi` file.
 
     Args:
-        urlpath: Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
-        as_mol: whether to convert the smiles to a list of molecules. If you need to use custom arguments,
-            to convert to mol, use `[dm.to_mol(smiles, **custom_args) for smiles in smiles_list`. When set
-            to false, smiles are loaded as-is without any validity check.
+        urlpath: Path to the file. Path to the file. Can be a local path, HTTP,
+            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
     """
 
-    with fsspec.open(urlpath, mode="r") as f:
-        mols = []
-        for line in f.readlines():
-            mols.append(line.strip())
+    active_path = urlpath
 
-    if as_mol:
-        mols = [dm.to_mol(mol) for mol in mols]
+    # NOTE(hadim): the temporary local file copy
+    # is because `SmilesMolSupplier` does not support
+    # using file-like object, only path.
+
+    # Copy to a local temporary path if the path is a remote one.
+    if not fsspec.utils.can_be_local(str(urlpath)):
+        active_path = pathlib.Path(tempfile.mkstemp()[1])
+        dm.utils.copy_files(urlpath, active_path)
+
+    # Read the molecules
+    supplier = Chem.SmilesMolSupplier(str(active_path), titleLine=0)
+    mols = [mol for mol in supplier if mol is not None]
+
+    # Delete the local temporary path
+    if not fsspec.utils.can_be_local(str(urlpath)):
+        active_path.unlink()
 
     return mols

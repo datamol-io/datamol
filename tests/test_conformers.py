@@ -14,8 +14,8 @@ class TestConformers(unittest.TestCase):
 
         smiles = "CCCC"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.generate(mol)
-        assert mol.GetNumConformers() == 50
+        mol = dm.conformers.generate(mol, n_confs=2, minimize_energy=True)
+        assert mol.GetNumConformers() == 2
 
         conf = mol.GetConformer(0)
         assert conf.GetPositions().shape == (14, 3)
@@ -32,7 +32,7 @@ class TestConformers(unittest.TestCase):
 
         smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.generate(mol)
+        mol = dm.conformers.generate(mol, minimize_energy=False)
         sasa = dm.conformers.sasa(mol)
         assert sasa.shape == (50,)
 
@@ -45,7 +45,7 @@ class TestConformers(unittest.TestCase):
 
         smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
-        mol = dm.conformers.generate(mol)
+        mol = dm.conformers.generate(mol, minimize_energy=False)
         rmsd = dm.conformers.rmsd(mol)
         assert rmsd.shape == (50, 50)
 
