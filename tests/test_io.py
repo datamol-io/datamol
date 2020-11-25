@@ -14,14 +14,18 @@ DATA_DIR = ROOT_DIR / "data"
 def get_freesolv_csv_path():
     return DATA_DIR / "freesolv.csv"
 
+
 def get_freesolv_excel_path():
     return DATA_DIR / "freesolv.xlsx"
+
 
 def get_tubb3_sdf_path():
     return DATA_DIR / "TUBB3-observations.sdf"
 
+
 def get_tubb3_sdf_gzip_path():
     return DATA_DIR / "TUBB3-observations.sdf.gz"
+
 
 def test_read_csv():
     data_path = get_freesolv_csv_path()
@@ -29,11 +33,13 @@ def test_read_csv():
     assert df.shape == (642, 4)
     assert list(df.columns) == ["iupac", "smiles", "expt", "calc"]
 
+
 def test_read_excel():
     data_path = get_freesolv_excel_path()
     df = dm.read_excel(data_path, engine="openpyxl")
     assert df.shape == (642, 4)
     assert list(df.columns) == ["iupac", "smiles", "expt", "calc"]
+
 
 def test_read_sdf():
 
@@ -50,6 +56,7 @@ def test_read_sdf():
     assert len(mols) == 10
     for mol in mols:
         assert isinstance(mol, Chem.Mol)
+
 
 def test_read_sdf_as_df():
 
@@ -91,6 +98,7 @@ def test_read_sdf_as_df():
         "reference.year",
     ]
 
+
 def test_to_sdf():
     data_path = get_tubb3_sdf_gzip_path()
 
@@ -111,6 +119,7 @@ def test_to_sdf():
 
     new_mols = dm.read_sdf(temp_path, as_df=False)
     assert [dm.to_smiles(mol) for mol in mols] == [dm.to_smiles(mol) for mol in new_mols]
+
 
 def test_to_from_text():
 

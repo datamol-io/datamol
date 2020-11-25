@@ -127,7 +127,7 @@ def to_text(
     if len(mols) == 0 and error_if_empty:
         raise ValueError("The list of mols/smiles provided is empty.")
 
-    if len(mols) >0 and isinstance(mols[0], Chem.Mol):
+    if len(mols) > 0 and isinstance(mols[0], Chem.Mol):
         mols = [dm.to_smiles(m) for m in mols]
 
     with fsspec.open(urlpath, mode="w") as f:
