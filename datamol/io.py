@@ -3,6 +3,7 @@ from typing import Optional
 from typing import List
 from typing import Sequence
 
+import io
 import tempfile
 import pathlib
 import gzip
