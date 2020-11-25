@@ -22,6 +22,7 @@ def test_generate():
     props = conf.GetPropsAsDict()
     assert "rdkit_uff_energy" in props
 
+
 def test_sasa():
 
     with pytest.raises(ValueError):
@@ -35,6 +36,7 @@ def test_sasa():
     sasa = dm.conformers.sasa(mol)
     assert sasa.shape == (10,)
 
+
 def test_rmsd():
 
     with pytest.raises(ValueError):
@@ -47,6 +49,7 @@ def test_rmsd():
     mol = dm.conformers.generate(mol, n_confs=10)
     rmsd = dm.conformers.rmsd(mol)
     assert rmsd.shape == (10, 10)
+
 
 def test_cluster():
 
