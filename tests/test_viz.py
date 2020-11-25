@@ -37,7 +37,7 @@ class TestViz(unittest.TestCase):
 
         import nglview as nv
 
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
         mol = dm.conformers.generate(mol, n_confs=2)
 

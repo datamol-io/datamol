@@ -28,7 +28,7 @@ def test_generate():
 def test_sasa():
 
     with pytest.raises(ValueError):
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
         mol = dm.conformers.sasa(mol)
 
@@ -42,7 +42,7 @@ def test_sasa():
 def test_rmsd():
 
     with pytest.raises(ValueError):
-        smiles = "O=C(C)Oc1ccccc1C(=O)O"
+        smiles = "CCCC=O"
         mol = dm.to_mol(smiles)
         mol = dm.conformers.rmsd(mol)
 
@@ -55,7 +55,7 @@ def test_rmsd():
 
 def test_cluster():
 
-    smiles = "O=C(C)Oc1ccccc1C(=O)O"
+    smiles = "CCCC=O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, n_confs=N_CONFS)
     mol.GetNumConformers()
