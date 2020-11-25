@@ -27,6 +27,7 @@ def to_mol(
     add_hs: bool = False,
     explicit_only: bool = False,
     ordered: bool = False,
+    kekulize: bool = False,
     sanitize: bool = True,
 ) -> Optional[Chem.Mol]:
     """Convert an input molecule (smiles representation) into a `Chem.Mol`.
@@ -40,6 +41,7 @@ def to_mol(
             important if you want to ensure that the features returned will always maintain
             a single atom order for the same molecule, regardless of its original SMILES representation.
             Default to False.
+        kekulize: Whether to perform kekulization of the input molecules. Default to False
         sanitize: Whether to apply rdkit sanitization when input is a SMILES. Default to True.
 
     Returns:
@@ -66,6 +68,8 @@ def to_mol(
     if _mol and ordered:
         _mol = reorder_atoms(_mol)
 
+    if _mol and kekulize:
+        Chem.Kekulize(_mol, clearAromaticFlags=False)
     return _mol
 
 
