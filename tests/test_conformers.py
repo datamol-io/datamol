@@ -5,7 +5,7 @@ import datamol as dm
 
 
 @pytest.mark.serial
-def test_generate(self):
+def test_generate():
 
     with pytest.raises(ValueError):
         smiles = "CCCC"
@@ -26,7 +26,7 @@ def test_generate(self):
 
 
 @pytest.mark.serial
-def test_sasa(self):
+def test_sasa():
 
     with pytest.raises(ValueError):
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
@@ -41,7 +41,7 @@ def test_sasa(self):
 
 
 @pytest.mark.serial
-def test_rmsd(self):
+def test_rmsd():
 
     with pytest.raises(ValueError):
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
@@ -56,7 +56,7 @@ def test_rmsd(self):
 
 
 @pytest.mark.serial
-def test_cluster(self):
+def test_cluster():
     # NOTE(hadim): disable here since something is wrong when running on CI.
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
