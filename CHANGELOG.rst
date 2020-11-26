@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.6
+====================
+
+**Added:**
+
+* Include stub files for rdkit generated using stubgen from mypy.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.5
 ====================
 
