@@ -239,7 +239,7 @@ def sasa(
     mol: Chem.Mol,
     conf_id: Union[int, List[int]] = None,
     n_jobs: int = 1,
-) -> np.array:
+) -> np.ndarray:
     """Compute Solvent Accessible Surface Area of all the conformers
     using FreeSASA (https://freesasa.github.io/). Values are returned
     as an array and also stored within each conformer as a property
@@ -303,7 +303,7 @@ def sasa(
     return np.array(sasa_values)
 
 
-def rmsd(mol: Chem.Mol) -> np.array:
+def rmsd(mol: Chem.Mol) -> np.ndarray:
     """Compute the RMSD between all the conformers of a molecule.
 
     Args:
