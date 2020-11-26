@@ -1,7 +1,7 @@
-import unittest
 import pathlib
 import tempfile
 import pytest
+import io
 
 from rdkit import Chem
 
@@ -149,3 +149,8 @@ def test_to_from_text():
         dm.to_smi([], temp_file, error_if_empty=True)
 
     temp_file.unlink()
+
+    # Check file like object works too
+    file_like = io.StringIO()
+    dm.to_smi(mols, file_like)
+    assert file_like.getvalue().strip().split("\n") == smiles_list
