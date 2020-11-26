@@ -1,0 +1,6 @@
+from rdkit.VLib.Node import VLibNode as VLibNode
+from typing import Any, Optional
+
+class TransformNode(VLibNode):
+    def __init__(self, func: Optional[Any] = ..., **kwargs: Any) -> None: ...
+    def next(self): ...

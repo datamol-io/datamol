@@ -1,0 +1,6 @@
+from rdkit.Dbase import DbConnection as DbConnection
+from rdkit.ML.Data import Quantize as Quantize
+from typing import Any
+
+def runIt(namesAndTypes: Any, dbConnect: Any, nBounds: Any, resCol: Any, typesToDo: Any = ...): ...
+def Usage() -> None: ...

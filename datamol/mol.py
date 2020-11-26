@@ -86,7 +86,7 @@ def reorder_atoms(mol: Chem.Mol) -> Optional[Chem.Mol]:
     if mol.GetNumAtoms() == 0:
         return mol
 
-    new_order = Chem.rdmolfiles.CanonicalRankAtoms(mol, breakTies=True)
+    new_order = Chem.CanonicalRankAtoms(mol, breakTies=True)
     new_order = sorted([(y, x) for x, y in enumerate(new_order)])
     return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])
 
