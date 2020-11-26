@@ -4,7 +4,6 @@ import pytest
 import datamol as dm
 
 
-@pytest.mark.serial
 def test_generate():
 
     with pytest.raises(ValueError):
@@ -25,7 +24,6 @@ def test_generate():
     # assert "rdkit_uff_energy" in props
 
 
-@pytest.mark.serial
 def test_sasa():
 
     with pytest.raises(ValueError):
@@ -40,7 +38,6 @@ def test_sasa():
     assert sasa.shape == (50,)
 
 
-@pytest.mark.serial
 def test_rmsd():
 
     with pytest.raises(ValueError):
@@ -55,7 +52,6 @@ def test_rmsd():
     assert rmsd.shape == (50, 50)
 
 
-@pytest.mark.serial
 def test_cluster():
     # NOTE(hadim): disable here since something is wrong when running on CI.
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
