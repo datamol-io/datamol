@@ -67,6 +67,8 @@ from .io import read_csv
 from .io import read_excel
 from .io import read_sdf
 from .io import to_sdf
+from .io import to_smi
+from .io import read_smi
 
 from . import conformers
 from . import viz

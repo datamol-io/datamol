@@ -1,7 +1,11 @@
 from typing import Union
 from typing import Optional
 from typing import List
+from typing import Sequence
+from typing import TextIO
 
+import io
+import tempfile
 import pathlib
 import gzip
 
@@ -12,69 +16,72 @@ import fsspec
 import datamol as dm
 
 
-def read_csv(file_uri: Union[str, pathlib.Path], **kwargs):
+def read_csv(
+    urlpath: Union[str, pathlib.Path, TextIO],
+    **kwargs,
+) -> pd.DataFrame:
     """Read a CSV file.
 
-    NOTE(hadim): not sure this function add a real value. fsspec is also
-    supported by pandas. Consider removing it.
-
     Args:
-        file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
         kwargs: Arguments to pass to `pd.read_csv()`.
 
     Returns:
         df: a `pandas.DataFrame`
     """
-    with fsspec.open(file_uri) as f:
-        df = pd.read_csv(f, **kwargs)
-    return df
+
+    # NOTE(hadim): identical to `pd.read_csv` but in the
+    # future we might want to add more molecule-logic in there.
+    return pd.read_csv(urlpath, **kwargs)
 
 
 def read_excel(
-    file_uri: Union[str, pathlib.Path],
+    urlpath: Union[str, pathlib.Path, TextIO],
     sheet_name: Optional[Union[str, int, list]] = 0,
     **kwargs,
-):
+) -> pd.DataFrame:
     """Read an excel file.
 
-    NOTE(hadim): not sure this function add a real value. fsspec is also
-    supported by pandas. Consider removing it.
-
     Args:
-        file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
-        sheet_name (Optional[Union[str, int, list]]): see `pandas.read_excel()` doc.
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        sheet_name: see `pandas.read_excel()` doc.
         kwargs: Arguments to pass to `pd.read_excel()`.
 
     Returns:
         df: a `pandas.DataFrame`
     """
-    with fsspec.open(file_uri) as f:
-        df = pd.read_excel(f, sheet_name=0, **kwargs)
-    return df
+
+    # NOTE(hadim): identical to `pd.read_csv` but in the
+    # future we might want to add more molecule-logic in there.
+    return pd.read_excel(urlpath, sheet_name=sheet_name, **kwargs)
 
 
 def read_sdf(
-    file_uri: Union[str, pathlib.Path],
+    urlpath: Union[str, pathlib.Path, TextIO],
     as_df: bool = False,
-) -> Union[list, pd.DataFrame]:
+) -> Union[List[Chem.Mol], pd.DataFrame]:
     """Read an SDF file.
 
     Args:
-        file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
         as_df: Whether to return a list mol or a pandas DataFrame. Default to False.
-
-    Returns:
-        df: a `pandas.DataFrame`
     """
 
-    with fsspec.open(file_uri) as f:
-        if str(file_uri).endswith(".gz") or str(file_uri).endswith(".gzip"):
-            f = gzip.open(f)
-        supplier = Chem.ForwardSDMolSupplier(f)
+    # File-like object
+    if isinstance(urlpath, io.IOBase):
+        supplier = Chem.ForwardSDMolSupplier(urlpath)
         mols = [mol for mol in supplier if mol is not None]
+
+    # Regular local or remote paths
+    else:
+        with fsspec.open(urlpath) as f:
+            if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
+                f = gzip.open(f)
+            supplier = Chem.ForwardSDMolSupplier(f)
+            mols = [mol for mol in supplier if mol is not None]
 
     if as_df:
         return dm.to_df(mols)
@@ -83,29 +90,106 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[List[Chem.Mol], pd.DataFrame],
-    file_uri: Union[str, pathlib.Path],
+    mols: Union[Sequence[Chem.Mol], pd.DataFrame],
+    urlpath: Union[str, pathlib.Path, TextIO],
     smiles_column: Optional[Union[int, str]] = None,
 ):
     """Write molecules to a file.
 
     Args:
-        mols (Union[List[Chem.Mol], pd.DataFrame]):
-        file_uri (Union[str, pathlib.Path]): Path to the file. Can be a local
-            path, HTTP, HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/
-        smiles_column (Optional[Union[int, str]]): if `mols` is a dataframe, you must specify `smiles_column`
+        mols:
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        smiles_column: if `mols` is a dataframe, you must specify `smiles_column`
             for saving to sdf.
-
-    Returns:
-        df: a `pandas.DataFrame`
     """
 
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column)
 
-    with fsspec.open(file_uri, mode="w") as f:
-        writer = Chem.SDWriter(f)
+    # Filter out None values
+    mols = [mol for mol in mols if mol is not None]
+
+    # File-like object
+    if isinstance(urlpath, io.IOBase):
+        writer = Chem.SDWriter(urlpath)
         for mol in mols:
-            if mol is not None:
-                writer.write(mol)
+            writer.write(mol)
         writer.close()
+
+    # Regular local or remote paths
+    else:
+        with fsspec.open(urlpath, mode="w") as f:
+            writer = Chem.SDWriter(f)
+            for mol in mols:
+                writer.write(mol)
+            writer.close()
+
+
+def to_smi(
+    mols: Sequence[Chem.Mol],
+    urlpath: Union[str, pathlib.Path, TextIO],
+    error_if_empty: bool = False,
+):
+    """Save a list of molecules in an `.smi` file.
+
+    Args:
+        mols: a list of molecules.
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        error_if_empty: whether to raise and error if the input list is empty.
+    """
+
+    if len(mols) == 0 and error_if_empty:
+        raise ValueError("The list of mols/smiles provided is empty.")
+
+    # Filter out None values
+    mols = [mol for mol in mols if mol is not None]
+
+    # File-like object
+    if isinstance(urlpath, io.IOBase):
+        writer = Chem.SmilesWriter(urlpath, includeHeader=False, nameHeader="")
+        for mol in mols:
+            writer.write(mol)
+        writer.close()
+
+    # Regular local or remote paths
+    else:
+        with fsspec.open(urlpath, "w") as f:
+            writer = Chem.SmilesWriter(f, includeHeader=False, nameHeader="")
+            for mol in mols:
+                writer.write(mol)
+            writer.close()
+
+
+def read_smi(
+    urlpath: Union[str, pathlib.Path],
+) -> Sequence[Chem.Mol]:
+    """Read a list of smiles from am `.smi` file.
+
+    Args:
+        urlpath: Path to a file or a file-like object. If a path, can be a local path
+            or a remote one (HTTP, HTTPS, S3, GS, etc).
+            Note: file-like object are not supported yet.
+    """
+
+    active_path = urlpath
+
+    # NOTE(hadim): the temporary local file copy
+    # is because `SmilesMolSupplier` does not support
+    # using file-like object, only path.
+
+    # Copy to a local temporary path if the path is a remote one.
+    if not fsspec.utils.can_be_local(str(urlpath)):
+        active_path = pathlib.Path(tempfile.mkstemp()[1])
+        dm.utils.copy_files(urlpath, active_path)
+
+    # Read the molecules
+    supplier = Chem.SmilesMolSupplier(str(active_path), titleLine=0)
+    mols = [mol for mol in supplier if mol is not None]
+
+    # Delete the local temporary path
+    if not fsspec.utils.can_be_local(str(urlpath)):
+        active_path.unlink()
+
+    return mols
