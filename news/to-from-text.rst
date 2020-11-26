@@ -1,6 +1,7 @@
 **Added:**
 
 * Add `to_smi` and `from_smi` in the IO module.
+* Support filelike object in io module.
 
 **Changed:**
 
