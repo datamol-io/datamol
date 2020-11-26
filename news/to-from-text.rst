@@ -5,12 +5,11 @@
 
 **Changed:**
 
-* In the IO module, use `urlpath` instead of `file_uri` to follow `fsspec` conventions.
 * Switch tests of the IO module to regular functions.
 
 **Deprecated:**
 
-* <news item>
+* In the IO module, use `urlpath` instead of `file_uri` to follow `fsspec` conventions.
 
 **Removed:**
 
