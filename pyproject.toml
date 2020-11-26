@@ -2,6 +2,7 @@
 line-length = 100
 target-version = ['py37', 'py38']
 include = '\.pyi?$'
+exclude = 'typings/'
 
 [tool.pytest.ini_options]
 minversion = "6.0"
