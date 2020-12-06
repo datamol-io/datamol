@@ -23,7 +23,7 @@ jobs:
       - name: Cache conda
         uses: actions/cache@v2
         env:
-          CACHE_NUMBER: 2
+          CACHE_NUMBER: 3
         with:
           path: ~/conda_pkgs_dir
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
@@ -37,9 +37,7 @@ jobs:
           activate-environment: datamol
 
       - name: Install Dependencies
-        run: |
-          mamba install -y python=3.7  # soft fix the python version
-          mamba env update -f env.yml
+        run: mamba env update -f env.yml
 
       - name: Install library
         run: python -m pip install .
