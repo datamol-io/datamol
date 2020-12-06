@@ -23,7 +23,7 @@ jobs:
       - name: Cache conda
         uses: actions/cache@v2
         env:
-          CACHE_NUMBER: 1
+          CACHE_NUMBER: 2
         with:
           path: ~/conda_pkgs_dir
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
