@@ -11,7 +11,7 @@ from tqdm.auto import tqdm
 class JobRunner:
     def __init__(
         self,
-        n_jobs: Optional[int] = 0,
+        n_jobs: Optional[int] = -1,
         prefer: str = None,
         progress: bool = False,
         **job_kwargs,
@@ -21,7 +21,9 @@ class JobRunner:
         allows taking advantage of its features, while the progress bar use tqdm
 
         Args:
-            n_jobs: number of process (see joblib). Use 0 or None to force sequential.
+            n_jobs: Number of process. Use 0 or None to force sequential.
+                Use -1 to use all the available processors. For details see
+                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
             prefer: Choose from ['processes', 'threads'] or None. Default to None.
                 Soft hint to choose the default backend if no specific backend
                 was selected with the parallel_backend context manager. The
@@ -148,7 +150,7 @@ def parallelized(
     fn: Callable,
     inputs_list: Iterable[Any],
     scheduler: str = "processes",
-    n_jobs: Optional[int] = None,
+    n_jobs: Optional[int] = -1,
     progress: bool = False,
     arg_type: str = "arg",
 ) -> Optional[List[Any]]:
@@ -159,8 +161,9 @@ def parallelized(
         inputs_list: List of inputs to pass to `fn`.
         scheduler: Choose between ["processes", "threads"]. Defaults
             to None which uses the default joblib "loky" scheduler.
-        n_jobs: Number of workers. If None, it will default
-            to the number of processors on the machine. Defaults to None.
+        n_jobs: Number of process. Use 0 or None to force sequential.
+                Use -1 to use all the available processors. For details see
+                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
         progress: Display a progress bar. Defaults to False.
         arg_type: One of ["arg", "args", "kwargs]:
             - "arg": the input is passed as an argument: `fn(arg)` (default).
@@ -172,5 +175,4 @@ def parallelized(
     """
 
     runner = JobRunner(n_jobs=n_jobs, progress=progress, prefer=scheduler)
-    results = runner(fn, inputs_list, arg_type=arg_type)
-    return results
+    return runner(fn, inputs_list, arg_type=arg_type)
