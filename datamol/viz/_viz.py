@@ -1,3 +1,5 @@
+import fsspec
+
 from typing import Union
 from typing import List
 from typing import Tuple
@@ -14,6 +16,7 @@ def to_image(
     mol_size: Tuple[int, int] = (200, 200),
     highlight_atom: List[List[int]] = None,
     highlight_bond: List[List[int]] = None,
+    outfile: str = None,
     max_mols: int = 50,
 ):
     """Generate an image out of a molecule or a list of molecule."""
@@ -48,4 +51,11 @@ def to_image(
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
     )
+    if outfile is not None:
+        with fsspec.open(outfile, "wb") as OUT:
+            if use_svg:
+                OUT.write(image.encode())
+            else:
+                image.save(OUT, "PNG")
+
     return image
