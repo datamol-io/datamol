@@ -1,3 +1,4 @@
+import gc
 import pytest
 
 import datamol as dm
@@ -9,11 +10,13 @@ def test_generate():
         smiles = "CCCC"
         mol = dm.to_mol(smiles)
         mol = dm.conformers.generate(mol, method="custom_method")
+        gc.collect()
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=False)
     assert mol.GetNumConformers() == 50
+    gc.collect()
 
     conf = mol.GetConformer(0)
     assert conf.GetPositions().shape == (14, 3)
@@ -22,6 +25,7 @@ def test_generate():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
     assert mol.GetNumConformers() == 23
+    gc.collect()
 
     # NOTE(hadim): `minimize_energy=True` fails on GA.
     # props = conf.GetPropsAsDict()
