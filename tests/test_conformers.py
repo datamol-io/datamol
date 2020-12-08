@@ -12,11 +12,16 @@ def test_generate():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, minimize_energy=False)
+    mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=False)
     assert mol.GetNumConformers() == 50
 
     conf = mol.GetConformer(0)
     assert conf.GetPositions().shape == (14, 3)
+
+    smiles = "CCCC"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
+    assert mol.GetNumConformers() == 23
 
     # NOTE(hadim): `minimize_energy=True` fails on GA.
     # props = conf.GetPropsAsDict()
@@ -34,7 +39,7 @@ def test_sasa():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, minimize_energy=False)
     sasa = dm.conformers.sasa(mol)
-    assert sasa.shape == (50,)
+    assert sasa.shape == (17,)
 
 
 def test_rmsd():
@@ -48,14 +53,23 @@ def test_rmsd():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, minimize_energy=False)
     rmsd = dm.conformers.rmsd(mol)
-    assert rmsd.shape == (50, 50)
+    assert rmsd.shape == (17, 17)
 
 
 def test_cluster():
-    # NOTE(hadim): disable here since something is wrong when running on CI.
+    # no centroids
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, n_confs=5, minimize_energy=False)
+    mol = dm.conformers.generate(mol, n_confs=10, rms_cutoff=None, minimize_energy=False)
+    clustered_mol = dm.conformers.cluster(mol, centroids=False)
+    assert len(clustered_mol) == 3
+    assert clustered_mol[0].GetNumConformers() == 5
+    assert clustered_mol[1].GetNumConformers() == 3
+    assert clustered_mol[2].GetNumConformers() == 2
 
-    clustered_mol = dm.conformers.cluster(mol, return_centroids=False)
-    assert len(clustered_mol) == 2
+    # centroids
+    smiles = "O=C(C)Oc1ccccc1C(=O)O"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10, rms_cutoff=None, minimize_energy=False)
+    clustered_mol = dm.conformers.cluster(mol, centroids=True)
+    assert clustered_mol.GetNumConformers() == 3
