@@ -4,6 +4,24 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.7
+====================
+
+**Added:**
+
+* Add a test to monitor datamol import duration.
+
+**Changed:**
+
+* Add rms cutoff option during conformers generation.
+* Refactor conformer cluster function.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.6
 ====================
 
