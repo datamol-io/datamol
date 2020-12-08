@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* Add a test to monitor datamol import duration.
 
 **Changed:**
 
