@@ -2,6 +2,8 @@ from typing import Union
 from typing import List
 from typing import Dict
 from typing import Any
+from typing import Sequence
+from typing import Optional
 
 import copy
 
@@ -22,9 +24,11 @@ import datamol as dm
 def generate(
     mol: Chem.Mol,
     n_confs: int = None,
-    method: str = None,
+    rms_cutoff: Optional[float] = 1,
+    clear_existing: bool = True,
     align_conformers: bool = True,
     minimize_energy: bool = True,
+    method: str = None,
     energy_iterations: int = 500,
     warning_not_converged: int = 10,
     random_seed: int = 19,
@@ -58,12 +62,15 @@ def generate(
         mol: a molecule
         n_confs: Number of conformers to generate. Depends on the
             number of rotatable bonds by default. Defaults to None.
-        method: RDKit method to use for embedding. Choose among
-            ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used. Default to None.
-        align_conformers: Wehther to align conformer. Note that this is done
-            BEFORE the energy minimization procedure. Defaults to True.
+        rms_cutoff: The minimum RMS value in Angstrom at which two conformers
+            are considered redundant and one is deleted. If None, all conformers
+            are kept. This step is done after an eventual minimization step.
+        clear_existing: Whether to overwrite existing conformers for the molecule.
+        align_conformers: Wehther to align conformer. Defaults to True.
         minimize_energy: Wether to minimize conformer's energies using UFF.
             Disable to generate conformers much faster. Defaults to True.
+        method: RDKit method to use for embedding. Choose among
+            ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used. Default to None.
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
             It corresponds to the `maxIters` argument in RDKit. Defaults to 500.
         warning_not_converged: Wether to log a warning when the number of not converged conformers
@@ -89,6 +96,10 @@ def generate(
 
     # Clone molecule
     mol = copy.deepcopy(mol)
+
+    # Remove existing conformers
+    if clear_existing:
+        mol.RemoveAllConformers()
 
     # It's probably best to compute conformers using the hydrogen
     # atoms. Even if rdkit does not always use those.
@@ -125,10 +136,6 @@ def generate(
     if len(confs) == 0:
         raise ValueError(f"Conformers embedding failed for {dm.to_smiles(mol)}")
 
-    # Align conformers to each others
-    if align_conformers:
-        Chem.rdMolAlign.AlignMolConformers(mol)
-
     # Minimize energy
     if minimize_energy:
 
@@ -155,84 +162,55 @@ def generate(
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
+    # Align conformers to each others
+    if align_conformers:
+        Chem.rdMolAlign.AlignMolConformers(mol)
+
+    if rms_cutoff is not None:
+        mol = cluster(
+            mol,
+            rms_cutoff=rms_cutoff,
+            already_aligned=align_conformers,
+            centroids=True,
+        )  # type: ignore
+
     return mol
 
 
 def cluster(
     mol: Chem.Mol,
-    method: str = None,
-    distance_threshold: float = 1,
-    return_centroids: bool = True,
-    method_kwargs: Dict[Any, Any] = None,
-) -> Union[List[Chem.Mol], Chem.Mol]:
-    """Cluster molecule's conformers.
+    rms_cutoff: float = 1,
+    already_aligned: bool = False,
+    centroids: bool = True,
+):
+    """Cluster the conformers of a molecule according to an RMS threshold in Angstrom.
 
     Args:
         mol: a molecule
-        method: Distance method to use from ["RMS", "TFD"].
-            Use None for "RMS", Defaults to None.
-            - TFD uses `TorsionFingerprints.GetTFDMatrix`.
-            - RMS uses `AllChem.GetConformerRMSMatrix`.
-        distance_threshold: Threshold for the clustering. Defaults to 1.
-        return_centroids: If True, return one molecule with centroid conformers
-            only. If False return a list of molecules per cluster with all the conformers of the cluster. Defaults to True.
-        method_kwargs: Additional method to pass to the clustering function.
+        rms_cutoff: The RMS cutoff in Angstrom.
+        already_aligned: Whether or not the conformers are aligned. If False,
+            they will be aligmned furing the RMS computation.
+        centroids: If True, return one molecule with centroid conformers
+            only. If False return a list of molecules per cluster with all
+            the conformers of the cluster. Defaults to True.
     """
-
-    AVAILABLE_METHODS = ["RMS", "TFD"]
 
     # Clone molecule
     mol = copy.deepcopy(mol)
 
-    if method_kwargs is None:
-        method_kwargs = {}
+    # Compute RMS
+    dmat = AllChem.GetConformerRMSMatrix(mol, prealigned=already_aligned)
 
-    if method is None:
-        method = "RMS"
-
-    if method == "TFD":
-        kwargs = {}
-        kwargs["useWeights"] = False
-        kwargs["maxDev"] = "equal"
-        kwargs["symmRadius"] = 2
-        kwargs["ignoreColinearBonds"] = True
-        kwargs.update(method_kwargs)
-        dmat = TorsionFingerprints.GetTFDMatrix(mol, **kwargs)
-    elif method == "RMS":
-        kwargs = {}
-        kwargs["prealigned"] = False
-        kwargs.update(method_kwargs)
-        dmat = AllChem.GetConformerRMSMatrix(mol, prealigned=False)
-    else:
-        raise ValueError(f"The method {method} is not supported. Use from {AVAILABLE_METHODS}")
-
+    # Cluster
     conf_clusters = Butina.ClusterData(
         dmat,
         nPts=mol.GetNumConformers(),
-        distThresh=distance_threshold,
+        distThresh=rms_cutoff,
         isDistData=True,
         reordering=False,
     )
 
-    # Collect centroid of each cluster (first element of the list)
-    centroids = [indices[0] for indices in conf_clusters]
-
-    if return_centroids:
-        # Keep only centroid conformers
-        confs = [mol.GetConformers()[i] for i in centroids]
-        mol.RemoveAllConformers()
-        [mol.AddConformer(conf, assignId=True) for conf in confs]
-        return mol
-
-    else:
-        # Create a new molecule for each cluster and add conformers to it.
-        mols = []
-        for cluster in conf_clusters:
-            m = copy.deepcopy(mol)
-            m.RemoveAllConformers()
-            [m.AddConformer(mol.GetConformer(c), assignId=True) for c in cluster]
-            mols.append(m)
-        return mols
+    return return_centroids(mol, conf_clusters, centroids=centroids)
 
 
 def sasa(
@@ -270,7 +248,7 @@ def sasa(
             and -1 to use all cores.
 
     Returns:
-        mol (Chem.Mol): the molecule with the conformers.
+        mol: the molecule with the conformers.
     """
 
     if mol.GetNumConformers() == 0:
@@ -322,3 +300,40 @@ def rmsd(mol: Chem.Mol) -> np.ndarray:
             rmsd = Chem.rdMolAlign.AlignMol(prbMol=mol, refMol=mol, prbCid=i, refCid=j)
             rmsds.append(rmsd)
     return np.array(rmsds).reshape(n_confs, n_confs)
+
+
+def return_centroids(
+    mol: Chem.Mol,
+    conf_clusters: Sequence[Sequence[int]],
+    centroids: bool = True,
+) -> Union[List[Chem.Mol], Chem.Mol]:
+    """Given a list of cluster indices, return one single molecule
+    with only the centroid of the clusters of a list of molecules per cluster.
+
+    Args:
+        mol: a molecule.
+        conf_clusters: list of cluster indices.
+        centroids: If True, return one molecule with centroid conformers
+            only. If False return a list of molecules per cluster with all
+            the conformers of the cluster. Defaults to True.
+    """
+
+    if centroids:
+        # Collect centroid of each cluster (first element of the list)
+        centroid_list = [indices[0] for indices in conf_clusters]
+
+        # Keep only centroid conformers
+        confs = [mol.GetConformers()[i] for i in centroid_list]
+        mol.RemoveAllConformers()
+        [mol.AddConformer(conf, assignId=True) for conf in confs]
+        return mol
+
+    else:
+        # Create a new molecule for each cluster and add conformers to it.
+        mols = []
+        for cluster in conf_clusters:
+            m = copy.deepcopy(mol)
+            m.RemoveAllConformers()
+            [m.AddConformer(mol.GetConformer(c), assignId=True) for c in cluster]
+            mols.append(m)
+        return mols
