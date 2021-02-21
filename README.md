@@ -54,7 +54,7 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 Use conda:
 
 ```bash
-conda install -c invivoai datamol
+mamba install -c invivoai datamol
 ```
 
 ## Changelogs
