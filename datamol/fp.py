@@ -11,7 +11,7 @@ import numpy as np
 import datamol as dm
 
 
-def fp_to_array(fp: DataStructs.ExplicitBitVect, dtype: type = np.int) -> np.ndarray:
+def fp_to_array(fp: DataStructs.ExplicitBitVect, dtype: type = int) -> np.ndarray:
     """Convert rdkit fingerprint to numpy array."""
     if isinstance(fp, np.ndarray):
         return fp
