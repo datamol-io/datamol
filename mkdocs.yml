@@ -25,6 +25,7 @@ nav:
       - datamol.scaffold: api/datamol.scaffold.md
       - datamol.utils: api/datamol.utils.md
       - datamol.viz: api/datamol.viz.md
+  - Contribute: contribute.md
   - License: license.md
 
 theme:
@@ -47,12 +48,17 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.tasklist
+  # For `tab_length=2` in the markdown extension
+  # See https://github.com/mkdocs/mkdocs/issues/545
+  - mdx_truly_sane_lists
   - toc:
       permalink: true
 
 plugins:
   - search
   - mkdocstrings:
+      watch:
+        - datamol/
       handlers:
         python:
           setup_commands:
