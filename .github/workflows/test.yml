@@ -56,7 +56,7 @@ jobs:
           auto-activate-base: true
           activate-environment: ""
 
-      - name: Install Dependencies
+      - name: Setup conda env
         run: |
           # Patch the conda env file
           mamba install --yes pyyaml
@@ -65,23 +65,29 @@ jobs:
             rdkit=${{ matrix.rdkit-version }} \
             > env-patched.yml
 
-          # Display the new env file
-          cat env-patched.yml
-
+          # Create conda env
           conda create -n datamol
           conda activate datamol
 
-          # Install the deps
+      - name: Install Dependencies
+        run: |
+          conda activate datamol
           mamba env update -f env-patched.yml
 
       - name: Install library
-        run: python -m pip install .
+        run: |
+          conda activate datamol
+          python -m pip install .
 
       - name: Run tests
-        run: pytest -v .
+        run: |
+          conda activate datamol
+          pytest
 
       - name: Test building the doc
         run: |
+          conda activate datamol
+
           # Regenerate the API doc
           python -m datamol._mkdocs
 
@@ -91,6 +97,8 @@ jobs:
       - name: Deploy the doc
         if: ${{ github.ref == 'refs/heads/master' }}
         run: |
+          conda activate datamol
+
           # Get the privpage branch
           git fetch origin privpage
 
