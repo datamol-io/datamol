@@ -1,4 +1,4 @@
-name: Doc
+name: doc
 
 on:
   push:
@@ -7,7 +7,6 @@ on:
 
 jobs:
   doc:
-    name: Doc
     runs-on: ubuntu-latest
     defaults:
       run:

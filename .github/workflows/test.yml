@@ -1,4 +1,4 @@
-name: Test
+name: test
 
 on:
   push:
@@ -11,8 +11,6 @@ on:
 
 jobs:
   test:
-    name: Test
-
     strategy:
       fail-fast: false
       matrix:
