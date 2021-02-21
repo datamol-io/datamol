@@ -56,3 +56,9 @@ sasa = dm.conformers.sasa(mol_with_conformers)
 mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
+
+## Compatibilities
+
+| datamol | Python  | RDKit     |
+|---------|---------|-----------|
+| `0.3`   | `>=3.7` | `2020.09` |
