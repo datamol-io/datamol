@@ -1465,7 +1465,7 @@ HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/lates
         <span class="k">elif</span> <span class="n">os_name</span> <span class="o">==</span> <span class="s2">"osx"</span><span class="p">:</span>
             <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">"Darwin"</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Platform '</span><span class="si">{</span><span class="n">os_name</span><span class="si">}</span><span class="s2">' is unknown."</span><span class="p">)</span>
+            <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os_name</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">real_decorator</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
         <span class="nd">@wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
