@@ -1301,6 +1301,7 @@ and -1 to use all cores.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        mol: the molecule with the conformers.</span>
 <span class="sd">    """</span>
+    <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdFreeSASA</span>
 
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
