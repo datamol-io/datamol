@@ -60,6 +60,7 @@ jobs:
       - name: Install Dependencies
         run: |
           # Patch the conda env file
+          mamba install --yes pyyaml
           python .github/patch_conda_env.py --env env.yml -d \
             python=${{ matrix.python-version }} \
             rdkit=${{ matrix.rdkit-version }} \
