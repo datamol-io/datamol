@@ -38,10 +38,6 @@ theme:
 
 extra_css:
   - _assets/css/custom.css
-  - _assets/css/version-select.css
-
-extra_javascript:
-  - _assets/js/version-select.js
 
 markdown_extensions:
   - admonition
