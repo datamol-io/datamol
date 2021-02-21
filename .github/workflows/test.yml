@@ -14,18 +14,10 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: ["ubuntu", "macos", "windows"]
-        os: ["ubuntu"]
+        os: ["ubuntu", "macos"]
         # python-version: [3.6, 3.7, 3.8, 3.9]
         python-version: [3.8, 3.9]
         rdkit-version: [2020.09]
-        # include:
-        #   - os: ubuntu
-        #     bash-cmd: bash -l {0}
-        #   - os: macos
-        #     bash-cmd: bash -l {0}
-        #   - os: windows
-        #     bash-cmd: cmd /C call {0}
 
     runs-on: ${{ matrix.os }}-latest
 
