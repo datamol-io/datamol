@@ -1,4 +1,16 @@
-# `datamol`: the rdkit-based molecular Python library
+<img src="docs/images/logo-title-200.png" height="80px">
+
+# The rdkit-based molecular Python library
+
+<div align="center">
+
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datamol)](https://pypi.org/project/datamol/)
+[![PyPI Status](https://badge.fury.io/py/datamol.svg)](https://badge.fury.io/py/datamol)
+[![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
+[![ReadTheDocs](https://readthedocs.org/projects/datamol/badge/?version=stable)](https://datamol.readthedocs.io/en/stable/)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-org/datamol/blob/master/LICENSE)
+
+</div>
 
 `datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
