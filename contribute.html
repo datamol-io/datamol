@@ -16,7 +16,7 @@
     
     
       
-        <title>Usage - datamol</title>
+        <title>Contribute - datamol</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#usage" class="md-skip">
+        <a href="#contribute" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Usage
+              Contribute
             
           </span>
         </div>
@@ -221,49 +221,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Usage
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="usage.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="usage.html" class="md-nav__link">
         Usage
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#available-modules" class="md-nav__link">
-    Available modules
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -480,11 +442,77 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="contribute.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Contribute
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="contribute.html" class="md-nav__link md-nav__link--active">
         Contribute
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#setup-a-dev-environment" class="md-nav__link">
+    Setup a dev environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-integration" class="md-nav__link">
+    Continuous Integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-tests" class="md-nav__link">
+    Run tests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-documentation" class="md-nav__link">
+    Build the documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-a-new-version" class="md-nav__link">
+    Release a new version
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -529,8 +557,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#available-modules" class="md-nav__link">
-    Available modules
+  <a href="#setup-a-dev-environment" class="md-nav__link">
+    Setup a dev environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#continuous-integration" class="md-nav__link">
+    Continuous Integration
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#run-tests" class="md-nav__link">
+    Run tests
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#build-the-documentation" class="md-nav__link">
+    Build the documentation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#release-a-new-version" class="md-nav__link">
+    Release a new version
   </a>
   
 </li>
@@ -547,26 +603,62 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/usage.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/contribute.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
-<p><code>datamol</code> has been designed to be used with a single import:</p>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
+                <h1 id="contribute">Contribute<a class="headerlink" href="#contribute" title="Permanent link">&para;</a></h1>
+<p>The below documents the development lifecycle of <code>datamol</code>.</p>
+<h2 id="setup-a-dev-environment">Setup a dev environment<a class="headerlink" href="#setup-a-dev-environment" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>conda create -n datamol
+conda activate datamol
+
+mamba env update -f env.yml
+
+conda deactivate <span class="o">&amp;&amp;</span> conda activate datamol
+pip install -e .
 </code></pre></div>
-<p>All <code>datamol</code> functions are available under <code>dm</code>.</p>
-<h2 id="available-modules">Available modules<a class="headerlink" href="#available-modules" title="Permanent link">&para;</a></h2>
+<h2 id="continuous-integration">Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permanent link">&para;</a></h2>
+<p><code>datamol</code> uses Github Actions to:</p>
 <ul>
-<li><code>dm</code>: top-level module that contains common functions.</li>
-<li><code>dm.actions</code>: functions to edit molecules.</li>
-<li><code>dm.conformers</code>: generate and perform computation on conformers.</li>
-<li><code>dm.data</code>: get some common data (mainly for dev purposes).</li>
-<li><code>dm.fragment</code>: fragment molecules in a list of fragments.</li>
-<li><code>dm.reactions</code>: functions to work with reactions.</li>
-<li><code>dm.scaffold</code>: get representative scaffolds from a list of molecules.</li>
-<li><code>dm.viz</code>: 2D/3D visualization functions.</li>
+<li><strong>Build and test</strong> <code>datamol</code>.<ul>
+<li>Multiple combinations of OS, Python and RDKit versions are tested.</li>
+</ul>
+</li>
+<li><strong>Check</strong> the code:<ul>
+<li>Formatting with <code>black</code>.</li>
+<li>Static type check with <code>mypy</code>.</li>
+</ul>
+</li>
+<li><strong>Documentation</strong>: build and deploy the documentation on <code>master</code> and for every new git tag.</li>
+</ul>
+<h2 id="run-tests">Run tests<a class="headerlink" href="#run-tests" title="Permanent link">&para;</a></h2>
+<div class="highlight"><pre><span></span><code>pytest
+</code></pre></div>
+<h2 id="build-the-documentation">Build the documentation<a class="headerlink" href="#build-the-documentation" title="Permanent link">&para;</a></h2>
+<p>You can build and serve the documentation locally with:</p>
+<div class="highlight"><pre><span></span><code><span class="c1"># Regenerate the API doc</span>
+python -m datamol._mkdocs
+
+<span class="c1"># Build and serve the doc</span>
+mkdocs serve
+</code></pre></div>
+<h2 id="release-a-new-version">Release a new version<a class="headerlink" href="#release-a-new-version" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Install <a href="https://regro.github.io/rever-docs">rever</a>: <code>conda install -y rever</code>.</li>
+<li>Run check: <code>rever check</code>.</li>
+<li>Bump and release new version: <code>rever VERSION_NUMBER</code>.</li>
+<li>Releasing a new version will do the following things in that order:<ul>
+<li>Update <code>AUTHORS.rst</code>.</li>
+<li>Update <code>CHANGELOG.rst</code>.</li>
+<li>Bump the version number in <code>setup.py</code> and <code>_version.py</code>.</li>
+<li>Add a git tag.</li>
+<li>Push the git tag.</li>
+<li>Add a new release on the GH repo associated with the git tag.</li>
+<li>Update the appropriate feedstock to build a new conda package.</li>
+</ul>
+</li>
 </ul>
                 
               
@@ -586,7 +678,7 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
-          <a href="index.html" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="api/datamol.viz.html" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-footer-nav__button md-icon">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
             </div>
@@ -595,19 +687,19 @@
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Overview
+                datamol.viz
               </div>
             </div>
           </a>
         
         
-          <a href="examples/The_Basics.html" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="license.html" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                The Basics
+                License
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">

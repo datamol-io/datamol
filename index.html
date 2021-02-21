@@ -6,7 +6,7 @@
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width,initial-scale=1">
       
-        <meta name="description" content="A python library to work with molecules. Built on top of rdkit.">
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
       
       
       
@@ -140,13 +140,13 @@
     
       <div class="md-header-nav__source">
         
-<a href="https://github.com/invivoai-platform/datamol/" title="Go to repository" class="md-source">
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    invivoai-platform/datamol
+    datamol-org/datamol
   </div>
 </a>
       </div>
@@ -187,13 +187,13 @@
   
     <div class="md-nav__source">
       
-<a href="https://github.com/invivoai-platform/datamol/" title="Go to repository" class="md-source">
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source">
   <div class="md-source__icon md-icon">
     
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 00-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 01-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 000 40.81l195.61 195.6a28.86 28.86 0 0040.8 0l194.69-194.69a28.86 28.86 0 000-40.81z"/></svg>
   </div>
   <div class="md-source__repository">
-    invivoai-platform/datamol
+    datamol-org/datamol
   </div>
 </a>
     </div>
@@ -496,6 +496,21 @@
   
   
     <li class="md-nav__item">
+      <a href="contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="license.html" class="md-nav__link">
         License
       </a>
@@ -560,13 +575,13 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/invivoai-platform/datamol/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
                 <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p><code>datamol</code> is a python library to work molecules. It's a layer built on top of <a href="https://www.rdkit.org/"><code>rdkit</code></a> and aims to be as light as possible.</p>
+<p><code>datamol</code> is a python library to work with molecules. It's a layer built on top of <a href="https://www.rdkit.org/">RDKit</a> and aims to be as light as possible.</p>
 <ul>
 <li>🐍 Simple pythonic API</li>
 <li>⚗️ Rdkit first: all you manipulate are <code>rdkit.Chem.Mol</code> objects.</li>
@@ -576,8 +591,16 @@
 </ul>
 <h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
 <p>Use conda:</p>
-<div class="highlight"><pre><span></span><code>conda install -c conda-forge datamol
+<div class="highlight"><pre><span></span><code>mamba install -c conda-forge datamol
 </code></pre></div>
+<div class="admonition tips">
+<p class="admonition-title">Tips</p>
+<p>You can replace <code>mamba</code> by <code>conda</code>.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>We highly recommend to use a Conda Python distribution to install <code>datamol</code>. The package is also pip installable if you need it: <code>pip install datamol</code>.</p>
+</div>
 <h2 id="quick-api-tour">Quick API Tour<a class="headerlink" href="#quick-api-tour" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
 
@@ -617,6 +640,7 @@
 <span class="n">dm</span><span class="o">.</span><span class="n">to_sdf</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="s2">&quot;gs://data-bucket/smiles.sdf&quot;</span><span class="p">)</span>
 </code></pre></div>
 <h2 id="compatibilities">Compatibilities<a class="headerlink" href="#compatibilities" title="Permanent link">&para;</a></h2>
+<p>Version compatibilities are an essential topic for production-software stack. We are cautious about documenting compatibility between <code>datamol</code>, <code>python</code> and <code>rdkit</code>.</p>
 <table>
 <thead>
 <tr>
@@ -674,7 +698,7 @@
       <div class="md-footer-copyright">
         
           <div class="md-footer-copyright__highlight">
-            Copyright 2020 - 2021 InvivoAI
+            Copyright 2020 - 2021 Valence
           </div>
         
         Made with
