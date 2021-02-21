@@ -1,5 +1,5 @@
 site_name: "datamol"
-site_description: "A python library to work with molecules. Built on top of RDK."
+site_description: "A python library to work with molecules. Built on top of RDKit."
 repo_url: "https://github.com/datamol-org/datamol"
 repo_name: "datamol-org/datamol"
 copyright: Copyright 2020 - 2021 Valence

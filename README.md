@@ -1,4 +1,4 @@
-# `datamol`
+# `datamol`: the RDKit-based molecular Python library
 
 `datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
