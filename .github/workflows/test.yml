@@ -23,13 +23,10 @@ jobs:
         rdkit-version: [2020.09]
         # include:
         #   - os: ubuntu
-        #     miniforge-variant: Mambaforge
         #     bash-cmd: bash -l {0}
         #   - os: macos
-        #     miniforge-variant: Mambaforge
         #     bash-cmd: bash -l {0}
         #   - os: windows
-        #     miniforge-variant: Mambaforge
         #     bash-cmd: cmd /C call {0}
 
     runs-on: ${{ matrix.os }}-latest
@@ -58,7 +55,7 @@ jobs:
           use-only-tar-bz2: true
           python-version: 3.8
           auto-activate-base: true
-          activate-environment: ""
+          activate-environment: true
 
       - name: Install Dependencies
         run: |
