@@ -15,6 +15,7 @@ def check_logs_are_not_shown(capfd):
     assert err == ""
 
 
+@dm.utils.decorators.disable_on_os("win")
 def test_rdkit_log(capfd):
     """Test multiple rdkit log scenarios."""
 

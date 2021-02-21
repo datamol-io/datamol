@@ -14,10 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: ["ubuntu", "macos", "windows"]
-        # python-version: [3.7, 3.8, 3.9]
-        os: ["windows"]
-        python-version: [3.7]
+        os: ["ubuntu", "macos", "windows"]
+        python-version: [3.7, 3.8, 3.9]
         rdkit-version: [2020.09]
 
     runs-on: ${{ matrix.os }}-latest
@@ -33,7 +31,7 @@ jobs:
       - name: Cache conda
         uses: actions/cache@v2
         env:
-          CACHE_NUMBER: 3
+          CACHE_NUMBER: 4
         with:
           path: ~/conda_pkgs_dir
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}

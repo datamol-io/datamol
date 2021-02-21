@@ -1,4 +1,3 @@
-from multiprocessing import Value
 from typing import Callable
 from typing import List
 from typing import Union
@@ -26,7 +25,7 @@ def disable_on_os(os_names: Union[str, List[str]]):
         elif os_name == "osx":
             valid_os_names.append("Darwin")
         else:
-            raise ValueError(f"Platform '{os_name}' is unknown.")
+            valid_os_names.append(os_name)
 
     def real_decorator(function: Callable):
         @wraps(function)
