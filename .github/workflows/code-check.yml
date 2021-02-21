@@ -1,0 +1,55 @@
+name: code-check
+
+on:
+  push:
+    branches:
+      - "master"
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  python-format-black:
+    name: Python lint [black]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install black
+        run: |
+          pip install black==20.8b1
+
+      - name: Lint
+        run: black --check .
+
+  python-typing-mypy:
+    name: Python typing check [mypy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.8
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.8
+
+      - name: Install mypy
+        run: |
+          pip install mypy==0.812
+
+      - name: Run code check
+        run: |
+          mypy || true
+
+          # only fails if exit code >=2
+          exitCode=$?
+          if [ $exitCode -eq 2 ]; then
+              exit $exitCode
+          fi
