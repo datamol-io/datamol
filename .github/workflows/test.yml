@@ -53,7 +53,7 @@ jobs:
       - name: Setup conda
         uses: conda-incubator/setup-miniconda@master # TODO: pin the version when new version is released.
         with:
-          miniforge-variant: ${{ matrix.miniforge-variant }}
+          miniforge-variant: Mambaforge
           use-mamba: true
           use-only-tar-bz2: true
           python-version: 3.8
