@@ -33,6 +33,7 @@ def test_generate():
     # assert "rdkit_uff_energy" in props
 
 
+@pytest.mark.skip_platform("win")
 def test_sasa():
 
     with pytest.raises(ValueError):
