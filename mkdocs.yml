@@ -5,7 +5,7 @@ repo_url: "https://github.com/invivoai-platform/datamol"
 repo_name: "invivoai-platform/datamol"
 copyright: Copyright 2020 - 2021 InvivoAI
 
-remote_branch: "privpage"
+remote_branch: "gh-pages"
 use_directory_urls: false
 docs_dir: "docs"
 
@@ -39,10 +39,10 @@ theme:
 
 extra_css:
   - _assets/css/custom.css
-  - css/version-select.css
+  - _assets/css/version-select.css
 
 extra_javascript:
-  - js/version-select.js
+  - _assets/js/version-select.js
 
 markdown_extensions:
   - admonition
@@ -72,8 +72,3 @@ plugins:
   - mkdocs-jupyter:
       execute: false
       # kernel_name: python3
-  - mike:
-      version_selector: true # turn this off to leave out the version selector
-      css_dir: css # the directory to put the version selector's CSS
-      javascript_dir: js # the directory to put the version selector's JS
-
