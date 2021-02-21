@@ -16,7 +16,7 @@
     
     
       
-        <title>Overview - datamol</title>
+        <title>Usage - datamol</title>
       
     
     
@@ -66,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#usage" class="md-skip">
           Skip to content
         </a>
       
@@ -100,7 +100,7 @@
         <div class="md-header-nav__topic">
           <span class="md-ellipsis">
             
-              Overview
+              Usage
             
           </span>
         </div>
@@ -206,56 +206,11 @@
 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          Overview
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         Overview
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-api-tour" class="md-nav__link">
-    Quick API Tour
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -266,11 +221,20 @@
 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="usage.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+      <a href="usage.html" class="md-nav__link md-nav__link--active">
         Usage
       </a>
+      
     </li>
   
 
@@ -514,28 +478,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-api-tour" class="md-nav__link">
-    Quick API Tour
-  </a>
-  
-</li>
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -546,62 +488,16 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/invivoai-platform/datamol/edit/master/docs/index.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/invivoai-platform/datamol/edit/master/docs/usage.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p><code>datamol</code> is a python library to work molecules. It's a layer built on top of <a href="https://www.rdkit.org/"><code>rdkit</code></a> and aims to be as light as possible.</p>
-<ul>
-<li>🐍 Simple pythonic API</li>
-<li>⚗️ Rdkit first: all you manipulate are <code>rdkit.Chem.Mol</code> objects.</li>
-<li>✅ Manipulating molecules often rely on many options, datamol provides good defaults by design.</li>
-<li>🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.</li>
-<li>🕹️ Modern IO: out-of-the-box support for remote paths using <code>fsspec</code> to read and write multiple formats (sdf, xlsx, csv, etc).</li>
-</ul>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Use conda:</p>
-<div class="highlight"><pre><span></span><code>conda install -c conda-forge datamol
-</code></pre></div>
-<h2 id="quick-api-tour">Quick API Tour<a class="headerlink" href="#quick-api-tour" title="Permanent link">&para;</a></h2>
+                <h1 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h1>
+<p><code>datamol</code> has been designed to be used with a single import:</p>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
-
-<span class="c1"># Common functions</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">selfies</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_selfies</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">inchi</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># Standardize and sanitize</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">standardized_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># Dataframe manipulation</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
-<span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="c1"># 2D viz</span>
-<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">)</span>
-
-<span class="c1"># Generate conformers</span>
-<span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
-<span class="n">mol_with_conformers</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># 3D viz (using nglview)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Compute SASA from conformers</span>
-<span class="n">sasa</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol_with_conformers</span><span class="p">)</span>
-
-<span class="c1"># Easy IO</span>
-<span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="s2">&quot;s3://my-awesome-data-lake/smiles.sdf&quot;</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_sdf</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="s2">&quot;gs://data-bucket/smiles.sdf&quot;</span><span class="p">)</span>
 </code></pre></div>
+<p>All <code>datamol</code> functions are available under <code>dm</code>.</p>
                 
               
               
@@ -620,14 +516,28 @@
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
         
+          <a href="index.html" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Overview
+              </div>
+            </div>
+          </a>
         
-          <a href="usage.html" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+        
+          <a href="examples/The_Basics.html" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-footer-nav__title">
               <div class="md-ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Usage
+                The Basics
               </div>
             </div>
             <div class="md-footer-nav__button md-icon">
