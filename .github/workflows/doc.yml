@@ -1,0 +1,69 @@
+name: Doc
+
+on:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  doc:
+    name: Doc
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -l {0}
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v2
+
+      - name: Cache conda
+        uses: actions/cache@v2
+        env:
+          CACHE_NUMBER: 3
+        with:
+          path: ~/conda_pkgs_dir
+          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
+
+      - name: Setup conda
+        uses: conda-incubator/setup-miniconda@master # TODO: pin once 2.1 released.
+        with:
+          miniforge-variant: Mambaforge
+          use-mamba: true
+          use-only-tar-bz2: true
+          auto-activate-base: true
+          activate-environment: ""
+
+      - name: Setup conda env
+        run: |
+          # Patch the conda env file
+          mamba install --yes pyyaml
+          python .github/patch_conda_env.py --env env.yml -d \
+            python=${{ matrix.python-version }} \
+            rdkit=${{ matrix.rdkit-version }} \
+            > env-patched.yml
+
+          # Create conda env
+          conda create -n datamol
+
+      - name: Install Dependencies
+        run: |
+          conda activate datamol
+          mamba env update -f env-patched.yml
+
+      - name: Install library
+        run: |
+          conda activate datamol
+          python -m pip install .
+
+      - name: Deploy the doc
+        run: |
+          conda activate datamol
+
+          # Get the privpage branch
+          git fetch origin privpage
+
+          # Regenerate the API doc
+          python -m datamol._mkdocs
+
+          # Build and serve the doc
+          mkdocs gh-deploy
