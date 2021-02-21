@@ -52,11 +52,10 @@ jobs:
           miniforge-variant: ${{ matrix.miniforge-variant }}
           use-mamba: true
           use-only-tar-bz2: true
-          activate-environment: datamol
+          python-version: 3.8
 
       - name: Install Dependencies
         run: |
-          python --version
           # Patch the conda env file
           python .github/patch_conda_env.py --env env.yml -d \
             python=${{ matrix.python-version }} \
@@ -65,6 +64,9 @@ jobs:
 
           # Display the new env file
           cat env-patched.yml
+
+          conda create -n datamol
+          conda activate datamol
 
           # Install the deps
           mamba env update -f env-patched.yml
