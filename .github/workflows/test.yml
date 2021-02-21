@@ -56,7 +56,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-
+          python --version
           # Patch the conda env file
           python .github/patch_conda_env.py --env env.yml -d \
             python=${{ matrix.python-version }} \
