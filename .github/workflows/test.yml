@@ -15,9 +15,8 @@ jobs:
       fail-fast: false
       matrix:
         os: ["ubuntu", "macos"]
-        # python-version: [3.6, 3.7, 3.8, 3.9]
-        python-version: [3.8, 3.9]
-        rdkit-version: [2020.09]
+        python-version: [3.6, 3.7, 3.8, 3.9]
+        rdkit-version: [2020.03, 2020.09]
 
     runs-on: ${{ matrix.os }}-latest
 
