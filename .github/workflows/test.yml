@@ -67,7 +67,6 @@ jobs:
 
           # Create conda env
           conda create -n datamol
-          conda activate datamol
 
       - name: Install Dependencies
         run: |
