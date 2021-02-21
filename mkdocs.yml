@@ -1,8 +1,8 @@
 site_name: "datamol"
-site_description: "A python library to work with molecules. Built on top of rdkit."
-repo_url: "https://github.com/invivoai-platform/datamol"
-repo_name: "invivoai-platform/datamol"
-copyright: Copyright 2020 - 2021 InvivoAI
+site_description: "A python library to work with molecules. Built on top of RDK."
+repo_url: "https://github.com/datamol-org/datamol"
+repo_name: "datamol-org/datamol"
+copyright: Copyright 2020 - 2021 Valence
 
 remote_branch: "privpage"
 use_directory_urls: false

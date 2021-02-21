@@ -83,13 +83,23 @@ See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
 
 ## License
 
-Under BSD license. See [LICENSE](LICENSE).
+Under the Apache-2.0 license. See [LICENSE](LICENSE).
 
 ## Authors
 
 See [AUTHORS.rst](./AUTHORS.rst).
 
 ## Development Lifecycle
+
+### Setup a dev envrionment
+
+with conda
+
+### Run tests
+
+```bash
+pytest
+```
 
 ### Build the documentation
 
