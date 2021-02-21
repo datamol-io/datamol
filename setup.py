@@ -26,7 +26,7 @@ setup(
     long_description_content_type="text/markdown",
     project_urls={
         "Bug Tracker": "https://github.com/datamol-org/datamol/issues",
-        "Documentation": "https://github.com/datamol-org/datamol",
+        "Documentation": "https://datamol.readthedocs.io/en/stable/",
         "Source Code": "https://github.com/datamol-org/datamol",
     },
     python_requires=">=3.7",
