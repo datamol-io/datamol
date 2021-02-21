@@ -123,7 +123,7 @@ def test_to_sdf():
 
 def test_to_from_text():
 
-    temp_file = pathlib.Path(tempfile.mkstemp()[1])
+    temp_file = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
 
     smiles_list = [
         "Cn1c(=S)ccc2nc[nH]c21",

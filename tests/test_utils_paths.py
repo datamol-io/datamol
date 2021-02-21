@@ -5,8 +5,8 @@ import datamol as dm
 
 
 def test_copy_files():
-    source_path = pathlib.Path(tempfile.mkstemp()[1])
-    destination_path = pathlib.Path(tempfile.mkstemp()[1])
+    source_path = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
+    destination_path = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
 
     content = "hello this is a content"
     with open(source_path, "w") as f:

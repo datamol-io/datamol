@@ -5,7 +5,7 @@ DATAMOL_MAX_IMPORT_DURATION = {}  # in seconds
 DATAMOL_MAX_IMPORT_DURATION["default"] = 2
 DATAMOL_MAX_IMPORT_DURATION["linux"] = 2
 DATAMOL_MAX_IMPORT_DURATION["osx"] = 5
-DATAMOL_MAX_IMPORT_DURATION["windows"] = 2
+DATAMOL_MAX_IMPORT_DURATION["windows"] = 3
 
 
 def _get_max_import_duration():
