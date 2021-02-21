@@ -45,10 +45,10 @@ jobs:
           CACHE_NUMBER: 3
         with:
           path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
+          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
 
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@master # TODO: pin the version when new version is released.
+        uses: conda-incubator/setup-miniconda@master # TODO: pin once 2.1 released.
         with:
           miniforge-variant: Mambaforge
           use-mamba: true
