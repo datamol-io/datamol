@@ -50,6 +50,5 @@ jobs:
 
           # only fails if exit code >=2
           if [ $exitCode -ge 2 ]; then
-            echo "TESSSSSSSSSSSSSST"
             exit $exitCode
           fi
