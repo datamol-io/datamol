@@ -53,9 +53,8 @@ jobs:
           miniforge-variant: Mambaforge
           use-mamba: true
           use-only-tar-bz2: true
-          python-version: 3.8
           auto-activate-base: true
-          activate-environment: base
+          activate-environment: ""
 
       - name: Install Dependencies
         run: |
