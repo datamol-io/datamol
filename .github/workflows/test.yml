@@ -36,7 +36,7 @@ jobs:
 
     defaults:
       run:
-        shell: ${{ matrix.bash-cmd }}
+        shell: bash -l {0}
 
     steps:
       - name: Checkout the code
