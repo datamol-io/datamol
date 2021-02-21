@@ -39,6 +39,10 @@ theme:
 
 extra_css:
   - _assets/css/custom.css
+  - css/version-select.css
+
+extra_javascript:
+  - js/version-select.js
 
 markdown_extensions:
   - admonition
@@ -66,5 +70,10 @@ plugins:
             show_root_heading: yes
             heading_level: 3
   - mkdocs-jupyter:
-      execute: False
+      execute: false
       # kernel_name: python3
+  - mike:
+      version_selector: true # turn this off to leave out the version selector
+      css_dir: css # the directory to put the version selector's CSS
+      javascript_dir: js # the directory to put the version selector's JS
+

@@ -1,3 +1,0 @@
-from typing import Any
-
-def bezierArc(x1: Any, y1: Any, x2: Any, y2: Any, startAng: int = ..., extent: int = ...): ...
