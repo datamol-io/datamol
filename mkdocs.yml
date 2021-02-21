@@ -34,8 +34,9 @@ theme:
     primary: teal
     accent: purple
   features:
-    # - navigation.instant
     - navigation.expand
+  favicon: images/logo-128x128.png
+  logo: images/logo-600x600.png
 
 extra_css:
   - _assets/css/custom.css
