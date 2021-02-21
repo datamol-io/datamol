@@ -12,7 +12,7 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: ${{ matrix.os }}-latest
+
     strategy:
       fail-fast: false
       matrix:
@@ -21,19 +21,23 @@ jobs:
         # python-version: [3.6, 3.7, 3.8, 3.9]
         python-version: [3.8, 3.9]
         rdkit-version: [2020.09]
-        include:
-          - os: ubuntu
-            miniforge-variant: Mambaforge
-            bash-cmd: bash -l {0}
-          - os: macos
-            miniforge-variant: Mambaforge
-            bash-cmd: bash -l {0}
-          - os: windows
-            miniforge-variant: Mambaforge
-            bash-cmd: cmd /C call {0}
+        # include:
+        #   - os: ubuntu
+        #     miniforge-variant: Mambaforge
+        #     bash-cmd: bash -l {0}
+        #   - os: macos
+        #     miniforge-variant: Mambaforge
+        #     bash-cmd: bash -l {0}
+        #   - os: windows
+        #     miniforge-variant: Mambaforge
+        #     bash-cmd: cmd /C call {0}
+
+    runs-on: ${{ matrix.os }}-latest
+
     defaults:
       run:
         shell: ${{ matrix.bash-cmd }}
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -47,7 +51,7 @@ jobs:
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
 
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@master  # TODO: pin the version when new version is released.
+        uses: conda-incubator/setup-miniconda@master # TODO: pin the version when new version is released.
         with:
           miniforge-variant: ${{ matrix.miniforge-variant }}
           use-mamba: true
