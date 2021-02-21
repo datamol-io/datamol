@@ -46,7 +46,7 @@ jobs:
 
       - name: Run code check
         run: |
-          mypy  || exitCode=$?
+          mypy . || exitCode=$?
 
           # only fails if exit code >=2
           if [ $exitCode -ge 2 ]; then
