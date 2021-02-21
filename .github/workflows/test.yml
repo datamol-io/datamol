@@ -12,18 +12,28 @@ on:
 jobs:
   test:
     name: Test
-    runs-on: "ubuntu-latest"
-
+    runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: false
       matrix:
-        # os: [ubuntu-20.04]
-        python-version: [3.6, 3.7, 3.8, 3.9]
+        # os: ["ubuntu", "macos", "windows"]
+        os: ["ubuntu"]
+        # python-version: [3.6, 3.7, 3.8, 3.9]
+        python-version: [3.8, 3.9]
         rdkit-version: [2020.09]
-
+        include:
+          - os: ubuntu
+            miniforge-variant: Mambaforge
+            bash-cmd: bash -l {0}
+          - os: macos
+            miniforge-variant: Mambaforge
+            bash-cmd: bash -l {0}
+          - os: windows
+            miniforge-variant: Mambaforge
+            bash-cmd: cmd /C call {0}
     defaults:
       run:
-        shell: bash -l {0}
+        shell: ${{ matrix.bash-cmd }}
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
@@ -37,17 +47,27 @@ jobs:
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
 
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: conda-incubator/setup-miniconda@master  # TODO: pin the version when new version is released.
         with:
-          installer-url: https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-Linux-x86_64.sh
-          channel-priority: true
+          miniforge-variant: ${{ matrix.miniforge-variant }}
+          use-mamba: true
           use-only-tar-bz2: true
           activate-environment: datamol
 
       - name: Install Dependencies
         run: |
 
-          mamba env update -f env.yml
+          # Patch the conda env file
+          python .github/patch_conda_env.py --env env.yml -d \
+            python=${{ matrix.python-version }} \
+            rdkit=${{ matrix.rdkit-version }} \
+            > env-patched.yml
+
+          # Display the new env file
+          cat env-patched.yml
+
+          # Install the deps
+          mamba env update -f env-patched.yml
 
       - name: Install library
         run: python -m pip install .
