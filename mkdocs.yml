@@ -73,4 +73,4 @@ plugins:
             heading_level: 3
   - mkdocs-jupyter:
       execute: false
-      # kernel_name: python3
+      kernel_name: python3
