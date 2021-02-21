@@ -55,7 +55,7 @@ jobs:
           use-only-tar-bz2: true
           python-version: 3.8
           auto-activate-base: true
-          activate-environment: true
+          activate-environment: base
 
       - name: Install Dependencies
         run: |
