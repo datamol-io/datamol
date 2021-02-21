@@ -50,6 +50,6 @@ jobs:
 
           # only fails if exit code >=2
           exitCode=$?
-          if [ $exitCode -eq 2 ]; then
-              exit $exitCode
+          if [ $exitCode -ge 2 ]; then
+            exit $exitCode
           fi
