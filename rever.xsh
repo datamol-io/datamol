@@ -1,8 +1,8 @@
 # Configuration
 
 $PROJECT = $GITHUB_REPO  = 'datamol'
-$GITHUB_ORG = 'invivoai-platform'
-$PUSH_TAG_REMOTE = 'git@github.com:invivoai-platform/datamol.git'
+$GITHUB_ORG = 'datamol-org'
+$PUSH_TAG_REMOTE = 'git@github.com:datamol-org/datamol.git'
 
 # Logic
 
@@ -15,13 +15,9 @@ $CHANGELOG_FILENAME = 'CHANGELOG.rst'
 $CHANGELOG_TEMPLATE = 'TEMPLATE.rst'
 $CHANGELOG_NEWS = 'news'
 
-$FORGE_FEEDSTOCK_ORG = 'invivoai-forge'
-$FORGE_RERENDER = True
-$FORGE_USE_GIT_URL = True
-$FORGE_FORK = False
-$FORGE_PULL_REQUEST = False
+$PYPI_BUILD_COMMANDS = ('sdist', )
 
-$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease', 'forge']
+$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease', 'pypi']
 
 $VERSION_BUMP_PATTERNS = [('datamol/_version.py', r'__version__\s*=.*', "__version__ = \"$VERSION\""),
                           ('setup.py', r'version\s*=.*,', "version=\"$VERSION\",")

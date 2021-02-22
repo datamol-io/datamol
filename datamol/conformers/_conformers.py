@@ -13,7 +13,6 @@ import numpy as np
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem import rdFreeSASA
 from rdkit.Chem import TorsionFingerprints
 from rdkit.Chem import Descriptors
 from rdkit.ML.Cluster import Butina
@@ -213,6 +212,9 @@ def cluster(
     return return_centroids(mol, conf_clusters, centroids=centroids)
 
 
+dm.utils.decorators.disable_on_os("win")
+
+
 def sasa(
     mol: Chem.Mol,
     conf_id: Union[int, List[int]] = None,
@@ -250,6 +252,7 @@ def sasa(
     Returns:
         mol: the molecule with the conformers.
     """
+    from rdkit.Chem import rdFreeSASA
 
     if mol.GetNumConformers() == 0:
         raise ValueError(

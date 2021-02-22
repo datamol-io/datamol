@@ -1,3 +1,5 @@
+import pytest
+
 import datamol as dm
 
 
@@ -5,7 +7,7 @@ def check_logs_are_shown(capfd):
     smiles = "fake_smiles"
     dm.to_mol(smiles)
     _, err = capfd.readouterr()
-    assert "SMILES Parse Error: syntax error while parsing: fake_smiles" in err
+    assert "SMILES Parse Error" in err
 
 
 def check_logs_are_not_shown(capfd):
@@ -15,6 +17,7 @@ def check_logs_are_not_shown(capfd):
     assert err == ""
 
 
+@pytest.mark.skip_platform("win")
 def test_rdkit_log(capfd):
     """Test multiple rdkit log scenarios."""
 

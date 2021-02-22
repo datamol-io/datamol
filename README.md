@@ -1,6 +1,19 @@
-# `datamol`
+<img src="docs/images/logo-title-200.png" height="80px">
 
-`datamol` is a python library to work molecules. It's a layer built on top of [`rdkit`](https://www.rdkit.org/) and aims to be as light as possible.
+# The rdkit-based molecular Python library
+
+[![ReadTheDocs](https://readthedocs.org/projects/datamol/badge/?version=stable)](https://datamol.readthedocs.io/en/stable/)
+[![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
+[![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
+[![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
+[![Conda](https://img.shields.io/conda/dn/conda-forge/datamol)](https://anaconda.org/conda-forge/datamol)
+[![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datamol)](https://pypi.org/project/datamol/)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-org/datamol/blob/master/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
+
+
+`datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
@@ -8,7 +21,12 @@
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-## API
+## Entrypoints
+
+- Website: https://datamol.io
+- Documentation: https://datamol.readthedocs.io/en/stable/
+
+## Quick API Tour
 
 ```python
 import datamol as dm
@@ -49,33 +67,19 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
-## Available modules
-
-- `dm`: top-level module that contains common functions.
-- `dm.actions`: functions to edit molecules.
-- `dm.conformers`: generate and perform computation on conformers.
-- `dm.data`: get some common data (mainly for dev purposes).
-- `dm.fragment`: fragment molecules in a list of fragments.
-- `dm.reactions`: functions to work with reactions.
-- `dm.scaffold`: get representative scaffolds from a list of molecules.
-- `dm.viz`: 2D/3D visualization functions.
-
 ## Install
 
 Use conda:
 
 ```bash
-conda install -c invivoai datamol
+mamba install -c invivoai datamol
 ```
 
-## Examples
+## CI Status
 
-See examples provided as a serie of notebooks:
-
-- [The Basics](docs/examples/The_Basics.ipynb)
-- [Preprocessing Molecules](docs/examples/Preprocessing_Molecules.ipynb)
-- [Cluster Molecules](docs/examples/Cluster_Molecules.ipynb)
-- [Fragment and scaffold](docs/examples/Fragment_and_Scaffold.ipynb)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/test)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/code-check)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/doc)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
 
 ## Changelogs
 
@@ -83,36 +87,8 @@ See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
 
 ## License
 
-Under BSD license. See [LICENSE](LICENSE).
+Under the Apache-2.0 license. See [LICENSE](LICENSE).
 
 ## Authors
 
 See [AUTHORS.rst](./AUTHORS.rst).
-
-## Development Lifecycle
-
-### Build the documentation
-
-You can build and serve the documentation locally with:
-
-```bash
-# Regenerate the API doc
-python -m datamol._mkdocs
-
-# Build and serve the doc
-mkdocs serve
-```
-
-### Release a new version
-
-- Install [rever](https://regro.github.io/rever-docs): `conda install -y rever`.
-- Run check: `rever check`.
-- Bump and release new version: `rever VERSION_NUMBER`.
-- Releasing a new version will do the following things in that order:
-  - Update [AUTHORS.rst](./AUTHORS.rst).
-  - Update [CHANGELOG.rst](./CHANGELOG.rst).
-  - Bump the version number in `setup.py` and `_version.py`.
-  - Add a git tag.
-  - Push the git tag.
-  - Add a new release on the GH repo associated with the git tag.
-  - Update the appropriate feedstock to build a new conda package.

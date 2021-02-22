@@ -1,14 +1,13 @@
 [tool.black]
 line-length = 100
-target-version = ['py37', 'py38']
+target-version = ['py36', 'py37', 'py38']
 include = '\.pyi?$'
 exclude = 'typings/'
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-# nb_test_files = false # buggy at the moment
 addopts = "--verbose --cov --cov-report xml --cov-report term"
-testpaths = ["tests", "notebooks"]
+testpaths = ["tests"]
 
 [tool.coverage.run]
 omit = ["setup.py", "tests/*"]

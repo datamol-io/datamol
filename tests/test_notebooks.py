@@ -7,12 +7,13 @@ from nbconvert.preprocessors import ExecutePreprocessor
 
 ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 
-NOTEBOOK_DIR = ROOT_DIR.parent / "docs" / "examples"
+NOTEBOOK_DIR = ROOT_DIR.parent / "docs" / "tutorials"
 
 NOTEBOOK_PATHS = NOTEBOOK_DIR.glob("*.ipynb")
 NOTEBOOK_PATHS = sorted(list(NOTEBOOK_DIR.glob("*.ipynb")))
 
 
+@pytest.mark.skip_platform("win")
 @pytest.mark.parametrize("nb_path", NOTEBOOK_PATHS, ids=[str(n.name) for n in NOTEBOOK_PATHS])
 def test_notebook(nb_path):
 

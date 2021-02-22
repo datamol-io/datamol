@@ -1,9 +1,8 @@
 site_name: "datamol"
-site_description: "A python library to work with molecules. Built on top of rdkit."
-site_url: "https://github.com/invivoai-platform/datamol"
-repo_url: "https://github.com/invivoai-platform/datamol"
-repo_name: "invivoai-platform/datamol"
-copyright: Copyright 2020 - 2021 InvivoAI
+site_description: "A python library to work with molecules. Built on top of RDKit."
+repo_url: "https://github.com/datamol-org/datamol"
+repo_name: "datamol-org/datamol"
+copyright: Copyright 2020 - 2021 Valence
 
 remote_branch: "privpage"
 use_directory_urls: false
@@ -12,11 +11,11 @@ docs_dir: "docs"
 nav:
   - Overview: index.md
   - Usage: usage.md
-  - Examples:
-      - The Basics: examples/The_Basics.ipynb
-      - Preprocessing Molecules: examples/Preprocessing_Molecules.ipynb
-      - Cluster Molecules: examples/Cluster_Molecules.ipynb
-      - Fragment and Scaffold: examples/Fragment_and_Scaffold.ipynb
+  - Tutorials:
+      - The Basics: tutorials/The_Basics.ipynb
+      - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
+      - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
+      - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
   - API:
       - datamol: api/datamol.md
       - datamol.actions: api/datamol.actions.md
@@ -26,6 +25,7 @@ nav:
       - datamol.scaffold: api/datamol.scaffold.md
       - datamol.utils: api/datamol.utils.md
       - datamol.viz: api/datamol.viz.md
+  - Contribute: contribute.md
   - License: license.md
 
 theme:
@@ -34,8 +34,9 @@ theme:
     primary: teal
     accent: purple
   features:
-    # - navigation.instant
     - navigation.expand
+  favicon: images/logo-128x128.png
+  logo: images/logo-600x600.png
 
 extra_css:
   - _assets/css/custom.css
@@ -48,12 +49,17 @@ markdown_extensions:
   - pymdownx.superfences
   - pymdownx.tabbed
   - pymdownx.tasklist
+  # For `tab_length=2` in the markdown extension
+  # See https://github.com/mkdocs/mkdocs/issues/545
+  - mdx_truly_sane_lists
   - toc:
       permalink: true
 
 plugins:
   - search
   - mkdocstrings:
+      watch:
+        - datamol/
       handlers:
         python:
           setup_commands:
@@ -66,5 +72,5 @@ plugins:
             show_root_heading: yes
             heading_level: 3
   - mkdocs-jupyter:
-      execute: False
-      # kernel_name: python3
+      execute: false
+      kernel_name: python3
