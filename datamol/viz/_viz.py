@@ -1,9 +1,13 @@
+import fsspec
+
 from typing import Union
 from typing import List
 from typing import Tuple
 
 from rdkit import Chem
 from rdkit.Chem import Draw
+
+import PIL
 
 
 def to_image(
@@ -14,6 +18,7 @@ def to_image(
     mol_size: Tuple[int, int] = (200, 200),
     highlight_atom: List[List[int]] = None,
     highlight_bond: List[List[int]] = None,
+    outfile: str = None,
     max_mols: int = 50,
 ):
     """Generate an image out of a molecule or a list of molecule."""
@@ -48,4 +53,22 @@ def to_image(
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
     )
+
+    if outfile is not None:
+        with fsspec.open(outfile, "wb") as f:
+            if use_svg:
+                if isinstance(image, str):
+                    # in a terminal process
+                    f.write(image.encode())
+                else:
+                    # in a jupyter kernel process
+                    f.write(image.data.encode())
+            else:
+                if isinstance(image, PIL.PngImagePlugin.PngImageFile):
+                    # in a terminal process
+                    image.save(f)
+                else:
+                    # in a jupyter kernel process
+                    f.write(image.data)
+
     return image

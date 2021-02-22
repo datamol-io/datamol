@@ -50,7 +50,7 @@ def frag(
     sanitize: bool = True,
     fix: bool = True,
 ):
-    """Fragment molecule using FraggleSim on all bonds.
+    """Generate all possible fragmentation of a molecule.
 
     Args:
         mol: a molecule.

@@ -6,8 +6,7 @@ http://dacemirror.sci-hub.tw/journal-article/93060992e8d889318b77b562c0e5b75f/de
 This makes senses from a methodological point of view, but I can't either guarantee that its is working as expected of if it's the best
 way to tackle this problem. The goal here is to reconstruct a set of original molecules, which if they were to be fragmented using BRICS, should yield
 the same fragment set in input. Thus, in theory fragments obtained using BRICS CAN be assembled into the original molecules with this method.
-This differs from rdkit BRICSBuild implementation that requires the presence of dummy indicator atoms added by a prior BRICS fragmentation
-(which as you would guess we don't have) !
+This differs from rdkit BRICSBuild implementation that requires the presence of dummy indicator atoms added by a prior BRICS fragmentation.
 """
 
 import copy
@@ -18,7 +17,6 @@ import numpy as np
 import re
 import pkg_resources
 
-from ete3 import Tree
 from functools import lru_cache
 
 from rdkit import Chem
@@ -283,6 +281,7 @@ def break_mol(
     returnTree: bool = False,
 ):
     """Breaks a molecules into a list of fragment."""
+
     if mode.lower() == "brics":
         all_reactions = ALL_BRICS
         all_reactions_type = ALL_BRICS_TYPE
@@ -297,21 +296,22 @@ def break_mol(
         all_reactions = [all_reactions[ind] for ind in p]
         all_reactions_type = [all_reactions_type[ind] for ind in p]
 
+    nx = dm.graph._get_networkx()
     mSmi = Chem.MolToSmiles(mol, isomericSmiles=True)
-    root = Tree()
-    root.add_features(smiles=mSmi, mol=mol)
+    G = nx.DiGraph()
+    node_num = 0
+    G.add_node(node_num, smiles=mSmi, mol=mol)
     allNodes = set()
-    activePool = {mSmi: root}
+    activePool = {mSmi: node_num}
     allNodes.add(mSmi)
     while activePool:
         nSmi = list(activePool.keys())[0]
         parent = activePool.pop(nSmi)
-        mol = parent.mol
+        node = G.nodes[parent]
+        mol = node["mol"]
         for rxnIdx, reaction in zip(all_reactions_type, all_reactions):
             if onlyUseReactions and rxnIdx not in onlyUseReactions:
                 continue
-            if not silent:
-                print("--------")
             ps = reaction.RunReactants((mol,))
             if ps:
 
@@ -355,19 +355,22 @@ def break_mol(
                         if not prod.sanitized:
                             continue
                         pSmi = prod.pSmi
+                        node_num += 1
                         usmi = Chem.MolToSmiles(dm.fix_mol(prod), isomericSmiles=True)
-                        node = Tree()
-                        node.add_features(smiles=usmi, mol=prod)
-                        parent.add_child(node)
+                        G.add_node(node_num, smiles=usmi, mol=prod)
+                        G.add_edge(parent, node_num)
                         if usmi not in allNodes:
-                            activePool[pSmi] = node
+                            activePool[pSmi] = node_num
                             allNodes.add(usmi)
-                    parent.add_features(rxn=rxnIdx)
+                    G.nodes[parent]["rxn"] = rxnIdx
                     break  # at least one reaction matches
 
+    leaves_smiles = [
+        G.nodes[n]["smiles"] for n in G.nodes() if G.in_degree(n) != 0 and G.out_degree(n) == 0
+    ]
     if returnTree:
-        return [leaf.smiles for leaf in root], allNodes, root
-    return [leaf.smiles for leaf in root], allNodes
+        return leaves_smiles, allNodes, G
+    return leaves_smiles, allNodes
 
 
 def build(ll_mols, max_n_mols=float("inf"), mode="brics", frag_rxn=None, ADD_RNXS=[]):
