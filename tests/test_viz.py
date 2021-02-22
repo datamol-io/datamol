@@ -1,6 +1,3 @@
-import base64
-import io
-
 import pytest
 
 import numpy as np
