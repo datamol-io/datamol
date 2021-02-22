@@ -11,7 +11,6 @@ install_requires = [
     "numpy",
     "scipy",
     "pillow",
-    "ete3",
     "selfies",
 ]
 

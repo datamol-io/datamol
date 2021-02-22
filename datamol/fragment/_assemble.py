@@ -17,7 +17,6 @@ import numpy as np
 import re
 import pkg_resources
 
-import networkx as nx
 from functools import lru_cache
 
 from rdkit import Chem
@@ -296,6 +295,7 @@ def break_mol(
         all_reactions = [all_reactions[ind] for ind in p]
         all_reactions_type = [all_reactions_type[ind] for ind in p]
 
+    nx = _get_networkx()
     mSmi = Chem.MolToSmiles(mol, isomericSmiles=True)
     G = nx.DiGraph()
     node_num = 0

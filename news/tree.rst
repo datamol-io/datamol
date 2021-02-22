@@ -4,7 +4,8 @@
 
 **Changed:**
 
-* Support outfile writing for viz.to_image()
+* Replace ete3 by networkx due to GPL licensing.
+* Fix some typos in docs.
 
 **Deprecated:**
 
