@@ -295,7 +295,7 @@ def break_mol(
         all_reactions = [all_reactions[ind] for ind in p]
         all_reactions_type = [all_reactions_type[ind] for ind in p]
 
-    nx = _get_networkx()
+    nx = dm.graph._get_networkx()
     mSmi = Chem.MolToSmiles(mol, isomericSmiles=True)
     G = nx.DiGraph()
     node_num = 0
@@ -361,14 +361,11 @@ def break_mol(
                         if usmi not in allNodes:
                             activePool[pSmi] = node_num
                             allNodes.add(usmi)
-                    parent.add_features(rxn=rxnIdx)
-
+                    G.nodes[parent]["rxn"] = rxnIdx
                     break  # at least one reaction matches
 
     leaves_smiles = [
-        G.nodes[n]["smiles"]
-        for n in G.nodes()
-        if G.in_degree(node) != 0 and G.out_degree(node) == 0
+        G.nodes[n]["smiles"] for n in G.nodes() if G.in_degree(n) != 0 and G.out_degree(n) == 0
     ]
     if returnTree:
         return leaves_smiles, allNodes, G
