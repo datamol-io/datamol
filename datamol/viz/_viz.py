@@ -54,8 +54,7 @@ def to_image(
     if outfile is not None:
         with fsspec.open(outfile, "wb") as OUT:
             if use_svg:
-                OUT.write(image.encode())
+                OUT.write(image.data.encode())
             else:
-                image.save(OUT, "PNG")
-
+                OUT.write(image.data)
     return image

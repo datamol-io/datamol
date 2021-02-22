@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* Added outfile to viz.to_image
 
 **Changed:**
 
