@@ -58,7 +58,6 @@ def test_to_image_save_file(tmpdir):
         pytest.fail(f"The image {image_path} is invalid.")
 
     image_path = str(tmpdir.join("mol.svg"))
-    image_path = "/home/hadim/test.svg"
     dm.viz.to_image(mol, outfile=image_path, use_svg=True)
 
     # check whether the svg looks valid
