@@ -12,11 +12,10 @@ from PIL import Image
 import datamol as dm
 
 
-def _convert_ipython_to_array(image):
-    """convert ipython image to numpy array"""
-    image = base64.b64decode(str(image._repr_png_()))
-    image = Image.open(io.BytesIO(image))
-    return np.array(image)
+# NOTE(hadim): rdkit returns different image objects
+# according to the Python process context (Jupyter notebook vs terminal).
+# In consequence, those tests will fail if they are executed within a
+# Jupyter notebook.
 
 
 def test_to_image():
@@ -29,7 +28,8 @@ def test_to_image():
     # With multiple molecules
     legends = [dm.to_smiles(mol) for mol in mols]
     image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200))
-    image = _convert_ipython_to_array(image)
+    # image = _convert_ipython_to_array(image)
+    image = np.array(image)
 
     assert image.dtype == np.uint8
     assert image.shape == (400, 800, 3)
@@ -39,7 +39,8 @@ def test_to_image():
     mol = mols[0]
     legends = dm.to_smiles(mol)
     image = dm.viz.to_image(mol, legends=legends, mol_size=(200, 200))
-    image = _convert_ipython_to_array(image)
+    # image = _convert_ipython_to_array(image)
+    image = np.array(image)
 
     assert image.dtype == np.uint8
     assert image.shape == (200, 200, 3)
@@ -66,7 +67,7 @@ def test_to_image_save_file(tmpdir):
     # check whether the svg looks valid
     with open(image_path) as f:
         content = f.read().strip()
-    assert content.startswith("<svg ")
+    assert content.startswith("<?xml ")
     assert content.endswith("</svg>")
 
 

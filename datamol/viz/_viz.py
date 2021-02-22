@@ -7,6 +7,8 @@ from typing import Tuple
 from rdkit import Chem
 from rdkit.Chem import Draw
 
+import PIL
+
 
 def to_image(
     mols: Union[List[Chem.Mol], Chem.Mol],
@@ -51,30 +53,22 @@ def to_image(
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
     )
-    from rdkit.Chem.Draw import IPythonConsole
 
     if outfile is not None:
         with fsspec.open(outfile, "wb") as f:
             if use_svg:
-                f.write(image.data.encode())
+                if isinstance(image, str):
+                    # in a terminal process
+                    f.write(image.encode())
+                else:
+                    # in a jupyter kernel process
+                    f.write(image.data.encode())
             else:
-                f.write(image.data)
-
-    # if outfile is not None:
-    #     with fsspec.open(outfile, "wb") as f:
-    #         if use_svg:
-    #             if isinstance(image, str):
-    #                 # in a terminal process
-    #                 f.write(image.encode())
-    #             else:
-    #                 # in a jupyter kernel process
-    #                 f.write(image.data.encode())
-    #         else:
-    #             if isinstance(image, PIL.PngImagePlugin.PngImageFile):
-    #                 # in a terminal process
-    #                 image.save(f)
-    #             else:
-    #                 # in a jupyter kernel process
-    #                 f.write(image.data)
+                if isinstance(image, PIL.PngImagePlugin.PngImageFile):
+                    # in a terminal process
+                    image.save(f)
+                else:
+                    # in a jupyter kernel process
+                    f.write(image.data)
 
     return image

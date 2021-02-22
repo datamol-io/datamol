@@ -1,9 +1,5 @@
 from ._version import __version__
 
-# NOTE: this import makes sure the image objects returned
-# from rdkit are of always the same types.
-from rdkit.Chem.Draw import IPythonConsole
-
 from .utils import parallelized
 from .utils import JobRunner
 
