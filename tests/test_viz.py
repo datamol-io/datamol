@@ -35,6 +35,7 @@ def test_to_image():
     assert image.dtype == np.uint8
     assert image.shape == (200, 200, 3)
 
+
 def test_to_image_save_file(tmpdir):
     smiles = "CCCOCc1cc(c2ncccc2)ccc1"
     mol = dm.to_mol(smiles)
@@ -57,6 +58,7 @@ def test_to_image_save_file(tmpdir):
         content = f.read().strip()
     assert content.startswith("<?xml ")
     assert content.endswith("</svg>")
+
 
 def test_conformers():
 
