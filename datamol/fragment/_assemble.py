@@ -281,6 +281,7 @@ def break_mol(
     returnTree: bool = False,
 ):
     """Breaks a molecules into a list of fragment."""
+
     if mode.lower() == "brics":
         all_reactions = ALL_BRICS
         all_reactions_type = ALL_BRICS_TYPE
