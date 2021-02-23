@@ -31,8 +31,8 @@ nav:
 theme:
   name: material
   palette:
-    primary: teal
-    accent: purple
+    primary: deep-orange
+    accent: indigo
   features:
     - navigation.expand
   favicon: images/logo-128x128.png
@@ -73,4 +73,4 @@ plugins:
             heading_level: 3
   - mkdocs-jupyter:
       execute: false
-      kernel_name: python3
+      # kernel_name: python3
