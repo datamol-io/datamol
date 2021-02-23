@@ -23,8 +23,8 @@
 
 ## Entrypoints
 
-- Website: https://datamol.io
-- Documentation: https://datamol.readthedocs.io/en/stable/
+- Website: https://datamol-org--datamol-org.github.privpage.net/
+- Documentation: https://datamol-org--datamol.github.privpage.net/
 
 ## Quick API Tour
 
