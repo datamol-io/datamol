@@ -1,3 +1,6 @@
+# IMPORTANT: this repo is deprecated in favor of https://github.com/datamol-org/datamol
+---
+
 <img src="docs/images/logo-title-200.png" height="80px">
 
 # The rdkit-based molecular Python library
