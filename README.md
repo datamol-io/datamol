@@ -72,7 +72,7 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 Use conda:
 
 ```bash
-mamba install -c invivoai datamol
+mamba install -c conda-forge datamol
 ```
 
 ## CI Status
