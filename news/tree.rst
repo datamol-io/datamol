@@ -17,7 +17,7 @@
 
 **Fixed:**
 
-* <news item>
+* Null pointer exception during conformers generation.
 
 **Security:**
 
