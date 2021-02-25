@@ -1,6 +1,8 @@
-<img src="docs/images/logo-title.png" height="80px">
+<div align="center">
+    <img src="docs/images/logo-title.png" height="80px">
+    <h2>The rdkit-based molecular Python library</h2>
+</div>
 
-# The rdkit-based molecular Python library
 
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
