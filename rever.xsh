@@ -17,7 +17,7 @@ $CHANGELOG_NEWS = 'news'
 
 $PYPI_BUILD_COMMANDS = ('sdist', )
 
-$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease', 'pypi']
+$ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease']#, 'pypi']
 
 $VERSION_BUMP_PATTERNS = [('datamol/_version.py', r'__version__\s*=.*', "__version__ = \"$VERSION\""),
                           ('setup.py', r'version\s*=.*,', "version=\"$VERSION\",")
