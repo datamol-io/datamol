@@ -73,7 +73,7 @@ def test_conformers():
 
     smiles = "CCCC=O"
     mol = dm.to_mol(smiles)
-    mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=False)
+    mol = dm.conformers.generate(mol)
 
     # one conformer
     view = dm.viz.conformers(mol)
