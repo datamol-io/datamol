@@ -4,6 +4,31 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.8
+====================
+
+**Added:**
+
+* Added outfile to viz.to_image
+
+**Changed:**
+
+* Replace ete3 by networkx due to GPL licensing.
+* Fix some typos in docs.
+
+**Fixed:**
+
+* Null pointer exception during conformers generation.
+
+**Authors:**
+
+* Emmanuel Noutahi
+* Hadrien Mary
+* Honoré Hounwanou
+* michelml
+
+
+
 v0.2.7
 ====================
 
