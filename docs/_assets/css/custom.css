@@ -1,9 +1,3 @@
-/* :root {
-  --md-primary-fg-color:        #f2994a;
-  --md-primary-fg-color--light: #ECB7B7;
-  --md-primary-fg-color--dark:  #90030C;
-} */
-
 /* Indentation. */
 div.doc-contents:not(.first) {
   padding-left: 25px;

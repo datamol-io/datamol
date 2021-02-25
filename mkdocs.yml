@@ -30,16 +30,16 @@ nav:
 
 theme:
   name: material
-  palette:
-    primary: deep-orange
-    accent: indigo
+  # NOTE(hadim): to customize the material primary and secondary
+  # color check `docs/_assets/css/datamol-custom.css`.
   features:
     - navigation.expand
-  favicon: images/logo-128x128.png
-  logo: images/logo-600x600.png
+  favicon: images/logo.png
+  logo: images/logo.png
 
 extra_css:
   - _assets/css/custom.css
+  - _assets/css/custom-datamol.css
 
 markdown_extensions:
   - admonition

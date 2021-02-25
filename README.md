@@ -1,4 +1,4 @@
-<img src="docs/images/logo-title-200.png" height="80px">
+<img src="docs/images/logo-title.png" height="80px">
 
 # The rdkit-based molecular Python library
 
@@ -11,7 +11,6 @@
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-org/datamol/blob/master/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
-
 
 `datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
