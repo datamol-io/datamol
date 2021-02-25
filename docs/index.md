@@ -4,14 +4,11 @@
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Manipulating molecules often rely on many options, datamol provides good defaults by design.
+- ✅ Manipulating molecules often rely on many options; datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-## Entrypoints
-
-- Website: https://datamol.io
-- Documentation: https://datamol.readthedocs.io/en/stable/
+Visit our website at https://datamol-org--datamol-org.github.privpage.net/.
 
 ## Installation
 
@@ -25,7 +22,7 @@ mamba install -c conda-forge datamol
     You can replace `mamba` by `conda`.
 
 !!! note
-    We highly recommend to use a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
+    We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
 
 ## Quick API Tour
 

@@ -2,7 +2,6 @@
 
 # The rdkit-based molecular Python library
 
-[![ReadTheDocs](https://readthedocs.org/projects/datamol/badge/?version=stable)](https://datamol.readthedocs.io/en/stable/)
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
@@ -16,14 +15,13 @@
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Manipulating molecules often rely on many options, datamol provides good defaults by design.
+- ✅ Manipulating molecules often rely on many options; datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-## Entrypoints
+## Documentation
 
-- Website: https://datamol-org--datamol-org.github.privpage.net/
-- Documentation: https://datamol-org--datamol.github.privpage.net/
+Visit https://datamol-org--datamol.github.privpage.net/.
 
 ## Quick API Tour
 
@@ -66,7 +64,7 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
-## Install
+## Installation
 
 Use conda:
 
