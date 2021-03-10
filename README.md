@@ -1,11 +1,10 @@
-# IMPORTANT: this repo is deprecated in favor of https://github.com/datamol-org/datamol
+<div align="center">
+    <img src="docs/images/logo-title.png" height="80px">
+    <h3>The rdkit-based molecular Python library</h3>
+</div>
+
 ---
 
-<img src="docs/images/logo-title-200.png" height="80px">
-
-# The rdkit-based molecular Python library
-
-[![ReadTheDocs](https://readthedocs.org/projects/datamol/badge/?version=stable)](https://datamol.readthedocs.io/en/stable/)
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
@@ -15,19 +14,17 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
 
-
 `datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ Rdkit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Manipulating molecules often rely on many options, datamol provides good defaults by design.
+- ✅ Manipulating molecules often rely on many options; datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-## Entrypoints
+## Documentation
 
-- Website: https://datamol.io
-- Documentation: https://datamol.readthedocs.io/en/stable/
+Visit https://datamol-org--datamol.github.privpage.net/.
 
 ## Quick API Tour
 
@@ -70,12 +67,12 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
-## Install
+## Installation
 
 Use conda:
 
 ```bash
-mamba install -c invivoai datamol
+mamba install -c conda-forge datamol
 ```
 
 ## CI Status

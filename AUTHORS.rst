@@ -3,3 +3,5 @@ Authors are sorted alphabetically.
 
 * Emmanuel Noutahi
 * Hadrien Mary
+* Honoré Hounwanou
+* michelml

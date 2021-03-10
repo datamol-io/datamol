@@ -13,7 +13,7 @@ import numpy as np
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
-from rdkit.Chem import TorsionFingerprints
+from rdkit.Chem import rdMolAlign
 from rdkit.Chem import Descriptors
 from rdkit.ML.Cluster import Butina
 
@@ -21,18 +21,18 @@ import datamol as dm
 
 
 def generate(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     n_confs: int = None,
-    rms_cutoff: Optional[float] = 1,
+    rms_cutoff: Optional[float] = None,
     clear_existing: bool = True,
     align_conformers: bool = True,
-    minimize_energy: bool = True,
+    minimize_energy: bool = False,
     method: str = None,
     energy_iterations: int = 500,
     warning_not_converged: int = 10,
     random_seed: int = 19,
     verbose: bool = False,
-) -> Chem.Mol:
+) -> Chem.rdchem.Mol:
     """Compute conformers of a molecule.
 
     Example:
@@ -60,21 +60,21 @@ def generate(
     Args:
         mol: a molecule
         n_confs: Number of conformers to generate. Depends on the
-            number of rotatable bonds by default. Defaults to None.
+            number of rotatable bonds by default.
         rms_cutoff: The minimum RMS value in Angstrom at which two conformers
             are considered redundant and one is deleted. If None, all conformers
             are kept. This step is done after an eventual minimization step.
         clear_existing: Whether to overwrite existing conformers for the molecule.
-        align_conformers: Wehther to align conformer. Defaults to True.
+        align_conformers: Wehther to align conformer.
         minimize_energy: Wether to minimize conformer's energies using UFF.
-            Disable to generate conformers much faster. Defaults to True.
+            Disable to generate conformers much faster.
         method: RDKit method to use for embedding. Choose among
-            ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used. Default to None.
+            ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
-            It corresponds to the `maxIters` argument in RDKit. Defaults to 500.
+            It corresponds to the `maxIters` argument in RDKit.
         warning_not_converged: Wether to log a warning when the number of not converged conformers
             during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True. Disable with 0. Defaults to 10.
-        random_seed: Set to None or -1 to disable. Defaults to 19.
+        random_seed: Set to None or -1 to disable.
         verbose: Wether to enable logs during the process.
 
     Returns:
@@ -157,13 +157,14 @@ def generate(
 
         # Now we reorder conformers according to their energies,
         # so the lowest energies conformers are first.
-        ordered_conformers = [conf for _, conf in sorted(zip(energies, mol.GetConformers()))]
+        mol_clone = copy.deepcopy(mol)
+        ordered_conformers = [conf for _, conf in sorted(zip(energies, mol_clone.GetConformers()))]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
     # Align conformers to each others
     if align_conformers:
-        Chem.rdMolAlign.AlignMolConformers(mol)
+        rdMolAlign.AlignMolConformers(mol)
 
     if rms_cutoff is not None:
         mol = cluster(
@@ -177,7 +178,7 @@ def generate(
 
 
 def cluster(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     rms_cutoff: float = 1,
     already_aligned: bool = False,
     centroids: bool = True,
@@ -212,11 +213,9 @@ def cluster(
     return return_centroids(mol, conf_clusters, centroids=centroids)
 
 
-dm.utils.decorators.disable_on_os("win")
-
-
+@dm.utils.decorators.disable_on_os("win")
 def sasa(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     conf_id: Union[int, List[int]] = None,
     n_jobs: int = 1,
 ) -> np.ndarray:
@@ -284,7 +283,7 @@ def sasa(
     return np.array(sasa_values)
 
 
-def rmsd(mol: Chem.Mol) -> np.ndarray:
+def rmsd(mol: Chem.rdchem.Mol) -> np.ndarray:
     """Compute the RMSD between all the conformers of a molecule.
 
     Args:
@@ -300,16 +299,16 @@ def rmsd(mol: Chem.Mol) -> np.ndarray:
     rmsds = []
     for i in range(n_confs):
         for j in range(n_confs):
-            rmsd = Chem.rdMolAlign.AlignMol(prbMol=mol, refMol=mol, prbCid=i, refCid=j)
+            rmsd = rdMolAlign.AlignMol(prbMol=mol, refMol=mol, prbCid=i, refCid=j)
             rmsds.append(rmsd)
     return np.array(rmsds).reshape(n_confs, n_confs)
 
 
 def return_centroids(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     conf_clusters: Sequence[Sequence[int]],
     centroids: bool = True,
-) -> Union[List[Chem.Mol], Chem.Mol]:
+) -> Union[List[Chem.rdchem.Mol], Chem.rdchem.Mol]:
     """Given a list of cluster indices, return one single molecule
     with only the centroid of the clusters of a list of molecules per cluster.
 
@@ -318,7 +317,7 @@ def return_centroids(
         conf_clusters: list of cluster indices.
         centroids: If True, return one molecule with centroid conformers
             only. If False return a list of molecules per cluster with all
-            the conformers of the cluster. Defaults to True.
+            the conformers of the cluster.
     """
 
     if centroids:
@@ -326,7 +325,8 @@ def return_centroids(
         centroid_list = [indices[0] for indices in conf_clusters]
 
         # Keep only centroid conformers
-        confs = [mol.GetConformers()[i] for i in centroid_list]
+        mol_clone = copy.deepcopy(mol)
+        confs = [mol_clone.GetConformers()[i] for i in centroid_list]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in confs]
         return mol
