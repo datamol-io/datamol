@@ -6,6 +6,8 @@ All the below functions are accessible under `datamol.FUNCTION_NAME`.
 
 ::: datamol:cluster_mols
 ::: datamol:pick_diverse
+::: datamol:pick_centroids
+::: datamol:assign_to_centroids
 
 ## `datamol.convert`
 

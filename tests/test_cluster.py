@@ -31,3 +31,33 @@ class TestCluster(unittest.TestCase):
         )
 
         assert np.all(indices == excepted_indices)
+
+    def test_pick_centroids(self):
+        data = dm.data.freesolv()
+        smiles = data["smiles"].iloc[:100].tolist()
+        mols = [dm.to_mol(s) for s in smiles]
+        indices, centroids = dm.pick_centroids(
+            mols, npick=18, threshold=0.7, method="sphere", n_jobs=-1
+        )
+        excepted_indices = np.array(
+            [0, 1, 2, 3, 4, 5, 8, 11, 13, 15, 16, 17, 18, 19, 21, 23, 25, 32]
+        )
+
+        assert np.all(indices == excepted_indices)
+
+    def test_assign_to_centroids(self):
+        data = dm.data.freesolv()
+        smiles = data["smiles"].iloc[:100].tolist()
+        mols = [dm.to_mol(s) for s in smiles]
+        indices, centroids = dm.pick_centroids(
+            mols, npick=18, threshold=0.7, method="sphere", n_jobs=-1
+        )
+
+        cluster_map, cluster_list = dm.assign_to_centroids(mols, centroids, n_jobs=-1)
+        # expect centroid to be in centroid list
+        assert indices[0] in cluster_map[0]
+        # expect no intersection after assignment
+        map_intersection = set.intersection(*map(set, cluster_map.values()))
+        assert len(map_intersection) == 0
+        # expect some similar molecule in a given cluster
+        # assert 33 in cluster_map[0]

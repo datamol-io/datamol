@@ -38,6 +38,8 @@ from .mol import set_dative_bonds
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
+from .cluster import pick_centroids
+from .cluster import assign_to_centroids
 
 from . import fragment
 from . import scaffold
