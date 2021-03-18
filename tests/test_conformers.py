@@ -15,7 +15,7 @@ def test_generate():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=False)
     assert mol.GetNumConformers() == 50
-    assert mol.GetConformer(0).GetPositions().shape == (14, 3)
+    assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
@@ -27,7 +27,7 @@ def test_generate():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
     assert mol.GetNumConformers() == 23
-    assert mol.GetConformer(0).GetPositions().shape == (14, 3)
+    assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
@@ -71,31 +71,29 @@ def test_cluster():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
-    assert len(clustered_mol) == 4
-    assert clustered_mol[0].GetNumConformers() == 21
-    assert clustered_mol[1].GetNumConformers() == 16
-    assert clustered_mol[2].GetNumConformers() == 9
+    assert len(clustered_mol) == 2
+    assert clustered_mol[0].GetNumConformers() == 40
+    assert clustered_mol[1].GetNumConformers() == 10
 
     # centroids
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None)
     clustered_mol = dm.conformers.cluster(mol, centroids=True)
-    assert clustered_mol.GetNumConformers() == 4
+    assert clustered_mol.GetNumConformers() == 2
 
     # no centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
-    assert len(clustered_mol) == 3
-    assert clustered_mol[0].GetNumConformers() == 31
-    assert clustered_mol[1].GetNumConformers() == 2
-    assert clustered_mol[2].GetNumConformers() == 17
+    assert len(clustered_mol) == 2
+    assert clustered_mol[0].GetNumConformers() == 44
+    assert clustered_mol[1].GetNumConformers() == 6
 
     # centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     clustered_mol = dm.conformers.cluster(mol, centroids=True)
-    assert clustered_mol.GetNumConformers() == 3
+    assert clustered_mol.GetNumConformers() == 2
