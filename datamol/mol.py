@@ -73,12 +73,20 @@ def to_mol(
     return _mol
 
 
-def reorder_atoms(mol: Chem.Mol) -> Optional[Chem.Mol]:
+def reorder_atoms(
+    mol: Chem.Mol,
+    break_ties: bool = True,
+    include_chirality: bool = True,
+    include_isotopes: bool = True,
+) -> Optional[Chem.Mol]:
     """Reorder the atoms in a mol. It ensures a single atom order for the same molecule,
     regardless of its original representation.
 
     Args:
         mol: a molecule.
+        break_ties: Force breaking of ranked ties.
+        include_chirality: Use chiral information when computing rank.
+        include_isotopes: Use isotope information when computing rank.
 
     Returns:
         mol: a molecule.
@@ -86,7 +94,12 @@ def reorder_atoms(mol: Chem.Mol) -> Optional[Chem.Mol]:
     if mol.GetNumAtoms() == 0:
         return mol
 
-    new_order = Chem.CanonicalRankAtoms(mol, breakTies=True)
+    new_order = Chem.CanonicalRankAtoms(
+        mol,
+        breakTies=break_ties,
+        includeChirality=include_chirality,
+        includeIsotopes=include_isotopes,
+    )
     new_order = sorted([(y, x) for x, y in enumerate(new_order)])
     return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])
 
