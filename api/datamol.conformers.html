@@ -11,8 +11,8 @@
       
       
       
-      <link rel="shortcut icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.5">
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.77f3fd56.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.2c0c5eaf.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
@@ -75,13 +75,9 @@
       
     </div>
     
-      
-
-  
-
-<header class="md-header" data-md-component="header">
+      <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol">
+    <a href=".." title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -171,14 +167,10 @@
                   <div class="md-sidebar__inner">
                     
 
-  
-
-
-
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol">
+    <a href=".." title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -716,7 +708,7 @@ the conformers of the cluster. Defaults to True.</p></td>
 
 
 <h3 id="datamol.conformers._conformers.generate" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">align_conformers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">minimize_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">warning_not_converged</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">align_conformers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">minimize_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">warning_not_converged</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.conformers._conformers.generate" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -825,6 +817,15 @@ during the minimization is higher than <code>warning_not_converged</code>. Only 
         <td><code>19</code></td>
       </tr>
       <tr>
+        <td><code>add_hs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
+are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
+recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
+it’s almost always a good idea to add hydrogens to the molecule first."</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
         <td><code>verbose</code></td>
         <td><code>bool</code></td>
         <td><p>Wether to enable logs during the process.</p></td>
@@ -860,6 +861,7 @@ during the minimization is higher than <code>warning_not_converged</code>. Only 
     <span class="n">energy_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">500</span><span class="p">,</span>
     <span class="n">warning_not_converged</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
+    <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute conformers of a molecule.</span>
@@ -904,6 +906,10 @@ during the minimization is higher than <code>warning_not_converged</code>. Only 
 <span class="sd">        warning_not_converged: Wether to log a warning when the number of not converged conformers</span>
 <span class="sd">            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True. Disable with 0. Defaults to 10.</span>
 <span class="sd">        random_seed: Set to None or -1 to disable.</span>
+<span class="sd">        add_hs: Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens</span>
+<span class="sd">            are removed in the returned molecule. Warning: explicit hydrogens won&#39;t be conserved. It is strongly</span>
+<span class="sd">            recommended to let the default value to True. The RDKit documentation says: &quot;To get good 3D conformations,</span>
+<span class="sd">            it’s almost always a good idea to add hydrogens to the molecule first.&quot;</span>
 <span class="sd">        verbose: Wether to enable logs during the process.</span>
 
 <span class="sd">    Returns:</span>
@@ -929,9 +935,9 @@ during the minimization is higher than <code>warning_not_converged</code>. Only 
     <span class="k">if</span> <span class="n">clear_existing</span><span class="p">:</span>
         <span class="n">mol</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
 
-    <span class="c1"># It&#39;s probably best to compute conformers using the hydrogen</span>
-    <span class="c1"># atoms. Even if rdkit does not always use those.</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="c1"># Add hydrogens</span>
+    <span class="k">if</span> <span class="n">add_hs</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">n_confs</span><span class="p">:</span>
         <span class="c1"># Set the number of conformers depends on</span>
@@ -1002,6 +1008,9 @@ during the minimization is higher than <code>warning_not_converged</code>. Only 
             <span class="n">already_aligned</span><span class="o">=</span><span class="n">align_conformers</span><span class="p">,</span>
             <span class="n">centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
         <span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">if</span> <span class="n">add_hs</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div>
@@ -1398,7 +1407,7 @@ and -1 to use all cores.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.5cf3e710.min.js"></script>
+      <script src="../assets/javascripts/bundle.a1c7c35e.min.js"></script>
       
     
   </body>
