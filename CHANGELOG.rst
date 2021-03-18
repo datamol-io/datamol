@@ -4,6 +4,29 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.9
+====================
+
+**Added:**
+
+* `dm.pick_centroids` for picking a set of centroid molecules using various algorithm
+* `dm.assign_to_centroids` for clustering molecules based on precomputed centroids.
+
+**Changed:**
+
+* Make `add_hs` optional in `conformers.generate` and removed them when `add_hs` is True. Explicit hydrogens will be lost.
+
+**Fixed:**
+
+* Doc string of `dm.pick_diverse`
+
+**Authors:**
+
+* Emmanuel Noutahi
+* Hadrien Mary
+
+
+
 v0.2.8
 ====================
 
