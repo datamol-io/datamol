@@ -31,6 +31,7 @@ def generate(
     energy_iterations: int = 500,
     warning_not_converged: int = 10,
     random_seed: int = 19,
+    add_hs: bool = True,
     verbose: bool = False,
 ) -> Chem.rdchem.Mol:
     """Compute conformers of a molecule.
@@ -75,6 +76,8 @@ def generate(
         warning_not_converged: Wether to log a warning when the number of not converged conformers
             during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True. Disable with 0. Defaults to 10.
         random_seed: Set to None or -1 to disable.
+        add_hs: Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
+            are removed in the returned molecule. Warning: explicit hydrogens won't be conserved.
         verbose: Wether to enable logs during the process.
 
     Returns:
@@ -100,9 +103,9 @@ def generate(
     if clear_existing:
         mol.RemoveAllConformers()
 
-    # It's probably best to compute conformers using the hydrogen
-    # atoms. Even if rdkit does not always use those.
-    mol = Chem.AddHs(mol)
+    # Add hydrogens
+    if add_hs:
+        mol = Chem.AddHs(mol)
 
     if not n_confs:
         # Set the number of conformers depends on
@@ -173,6 +176,9 @@ def generate(
             already_aligned=align_conformers,
             centroids=True,
         )  # type: ignore
+
+    if add_hs:
+        mol = Chem.RemoveHs(mol)
 
     return mol
 
