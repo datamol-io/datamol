@@ -5222,7 +5222,7 @@ Default to False.</p></td>
 
 
 <h3 id="datamol.mol.reorder_atoms" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">reorder_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">reorder_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">break_ties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_chirality</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">include_isotopes</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
 <a href="#datamol.mol.reorder_atoms" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -5249,6 +5249,24 @@ regardless of its original representation.</p>
         <td><p>a molecule.</p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>break_ties</code></td>
+        <td><code>bool</code></td>
+        <td><p>Force breaking of ranked ties.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>include_chirality</code></td>
+        <td><code>bool</code></td>
+        <td><p>Use chiral information when computing rank.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>include_isotopes</code></td>
+        <td><code>bool</code></td>
+        <td><p>Use isotope information when computing rank.</p></td>
+        <td><code>True</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -5268,12 +5286,20 @@ regardless of its original representation.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_atoms</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">break_ties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_chirality</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">include_isotopes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Reorder the atoms in a mol. It ensures a single atom order for the same molecule,</span>
 <span class="sd">    regardless of its original representation.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
+<span class="sd">        break_ties: Force breaking of ranked ties.</span>
+<span class="sd">        include_chirality: Use chiral information when computing rank.</span>
+<span class="sd">        include_isotopes: Use isotope information when computing rank.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -5281,7 +5307,12 @@ regardless of its original representation.</p>
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">mol</span>
 
-    <span class="n">new_order</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">breakTies</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">new_order</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span>
+        <span class="n">mol</span><span class="p">,</span>
+        <span class="n">breakTies</span><span class="o">=</span><span class="n">break_ties</span><span class="p">,</span>
+        <span class="n">includeChirality</span><span class="o">=</span><span class="n">include_chirality</span><span class="p">,</span>
+        <span class="n">includeIsotopes</span><span class="o">=</span><span class="n">include_isotopes</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="n">new_order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_order</span><span class="p">)])</span>
     <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">new_order</span><span class="p">])</span>
 </code></pre></div>
