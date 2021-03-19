@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.10
+====================
+
+**Changed:**
+
+* Propagate more options to dm.reorder_atoms.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.9
 ====================
 
