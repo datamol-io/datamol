@@ -4,8 +4,6 @@ from typing import List
 import copy
 import itertools
 
-import ipywidgets as widgets
-
 from rdkit import Chem
 
 
@@ -16,6 +14,17 @@ def _get_nglview():
         return nv
     except ImportError:
         raise ImportError("You must install nglview from https://github.com/nglviewer/nglview.")
+
+
+def _get_ipywidgets():
+    try:
+        import ipywidgets as widgets
+
+        return widgets
+    except ImportError:
+        raise ImportError(
+            "You must install ipywidgets from https://github.com/jupyter-widgets/ipywidgets/."
+        )
 
 
 def conformers(
@@ -48,12 +57,13 @@ def conformers(
         width (str, optional): The width of the returned view. Defaults to "auto".
     """
 
+    widgets = _get_ipywidgets()
+    nv = _get_nglview()
+
     if mol.GetNumConformers() == 0:
         raise ValueError(
             "The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`."
         )
-
-    nv = _get_nglview()
 
     # Clone the molecule
     mol = copy.deepcopy(mol)
