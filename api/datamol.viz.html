@@ -956,12 +956,13 @@ Defaults to True.</p></td>
 <span class="sd">        width (str, optional): The width of the returned view. Defaults to &quot;auto&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="n">widgets</span> <span class="o">=</span> <span class="n">_get_ipywidgets</span><span class="p">()</span>
+    <span class="n">nv</span> <span class="o">=</span> <span class="n">_get_nglview</span><span class="p">()</span>
+
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
             <span class="s2">&quot;The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`.&quot;</span>
         <span class="p">)</span>
-
-    <span class="n">nv</span> <span class="o">=</span> <span class="n">_get_nglview</span><span class="p">()</span>
 
     <span class="c1"># Clone the molecule</span>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
