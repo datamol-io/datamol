@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.11
+====================
+
+**Changed:**
+
+* Make ipywidgets an optional dep.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.2.10
 ====================
 
