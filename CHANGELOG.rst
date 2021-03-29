@@ -4,6 +4,19 @@ pantagruel Change Log
 
 .. current developments
 
+v0.2.12
+====================
+
+**Fixed:**
+
+* Tqdm progress bar update on completion of job and not submission
+
+**Authors:**
+
+* Emmanuel Noutahi
+
+
+
 v0.2.11
 ====================
 
