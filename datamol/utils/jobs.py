@@ -4,6 +4,8 @@ from typing import Optional
 from typing import Any
 from typing import List
 
+import contextlib
+import joblib
 from joblib import Parallel, delayed
 from tqdm.auto import tqdm
 
@@ -139,11 +141,33 @@ class JobRunner:
 
         def run(**tq_args):
             def tmp(op_iter):
-                return Parallel(**joblib_args)(tqdm(op_iter, **tq_args))
+                with _tqdm_callback(tqdm(**tq_args)) as pbar:
+                    return Parallel(**joblib_args)(op_iter)
 
             return tmp
 
         return run
+
+
+@contextlib.contextmanager
+def _tqdm_callback(pbar):
+    """Report tqdm update on job completion"""
+
+    class _CompletionCallBack(joblib.parallel.BatchCompletionCallBack):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+        def __call__(self, *args, **kwargs):
+            pbar.update(n=self.batch_size)
+            return super().__call__(*args, **kwargs)
+
+    jlib_callback = joblib.parallel.BatchCompletionCallBack
+    joblib.parallel.BatchCompletionCallBack = _CompletionCallBack
+    try:
+        yield pbar
+    finally:
+        joblib.parallel.BatchCompletionCallBack = jlib_callback
+        pbar.close()
 
 
 def parallelized(
