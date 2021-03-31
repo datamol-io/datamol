@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.7">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.0">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.c772ddf0.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.33e2939f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.7fa14f5b.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
         
       
     
@@ -57,8 +57,9 @@
     
     
     <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-      
   
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
     
     <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
@@ -101,9 +102,8 @@
         </div>
       </div>
     </div>
-    <div class="md-header__options">
-      
-    </div>
+    
+    
     
       <label class="md-header__button md-icon" for="__search">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
@@ -613,55 +613,82 @@
                 
                 
 <div class="notebook-content">
+<script>
+(function() {
+  function addWidgetsRenderer() {
+    var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
+    var scriptElement = document.createElement('script');
+    var widgetRendererSrc = '@jupyter-widgets/html-manager@/dist/embed-amd.js';
+    var widgetState;
+
+    // Fallback for older version:
+    try {
+      widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
+
+      if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
+        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
+      }
+    } catch(e) {}
+
+    scriptElement.src = widgetRendererSrc;
+    document.body.appendChild(scriptElement);
+  }
+
+  document.addEventListener('DOMContentLoaded', addWidgetsRenderer);
+}());
+</script>
+
 <style type="text/css">
+    
     pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 span.linenos { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
-.highlight .hll { background-color: var(--jp-cell-editor-active-background) }
-.highlight { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
-.highlight .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
-.highlight .err { color: var(--jp-mirror-editor-error-color) } /* Error */
-.highlight .k { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword */
-.highlight .o { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator */
-.highlight .p { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation */
-.highlight .ch { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Hashbang */
-.highlight .cm { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Multiline */
-.highlight .cp { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Preproc */
-.highlight .cpf { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.PreprocFile */
-.highlight .c1 { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Single */
-.highlight .cs { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Special */
-.highlight .kc { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Constant */
-.highlight .kd { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Declaration */
-.highlight .kn { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Namespace */
-.highlight .kp { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Pseudo */
-.highlight .kr { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Reserved */
-.highlight .kt { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Type */
-.highlight .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
-.highlight .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
-.highlight .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
-.highlight .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
-.highlight .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
-.highlight .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
-.highlight .mh { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Hex */
-.highlight .mi { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer */
-.highlight .mo { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Oct */
-.highlight .sa { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Affix */
-.highlight .sb { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Backtick */
-.highlight .sc { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Char */
-.highlight .dl { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Delimiter */
-.highlight .sd { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Doc */
-.highlight .s2 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Double */
-.highlight .se { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Escape */
-.highlight .sh { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Heredoc */
-.highlight .si { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Interpol */
-.highlight .sx { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Other */
-.highlight .sr { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Regex */
-.highlight .s1 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Single */
-.highlight .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
-.highlight .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
+.highlight-ipynb .hll { background-color: var(--jp-cell-editor-active-background) }
+.highlight-ipynb { background: var(--jp-cell-editor-background); color: var(--jp-mirror-editor-variable-color) }
+.highlight-ipynb .c { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment */
+.highlight-ipynb .err { color: var(--jp-mirror-editor-error-color) } /* Error */
+.highlight-ipynb .k { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword */
+.highlight-ipynb .o { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator */
+.highlight-ipynb .p { color: var(--jp-mirror-editor-punctuation-color) } /* Punctuation */
+.highlight-ipynb .ch { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Hashbang */
+.highlight-ipynb .cm { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Multiline */
+.highlight-ipynb .cp { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Preproc */
+.highlight-ipynb .cpf { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.PreprocFile */
+.highlight-ipynb .c1 { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Single */
+.highlight-ipynb .cs { color: var(--jp-mirror-editor-comment-color); font-style: italic } /* Comment.Special */
+.highlight-ipynb .kc { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Constant */
+.highlight-ipynb .kd { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Declaration */
+.highlight-ipynb .kn { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Namespace */
+.highlight-ipynb .kp { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Pseudo */
+.highlight-ipynb .kr { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Reserved */
+.highlight-ipynb .kt { color: var(--jp-mirror-editor-keyword-color); font-weight: bold } /* Keyword.Type */
+.highlight-ipynb .m { color: var(--jp-mirror-editor-number-color) } /* Literal.Number */
+.highlight-ipynb .s { color: var(--jp-mirror-editor-string-color) } /* Literal.String */
+.highlight-ipynb .ow { color: var(--jp-mirror-editor-operator-color); font-weight: bold } /* Operator.Word */
+.highlight-ipynb .w { color: var(--jp-mirror-editor-variable-color) } /* Text.Whitespace */
+.highlight-ipynb .mb { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Bin */
+.highlight-ipynb .mf { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Float */
+.highlight-ipynb .mh { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Hex */
+.highlight-ipynb .mi { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer */
+.highlight-ipynb .mo { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Oct */
+.highlight-ipynb .sa { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Affix */
+.highlight-ipynb .sb { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Backtick */
+.highlight-ipynb .sc { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Char */
+.highlight-ipynb .dl { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Delimiter */
+.highlight-ipynb .sd { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Doc */
+.highlight-ipynb .s2 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Double */
+.highlight-ipynb .se { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Escape */
+.highlight-ipynb .sh { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Heredoc */
+.highlight-ipynb .si { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Interpol */
+.highlight-ipynb .sx { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Other */
+.highlight-ipynb .sr { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Regex */
+.highlight-ipynb .s1 { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Single */
+.highlight-ipynb .ss { color: var(--jp-mirror-editor-string-color) } /* Literal.String.Symbol */
+.highlight-ipynb .il { color: var(--jp-mirror-editor-number-color) } /* Literal.Number.Integer.Long */
   </style>
+
 
 
 <style type="text/css">
@@ -14402,7 +14429,8 @@ body.lm-mod-override-cursor .jp-OutputArea-output.jp-mod-isolated:before {
 |----------------------------------------------------------------------------*/
 
 </style>
-<style type="text/css">
+
+    <style type="text/css">
 /*-----------------------------------------------------------------------------
 | Copyright (c) Jupyter Development Team.
 | Distributed under the terms of the Modified BSD License.
@@ -14792,7 +14820,10 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-icon-contrast-color3: var(--md-blue-600);
 }
 </style>
-<style type="text/css">
+
+
+
+<style>
 /* Reset */
 *, *::before, *::after {
     -webkit-box-sizing: border-box;
@@ -14813,54 +14844,60 @@ all of MD as it is not optimized for dense, information rich UIs.
 }
 
 /* Anchor links */
-.anchor-link {
+.jupyter-notebook .anchor-link {
     display: none;
 }
 h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
     display: inline-block;
 }
 
-/* Markdown cells: Remove prompt */
+/* Markdown cells: Remove Input prompt */
 .jp-Cell-inputWrapper .jp-InputPrompt {
     display: none;
 }
 
-/* Code cells: Show prompt */
+/* Code cells: Show Input prompt */
 .jp-CodeCell .jp-Cell-inputWrapper .jp-InputPrompt {
     display: block;
 }
 
-/* Prompt fixes */
+/* Code pre block scroll horizontaly */
 .jp-InputPrompt, .jp-OutputPrompt{
     overflow: visible;
 }
 
-/* Lab uses move for the input prompts */
+/* Lab uses move cursor for the input prompts */
 .jp-Notebook .jp-Cell .jp-InputPrompt {
     cursor: default;
 }
 
-/* Editor max-width */
+/* Code cell max-width */
 .jp-InputArea-editor {
     width: 1px;
 }
 
-/* Editor colors */
-.jp-Editor .highlight {
-    margin: 0.4em;
-    background: var(--jp-cell-editor-background);
-    color: var(--jp-mirror-editor-variable-color);
+/* Code cell Fix pre margin */
+.jp-InputArea-editor .highlight-ipynb pre {
+    margin: 0;
+    padding: 5px 10px;
 }
 
 /* Editor colors */
-.jp-Editor .highlight pre {
+/* .jp-Editor .highlight {
+    margin: 0.4em;
+    background: var(--jp-cell-editor-background);
+    color: var(--jp-mirror-editor-variable-color);
+} */
+
+/* Editor colors */
+/* .jp-Editor .highlight pre {
     background: none;
     border: none;
     margin: 0;
     overflow-x: auto;
-}
+} */
 
-/* Material mkdocs */
+/* MKDocs Material theme defaults */
 .jp-RenderedHTMLCommon p {
     font-size: .8rem;
     line-height: 1.6;
@@ -14900,9 +14937,12 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
     border: none;
 }
 
+.jp-RenderedHTMLCommon .admonition p:not(:first-child) {
+    margin: 1em 0;
+}
 
 /* Tags on cells */
-/* Mostly copying this from straight Jupyter */
+/* Mostly copying this from straight from Jupyter */
 .celltoolbar {
     border: none;
     background: #EEE;
@@ -14948,7 +14988,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
     display: inline-block;
 }
 
-/* Bokeh plots table no hover */
+/* Fix: Bokeh plots table no hover */
 .bk-plot-wrapper tbody tr {
     background: none !important;
 }
@@ -14995,9 +15035,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
     }
     init_mathjax();
     </script>
-    <!-- End of mathjax configuration -->
-<body class="jp-Notebook" data-jp-theme-light="true" data-jp-theme-name="JupyterLab Light">
-<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+    <!-- End of mathjax configuration --><div class="jupyter-notebook"><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
 <div class="jp-Cell-inputWrapper">
 <div class="jp-InputArea jp-Cell-inputArea">
 <div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[11]:</div>
@@ -15005,7 +15043,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
 </pre></div>
@@ -15029,7 +15067,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Mol from a smiles</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Mol from a smiles</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">mol</span>
 </pre></div>
@@ -15073,7 +15111,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Morgan fingerprint</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Morgan fingerprint</span>
 <span class="n">fp</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">fp</span>
 </pre></div>
@@ -15115,7 +15153,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Generate a selfies</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Generate a selfies</span>
 <span class="n">selfies</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_selfies</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">selfies</span>
 </pre></div>
@@ -15157,7 +15195,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get InChi</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get InChi</span>
 <span class="n">inchi</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">inchi</span>
 </pre></div>
@@ -15204,11 +15242,10 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load a built-in dataset (only for demonstration purposes)</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load a built-in dataset (only for demonstration purposes)</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
 
 <span class="c1"># Make a molecule column from the smiles column</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;smiles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
@@ -15318,7 +15355,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Convert a dataframe to a list of mols</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Convert a dataframe to a list of mols</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
 <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s2">&quot;smiles&quot;</span><span class="p">)</span>
 <span class="n">mols</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
@@ -15365,7 +15402,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Convert a list of mols to a dataframe</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Convert a list of mols to a dataframe</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_df</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
 <span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
@@ -15473,7 +15510,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get a list of molecules</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Get a list of molecules</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
 <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[:</span><span class="mi">8</span><span class="p">]</span>
@@ -15527,7 +15564,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
 
 <span class="c1"># Generate conformers</span>
@@ -15574,7 +15611,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute SASA from conformers (not on windows)</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute SASA from conformers (not on windows)</span>
 <span class="n">sasa</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">sasa</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
 </pre></div>
@@ -15615,7 +15652,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute RMSD between conformers</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute RMSD between conformers</span>
 <span class="n">rmsd</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">rmsd</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">rmsd</span><span class="p">[:</span><span class="mi">4</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
@@ -15660,7 +15697,7 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Visualize the conformers in 3D</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Visualize the conformers in 3D</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s2">&quot;auto&quot;</span><span class="p">)</span>
 </pre></div>
 
@@ -15686,9 +15723,9 @@ h1:hover .anchor-link, h2:hover .anchor-link, h3:hover .anchor-link {
 
 
 
-<div id="900d1fd0-437e-4a20-9117-444b1c5a8c21" class="jupyter-widgets jp-OutputArea-output ">
+<div id="70a53faa-e7d2-4622-8d49-e1cbc7dc4f1d" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('900d1fd0-437e-4a20-9117-444b1c5a8c21');
+var element = document.getElementById('70a53faa-e7d2-4622-8d49-e1cbc7dc4f1d');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "213a222037084dbf8780e5bc2a48bcf2", "version_major": 2, "version_minor": 0}
@@ -15708,9 +15745,9 @@ var element = document.getElementById('900d1fd0-437e-4a20-9117-444b1c5a8c21');
 
 
 
-<div id="cac6e980-393d-4ce1-afd1-def51b0ba670" class="jupyter-widgets jp-OutputArea-output ">
+<div id="50a9fc83-037b-4811-972c-eece6990a2c3" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
+var element = document.getElementById('50a9fc83-037b-4811-972c-eece6990a2c3');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "2a1443db5bdc4e78b134cec68a40ad6a", "version_major": 2, "version_minor": 0}
@@ -15736,8 +15773,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute the pairwise Tanimoto similarity distance using Morgan fingerprints.</span>
-<span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Compute the pairwise Tanimoto similarity distance using Morgan fingerprints.</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;smiles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
@@ -15805,7 +15841,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span><span class="c1"># Easy parallelization</span>
+    <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Easy parallelization</span>
 <span class="k">def</span> <span class="nf">compute_something</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
     <span class="c1"># just a fake computation</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">**</span> <span class="mf">0.5</span>
@@ -15859,7 +15895,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
         
         
         <div class="CodeMirror cm-s-jupyter">
-    <div class=" highlight highlight-ipynb hl-python"><pre><span></span>
+    <div class="highlight-ipynb hl-python"><pre><span></span>
 </pre></div>
 
         </div>
@@ -15869,7 +15905,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
 </div>
 
 </div>
-</body>
+</div>
 
 
 </div>
@@ -15884,6 +15920,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
             </article>
           </div>
         </div>
+        
       </main>
       
         
@@ -15948,7 +15985,7 @@ var element = document.getElementById('cac6e980-393d-4ce1-afd1-def51b0ba670');
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": null}</script>
     
     
-      <script src="../assets/javascripts/bundle.65ce87ac.min.js"></script>
+      <script src="../assets/javascripts/bundle.d892486b.min.js"></script>
       
     
   </body>
