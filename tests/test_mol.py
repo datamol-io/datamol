@@ -106,11 +106,11 @@ class TestMol(unittest.TestCase):
         fixed_smiles = [dm.sanitize_smiles(smiles) for smiles in smiles_list]
         assert len([x for x in fixed_smiles if x is not None]) == 6
 
-    def test_sanitize_best(self):
+    def test_sanitize_first(self):
 
         smiles = ["fake_smiles", "CC(=O)Oc1ccccc1C(=O)O"]
         mols = [dm.to_mol(s) for s in smiles]
-        mol = dm.sanitize_best(mols)
+        mol = dm.sanitize_first(mols)
         assert dm.to_smiles(mol) == "CC(=O)Oc1ccccc1C(=O)O"
 
     def test_standardize_mol(self):

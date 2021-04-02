@@ -31,7 +31,8 @@ def read_csv(
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.
         smiles_column: Use this column to build a mol column.
-        mol_column: name to give to the mol column.
+        mol_column: Name to give to the mol column. If not None a mol column will be build.
+            Avoid when loading a very large file.
         kwargs: Arguments to pass to `pd.read_csv()`.
 
     Returns:
@@ -58,7 +59,8 @@ def read_excel(
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.
         sheet_name: see `pandas.read_excel()` doc.
-        smiles_column: Use this column to build a mol column.
+        mol_column: Name to give to the mol column. If not None a mol column will be build.
+            Avoid when loading a very large file.
         mol_column: name to give to the mol column.
         kwargs: Arguments to pass to `pd.read_excel()`.
 

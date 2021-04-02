@@ -20,7 +20,7 @@ def compute_reaction_product(out, single_output=True):
     # Might be a important to make a tradeoff decision in selecting products for greater speed.
     # product = sorted(out, key=lambda x: MoleculeEnv.compute_reward_from_mol(x, True))[-1]
     # sampling from list of products is an alternative
-    return dm.sanitize_best(np.random.permutation(out))
+    return dm.sanitize_first(np.random.permutation(out))
 
 
 @singledispatch

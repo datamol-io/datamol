@@ -215,7 +215,7 @@ def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
     return smiles
 
 
-def sanitize_best(mols: List[Chem.rdchem.Mol], charge_neutral: bool = False, sanifix: bool = True):
+def sanitize_first(mols: List[Chem.rdchem.Mol], charge_neutral: bool = False, sanifix: bool = True):
     """Sanitize a list of molecules and return the first valid molecule seen in the list.
 
     Args:

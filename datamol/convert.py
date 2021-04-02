@@ -35,8 +35,10 @@ def to_smiles(
         explicit_bonds: if true, all bond orders will be explicitly indicated in the output SMILES.
         explicit_hs: if true, all H counts will be explicitly indicated in the output SMILES.
         randomize: whether to randomize the generated smiles. Override `canonical`.
+        cxsmiles: Whether to return a CXSMILES instead of a SMILES.
+        allow_to_fail: Raise an error if the conversion to SMILES fails. Return None otherwise.
     """
-    if ordered:
+    if ordered and canonical is False:
         mol = dm.reorder_atoms(mol)
 
     if randomize:
@@ -89,7 +91,12 @@ def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     if isinstance(mol, Chem.rdchem.Mol):
         mol = to_smiles(mol)
 
-    return sf.encoder(mol)
+    selfies = sf.encoder(mol)
+
+    if selfies == -1:
+        return None
+
+    return selfies
 
 
 def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.rdchem.Mol]]:
@@ -245,9 +252,11 @@ def to_df(
     ]
     props_df = pd.DataFrame(props)
 
-    # If a smiles column already exists in the props, we remove it
-    # in favor of the one specified as args.
+    # If a smiles column with the same name as specified in the inputs exists
+    # in the props, we rename it to avoid having two columns with the same name.
     if smiles_column is not None and smiles_column in props_df.columns:
+        # new_col_name = f"{smiles_column}_from_props"
+        # props_df.rename(columns={smiles_column: new_col_name}, inplace=True)
         props_df.pop(smiles_column)
 
     # Concat the df with the properties df

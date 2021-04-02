@@ -21,7 +21,7 @@ from .mol import reorder_atoms
 from .mol import randomize_atoms
 from .mol import to_neutral
 from .mol import sanitize_mol
-from .mol import sanitize_best
+from .mol import sanitize_first
 from .mol import sanitize_smiles
 from .mol import standardize_smiles
 from .mol import standardize_mol
