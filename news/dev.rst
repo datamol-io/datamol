@@ -6,6 +6,8 @@
 * `dm.conformers.get_coords`
 * `dm.conformers.center_of_mass`
 * `dm.conformers.translate`
+* `dm.enumerate_stereoisomers`
+* `dm.enumerate_tautomers`
 
 **Changed:**
 

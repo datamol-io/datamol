@@ -236,3 +236,22 @@ class TestMol(unittest.TestCase):
         dm.copy_mol_props(source, destination)
 
         assert destination.GetPropsAsDict() == source.GetPropsAsDict()
+
+    def test_enumerate_tautomers(self):
+        mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+
+        mols = dm.enumerate_tautomers(mol, n_variants=10)
+
+        assert {dm.to_smiles(m) for m in mols} == {"O=C1C=[N:1]C2CCCCC2C1", "OC1=CC2CCCCC2[N:1]=C1"}
+
+    def test_enumerate_stereo(self):
+        mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+
+        mols = dm.enumerate_stereoisomers(mol, n_variants=10)
+
+        assert {dm.to_smiles(m) for m in mols} == {
+            "OC1=C[C@@H]2CCCC[C@@H]2[N:1]=C1",
+            "OC1=C[C@@H]2CCCC[C@H]2[N:1]=C1",
+            "OC1=C[C@H]2CCCC[C@@H]2[N:1]=C1",
+            "OC1=C[C@H]2CCCC[C@H]2[N:1]=C1",
+        }

@@ -38,6 +38,8 @@ from .mol import is_transition_metal
 from .mol import set_dative_bonds
 from .mol import set_mol_props
 from .mol import copy_mol_props
+from .mol import enumerate_stereoisomers
+from .mol import enumerate_tautomers
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
