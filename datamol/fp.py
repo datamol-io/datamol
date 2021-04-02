@@ -20,7 +20,7 @@ def fp_to_array(fp: DataStructs.ExplicitBitVect, dtype: type = int) -> np.ndarra
     """
     if isinstance(fp, np.ndarray):
         return fp
-    return np.frombuffer(fp.ToBitString().encode(), 'u1') - ord('0')
+    return np.frombuffer(fp.ToBitString().encode(), "u1") - ord("0")
 
 
 def to_fp(
