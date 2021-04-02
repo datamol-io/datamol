@@ -30,7 +30,8 @@
 
 **Fixed:**
 
-* <news item>
+* Scaffold tests for new rdkit version
+* Conformer cluster tests for new rdkit version
 
 **Security:**
 

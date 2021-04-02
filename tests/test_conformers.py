@@ -72,8 +72,8 @@ def test_cluster():
     mol = dm.conformers.generate(mol, rms_cutoff=None)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
     assert len(clustered_mol) == 2
-    assert clustered_mol[0].GetNumConformers() == 40
-    assert clustered_mol[1].GetNumConformers() == 10
+    assert clustered_mol[0].GetNumConformers() > 30
+    assert clustered_mol[1].GetNumConformers() > 5
 
     # centroids
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
@@ -88,8 +88,8 @@ def test_cluster():
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
     assert len(clustered_mol) == 2
-    assert clustered_mol[0].GetNumConformers() == 44
-    assert clustered_mol[1].GetNumConformers() == 6
+    assert clustered_mol[0].GetNumConformers() > 30
+    assert clustered_mol[1].GetNumConformers() > 6
 
     # centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
