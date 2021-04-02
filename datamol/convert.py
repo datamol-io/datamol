@@ -206,7 +206,6 @@ def to_df(
     mols: List[Chem.rdchem.Mol],
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
-    include_fingerprints: bool = False,
     include_private: bool = False,
     include_computed: bool = False,
 ) -> Optional[pd.DataFrame]:
@@ -218,8 +217,6 @@ def to_df(
         smiles_column: name of the SMILES column.
         mol_column: Name of the column. If not None, rdkit.Chem.PandaTools
             is used to add a molecule column.
-        include_fingerprints: Whether to precompute the fingerprint when `mol_column`
-            is not None.
         include_private: Include private properties in the columns.
         include_computed: Include computed properties in the columns.
     """
@@ -234,12 +231,9 @@ def to_df(
 
     # Add a mol column
     if mol_column is not None:
-        PandasTools.AddMoleculeColumnToFrame(
-            df,
-            smiles_column,
-            mol_column,
-            includeFingerprints=include_fingerprints,
-        )
+        # NOTE(hadim): not sure it's ok to do that here.
+        PandasTools.RenderImagesInAllDataFrames()
+        df[mol_column] = mols
 
     # Add any other properties present in the molecule
     props = [

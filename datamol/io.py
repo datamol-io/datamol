@@ -79,7 +79,6 @@ def read_sdf(
     as_df: bool = False,
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
-    include_fingerprints: bool = False,
     include_private: bool = False,
     include_computed: bool = False,
 ) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
@@ -90,8 +89,6 @@ def read_sdf(
         as_df: Whether to return a list mol or a pandas DataFrame.
         smiles_column: Name of the SMILES column. Only relevant if `as_df` is True.
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
-        include_fingerprints: Whether to precompute the fingerprint when `mol_column`
-            is not None.  Only relevant if `as_df` is True.
         include_private: Include private properties in the columns.  Only relevant if
             `as_df` is True.
         include_computed: Include computed properties in the columns.  Only relevant if
@@ -116,7 +113,6 @@ def read_sdf(
             mols,
             smiles_column=smiles_column,
             mol_column=mol_column,
-            include_fingerprints=include_fingerprints,
             include_private=include_private,
             include_computed=include_computed,
         )  # type: ignore
