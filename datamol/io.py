@@ -179,7 +179,7 @@ def read_smi(
     # Copy to a local temporary path if the path is a remote one.
     if not fsspec.utils.can_be_local(str(urlpath)):
         active_path = pathlib.Path(tempfile.mkstemp()[1])
-        dm.utils.copy_files(urlpath, active_path)
+        dm.utils.fs.copy_file(urlpath, active_path)
 
     # Read the molecules
     supplier = Chem.SmilesMolSupplier(str(active_path), titleLine=0)

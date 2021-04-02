@@ -1,6 +1,5 @@
 from typing import Union
 from typing import Optional
-from typing import List
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors

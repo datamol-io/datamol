@@ -1,3 +1,5 @@
+# type: ignore
+
 import pathlib
 import unittest
 import copy

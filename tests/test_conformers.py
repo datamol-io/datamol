@@ -1,3 +1,4 @@
+# type: ignore
 import pytest
 
 import numpy as np

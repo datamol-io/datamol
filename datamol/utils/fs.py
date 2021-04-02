@@ -5,7 +5,7 @@ import os
 import fsspec
 
 
-def copy_files(
+def copy_file(
     source: Union[str, os.PathLike],
     destination: Union[str, os.PathLike],
 ):

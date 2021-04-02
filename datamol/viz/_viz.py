@@ -14,7 +14,7 @@ import datamol as dm
 
 def to_image(
     mols: Union[List[Chem.rdchem.Mol], Chem.rdchem.Mol],
-    legends: Union[List[str], str] = None,
+    legends: Union[List[Union[str, None]], str, None] = None,
     n_cols: int = 4,
     use_svg: bool = False,
     mol_size: Union[Tuple[int, int], int] = (200, 200),

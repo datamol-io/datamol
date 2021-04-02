@@ -1,3 +1,4 @@
+# type: ignore
 import pathlib
 import unittest
 

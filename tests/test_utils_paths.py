@@ -12,7 +12,7 @@ def test_copy_files():
     with open(source_path, "w") as f:
         f.write(content)
 
-    dm.utils.copy_files(source_path, destination_path)
+    dm.utils.fs.copy_file(source_path, destination_path)
 
     with open(destination_path) as f:
         f.read() == content

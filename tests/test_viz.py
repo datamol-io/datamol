@@ -19,7 +19,7 @@ def test_to_image():
 
     # Get a list of molecules
     data = dm.data.freesolv()
-    mols = dm.from_df(data)
+    mols = dm.from_df(data)  # type: ignore
     mols = mols[:8]
 
     # With multiple molecules
