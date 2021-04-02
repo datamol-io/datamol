@@ -48,14 +48,14 @@ def test_read_sdf():
     mols = dm.read_sdf(data_path)
     assert len(mols) == 10
     for mol in mols:
-        assert isinstance(mol, Chem.Mol)
+        assert isinstance(mol, Chem.rdchem.Mol)
 
     # sdf gzipped
     data_path = get_tubb3_sdf_gzip_path()
     mols = dm.read_sdf(data_path)
     assert len(mols) == 10
     for mol in mols:
-        assert isinstance(mol, Chem.Mol)
+        assert isinstance(mol, Chem.rdchem.Mol)
 
 
 def test_read_sdf_as_df():
@@ -154,3 +154,17 @@ def test_to_from_text():
     file_like = io.StringIO()
     dm.to_smi(mols, file_like)
     assert file_like.getvalue().strip().split("\n") == smiles_list
+
+
+def test_read_csv_with_mol():
+    df = dm.read_csv(get_freesolv_csv_path(), smiles_column="smiles")
+
+    assert list(df.columns) == ["iupac", "smiles", "expt", "calc", "mol"]
+    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
+
+
+def test_read_excel_with_mol():
+    df = dm.read_excel(get_freesolv_excel_path(), smiles_column="smiles")
+
+    assert list(df.columns) == ["iupac", "smiles", "expt", "calc", "mol"]
+    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)

@@ -7,6 +7,8 @@ import re
 import pandas as pd
 
 from rdkit import Chem
+from rdkit.Chem import PandasTools
+
 import selfies as sf
 
 import datamol as dm
@@ -200,54 +202,97 @@ def from_inchi(
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
 
 
-def to_df(mols: List[Chem.rdchem.Mol], smiles_column: str = "smiles") -> Optional[pd.DataFrame]:
+def to_df(
+    mols: List[Chem.rdchem.Mol],
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = None,
+    include_fingerprints: bool = False,
+    include_private: bool = False,
+    include_computed: bool = False,
+) -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
     Args:
         mols: a molecule.
-        smiles_column (str, optional): name of the SMILES column.
-            Default to "smiles".
+        smiles_column: name of the SMILES column.
+        mol_column: Name of the column. If not None, rdkit.Chem.PandaTools
+            is used to add a molecule column.
+        include_fingerprints: Whether to precompute the fingerprint when `mol_column`
+            is not None.
+        include_private: Include private properties in the columns.
+        include_computed: Include computed properties in the columns.
     """
-    df = [mol.GetPropsAsDict() for mol in mols]
-    df = pd.DataFrame(df)
 
-    # Add the smiles column and move it to the first position
-    smiles = [to_smiles(mol) for mol in mols]
-    df[smiles_column] = smiles
-    col = df.pop(smiles_column)
-    df.insert(0, col.name, col)
+    # Init a dataframe
+    df = pd.DataFrame()
+
+    # Feed it with smiles
+    if smiles_column is not None:
+        smiles = [dm.to_smiles(mol) for mol in mols]
+        df[smiles_column] = smiles
+
+    # Add a mol column
+    if mol_column is not None:
+        PandasTools.AddMoleculeColumnToFrame(
+            df,
+            smiles_column,
+            mol_column,
+            includeFingerprints=include_fingerprints,
+        )
+
+    # Add any other properties present in the molecule
+    props = [
+        mol.GetPropsAsDict(
+            includePrivate=include_private,
+            includeComputed=include_computed,
+        )
+        for mol in mols
+    ]
+    props_df = pd.DataFrame(props)
+
+    # If a smiles column already exists in the props, we remove it
+    # in favor of the one specified as args.
+    if smiles_column is not None and smiles_column in props_df.columns:
+        props_df.pop(smiles_column)
+
+    # Concat the df with the properties df
+    df = pd.concat([df, props_df], axis=1)
 
     return df
 
 
-def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Chem.rdchem.Mol]]:
+def from_df(
+    df: pd.DataFrame,
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = None,
+) -> List[Chem.rdchem.Mol]:
     """Convert a dataframe to a list of mols.
 
     Args:
         df: a dataframe.
-        smiles_column: Column name to use for smiles.
-            Default to "smiles".
+        smiles_column: Column name to extract the molecule.
+        mol_column: Column name to extract the molecule. It takes
+            precedence over `smiles_column`.
     """
+
+    if smiles_column is None and mol_column is None:
+        raise ValueError("Either `smiles_column` or `mol_column` must be not None.")
 
     if len(df) == 0:
         return []
 
     def _row_to_mol(row):
-        mol = dm.to_mol(row[smiles_column])
+
+        if mol_column is not None:
+            mol = row[mol_column]
+        else:
+            mol = dm.to_mol(row[smiles_column])
 
         if mol is None:
             return None
 
-        for k, v in row.to_dict().items():
-            if isinstance(v, int):
-                mol.SetIntProp(k, v)
-            elif isinstance(v, float):
-                mol.SetDoubleProp(k, v)
-            elif isinstance(v, bool):
-                mol.SetBoolProp(k, v)
-            else:
-                mol.SetProp(k, str(v))
+        dm.set_mol_props(mol, row.to_dict())
         return mol
 
     return df.apply(_row_to_mol, axis=1).tolist()
