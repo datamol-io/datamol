@@ -544,7 +544,7 @@ def is_transition_metal(at: Chem.rdchem.Atom) -> bool:
     """Check if atom is a transition metal.
 
     Args:
-        atom: an atom.
+        at: an atom.
     """
     n = at.GetAtomicNum()
     return (n >= 22 and n <= 29) or (n >= 40 and n <= 47) or (n >= 72 and n <= 79)
@@ -564,7 +564,6 @@ def set_dative_bonds(
     Returns:
         The modified molecule.
     """
-    pt = Chem.GetPeriodicTable()
     rwmol = Chem.RWMol(mol)
     rwmol.UpdatePropertyCache(strict=False)
 
@@ -572,7 +571,7 @@ def set_dative_bonds(
     for metal in metals:
         for nbr in metal.GetNeighbors():
             if (nbr.GetAtomicNum() in from_atoms or nbr.GetSymbol() in from_atoms) and (
-                nbr.GetExplicitValence() > pt.GetDefaultValence(nbr.GetAtomicNum())
+                nbr.GetExplicitValence() > PERIODIC_TABLE.GetDefaultValence(nbr.GetAtomicNum())
                 and rwmol.GetBondBetweenAtoms(nbr.GetIdx(), metal.GetIdx()).GetBondType()
                 == SINGLE_BOND
             ):
@@ -692,3 +691,19 @@ def enumerate_stereoisomers(
         variants.append(isomer)
 
     return variants
+
+
+def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
+    """Add the `molAtomMapNumber` property to each atoms.
+
+    Args:
+        mol: a molecule
+        copy: Whether to copy the molecule.
+    """
+
+    if copy is True:
+        mol = copy_mol(mol)
+
+    for atom in mol.GetAtoms():
+        atom.SetProp("molAtomMapNumber", str(atom.GetIdx()))
+    return mol

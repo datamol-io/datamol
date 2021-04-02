@@ -255,3 +255,9 @@ class TestMol(unittest.TestCase):
             "OC1=C[C@H]2CCCC[C@@H]2[N:1]=C1",
             "OC1=C[C@H]2CCCC[C@H]2[N:1]=C1",
         }
+
+    def test_atom_indices_to_mol(self):
+        mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+        dm.atom_indices_to_mol(mol)
+        for atom in mol.GetAtoms():
+            assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()

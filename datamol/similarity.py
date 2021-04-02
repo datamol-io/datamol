@@ -1,5 +1,6 @@
 from typing import List
 from typing import Optional
+from typing import Tuple
 
 import functools
 
@@ -12,7 +13,9 @@ from scipy.spatial import distance
 import datamol as dm
 
 
-def pdist(mols: List[Chem.Mol], n_jobs: Optional[int] = 1, **fp_args):
+def pdist(
+    mols: List[Chem.rdchem.Mol], n_jobs: Optional[int] = 1, **fp_args
+) -> Tuple[np.ndarray, np.ndarray]:
     """Compute the pairwise tanimoto distance between the fingerprints of all the
     molecules in the input set.
 
@@ -45,11 +48,11 @@ def pdist(mols: List[Chem.Mol], n_jobs: Optional[int] = 1, **fp_args):
 
 
 def cdist(
-    mols1: List[Chem.Mol],
-    mols2: List[Chem.Mol],
+    mols1: List[Chem.rdchem.Mol],
+    mols2: List[Chem.rdchem.Mol],
     n_jobs: Optional[int] = 1,
     **fp_args,
-):
+) -> np.ndarray:
     """Compute the pairwise tanimoto distance between the fingerprints of
     each pair of molecules of the two collections of inputs.
 

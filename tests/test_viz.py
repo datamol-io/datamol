@@ -42,6 +42,8 @@ def test_to_image():
     assert image.dtype == np.uint8
     assert image.shape == (200, 200, 3)
 
+    dm.viz.to_image(mol, indices=True, mol_size=400)
+
 
 def test_to_image_save_file(tmpdir):
     smiles = "CCCOCc1cc(c2ncccc2)ccc1"
