@@ -19,10 +19,10 @@ mamba install -c conda-forge datamol
 ```
 
 !!! tips
-    You can replace `mamba` by `conda`.
+You can replace `mamba` by `conda`.
 
 !!! note
-    We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
+We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
 
 ## Quick API Tour
 
@@ -67,8 +67,8 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 
 ## Compatibilities
 
-Version compatibilities are an essential topic for production-software stack. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
+Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-| datamol | Python  | RDKit       |
-| ------- | ------- | ----------- |
-| `0.3`   | `>=3.7` | `>=2020.09` |
+| datamol | Python        | RDKit                 |
+| ------- | ------------- | --------------------- |
+| `0.3`   | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |

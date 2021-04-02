@@ -26,6 +26,14 @@
 
 Visit https://datamol-org--datamol.github.privpage.net/.
 
+## Installation
+
+Use conda:
+
+```bash
+mamba install -c conda-forge datamol
+```
+
 ## Quick API Tour
 
 ```python
@@ -67,13 +75,13 @@ mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
 
-## Installation
+## Compatibilities
 
-Use conda:
+Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-```bash
-mamba install -c conda-forge datamol
-```
+| datamol | Python        | RDKit                 |
+| ------- | ------------- | --------------------- |
+| `0.3`   | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
 
 ## CI Status
 
