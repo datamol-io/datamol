@@ -118,3 +118,17 @@ def test_center_of_mass():
     # mass center
     center = dm.conformers.center_of_mass(mol, use_atoms=True)
     assert center.shape == (3,)
+
+
+def test_translate():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=1)
+
+    coords = dm.conformers.get_coords(mol)
+    print(coords)
+
+    dm.conformers.translate(mol, [10, 10, 10])
+    new_coords = dm.conformers.get_coords(mol)
+    print(new_coords - 10)
+
+    np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=1)

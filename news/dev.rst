@@ -5,6 +5,7 @@
 * `dm.copy_mol_props`
 * `dm.conformers.get_coords`
 * `dm.conformers.center_of_mass`
+* `dm.conformers.translate`
 
 **Changed:**
 
