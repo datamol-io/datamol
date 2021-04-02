@@ -3,6 +3,8 @@
 * `dm.copy_mol`
 * `dm.set_mol_props`
 * `dm.copy_mol_props`
+* `dm.conformers.get_coords`
+* `dm.conformers.center_of_mass`
 
 **Changed:**
 
