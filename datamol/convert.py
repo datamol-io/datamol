@@ -215,6 +215,7 @@ def to_df(
     mol_column: str = None,
     include_private: bool = False,
     include_computed: bool = False,
+    render_df_mol: bool = True,
 ) -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
@@ -226,6 +227,9 @@ def to_df(
             is used to add a molecule column.
         include_private: Include private properties in the columns.
         include_computed: Include computed properties in the columns.
+        render_df_mol: whether to render the molecule in the dataframe to images.
+            If called once, it will be applied for the newly created dataframe with
+            mol in it.
     """
 
     # Init a dataframe
@@ -238,7 +242,8 @@ def to_df(
 
     # Add a mol column
     if mol_column is not None:
-        # NOTE(hadim): not sure it's ok to do that here.
+        # NOTE(hadim): replace by `ChangeMoleculeRendering` once
+        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
         PandasTools.RenderImagesInAllDataFrames()
         df[mol_column] = mols
 
