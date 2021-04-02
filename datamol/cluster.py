@@ -246,7 +246,7 @@ def assign_to_centroids(
     centroid_inds = np.expand_dims(np.arange(len(centroids), dtype=int), axis=1) + len(mols)
     dist_mat = distance.cdist(query_inds, centroid_inds, metric=distij)
     closest = np.argmin(dist_mat, axis=1)
-    for ind, cluster_ind in enumerate(closest):
+    for ind, cluster_ind in enumerate(closest):  # type: ignore
         clusters_map[cluster_ind].append(ind)
         clusters_list[cluster_ind].append(mols[ind])
     return clusters_map, clusters_list
