@@ -4,27 +4,29 @@ from typing import List
 from typing import Sequence
 from typing import TextIO
 
+import os
 import io
 import tempfile
 import pathlib
 import gzip
 
 from rdkit import Chem
+
 import pandas as pd
 import fsspec
+import fsspec.utils
 
 import datamol as dm
 
 
 def read_csv(
-    urlpath: Union[str, pathlib.Path, TextIO],
+    urlpath: Union[str, os.PathLike, TextIO],
     **kwargs,
 ) -> pd.DataFrame:
     """Read a CSV file.
 
     Args:
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
         kwargs: Arguments to pass to `pd.read_csv()`.
 
     Returns:
@@ -37,15 +39,14 @@ def read_csv(
 
 
 def read_excel(
-    urlpath: Union[str, pathlib.Path, TextIO],
+    urlpath: Union[str, os.PathLike, TextIO],
     sheet_name: Optional[Union[str, int, list]] = 0,
     **kwargs,
 ) -> pd.DataFrame:
     """Read an excel file.
 
     Args:
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
         sheet_name: see `pandas.read_excel()` doc.
         kwargs: Arguments to pass to `pd.read_excel()`.
 
@@ -59,14 +60,13 @@ def read_excel(
 
 
 def read_sdf(
-    urlpath: Union[str, pathlib.Path, TextIO],
+    urlpath: Union[str, os.PathLike, TextIO],
     as_df: bool = False,
-) -> Union[List[Chem.Mol], pd.DataFrame]:
+) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
     """Read an SDF file.
 
     Args:
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
         as_df: Whether to return a list mol or a pandas DataFrame. Default to False.
     """
 
@@ -90,16 +90,15 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[Sequence[Chem.Mol], pd.DataFrame],
-    urlpath: Union[str, pathlib.Path, TextIO],
+    mols: Union[Sequence[Chem.rdchem.Mol], pd.DataFrame],
+    urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[Union[int, str]] = None,
 ):
     """Write molecules to a file.
 
     Args:
         mols:
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
         smiles_column: if `mols` is a dataframe, you must specify `smiles_column`
             for saving to sdf.
     """
@@ -127,16 +126,15 @@ def to_sdf(
 
 
 def to_smi(
-    mols: Sequence[Chem.Mol],
-    urlpath: Union[str, pathlib.Path, TextIO],
+    mols: Sequence[Chem.rdchem.Mol],
+    urlpath: Union[str, os.PathLike, TextIO],
     error_if_empty: bool = False,
 ):
     """Save a list of molecules in an `.smi` file.
 
     Args:
         mols: a list of molecules.
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
         error_if_empty: whether to raise and error if the input list is empty.
     """
 
@@ -163,13 +161,12 @@ def to_smi(
 
 
 def read_smi(
-    urlpath: Union[str, pathlib.Path],
-) -> Sequence[Chem.Mol]:
+    urlpath: Union[str, os.PathLike],
+) -> Sequence[Chem.rdchem.Mol]:
     """Read a list of smiles from am `.smi` file.
 
     Args:
-        urlpath: Path to a file or a file-like object. If a path, can be a local path
-            or a remote one (HTTP, HTTPS, S3, GS, etc).
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
             Note: file-like object are not supported yet.
     """
 
@@ -190,6 +187,6 @@ def read_smi(
 
     # Delete the local temporary path
     if not fsspec.utils.can_be_local(str(urlpath)):
-        active_path.unlink()
+        pathlib.Path(active_path).unlink()
 
     return mols
