@@ -32,6 +32,9 @@ def to_fp(
 ) -> Optional[Union[np.ndarray, DataStructs.ExplicitBitVect]]:
     """Transform a molecule from smiles to morgan fingerprint.
 
+    Note:
+        That function should be expanded to compute more type of fingerprints.
+
     Args:
         mol (Chem.Mol or str): a molecule or a SMILES.
         fp_size (int, optional): Size of morgan fingerprint. Default to 2048.
