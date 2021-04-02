@@ -90,7 +90,7 @@ def test_cluster():
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
     assert len(clustered_mol) == 2
     assert clustered_mol[0].GetNumConformers() > 30
-    assert clustered_mol[1].GetNumConformers() > 6
+    assert clustered_mol[1].GetNumConformers() > 5
 
     # centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
