@@ -13,30 +13,26 @@ import datamol as dm
 
 
 def to_smiles(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     canonical: bool = True,
     isomeric: bool = True,
     ordered: bool = False,
     explicit_bonds: bool = False,
     explicit_hs: bool = False,
     randomize: bool = False,
+    cxsmiles: bool = False,
+    allow_to_fail: bool = False,
 ) -> Optional[str]:
     """Convert a mol to a SMILES.
 
     Args:
         mol: a molecule.
         canonical: if false no attempt will be made to canonicalize the molecule.
-            Defaults to true.
-        isomeric: whether to include information about stereochemistry in
-            the SMILES. Defaults to True.
-        ordered: whether to force reordering of the atoms
-            first. Defaults to False.
-        explicit_bonds: if true, all bond orders will be explicitly indicated in
-            the output SMILES. Defaults to false.
-        explicit_hs: if true, all H counts will be explicitly indicated in the
-            output SMILES. Defaults to false.
+        isomeric: whether to include information about stereochemistry in the SMILES.
+        ordered: whether to force reordering of the atoms first.
+        explicit_bonds: if true, all bond orders will be explicitly indicated in the output SMILES.
+        explicit_hs: if true, all H counts will be explicitly indicated in the output SMILES.
         randomize: whether to randomize the generated smiles. Override `canonical`.
-            Defaults to false.
     """
     if ordered:
         mol = dm.reorder_atoms(mol)
@@ -47,19 +43,36 @@ def to_smiles(
 
     smiles = None
     try:
-        smiles = Chem.MolToSmiles(
-            mol,
-            isomericSmiles=isomeric,
-            canonical=canonical,
-            allBondsExplicit=explicit_bonds,
-            allHsExplicit=explicit_hs,
-        )
-    except:
+
+        if cxsmiles:
+            smiles = Chem.MolToCXSmiles(  # type: ignore
+                mol,
+                isomericSmiles=isomeric,
+                canonical=canonical,
+                allBondsExplicit=explicit_bonds,
+                allHsExplicit=explicit_hs,
+            )
+
+        else:
+            smiles = Chem.MolToSmiles(  # type: ignore
+                mol,
+                isomericSmiles=isomeric,
+                canonical=canonical,
+                allBondsExplicit=explicit_bonds,
+                allHsExplicit=explicit_hs,
+            )
+
+    except Exception as e:
+
+        if allow_to_fail:
+            raise e
+
         return None
+
     return smiles
 
 
-def to_selfies(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to SELFIES.
 
     Args:
@@ -71,13 +84,13 @@ def to_selfies(mol: Union[str, Chem.Mol]) -> Optional[str]:
     if mol is None:
         return None
 
-    if isinstance(mol, Chem.Mol):
+    if isinstance(mol, Chem.rdchem.Mol):
         mol = to_smiles(mol)
 
     return sf.encoder(mol)
 
 
-def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.Mol]]:
+def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.rdchem.Mol]]:
     """Convert a SEFLIES to a smiles or a mol.
 
     Args:
@@ -98,7 +111,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem
     return smiles
 
 
-def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
+def to_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optional[str]:
     """Convert a molecule to a smarts.
 
     Args:
@@ -118,7 +131,7 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
         mol = dm.to_mol(mol)
 
     # Change the isotope to 42
-    for atom in mol.GetAtoms():
+    for atom in mol.GetAtoms():  # type: ignore
         if keep_hs:
             s = sum(na.GetAtomicNum() == 1 for na in atom.GetNeighbors())
             if s:
@@ -136,7 +149,7 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
     return smarts
 
 
-def to_inchi(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_inchi(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi.
 
     Args:
@@ -152,7 +165,7 @@ def to_inchi(mol: Union[str, Chem.Mol]) -> Optional[str]:
     return Chem.MolToInchi(mol)
 
 
-def to_inchikey(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi key.
 
     Args:
@@ -168,7 +181,9 @@ def to_inchikey(mol: Union[str, Chem.Mol]) -> Optional[str]:
     return Chem.MolToInchiKey(mol)
 
 
-def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True) -> Optional[Chem.Mol]:
+def from_inchi(
+    inchi: str, sanitize: bool = True, remove_hs: bool = True
+) -> Optional[Chem.rdchem.Mol]:
     """Convert an InChi to a mol.
 
     Args:
@@ -185,7 +200,7 @@ def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True) -> Opt
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
 
 
-def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles") -> Optional[pd.DataFrame]:
+def to_df(mols: List[Chem.rdchem.Mol], smiles_column: str = "smiles") -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
@@ -206,7 +221,7 @@ def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles") -> Optional[pd.Da
     return df
 
 
-def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Chem.Mol]]:
+def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Chem.rdchem.Mol]]:
     """Convert a dataframe to a list of mols.
 
     Args:

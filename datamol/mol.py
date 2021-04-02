@@ -158,6 +158,10 @@ def sanitize_mol(
 ) -> Optional[Chem.rdchem.Mol]:
     """Sanitize molecule and fix common errors.
 
+    Warning:
+        The procedure includes a SMILES conversion to avoid accasional aromaticity
+        errors. In consequence, all the properties and the conformers will be lost.
+
     Args:
         mol: a molecule.
         charge_neutral: whether charge neutralization should be applied.
@@ -186,11 +190,10 @@ def sanitize_mol(
 
 
 def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
-    """
-    Takes list of SMILES strings and returns list of their sanitized versions.
+    """Takes SMILES string and returns its sanitized version.
 
     Args:
-        smiles: smiles to be converted.
+        smiles: smiles to be sanitized.
         isomeric: Whether to include information about stereochemistry in the SMILES.
 
     Returns:

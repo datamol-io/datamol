@@ -17,6 +17,8 @@
 * Clean various types.
 * Allow `dm.to_image` instead of `dm.viz.to_image`
 * Add atom indices drawing option to `dm.to_image`
+* Allow to smiles to fail (default is to not fail but return None as before).
+* Add CXSmiles bool flag to to_smiles.
 
 **Deprecated:**
 

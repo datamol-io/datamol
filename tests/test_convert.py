@@ -1,6 +1,8 @@
 import pathlib
 import unittest
 
+import pytest
+
 import pandas as pd
 from rdkit import Chem
 
@@ -178,3 +180,16 @@ class TestConvert(unittest.TestCase):
         )
 
         assert dm.from_df(pd.DataFrame()) == []
+
+    def test_to_cxsmiles(self):
+        mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+        smiles = dm.to_smiles(mol, cxsmiles=True)
+        assert smiles == "OC1=CC2CCCCC2[N:1]=C1 |atomProp:9.molAtomMapNumber.1|"
+
+    def test_to_smiles_fail(self):
+        smiles = dm.to_smiles(55, allow_to_fail=False)
+        assert smiles == None
+
+        # NOTE(hadim): ideally you want to catch only `Boost.Python.ArgumentError` here.
+        with pytest.raises(Exception):
+            dm.to_smiles(55, allow_to_fail=True)
