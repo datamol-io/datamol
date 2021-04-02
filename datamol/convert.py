@@ -242,9 +242,10 @@ def to_df(
 
     # Add a mol column
     if mol_column is not None:
-        # NOTE(hadim): replace by `ChangeMoleculeRendering` once
-        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
-        PandasTools.RenderImagesInAllDataFrames()
+        if render_df_mol is True:
+            # NOTE(hadim): replace by `ChangeMoleculeRendering` once
+            # https://github.com/rdkit/rdkit/issues/3563 is fixed.
+            PandasTools.RenderImagesInAllDataFrames()
         df[mol_column] = mols
 
     # Add any other properties present in the molecule
