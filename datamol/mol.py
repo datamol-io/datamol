@@ -2,6 +2,8 @@ from typing import Union
 from typing import List
 from typing import Tuple
 from typing import Optional
+from typing import Dict
+from typing import Any
 
 import copy
 import random
@@ -20,6 +22,15 @@ DOUBLE_BOND = Chem.rdchem.BondType.DOUBLE
 SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
+
+
+def copy_mol(mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
+    """Copy a molecule and return a new one.
+
+    Args:
+        mol: a molecule to copy.
+    """
+    return copy.deepcopy(mol)
 
 
 def to_mol(
@@ -568,3 +579,44 @@ def set_dative_bonds(
                 rwmol.RemoveBond(nbr.GetIdx(), metal.GetIdx())
                 rwmol.AddBond(nbr.GetIdx(), metal.GetIdx(), DATIVE_BOND)
     return rwmol
+
+
+def set_mol_props(
+    mol: Chem.rdchem.Mol, props: Dict[str, Any], copy: bool = False
+) -> Chem.rdchem.Mol:
+    """Set properties to a mol from a dict.
+
+    Args:
+        mol: the mol where to copy the props.
+        props: the props to copy.
+        copy: whether to copy the provided mol
+
+    """
+
+    if copy is True:
+        mol = dm.copy_mol(mol)
+
+    for k, v in props.items():
+        if isinstance(v, bool):
+            mol.SetBoolProp(k, v)
+        elif isinstance(v, int):
+            mol.SetIntProp(k, v)
+        elif isinstance(v, float):
+            mol.SetDoubleProp(k, v)
+        else:
+            mol.SetProp(k, str(v))
+
+    return mol
+
+
+def copy_mol_props(source: Chem.rdchem.Mol, destination: Chem.rdchem.Mol):
+    """Copy properties from one source molecule to another destination
+    molecule.
+
+    Args:
+        source: a molecule to copy from.
+        destination: a molecule to copy to.
+    """
+
+    props = source.GetPropsAsDict()
+    dm.set_mol_props(destination, props)

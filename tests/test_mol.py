@@ -197,3 +197,42 @@ class TestMol(unittest.TestCase):
         mol = dm.set_dative_bonds(Chem.MolFromSmiles(smis, sanitize=False))
         self.assertEqual(Chem.MolToSmiles(mol), expected_result)
         self.assertIsNotNone(dm.to_mol(Chem.MolToSmiles(mol)))
+
+    def test_copy_mol(self):
+        mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+        new_mol = dm.copy_mol(mol)
+
+        assert dm.to_smiles(mol) == dm.to_smiles(new_mol)
+
+    def test_set_mol_props(self):
+        mol = dm.to_mol("CCC")
+
+        props = {}
+        props["number"] = 55
+        props["float"] = 5.555
+        props["string"] = "hello"
+        props["something_else"] = type(int)
+
+        dm.set_mol_props(mol, props)
+
+        mol_props = mol.GetPropsAsDict()
+        assert mol_props["number"] == props["number"]
+        assert mol_props["float"] == props["float"]
+        assert mol_props["string"] == props["string"]
+        assert mol_props["something_else"] == str(props["something_else"])
+
+    def test_copy_mol_props(self):
+        source = dm.to_mol("CCC")
+        destination = dm.to_mol("CC")
+
+        props = {}
+        props["number"] = 55
+        props["float"] = 5.555
+        props["string"] = "hello"
+        props["something_else"] = type(int)
+
+        dm.set_mol_props(source, props)
+
+        dm.copy_mol_props(source, destination)
+
+        assert destination.GetPropsAsDict() == source.GetPropsAsDict()

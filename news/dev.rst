@@ -1,6 +1,8 @@
 **Added:**
 
-* <news item>
+* `dm.copy_mol`
+* `dm.set_mol_props`
+* `dm.copy_mol_props`
 
 **Changed:**
 

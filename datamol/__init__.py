@@ -15,6 +15,7 @@ from .mol import DOUBLE_BOND
 from .mol import SINGLE_BOND
 from .mol import AROMATIC_BOND
 
+from .mol import copy_mol
 from .mol import to_mol
 from .mol import reorder_atoms
 from .mol import randomize_atoms
@@ -35,6 +36,8 @@ from .mol import replace_dummies_atoms
 from .mol import keep_largest_fragment
 from .mol import is_transition_metal
 from .mol import set_dative_bonds
+from .mol import set_mol_props
+from .mol import copy_mol_props
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
