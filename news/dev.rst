@@ -21,6 +21,7 @@
 * Add CXSmiles bool flag to to_smiles.
 * Rename utils.paths to utils.fs
 * Integrate pandatools into `dm.to_df`.
+* Build a mol column from smiles in read_csv and read_excel
 
 **Deprecated:**
 
