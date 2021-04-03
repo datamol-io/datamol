@@ -292,6 +292,7 @@ def from_df(
         smiles_column: Column name to extract the molecule.
         mol_column: Column name to extract the molecule. It takes
             precedence over `smiles_column`.
+        conserve_smiles: Whether to conserve the SMILES in the mols' props.
     """
 
     if smiles_column is None and mol_column is None:
