@@ -160,6 +160,23 @@ def test_from_df_conserve_smiles(datadir):
     assert "smiles" in mols[0].GetPropsAsDict().keys()
 
 
+def test_to_df_smiles_warning(datadir, caplog):
+    data_path = datadir / "freesolv.csv"
+    df = dm.read_csv(data_path)
+
+    mols = dm.from_df(df, conserve_smiles=True)
+    df = dm.to_df(mols)
+
+    assert sum(df.columns == "smiles") == 2
+
+    for record in caplog.records:
+        assert record.levelname != "WARNING"
+    assert (
+        "The SMILES column name provided ('smiles') is already present in the properties of the molecules"
+        not in caplog.text
+    )
+
+
 def test_to_cxsmiles():
     mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
     smiles = dm.to_smiles(mol, cxsmiles=True)

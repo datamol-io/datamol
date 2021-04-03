@@ -1,12 +1,9 @@
-import pathlib
-import tempfile
-
 import datamol as dm
 
 
-def test_copy_files():
-    source_path = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
-    destination_path = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
+def test_copy_files(tmp_path):
+    source_path = tmp_path / "source.txt"
+    destination_path = tmp_path / "destination.txt"
 
     content = "hello this is a content"
     with open(source_path, "w") as f:
@@ -16,6 +13,3 @@ def test_copy_files():
 
     with open(destination_path) as f:
         f.read() == content
-
-    source_path.unlink()
-    destination_path.unlink()
