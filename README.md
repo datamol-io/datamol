@@ -1,6 +1,6 @@
 <div align="center">
     <img src="docs/images/logo-title.png" height="80px">
-    <h3>The rdkit-based molecular Python library</h3>
+    <h3>The RDKit-based molecular Python library</h3>
 </div>
 
 ---
