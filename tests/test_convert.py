@@ -134,7 +134,7 @@ def test_from_df(datadir):
     mols = dm.from_df(df)
 
     assert len(mols) == 10
-    assert isinstance(mols[0], Chem.Mol)
+    assert isinstance(mols[0], Chem.rdchem.Mol)
 
     assert set(mols[0].GetPropsAsDict().keys()) == {
         "zinc_id",

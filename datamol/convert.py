@@ -193,7 +193,9 @@ def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
 
 
 def from_inchi(
-    inchi: str, sanitize: bool = True, remove_hs: bool = True
+    inchi: Optional[str],
+    sanitize: bool = True,
+    remove_hs: bool = True,
 ) -> Optional[Chem.rdchem.Mol]:
     """Convert an InChi to a mol.
 
