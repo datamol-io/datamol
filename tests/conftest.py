@@ -1,6 +1,9 @@
 import platform
+import pathlib
 
 import pytest
+
+DATA_DIR_PATH = pathlib.Path(__file__).parent.resolve() / "data"
 
 
 @pytest.fixture
@@ -28,3 +31,8 @@ def pytest_configure(config):
         "markers",
         "skip_platform(current_platform): skip test for a given platform from `['linux', 'osx', 'win']`",
     )
+
+
+@pytest.fixture
+def datadir(request):
+    return DATA_DIR_PATH

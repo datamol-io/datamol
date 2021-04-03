@@ -4,6 +4,8 @@ from typing import Optional
 
 import re
 
+from loguru import logger
+
 import pandas as pd
 
 from rdkit import Chem
@@ -91,7 +93,7 @@ def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     if isinstance(mol, Chem.rdchem.Mol):
         mol = to_smiles(mol)
 
-    selfies = sf.encoder(mol)
+    selfies = sf.encoder(mol)  # type: ignore
 
     if selfies == -1:
         return None
@@ -258,12 +260,11 @@ def to_df(
     ]
     props_df = pd.DataFrame(props)
 
-    # If a smiles column with the same name as specified in the inputs exists
-    # in the props, we rename it to avoid having two columns with the same name.
     if smiles_column is not None and smiles_column in props_df.columns:
-        # new_col_name = f"{smiles_column}_from_props"
-        # props_df.rename(columns={smiles_column: new_col_name}, inplace=True)
-        props_df.pop(smiles_column)
+        logger.warning(
+            f"The SMILES column name provided ('{smiles_column}') is already present in the properties"
+            " of the molecules. THe returned dataframe will two columns with the same name."
+        )
 
     # Concat the df with the properties df
     df = pd.concat([df, props_df], axis=1)
@@ -275,8 +276,14 @@ def from_df(
     df: pd.DataFrame,
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
+    conserve_smiles: bool = False,
 ) -> List[Chem.rdchem.Mol]:
     """Convert a dataframe to a list of mols.
+
+    Note:
+        If `smiles_column` is used to build the molecules, this property
+        is removed from the molecules' properties. You can decide to conserve
+        the SMILES column by setting `conserve_smiles` to True.
 
     Args:
         df: a dataframe.
@@ -293,15 +300,25 @@ def from_df(
 
     def _row_to_mol(row):
 
+        props = row.to_dict()
+
         if mol_column is not None:
-            mol = row[mol_column]
+            mol = props[mol_column]
         else:
-            mol = dm.to_mol(row[smiles_column])
+
+            if conserve_smiles:
+                smiles = props[smiles_column]
+            else:
+                # If a SMILES column is used to create the molecule then it is removed from the
+                # properties.
+                smiles = props.pop(smiles_column)
+
+            mol = dm.to_mol(smiles)
 
         if mol is None:
             return None
 
-        dm.set_mol_props(mol, row.to_dict())
+        dm.set_mol_props(mol, props)
         return mol
 
     return df.apply(_row_to_mol, axis=1).tolist()

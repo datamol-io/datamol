@@ -1,5 +1,3 @@
-import pathlib
-import tempfile
 import pytest
 import io
 
@@ -7,64 +5,61 @@ from rdkit import Chem
 
 import datamol as dm
 
-ROOT_DIR = pathlib.Path(__file__).parent.resolve()
-DATA_DIR = ROOT_DIR / "data"
 
-
-def get_freesolv_csv_path():
-    return DATA_DIR / "freesolv.csv"
-
-
-def get_freesolv_excel_path():
-    return DATA_DIR / "freesolv.xlsx"
-
-
-def get_tubb3_sdf_path():
-    return DATA_DIR / "TUBB3-observations.sdf"
-
-
-def get_tubb3_sdf_gzip_path():
-    return DATA_DIR / "TUBB3-observations.sdf.gz"
-
-
-def test_read_csv():
-    data_path = get_freesolv_csv_path()
+def test_read_csv(datadir):
+    data_path = datadir / "freesolv.csv"
     df = dm.read_csv(data_path)
     assert df.shape == (642, 4)
     assert list(df.columns) == ["iupac", "smiles", "expt", "calc"]
 
 
-def test_read_excel():
-    data_path = get_freesolv_excel_path()
+def test_read_csv_with_mol_col(datadir):
+    data_path = datadir / "freesolv.csv"
+    df = dm.read_csv(data_path, smiles_column="smiles", mol_column="mol")
+    assert df.shape == (642, 5)
+    assert set(df.columns) == {"iupac", "smiles", "expt", "calc", "mol"}
+    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
+
+
+def test_read_excel(datadir):
+    data_path = datadir / "freesolv.xlsx"
     df = dm.read_excel(data_path, engine="openpyxl")
     assert df.shape == (642, 4)
-    assert list(df.columns) == ["iupac", "smiles", "expt", "calc"]
+    assert set(df.columns) == {"iupac", "smiles", "expt", "calc"}
 
 
-def test_read_sdf():
+def test_read_excel_with_mol_col(datadir):
+    data_path = datadir / "freesolv.xlsx"
+    df = dm.read_excel(data_path, smiles_column="smiles", mol_column="mol")
+    assert df.shape == (642, 5)
+    assert set(df.columns) == {"iupac", "smiles", "expt", "calc", "mol"}
+    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
 
-    # sdf
-    data_path = get_tubb3_sdf_path()
+
+def test_read_sdf(datadir):
+
+    data_path = datadir / "TUBB3-observations.sdf"
     mols = dm.read_sdf(data_path)
     assert len(mols) == 10
     for mol in mols:
         assert isinstance(mol, Chem.rdchem.Mol)
 
-    # sdf gzipped
-    data_path = get_tubb3_sdf_gzip_path()
+
+def test_read_sdf_gz(datadir):
+
+    data_path = datadir / "TUBB3-observations.sdf.gz"
     mols = dm.read_sdf(data_path)
     assert len(mols) == 10
     for mol in mols:
         assert isinstance(mol, Chem.rdchem.Mol)
 
 
-def test_read_sdf_as_df():
+def test_read_sdf_as_df(datadir):
 
-    # sdf
-    data_path = get_tubb3_sdf_path()
+    data_path = datadir / "TUBB3-observations.sdf"
     df = dm.read_sdf(data_path, as_df=True)
     assert df.shape == (10, 12)
-    assert list(df.columns) == [
+    assert set(df.columns) == {
         "smiles",
         "zinc_id",
         "ortholog_name",
@@ -77,13 +72,24 @@ def test_read_sdf_as_df():
         "reference.chembl_id",
         "reference.journal",
         "reference.year",
-    ]
+    }
 
-    # sdf gzipped
-    data_path = get_tubb3_sdf_gzip_path()
+
+def test_read_sdf_as_df_mol_col(datadir):
+
+    data_path = datadir / "TUBB3-observations.sdf"
+    df = dm.read_sdf(data_path, as_df=True, mol_column="mol")
+    assert "mol" in df.columns
+    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
+
+
+def test_read_sdf_gz_as_df(datadir):
+
+    data_path = datadir / "TUBB3-observations.sdf.gz"
     df = dm.read_sdf(data_path, as_df=True)
+
     assert df.shape == (10, 12)
-    assert list(df.columns) == [
+    assert set(df.columns) == {
         "smiles",
         "zinc_id",
         "ortholog_name",
@@ -96,34 +102,36 @@ def test_read_sdf_as_df():
         "reference.chembl_id",
         "reference.journal",
         "reference.year",
-    ]
+    }
 
 
-def test_to_sdf():
-    data_path = get_tubb3_sdf_gzip_path()
+def test_to_sdf(datadir, tmp_path):
+    data_path = datadir / "TUBB3-observations.sdf.gz"
 
-    # dataframe based
     df = dm.read_sdf(data_path, as_df=True)
 
-    temp_path = tempfile.mktemp()
-    dm.to_sdf(df, temp_path, smiles_column="smiles")
+    sdf_path = tmp_path / "mols.sdf"
+    dm.to_sdf(df, sdf_path, smiles_column="smiles")
 
-    new_df = dm.read_sdf(temp_path, as_df=True)
+    new_df = dm.read_sdf(sdf_path, as_df=True)
     assert df.equals(new_df)
 
-    # list of mols based
+
+def test_to_sdf_mols(datadir, tmp_path):
+    data_path = datadir / "TUBB3-observations.sdf.gz"
+
     mols = dm.read_sdf(data_path, as_df=False)
 
-    temp_path = tempfile.mktemp()
-    dm.to_sdf(mols, temp_path)
+    sdf_path = tmp_path / "mols.sdf"
+    dm.to_sdf(mols, sdf_path)
 
-    new_mols = dm.read_sdf(temp_path, as_df=False)
+    new_mols = dm.read_sdf(sdf_path, as_df=False)
     assert [dm.to_smiles(mol) for mol in mols] == [dm.to_smiles(mol) for mol in new_mols]
 
 
-def test_to_from_text():
+def test_to_from_text(tmp_path):
 
-    temp_file = pathlib.Path(tempfile.NamedTemporaryFile(delete=False).name)
+    temp_file = tmp_path / "mols.smi"
 
     smiles_list = [
         "Cn1c(=S)ccc2nc[nH]c21",
@@ -154,17 +162,3 @@ def test_to_from_text():
     file_like = io.StringIO()
     dm.to_smi(mols, file_like)
     assert file_like.getvalue().strip().split("\n") == smiles_list
-
-
-def test_read_csv_with_mol():
-    df = dm.read_csv(get_freesolv_csv_path(), smiles_column="smiles")
-
-    assert list(df.columns) == ["iupac", "smiles", "expt", "calc", "mol"]
-    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
-
-
-def test_read_excel_with_mol():
-    df = dm.read_excel(get_freesolv_excel_path(), smiles_column="smiles")
-
-    assert list(df.columns) == ["iupac", "smiles", "expt", "calc", "mol"]
-    assert isinstance(df.iloc[0]["mol"], Chem.rdchem.Mol)
