@@ -75,10 +75,10 @@ def to_mol(
         _mol = Chem.AddHs(_mol, explicitOnly=explicit_only)
 
     # Reorder atoms
-    if _mol and ordered:
+    if _mol is not None and ordered:
         _mol = reorder_atoms(_mol)
 
-    if _mol and kekulize:
+    if _mol is not None and kekulize:
         Chem.Kekulize(_mol, clearAromaticFlags=False)
     return _mol
 

@@ -1,4 +1,4 @@
-import copy
+import pytest
 
 from rdkit import Chem
 
@@ -111,7 +111,7 @@ def test_fix_valence():
     sm = "Cl.[H][N:1]1=CC(O)=CC2CCCCC12"
     mol = Chem.MolFromSmiles(sm, sanitize=False)
     mol.UpdatePropertyCache(False)
-    mol_copy = copy.copy(mol)
+    mol_copy = dm.copy_mol(mol)
 
     nitrogen_atom = [a for a in mol.GetAtoms() if a.GetAtomMapNum() == 1][0]
     nitrogen_valence = nitrogen_atom.GetExplicitValence()
@@ -218,6 +218,7 @@ def test_copy_mol_props():
     destination = dm.to_mol("CC")
 
     props = {}
+    props["bool"] = True
     props["number"] = 55
     props["float"] = 5.555
     props["string"] = "hello"
@@ -256,3 +257,78 @@ def test_atom_indices_to_mol():
     dm.atom_indices_to_mol(mol)
     for atom in mol.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
+
+
+def test_to_mol_bad_input():
+    with pytest.raises(ValueError):
+        dm.to_mol(555)
+
+
+def test_to_mol_input_mol():
+    mol = dm.to_mol(dm.to_mol("CCC"))
+    assert dm.to_smiles(mol) == "CCC"
+
+
+def test_to_mol_ordered():
+    s1 = dm.to_smiles(dm.to_mol("C1(O)=CC2CCCCC2[N:1]=C1", ordered=False), canonical=False)
+    s2 = dm.to_smiles(dm.to_mol("C1(O)=CC2CCCCC2[N:1]=C1", ordered=True), canonical=False)
+    assert s1 != s2
+
+
+def test_to_mol_kekulize():
+    smiles = "C1=CC=CN=C1"
+    dm.to_mol(smiles, kekulize=True)
+
+
+def test_reorder_atoms_without_atoms():
+    mol1 = dm.to_mol("")
+    mol2 = dm.reorder_atoms(mol1)
+    assert dm.to_smiles(mol1) == dm.to_smiles(mol2)
+
+
+def test_randomize_atoms_without_atoms():
+    mol1 = dm.to_mol("")
+    mol2 = dm.randomize_atoms(mol1)
+    assert dm.to_smiles(mol1) == dm.to_smiles(mol2)
+
+
+def test_to_neutral_without_atoms():
+    assert dm.to_neutral(None) is None
+
+
+def test_sanitize_smiles_none():
+    assert dm.sanitize_smiles(444) is None
+
+
+def test_standardize_smiles_tautomer():
+    smiles = "C1=CC=CN=C1"
+    std_smiles = dm.standardize_smiles(smiles, tautomer=True)
+    assert "c1ccncc1" == std_smiles
+
+
+def test_decrease_bond():
+
+    smiles = "C=CCC#C"
+    mol = dm.to_mol(smiles)
+
+    single_bond = mol.GetBondBetweenAtoms(1, 2)
+    double_bond = mol.GetBondBetweenAtoms(0, 1)
+    triple_bond = mol.GetBondBetweenAtoms(3, 4)
+
+    assert dm.decrease_bond(single_bond) is None
+    assert dm.decrease_bond(double_bond) == dm.SINGLE_BOND
+    assert dm.decrease_bond(triple_bond) == dm.DOUBLE_BOND
+
+
+def test_replace_dummies_atoms():
+    smiles = "C=CCC*"
+    mol = dm.to_mol(smiles)
+
+    mol2 = dm.replace_dummies_atoms(mol)
+    assert dm.to_smiles(mol2) == "C=CCCC"
+
+
+def test_keep_largest_frag():
+    mol = dm.to_mol("Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C")
+    frag = dm.keep_largest_fragment(mol)
+    assert dm.to_smiles(frag) == "OC1=CC2CCCCC2[N:1]=C1"
