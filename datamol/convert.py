@@ -3,6 +3,7 @@ from typing import List
 from typing import Optional
 
 import re
+from click import types
 
 from loguru import logger
 
@@ -220,6 +221,7 @@ def to_df(
     include_private: bool = False,
     include_computed: bool = False,
     render_df_mol: bool = True,
+    render_all_df_mol: bool = False,
 ) -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
@@ -234,6 +236,7 @@ def to_df(
         render_df_mol: whether to render the molecule in the dataframe to images.
             If called once, it will be applied for the newly created dataframe with
             mol in it.
+        render_all_df_mol: Whether to render all pandas dataframe mol column as images.
     """
 
     # Init a dataframe
@@ -246,10 +249,6 @@ def to_df(
 
     # Add a mol column
     if mol_column is not None:
-        if render_df_mol is True:
-            # NOTE(hadim): replace by `ChangeMoleculeRendering` once
-            # https://github.com/rdkit/rdkit/issues/3563 is fixed.
-            PandasTools.RenderImagesInAllDataFrames()
         df[mol_column] = mols
 
     # Add any other properties present in the molecule
@@ -270,6 +269,15 @@ def to_df(
 
     # Concat the df with the properties df
     df = pd.concat([df, props_df], axis=1)
+
+    # Render mol column to images
+    if render_df_mol is True and mol_column is not None:
+        # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
+        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
+        _ChangeMoleculeRendering(df)
+
+        if render_all_df_mol:
+            PandasTools.RenderImagesInAllDataFrames()
 
     return df
 
@@ -325,3 +333,29 @@ def from_df(
         return mol
 
     return df.apply(_row_to_mol, axis=1).tolist()
+
+
+def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
+    """Allows to change the rendering of the molecules between base64 PNG images and string
+    representations.
+    This serves two purposes: First it allows to avoid the generation of images if this is
+    not desired and, secondly, it allows to enable image rendering for newly created dataframe
+    that already contains molecules, without having to rerun the time-consuming
+    AddMoleculeColumnToFrame. Note: this behaviour is, because some pandas methods, e.g. head()
+    returns a new dataframe instance that uses the default pandas rendering (thus not drawing
+    images for molecules) instead of the monkey-patched one.
+    """
+    import types
+
+    if renderer == "String":
+        Chem.rdchem.Mol.__str__ = PandasTools.PrintDefaultMolRep
+    else:
+        Chem.rdchem.Mol.__str__ = PandasTools.PrintAsBase64PNGString
+
+    if frame is not None:
+        frame.to_html = types.MethodType(PandasTools.patchPandasHTMLrepr, frame)
+
+    if PandasTools.defPandasRepr is not None and renderer == "String":
+        frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)
+    else:
+        frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)
