@@ -501,13 +501,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.utils.paths.copy_files" class="md-nav__link">
-    copy_files()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#datamol.utils.decorators.decorators" class="md-nav__link">
     decorators
   </a>
@@ -518,6 +511,26 @@
           <li class="md-nav__item">
   <a href="#datamol.utils.decorators.decorators.disable_on_os" class="md-nav__link">
     disable_on_os()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.utils.fs.fs" class="md-nav__link">
+    fs
+  </a>
+  
+    <nav class="md-nav" aria-label="fs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.fs.copy_file" class="md-nav__link">
+    copy_file()
   </a>
   
 </li>
@@ -613,26 +626,6 @@
   <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
     parallelized()
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.paths.paths" class="md-nav__link">
-    paths
-  </a>
-  
-    <nav class="md-nav" aria-label="paths">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.paths.paths.copy_files" class="md-nav__link">
-    copy_files()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -779,13 +772,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.utils.paths.copy_files" class="md-nav__link">
-    copy_files()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#datamol.utils.decorators.decorators" class="md-nav__link">
     decorators
   </a>
@@ -796,6 +782,26 @@
           <li class="md-nav__item">
   <a href="#datamol.utils.decorators.decorators.disable_on_os" class="md-nav__link">
     disable_on_os()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.utils.fs.fs" class="md-nav__link">
+    fs
+  </a>
+  
+    <nav class="md-nav" aria-label="fs">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.fs.copy_file" class="md-nav__link">
+    copy_file()
   </a>
   
 </li>
@@ -891,26 +897,6 @@
   <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
     parallelized()
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.paths.paths" class="md-nav__link">
-    paths
-  </a>
-  
-    <nav class="md-nav" aria-label="paths">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.paths.paths.copy_files" class="md-nav__link">
-    copy_files()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -1388,72 +1374,6 @@ parameter is specified.</p></td>
 
 
 
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.utils.paths.copy_files" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">paths</span><span class="o">.</span><span class="n">copy_files</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.paths.copy_files" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>Copy a file to another path using fsspec.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>source</code></td>
-        <td><code>Union[str, pathlib.Path]</code></td>
-        <td><p>Path to the file. Path to the file. Can be a local path, HTTP,
-HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/latest/">https://filesystem-spec.readthedocs.io/en/latest/</a></p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>destination</code></td>
-        <td><code>Union[str, pathlib.Path]</code></td>
-        <td><p>Path to the file. Path to the file. Can be a local path, HTTP,
-HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/latest/">https://filesystem-spec.readthedocs.io/en/latest/</a></p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/paths.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span>
-    <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
-    <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Copy a file to another path using fsspec.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        source: Path to the file. Path to the file. Can be a local path, HTTP,</span>
-<span class="sd">            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/</span>
-<span class="sd">        destination: Path to the file. Path to the file. Can be a local path, HTTP,</span>
-<span class="sd">            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_dest</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_source</span><span class="p">:</span>
-            <span class="n">f_dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_source</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
   <div class="doc doc-object doc-module">
 
 
@@ -1551,6 +1471,104 @@ HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/lates
         <span class="k">return</span> <span class="n">wrapper</span>
 
     <span class="k">return</span> <span class="n">real_decorator</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-module">
+
+
+
+<h3 id="datamol.utils.fs.fs" class="doc doc-heading">
+        <code>datamol.utils.fs.fs</code>
+
+
+
+<a href="#datamol.utils.fs.fs" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.fs.copy_file" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">copy_file</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.fs.copy_file" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Copy a file to another path using fsspec.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>source</code></td>
+        <td><code>Union[str, os.PathLike]</code></td>
+        <td><p>Path to a file to copy from (remote or local).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>destination</code></td>
+        <td><code>Union[str, os.PathLike]</code></td>
+        <td><p>Path to a file to copy to (remote or local).</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+    <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Copy a file to another path using fsspec.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        source: Path to a file to copy from (remote or local).</span>
+<span class="sd">        destination: Path to a file to copy to (remote or local).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_dest</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_source</span><span class="p">:</span>
+            <span class="n">f_dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_source</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
 </code></pre></div>
         </details>
     </div>
@@ -2301,108 +2319,6 @@ to None which uses the default joblib "loky" scheduler.</p></td>
     <span class="k">return</span> <span class="n">runner</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="n">arg_type</span><span class="p">)</span>
 </code></pre></div>
         </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h3 id="datamol.utils.paths.paths" class="doc doc-heading">
-        <code>datamol.utils.paths.paths</code>
-
-
-
-<a href="#datamol.utils.paths.paths" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.paths.paths.copy_files" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">copy_files</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.paths.paths.copy_files" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Copy a file to another path using fsspec.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>source</code></td>
-        <td><code>Union[str, pathlib.Path]</code></td>
-        <td><p>Path to the file. Path to the file. Can be a local path, HTTP,
-HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/latest/">https://filesystem-spec.readthedocs.io/en/latest/</a></p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>destination</code></td>
-        <td><code>Union[str, pathlib.Path]</code></td>
-        <td><p>Path to the file. Path to the file. Can be a local path, HTTP,
-HTTPS, S3, GS, etc. See <a href="https://filesystem-spec.readthedocs.io/en/latest/">https://filesystem-spec.readthedocs.io/en/latest/</a></p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/paths.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_files</span><span class="p">(</span>
-    <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
-    <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Copy a file to another path using fsspec.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        source: Path to the file. Path to the file. Can be a local path, HTTP,</span>
-<span class="sd">            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/</span>
-<span class="sd">        destination: Path to the file. Path to the file. Can be a local path, HTTP,</span>
-<span class="sd">            HTTPS, S3, GS, etc. See https://filesystem-spec.readthedocs.io/en/latest/</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_dest</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f_source</span><span class="p">:</span>
-            <span class="n">f_dest</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">f_source</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-
-  </div>
-
     </div>
 
   </div>

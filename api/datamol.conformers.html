@@ -391,6 +391,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#datamol.conformers._features.center_of_mass" class="md-nav__link">
+    center_of_mass()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamol.conformers._conformers.cluster" class="md-nav__link">
     cluster()
   </a>
@@ -400,6 +407,13 @@
         <li class="md-nav__item">
   <a href="#datamol.conformers._conformers.generate" class="md-nav__link">
     generate()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._features.get_coords" class="md-nav__link">
+    get_coords()
   </a>
   
 </li>
@@ -419,8 +433,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.conformers._conformers.sasa" class="md-nav__link">
+  <a href="#datamol.conformers._features.sasa" class="md-nav__link">
     sasa()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.translate" class="md-nav__link">
+    translate()
   </a>
   
 </li>
@@ -554,6 +575,13 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#datamol.conformers._features.center_of_mass" class="md-nav__link">
+    center_of_mass()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamol.conformers._conformers.cluster" class="md-nav__link">
     cluster()
   </a>
@@ -563,6 +591,13 @@
         <li class="md-nav__item">
   <a href="#datamol.conformers._conformers.generate" class="md-nav__link">
     generate()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._features.get_coords" class="md-nav__link">
+    get_coords()
   </a>
   
 </li>
@@ -582,8 +617,15 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.conformers._conformers.sasa" class="md-nav__link">
+  <a href="#datamol.conformers._features.sasa" class="md-nav__link">
     sasa()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.translate" class="md-nav__link">
+    translate()
   </a>
   
 </li>
@@ -607,6 +649,100 @@
                 
                 <h1 id="datamolconformers"><code>datamol.conformers</code><a class="headerlink" href="#datamolconformers" title="Permanent link">&para;</a></h1>
 <p>All the below functions are accessible under <code>datamol.conformers</code>.</p>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.conformers._features.center_of_mass" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_features</span><span class="o">.</span><span class="n">center_of_mass</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">use_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+<a href="#datamol.conformers._features.center_of_mass" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Compute the center of mass of a conformer of a molecule.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>use_atoms</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to compute the true center of mass or the geometrical center.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>digits</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of digits to round to.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>conf_id</code></td>
+        <td><code>int</code></td>
+        <td><p>the conformer id.</p></td>
+        <td><code>-1</code></td>
+      </tr>
+  </tbody>
+</table>      <p>Returns
+    cm: Center of mass or geometrical center</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">use_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">digits</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute the center of mass of a conformer of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">        use_atoms: Whether to compute the true center of mass or the geometrical center.</span>
+<span class="sd">        digits: Number of digits to round to.</span>
+<span class="sd">        conf_id: the conformer id.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        cm: Center of mass or geometrical center</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">use_atoms</span><span class="p">:</span>
+        <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">GetMass</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()])</span>
+
+    <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">atom_weight</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">atom_weight</span> <span class="o">/=</span> <span class="n">atom_weight</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span> <span class="o">*</span> <span class="n">atom_weight</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">digits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">center</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">center</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 
 
   <div class="doc doc-object doc-function">
@@ -1029,6 +1165,68 @@ it’s almost always a good idea to add hydrogens to the molecule first."</p></t
 
 
 
+<h3 id="datamol.conformers._features.get_coords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_features</span><span class="o">.</span><span class="n">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+<a href="#datamol.conformers._features.get_coords" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Get the coordinate of a conformer of a molecule.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>conf_id</code></td>
+        <td><code>int</code></td>
+        <td><p>a conformer id.</p></td>
+        <td><code>-1</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the coordinate of a conformer of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        conf_id: a conformer id.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Molecule does not have any conformers.&quot;</span><span class="p">)</span>
+
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">conf</span><span class="o">.</span><span class="n">GetPositions</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
 <h3 id="datamol.conformers._conformers.return_centroids" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">return_centroids</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_clusters</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
@@ -1185,11 +1383,11 @@ the conformers of the cluster.</p></td>
 
 
 
-<h3 id="datamol.conformers._conformers.sasa" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+<h3 id="datamol.conformers._features.sasa" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_features</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 
-<a href="#datamol.conformers._conformers.sasa" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.conformers._features.sasa" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents first">
 
@@ -1263,7 +1461,7 @@ and -1 to use all cores.</p></td>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+          <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="nd">@dm</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sasa</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
@@ -1332,6 +1530,85 @@ and -1 to use all cores.</p></td>
     <span class="n">runner</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
     <span class="n">sasa_values</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">_get_sasa</span><span class="p">,</span> <span class="n">conf_ids</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sasa_values</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.conformers._conformers.translate" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">translate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">new_centroid</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+
+<a href="#datamol.conformers._conformers.translate" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Move a given conformer of a molecule to a new position. The transformation is performed
+in place.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>the molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>new_centroid</code></td>
+        <td><code>Union[numpy.ndarray, List[int]]</code></td>
+        <td><p>the new position to move to of shape [x, y, z]</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>conf_id</code></td>
+        <td><code>int</code></td>
+        <td><p>id of the conformer.</p></td>
+        <td><code>-1</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">new_centroid</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Move a given conformer of a molecule to a new position. The transformation is performed</span>
+<span class="sd">    in place.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: the molecule.</span>
+<span class="sd">        new_centroid: the new position to move to of shape [x, y, z]</span>
+<span class="sd">        conf_id: id of the conformer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get conformer</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="n">conf_id</span><span class="p">)</span>
+
+    <span class="c1"># Compute the vector for translation</span>
+    <span class="n">mol_center</span> <span class="o">=</span> <span class="n">rdMolTransforms</span><span class="o">.</span><span class="n">ComputeCentroid</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">mol_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mol_center</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mol_center</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">mol_center</span><span class="o">.</span><span class="n">z</span><span class="p">])</span>
+
+    <span class="c1"># Make the transformation matrix</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">T</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_centroid</span> <span class="o">-</span> <span class="n">mol_center</span>
+
+    <span class="c1"># Transform</span>
+    <span class="n">rdMolTransforms</span><span class="o">.</span><span class="n">TransformConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>

@@ -881,8 +881,7 @@
         <td><code>conf_id</code></td>
         <td><code>int</code></td>
         <td><p>The ID of the conformer to show. -1 shows
-the first conformer. Only works if <code>n_confs</code> is None.
-Defaults to -1.</p></td>
+the first conformer. Only works if <code>n_confs</code> is None.</p></td>
         <td><code>-1</code></td>
       </tr>
       <tr>
@@ -890,14 +889,13 @@ Defaults to -1.</p></td>
         <td><code>Union[int, List[int]]</code></td>
         <td><p>Can be a number of conformers
 to shows or a list of conformer indices. When None, only the first
-conformer is displayed. When -1, show all conformers. Defaults to None.</p></td>
+conformer is displayed. When -1, show all conformers.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>align_conf</code></td>
         <td><code>bool</code></td>
-        <td><p>Whether to align conformers together.
-Defaults to True.</p></td>
+        <td><p>Whether to align conformers together.</p></td>
         <td><code>True</code></td>
       </tr>
       <tr>
@@ -909,15 +907,13 @@ Defaults to True.</p></td>
       <tr>
         <td><code>sync_views</code></td>
         <td><code>bool</code></td>
-        <td><p>Wether to sync the multiple views.
-Defaults to True.</p></td>
+        <td><p>Wether to sync the multiple views.</p></td>
         <td><code>True</code></td>
       </tr>
       <tr>
         <td><code>remove_hs</code></td>
         <td><code>bool</code></td>
-        <td><p>Wether to remove the hydrogens of the conformers.
-Defaults to True.</p></td>
+        <td><p>Wether to remove the hydrogens of the conformers.</p></td>
         <td><code>True</code></td>
       </tr>
       <tr>
@@ -931,7 +927,7 @@ Defaults to True.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/viz/_conformers.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">n_confs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">align_conf</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -943,21 +939,17 @@ Defaults to True.</p></td>
     <span class="sd">&quot;&quot;&quot;Visualize the conformer(s) of a molecule.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol (Chem.Mol): a molecule.</span>
-<span class="sd">        conf_id (int, optional): The ID of the conformer to show. -1 shows</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        conf_id: The ID of the conformer to show. -1 shows</span>
 <span class="sd">            the first conformer. Only works if `n_confs` is None.</span>
-<span class="sd">            Defaults to -1.</span>
-<span class="sd">        n_confs (Union[int, List[int]], optional): Can be a number of conformers</span>
+<span class="sd">        n_confs: Can be a number of conformers</span>
 <span class="sd">            to shows or a list of conformer indices. When None, only the first</span>
-<span class="sd">            conformer is displayed. When -1, show all conformers. Defaults to None.</span>
+<span class="sd">            conformer is displayed. When -1, show all conformers.</span>
 <span class="sd">        align_conf: Whether to align conformers together.</span>
-<span class="sd">            Defaults to True.</span>
-<span class="sd">        n_cols (int, optional): Number of columns. Defaults to 3.</span>
+<span class="sd">        n_cols: Number of columns. Defaults to 3.</span>
 <span class="sd">        sync_views: Wether to sync the multiple views.</span>
-<span class="sd">            Defaults to True.</span>
 <span class="sd">        remove_hs: Wether to remove the hydrogens of the conformers.</span>
-<span class="sd">            Defaults to True.</span>
-<span class="sd">        width (str, optional): The width of the returned view. Defaults to &quot;auto&quot;.</span>
+<span class="sd">        width: The width of the returned view. Defaults to &quot;auto&quot;.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">widgets</span> <span class="o">=</span> <span class="n">_get_ipywidgets</span><span class="p">()</span>
@@ -972,9 +964,9 @@ Defaults to True.</p></td>
     <span class="n">mol</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">remove_hs</span><span class="p">:</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">if</span> <span class="n">n_confs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">nv</span><span class="o">.</span><span class="n">show_rdkit</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
@@ -985,17 +977,17 @@ Defaults to True.</p></td>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">n_confs</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">n_confs</span> <span class="o">&gt;</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">():</span>
             <span class="n">n_confs</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span>
-        <span class="n">n_confs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_confs</span><span class="p">))</span>
+        <span class="n">n_confs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_confs</span><span class="p">))</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">if</span> <span class="n">align_conf</span><span class="p">:</span>
-        <span class="n">Chem</span><span class="o">.</span><span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMolConformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confIds</span><span class="o">=</span><span class="n">n_confs</span><span class="p">)</span>
+        <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMolConformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confIds</span><span class="o">=</span><span class="n">n_confs</span><span class="p">)</span>
 
     <span class="c1"># Get number of rows</span>
     <span class="n">n_rows</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">n_confs</span><span class="p">)</span> <span class="o">//</span> <span class="n">n_cols</span>
     <span class="n">n_rows</span> <span class="o">+=</span> <span class="mi">1</span> <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">n_confs</span><span class="p">)</span> <span class="o">%</span> <span class="n">n_cols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="mi">0</span>
 
     <span class="c1"># Create a grid</span>
-    <span class="n">grid</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GridspecLayout</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>
+    <span class="n">grid</span> <span class="o">=</span> <span class="n">widgets</span><span class="o">.</span><span class="n">GridspecLayout</span><span class="p">(</span><span class="n">n_rows</span><span class="p">,</span> <span class="n">n_cols</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="c1"># Create and add views to the grid.</span>
     <span class="n">widget_coords</span> <span class="o">=</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">n_rows</span><span class="p">),</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_cols</span><span class="p">))</span>
@@ -1026,7 +1018,7 @@ Defaults to True.</p></td>
 
 
 <h3 id="datamol.viz._viz.to_image" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">highlight_atom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">highlight_bond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">50</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">highlight_atom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">highlight_bond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.viz._viz.to_image" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1035,29 +1027,136 @@ Defaults to True.</p></td>
 
       <p>Generate an image out of a molecule or a list of molecule.</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mols</code></td>
+        <td><code>Union[List[rdkit.Chem.rdchem.Mol], rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>one or a list of molecules.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>legends</code></td>
+        <td><code>Union[List[Optional[str]], str]</code></td>
+        <td><p>a string or a list of string as legend for every molecules.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>n_cols</code></td>
+        <td><code>int</code></td>
+        <td><p>number of molecules per column.</p></td>
+        <td><code>4</code></td>
+      </tr>
+      <tr>
+        <td><code>use_svg</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to ouput an SVG (or a PNG).</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>mol_size</code></td>
+        <td><code>Union[Tuple[int, int], int]</code></td>
+        <td><p>a int or a tuple of int defining the size per molecule.</p></td>
+        <td><code>(200, 200)</code></td>
+      </tr>
+      <tr>
+        <td><code>highlight_atom</code></td>
+        <td><code>List[List[int]]</code></td>
+        <td><p>atom to highlight.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>highlight_bond</code></td>
+        <td><code>List[List[int]]</code></td>
+        <td><p>bonds to highlight.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>outfile</code></td>
+        <td><code>str</code></td>
+        <td><p>path where to save the image (local or remote path).</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>max_mols</code></td>
+        <td><code>int</code></td>
+        <td><p>the maximum number of molecules to display.</p></td>
+        <td><code>32</code></td>
+      </tr>
+      <tr>
+        <td><code>copy</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to copy the molecules or not.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>indices</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to draw the atom indices.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
           <summary>Source code in <code>datamol/viz/_viz.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">legends</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">legends</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
     <span class="n">use_svg</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">mol_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+    <span class="n">mol_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
     <span class="n">highlight_atom</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">highlight_bond</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">max_mols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+    <span class="n">max_mols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate an image out of a molecule or a list of molecule.&quot;&quot;&quot;</span>
+    <span class="sd">&quot;&quot;&quot;Generate an image out of a molecule or a list of molecule.</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+<span class="sd">    Args:</span>
+<span class="sd">        mols: one or a list of molecules.</span>
+<span class="sd">        legends: a string or a list of string as legend for every molecules.</span>
+<span class="sd">        n_cols: number of molecules per column.</span>
+<span class="sd">        use_svg: whether to ouput an SVG (or a PNG).</span>
+<span class="sd">        mol_size: a int or a tuple of int defining the size per molecule.</span>
+<span class="sd">        highlight_atom: atom to highlight.</span>
+<span class="sd">        highlight_bond: bonds to highlight.</span>
+<span class="sd">        outfile: path where to save the image (local or remote path).</span>
+<span class="sd">        max_mols: the maximum number of molecules to display.</span>
+<span class="sd">        copy: whether to copy the molecules or not.</span>
+<span class="sd">        indices: Whether to draw the atom indices.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">mol_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="n">mol_size</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="n">legends</span><span class="p">]</span>
 
+    <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+
     <span class="k">if</span> <span class="n">max_mols</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[:</span><span class="n">max_mols</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">legends</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">legends</span> <span class="o">=</span> <span class="n">legends</span><span class="p">[:</span><span class="n">max_mols</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">indices</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">atom_indices_to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
 
     <span class="n">_highlight_atom</span> <span class="o">=</span> <span class="n">highlight_atom</span>
     <span class="k">if</span> <span class="n">highlight_atom</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">highlight_atom</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
@@ -1089,14 +1188,14 @@ Defaults to True.</p></td>
                     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># in a jupyter kernel process</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">PIL</span><span class="o">.</span><span class="n">PngImagePlugin</span><span class="o">.</span><span class="n">PngImageFile</span><span class="p">):</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">PIL</span><span class="o">.</span><span class="n">PngImagePlugin</span><span class="o">.</span><span class="n">PngImageFile</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
                     <span class="c1"># in a terminal process</span>
                     <span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># in a jupyter kernel process</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">return</span> <span class="n">image</span>
 </code></pre></div>

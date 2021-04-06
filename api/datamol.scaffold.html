@@ -609,22 +609,19 @@ in the core, forcing to keep the full side chain if required.</p>
       <tr>
         <td><code>n_atom_cuttoff</code></td>
         <td><code>int</code></td>
-        <td><p>Minimum number of atom a core should have.
-Default to 8.</p></td>
+        <td><p>Minimum number of atom a core should have.</p></td>
         <td><code>8</code></td>
       </tr>
       <tr>
         <td><code>additional_templates</code></td>
         <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
-        <td><p>Additional template to use to
-generate scaffolds.</p></td>
+        <td><p>Additional template to use to generate scaffolds.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>ignore_non_ring</code></td>
         <td><code>bool</code></td>
-        <td><p>Whether to ignore atom no in murcko ring system,
-even if they are in the framework. Default to False.</p></td>
+        <td><p>Whether to ignore atom no in murcko ring system, even if they are in the framework.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
@@ -661,10 +658,10 @@ scaffold_to_group: dict of list
         <details class="quote">
           <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">enforce_subs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_atom_cuttoff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="n">additional_templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">additional_templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ignore_non_ring</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
@@ -674,15 +671,12 @@ scaffold_to_group: dict of list
 <span class="sd">    NOTE(hadim): consider parallelize this (if possible).</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mols (List[Chem.Mol]): List of all molecules</span>
-<span class="sd">        enforce_subs (list, optional): List of substructure to enforce on the scaffold.</span>
-<span class="sd">        n_atom_cuttoff (int, optional): Minimum number of atom a core should have.</span>
-<span class="sd">            Default to 8.</span>
-<span class="sd">        additional_templates (List[Chem.Mol], optional): Additional template to use to</span>
-<span class="sd">            generate scaffolds.</span>
-<span class="sd">        ignore_non_ring: Whether to ignore atom no in murcko ring system,</span>
-<span class="sd">            even if they are in the framework. Default to False.</span>
-<span class="sd">        mcs_params (dict): Arguments of MCS algorithm.</span>
+<span class="sd">        mols: List of all molecules</span>
+<span class="sd">        enforce_subs: List of substructure to enforce on the scaffold.</span>
+<span class="sd">        n_atom_cuttoff: Minimum number of atom a core should have.</span>
+<span class="sd">        additional_templates: Additional template to use to generate scaffolds.</span>
+<span class="sd">        ignore_non_ring: Whether to ignore atom no in murcko ring system, even if they are in the framework.</span>
+<span class="sd">        mcs_params: Arguments of MCS algorithm.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        scaffolds: set</span>
@@ -846,8 +840,9 @@ scaffold_to_group: dict of list
 
         <details class="quote">
           <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Trim list of side chain from a molecule.&quot;&quot;&quot;</span>
+
     <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="n">match</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">core</span><span class="p">)</span>
