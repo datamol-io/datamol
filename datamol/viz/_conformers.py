@@ -5,6 +5,7 @@ import copy
 import itertools
 
 from rdkit import Chem
+from rdkit.Chem import rdMolAlign
 
 
 def _get_nglview():
@@ -28,7 +29,7 @@ def _get_ipywidgets():
 
 
 def conformers(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     conf_id: int = -1,
     n_confs: Union[int, List[int]] = None,
     align_conf: bool = True,
@@ -40,21 +41,17 @@ def conformers(
     """Visualize the conformer(s) of a molecule.
 
     Args:
-        mol (Chem.Mol): a molecule.
-        conf_id (int, optional): The ID of the conformer to show. -1 shows
+        mol: a molecule.
+        conf_id: The ID of the conformer to show. -1 shows
             the first conformer. Only works if `n_confs` is None.
-            Defaults to -1.
-        n_confs (Union[int, List[int]], optional): Can be a number of conformers
+        n_confs: Can be a number of conformers
             to shows or a list of conformer indices. When None, only the first
-            conformer is displayed. When -1, show all conformers. Defaults to None.
+            conformer is displayed. When -1, show all conformers.
         align_conf: Whether to align conformers together.
-            Defaults to True.
-        n_cols (int, optional): Number of columns. Defaults to 3.
+        n_cols: Number of columns. Defaults to 3.
         sync_views: Wether to sync the multiple views.
-            Defaults to True.
         remove_hs: Wether to remove the hydrogens of the conformers.
-            Defaults to True.
-        width (str, optional): The width of the returned view. Defaults to "auto".
+        width: The width of the returned view. Defaults to "auto".
     """
 
     widgets = _get_ipywidgets()
@@ -69,9 +66,9 @@ def conformers(
     mol = copy.deepcopy(mol)
 
     if remove_hs:
-        mol = Chem.RemoveHs(mol)
+        mol = Chem.RemoveHs(mol)  # type: ignore
     else:
-        mol = Chem.AddHs(mol)
+        mol = Chem.AddHs(mol)  # type: ignore
 
     if n_confs is None:
         return nv.show_rdkit(mol, conf_id=conf_id)
@@ -82,17 +79,17 @@ def conformers(
     elif isinstance(n_confs, int):
         if n_confs > mol.GetNumConformers():
             n_confs = mol.GetNumConformers()
-        n_confs = list(range(n_confs))
+        n_confs = list(range(n_confs))  # type: ignore
 
     if align_conf:
-        Chem.rdMolAlign.AlignMolConformers(mol, confIds=n_confs)
+        rdMolAlign.AlignMolConformers(mol, confIds=n_confs)
 
     # Get number of rows
     n_rows = len(n_confs) // n_cols
     n_rows += 1 if (len(n_confs) % n_cols) > 0 else 0
 
     # Create a grid
-    grid = widgets.GridspecLayout(n_rows, n_cols)
+    grid = widgets.GridspecLayout(n_rows, n_cols)  # type: ignore
 
     # Create and add views to the grid.
     widget_coords = itertools.product(range(n_rows), range(n_cols))

@@ -1,3 +1,4 @@
+from ._actions import pick_atom_idx
 from ._actions import add_bond_between
 from ._actions import update_bond
 

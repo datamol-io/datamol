@@ -19,8 +19,9 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 import datamol as dm
 
 
-def trim_side_chain(mol: Chem.Mol, core, unwanted_side_chains):
+def trim_side_chain(mol: Chem.rdchem.Mol, core, unwanted_side_chains):
     """Trim list of side chain from a molecule."""
+
     mol = Chem.AddHs(mol)
 
     match = mol.GetSubstructMatch(core)
@@ -64,10 +65,10 @@ def trim_side_chain(mol: Chem.Mol, core, unwanted_side_chains):
 
 
 def fuzzy_scaffolding(
-    mols: List[Chem.Mol],
+    mols: List[Chem.rdchem.Mol],
     enforce_subs: List[str] = None,
     n_atom_cuttoff: int = 8,
-    additional_templates: List[Chem.Mol] = None,
+    additional_templates: List[Chem.rdchem.Mol] = None,
     ignore_non_ring: bool = False,
     mcs_params: Dict[Any, Any] = None,
 ):
@@ -77,15 +78,12 @@ def fuzzy_scaffolding(
     NOTE(hadim): consider parallelize this (if possible).
 
     Args:
-        mols (List[Chem.Mol]): List of all molecules
-        enforce_subs (list, optional): List of substructure to enforce on the scaffold.
-        n_atom_cuttoff (int, optional): Minimum number of atom a core should have.
-            Default to 8.
-        additional_templates (List[Chem.Mol], optional): Additional template to use to
-            generate scaffolds.
-        ignore_non_ring: Whether to ignore atom no in murcko ring system,
-            even if they are in the framework. Default to False.
-        mcs_params (dict): Arguments of MCS algorithm.
+        mols: List of all molecules
+        enforce_subs: List of substructure to enforce on the scaffold.
+        n_atom_cuttoff: Minimum number of atom a core should have.
+        additional_templates: Additional template to use to generate scaffolds.
+        ignore_non_ring: Whether to ignore atom no in murcko ring system, even if they are in the framework.
+        mcs_params: Arguments of MCS algorithm.
 
     Returns:
         scaffolds: set

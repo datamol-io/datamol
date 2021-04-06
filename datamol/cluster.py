@@ -14,6 +14,7 @@ from scipy.spatial import distance
 from rdkit import Chem
 from rdkit.Chem import DataStructs
 from rdkit.ML.Cluster import Butina
+
 from rdkit.SimDivFilters.rdSimDivPickers import ClusterMethod
 from rdkit.SimDivFilters.rdSimDivPickers import HierarchicalClusterPicker
 from rdkit.SimDivFilters.rdSimDivPickers import MaxMinPicker
@@ -23,7 +24,7 @@ import datamol as dm
 
 
 def cluster_mols(
-    mols: List[Chem.Mol],
+    mols: List[Chem.rdchem.Mol],
     cutoff: float = 0.2,
     feature_fn: Callable = None,
     n_jobs: Optional[int] = 1,
@@ -31,12 +32,12 @@ def cluster_mols(
     """Cluster a set of molecules using the butina clustering algorithm and a given threshold.
 
     Args:
-        mols (List[Chem.Mol]): a list of molecules.
-        cutoff (float, optional): Cuttoff for the clustering. Default to 0.2.
-        feature_fn (callable, optional): A feature function that takes a Chem.Mol object
+        mols: a list of molecules.
+        cutoff: Cuttoff for the clustering. Default to 0.2.
+        feature_fn: A feature function that takes a Chem.rdchem.Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
-        n_jobs (int): Number of jobs for parallelization. Let to 1 for no
+        n_jobs: Number of jobs for parallelization. Let to 1 for no
             parallelization. Set to None to use all available cores.
     """
 
@@ -57,13 +58,13 @@ def cluster_mols(
     cluster_mols = [operator.itemgetter(*cluster)(mols) for cluster in cluster_indices]
 
     # Make single mol cluster a list
-    cluster_mols = [[c] if isinstance(c, Chem.Mol) else c for c in cluster_mols]
+    cluster_mols = [[c] if isinstance(c, Chem.rdchem.Mol) else c for c in cluster_mols]
 
     return cluster_indices, cluster_mols
 
 
 def pick_diverse(
-    mols: List[Chem.Mol],
+    mols: List[Chem.rdchem.Mol],
     npick: int,
     initial_picks: List[int] = None,
     feature_fn: Callable = None,
@@ -74,18 +75,18 @@ def pick_diverse(
     r"""Pick a set of diverse molecules based on they fingerprint.
 
     Args:
-        mols (List[Chem.Mol]): a list of molecules.
-        npick (int): Number of element to pick from mols, including the preselection.
-        initial_picks (list, optional): Starting list of index for molecules that should be in the
+        mols: a list of molecules.
+        npick: Number of element to pick from mols, including the preselection.
+        initial_picks: Starting list of index for molecules that should be in the
             set of picked molecules. Default to None.
-        feature_fn (callable, optional): A feature function that takes a Chem.Mol object
+        feature_fn: A feature function that takes a Chem.rdchem.Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
-        dist_fn (callable, optional): A function that takes two indexes (i,j) and return the
+        dist_fn: A function that takes two indexes (i,j) and return the
             distance between them. You might use partial to set the fingerprints as input.
             By default, the Tanimoto similarity will be used. Default to None.
-        seed (int, optional): seed for reproducibility
-        n_jobs (int): Number of jobs for parallelization. Let to 1 for no
+        seed: seed for reproducibility
+        n_jobs: Number of jobs for parallelization. Let to 1 for no
             parallelization. Set to None to use all available cores.
 
     Returns:
@@ -114,7 +115,7 @@ def pick_diverse(
 
 
 def pick_centroids(
-    mols: List[Chem.Mol],
+    mols: List[Chem.rdchem.Mol],
     npick: int = 0,
     initial_picks: List[int] = None,
     threshold: float = 0.5,
@@ -127,21 +128,21 @@ def pick_centroids(
     r"""Pick a set of `npick` centroids from a list of molecules.
 
     Args:
-        mols (List[Chem.Mol]): a list of molecules.
-        npick (int, optional): Number of element to pick from mols, including the preselection.
-        threshold (float, optional): Minimum distance between centroids for `maxmin` and sphere exclusion (`sphere`) methods.
-        initial_picks (list, optional): Starting list of index for molecules that should be in the
+        mols: a list of molecules.
+        npick: Number of element to pick from mols, including the preselection.
+        threshold: Minimum distance between centroids for `maxmin` and sphere exclusion (`sphere`) methods.
+        initial_picks: Starting list of index for molecules that should be in the
             set of picked molecules. Default to None.
-        feature_fn (callable, optional): A feature function that takes a Chem.Mol object
+        feature_fn (callable, optional): A feature function that takes a Chem.rdchem.Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
-        dist_fn (callable, optional): A function that takes two indexes (i,j) and return the
+        dist_fn: A function that takes two indexes (i,j) and return the
             distance between them. You might use partial to set the fingerprints as input.
             By default, the Tanimoto similarity will be used. Default to None.
-        seed (int, optional): seed for reproducibility
-        method (str, optional): Picking method to use. One of  `sphere`, `maxmin` or any
+        seed: seed for reproducibility
+        method: Picking method to use. One of  `sphere`, `maxmin` or any
             supported rdkit hierarchical clustering method such as `centroid`, `clink`, `upgma`
-        n_jobs (int): Number of jobs for parallelization. Let to 1 for no
+        n_jobs: Number of jobs for parallelization. Let to 1 for no
             parallelization. Set to None to use all available cores.
 
     Returns:
@@ -201,8 +202,8 @@ def pick_centroids(
 
 
 def assign_to_centroids(
-    mols: List[Chem.Mol],
-    centroids: List[Chem.Mol],
+    mols: List[Chem.rdchem.Mol],
+    centroids: List[Chem.rdchem.Mol],
     feature_fn: Callable = None,
     dist_fn: Callable = None,
     n_jobs: Optional[int] = 1,
@@ -210,20 +211,20 @@ def assign_to_centroids(
     r"""Assign molecules to centroids. Each molecule will be assigned to the closest centroid.
 
     Args:
-        mols (List[Chem.Mol]): a list of molecules to assign to centroids
-        centroids ((List[Chem.Mol])): list of molecules to use as centroid
-        feature_fn (callable, optional): A feature function that takes a Chem.Mol object
+        mols: a list of molecules to assign to centroids
+        centroids: list of molecules to use as centroid
+        feature_fn: A feature function that takes a Chem.rdchem.Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
-        dist_fn (callable, optional): A function that takes two indexes (i,j) and return the
+        dist_fn: A function that takes two indexes (i,j) and return the
             distance between them. You might use partial to set the fingerprints as input.
             By default, the Tanimoto similarity will be used. Default to None.
-        n_jobs (int): Number of jobs for parallelization. Let to 1 for no
+        n_jobs: Number of jobs for parallelization. Let to 1 for no
             parallelization. Set to None to use all available cores.
 
     Returns:
-        clusters_map (dict): dict of index mapping each centroid index to the molecule index in the cluster
-        clusters_list (List[list]) list of all molecules in each cluster. The cluster index follows the index of the centroid.
+        clusters_map: dict of index mapping each centroid index to the molecule index in the cluster
+        clusters_list: list of all molecules in each cluster. The cluster index follows the index of the centroid.
             Note that the centroid molecule is not added to the cluster.
     """
 
@@ -245,7 +246,7 @@ def assign_to_centroids(
     centroid_inds = np.expand_dims(np.arange(len(centroids), dtype=int), axis=1) + len(mols)
     dist_mat = distance.cdist(query_inds, centroid_inds, metric=distij)
     closest = np.argmin(dist_mat, axis=1)
-    for ind, cluster_ind in enumerate(closest):
+    for ind, cluster_ind in enumerate(closest):  # type: ignore
         clusters_map[cluster_ind].append(ind)
         clusters_list[cluster_ind].append(mols[ind])
     return clusters_map, clusters_list

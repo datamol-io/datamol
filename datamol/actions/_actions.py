@@ -11,7 +11,7 @@ from rdkit.Chem import rdmolops
 import datamol as dm
 
 
-def _pick_atom_idx(mol, prepick=None):
+def pick_atom_idx(mol, prepick=None):
     """pick an atom from the molecule"""
     mol.UpdatePropertyCache()
     if not (prepick is not None and prepick >= 0 and prepick < mol.GetNumAtoms()):
@@ -32,7 +32,7 @@ def add_bond_between(mol, a1, a2, bond_type):
 
 def update_bond(mol, bond, bond_type):
     """Update bond type between atoms"""
-    new_mol = copy.copy(mol)
+    new_mol = dm.copy_mol(mol)
     with dm.without_rdkit_log():
         new_bond = new_mol.GetBondWithIdx(bond.GetIdx())
         new_bond.SetBondType(bond_type)
@@ -399,55 +399,49 @@ def all_bond_add(
 
 
 def all_bond_remove(
-    mol,
-    asMols=True,
-    allow_bond_decrease=True,
-    allow_atom_trim=True,
+    mol: Chem.rdchem.Mol,
+    as_mol: bool = True,
+    allow_bond_decrease: bool = True,
+    allow_atom_trim: bool = True,
     max_num_action=float("Inf"),
 ):
-    """
-    Remove bonds from a molecule
+    """Remove bonds from a molecule
 
-    .. warning::
-        This is could be computationally expensive
+    Warning:
+        This can be computationally expensive.
 
-    Arguments
-    ----------
-        mol: <Chem.Mol>
-            Input molecule
-        allow_bond_decrease: bool, optional
-            Allow decreasing bond type in addition to bond cut
-            (Default: True)
-        max_num_action: float, optional
-            Maximum number of action to reduce complexity
-        allow_atom_trim: bool, optional
-            Allow bond removal even when it results in dm.SINGLE_BONDton atoms
-            (Default: True)
+    Args:
+        mol: Input molecule
+        allow_bond_decrease: Allow decreasing bond type in addition to bond cut
+        max_num_action: Maximum number of action to reduce complexity
+        allow_atom_trim: Allow bond removal even when it results in dm.SINGLE_BOND
 
-
-    Returns
-    -------
+    Returns:
         All possible molecules from removing bonds
 
     """
     new_mols = []
+
     try:
         Chem.Kekulize(mol, clearAromaticFlags=True)
     except:
         pass
+
     for bond in mol.GetBonds():
         if len(new_mols) > max_num_action:
             break
+
         original_bond_type = bond.GetBondType()
         emol = Chem.RWMol(mol)
         emol.RemoveBond(bond.GetBeginAtomIdx(), bond.GetEndAtomIdx())
         new_mol = dm.sanitize_mol(emol.GetMol())
+
         if not new_mol:
             continue
 
         frag_list = list(rdmolops.GetMolFrags(new_mol, asMols=True))
-        has_dm.SINGLE_BOND_atom = any([x.GetNumAtoms() < 2 for x in frag_list])
-        if not has_dm.SINGLE_BOND_atom or allow_atom_trim:
+        has_single_atom = any([x.GetNumAtoms() < 2 for x in frag_list])
+        if not has_single_atom or allow_atom_trim:
             new_mols.extend(frag_list)
         if allow_bond_decrease:
             if original_bond_type in [dm.DOUBLE_BOND, dm.TRIPLE_BOND]:
@@ -460,8 +454,10 @@ def all_bond_remove(
                     new_mols.extend(list(rdmolops.GetMolFrags(new_mol, asMols=True)))
 
     new_mols = [mol for mol in new_mols if mol is not None]
-    if not asMols:
+
+    if not as_mol:
         return [dm.to_smiles(x) for x in new_mols if x]
+
     return new_mols
 
 

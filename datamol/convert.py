@@ -3,42 +3,45 @@ from typing import List
 from typing import Optional
 
 import re
+from click import types
+
+from loguru import logger
 
 import pandas as pd
 
 from rdkit import Chem
+from rdkit.Chem import PandasTools
+
 import selfies as sf
 
 import datamol as dm
 
 
 def to_smiles(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     canonical: bool = True,
     isomeric: bool = True,
     ordered: bool = False,
     explicit_bonds: bool = False,
     explicit_hs: bool = False,
     randomize: bool = False,
+    cxsmiles: bool = False,
+    allow_to_fail: bool = False,
 ) -> Optional[str]:
     """Convert a mol to a SMILES.
 
     Args:
         mol: a molecule.
         canonical: if false no attempt will be made to canonicalize the molecule.
-            Defaults to true.
-        isomeric: whether to include information about stereochemistry in
-            the SMILES. Defaults to True.
-        ordered: whether to force reordering of the atoms
-            first. Defaults to False.
-        explicit_bonds: if true, all bond orders will be explicitly indicated in
-            the output SMILES. Defaults to false.
-        explicit_hs: if true, all H counts will be explicitly indicated in the
-            output SMILES. Defaults to false.
+        isomeric: whether to include information about stereochemistry in the SMILES.
+        ordered: whether to force reordering of the atoms first.
+        explicit_bonds: if true, all bond orders will be explicitly indicated in the output SMILES.
+        explicit_hs: if true, all H counts will be explicitly indicated in the output SMILES.
         randomize: whether to randomize the generated smiles. Override `canonical`.
-            Defaults to false.
+        cxsmiles: Whether to return a CXSMILES instead of a SMILES.
+        allow_to_fail: Raise an error if the conversion to SMILES fails. Return None otherwise.
     """
-    if ordered:
+    if ordered and canonical is False:
         mol = dm.reorder_atoms(mol)
 
     if randomize:
@@ -47,19 +50,36 @@ def to_smiles(
 
     smiles = None
     try:
-        smiles = Chem.MolToSmiles(
-            mol,
-            isomericSmiles=isomeric,
-            canonical=canonical,
-            allBondsExplicit=explicit_bonds,
-            allHsExplicit=explicit_hs,
-        )
-    except:
+
+        if cxsmiles:
+            smiles = Chem.MolToCXSmiles(  # type: ignore
+                mol,
+                isomericSmiles=isomeric,
+                canonical=canonical,
+                allBondsExplicit=explicit_bonds,
+                allHsExplicit=explicit_hs,
+            )
+
+        else:
+            smiles = Chem.MolToSmiles(  # type: ignore
+                mol,
+                isomericSmiles=isomeric,
+                canonical=canonical,
+                allBondsExplicit=explicit_bonds,
+                allHsExplicit=explicit_hs,
+            )
+
+    except Exception as e:
+
+        if allow_to_fail:
+            raise e
+
         return None
+
     return smiles
 
 
-def to_selfies(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to SELFIES.
 
     Args:
@@ -71,13 +91,18 @@ def to_selfies(mol: Union[str, Chem.Mol]) -> Optional[str]:
     if mol is None:
         return None
 
-    if isinstance(mol, Chem.Mol):
+    if isinstance(mol, Chem.rdchem.Mol):
         mol = to_smiles(mol)
 
-    return sf.encoder(mol)
+    selfies = sf.encoder(mol)  # type: ignore
+
+    if selfies == -1:
+        return None
+
+    return selfies
 
 
-def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.Mol]]:
+def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.rdchem.Mol]]:
     """Convert a SEFLIES to a smiles or a mol.
 
     Args:
@@ -98,7 +123,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem
     return smiles
 
 
-def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
+def to_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optional[str]:
     """Convert a molecule to a smarts.
 
     Args:
@@ -118,7 +143,7 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
         mol = dm.to_mol(mol)
 
     # Change the isotope to 42
-    for atom in mol.GetAtoms():
+    for atom in mol.GetAtoms():  # type: ignore
         if keep_hs:
             s = sum(na.GetAtomicNum() == 1 for na in atom.GetNeighbors())
             if s:
@@ -136,7 +161,7 @@ def to_smarts(mol: Union[str, Chem.Mol], keep_hs: bool = True) -> Optional[str]:
     return smarts
 
 
-def to_inchi(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_inchi(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi.
 
     Args:
@@ -152,7 +177,7 @@ def to_inchi(mol: Union[str, Chem.Mol]) -> Optional[str]:
     return Chem.MolToInchi(mol)
 
 
-def to_inchikey(mol: Union[str, Chem.Mol]) -> Optional[str]:
+def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     """Convert a mol to Inchi key.
 
     Args:
@@ -168,7 +193,11 @@ def to_inchikey(mol: Union[str, Chem.Mol]) -> Optional[str]:
     return Chem.MolToInchiKey(mol)
 
 
-def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True) -> Optional[Chem.Mol]:
+def from_inchi(
+    inchi: Optional[str],
+    sanitize: bool = True,
+    remove_hs: bool = True,
+) -> Optional[Chem.rdchem.Mol]:
     """Convert an InChi to a mol.
 
     Args:
@@ -185,54 +214,148 @@ def from_inchi(inchi: str, sanitize: bool = True, remove_hs: bool = True) -> Opt
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
 
 
-def to_df(mols: List[Chem.Mol], smiles_column: str = "smiles") -> Optional[pd.DataFrame]:
+def to_df(
+    mols: List[Chem.rdchem.Mol],
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = None,
+    include_private: bool = False,
+    include_computed: bool = False,
+    render_df_mol: bool = True,
+    render_all_df_mol: bool = False,
+) -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
     Args:
         mols: a molecule.
-        smiles_column (str, optional): name of the SMILES column.
-            Default to "smiles".
+        smiles_column: name of the SMILES column.
+        mol_column: Name of the column. If not None, rdkit.Chem.PandaTools
+            is used to add a molecule column.
+        include_private: Include private properties in the columns.
+        include_computed: Include computed properties in the columns.
+        render_df_mol: whether to render the molecule in the dataframe to images.
+            If called once, it will be applied for the newly created dataframe with
+            mol in it.
+        render_all_df_mol: Whether to render all pandas dataframe mol column as images.
     """
-    df = [mol.GetPropsAsDict() for mol in mols]
-    df = pd.DataFrame(df)
 
-    # Add the smiles column and move it to the first position
-    smiles = [to_smiles(mol) for mol in mols]
-    df[smiles_column] = smiles
-    col = df.pop(smiles_column)
-    df.insert(0, col.name, col)
+    # Init a dataframe
+    df = pd.DataFrame()
+
+    # Feed it with smiles
+    if smiles_column is not None:
+        smiles = [dm.to_smiles(mol) for mol in mols]
+        df[smiles_column] = smiles
+
+    # Add a mol column
+    if mol_column is not None:
+        df[mol_column] = mols
+
+    # Add any other properties present in the molecule
+    props = [
+        mol.GetPropsAsDict(
+            includePrivate=include_private,
+            includeComputed=include_computed,
+        )
+        for mol in mols
+    ]
+    props_df = pd.DataFrame(props)
+
+    if smiles_column is not None and smiles_column in props_df.columns:
+        logger.warning(
+            f"The SMILES column name provided ('{smiles_column}') is already present in the properties"
+            " of the molecules. THe returned dataframe will two columns with the same name."
+        )
+
+    # Concat the df with the properties df
+    df = pd.concat([df, props_df], axis=1)
+
+    # Render mol column to images
+    if render_df_mol is True and mol_column is not None:
+        # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
+        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
+        _ChangeMoleculeRendering(df)
+
+        if render_all_df_mol:
+            PandasTools.RenderImagesInAllDataFrames()
 
     return df
 
 
-def from_df(df: pd.DataFrame, smiles_column: str = "smiles") -> Optional[List[Chem.Mol]]:
+def from_df(
+    df: pd.DataFrame,
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = None,
+    conserve_smiles: bool = False,
+) -> List[Chem.rdchem.Mol]:
     """Convert a dataframe to a list of mols.
+
+    Note:
+        If `smiles_column` is used to build the molecules, this property
+        is removed from the molecules' properties. You can decide to conserve
+        the SMILES column by setting `conserve_smiles` to True.
 
     Args:
         df: a dataframe.
-        smiles_column: Column name to use for smiles.
-            Default to "smiles".
+        smiles_column: Column name to extract the molecule.
+        mol_column: Column name to extract the molecule. It takes
+            precedence over `smiles_column`.
+        conserve_smiles: Whether to conserve the SMILES in the mols' props.
     """
+
+    if smiles_column is None and mol_column is None:
+        raise ValueError("Either `smiles_column` or `mol_column` must be not None.")
 
     if len(df) == 0:
         return []
 
     def _row_to_mol(row):
-        mol = dm.to_mol(row[smiles_column])
+
+        props = row.to_dict()
+
+        if mol_column is not None:
+            mol = props[mol_column]
+        else:
+
+            if conserve_smiles:
+                smiles = props[smiles_column]
+            else:
+                # If a SMILES column is used to create the molecule then it is removed from the
+                # properties.
+                smiles = props.pop(smiles_column)
+
+            mol = dm.to_mol(smiles)
 
         if mol is None:
             return None
 
-        for k, v in row.to_dict().items():
-            if isinstance(v, int):
-                mol.SetIntProp(k, v)
-            elif isinstance(v, float):
-                mol.SetDoubleProp(k, v)
-            elif isinstance(v, bool):
-                mol.SetBoolProp(k, v)
-            else:
-                mol.SetProp(k, str(v))
+        dm.set_mol_props(mol, props)
         return mol
 
     return df.apply(_row_to_mol, axis=1).tolist()
+
+
+def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
+    """Allows to change the rendering of the molecules between base64 PNG images and string
+    representations.
+    This serves two purposes: First it allows to avoid the generation of images if this is
+    not desired and, secondly, it allows to enable image rendering for newly created dataframe
+    that already contains molecules, without having to rerun the time-consuming
+    AddMoleculeColumnToFrame. Note: this behaviour is, because some pandas methods, e.g. head()
+    returns a new dataframe instance that uses the default pandas rendering (thus not drawing
+    images for molecules) instead of the monkey-patched one.
+    """
+    import types
+
+    if renderer == "String":
+        Chem.rdchem.Mol.__str__ = PandasTools.PrintDefaultMolRep
+    else:
+        Chem.rdchem.Mol.__str__ = PandasTools.PrintAsBase64PNGString
+
+    if frame is not None:
+        frame.to_html = types.MethodType(PandasTools.patchPandasHTMLrepr, frame)
+
+    if PandasTools.defPandasRepr is not None and renderer == "String":
+        frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)
+    else:
+        frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)
