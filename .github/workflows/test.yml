@@ -14,11 +14,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        # os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        # python-version: [3.7, 3.8, 3.9]
-        # rdkit-version: [2020.09, 2021.03]
-        os: ["ubuntu-latest"]
-        python-version: [3.8]
+        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        python-version: [3.7, 3.8, 3.9]
         rdkit-version: [2020.09, 2021.03]
 
     runs-on: ${{ matrix.os }}
@@ -40,7 +37,7 @@ jobs:
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
 
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@master # TODO: pin once 2.1 released.
+        uses: conda-incubator/setup-miniconda@2.1
         with:
           miniforge-variant: Mambaforge
           use-mamba: true
