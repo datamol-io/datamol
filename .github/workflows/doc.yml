@@ -25,7 +25,7 @@ jobs:
           key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
 
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@2.1
+        uses: conda-incubator/setup-miniconda@v2.1
         with:
           miniforge-variant: Mambaforge
           use-mamba: true
