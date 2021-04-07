@@ -4,6 +4,15 @@ pantagruel Change Log
 
 .. current developments
 
+v0.3.1
+====================
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.0
 ====================
 
