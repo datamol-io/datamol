@@ -16,7 +16,7 @@ install_requires = [
 
 setup(
     name="datamol",
-    version="0.2.12",
+    version="0.3.0",
     author="Hadrien Mary",
     author_email="hadrien.mary@gmail.com",
     url="https://github.com/datamol-org/datamol",
