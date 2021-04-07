@@ -15,7 +15,7 @@ $CHANGELOG_FILENAME = 'CHANGELOG.rst'
 $CHANGELOG_TEMPLATE = 'TEMPLATE.rst'
 $CHANGELOG_NEWS = 'news'
 
-$PYPI_BUILD_COMMANDS = ('sdist', 'bdist')
+$PYPI_BUILD_COMMANDS = ['sdist']
 $PYPI_UPLOAD = True
 
 $ACTIVITIES = ['check', 'authors', 'changelog', 'version_bump', 'tag', 'push_tag', 'ghrelease', 'pypi']

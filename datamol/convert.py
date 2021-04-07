@@ -3,7 +3,6 @@ from typing import List
 from typing import Optional
 
 import re
-from click import types
 
 from loguru import logger
 
