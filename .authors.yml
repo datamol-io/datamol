@@ -10,13 +10,21 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 277
+  num_commits: 322
   first_commit: 2020-10-24 11:46:22
 - name: michelml
   email: michmoreau.l@gmail.com
-  num_commits: 3
+  num_commits: 5
   first_commit: 2021-02-25 15:48:52
 - name: Honoré Hounwanou
   email: mercuryseries@gmail.com
   num_commits: 1
   first_commit: 2021-02-12 17:01:32
+- name: Therence1
+  email: 38595485+Therence1@users.noreply.github.com
+  num_commits: 3
+  first_commit: 2021-04-03 17:31:09
+- name: mike
+  email: michael@invivoai.com
+  num_commits: 3
+  first_commit: 2021-03-30 16:03:51
