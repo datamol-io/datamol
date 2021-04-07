@@ -4,7 +4,7 @@ repo_url: "https://github.com/datamol-org/datamol"
 repo_name: "datamol-org/datamol"
 copyright: Copyright 2020 - 2021 Valence
 
-remote_branch: "privpage"
+remote_branch: "gh-pages"
 use_directory_urls: false
 docs_dir: "docs"
 

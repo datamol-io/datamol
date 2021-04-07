@@ -58,8 +58,8 @@ jobs:
         run: |
           conda activate datamol
 
-          # Get the privpage branch
-          git fetch origin privpage
+          # Get the gh-pages branch
+          git fetch origin gh-pages
 
           # Regenerate the API doc
           python -m datamol._mkdocs

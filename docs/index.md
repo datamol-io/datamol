@@ -8,7 +8,7 @@
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-Visit our website at https://datamol-org--datamol-org.github.privpage.net/.
+Visit our website at https://datamol.io.
 
 ## Installation
 

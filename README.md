@@ -24,7 +24,7 @@
 
 ## Documentation
 
-Visit https://datamol-org--datamol.github.privpage.net/.
+Visit https://doc.datamol.io.
 
 ## Installation
 
