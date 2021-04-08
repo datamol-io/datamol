@@ -43,7 +43,7 @@ jobs:
 
       - name: Install mypy
         run: |
-          pip install mypy==0.812
+          pip install mypy==0.812 numpy pandas loguru pytest pillow scipy
 
       - name: Run code check
         run: |
