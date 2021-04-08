@@ -85,9 +85,11 @@ Version compatibilities are an essential topic for production-software stacks. W
 
 ## CI Status
 
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/test)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/code-check)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/doc)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml)
+|                                         | `master`                                                                                                                                                                           |
+| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lib build & Testing                     | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/test)](https://github.com/datamol-org/datamol/actions/workflows/test.yml)             |
+| Code Sanity (linting and type analysis) | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/code-check)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml) |
+| Documentation Build                     | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/doc)](https://github.com/datamol-org/datamol/actions/workflows/doc.yml)               |
 
 ## Changelogs
 
