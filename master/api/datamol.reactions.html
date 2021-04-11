@@ -38,6 +38,8 @@
     
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="../assets/css/custom.css">
     
       <link rel="stylesheet" href="../assets/css/custom-datamol.css">
@@ -605,62 +607,82 @@
                 
                 <h1 id="datamolreactions"><code>datamol.reactions</code><a class="headerlink" href="#datamolreactions" title="Permanent link">&para;</a></h1>
 <p>All the below functions are accessible under <code>datamol.reactions</code>.</p>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.reactions._reactions.apply_reaction">
 
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.reactions._reactions.apply_reaction" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.reactions._reactions.apply_reaction" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Apply a chemical reaction on a molecule</p>
-<details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="nd">@singledispatch</span>
-<span class="k">def</span> <span class="nf">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">"""Apply a chemical reaction on a molecule"""</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.reactions._reactions.can_react">
+<a href="#datamol.reactions._reactions.apply_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents first">
+
+      <p>Apply a chemical reaction on a molecule</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@singledispatch</span>
+<span class="k">def</span> <span class="nf">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Apply a chemical reaction on a molecule&quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.reactions._reactions.can_react" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.reactions._reactions.can_react" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Check if a molecule is a reactant to a chemical reaction and return position</p>
-<details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="nd">@singledispatch</span>
-<span class="k">def</span> <span class="nf">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
-    <span class="sd">"""Check if a molecule is a reactant to a chemical reaction and return position"""</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.reactions._reactions.compute_reaction_product">
+<a href="#datamol.reactions._reactions.can_react" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents first">
+
+      <p>Check if a molecule is a reactant to a chemical reaction and return position</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@singledispatch</span>
+<span class="k">def</span> <span class="nf">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check if a molecule is a reactant to a chemical reaction and return position&quot;&quot;&quot;</span>
+    <span class="k">raise</span> <span class="ne">ValueError</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.reactions._reactions.compute_reaction_product" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.reactions._reactions.compute_reaction_product" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Compute the product of a reaction</p>
-<details class="quote">
+<a href="#datamol.reactions._reactions.compute_reaction_product" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Compute the product of a reaction</p>
+
+        <details class="quote">
           <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">"""Compute the product of a reaction"""</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Compute the product of a reaction&quot;&quot;&quot;</span>
     <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">single_output</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
@@ -668,25 +690,32 @@
     <span class="c1"># product = sorted(out, key=lambda x: MoleculeEnv.compute_reward_from_mol(x, True))[-1]</span>
     <span class="c1"># sampling from list of products is an alternative</span>
     <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_first</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.reactions._reactions.inverse_reaction">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.reactions._reactions.inverse_reaction" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.reactions._reactions.inverse_reaction" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Get the reverse reaction of the input reaction</p>
-<details class="quote">
+<a href="#datamol.reactions._reactions.inverse_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Get the reverse reaction of the input reaction</p>
+
+        <details class="quote">
           <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
-    <span class="sd">"""Get the reverse reaction of the input reaction"""</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the reverse reaction of the input reaction&quot;&quot;&quot;</span>
     <span class="n">rxn2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetNumReactantTemplates</span><span class="p">()):</span>
         <span class="n">rxn2</span><span class="o">.</span><span class="n">AddProductTemplate</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetReactantTemplate</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
@@ -694,31 +723,38 @@
         <span class="n">rxn2</span><span class="o">.</span><span class="n">AddReactantTemplate</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetProductTemplate</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
     <span class="n">rxn2</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">rxn2</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.reactions._reactions.is_reaction_ok">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.reactions._reactions.is_reaction_ok" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.reactions._reactions.is_reaction_ok" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Check is the reaction is synthetically valid</p>
-<details class="quote">
+<a href="#datamol.reactions._reactions.is_reaction_ok" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Check is the reaction is synthetically valid</p>
+
+        <details class="quote">
           <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
-    <span class="sd">"""Check is the reaction is synthetically valid"""</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Check is the reaction is synthetically valid&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">rdChemReactions</span><span class="o">.</span><span class="n">SanitizeRxn</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span> <span class="o">==</span> <span class="n">rdChemReactions</span><span class="o">.</span><span class="n">SanitizeFlags</span><span class="o">.</span><span class="n">SANITIZE_NONE</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
                 
               
               

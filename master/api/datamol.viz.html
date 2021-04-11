@@ -38,6 +38,8 @@
     
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="../assets/css/custom.css">
     
       <link rel="stylesheet" href="../assets/css/custom-datamol.css">
@@ -617,85 +619,98 @@
                 
                 <h1 id="datamolviz"><code>datamol.viz</code><a class="headerlink" href="#datamolviz" title="Permanent link">&para;</a></h1>
 <p>All the below functions are accessible under <code>datamol.viz</code>.</p>
-<div class="doc doc-object doc-class">
-<h3 class="doc doc-heading" id="datamol.viz._circle_grid.MolsCircleGrid">
 
+
+  <div class="doc doc-object doc-class">
+
+
+
+<h3 id="datamol.viz._circle_grid.MolsCircleGrid" class="doc doc-heading">
         <code>datamol.viz._circle_grid.MolsCircleGrid</code>
 
 
 
-      <a class="headerlink" href="#datamol.viz._circle_grid.MolsCircleGrid" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<div class="doc doc-children">
-<div class="doc doc-object doc-method">
-<h4 class="doc doc-heading" id="datamol.viz._circle_grid.MolsCircleGrid.__init__">
+<a href="#datamol.viz._circle_grid.MolsCircleGrid" class="headerlink" title="Permanent link">&para;</a></h3>
 
+    <div class="doc doc-contents first">
+
+
+
+
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="datamol.viz._circle_grid.MolsCircleGrid.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">center_mol</span><span class="p">,</span> <span class="n">circle_mols</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">circle_margin</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">act_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-      <a class="headerlink" href="#datamol.viz._circle_grid.MolsCircleGrid.__init__" title="Permanent link">&para;</a></h4>
-<div class="doc doc-contents ">
-<p>Show molecules in concentric rings, with one molecule at the center</p>
+<a href="#datamol.viz._circle_grid.MolsCircleGrid.__init__" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents ">
+
+      <p>Show molecules in concentric rings, with one molecule at the center</p>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>center_mol</code></td>
-<td><code>Mol</code></td>
-<td>
-<p>Molecule at center</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>circle_mols</code></td>
-<td><code>List[List[rdkit.Chem.rdchem.Mol]]</code></td>
-<td>
-<p>List of molecule for each concentric circle around the center mol</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>mol_size</code></td>
-<td><code>Tuple[int, int]</code></td>
-<td>
-<p>Tuple of width and height for each molecule</p>
-</td>
-<td><code>(200, 200)</code></td>
-</tr>
-<tr>
-<td><code>circle_margin</code></td>
-<td><code>int</code></td>
-<td>
-<p>Margin between the circle layers</p>
-</td>
-<td><code>50</code></td>
-</tr>
-<tr>
-<td><code>act_mapper</code></td>
-<td><code>dict</code></td>
-<td>
-<p>Map each molecule to a dictionary of activity</p>
-</td>
-<td><code>None</code></td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>center_mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>Molecule at center</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>circle_mols</code></td>
+        <td><code>List[List[rdkit.Chem.rdchem.Mol]]</code></td>
+        <td><p>List of molecule for each concentric circle around the center mol</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>mol_size</code></td>
+        <td><code>Tuple[int, int]</code></td>
+        <td><p>Tuple of width and height for each molecule</p></td>
+        <td><code>(200, 200)</code></td>
+      </tr>
+      <tr>
+        <td><code>circle_margin</code></td>
+        <td><code>int</code></td>
+        <td><p>Margin between the circle layers</p></td>
+        <td><code>50</code></td>
+      </tr>
+      <tr>
+        <td><code>act_mapper</code></td>
+        <td><code>dict</code></td>
+        <td><p>Map each molecule to a dictionary of activity</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">center_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">circle_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
@@ -704,7 +719,7 @@
     <span class="n">circle_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
     <span class="n">act_mapper</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Show molecules in concentric rings, with one molecule at the center</span>
+    <span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        center_mol: Molecule at center</span>
@@ -712,94 +727,100 @@
 <span class="sd">        mol_size: Tuple of width and height for each molecule</span>
 <span class="sd">        circle_margin: Margin between the circle layers</span>
 <span class="sd">        act_mapper: Map each molecule to a dictionary of activity</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">circle_mols</span> <span class="o">=</span> <span class="n">circle_mols</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_mols</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">legend</span> <span class="o">=</span> <span class="n">legend</span> <span class="ow">or</span> <span class="s2">""</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">legend</span> <span class="o">=</span> <span class="n">legend</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">=</span> <span class="n">circle_margin</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span> <span class="o">=</span> <span class="n">center_mol</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">mol_size</span> <span class="o">=</span> <span class="n">mol_size</span>
     <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">mol_size</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">"RGBA"</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGBA&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">=</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">2</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="o">=</span> <span class="kc">None</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">act_mapper</span> <span class="o">=</span> <span class="n">act_mapper</span> <span class="ow">or</span> <span class="p">{}</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">_draw</span><span class="p">()</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.viz._circle_grid.circle_grid">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+
+
+
+
+  </div>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.viz._circle_grid.circle_grid" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_circle_grid</span><span class="o">.</span><span class="n">circle_grid</span><span class="p">(</span><span class="n">center_mol</span><span class="p">,</span> <span class="n">circle_mols</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">circle_margin</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">act_mapper</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.viz._circle_grid.circle_grid" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Show molecules in concentric rings, with one molecule at the center</p>
+<a href="#datamol.viz._circle_grid.circle_grid" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Show molecules in concentric rings, with one molecule at the center</p>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>center_mol</code></td>
-<td><code>Mol</code></td>
-<td>
-<p>Molecule at center</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>circle_mols</code></td>
-<td><code>List[List[rdkit.Chem.rdchem.Mol]]</code></td>
-<td>
-<p>List of molecule for each concentric circle around the center mol</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>mol_size</code></td>
-<td><code>Tuple[int, int]</code></td>
-<td>
-<p>Tuple of width and height for each molecule</p>
-</td>
-<td><code>(200, 200)</code></td>
-</tr>
-<tr>
-<td><code>circle_margin</code></td>
-<td><code>int</code></td>
-<td>
-<p>Margin between the circle layers</p>
-</td>
-<td><code>50</code></td>
-</tr>
-<tr>
-<td><code>act_mapper</code></td>
-<td><code>dict</code></td>
-<td>
-<p>Map each molecule to a dictionary of activity</p>
-</td>
-<td><code>None</code></td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>center_mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>Molecule at center</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>circle_mols</code></td>
+        <td><code>List[List[rdkit.Chem.rdchem.Mol]]</code></td>
+        <td><p>List of molecule for each concentric circle around the center mol</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>mol_size</code></td>
+        <td><code>Tuple[int, int]</code></td>
+        <td><p>Tuple of width and height for each molecule</p></td>
+        <td><code>(200, 200)</code></td>
+      </tr>
+      <tr>
+        <td><code>circle_margin</code></td>
+        <td><code>int</code></td>
+        <td><p>Margin between the circle layers</p></td>
+        <td><code>50</code></td>
+      </tr>
+      <tr>
+        <td><code>act_mapper</code></td>
+        <td><code>dict</code></td>
+        <td><p>Map each molecule to a dictionary of activity</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">circle_grid</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">circle_grid</span><span class="p">(</span>
     <span class="n">center_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">circle_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">legend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -807,7 +828,7 @@
     <span class="n">circle_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
     <span class="n">act_mapper</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Show molecules in concentric rings, with one molecule at the center</span>
+    <span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        center_mol (Chem.Mol): Molecule at center</span>
@@ -815,106 +836,97 @@
 <span class="sd">        mol_size (tuple, optional): Tuple of width and height for each molecule</span>
 <span class="sd">        circle_margin (int, optional): Margin between the circle layers</span>
 <span class="sd">        act_mapper (dict): Map each molecule to a dictionary of activity</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">MolsCircleGrid</span><span class="p">(</span><span class="n">center_mol</span><span class="p">,</span> <span class="n">circle_mols</span><span class="p">,</span> <span class="n">legend</span><span class="p">,</span> <span class="n">mol_size</span><span class="p">,</span> <span class="n">circle_margin</span><span class="p">,</span> <span class="n">act_mapper</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.viz._conformers.conformers">
+</code></pre></div>
+        </details>
+    </div>
 
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">align_conf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sync_views</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">'auto'</span><span class="p">)</span></code>
+  </div>
 
 
-      <a class="headerlink" href="#datamol.viz._conformers.conformers" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Visualize the conformer(s) of a molecule.</p>
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.viz._conformers.conformers" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_conformers</span><span class="o">.</span><span class="n">conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">align_conf</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">sync_views</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="s1">&#39;auto&#39;</span><span class="p">)</span></code>
+
+
+<a href="#datamol.viz._conformers.conformers" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Visualize the conformer(s) of a molecule.</p>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mol</code></td>
-<td><code>Mol</code></td>
-<td>
-<p>a molecule.</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>conf_id</code></td>
-<td><code>int</code></td>
-<td>
-<p>The ID of the conformer to show. -1 shows
-the first conformer. Only works if <code>n_confs</code> is None.</p>
-</td>
-<td><code>-1</code></td>
-</tr>
-<tr>
-<td><code>n_confs</code></td>
-<td><code>Union[int, List[int]]</code></td>
-<td>
-<p>Can be a number of conformers
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>conf_id</code></td>
+        <td><code>int</code></td>
+        <td><p>The ID of the conformer to show. -1 shows
+the first conformer. Only works if <code>n_confs</code> is None.</p></td>
+        <td><code>-1</code></td>
+      </tr>
+      <tr>
+        <td><code>n_confs</code></td>
+        <td><code>Union[int, List[int]]</code></td>
+        <td><p>Can be a number of conformers
 to shows or a list of conformer indices. When None, only the first
-conformer is displayed. When -1, show all conformers.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>align_conf</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to align conformers together.</p>
-</td>
-<td><code>True</code></td>
-</tr>
-<tr>
-<td><code>n_cols</code></td>
-<td><code>int</code></td>
-<td>
-<p>Number of columns. Defaults to 3.</p>
-</td>
-<td><code>3</code></td>
-</tr>
-<tr>
-<td><code>sync_views</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Wether to sync the multiple views.</p>
-</td>
-<td><code>True</code></td>
-</tr>
-<tr>
-<td><code>remove_hs</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Wether to remove the hydrogens of the conformers.</p>
-</td>
-<td><code>True</code></td>
-</tr>
-<tr>
-<td><code>width</code></td>
-<td><code>str</code></td>
-<td>
-<p>The width of the returned view. Defaults to "auto".</p>
-</td>
-<td><code>'auto'</code></td>
-</tr>
-</tbody>
+conformer is displayed. When -1, show all conformers.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>align_conf</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to align conformers together.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>n_cols</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of columns. Defaults to 3.</p></td>
+        <td><code>3</code></td>
+      </tr>
+      <tr>
+        <td><code>sync_views</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to sync the multiple views.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>remove_hs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to remove the hydrogens of the conformers.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>width</code></td>
+        <td><code>str</code></td>
+        <td><p>The width of the returned view. Defaults to "auto".</p></td>
+        <td><code>&#39;auto&#39;</code></td>
+      </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>datamol/viz/_conformers.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">n_confs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -922,9 +934,9 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
     <span class="n">sync_views</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"auto"</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Visualize the conformer(s) of a molecule.</span>
+    <span class="sd">&quot;&quot;&quot;Visualize the conformer(s) of a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -937,15 +949,15 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="sd">        n_cols: Number of columns. Defaults to 3.</span>
 <span class="sd">        sync_views: Wether to sync the multiple views.</span>
 <span class="sd">        remove_hs: Wether to remove the hydrogens of the conformers.</span>
-<span class="sd">        width: The width of the returned view. Defaults to "auto".</span>
-<span class="sd">    """</span>
+<span class="sd">        width: The width of the returned view. Defaults to &quot;auto&quot;.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">widgets</span> <span class="o">=</span> <span class="n">_get_ipywidgets</span><span class="p">()</span>
     <span class="n">nv</span> <span class="o">=</span> <span class="n">_get_nglview</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">"The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`."</span>
+            <span class="s2">&quot;The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`.&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># Clone the molecule</span>
@@ -983,7 +995,7 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">conf_id</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">widget_coords</span><span class="p">)):</span>
         <span class="n">view</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">show_rdkit</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
         <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_self</span> <span class="o">=</span> <span class="s2">"stretch"</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_self</span> <span class="o">=</span> <span class="s2">&quot;stretch&quot;</span>
         <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">view</span>
         <span class="n">views</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
 
@@ -993,125 +1005,110 @@ conformer is displayed. When -1, show all conformers.</p>
             <span class="n">view</span><span class="o">.</span><span class="n">_set_sync_camera</span><span class="p">(</span><span class="n">views</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">grid</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.viz._viz.to_image">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.viz._viz.to_image" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">_viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">highlight_atom</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">highlight_bond</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">outfile</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">32</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">indices</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.viz._viz.to_image" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Generate an image out of a molecule or a list of molecule.</p>
+<a href="#datamol.viz._viz.to_image" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Generate an image out of a molecule or a list of molecule.</p>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mols</code></td>
-<td><code>Union[List[rdkit.Chem.rdchem.Mol], rdkit.Chem.rdchem.Mol]</code></td>
-<td>
-<p>one or a list of molecules.</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>legends</code></td>
-<td><code>Union[List[Union[str, NoneType]], str]</code></td>
-<td>
-<p>a string or a list of string as legend for every molecules.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>n_cols</code></td>
-<td><code>int</code></td>
-<td>
-<p>number of molecules per column.</p>
-</td>
-<td><code>4</code></td>
-</tr>
-<tr>
-<td><code>use_svg</code></td>
-<td><code>bool</code></td>
-<td>
-<p>whether to ouput an SVG (or a PNG).</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>mol_size</code></td>
-<td><code>Union[Tuple[int, int], int]</code></td>
-<td>
-<p>a int or a tuple of int defining the size per molecule.</p>
-</td>
-<td><code>(200, 200)</code></td>
-</tr>
-<tr>
-<td><code>highlight_atom</code></td>
-<td><code>List[List[int]]</code></td>
-<td>
-<p>atom to highlight.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>highlight_bond</code></td>
-<td><code>List[List[int]]</code></td>
-<td>
-<p>bonds to highlight.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>outfile</code></td>
-<td><code>str</code></td>
-<td>
-<p>path where to save the image (local or remote path).</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>max_mols</code></td>
-<td><code>int</code></td>
-<td>
-<p>the maximum number of molecules to display.</p>
-</td>
-<td><code>32</code></td>
-</tr>
-<tr>
-<td><code>copy</code></td>
-<td><code>bool</code></td>
-<td>
-<p>whether to copy the molecules or not.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>indices</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to draw the atom indices.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mols</code></td>
+        <td><code>Union[List[rdkit.Chem.rdchem.Mol], rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>one or a list of molecules.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>legends</code></td>
+        <td><code>Union[List[Optional[str]], str]</code></td>
+        <td><p>a string or a list of string as legend for every molecules.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>n_cols</code></td>
+        <td><code>int</code></td>
+        <td><p>number of molecules per column.</p></td>
+        <td><code>4</code></td>
+      </tr>
+      <tr>
+        <td><code>use_svg</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to ouput an SVG (or a PNG).</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>mol_size</code></td>
+        <td><code>Union[Tuple[int, int], int]</code></td>
+        <td><p>a int or a tuple of int defining the size per molecule.</p></td>
+        <td><code>(200, 200)</code></td>
+      </tr>
+      <tr>
+        <td><code>highlight_atom</code></td>
+        <td><code>List[List[int]]</code></td>
+        <td><p>atom to highlight.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>highlight_bond</code></td>
+        <td><code>List[List[int]]</code></td>
+        <td><p>bonds to highlight.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>outfile</code></td>
+        <td><code>str</code></td>
+        <td><p>path where to save the image (local or remote path).</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>max_mols</code></td>
+        <td><code>int</code></td>
+        <td><p>the maximum number of molecules to display.</p></td>
+        <td><code>32</code></td>
+      </tr>
+      <tr>
+        <td><code>copy</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to copy the molecules or not.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>indices</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to draw the atom indices.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>datamol/viz/_viz.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">legends</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -1124,7 +1121,7 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Generate an image out of a molecule or a list of molecule.</span>
+    <span class="sd">&quot;&quot;&quot;Generate an image out of a molecule or a list of molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: one or a list of molecules.</span>
@@ -1138,7 +1135,7 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="sd">        max_mols: the maximum number of molecules to display.</span>
 <span class="sd">        copy: whether to copy the molecules or not.</span>
 <span class="sd">        indices: Whether to draw the atom indices.</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">mol_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="n">mol_size</span><span class="p">)</span>
@@ -1169,7 +1166,7 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="k">if</span> <span class="n">highlight_bond</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">highlight_bond</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">_highlight_bond</span> <span class="o">=</span> <span class="p">[</span><span class="n">highlight_bond</span><span class="p">]</span>
 
-    <span class="c1"># Don't make the image bigger than it</span>
+    <span class="c1"># Don&#39;t make the image bigger than it</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_cols</span><span class="p">:</span>
         <span class="n">n_cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
 
@@ -1184,7 +1181,7 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="p">)</span>
 
     <span class="k">if</span> <span class="n">outfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">"wb"</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">outfile</span><span class="p">,</span> <span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">use_svg</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                     <span class="c1"># in a terminal process</span>
@@ -1201,11 +1198,11 @@ conformer is displayed. When -1, show all conformers.</p>
                     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">return</span> <span class="n">image</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
                 
               
               

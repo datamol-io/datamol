@@ -38,6 +38,8 @@
     
     
     
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
       <link rel="stylesheet" href="../assets/css/custom.css">
     
       <link rel="stylesheet" href="../assets/css/custom-datamol.css">
@@ -563,91 +565,85 @@
                 
                 <h1 id="datamolscaffold"><code>datamol.scaffold</code><a class="headerlink" href="#datamolscaffold" title="Permanent link">&para;</a></h1>
 <p>All the below functions are accessible under <code>datamol.scaffold</code>.</p>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.scaffold._fuzzy.fuzzy_scaffolding">
 
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.scaffold._fuzzy.fuzzy_scaffolding" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">scaffold</span><span class="o">.</span><span class="n">_fuzzy</span><span class="o">.</span><span class="n">fuzzy_scaffolding</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">enforce_subs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_atom_cuttoff</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">additional_templates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_non_ring</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mcs_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Generate fuzzy scaffold with enforceable group that needs to appear
+<a href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Generate fuzzy scaffold with enforceable group that needs to appear
 in the core, forcing to keep the full side chain if required.</p>
 <p>NOTE(hadim): consider parallelize this (if possible).</p>
+
 <p><strong>Parameters:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Name</th>
-<th>Type</th>
-<th>Description</th>
-<th>Default</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>mols</code></td>
-<td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
-<td>
-<p>List of all molecules</p>
-</td>
-<td><em>required</em></td>
-</tr>
-<tr>
-<td><code>enforce_subs</code></td>
-<td><code>List[str]</code></td>
-<td>
-<p>List of substructure to enforce on the scaffold.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>n_atom_cuttoff</code></td>
-<td><code>int</code></td>
-<td>
-<p>Minimum number of atom a core should have.</p>
-</td>
-<td><code>8</code></td>
-</tr>
-<tr>
-<td><code>additional_templates</code></td>
-<td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
-<td>
-<p>Additional template to use to generate scaffolds.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-<tr>
-<td><code>ignore_non_ring</code></td>
-<td><code>bool</code></td>
-<td>
-<p>Whether to ignore atom no in murcko ring system, even if they are in the framework.</p>
-</td>
-<td><code>False</code></td>
-</tr>
-<tr>
-<td><code>mcs_params</code></td>
-<td><code>Dict[Any, Any]</code></td>
-<td>
-<p>Arguments of MCS algorithm.</p>
-</td>
-<td><code>None</code></td>
-</tr>
-</tbody>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mols</code></td>
+        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>List of all molecules</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>enforce_subs</code></td>
+        <td><code>List[str]</code></td>
+        <td><p>List of substructure to enforce on the scaffold.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>n_atom_cuttoff</code></td>
+        <td><code>int</code></td>
+        <td><p>Minimum number of atom a core should have.</p></td>
+        <td><code>8</code></td>
+      </tr>
+      <tr>
+        <td><code>additional_templates</code></td>
+        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>Additional template to use to generate scaffolds.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>ignore_non_ring</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to ignore atom no in murcko ring system, even if they are in the framework.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>mcs_params</code></td>
+        <td><code>Dict[Any, Any]</code></td>
+        <td><p>Arguments of MCS algorithm.</p></td>
+        <td><code>None</code></td>
+      </tr>
+  </tbody>
 </table>
 <p><strong>Returns:</strong></p>
 <table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>scaffolds</code></td>
-<td>
-<p>set
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>scaffolds</code></td>
+      <td><p>set
     All found scaffolds in the molecules as valid smiles
 scaffold_infos: dict of dict
     Infos on the scaffold mapping, ignoring any side chain that had to be enforced.
@@ -655,15 +651,13 @@ scaffold_infos: dict of dict
     Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
     Values at ['mols'] corresponds to list of molecules matching the scaffold
 scaffold_to_group: dict of list
-    Map between each generic scaffold and the R-groups decomposition row</p>
-</td>
-</tr>
-</tbody>
+    Map between each generic scaffold and the R-groups decomposition row</p></td>
+    </tr>
+  </tbody>
 </table>
-<details class="quote">
+        <details class="quote">
           <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">enforce_subs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_atom_cuttoff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
@@ -671,7 +665,7 @@ scaffold_to_group: dict of list
     <span class="n">ignore_non_ring</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">"""Generate fuzzy scaffold with enforceable group that needs to appear</span>
+    <span class="sd">&quot;&quot;&quot;Generate fuzzy scaffold with enforceable group that needs to appear</span>
 <span class="sd">    in the core, forcing to keep the full side chain if required.</span>
 
 <span class="sd">    NOTE(hadim): consider parallelize this (if possible).</span>
@@ -690,11 +684,11 @@ scaffold_to_group: dict of list
 <span class="sd">        scaffold_infos: dict of dict</span>
 <span class="sd">            Infos on the scaffold mapping, ignoring any side chain that had to be enforced.</span>
 <span class="sd">            Key corresponds to generic scaffold smiles</span>
-<span class="sd">            Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)</span>
-<span class="sd">            Values at ['mols'] corresponds to list of molecules matching the scaffold</span>
+<span class="sd">            Values at [&#39;smarts&#39;] corresponds to smarts representation of the true scaffold (from MCS)</span>
+<span class="sd">            Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
 <span class="sd">        scaffold_to_group: dict of list</span>
 <span class="sd">            Map between each generic scaffold and the R-groups decomposition row</span>
-<span class="sd">    """</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">enforce_subs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">enforce_subs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -750,15 +744,15 @@ scaffold_to_group: dict of list
                 <span class="n">scfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">tmp_scf</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">scf</span> <span class="ow">in</span> <span class="n">scfs</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">"mols"</span><span class="p">):</span>
-                <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">"mols"</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mols&quot;</span><span class="p">):</span>
+                <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;mols&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">"mols"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span>
+                <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;mols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">m</span><span class="p">]</span>
 
     <span class="k">for</span> <span class="n">scf</span> <span class="ow">in</span> <span class="n">scf2infos</span><span class="p">:</span>
         <span class="c1"># cheat by adding murcko as last mol always</span>
         <span class="n">popout</span> <span class="o">=</span> <span class="kc">False</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">"mols"</span><span class="p">]</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;mols&quot;</span><span class="p">]</span>
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="p">:</span>
             <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span> <span class="o">+</span> <span class="p">[</span><span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">GetScaffoldForMol</span><span class="p">(</span><span class="n">mols</span><span class="p">[</span><span class="mi">0</span><span class="p">])]</span>
             <span class="n">popout</span> <span class="o">=</span> <span class="kc">True</span>
@@ -779,7 +773,7 @@ scaffold_to_group: dict of list
         <span class="k">if</span> <span class="n">mcsM</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n_atom_cuttoff</span><span class="p">:</span>
             <span class="k">continue</span>
 
-        <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">"smarts"</span><span class="p">]</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">mcsM</span><span class="p">)</span>
+        <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;smarts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">mcsM</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">popout</span><span class="p">:</span>
             <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
@@ -801,14 +795,14 @@ scaffold_to_group: dict of list
         <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">success_mols</span><span class="p">]</span>
         <span class="n">scf2groups</span><span class="p">[</span><span class="n">scf</span><span class="p">]</span> <span class="o">=</span> <span class="n">core_groups</span>
         <span class="k">for</span> <span class="n">mol</span><span class="p">,</span> <span class="n">gp</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">core_groups</span><span class="p">):</span>
-            <span class="n">core</span> <span class="o">=</span> <span class="n">gp</span><span class="p">[</span><span class="s2">"Core"</span><span class="p">]</span>
+            <span class="n">core</span> <span class="o">=</span> <span class="n">gp</span><span class="p">[</span><span class="s2">&quot;Core&quot;</span><span class="p">]</span>
             <span class="n">acceptable_groups</span> <span class="o">=</span> <span class="p">[</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">GetAtomMapNum</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">core</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span>
                 <span class="k">if</span> <span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">GetAtomMapNum</span><span class="p">()</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">())</span>
             <span class="p">]</span>
 
-            <span class="n">rgroups</span> <span class="o">=</span> <span class="p">[</span><span class="n">gp</span><span class="p">[</span><span class="sa">f</span><span class="s2">"R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">acceptable_groups</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">"R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span> <span class="ow">in</span> <span class="n">gp</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+            <span class="n">rgroups</span> <span class="o">=</span> <span class="p">[</span><span class="n">gp</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">acceptable_groups</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">gp</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
             <span class="k">if</span> <span class="n">enforce_subs</span><span class="p">:</span>
                 <span class="n">rgroups</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">rgp</span>
@@ -822,25 +816,32 @@ scaffold_to_group: dict of list
             <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">all_scaffolds</span><span class="p">,</span> <span class="n">scf2infos</span><span class="p">,</span> <span class="n">scf2groups</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
-<div class="doc doc-object doc-function">
-<h3 class="doc doc-heading" id="datamol.scaffold._fuzzy.trim_side_chain">
+</code></pre></div>
+        </details>
+    </div>
 
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.scaffold._fuzzy.trim_side_chain" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">scaffold</span><span class="o">.</span><span class="n">_fuzzy</span><span class="o">.</span><span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">)</span></code>
 
 
-      <a class="headerlink" href="#datamol.scaffold._fuzzy.trim_side_chain" title="Permanent link">&para;</a></h3>
-<div class="doc doc-contents first">
-<p>Trim list of side chain from a molecule.</p>
-<details class="quote">
+<a href="#datamol.scaffold._fuzzy.trim_side_chain" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Trim list of side chain from a molecule.</p>
+
+        <details class="quote">
           <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-          <div class="highlight">
-<pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
-    <span class="sd">"""Trim list of side chain from a molecule."""</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Trim list of side chain from a molecule.&quot;&quot;&quot;</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
@@ -862,7 +863,7 @@ scaffold_to_group: dict of list
 
     <span class="n">emol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">EditableMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">atom_idx</span><span class="p">,</span> <span class="n">atom_map</span> <span class="ow">in</span> <span class="n">map2idx</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">dummy</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">(</span><span class="s2">"*"</span><span class="p">)</span>
+        <span class="n">dummy</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
         <span class="n">dummy</span><span class="o">.</span><span class="n">SetAtomMapNum</span><span class="p">(</span><span class="n">atom_map</span><span class="p">)</span>
         <span class="n">nei_idx</span> <span class="o">=</span> <span class="n">map2nei</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">atom_idx</span><span class="p">,</span> <span class="p">[</span><span class="kc">None</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
         <span class="k">if</span> <span class="n">nei_idx</span><span class="p">:</span>
@@ -882,11 +883,11 @@ scaffold_to_group: dict of list
         <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">DeleteSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cur_frag</span><span class="p">,</span> <span class="n">onlyFrags</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-</code></pre>
-</div>
-</details>
-</div>
-</div>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
                 
               
               
