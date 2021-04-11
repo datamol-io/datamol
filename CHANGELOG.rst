@@ -1,6 +1,6 @@
-=====================
-pantagruel Change Log
-=====================
+==================
+datamol Changelogs
+==================
 
 .. current developments
 
