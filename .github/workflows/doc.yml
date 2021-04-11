@@ -45,8 +45,14 @@ jobs:
           python -m pip install .
 
       - name: Deploy the doc
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           conda activate datamol
+
+          echo "Configure git"
+          git config --global user.name 'hadim'
+          git config --global user.email 'hadim@users.noreply.github.com'
 
           echo "Get the gh-pages branch"
           git fetch origin gh-pages
