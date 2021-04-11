@@ -49,7 +49,7 @@ inchi = dm.to_inchi(mol)
 mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O")
 mol = dm.fix_mol(mol)
 mol = dm.sanitize_mol(mol)
-mol = dm.standardized_mol(mol)
+mol = dm.standardize_mol(mol)
 
 # Dataframe manipulation
 df = dm.data.freesolv()
