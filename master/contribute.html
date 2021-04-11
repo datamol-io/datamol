@@ -493,6 +493,19 @@
     Build the documentation
   </a>
   
+    <nav class="md-nav" aria-label="Build the documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-versionning" class="md-nav__link">
+    Multi-versionning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -575,6 +588,19 @@
     Build the documentation
   </a>
   
+    <nav class="md-nav" aria-label="Build the documentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#multi-versionning" class="md-nav__link">
+    Multi-versionning
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -635,11 +661,12 @@ pip install -e .
 python -m datamol._mkdocs
 
 <span class="c1"># Build and serve the doc</span>
-mkdocs serve
+mike serve
 </code></pre></div>
+<h3 id="multi-versionning">Multi-versionning<a class="headerlink" href="#multi-versionning" title="Permanent link">&para;</a></h3>
+<p>The doc is built for eash push on <code>master</code> and every git tags using <a href="https://github.com/jimporter/mike">mike</a>. Everything is automated using Github Actions. Please refer to the official mike's documentation for the details.</p>
 <h2 id="release-a-new-version">Release a new version<a class="headerlink" href="#release-a-new-version" title="Permanent link">&para;</a></h2>
 <ul>
-<li>Install <a href="https://regro.github.io/rever-docs">rever</a>: <code>conda install -y rever</code>.</li>
 <li>Run check: <code>rever check</code>.</li>
 <li>Bump and release new version: <code>rever VERSION_NUMBER</code>.</li>
 <li>Releasing a new version will do the following things in that order:<ul>
@@ -649,7 +676,6 @@ mkdocs serve
 <li>Add a git tag.</li>
 <li>Push the git tag.</li>
 <li>Add a new release on the GH repo associated with the git tag.</li>
-<li>Update the appropriate feedstock to build a new conda package.</li>
 </ul>
 </li>
 </ul>

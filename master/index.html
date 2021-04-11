@@ -589,12 +589,12 @@
 </code></pre></div>
 <div class="admonition tips">
 <p class="admonition-title">Tips</p>
-</div>
 <p>You can replace <code>mamba</code> by <code>conda</code>.</p>
+</div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-</div>
 <p>We highly recommend using a Conda Python distribution to install <code>datamol</code>. The package is also pip installable if you need it: <code>pip install datamol</code>.</p>
+</div>
 <h2 id="quick-api-tour">Quick API Tour<a class="headerlink" href="#quick-api-tour" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
 
@@ -608,7 +608,7 @@
 <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span><span class="p">)</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">standardized_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">standardize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
 <span class="c1"># Dataframe manipulation</span>
 <span class="n">df</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
