@@ -48,12 +48,13 @@ jobs:
         run: |
           conda activate datamol
 
-          # Get the gh-pages branch
+          echo "Get the gh-pages branch"
           git fetch origin gh-pages
 
-          # Regenerate the API doc
+          echo "Regenerate the API doc"
           python -m datamol._mkdocs
 
+          echo "Build and deploy the doc"
           if [ $GITHUB_REF = "master" ]; then
             mike deploy --push master
           else
@@ -61,5 +62,5 @@ jobs:
             mike deploy --push $GITHUB_REF
           fi
 
-          # Define the default version to serve
-          mike set-default stable
+          echo "Define the default version to serve"
+          mike set-default --push stable
