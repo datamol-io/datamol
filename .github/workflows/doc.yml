@@ -62,13 +62,13 @@ jobs:
 
           if [ $TAG_OR_BRANCH_NAME = "master" ]; then
             echo "Build and deploy the doc on master"
-            mike deploy --push master
+            mike deploy --push --force master
           else
             echo "Build and deploy the doc on $TAG_OR_BRANCH_NAME"
 
-            mike deploy --push stable
-            mike deploy --push $TAG_OR_BRANCH_NAME
+            mike deploy --push --force stable
+            mike deploy --push --force $TAG_OR_BRANCH_NAME
 
             echo "Define the default version to serve"
-            mike set-default --push stable
+            mike set-default --push --force stable
           fi
