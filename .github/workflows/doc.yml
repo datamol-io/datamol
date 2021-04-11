@@ -58,14 +58,16 @@ jobs:
           echo "Regenerate the API doc"
           python -m datamol._mkdocs
 
-          if [ $GITHUB_REF = "master" ]; then
+          TAG_OR_BRANCH_NAME=${GITHUB_REF##*/}
+
+          if [ $TAG_OR_BRANCH_NAME = "master" ]; then
             echo "Build and deploy the doc on master"
             mike deploy --push master
           else
-            echo "Build and deploy the doc on $GITHUB_REF"
+            echo "Build and deploy the doc on $TAG_OR_BRANCH_NAME"
 
             mike deploy --push stable
-            mike deploy --push $GITHUB_REF
+            mike deploy --push $TAG_OR_BRANCH_NAME
 
             echo "Define the default version to serve"
             mike set-default --push stable
