@@ -64,7 +64,7 @@ jobs:
           else
             mike deploy --push stable
             mike deploy --push $GITHUB_REF
-          fi
 
-          echo "Define the default version to serve"
-          mike set-default --push stable
+            echo "Define the default version to serve"
+            mike set-default --push stable
+          fi
