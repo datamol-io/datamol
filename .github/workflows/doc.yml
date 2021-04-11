@@ -2,8 +2,8 @@ name: doc
 
 on:
   push:
-    branches:
-      - "master"
+    branches: ["master"]
+    tags: ["*"]
 
 jobs:
   doc:
@@ -22,7 +22,7 @@ jobs:
           CACHE_NUMBER: 3
         with:
           path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
+          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
 
       - name: Setup conda
         uses: conda-incubator/setup-miniconda@v2
@@ -33,22 +33,11 @@ jobs:
           auto-activate-base: true
           activate-environment: ""
 
-      - name: Setup conda env
-        run: |
-          # Patch the conda env file
-          mamba install --yes pyyaml
-          python .github/patch_conda_env.py --env env.yml -d \
-            python=${{ matrix.python-version }} \
-            rdkit=${{ matrix.rdkit-version }} \
-            > env-patched.yml
-
-          # Create conda env
-          conda create -n datamol
-
       - name: Install Dependencies
         run: |
+          mamba create -n datamol
           conda activate datamol
-          mamba env update -f env-patched.yml
+          mamba env update -f env.yml
 
       - name: Install library
         run: |
@@ -65,5 +54,11 @@ jobs:
           # Regenerate the API doc
           python -m datamol._mkdocs
 
-          # Build and serve the doc
-          mkdocs gh-deploy
+          if [ $GITHUB_REF = "master" ]; then
+            mike deploy --push master
+          else
+            # Make default doc
+            mike set-default stable
+            mike deploy --push stable
+            mike deploy --push $GITHUB_REF
+          fi

@@ -38,8 +38,8 @@ theme:
   logo: images/logo.png
 
 extra_css:
-  - _assets/css/custom.css
-  - _assets/css/custom-datamol.css
+  - assets/css/custom.css
+  - assets/css/custom-datamol.css
 
 markdown_extensions:
   - admonition
@@ -57,6 +57,7 @@ markdown_extensions:
 
 plugins:
   - search
+
   - mkdocstrings:
       watch:
         - datamol/
@@ -71,9 +72,18 @@ plugins:
           rendering:
             show_root_heading: yes
             heading_level: 3
+
   - mkdocs-jupyter:
       execute: false
       # kernel_name: python3
+
+  - mike:
+      version_selector: true
+
+extra:
+  version:
+    # Multi versioning provider for mkdocs-material (used for the JS selector)
+    provider: mike
 
 google_analytics:
   - G-J3EFY97J4G

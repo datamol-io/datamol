@@ -56,7 +56,7 @@ jobs:
             > env-patched.yml
 
           # Create conda env
-          conda create -n datamol
+          mamba create -n datamol
 
       - name: Install Dependencies
         run: |
