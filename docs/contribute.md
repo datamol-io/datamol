@@ -40,7 +40,7 @@ You can build and serve the documentation locally with:
 python -m datamol._mkdocs
 
 # Build and serve the doc
-mkdocs serve
+mike serve
 ```
 
 ## Release a new version
