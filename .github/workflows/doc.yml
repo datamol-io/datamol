@@ -45,8 +45,6 @@ jobs:
           python -m pip install .
 
       - name: Deploy the doc
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           conda activate datamol
 
