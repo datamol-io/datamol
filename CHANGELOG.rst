@@ -4,6 +4,20 @@ datamol Changelogs
 
 .. current developments
 
+v0.3.2
+====================
+
+**Fixed:**
+
+* Fixed typo in readme
+
+**Authors:**
+
+* Emmanuel Noutahi
+* Hadrien Mary
+
+
+
 v0.3.1
 ====================
 
