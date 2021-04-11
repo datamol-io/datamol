@@ -43,9 +43,12 @@ python -m datamol._mkdocs
 mike serve
 ```
 
+### Multi-versionning
+
+The doc is built for eash push on `master` and every git tags using [mike](https://github.com/jimporter/mike). Everything is automated using Github Actions. Please refer to the official mike's documentation for the details.
+
 ## Release a new version
 
-- Install [rever](https://regro.github.io/rever-docs): `conda install -y rever`.
 - Run check: `rever check`.
 - Bump and release new version: `rever VERSION_NUMBER`.
 - Releasing a new version will do the following things in that order:
@@ -55,4 +58,3 @@ mike serve
   - Add a git tag.
   - Push the git tag.
   - Add a new release on the GH repo associated with the git tag.
-  - Update the appropriate feedstock to build a new conda package.
