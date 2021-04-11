@@ -54,11 +54,12 @@ jobs:
           # Regenerate the API doc
           python -m datamol._mkdocs
 
+          # Define the default version to serve
+          mike set-default stable
+
           if [ $GITHUB_REF = "master" ]; then
             mike deploy --push master
           else
-            # Make default doc
-            mike set-default stable
             mike deploy --push stable
             mike deploy --push $GITHUB_REF
           fi
