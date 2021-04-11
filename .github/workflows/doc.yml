@@ -58,10 +58,12 @@ jobs:
           echo "Regenerate the API doc"
           python -m datamol._mkdocs
 
-          echo "Build and deploy the doc"
           if [ $GITHUB_REF = "master" ]; then
+            echo "Build and deploy the doc on master"
             mike deploy --push master
           else
+            echo "Build and deploy the doc on $GITHUB_REF"
+
             mike deploy --push stable
             mike deploy --push $GITHUB_REF
 
