@@ -1,6 +1,6 @@
 **Added:**
 
-* Multi versionning for the doc using mike
+* <news item>
 
 **Changed:**
 
