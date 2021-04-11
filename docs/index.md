@@ -19,10 +19,10 @@ mamba install -c conda-forge datamol
 ```
 
 !!! tips
-You can replace `mamba` by `conda`.
+    You can replace `mamba` by `conda`.
 
 !!! note
-We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
+    We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
 
 ## Quick API Tour
 
