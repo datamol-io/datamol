@@ -4,6 +4,19 @@ datamol Changelogs
 
 .. current developments
 
+v0.3.3
+====================
+
+**Changed:**
+
+* New logo.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.2
 ====================
 
