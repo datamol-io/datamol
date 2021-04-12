@@ -5,6 +5,7 @@
 
 ---
 
+[![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/master?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb)
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
@@ -21,6 +22,10 @@
 - ✅ Manipulating molecules often rely on many options; datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
+
+## Try Online
+
+Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/master?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb) and try `datamol` online.
 
 ## Documentation
 
