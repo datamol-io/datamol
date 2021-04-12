@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* New logo.
 
 **Deprecated:**
 

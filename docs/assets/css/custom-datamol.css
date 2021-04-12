@@ -31,10 +31,16 @@
 }
 
 /* Increase the size of the logo */
-.md-header-nav__button.md-logo img,
-.md-header-nav__button.md-logo svg {
-  width: 3em;
-  height: 3em;
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: 4em;
+  height: 4em;
+}
+
+/* Reduce the margin around the logo */
+.md-header__button.md-logo {
+  margin: 0em;
+  padding: 0em;
 }
 
 /* Remove the `In` and `Out` block in rendered Jupyter notebooks */
