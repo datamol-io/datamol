@@ -31,7 +31,7 @@ nav:
 theme:
   name: material
   # NOTE(hadim): to customize the material primary and secondary
-  # color check `docs/_assets/css/datamol-custom.css`.
+  # color check `docs/assets/css/datamol-custom.css`.
   features:
     - navigation.expand
   favicon: images/logo.png
