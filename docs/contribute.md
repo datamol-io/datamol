@@ -1,6 +1,6 @@
 # Contribute
 
-The below documents the development lifecycle of `datamol`.
+The below documents the development lifecycle of Datamol.
 
 ## Setup a dev environment
 
@@ -16,7 +16,7 @@ pip install -e .
 
 ## Continuous Integration
 
-`datamol` uses Github Actions to:
+Datamol uses Github Actions to:
 
 - **Build and test** `datamol`.
   - Multiple combinations of OS, Python and RDKit versions are tested.

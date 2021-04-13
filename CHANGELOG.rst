@@ -1,5 +1,5 @@
 ==================
-datamol Changelogs
+Datamol Changelogs
 ==================
 
 .. current developments

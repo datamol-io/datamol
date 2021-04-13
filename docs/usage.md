@@ -1,6 +1,6 @@
 # Usage
 
-`datamol` has been designed to be used with a single import:
+Datamol has been designed to be used with a single import:
 
 ```python
 import datamol as dm

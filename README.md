@@ -1,6 +1,6 @@
 <div align="center">
     <img src="docs/images/logo-title.png" height="80px">
-    <h3>The RDKit-based molecular Python library</h3>
+    <h3>Molecular Manipulation Made Easy</h3>
 </div>
 
 ---
@@ -15,7 +15,7 @@
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
 
-`datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
+Datamol is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ RDKit first: all you manipulate are `rdkit.Chem.Mol` objects.
@@ -25,7 +25,7 @@
 
 ## Try Online
 
-Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/master?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb) and try `datamol` online.
+Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/master?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb) and try Datamol online.
 
 ## Documentation
 
@@ -84,9 +84,9 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 
 Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-| datamol | Python        | RDKit                 |
-| ------- | ------------- | --------------------- |
-| `0.3`   | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
+| `datamol` | `python`      | `rdkit`               |
+| --------- | ------------- | --------------------- |
+| `0.3`     | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
 
 ## CI Status
 

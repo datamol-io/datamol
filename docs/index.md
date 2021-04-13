@@ -1,6 +1,6 @@
 # Overview
 
-`datamol` is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
+Datamol is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ RDKit first: all you manipulate are `rdkit.Chem.Mol` objects.
@@ -22,7 +22,7 @@ mamba install -c conda-forge datamol
     You can replace `mamba` by `conda`.
 
 !!! note
-    We highly recommend using a Conda Python distribution to install `datamol`. The package is also pip installable if you need it: `pip install datamol`.
+    We highly recommend using a Conda Python distribution to install Datamol. The package is also pip installable if you need it: `pip install datamol`.
 
 ## Quick API Tour
 
@@ -69,6 +69,6 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 
 Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-| datamol | Python        | RDKit                 |
-| ------- | ------------- | --------------------- |
-| `0.3`   | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
+| `datamol` | `python`      | `rdkit`               |
+| --------- | ------------- | --------------------- |
+| `0.3`     | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
