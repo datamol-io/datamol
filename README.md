@@ -19,7 +19,7 @@ Datamol is a python library to work with molecules. It's a layer built on top of
 
 - 🐍 Simple pythonic API
 - ⚗️ RDKit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Manipulating molecules often rely on many options; datamol provides good defaults by design.
+- ✅ Manipulating molecules often rely on many options; Datamol provides good defaults by design.
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
