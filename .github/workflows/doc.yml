@@ -68,7 +68,4 @@ jobs:
 
             mike deploy --push --force stable
             mike deploy --push --force $TAG_OR_BRANCH_NAME
-
-            echo "Define the default version to serve"
-            mike set-default --push --force stable
           fi
