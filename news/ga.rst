@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* Fix analytics id code so the doc website has the same everywhere).
+* <news item>
 
 **Deprecated:**
 
