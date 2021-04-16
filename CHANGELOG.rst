@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.3.6
+====================
+
+**Changed:**
+
+* Add s3fs and gcsfs as hard dep
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.5
 ====================
 
