@@ -34,12 +34,16 @@ theme:
   # color check `docs/assets/css/datamol-custom.css`.
   features:
     - navigation.expand
+    - navigation.instant
   favicon: images/logo.png
   logo: images/logo.png
 
 extra_css:
   - assets/css/custom.css
   - assets/css/custom-datamol.css
+
+extra_javascript:
+  - assets/js/google-analytics.js
 
 markdown_extensions:
   - admonition
@@ -84,7 +88,3 @@ extra:
   version:
     # Multi versioning provider for mkdocs-material (used for the JS selector)
     provider: mike
-
-google_analytics:
-  - G-0L9PP26N2H
-  - auto
