@@ -15,8 +15,9 @@ location$.subscribe(function (url) {
   gtag("config", gtag_id);
 });
 
-
+/*
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 gtag('config', gtag_id);
+*/
