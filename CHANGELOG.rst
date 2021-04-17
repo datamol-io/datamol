@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.3.7
+====================
+
+**Fixed:**
+
+* Fix again and hopefully the last time google analytics.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.6
 ====================
 
