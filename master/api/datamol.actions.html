@@ -686,13 +686,6 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.actions._actions.pick_atom_idx" class="md-nav__link">
-    pick_atom_idx()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
   <a href="#datamol.actions._actions.update_bond" class="md-nav__link">
     update_bond()
   </a>
@@ -1147,13 +1140,6 @@
         
       </ul>
     </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.actions._actions.pick_atom_idx" class="md-nav__link">
-    pick_atom_idx()
-  </a>
   
 </li>
       
@@ -2292,40 +2278,6 @@ This corresponds to exploring all valid actions by adding/replacing fragments in
     <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
     <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">])</span>
     <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.actions._actions.pick_atom_idx" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">pick_atom_idx</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prepick</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
-
-
-<a href="#datamol.actions._actions.pick_atom_idx" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>pick an atom from the molecule</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pick_atom_idx</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prepick</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;pick an atom from the molecule&quot;&quot;&quot;</span>
-    <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">prepick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">prepick</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">prepick</span> <span class="o">&lt;</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()):</span>
-        <span class="n">pickable_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
-        <span class="k">if</span> <span class="n">pickable_atoms</span><span class="p">:</span>
-            <span class="n">prepick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pickable_atoms</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">prepick</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">return</span> <span class="n">prepick</span>
 </code></pre></div>
         </details>
     </div>
