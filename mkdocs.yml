@@ -34,7 +34,6 @@ theme:
   # color check `docs/assets/css/datamol-custom.css`.
   features:
     - navigation.expand
-    - navigation.instant
   favicon: images/logo.png
   logo: images/logo.png
 
