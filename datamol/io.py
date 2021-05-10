@@ -83,6 +83,7 @@ def read_sdf(
     mol_column: str = None,
     include_private: bool = False,
     include_computed: bool = False,
+    sanitize: bool = True,
 ) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
     """Read an SDF file.
 
@@ -95,11 +96,12 @@ def read_sdf(
             `as_df` is True.
         include_computed: Include computed properties in the columns.  Only relevant if
             `as_df` is True.
+        sanitize: Whether to sanitize the molecules
     """
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.ForwardSDMolSupplier(urlpath)
+        supplier = Chem.ForwardSDMolSupplier(urlpath, sanitize=sanitize)
         mols = [mol for mol in supplier if mol is not None]
 
     # Regular local or remote paths
@@ -107,7 +109,7 @@ def read_sdf(
         with fsspec.open(urlpath) as f:
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
-            supplier = Chem.ForwardSDMolSupplier(f)
+            supplier = Chem.ForwardSDMolSupplier(f, sanitize=sanitize)
             mols = [mol for mol in supplier if mol is not None]
 
     if as_df:
