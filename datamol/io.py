@@ -118,7 +118,7 @@ def read_sdf(
         mols = [
             dm.set_mol_props(dm.sanitize_mol(mol), mol.GetPropsAsDict())
             for mol in mols
-            if mol is not None
+            if mol is not None and dm.sanitize_mol(mol) is not None
         ]
 
     if as_df:
