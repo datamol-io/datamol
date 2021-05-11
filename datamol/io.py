@@ -115,11 +115,10 @@ def read_sdf(
             mols = [mol for mol in supplier if mol is not None]
 
     if sanitize == True:
-        mols = [
-            dm.set_mol_props(dm.sanitize_mol(mol), mol.GetPropsAsDict())
-            for mol in mols
-            if mol is not None and dm.sanitize_mol(mol) is not None
+        mols_props = [
+            (dm.sanitize_mol(mol), mol.GetPropsAsDict()) for mol in mols if mol is not None
         ]
+        mols = [dm.set_mol_props(mol, props) for mol, props in mols_props]
 
     if as_df:
         return dm.to_df(
