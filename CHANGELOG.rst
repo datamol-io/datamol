@@ -4,6 +4,21 @@ Datamol Changelogs
 
 .. current developments
 
+v0.3.8
+====================
+
+**Changed:**
+
+* Propagate `sanitize` and `strict_parsing` to `dm.read_sdf`.
+
+**Authors:**
+
+* Hadrien Mary
+* Ishan Kumar
+* michelml
+
+
+
 v0.3.7
 ====================
 
