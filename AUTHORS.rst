@@ -4,6 +4,7 @@ Authors are sorted alphabetically.
 * Emmanuel Noutahi
 * Hadrien Mary
 * Honoré Hounwanou
+* Ishan Kumar
 * Therence1
 * michelml
 * mike
