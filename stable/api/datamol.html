@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.1">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.9299cb39.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.bde7dde4.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
@@ -337,6 +337,7 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+      
         
       
       
@@ -351,6 +352,7 @@
       
         
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -1107,6 +1109,7 @@
                   <div class="md-sidebar__inner">
                     
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
   
   
     
@@ -4034,7 +4037,7 @@ Avoid when loading a very large file.</p></td>
 
 
 <h3 id="datamol.io.read_sdf" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
 <a href="#datamol.io.read_sdf" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -4092,6 +4095,18 @@ Avoid when loading a very large file.</p></td>
 <code>as_df</code> is True.</p></td>
         <td><code>False</code></td>
       </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to sanitize the molecules</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>strict_parsing</code></td>
+        <td><code>bool</code></td>
+        <td><p>If set to false, the parser is more lax about correctness of the contents.</p></td>
+        <td><code>True</code></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
@@ -4103,6 +4118,8 @@ Avoid when loading a very large file.</p></td>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Read an SDF file.</span>
 
@@ -4115,11 +4132,13 @@ Avoid when loading a very large file.</p></td>
 <span class="sd">            `as_df` is True.</span>
 <span class="sd">        include_computed: Include computed properties in the columns.  Only relevant if</span>
 <span class="sd">            `as_df` is True.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules</span>
+<span class="sd">        strict_parsing: If set to false, the parser is more lax about correctness of the contents.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># File-like object</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
-        <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span>
+        <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">)</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 
     <span class="c1"># Regular local or remote paths</span>
@@ -4127,8 +4146,14 @@ Avoid when loading a very large file.</p></td>
         <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
             <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gzip&quot;</span><span class="p">):</span>
                 <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">)</span>
             <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">sanitize</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">mols_props</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">())</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
+        <span class="p">]</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span><span class="p">,</span> <span class="n">props</span> <span class="ow">in</span> <span class="n">mols_props</span><span class="p">]</span>
 
     <span class="k">if</span> <span class="n">as_df</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_df</span><span class="p">(</span>
@@ -7578,10 +7603,10 @@ parallelization. Set to None to use all available cores.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.fe42c31b.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.7353b375.min.js"></script>
+      <script src="../assets/javascripts/bundle.a1609d9a.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
