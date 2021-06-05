@@ -84,6 +84,7 @@ def read_sdf(
     include_private: bool = False,
     include_computed: bool = False,
     sanitize: bool = True,
+    sanitize_mol: bool = False,
     strict_parsing: bool = True,
 ) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
     """Read an SDF file.
@@ -97,13 +98,15 @@ def read_sdf(
             `as_df` is True.
         include_computed: Include computed properties in the columns.  Only relevant if
             `as_df` is True.
-        sanitize: Whether to sanitize the molecules
+        sanitize_rdkit: Whether to read the molecules with the RDKit sanitize flag.
+        sanitize: Whether to sanitize the molecules after reading it with `dm.sanitize_mol`.
+            **Warning:** conformers are lost during the procedure.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
     """
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.ForwardSDMolSupplier(urlpath, sanitize=False, strictParsing=strict_parsing)
+        supplier = Chem.ForwardSDMolSupplier(urlpath, sanitize=sanitize, strictParsing=strict_parsing)
         mols = [mol for mol in supplier if mol is not None]
 
     # Regular local or remote paths
@@ -111,10 +114,10 @@ def read_sdf(
         with fsspec.open(urlpath) as f:
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
-            supplier = Chem.ForwardSDMolSupplier(f, sanitize=False, strictParsing=strict_parsing)
+            supplier = Chem.ForwardSDMolSupplier(f, sanitize=sanitize, strictParsing=strict_parsing)
             mols = [mol for mol in supplier if mol is not None]
 
-    if sanitize == True:
+    if sanitize_mol == True:
         mols_props = [
             (dm.sanitize_mol(mol), mol.GetPropsAsDict()) for mol in mols if mol is not None
         ]
