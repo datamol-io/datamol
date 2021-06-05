@@ -106,7 +106,9 @@ def read_sdf(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.ForwardSDMolSupplier(urlpath, sanitize=sanitize, strictParsing=strict_parsing)
+        supplier = Chem.ForwardSDMolSupplier(
+            urlpath, sanitize=sanitize, strictParsing=strict_parsing
+        )
         mols = [mol for mol in supplier if mol is not None]
 
     # Regular local or remote paths
