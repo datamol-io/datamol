@@ -578,7 +578,7 @@ def set_dative_bonds(
     Returns:
         The modified molecule.
     """
-    rwmol = Chem.rdBase.RWMol(mol)
+    rwmol = Chem.RWMol(mol)
     rwmol.UpdatePropertyCache(strict=False)
 
     metals = [at for at in rwmol.GetAtoms() if is_transition_metal(at)]

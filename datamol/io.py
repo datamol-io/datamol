@@ -106,7 +106,7 @@ def read_sdf(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.rdBase.ForwardSDMolSupplier(
+        supplier = Chem.ForwardSDMolSupplier(
             urlpath,
             sanitize=False,
             strictParsing=strict_parsing,
@@ -119,7 +119,7 @@ def read_sdf(
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
 
-            supplier = Chem.rdBase.ForwardSDMolSupplier(
+            supplier = Chem.ForwardSDMolSupplier(
                 f,
                 sanitize=False,
                 strictParsing=strict_parsing,
@@ -165,7 +165,7 @@ def to_sdf(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        writer = Chem.rdBase.SDWriter(urlpath)
+        writer = Chem.SDWriter(urlpath)
         for mol in mols:
             writer.write(mol)
         writer.close()
@@ -173,7 +173,7 @@ def to_sdf(
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath, mode="w") as f:
-            writer = Chem.rdBase.SDWriter(f)
+            writer = Chem.SDWriter(f)
             for mol in mols:
                 writer.write(mol)
             writer.close()
@@ -200,7 +200,7 @@ def to_smi(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        writer = Chem.rdBase.SmilesWriter(urlpath, includeHeader=False, nameHeader="")
+        writer = Chem.SmilesWriter(urlpath, includeHeader=False, nameHeader="")
         for mol in mols:
             writer.write(mol)
         writer.close()
@@ -208,7 +208,7 @@ def to_smi(
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath, "w") as f:
-            writer = Chem.rdBase.SmilesWriter(f, includeHeader=False, nameHeader="")
+            writer = Chem.SmilesWriter(f, includeHeader=False, nameHeader="")
             for mol in mols:
                 writer.write(mol)
             writer.close()
@@ -236,7 +236,7 @@ def read_smi(
         dm.utils.fs.copy_file(urlpath, active_path)
 
     # Read the molecules
-    supplier = Chem.rdBase.SmilesMolSupplier(str(active_path), titleLine=0)
+    supplier = Chem.SmilesMolSupplier(str(active_path), titleLine=0)
     mols = [mol for mol in supplier if mol is not None]
 
     # Delete the local temporary path
