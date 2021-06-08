@@ -154,13 +154,11 @@ def to_neutral(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
 
 
 def sanitize_mol(
-    mol: Chem.rdchem.Mol, charge_neutral: bool = False, sanifix: bool = True
+    mol: Chem.rdchem.Mol,
+    charge_neutral: bool = False,
+    sanifix: bool = True,
 ) -> Optional[Chem.rdchem.Mol]:
     """Sanitize molecule and fix common errors.
-
-    Warning:
-        The procedure includes a SMILES conversion to avoid accasional aromaticity
-        errors. In consequence, all the properties and the conformers will be lost.
 
     Args:
         mol: a molecule.
@@ -174,18 +172,31 @@ def sanitize_mol(
     if mol is None:
         return mol
 
+    # Extract properties and conformers
+    original_mol = copy_mol(mol)
+    properties = original_mol.GetPropsAsDict()
+    conformers = list(original_mol.GetConformers())
+
+    # Sanitize
+
     if charge_neutral:
         mol = to_neutral(mol)
 
     if sanifix:
         mol = _sanifix4.sanifix(mol)
 
-    if mol:
+    if mol is not None:
         try:
             # Try catch to avoid occasional aromaticity errors
-            return to_mol(dm.to_smiles(mol), sanitize=True)  # type: ignore
+            mol = to_mol(dm.to_smiles(mol), sanitize=True)  # type: ignore
         except Exception:
-            return None
+            mol = None
+
+    if mol is not None:
+        # Insert back properties and conformers
+        mol = dm.set_mol_props(mol, properties)
+        [mol.AddConformer(conf) for conf in conformers]
+
     return mol
 
 
@@ -276,7 +287,7 @@ def standardize_mol(
     Returns:
         mol: The standardized molecule.
     """
-    mol = copy.copy(mol)
+    mol = copy_mol(mol)
 
     if disconnect_metals:
         md = rdMolStandardize.MetalDisconnector()
@@ -567,7 +578,7 @@ def set_dative_bonds(
     Returns:
         The modified molecule.
     """
-    rwmol = Chem.RWMol(mol)
+    rwmol = Chem.rdBase.RWMol(mol)
     rwmol.UpdatePropertyCache(strict=False)
 
     metals = [at for at in rwmol.GetAtoms() if is_transition_metal(at)]
@@ -584,7 +595,9 @@ def set_dative_bonds(
 
 
 def set_mol_props(
-    mol: Chem.rdchem.Mol, props: Dict[str, Any], copy: bool = False
+    mol: Chem.rdchem.Mol,
+    props: Dict[str, Any],
+    copy: bool = False,
 ) -> Chem.rdchem.Mol:
     """Set properties to a mol from a dict.
 
