@@ -93,7 +93,7 @@ def read_sdf(
 
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.
-        sanitize: Whether to sanitize the molecules with `dm.sanitize_mol`.
+        sanitize: Whether to sanitize the molecules.
         as_df: Whether to return a list mol or a pandas DataFrame.
         smiles_column: Name of the SMILES column. Only relevant if `as_df` is True.
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
@@ -108,7 +108,7 @@ def read_sdf(
     if isinstance(urlpath, io.IOBase):
         supplier = Chem.ForwardSDMolSupplier(
             urlpath,
-            sanitize=False,
+            sanitize=sanitize,
             strictParsing=strict_parsing,
         )
         mols = list(supplier)
@@ -123,14 +123,10 @@ def read_sdf(
 
             supplier = Chem.ForwardSDMolSupplier(
                 f,
-                sanitize=False,
+                sanitize=sanitize,
                 strictParsing=strict_parsing,
             )
             mols = list(supplier)
-
-    # Sanitize
-    if sanitize == True:
-        mols = [dm.sanitize_mol(mol) for mol in mols]
 
     # Discard None values
     mols = [mol for mol in mols if mol is not None]
@@ -149,7 +145,7 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[Sequence[Chem.rdchem.Mol], pd.DataFrame],
+    mols: Union[Chem.rdchem.Mol, Sequence[Chem.rdchem.Mol], pd.DataFrame],
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
@@ -157,7 +153,7 @@ def to_sdf(
     """Write molecules to a file.
 
     Args:
-        mols: a dataframe or a list of molecule.
+        mols: a dataframe, a molecule or a list of molecule.
         urlpath: Path to a file or a file-like object. Path can be remote or local.
         smiles_column: Column name to extract the molecule.
         mol_column: Column name to extract the molecule. It takes
@@ -166,6 +162,9 @@ def to_sdf(
 
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column, mol_column=mol_column)
+
+    elif isinstance(mols, Chem.rdchem.Mol):
+        mols = [mols]
 
     # Filter out None values
     mols = [mol for mol in mols if mol is not None]

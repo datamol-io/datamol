@@ -172,10 +172,9 @@ def sanitize_mol(
     if mol is None:
         return mol
 
-    # Extract properties and conformers
+    # Extract properties.
     original_mol = copy_mol(mol)
     properties = original_mol.GetPropsAsDict()
-    conformers = list(original_mol.GetConformers())
 
     # Sanitize
 
@@ -193,9 +192,8 @@ def sanitize_mol(
             mol = None
 
     if mol is not None:
-        # Insert back properties and conformers
+        # Insert back properties.
         mol = dm.set_mol_props(mol, properties)
-        [mol.AddConformer(conf) for conf in conformers]
 
     return mol
 

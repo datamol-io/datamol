@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* Allow input a single molecule to `dm.to_sdf` instead of a list of mol.
 
 **Deprecated:**
 
@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* Change former `sanitize` into `sanitize_mol` and use `sanitize` for `ForwardSDMolSupplier`.
+* Remove call to `sanitize_mol` in `read_sdf`, instead use `sanitize=True` from RDKit.
 
 **Security:**
 

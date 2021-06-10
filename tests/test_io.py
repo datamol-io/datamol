@@ -162,3 +162,19 @@ def test_to_from_text(tmp_path):
     file_like = io.StringIO()
     dm.to_smi(mols, file_like)
     assert file_like.getvalue().strip().split("\n") == smiles_list
+
+
+def test_to_sdf_single_mol(tmp_path):
+
+    sdf_path = tmp_path / "test.sdf"
+
+    smiles = "CC1(C2C(C3C(C(=O)C(=C(C3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O)O"
+    mol = dm.to_mol(smiles)
+    dm.to_sdf(mol, sdf_path)
+
+    mols = dm.read_sdf(sdf_path)
+    assert dm.to_smiles(mol) == dm.to_smiles(mols[0])
+
+
+def test_sdf_props_and_conformer_preserved(tmp_path):
+    pass
