@@ -176,8 +176,6 @@ def sanitize_mol(
     original_mol = copy_mol(mol)
     properties = original_mol.GetPropsAsDict()
 
-    # Sanitize
-
     if charge_neutral:
         mol = to_neutral(mol)
 
