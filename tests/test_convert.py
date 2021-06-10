@@ -169,11 +169,10 @@ def test_to_df_smiles_warning(datadir, caplog):
 
     assert sum(df.columns == "smiles") == 2
 
-    for record in caplog.records:
-        assert record.levelname != "WARNING"
+    assert "WARNING" in caplog.text
     assert (
         "The SMILES column name provided ('smiles') is already present in the properties of the molecules"
-        not in caplog.text
+        in caplog.text
     )
 
 
