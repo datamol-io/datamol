@@ -4,6 +4,32 @@ Datamol Changelogs
 
 .. current developments
 
+v0.3.9
+====================
+
+**Added:**
+
+* Add a sanitize flag to `from_df`.
+* Automatically detect the mol column in `from_df`.
+* Add `add_hs` arg to `sanitize_mol`.
+
+**Changed:**
+
+* Allow input a single molecule to `dm.to_sdf` instead of a list of mol.
+* Preserve mol properties and the frist conformer in `dm.sanitize_mol`.
+* Display a warning message when input mol has multiple conformers in `dm.sanitize_mol`.
+
+**Fixed:**
+
+* Remove call to `sanitize_mol` in `read_sdf`, instead use `sanitize=True` from RDKit.
+* Remove the `mol` column from the mol properties in `from_df`. It also fixes `to_sdf`.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.8
 ====================
 
