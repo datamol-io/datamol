@@ -111,11 +111,13 @@ def read_sdf(
             sanitize=False,
             strictParsing=strict_parsing,
         )
-        mols = [mol for mol in supplier if mol is not None]
+        mols = list(supplier)
 
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath) as f:
+
+            # Handle gzip file if needed
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
 
@@ -124,11 +126,17 @@ def read_sdf(
                 sanitize=False,
                 strictParsing=strict_parsing,
             )
-            mols = [mol for mol in supplier if mol is not None]
+            mols = list(supplier)
 
+
+    # Sanitize
     if sanitize == True:
         mols = [dm.sanitize_mol(mol) for mol in mols]
 
+    # Discard None values
+    mols = [mol for mol in mols if mol is not None]
+
+    # Convert to dataframe
     if as_df:
         return dm.to_df(
             mols,
