@@ -8,6 +8,8 @@ from typing import Any
 import copy
 import random
 
+from loguru import logger
+
 from rdkit import Chem
 from rdkit.Chem import rdmolops
 from rdkit.Chem.MolStandardize import rdMolStandardize
@@ -157,14 +159,25 @@ def sanitize_mol(
     mol: Chem.rdchem.Mol,
     charge_neutral: bool = False,
     sanifix: bool = True,
+    verbose: bool = True,
 ) -> Optional[Chem.rdchem.Mol]:
-    """Sanitize molecule and fix common errors.
+    """An augmented version of RDKit `sanitize=True`. It uses a
+    mol-SMILES-mol conversion to catch potential aromaticity errors
+    and try to fix aromatic nitrogen (using the popular sanifix4 script).
+    Optionally, it can neutralize the charge of the molecule.
+
+    Note #1: Only the first conformer (if present) will be preserved and
+    a warning will be displayed if more than one conformer is detected.
+
+    Note #2: The molecule's properties will be preserved but the atom's
+    properties will be lost.
 
     Args:
         mol: a molecule.
         charge_neutral: whether charge neutralization should be applied.
         sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens.
+        verbose: Whether displaying a warning about multiple conformers.
 
     Returns:
         mol: a molecule.
@@ -183,9 +196,17 @@ def sanitize_mol(
         mol = _sanifix4.sanifix(mol)
 
     if mol is not None:
+
+        # Detect multiple conformers
+        if verbose and mol.GetNumConformers() > 1:
+            logger.warning(
+                f"The molecule contains multiple conformers. Only the first one will be preserved."
+            )
+
+        # Try catch to avoid occasional aromaticity errors
         try:
-            # Try catch to avoid occasional aromaticity errors
-            mol = to_mol(dm.to_smiles(mol), sanitize=True)  # type: ignore
+            # `cxsmiles` is used here to preserve the first conformer.
+            mol = to_mol(dm.to_smiles(mol, cxsmiles=True), sanitize=True)  # type: ignore
         except Exception:
             mol = None
 

@@ -1,7 +1,10 @@
 import platform
 import pathlib
+from loguru import logger
 
 import pytest
+from _pytest.logging import caplog as _caplog
+
 
 DATA_DIR_PATH = pathlib.Path(__file__).parent.resolve() / "data"
 
@@ -36,3 +39,20 @@ def pytest_configure(config):
 @pytest.fixture
 def datadir(request):
     return DATA_DIR_PATH
+
+
+@pytest.fixture
+def caplog(_caplog):
+    """Monkeypatching the pytest caplog to work with loguru.
+
+    See https://loguru.readthedocs.io/en/latest/resources/migration.html#making-things-work-with-pytest-and-caplog
+    """
+    import logging
+
+    class PropogateHandler(logging.Handler):
+        def emit(self, record):
+            logging.getLogger(record.name).handle(record)
+
+    handler_id = logger.add(PropogateHandler(), format="{message}")
+    yield _caplog
+    logger.remove(handler_id)
