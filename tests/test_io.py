@@ -4,6 +4,7 @@ import io
 from rdkit import Chem
 
 import datamol as dm
+import numpy as np
 
 
 def test_read_csv(datadir):
@@ -162,3 +163,43 @@ def test_to_from_text(tmp_path):
     file_like = io.StringIO()
     dm.to_smi(mols, file_like)
     assert file_like.getvalue().strip().split("\n") == smiles_list
+
+
+def test_to_sdf_single_mol(tmp_path):
+
+    sdf_path = tmp_path / "test.sdf"
+
+    smiles = "CC1(C2C(C3C(C(=O)C(=C(C3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O)O"
+    mol = dm.to_mol(smiles)
+    dm.to_sdf(mol, sdf_path)
+
+    mols = dm.read_sdf(sdf_path)
+    assert dm.to_smiles(mol) == dm.to_smiles(mols[0])
+
+
+def test_sdf_props_and_conformer_preserved(tmp_path):
+
+    sdf_path = tmp_path / "test.sdf"
+
+    # Generate an SDF file
+    props = dict(test_int=588, test_str="hello")
+    smiles = "CC1(C2C(C3C(C(=O)C(=C(C3(C(=O)C2=C(C4=C1C=CC=C4O)O)O)O)C(=O)N)N(C)C)O)O"
+
+    mol = dm.to_mol(smiles)
+    mol = dm.set_mol_props(mol, props)
+    mol = dm.conformers.generate(mol, n_confs=1)
+    pos = mol.GetConformer().GetPositions()
+    dm.to_sdf(mol, sdf_path)
+
+    # Read sdf file
+    mols = dm.read_sdf(sdf_path)
+    mol = mols[0]
+
+    # Check properties
+    assert mol.GetPropsAsDict() == props
+
+    # Check conformer
+    conf = mol.GetConformer()
+    assert mol.GetNumConformers() == 1
+    assert conf.Is3D()
+    np.testing.assert_almost_equal(conf.GetPositions(), pos, decimal=4)

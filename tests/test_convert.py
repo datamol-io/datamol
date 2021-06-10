@@ -169,11 +169,10 @@ def test_to_df_smiles_warning(datadir, caplog):
 
     assert sum(df.columns == "smiles") == 2
 
-    for record in caplog.records:
-        assert record.levelname != "WARNING"
+    assert "WARNING" in caplog.text
     assert (
         "The SMILES column name provided ('smiles') is already present in the properties of the molecules"
-        not in caplog.text
+        in caplog.text
     )
 
 
@@ -190,3 +189,19 @@ def test_to_smiles_fail():
     # NOTE(hadim): ideally you want to catch only `Boost.Python.ArgumentError` here.
     with pytest.raises(Exception):
         dm.to_smiles(55, allow_to_fail=True)
+
+
+def test_from_df_pop_mol_column():
+    df = dm.data.freesolv().iloc[:10]  # type: ignore
+    mols = [dm.to_mol(smiles) for smiles in df["smiles"]]
+
+    df: pd.DataFrame = dm.to_df(mols, mol_column="mol")  # type: ignore
+    df["dummy"] = "hello"
+
+    # test with provided mol column
+    mols = dm.from_df(df.copy(), mol_column="mol")
+    assert set(mols[0].GetPropsAsDict().keys()) == {"smiles", "dummy"}
+
+    # test with automatic mol column detection
+    mols = dm.from_df(df.copy())
+    assert set(mols[0].GetPropsAsDict().keys()) == {"smiles", "dummy"}

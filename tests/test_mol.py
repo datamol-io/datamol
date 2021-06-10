@@ -3,6 +3,7 @@ import pytest
 from rdkit import Chem
 
 import datamol as dm
+import numpy as np
 
 
 def test_to_mol():
@@ -89,6 +90,11 @@ def test_sanitize():
 
     fixed_smiles = [dm.sanitize_smiles(smiles) for smiles in smiles_list]
     assert len([x for x in fixed_smiles if x is not None]) == 6
+
+    smiles = "CCCN(=O)=O"
+    mol = dm.to_mol(smiles, sanitize=False)
+    sane_mol = dm.sanitize_mol(mol)
+    assert dm.to_smiles(sane_mol) == "CCC[N+](=O)[O-]"
 
 
 def test_sanitize_first():
@@ -332,3 +338,55 @@ def test_keep_largest_frag():
     mol = dm.to_mol("Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C")
     frag = dm.keep_largest_fragment(mol)
     assert dm.to_smiles(frag) == "OC1=CC2CCCCC2[N:1]=C1"
+
+
+def test_sanitize_mol_keep_props_and_conformers():
+    # Generate a mol with props and a conformer
+    props = dict(test_int=588, test_str="hello")
+    smiles = "CCC[N+](=O)[O-]"
+
+    mol = dm.to_mol(smiles)
+    mol = dm.set_mol_props(mol, props)
+    mol = dm.conformers.generate(mol, n_confs=1)
+    pos = mol.GetConformer().GetPositions()
+
+    # Sanitize
+    sane_mol = dm.sanitize_mol(mol)
+
+    # Check properties
+    assert sane_mol.GetPropsAsDict() == props
+
+    # Check conformer
+    conf = sane_mol.GetConformer()
+    assert sane_mol.GetNumConformers() == 1
+    assert conf.Is3D()
+    np.testing.assert_almost_equal(conf.GetPositions(), pos, decimal=4)
+
+
+def test_sanitize_mol_multiple_conformers_warning(caplog):
+    # Generate a mol with props and a conformer
+    smiles = "CCC[N+](=O)[O-]"
+
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    # Check warning log
+    dm.sanitize_mol(mol)
+    assert "WARNING" != caplog.text
+    assert (
+        "The molecule contains multiple conformers. Only the first one will be preserved."
+        in caplog.text
+    )
+
+
+def test_sanitize_mol_multiple_conformers_no_warning(caplog):
+
+    # Generate a mol with props and a conformer
+    smiles = "CCC[N+](=O)[O-]"
+
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    # Check no warning log
+    dm.sanitize_mol(mol, verbose=False)
+    assert caplog.text == ""

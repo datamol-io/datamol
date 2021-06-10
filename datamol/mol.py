@@ -8,6 +8,8 @@ from typing import Any
 import copy
 import random
 
+from loguru import logger
+
 from rdkit import Chem
 from rdkit.Chem import rdmolops
 from rdkit.Chem.MolStandardize import rdMolStandardize
@@ -72,7 +74,7 @@ def to_mol(
 
     # Add hydrogens
     if _mol is not None and add_hs:
-        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only)
+        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
 
     # Reorder atoms
     if _mol is not None and ordered:
@@ -154,19 +156,31 @@ def to_neutral(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
 
 
 def sanitize_mol(
-    mol: Chem.rdchem.Mol, charge_neutral: bool = False, sanifix: bool = True
+    mol: Chem.rdchem.Mol,
+    charge_neutral: bool = False,
+    sanifix: bool = True,
+    verbose: bool = True,
+    add_hs: bool = False,
 ) -> Optional[Chem.rdchem.Mol]:
-    """Sanitize molecule and fix common errors.
+    """An augmented version of RDKit `sanitize=True`. It uses a
+    mol-SMILES-mol conversion to catch potential aromaticity errors
+    and try to fix aromatic nitrogen (using the popular sanifix4 script).
+    Optionally, it can neutralize the charge of the molecule.
 
-    Warning:
-        The procedure includes a SMILES conversion to avoid accasional aromaticity
-        errors. In consequence, all the properties and the conformers will be lost.
+    Note #1: Only the first conformer (if present) will be preserved and
+    a warning will be displayed if more than one conformer is detected.
+
+    Note #2: The molecule's properties will be preserved but the atom's
+    properties will be lost.
 
     Args:
         mol: a molecule.
         charge_neutral: whether charge neutralization should be applied.
         sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens.
+        verbose: Whether displaying a warning about multiple conformers.
+        add_hs: Add hydrogens to the returned molecule. Useful when the input
+            molecule already contains hydrogens.
 
     Returns:
         mol: a molecule.
@@ -174,18 +188,35 @@ def sanitize_mol(
     if mol is None:
         return mol
 
+    # Extract properties.
+    original_mol = copy_mol(mol)
+    properties = original_mol.GetPropsAsDict()
+
     if charge_neutral:
         mol = to_neutral(mol)
 
     if sanifix:
         mol = _sanifix4.sanifix(mol)
 
-    if mol:
+    if mol is not None:
+
+        # Detect multiple conformers
+        if verbose and mol.GetNumConformers() > 1:
+            logger.warning(
+                f"The molecule contains multiple conformers. Only the first one will be preserved."
+            )
+
+        # Try catch to avoid occasional aromaticity errors
         try:
-            # Try catch to avoid occasional aromaticity errors
-            return to_mol(dm.to_smiles(mol), sanitize=True)  # type: ignore
+            # `cxsmiles` is used here to preserve the first conformer.
+            mol = to_mol(dm.to_smiles(mol, cxsmiles=True), sanitize=True, add_hs=add_hs)  # type: ignore
         except Exception:
-            return None
+            mol = None
+
+    if mol is not None:
+        # Insert back properties.
+        mol = dm.set_mol_props(mol, properties)
+
     return mol
 
 
@@ -276,7 +307,7 @@ def standardize_mol(
     Returns:
         mol: The standardized molecule.
     """
-    mol = copy.copy(mol)
+    mol = copy_mol(mol)
 
     if disconnect_metals:
         md = rdMolStandardize.MetalDisconnector()
@@ -584,7 +615,9 @@ def set_dative_bonds(
 
 
 def set_mol_props(
-    mol: Chem.rdchem.Mol, props: Dict[str, Any], copy: bool = False
+    mol: Chem.rdchem.Mol,
+    props: Dict[str, Any],
+    copy: bool = False,
 ) -> Chem.rdchem.Mol:
     """Set properties to a mol from a dict.
 

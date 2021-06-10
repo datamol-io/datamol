@@ -39,7 +39,7 @@ def read_csv(
         df: a `pandas.DataFrame`
     """
 
-    df = pd.read_csv(urlpath, **kwargs)
+    df: pd.DataFrame = pd.read_csv(urlpath, **kwargs)  # type: ignore
 
     if smiles_column is not None:
         PandasTools.AddMoleculeColumnToFrame(df, smiles_column, mol_column)
@@ -78,18 +78,22 @@ def read_excel(
 
 def read_sdf(
     urlpath: Union[str, os.PathLike, TextIO],
+    sanitize: bool = True,
     as_df: bool = False,
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
     include_private: bool = False,
     include_computed: bool = False,
-    sanitize: bool = True,
     strict_parsing: bool = True,
 ) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
     """Read an SDF file.
 
+    Note: This function is meant to be used with dataset that fit _in-memory_.
+    For a more advanced usage we suggest you to use directly `Chem.ForwardSDMolSupplier`.
+
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.
+        sanitize: Whether to sanitize the molecules.
         as_df: Whether to return a list mol or a pandas DataFrame.
         smiles_column: Name of the SMILES column. Only relevant if `as_df` is True.
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
@@ -97,29 +101,37 @@ def read_sdf(
             `as_df` is True.
         include_computed: Include computed properties in the columns.  Only relevant if
             `as_df` is True.
-        sanitize: Whether to sanitize the molecules
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
     """
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.ForwardSDMolSupplier(urlpath, sanitize=False, strictParsing=strict_parsing)
-        mols = [mol for mol in supplier if mol is not None]
+        supplier = Chem.ForwardSDMolSupplier(
+            urlpath,
+            sanitize=sanitize,
+            strictParsing=strict_parsing,
+        )
+        mols = list(supplier)
 
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath) as f:
+
+            # Handle gzip file if needed
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
-            supplier = Chem.ForwardSDMolSupplier(f, sanitize=False, strictParsing=strict_parsing)
-            mols = [mol for mol in supplier if mol is not None]
 
-    if sanitize == True:
-        mols_props = [
-            (dm.sanitize_mol(mol), mol.GetPropsAsDict()) for mol in mols if mol is not None
-        ]
-        mols = [dm.set_mol_props(mol, props) for mol, props in mols_props]
+            supplier = Chem.ForwardSDMolSupplier(
+                f,
+                sanitize=sanitize,
+                strictParsing=strict_parsing,
+            )
+            mols = list(supplier)
 
+    # Discard None values
+    mols = [mol for mol in mols if mol is not None]
+
+    # Convert to dataframe
     if as_df:
         return dm.to_df(
             mols,
@@ -133,7 +145,7 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[Sequence[Chem.rdchem.Mol], pd.DataFrame],
+    mols: Union[Chem.rdchem.Mol, Sequence[Chem.rdchem.Mol], pd.DataFrame],
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
@@ -141,7 +153,7 @@ def to_sdf(
     """Write molecules to a file.
 
     Args:
-        mols: a dataframe or a list of molecule.
+        mols: a dataframe, a molecule or a list of molecule.
         urlpath: Path to a file or a file-like object. Path can be remote or local.
         smiles_column: Column name to extract the molecule.
         mol_column: Column name to extract the molecule. It takes
@@ -150,6 +162,9 @@ def to_sdf(
 
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column, mol_column=mol_column)
+
+    elif isinstance(mols, Chem.rdchem.Mol):
+        mols = [mols]
 
     # Filter out None values
     mols = [mol for mol in mols if mol is not None]

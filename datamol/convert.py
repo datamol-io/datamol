@@ -286,6 +286,7 @@ def from_df(
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
     conserve_smiles: bool = False,
+    sanitize: bool = True,
 ) -> List[Chem.rdchem.Mol]:
     """Convert a dataframe to a list of mols.
 
@@ -300,6 +301,7 @@ def from_df(
         mol_column: Column name to extract the molecule. It takes
             precedence over `smiles_column`.
         conserve_smiles: Whether to conserve the SMILES in the mols' props.
+        sanitize: Whether to sanitize if `smiles_column` is not None.
     """
 
     if smiles_column is None and mol_column is None:
@@ -308,12 +310,18 @@ def from_df(
     if len(df) == 0:
         return []
 
+    # Try to detect the mol column if `mol_column` is None.
+    if mol_column is None:
+        for col in df.columns:
+            if isinstance(df[col].iloc[0], Chem.rdchem.Mol):
+                mol_column = col
+
     def _row_to_mol(row):
 
         props = row.to_dict()
 
         if mol_column is not None:
-            mol = props[mol_column]
+            mol = props.pop(mol_column)
         else:
 
             if conserve_smiles:
@@ -323,7 +331,7 @@ def from_df(
                 # properties.
                 smiles = props.pop(smiles_column)
 
-            mol = dm.to_mol(smiles)
+            mol = dm.to_mol(smiles, sanitize=sanitize)
 
         if mol is None:
             return None
