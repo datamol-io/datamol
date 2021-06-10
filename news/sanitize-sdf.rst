@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* Add a sanitize flag to `from_df`.
 
 **Changed:**
 
@@ -19,6 +19,7 @@
 **Fixed:**
 
 * Remove call to `sanitize_mol` in `read_sdf`, instead use `sanitize=True` from RDKit.
+* Remove the `mol` column from the mol properties in `from_df`. It also fixes `to_sdf`.
 
 **Security:**
 
