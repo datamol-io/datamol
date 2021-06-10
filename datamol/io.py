@@ -128,7 +128,6 @@ def read_sdf(
             )
             mols = list(supplier)
 
-
     # Sanitize
     if sanitize == True:
         mols = [dm.sanitize_mol(mol) for mol in mols]
