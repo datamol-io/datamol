@@ -1,6 +1,7 @@
 **Added:**
 
 * Add a sanitize flag to `from_df`.
+* Automatically detect the mol column in `from_df`.
 
 **Changed:**
 
