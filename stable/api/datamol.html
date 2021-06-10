@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.5">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.bde7dde4.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ef6f36e2.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
         
       
     
@@ -2536,7 +2536,7 @@ mols: molecules that have been picked</p></td>
 
 
 <h3 id="datamol.convert.from_df" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conserve_smiles</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">convert</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conserve_smiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
 <a href="#datamol.convert.from_df" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -2587,6 +2587,12 @@ precedence over <code>smiles_column</code>.</p></td>
         <td><p>Whether to conserve the SMILES in the mols' props.</p></td>
         <td><code>False</code></td>
       </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to sanitize if <code>smiles_column</code> is not None.</p></td>
+        <td><code>True</code></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
@@ -2596,6 +2602,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">conserve_smiles</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a dataframe to a list of mols.</span>
 
@@ -2610,6 +2617,7 @@ precedence over <code>smiles_column</code>.</p></td>
 <span class="sd">        mol_column: Column name to extract the molecule. It takes</span>
 <span class="sd">            precedence over `smiles_column`.</span>
 <span class="sd">        conserve_smiles: Whether to conserve the SMILES in the mols&#39; props.</span>
+<span class="sd">        sanitize: Whether to sanitize if `smiles_column` is not None.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">mol_column</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2618,12 +2626,18 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[]</span>
 
+    <span class="c1"># Try to detect the mol column if `mol_column` is None.</span>
+    <span class="k">if</span> <span class="n">mol_column</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+                <span class="n">mol_column</span> <span class="o">=</span> <span class="n">col</span>
+
     <span class="k">def</span> <span class="nf">_row_to_mol</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
 
         <span class="n">props</span> <span class="o">=</span> <span class="n">row</span><span class="o">.</span><span class="n">to_dict</span><span class="p">()</span>
 
         <span class="k">if</span> <span class="n">mol_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">mol</span> <span class="o">=</span> <span class="n">props</span><span class="p">[</span><span class="n">mol_column</span><span class="p">]</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">mol_column</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
 
             <span class="k">if</span> <span class="n">conserve_smiles</span><span class="p">:</span>
@@ -2633,7 +2647,7 @@ precedence over <code>smiles_column</code>.</p></td>
                 <span class="c1"># properties.</span>
                 <span class="n">smiles</span> <span class="o">=</span> <span class="n">props</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">smiles_column</span><span class="p">)</span>
 
-            <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">return</span> <span class="kc">None</span>
@@ -3908,7 +3922,7 @@ Avoid when loading a very large file.</p></td>
 <span class="sd">        df: a `pandas.DataFrame`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
     <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">PandasTools</span><span class="o">.</span><span class="n">AddMoleculeColumnToFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="p">)</span>
@@ -4037,7 +4051,7 @@ Avoid when loading a very large file.</p></td>
 
 
 <h3 id="datamol.io.read_sdf" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
 <a href="#datamol.io.read_sdf" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -4045,6 +4059,8 @@ Avoid when loading a very large file.</p></td>
     <div class="doc doc-contents first">
 
       <p>Read an SDF file.</p>
+<p>Note: This function is meant to be used with dataset that fit <em>in-memory</em>.
+For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMolSupplier</code>.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -4062,6 +4078,12 @@ Avoid when loading a very large file.</p></td>
         <td><code>Union[str, os.PathLike, TextIO]</code></td>
         <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
         <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to sanitize the molecules.</p></td>
+        <td><code>True</code></td>
       </tr>
       <tr>
         <td><code>as_df</code></td>
@@ -4096,12 +4118,6 @@ Avoid when loading a very large file.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
-        <td><code>sanitize</code></td>
-        <td><code>bool</code></td>
-        <td><p>Whether to sanitize the molecules</p></td>
-        <td><code>True</code></td>
-      </tr>
-      <tr>
         <td><code>strict_parsing</code></td>
         <td><code>bool</code></td>
         <td><p>If set to false, the parser is more lax about correctness of the contents.</p></td>
@@ -4113,18 +4129,22 @@ Avoid when loading a very large file.</p></td>
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_sdf</span><span class="p">(</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Read an SDF file.</span>
 
+<span class="sd">    Note: This function is meant to be used with dataset that fit _in-memory_.</span>
+<span class="sd">    For a more advanced usage we suggest you to use directly `Chem.ForwardSDMolSupplier`.</span>
+
 <span class="sd">    Args:</span>
 <span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules.</span>
 <span class="sd">        as_df: Whether to return a list mol or a pandas DataFrame.</span>
 <span class="sd">        smiles_column: Name of the SMILES column. Only relevant if `as_df` is True.</span>
 <span class="sd">        mol_column: Name of the mol column. Only relevant if `as_df` is True.</span>
@@ -4132,29 +4152,37 @@ Avoid when loading a very large file.</p></td>
 <span class="sd">            `as_df` is True.</span>
 <span class="sd">        include_computed: Include computed properties in the columns.  Only relevant if</span>
 <span class="sd">            `as_df` is True.</span>
-<span class="sd">        sanitize: Whether to sanitize the molecules</span>
 <span class="sd">        strict_parsing: If set to false, the parser is more lax about correctness of the contents.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># File-like object</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
-        <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">)</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+            <span class="n">urlpath</span><span class="p">,</span>
+            <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+            <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">supplier</span><span class="p">)</span>
 
     <span class="c1"># Regular local or remote paths</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+
+            <span class="c1"># Handle gzip file if needed</span>
             <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gzip&quot;</span><span class="p">):</span>
                 <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
-            <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">)</span>
-            <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 
-    <span class="k">if</span> <span class="n">sanitize</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">mols_props</span> <span class="o">=</span> <span class="p">[</span>
-            <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">())</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span>
-        <span class="p">]</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span><span class="p">,</span> <span class="n">props</span> <span class="ow">in</span> <span class="n">mols_props</span><span class="p">]</span>
+            <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+                <span class="n">f</span><span class="p">,</span>
+                <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+                <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">supplier</span><span class="p">)</span>
 
+    <span class="c1"># Discard None values</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># Convert to dataframe</span>
     <span class="k">if</span> <span class="n">as_df</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_df</span><span class="p">(</span>
             <span class="n">mols</span><span class="p">,</span>
@@ -4274,8 +4302,8 @@ Note: file-like object are not supported yet.</p></td>
   <tbody>
       <tr>
         <td><code>mols</code></td>
-        <td><code>Union[Sequence[rdkit.Chem.rdchem.Mol], pandas.core.frame.DataFrame]</code></td>
-        <td><p>a dataframe or a list of molecule.</p></td>
+        <td><code>Union[rdkit.Chem.rdchem.Mol, Sequence[rdkit.Chem.rdchem.Mol], pandas.core.frame.DataFrame]</code></td>
+        <td><p>a dataframe, a molecule or a list of molecule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -4302,7 +4330,7 @@ precedence over <code>smiles_column</code>.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_sdf</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -4310,7 +4338,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="sd">&quot;&quot;&quot;Write molecules to a file.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mols: a dataframe or a list of molecule.</span>
+<span class="sd">        mols: a dataframe, a molecule or a list of molecule.</span>
 <span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
 <span class="sd">        smiles_column: Column name to extract the molecule.</span>
 <span class="sd">        mol_column: Column name to extract the molecule. It takes</span>
@@ -4319,6 +4347,9 @@ precedence over <code>smiles_column</code>.</p></td>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="n">mol_column</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
 
     <span class="c1"># Filter out None values</span>
     <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
@@ -6511,19 +6542,21 @@ regardless of its original representation.</p>
 
 
 <h3 id="datamol.mol.sanitize_mol" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">charge_neutral</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanifix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">mol</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">charge_neutral</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanifix</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.mol.sanitize_mol" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents first">
 
-      <p>Sanitize molecule and fix common errors.</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>The procedure includes a SMILES conversion to avoid accasional aromaticity
-errors. In consequence, all the properties and the conformers will be lost.</p>
-</div>
+      <p>An augmented version of RDKit <code>sanitize=True</code>. It uses a
+mol-SMILES-mol conversion to catch potential aromaticity errors
+and try to fix aromatic nitrogen (using the popular sanifix4 script).
+Optionally, it can neutralize the charge of the molecule.</p>
+<p>Note #1: Only the first conformer (if present) will be preserved and
+a warning will be displayed if more than one conformer is detected.</p>
+<p>Note #2: The molecule's properties will be preserved but the atom's
+properties will be lost.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -6555,6 +6588,19 @@ errors. In consequence, all the properties and the conformers will be lost.</p>
 (sanifix4.py) that try to adjust aromatic nitrogens.</p></td>
         <td><code>True</code></td>
       </tr>
+      <tr>
+        <td><code>verbose</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether displaying a warning about multiple conformers.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>add_hs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Add hydrogens to the returned molecule. Useful when the input
+molecule already contains hydrogens.</p></td>
+        <td><code>False</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -6575,19 +6621,31 @@ errors. In consequence, all the properties and the conformers will be lost.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">charge_neutral</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sanifix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">charge_neutral</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanifix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Sanitize molecule and fix common errors.</span>
+    <span class="sd">&quot;&quot;&quot;An augmented version of RDKit `sanitize=True`. It uses a</span>
+<span class="sd">    mol-SMILES-mol conversion to catch potential aromaticity errors</span>
+<span class="sd">    and try to fix aromatic nitrogen (using the popular sanifix4 script).</span>
+<span class="sd">    Optionally, it can neutralize the charge of the molecule.</span>
 
-<span class="sd">    Warning:</span>
-<span class="sd">        The procedure includes a SMILES conversion to avoid accasional aromaticity</span>
-<span class="sd">        errors. In consequence, all the properties and the conformers will be lost.</span>
+<span class="sd">    Note #1: Only the first conformer (if present) will be preserved and</span>
+<span class="sd">    a warning will be displayed if more than one conformer is detected.</span>
+
+<span class="sd">    Note #2: The molecule&#39;s properties will be preserved but the atom&#39;s</span>
+<span class="sd">    properties will be lost.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
 <span class="sd">        charge_neutral: whether charge neutralization should be applied.</span>
 <span class="sd">        sanifix: whether to run the sanifix from James Davidson</span>
 <span class="sd">            (sanifix4.py) that try to adjust aromatic nitrogens.</span>
+<span class="sd">        verbose: Whether displaying a warning about multiple conformers.</span>
+<span class="sd">        add_hs: Add hydrogens to the returned molecule. Useful when the input</span>
+<span class="sd">            molecule already contains hydrogens.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -6595,18 +6653,35 @@ errors. In consequence, all the properties and the conformers will be lost.</p>
     <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">mol</span>
 
+    <span class="c1"># Extract properties.</span>
+    <span class="n">original_mol</span> <span class="o">=</span> <span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">properties</span> <span class="o">=</span> <span class="n">original_mol</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span>
+
     <span class="k">if</span> <span class="n">charge_neutral</span><span class="p">:</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">to_neutral</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">sanifix</span><span class="p">:</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">_sanifix4</span><span class="o">.</span><span class="n">sanifix</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">mol</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1"># Detect multiple conformers</span>
+        <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;The molecule contains multiple conformers. Only the first one will be preserved.&quot;</span>
+            <span class="p">)</span>
+
+        <span class="c1"># Try catch to avoid occasional aromaticity errors</span>
         <span class="k">try</span><span class="p">:</span>
-            <span class="c1"># Try catch to avoid occasional aromaticity errors</span>
-            <span class="k">return</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="c1"># `cxsmiles` is used here to preserve the first conformer.</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cxsmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="n">add_hs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
-            <span class="k">return</span> <span class="kc">None</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># Insert back properties.</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div>
         </details>
@@ -6846,7 +6921,9 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_mol_props</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set properties to a mol from a dict.</span>
 
@@ -6983,7 +7060,7 @@ The process is apply in the order of the argument.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        mol: The standardized molecule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">disconnect_metals</span><span class="p">:</span>
         <span class="n">md</span> <span class="o">=</span> <span class="n">rdMolStandardize</span><span class="o">.</span><span class="n">MetalDisconnector</span><span class="p">()</span>
@@ -7217,7 +7294,7 @@ None is returned so make sure that you handle this case on your own.</p></td>
 
     <span class="c1"># Add hydrogens</span>
     <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">add_hs</span><span class="p">:</span>
-        <span class="n">_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">explicitOnly</span><span class="o">=</span><span class="n">explicit_only</span><span class="p">)</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">explicitOnly</span><span class="o">=</span><span class="n">explicit_only</span><span class="p">,</span> <span class="n">addCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># Reorder atoms</span>
     <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ordered</span><span class="p">:</span>
@@ -7549,7 +7626,8 @@ parallelization. Set to None to use all available cores.</p></td>
   
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
-        <a href="../tutorials/Fragment_and_Scaffold.html" class="md-footer__link md-footer__link--prev" rel="prev">
+        
+        <a href="../tutorials/Fragment_and_Scaffold.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Fragment and Scaffold" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -7564,7 +7642,8 @@ parallelization. Set to None to use all available cores.</p></td>
         </a>
       
       
-        <a href="datamol.actions.html" class="md-footer__link md-footer__link--next" rel="next">
+        
+        <a href="datamol.actions.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.actions" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
@@ -7603,10 +7682,10 @@ parallelization. Set to None to use all available cores.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../assets/javascripts/workers/search.d351de03.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a1609d9a.min.js"></script>
+      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
