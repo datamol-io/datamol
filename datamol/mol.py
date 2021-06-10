@@ -74,7 +74,7 @@ def to_mol(
 
     # Add hydrogens
     if _mol is not None and add_hs:
-        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only)
+        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
 
     # Reorder atoms
     if _mol is not None and ordered:
@@ -160,6 +160,7 @@ def sanitize_mol(
     charge_neutral: bool = False,
     sanifix: bool = True,
     verbose: bool = True,
+    add_hs: bool = False,
 ) -> Optional[Chem.rdchem.Mol]:
     """An augmented version of RDKit `sanitize=True`. It uses a
     mol-SMILES-mol conversion to catch potential aromaticity errors
@@ -178,6 +179,8 @@ def sanitize_mol(
         sanifix: whether to run the sanifix from James Davidson
             (sanifix4.py) that try to adjust aromatic nitrogens.
         verbose: Whether displaying a warning about multiple conformers.
+        add_hs: Add hydrogens to the returned molecule. Useful when the input
+            molecule already contains hydrogens.
 
     Returns:
         mol: a molecule.
@@ -206,7 +209,7 @@ def sanitize_mol(
         # Try catch to avoid occasional aromaticity errors
         try:
             # `cxsmiles` is used here to preserve the first conformer.
-            mol = to_mol(dm.to_smiles(mol, cxsmiles=True), sanitize=True)  # type: ignore
+            mol = to_mol(dm.to_smiles(mol, cxsmiles=True), sanitize=True, add_hs=add_hs)  # type: ignore
         except Exception:
             mol = None
 
