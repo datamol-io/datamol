@@ -124,7 +124,7 @@ def generate_mkdocs_api(docs_dir):
             #         assert data["attr_type"].unique().tolist() == ['type', 'function']
 
             for _, attr_child in data.iterrows():
-                if attr_child['attr'] not in ["np", "Iterable", "Union"]:
+                if attr_child["attr"] not in ["np", "Iterable", "Union"]:
                     f.write(f"::: {row['parent']}.{row['attr']}:{attr_child['attr']}\n")
             f.write("\n")
 
