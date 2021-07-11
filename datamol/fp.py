@@ -92,10 +92,7 @@ def to_fp(
     as_array: bool = True,
     fp_type: str = "ecfp",
 ) -> Optional[Union[np.ndarray, SparseBitVect, ExplicitBitVect, UIntSparseIntVect]]:
-    """Transform a molecule from smiles to morgan fingerprint.
-
-    Note:
-        That function should be expanded to compute more type of fingerprints.
+    """Compute the molecular fingerprint given a molecule or a SMILES.
 
     Args:
         mol: a molecule or a SMILES.

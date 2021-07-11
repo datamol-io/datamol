@@ -51,6 +51,7 @@ from . import fragment
 from . import scaffold
 from . import reactions
 from . import actions
+from . import molar
 
 from .convert import to_smiles
 from .convert import to_selfies
