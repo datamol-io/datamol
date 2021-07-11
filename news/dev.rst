@@ -1,7 +1,8 @@
 **Added:**
 
 * Add support for more fingerprint types.
-* Twu utility functions for molar concentration conversion: `dm.molar_to_log()` and `dm.log_to_molar()`.
+* Two utility functions for molar concentration conversion: `dm.molar_to_log()` and `dm.log_to_molar()`.
+* Add the `dm.utils.fs` module to work with any type of paths (remote or local).
 
 **Changed:**
 
