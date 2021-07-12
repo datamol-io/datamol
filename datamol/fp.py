@@ -50,9 +50,8 @@ _FP_DEFAULT_ARGS = {
         "resetVect": False,
         "bitFlags": pyAvalonTools.avalonSimilarityBits,
     },
-    # Below is datamol default, not the RDKit default.
     "ecfp": {
-        "radius": 3,  # ECFP4
+        "radius": 2,  # ECFP4
         "nBits": 2048,
         "invariants": [],
         "fromAtoms": [],
