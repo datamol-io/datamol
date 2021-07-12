@@ -104,22 +104,16 @@ def exists(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
 def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file exists.
 
-    Important: HTTP file and file-like object always exists.
+    Important: File-like object always exists.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
     if isinstance(path, fsspec.core.OpenFile):
-        if isinstance(path.fs.protocol, str) and "http" in path.fs.protocol:
-            # Assume HTTP to always exists.
-            return True
         return path.fs.isfile(path.path)
 
     elif isinstance(path, (str, pathlib.Path)):
         mapper = get_mapper(str(path))
-        if isinstance(mapper.fs.protocol, str) and "http" in mapper.fs.protocol:
-            # Assume HTTP to always exists.
-            return True
         return mapper.fs.isfile(path)
 
     else:
@@ -130,22 +124,16 @@ def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
 def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file exists.
 
-    Important: HTTP file and file-like object always exists.
+    Important: File-like object always exists.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
     if isinstance(path, fsspec.core.OpenFile):
-        if isinstance(path.fs.protocol, str) and "http" in path.fs.protocol:
-            # Assume HTTP to always exists.
-            return True
         return path.fs.isdir(path.path)
 
     elif isinstance(path, (str, pathlib.Path)):
         mapper = get_mapper(str(path))
-        if isinstance(mapper.fs.protocol, str) and "http" in mapper.fs.protocol:
-            # Assume HTTP to always exists.
-            return True
         return mapper.fs.isdir(path)
 
     else:
