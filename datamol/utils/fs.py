@@ -255,10 +255,10 @@ def copy_file(
     else:
         destination_file = destination
 
-    if not file_exists(source_file):
+    if not is_file(source_file):
         raise ValueError(f"The file being copied does not exist: {source}")
 
-    if not force and file_exists(destination_file):
+    if not force and is_file(destination_file):
         raise ValueError(f"The destination file to copy already exists: {destination}")
 
     with source_file as source_stream:
