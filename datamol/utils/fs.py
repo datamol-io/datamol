@@ -90,22 +90,63 @@ def get_extension(path: Union[str, os.PathLike]):
     return basename.split(".")[-1]
 
 
-def file_exists(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
+def exists(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
+    """Check whether a file or a directory exists.
+
+    Important: HTTP file and file-like object always exists.
+
+    Args:
+        path: a path supported by `fsspec` such as local, s3, gcs, etc.
+    """
+    return is_file(path) or is_dir(path)
+
+
+def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file exists.
+
+    Important: HTTP file and file-like object always exists.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
     if isinstance(path, fsspec.core.OpenFile):
         if isinstance(path.fs.protocol, str) and "http" in path.fs.protocol:
+            # Assume HTTP to always exists.
             return True
-        return path.fs.exists(path.path)
+        return path.fs.isfile(path.path)
 
     elif isinstance(path, (str, pathlib.Path)):
         mapper = get_mapper(str(path))
         if isinstance(mapper.fs.protocol, str) and "http" in mapper.fs.protocol:
+            # Assume HTTP to always exists.
             return True
         return mapper.fs.isfile(path)
+
+    else:
+        # NOTE(hadim): file-like objects always exist right?
+        return True
+
+
+def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
+    """Check whether a file exists.
+
+    Important: HTTP file and file-like object always exists.
+
+    Args:
+        path: a path supported by `fsspec` such as local, s3, gcs, etc.
+    """
+    if isinstance(path, fsspec.core.OpenFile):
+        if isinstance(path.fs.protocol, str) and "http" in path.fs.protocol:
+            # Assume HTTP to always exists.
+            return True
+        return path.fs.isdir(path.path)
+
+    elif isinstance(path, (str, pathlib.Path)):
+        mapper = get_mapper(str(path))
+        if isinstance(mapper.fs.protocol, str) and "http" in mapper.fs.protocol:
+            # Assume HTTP to always exists.
+            return True
+        return mapper.fs.isdir(path)
 
     else:
         # NOTE(hadim): file-like objects always exist right?
