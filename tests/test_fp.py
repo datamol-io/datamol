@@ -86,3 +86,16 @@ def test_fp_deprecated_args_warnings():
         assert len(w) == 1
         assert issubclass(w[-1].category, DeprecationWarning)
         assert "will be removed in datamol 0.4.0" in str(w[-1].message)
+
+    args = {}
+    args["mol"] = mol
+    args["use_features"] = True
+    args["as_array"] = True
+    args["fp_type"] = "ecfp"
+
+    with warnings.catch_warnings(record=True) as w:
+        dm.to_fp(**args)
+
+        assert len(w) == 1
+        assert issubclass(w[-1].category, DeprecationWarning)
+        assert "will be removed in datamol 0.4.0" in str(w[-1].message)
