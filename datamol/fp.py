@@ -59,8 +59,8 @@ def fp_to_array(
 
     elif isinstance(fp, SparseBitVect):
         tmp = np.zeros(fp.GetNumBits(), dtype=int)
-        for n_bit in list(fp.GetOnBits()):
-            tmp[n_bit] = 1
+        on_bits = np.array(fp.GetOnBits())
+        tmp[on_bits] = 1
         fp_out = tmp
 
     elif isinstance(fp, ExplicitBitVect):
