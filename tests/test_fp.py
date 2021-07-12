@@ -40,16 +40,16 @@ def test_all_fps():
     fp_infos = {}
     for fp_type in dm.list_supported_fingerprints():
 
+        fold_size = None
         if fp_type == "rdkit-count":
-            # NOTE(hadim): Ignore rdkit-count because the size of the array
-            # would be way too large.
-            continue
+            fold_size = 2048
 
         print(fp_type)
         args = {}
         args["mol"] = mol
         args["as_array"] = True
         args["fp_type"] = fp_type
+        args["fold_size"] = fold_size
         fp = dm.to_fp(**args)
 
         fp_infos[fp_type] = dict(size=len(fp), bits_sum=fp.sum())
@@ -71,6 +71,7 @@ def test_all_fps():
         "fcfp-count": {"size": 2048, "bits_sum": 35},
         "topological-count": {"size": 2048, "bits_sum": 19},
         "atompair-count": {"size": 2048, "bits_sum": 78},
+        "rdkit-count": {"size": 2048, "bits_sum": 301},
     }
 
 

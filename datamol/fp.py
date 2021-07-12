@@ -1,7 +1,14 @@
 from typing import Union
 from typing import Optional
+from typing import Iterable
 
 import warnings
+
+import numpy as np
+
+import datamol as dm
+
+from scipy.sparse.coo import coo_matrix
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -18,9 +25,6 @@ from rdkit.DataStructs.cDataStructs import LongSparseIntVect
 from rdkit.DataStructs.cDataStructs import ExplicitBitVect
 from rdkit.DataStructs.cDataStructs import ULongSparseIntVect
 
-import numpy as np
-
-import datamol as dm
 
 _FP_FUNCS = {
     "maccs": rdMolDescriptors.GetMACCSKeysFingerprint,
@@ -236,6 +240,7 @@ def to_fp(
     mol: Union[str, Chem.rdchem.Mol],
     as_array: bool = True,
     fp_type: str = "ecfp",
+    fold_size: int = None,
     **fp_args,
 ) -> Optional[Union[np.ndarray, SparseBitVect, ExplicitBitVect, UIntSparseIntVect]]:
     """Compute the molecular fingerprint given a molecule or a SMILES.
@@ -245,6 +250,8 @@ def to_fp(
         as_array: Whether to return a numpy array of an RDKit vec. Default to True.
         fp_type: The type of the fingerprint. See `dm.list_supported_fingerprints()` for a
             complete list.
+        fold_size: If set, fold the fingerprint to the `fold_size`. If set, returned array is
+            always a numpy array.
         fp_args: Arguments to build the fingerprint. Refer to the official RDKit documentation.
 
     Returns:
@@ -286,9 +293,13 @@ def to_fp(
     # Compute the fingerprint
     fp = fp_func(mol, **fp_args)
 
+    # Fold the fp if needed.
+    if fold_size is not None:
+        fp = fold_count_fp(fp, dim=fold_size)
+
     # Convert to a numpy array
-    if as_array:
-        return fp_to_array(fp)
+    if not fold_size and as_array:
+        fp = fp_to_array(fp)
 
     return fp
 
@@ -297,3 +308,36 @@ def list_supported_fingerprints():
     """Return the supported fingerprints in datamol."""
 
     return _FP_FUNCS
+
+
+def fold_count_fp(fp: Iterable, dim: int = 1024, binary: bool = False):
+    """Fast folding of a count fingerprint to the specified dimension.
+
+    Args:
+        fp: iterable fingerprint
+        dim: dimension of the folded array if not provided. Defaults to 2**10.
+        binary: whether to fold into a binary array or take use a count vector.
+
+    Returns:
+        folded: returns folded array to the provided dimension
+    """
+    try:
+        tmp = fp.GetNonzeroElements()
+    except:
+        # try to get the dict of onbit
+        on_bits = fp.GetOnBits()
+        tmp = dict(zip(on_bits, np.ones(len(on_bits))))
+
+    out = (
+        coo_matrix(
+            (list(tmp.values()), (np.repeat(0, len(tmp)), [i % dim for i in tmp.keys()])),
+            shape=(1, dim),
+        )
+        .toarray()
+        .flatten()
+    )
+
+    if binary:
+        out = np.clip(out, a_min=0, a_max=1)
+
+    return out
