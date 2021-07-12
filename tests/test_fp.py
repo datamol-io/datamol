@@ -85,7 +85,7 @@ def test_fp_deprecated_args_warnings():
 
         assert len(w) == 1
         assert issubclass(w[-1].category, DeprecationWarning)
-        assert "will be removed in datamol 0.4.0" in str(w[-1].message)
+        assert "will be removed in datamol 0.5.0" in str(w[-1].message)
 
     args = {}
     args["mol"] = mol
@@ -98,4 +98,4 @@ def test_fp_deprecated_args_warnings():
 
         assert len(w) == 1
         assert issubclass(w[-1].category, DeprecationWarning)
-        assert "will be removed in datamol 0.4.0" in str(w[-1].message)
+        assert "will be removed in datamol 0.5.0" in str(w[-1].message)

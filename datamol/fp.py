@@ -51,7 +51,7 @@ _FP_DEFAULT_ARGS = {
         "bitFlags": pyAvalonTools.avalonSimilarityBits,
     },
     "ecfp": {
-        "radius": 2,  # ECFP4
+        "radius": 3,  # ECFP6 - not the RDKit default (ECFP4)
         "nBits": 2048,
         "invariants": [],
         "fromAtoms": [],
