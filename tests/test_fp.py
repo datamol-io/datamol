@@ -28,6 +28,7 @@ def test_list_fp():
         "rdkit",
         "topological",
         "topological-count",
+        "rdkit-count",
     }
 
 
@@ -38,6 +39,11 @@ def test_all_fps():
 
     fp_infos = {}
     for fp_type in dm.list_supported_fingerprints():
+
+        if fp_type == "rdkit-count":
+            # NOTE(hadim): Ignore rdkit-count because the size of the array
+            # would be way too large.
+            continue
 
         print(fp_type)
         args = {}

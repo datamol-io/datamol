@@ -34,8 +34,7 @@ _FP_FUNCS = {
     # NOTE(hadim): bad for pickling?
     "estate": lambda x, **args: EStateFingerprinter.FingerprintMol(x)[0],
     "avalon-count": pyAvalonTools.GetAvalonCountFP,
-    # NOTE(hadim): `rdkit-count` to ndarray hangs forever on my machine. Disabling it for now.
-    # "rdkit-count": rdmolops.UnfoldedRDKFingerprintCountBased,
+    "rdkit-count": rdmolops.UnfoldedRDKFingerprintCountBased,
     "ecfp-count": rdMolDescriptors.GetHashedMorganFingerprint,
     "fcfp-count": rdMolDescriptors.GetHashedMorganFingerprint,
     "topological-count": rdMolDescriptors.GetHashedTopologicalTorsionFingerprint,
@@ -211,7 +210,13 @@ def fp_to_array(
         fp_out = np.frombuffer(fp.ToBitString().encode(), "u1") - ord("0")
 
     elif isinstance(
-        fp, (UIntSparseIntVect, IntSparseIntVect, LongSparseIntVect, ULongSparseIntVect)
+        fp,
+        (
+            UIntSparseIntVect,
+            IntSparseIntVect,
+            LongSparseIntVect,
+            ULongSparseIntVect,
+        ),
     ):
         # one of the other rdkit type
         tmp = np.array(0, dtype="int")
