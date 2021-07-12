@@ -262,14 +262,14 @@ def to_fp(
     # Deal with new API introduced in >=0.4 + throw a warning if needed.
     if "fp_size" in fp_args:
         warnings.warn(
-            "Using `fp_size` is now deprecated and will be removed in datamol 0.4.0. Please use `nBits` instead.",
+            "Using `fp_size` is now deprecated and will be removed in datamol 0.5.0. Please use `nBits` instead.",
             DeprecationWarning,
         )
         fp_args["nBits"] = fp_args.pop("fp_size")
 
     if "use_features" in fp_args:
         warnings.warn(
-            "Using `use_features` is now deprecated and will be removed in datamol 0.4.0. Please use `useFeatures` instead.",
+            "Using `use_features` is now deprecated and will be removed in datamol 0.5.0. Please use `useFeatures` instead.",
             DeprecationWarning,
         )
         fp_args["useFeatures"] = fp_args.pop("use_features")
