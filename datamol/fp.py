@@ -1,14 +1,11 @@
 from typing import Union
 from typing import Optional
-from typing import Iterable
 
 import warnings
 
 import numpy as np
 
 import datamol as dm
-
-from scipy.sparse.coo import coo_matrix
 
 from rdkit import Chem
 from rdkit.Chem import rdMolDescriptors
@@ -342,14 +339,16 @@ def fold_count_fp(
     else:
         raise ValueError(f"The fingerprint is of wrong type: {type(fp)}")
 
-    folded = (
-        coo_matrix(
-            (list(tmp.values()), (np.repeat(0, len(tmp)), [i % dim for i in tmp.keys()])),
-            shape=(1, dim),
-        )
-        .toarray()
-        .flatten()
-    )
+    # ON bits dict to (i, v)
+    i = np.array(list(tmp.keys())) % dim
+    v = np.array(list(tmp.values()))
+
+    # Fold indices
+    i = i % dim
+
+    # Create the folded fp
+    folded = np.zeros(dim, dtype="int")
+    np.add.at(folded, i, v)
 
     if binary:
         folded = np.clip(folded, a_min=0, a_max=1)
