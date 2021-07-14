@@ -1840,9 +1840,9 @@ all of MD as it is not optimized for dense, information rich UIs.
 
 
 
-<div id="6af7663f-b7f8-4427-872f-26ddba2e099a" class="jupyter-widgets jp-OutputArea-output ">
+<div id="e8effa08-31cb-4584-b511-3df46ad980e5" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('6af7663f-b7f8-4427-872f-26ddba2e099a');
+var element = document.getElementById('e8effa08-31cb-4584-b511-3df46ad980e5');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "213a222037084dbf8780e5bc2a48bcf2", "version_major": 2, "version_minor": 0}
@@ -1862,9 +1862,9 @@ var element = document.getElementById('6af7663f-b7f8-4427-872f-26ddba2e099a');
 
 
 
-<div id="3451a6a9-447d-4827-8de8-77e6aba1b0ee" class="jupyter-widgets jp-OutputArea-output ">
+<div id="1cc54282-8dec-4fe8-9181-cc80865a16f2" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('3451a6a9-447d-4827-8de8-77e6aba1b0ee');
+var element = document.getElementById('1cc54282-8dec-4fe8-9181-cc80865a16f2');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "2a1443db5bdc4e78b134cec68a40ad6a", "version_major": 2, "version_minor": 0}
@@ -1895,7 +1895,7 @@ var element = document.getElementById('3451a6a9-447d-4827-8de8-77e6aba1b0ee');
 <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mol&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;smiles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
 
 <span class="n">mols</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s1">&#39;mol&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
-<span class="n">dist_mat</span><span class="p">,</span> <span class="n">valid_idx</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="n">dist_mat</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">colorbar</span><span class="p">()</span>
 </pre></div>

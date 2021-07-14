@@ -438,6 +438,13 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#datamol.mol.same_mol" class="md-nav__link">
+    same_mol()
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1202,6 +1209,13 @@
           <li class="md-nav__item">
   <a href="#datamol.mol.atom_indices_to_mol" class="md-nav__link">
     atom_indices_to_mol()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.mol.same_mol" class="md-nav__link">
+    same_mol()
   </a>
   
 </li>
@@ -2407,6 +2421,70 @@ molecule.</p>
     <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
         <span class="n">atom</span><span class="o">.</span><span class="n">SetProp</span><span class="p">(</span><span class="s2">&quot;molAtomMapNumber&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()))</span>
     <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.mol.same_mol" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">same_mol</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span></code>
+
+
+<a href="#datamol.mol.same_mol" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Check two molecules are the same by comparing their InChiKey.</p>
+<p>Invalid molecules (None) are always considered as not the same.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol1</code></td>
+        <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>A molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>mol2</code></td>
+        <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>A molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/mol.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">same_mol</span><span class="p">(</span><span class="n">mol1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">mol2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Check two molecules are the same by comparing their InChiKey.</span>
+
+<span class="sd">    Invalid molecules (None) are always considered as not the same.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol1: A molecule.</span>
+<span class="sd">        mol2: A molecule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol1</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">mol2</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span>
+
+    <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -5549,7 +5627,7 @@ Note: file-like object are not supported yet.</p></td>
 
 
 <h4 id="datamol.similarity.pdist" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">pdist</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">pdist</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">squareform</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span></code>
 
 
 <a href="#datamol.similarity.pdist" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -5572,7 +5650,7 @@ molecules in the input set.</p>
   <tbody>
       <tr>
         <td><code>mols</code></td>
-        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><code>List[Union[str, rdkit.Chem.rdchem.Mol]]</code></td>
         <td><p>list of molecules</p></td>
         <td><em>required</em></td>
       </tr>
@@ -5582,6 +5660,13 @@ molecules in the input set.</p>
         <td><p>Number of jobs for parallelization. Let to 1 for no
 parallelization. Set to None to use all available cores.</p></td>
         <td><code>1</code></td>
+      </tr>
+      <tr>
+        <td><code>squareform</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to return in square form (matrix) or in a condensed
+form (1D vector).</p></td>
+        <td><code>True</code></td>
       </tr>
       <tr>
         <td><code>**fp_args</code></td>
@@ -5601,17 +5686,19 @@ parallelization. Set to None to use all available cores.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>Tuple[numpy.ndarray, numpy.ndarray]</code></td>
-      <td><p>distmat, valid_idx: Distance matrix, and valid index that have passed the conversion
-    to fingerprint.</p></td>
+      <td><code>ndarray</code></td>
+      <td><p>dist_mat</p></td>
     </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/similarity.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pdist</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">squareform</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">fp_args</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the pairwise tanimoto distance between the fingerprints of all the</span>
 <span class="sd">    molecules in the input set.</span>
 
@@ -5619,28 +5706,28 @@ parallelization. Set to None to use all available cores.</p></td>
 <span class="sd">        mols: list of molecules</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
 <span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">        squareform: Whether to return in square form (matrix) or in a condensed</span>
+<span class="sd">            form (1D vector).</span>
 <span class="sd">        **fp_args: list of args to pass to `to_fp()`.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        distmat, valid_idx: Distance matrix, and valid index that have passed the conversion</span>
-<span class="sd">            to fingerprint.</span>
+<span class="sd">        dist_mat</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="n">fps</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span>
-        <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">),</span>
+        <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">),</span>
         <span class="n">mols</span><span class="p">,</span>
         <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">valid_idx</span><span class="p">,</span> <span class="n">fps</span> <span class="o">=</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">fp</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fp</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span> <span class="k">if</span> <span class="n">fp</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">])</span>
-    <span class="n">fps</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
 
-    <span class="n">dist</span> <span class="o">=</span> <span class="n">GetTanimotoDistMat</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
-    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">fps</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">fps</span><span class="p">)))</span>
-    <span class="n">dist_mat</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">triu_indices_from</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="mi">1</span><span class="p">)]</span> <span class="o">=</span> <span class="n">dist</span>
-    <span class="n">dist_mat</span> <span class="o">+=</span> <span class="n">dist_mat</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">fps</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">dist_mat</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">valid_idx</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">squareform</span><span class="p">:</span>
+        <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s2">&quot;tomatrix&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">dist_mat</span>
 </code></pre></div>
         </details>
     </div>
@@ -5661,8 +5748,8 @@ parallelization. Set to None to use all available cores.</p></td>
 
     <div class="doc doc-contents first">
 
-      <p>Compute the pairwise tanimoto distance between the fingerprints of
-each pair of molecules of the two collections of inputs.</p>
+      <p>Compute the tanimoto distance between the fingerprints of each pair of
+molecules of the two collections of inputs.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -5677,13 +5764,13 @@ each pair of molecules of the two collections of inputs.</p>
   <tbody>
       <tr>
         <td><code>mols1</code></td>
-        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><code>List[Union[str, rdkit.Chem.rdchem.Mol]]</code></td>
         <td><p>list of molecules.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
         <td><code>mols2</code></td>
-        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><code>List[Union[str, rdkit.Chem.rdchem.Mol]]</code></td>
         <td><p>list of molecules.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -5720,13 +5807,13 @@ parallelization. Set to None to use all available cores.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/similarity.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cdist</span><span class="p">(</span>
-    <span class="n">mols1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">mols2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
+    <span class="n">mols2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="o">**</span><span class="n">fp_args</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Compute the pairwise tanimoto distance between the fingerprints of</span>
-<span class="sd">    each pair of molecules of the two collections of inputs.</span>
+    <span class="sd">&quot;&quot;&quot;Compute the tanimoto distance between the fingerprints of each pair of</span>
+<span class="sd">    molecules of the two collections of inputs.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols1: list of molecules.</span>
@@ -5875,7 +5962,14 @@ always a numpy array.</p></td>
 
     <span class="c1"># Convert input to mol if needed</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">mol_obj</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">mol_obj</span> <span class="o">=</span> <span class="n">mol</span>
+
+    <span class="k">if</span> <span class="n">mol_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It seems like the input molecule &#39;</span><span class="si">{</span><span class="n">mol</span><span class="si">}</span><span class="s2">&#39; is invalid.&quot;</span><span class="p">)</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">mol_obj</span>
 
     <span class="c1"># Deal with new API introduced in &gt;=0.4 + throw a warning if needed.</span>
     <span class="k">if</span> <span class="s2">&quot;fp_size&quot;</span> <span class="ow">in</span> <span class="n">fp_args</span><span class="p">:</span>
