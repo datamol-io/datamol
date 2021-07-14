@@ -16,7 +16,7 @@
     
     
       
-        <title>datamol.reactions - datamol</title>
+        <title>`datamol.molar` - datamol</title>
       
     
     
@@ -69,7 +69,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#datamolreactions" class="md-skip">
+        <a href="#datamolmolar" class="md-skip">
           Skip to content
         </a>
       
@@ -98,7 +98,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              datamol.reactions
+              `datamol.molar`
             
           </span>
         </div>
@@ -309,14 +309,12 @@
 
   
   
-    
-  
   
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" data-md-state="indeterminate" type="checkbox" id="__nav_4" checked>
       
       <label class="md-nav__link" for="__nav_4">
         API
@@ -380,79 +378,11 @@
             
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          datamol.reactions
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="datamol.reactions.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
         datamol.reactions
       </a>
-      
-        
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.apply_reaction" class="md-nav__link">
-    apply_reaction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.can_react" class="md-nav__link">
-    can_react()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.compute_reaction_product" class="md-nav__link">
-    compute_reaction_product()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.inverse_reaction" class="md-nav__link">
-    inverse_reaction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.is_reaction_ok" class="md-nav__link">
-    is_reaction_ok()
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -555,36 +485,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.apply_reaction" class="md-nav__link">
-    apply_reaction()
+  <a href="#datamol.molar.log_to_molar" class="md-nav__link">
+    log_to_molar()
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.can_react" class="md-nav__link">
-    can_react()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.compute_reaction_product" class="md-nav__link">
-    compute_reaction_product()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.inverse_reaction" class="md-nav__link">
-    inverse_reaction()
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.reactions._reactions.is_reaction_ok" class="md-nav__link">
-    is_reaction_ok()
+  <a href="#datamol.molar.molar_to_log" class="md-nav__link">
+    molar_to_log()
   </a>
   
 </li>
@@ -601,35 +510,75 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.reactions.md" title="Edit this page" class="md-content__button md-icon">
+                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.molar.md" title="Edit this page" class="md-content__button md-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
                   </a>
                 
                 
-                <h1 id="datamolreactions"><code>datamol.reactions</code><a class="headerlink" href="#datamolreactions" title="Permanent link">&para;</a></h1>
-<p>All the below functions are accessible under <code>datamol.reactions</code>.</p>
+                <h1 id="datamolmolar"><code>datamol.molar</code><a class="headerlink" href="#datamolmolar" title="Permanent link">&para;</a></h1>
+<p>All the below functions are accessible under <code>datamol.molar</code>.</p>
 
 
   <div class="doc doc-object doc-function">
 
 
 
-<h3 id="datamol.reactions._reactions.apply_reaction" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h3 id="datamol.molar.log_to_molar" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">molar</span><span class="o">.</span><span class="n">log_to_molar</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.apply_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.molar.log_to_molar" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents first">
 
-      <p>Apply a chemical reaction on a molecule</p>
+      <p>Convert a log-scaled molar concentration (pXC50 for example) to its unscaled value (XC50).</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>values</code></td>
+        <td><code>Union[float, Iterable[float], numpy.ndarray]</code></td>
+        <td><p>A log-scaled molar concentration (can be a scalar, a list or an array).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>unit</code></td>
+        <td><code>str</code></td>
+        <td><p>The unit of the input concentration. Choose from:
+<code>{'M', 'fM', 'mM', 'nM', 'pM', 'uM'}</code>.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@singledispatch</span>
-<span class="k">def</span> <span class="nf">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Apply a chemical reaction on a molecule&quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span>
+          <summary>Source code in <code>datamol/molar.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">log_to_molar</span><span class="p">(</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a log-scaled molar concentration (pXC50 for example) to its unscaled value (XC50).</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        values: A log-scaled molar concentration (can be a scalar, a list or an array).</span>
+<span class="sd">        unit: The unit of the input concentration. Choose from:</span>
+<span class="sd">            `{&#39;M&#39;, &#39;fM&#39;, &#39;mM&#39;, &#39;nM&#39;, &#39;pM&#39;, &#39;uM&#39;}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">unit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_MOLAR_SCALES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The unit &#39;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&#39; is not supported. Choose from </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">_MOLAR_SCALES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="mi">10</span> <span class="o">**</span> <span class="p">(</span><span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">))</span> <span class="o">/</span> <span class="n">_MOLAR_SCALES</span><span class="p">[</span><span class="n">unit</span><span class="p">]</span>
 </code></pre></div>
         </details>
     </div>
@@ -642,115 +591,62 @@
 
 
 
-<h3 id="datamol.reactions._reactions.can_react" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span></code>
+<h3 id="datamol.molar.molar_to_log" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">molar</span><span class="o">.</span><span class="n">molar_to_log</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">unit</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.can_react" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>Check if a molecule is a reactant to a chemical reaction and return position</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@singledispatch</span>
-<span class="k">def</span> <span class="nf">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check if a molecule is a reactant to a chemical reaction and return position&quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="ne">ValueError</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.reactions._reactions.compute_reaction_product" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
-
-
-<a href="#datamol.reactions._reactions.compute_reaction_product" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.molar.molar_to_log" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents first">
 
-      <p>Compute the product of a reaction</p>
+      <p>Convert a molar concentration (XC50 for example) to its log scaled value (pXC50).</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>values</code></td>
+        <td><code>Union[float, Iterable[float], numpy.ndarray]</code></td>
+        <td><p>A molar concentration (can be a scalar, a list or an array).</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>unit</code></td>
+        <td><code>str</code></td>
+        <td><p>The unit of the input concentration. Choose from:
+<code>{'M', 'fM', 'mM', 'nM', 'pM', 'uM'}</code>.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Compute the product of a reaction&quot;&quot;&quot;</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">n_iter</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">single_output</span><span class="p">:</span>
-        <span class="k">return</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">out</span><span class="p">]</span>
-    <span class="c1"># Might be a important to make a tradeoff decision in selecting products for greater speed.</span>
-    <span class="c1"># product = sorted(out, key=lambda x: MoleculeEnv.compute_reward_from_mol(x, True))[-1]</span>
-    <span class="c1"># sampling from list of products is an alternative</span>
-    <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_first</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">out</span><span class="p">))</span>
-</code></pre></div>
-        </details>
-    </div>
+          <summary>Source code in <code>datamol/molar.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">molar_to_log</span><span class="p">(</span>
+    <span class="n">values</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">],</span>
+    <span class="n">unit</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="n">Iterable</span><span class="p">[</span><span class="nb">float</span><span class="p">],</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a molar concentration (XC50 for example) to its log scaled value (pXC50).</span>
 
-  </div>
+<span class="sd">    Args:</span>
+<span class="sd">        values: A molar concentration (can be a scalar, a list or an array).</span>
+<span class="sd">        unit: The unit of the input concentration. Choose from:</span>
+<span class="sd">            `{&#39;M&#39;, &#39;fM&#39;, &#39;mM&#39;, &#39;nM&#39;, &#39;pM&#39;, &#39;uM&#39;}`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="n">unit</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">_MOLAR_SCALES</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The unit &#39;</span><span class="si">{</span><span class="n">unit</span><span class="si">}</span><span class="s2">&#39; is not supported. Choose from </span><span class="si">{</span><span class="nb">set</span><span class="p">(</span><span class="n">_MOLAR_SCALES</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span><span class="si">}</span><span class="s2">.&quot;</span>
+        <span class="p">)</span>
 
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.reactions._reactions.inverse_reaction" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
-
-
-<a href="#datamol.reactions._reactions.inverse_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>Get the reverse reaction of the input reaction</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Get the reverse reaction of the input reaction&quot;&quot;&quot;</span>
-    <span class="n">rxn2</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">()</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetNumReactantTemplates</span><span class="p">()):</span>
-        <span class="n">rxn2</span><span class="o">.</span><span class="n">AddProductTemplate</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetReactantTemplate</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetNumProductTemplates</span><span class="p">()):</span>
-        <span class="n">rxn2</span><span class="o">.</span><span class="n">AddReactantTemplate</span><span class="p">(</span><span class="n">rxn</span><span class="o">.</span><span class="n">GetProductTemplate</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
-    <span class="n">rxn2</span><span class="o">.</span><span class="n">Initialize</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">rxn2</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.reactions._reactions.is_reaction_ok" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
-
-
-<a href="#datamol.reactions._reactions.is_reaction_ok" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>Check is the reaction is synthetically valid</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/reactions/_reactions.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Check is the reaction is synthetically valid&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">rdChemReactions</span><span class="o">.</span><span class="n">SanitizeRxn</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span> <span class="o">==</span> <span class="n">rdChemReactions</span><span class="o">.</span><span class="n">SanitizeFlags</span><span class="o">.</span><span class="n">SANITIZE_NONE</span>
+    <span class="k">return</span> <span class="o">-</span><span class="mi">1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">values</span><span class="p">)</span> <span class="o">*</span> <span class="n">_MOLAR_SCALES</span><span class="p">[</span><span class="n">unit</span><span class="p">])</span>
 </code></pre></div>
         </details>
     </div>
@@ -771,41 +667,6 @@
       
         
 <footer class="md-footer">
-  
-    <nav class="md-footer__inner md-grid" aria-label="Footer">
-      
-        
-        <a href="datamol.fragment.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.fragment" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              datamol.fragment
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.scaffold" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              datamol.scaffold
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">

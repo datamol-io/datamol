@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
@@ -46,6 +46,8 @@
     
     
       
+
+
     
     
   </head>
@@ -78,7 +80,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -170,7 +172,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -619,7 +621,7 @@
   function addWidgetsRenderer() {
     var mimeElement = document.querySelector('script[type="application/vnd.jupyter.widget-view+json"]');
     var scriptElement = document.createElement('script');
-    var widgetRendererSrc = '@jupyter-widgets/html-manager@/dist/embed-amd.js';
+    var widgetRendererSrc = 'https://unpkg.com/@jupyter-widgets/html-manager@*/dist/embed-amd.js';
     var widgetState;
 
     // Fallback for older version:
@@ -627,7 +629,7 @@
       widgetState = mimeElement && JSON.parse(mimeElement.innerHTML);
 
       if (widgetState && (widgetState.version_major < 2 || !widgetState.version_major)) {
-        widgetRendererSrc = 'jupyter-js-widgets@*/dist/embed.js';
+        widgetRendererSrc = 'https://unpkg.com/jupyter-js-widgets@*/dist/embed.js';
       }
     } catch(e) {}
 
@@ -976,7 +978,7 @@ all of MD as it is not optimized for dense, information rich UIs.
   --jp-cell-editor-active-border-color: var(--jp-brand-color1);
 
   --jp-cell-prompt-width: 64px;
-  --jp-cell-prompt-font-family: 'Source Code Pro', monospace;
+  --jp-cell-prompt-font-family: var(--jp-code-font-family-default);
   --jp-cell-prompt-letter-spacing: 0px;
   --jp-cell-prompt-opacity: 1;
   --jp-cell-prompt-not-active-opacity: 0.5;
@@ -1077,7 +1079,7 @@ all of MD as it is not optimized for dense, information rich UIs.
 
   /* Sidebar-related styles */
 
-  --jp-sidebar-min-width: 180px;
+  --jp-sidebar-min-width: 250px;
 
   /* Search-related styles */
 
@@ -1826,9 +1828,9 @@ all of MD as it is not optimized for dense, information rich UIs.
 
 
 
-<div id="cb479950-3d12-4317-823b-ac29a0f9e349" class="jupyter-widgets jp-OutputArea-output ">
+<div id="e7824bd6-7859-4d0d-b33b-05632ef1ad2f" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('cb479950-3d12-4317-823b-ac29a0f9e349');
+var element = document.getElementById('e7824bd6-7859-4d0d-b33b-05632ef1ad2f');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "213a222037084dbf8780e5bc2a48bcf2", "version_major": 2, "version_minor": 0}
@@ -1848,9 +1850,9 @@ var element = document.getElementById('cb479950-3d12-4317-823b-ac29a0f9e349');
 
 
 
-<div id="0978778b-950a-4ae6-864f-71572cae8f10" class="jupyter-widgets jp-OutputArea-output ">
+<div id="35be9002-fcb5-4112-bbe9-fa52f262cc2a" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('0978778b-950a-4ae6-864f-71572cae8f10');
+var element = document.getElementById('35be9002-fcb5-4112-bbe9-fa52f262cc2a');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "2a1443db5bdc4e78b134cec68a40ad6a", "version_major": 2, "version_minor": 0}
@@ -2085,10 +2087,10 @@ var element = document.getElementById('0978778b-950a-4ae6-864f-71572cae8f10');
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
