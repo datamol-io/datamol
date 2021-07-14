@@ -55,9 +55,6 @@ jobs:
           echo "Get the gh-pages branch"
           git fetch origin gh-pages
 
-          echo "Regenerate the API doc"
-          python -m datamol._mkdocs
-
           TAG_OR_BRANCH_NAME=${GITHUB_REF##*/}
 
           if [ $TAG_OR_BRANCH_NAME = "master" ]; then

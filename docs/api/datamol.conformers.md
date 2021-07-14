@@ -1,13 +1,15 @@
 # `datamol.conformers`
 
-All the below functions are accessible under `datamol.conformers`.
+## Generate and working with conformers
 
-::: datamol.conformers:center_of_mass
-::: datamol.conformers:cluster
 ::: datamol.conformers:generate
-::: datamol.conformers:get_coords
+::: datamol.conformers:cluster
 ::: datamol.conformers:return_centroids
 ::: datamol.conformers:rmsd
 ::: datamol.conformers:sasa
-::: datamol.conformers:translate
 
+## Low-level conformer manipulation
+
+::: datamol.conformers:center_of_mass
+::: datamol.conformers:get_coords
+::: datamol.conformers:translate

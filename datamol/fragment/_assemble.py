@@ -13,11 +13,12 @@ import copy
 import json
 import itertools
 import random
-import numpy as np
 import re
 import pkg_resources
 
 from functools import lru_cache
+
+import numpy as np
 
 from rdkit import Chem
 from rdkit.Chem import rdChemReactions
@@ -425,7 +426,7 @@ def assemble_fragment_order(
     seen=None,
     allow_incomplete: bool = False,
     max_n_mols: float = float("inf"),
-    RXNS=ALL_BRICS_RETRO,
+    RXNS=None,
 ):
     """Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm
 
@@ -441,6 +442,10 @@ def assemble_fragment_order(
         allow_incomplete: Whether to accept assembled molecules with missing fragment
 
     """
+
+    if RXNS is None:
+        RXNS = ALL_BRICS_RETRO
+
     fragmentlist = list(fragmentlist)
     yield_counter = 0
     if seen is None:
@@ -477,9 +482,13 @@ def assemble_fragment_iter(
     max_n_mols=float("inf"),
     maxdepth=3,
     as_smiles=True,
-    RXNS=ALL_BRICS_RETRO,
+    RXNS=None,
 ):
-    """Perform an assembly from fragment given all potential RXNS transformation"""
+    """Perform an assembly from fragment given all potential RXNS transformation."""
+
+    if RXNS is None:
+        RXNS = ALL_BRICS_RETRO
+
     seen = set()
     if max_n_mols <= 0:
         return

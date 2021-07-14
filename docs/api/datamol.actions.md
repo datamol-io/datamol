@@ -1,6 +1,6 @@
 # `datamol.actions`
 
-All the below functions are accessible under `datamol.actions`.
+## Perform edit actions on molecules
 
 ::: datamol.actions:add_bond_between
 ::: datamol.actions:all_atom_add
@@ -16,4 +16,3 @@ All the below functions are accessible under `datamol.actions`.
 ::: datamol.actions:all_transform_apply
 ::: datamol.actions:mmpa_fragment_exchange
 ::: datamol.actions:update_bond
-

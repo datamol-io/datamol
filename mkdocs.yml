@@ -19,13 +19,15 @@ nav:
       - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
   - API:
       - datamol: api/datamol.md
-      - datamol.actions: api/datamol.actions.md
       - datamol.conformers: api/datamol.conformers.md
-      - datamol.fragment: api/datamol.fragment.md
-      - datamol.reactions: api/datamol.reactions.md
-      - datamol.scaffold: api/datamol.scaffold.md
-      - datamol.utils: api/datamol.utils.md
       - datamol.viz: api/datamol.viz.md
+      - datamol.fragment: api/datamol.fragment.md
+      - datamol.scaffold: api/datamol.scaffold.md
+      - datamol.reactions: api/datamol.reactions.md
+      - datamol.actions: api/datamol.actions.md
+      - datamol.molar: api/datamol.molar.md
+      - datamol.utils: api/datamol.utils.md
+
   - Contribute: contribute.md
   - License: license.md
 
@@ -58,6 +60,7 @@ markdown_extensions:
   - mdx_truly_sane_lists
   - toc:
       permalink: true
+      toc_depth: 4
 
 plugins:
   - search
@@ -72,10 +75,11 @@ plugins:
             - sys.path.append("docs")
             - sys.path.append("datamol")
           selection:
-            new_path_syntax: yes
+            new_path_syntax: true
           rendering:
-            show_root_heading: yes
-            heading_level: 3
+            show_root_heading: true
+            heading_level: 4
+            show_root_full_path: false
 
   - mkdocs-jupyter:
       execute: false

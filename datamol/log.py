@@ -3,7 +3,17 @@ from rdkit import rdBase
 
 
 class without_rdkit_log:
-    """Context manager to disable RDKit logs. By default all logs are disabled."""
+    """Context manager to disable RDKit logs. By default all logs are disabled.
+
+    Example:
+
+    ```python
+    import datamol as dm
+
+    with dm.without_rdkit_log():
+        mol = dm.to_mol("CCCCO")  # potential RDKit logs won't show
+    ```
+    """
 
     def __init__(
         self,

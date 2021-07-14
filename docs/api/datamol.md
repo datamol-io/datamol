@@ -1,95 +1,105 @@
 # `datamol`
 
-All the below functions are accessible under `datamol.FUNCTION_NAME`.
+Datamol is designed to be used with a single import (`import datamol as dm`). Most of the functions are available in `datamol.*`. The others ones are available throught their specific modules.
 
-## `datamol._viz`
+The below sections shows you the directly available Datamol functions. For other modules, please browser the API using the left menu.
 
-::: datamol:to_image
+## Working with molecules
 
-## `datamol.cluster`
+### The basics
 
-::: datamol:assign_to_centroids
-::: datamol:cluster_mols
-::: datamol:pick_centroids
-::: datamol:pick_diverse
+::: datamol:to_mol
+::: datamol:copy_mol
+::: datamol:reorder_atoms
+::: datamol:randomize_atoms
+::: datamol:to_neutral
+::: datamol:set_mol_props
+::: datamol:copy_mol_props
+::: datamol:atom_indices_to_mol
 
-## `datamol.convert`
+### Fix, sanitize and standardize
 
-::: datamol:from_df
-::: datamol:from_inchi
+::: datamol:sanitize_mol
+::: datamol:sanitize_first
+::: datamol:sanitize_smiles
+::: datamol:standardize_smiles
+::: datamol:standardize_mol
+::: datamol:fix_valence_charge
+::: datamol:incorrect_valence
+::: datamol:decrease_bond
+::: datamol:fix_valence
+::: datamol:adjust_singleton
+::: datamol:remove_dummies
+::: datamol:fix_mol
+::: datamol:replace_dummies_atoms
+::: datamol:keep_largest_fragment
+::: datamol:is_transition_metal
+::: datamol:set_dative_bonds
+
+### Enumerate
+
+::: datamol:enumerate_stereoisomers
+::: datamol:enumerate_tautomers
+
+## Convert molecule(s)
+
+::: datamol:to_smiles
+::: datamol:to_selfies
 ::: datamol:from_selfies
-::: datamol:to_df
+::: datamol:to_smarts
 ::: datamol:to_inchi
 ::: datamol:to_inchikey
-::: datamol:to_selfies
-::: datamol:to_smarts
-::: datamol:to_smiles
+::: datamol:from_inchi
+::: datamol:to_df
+::: datamol:from_df
 
-## `datamol.data`
-
-::: datamol:freesolv
-
-## `datamol.fp`
-
-::: datamol:fp_to_array
-::: datamol:to_fp
-
-## `datamol.graph`
-
-::: datamol:get_all_path_between
-::: datamol:to_graph
-
-## `datamol.io`
+## Input/Output
 
 ::: datamol:read_csv
 ::: datamol:read_excel
 ::: datamol:read_sdf
-::: datamol:read_smi
 ::: datamol:to_sdf
 ::: datamol:to_smi
+::: datamol:read_smi
 
-## `datamol.jobs`
+## Molecule similarity and distance
 
-::: datamol:JobRunner
-::: datamol:parallelized
-
-## `datamol.log`
-
-::: datamol:disable_rdkit_log
-::: datamol:enable_rdkit_log
-::: datamol:without_rdkit_log
-
-## `datamol.mol`
-
-::: datamol:adjust_singleton
-::: datamol:atom_indices_to_mol
-::: datamol:copy_mol
-::: datamol:copy_mol_props
-::: datamol:decrease_bond
-::: datamol:enumerate_stereoisomers
-::: datamol:enumerate_tautomers
-::: datamol:fix_mol
-::: datamol:fix_valence
-::: datamol:fix_valence_charge
-::: datamol:incorrect_valence
-::: datamol:is_transition_metal
-::: datamol:keep_largest_fragment
-::: datamol:randomize_atoms
-::: datamol:remove_dummies
-::: datamol:reorder_atoms
-::: datamol:replace_dummies_atoms
-::: datamol:sanitize_first
-::: datamol:sanitize_mol
-::: datamol:sanitize_smiles
-::: datamol:set_dative_bonds
-::: datamol:set_mol_props
-::: datamol:standardize_mol
-::: datamol:standardize_smiles
-::: datamol:to_mol
-::: datamol:to_neutral
-
-## `datamol.similarity`
-
-::: datamol:cdist
 ::: datamol:pdist
+::: datamol:cdist
 
+## Working with fingerprints
+
+::: datamol:to_fp
+::: datamol:fp_to_array
+::: datamol:list_supported_fingerprints
+::: datamol:fold_count_fp
+
+## Cluster molecules
+
+::: datamol:cluster_mols
+::: datamol:pick_diverse
+::: datamol:pick_centroids
+::: datamol:assign_to_centroids
+
+## Molecule as a graph
+
+::: datamol:to_graph
+::: datamol:get_all_path_between
+
+## Constants
+
+::: datamol:PERIODIC_TABLE
+::: datamol:TRIPLE_BOND
+::: datamol:DOUBLE_BOND
+::: datamol:SINGLE_BOND
+::: datamol:AROMATIC_BOND
+
+## Control RDKit logging
+
+::: datamol:without_rdkit_log
+::: datamol:enable_rdkit_log
+::: datamol:disable_rdkit_log
+
+## Toy dataset
+
+::: datamol:freesolv

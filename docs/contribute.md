@@ -36,9 +36,6 @@ pytest
 You can build and serve the documentation locally with:
 
 ```bash
-# Regenerate the API doc
-python -m datamol._mkdocs
-
 # Build and serve the doc
 mike serve
 ```

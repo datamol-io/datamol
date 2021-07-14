@@ -93,7 +93,7 @@ def get_extension(path: Union[str, os.PathLike]):
 def exists(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file or a directory exists.
 
-    Important: HTTP file and file-like object always exists.
+    Important: File-like object always exists.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
