@@ -1,5 +1,7 @@
 import warnings
 
+import pytest
+
 import datamol as dm
 
 
@@ -106,3 +108,17 @@ def test_fp_deprecated_args_warnings():
         assert len(w) == 1
         assert issubclass(w[-1].category, DeprecationWarning)
         assert "will be removed in datamol 0.5.0" in str(w[-1].message)
+
+
+def test_fp_invalid_input():
+
+    args = {}
+    args["mol"] = None
+    args["radius"] = 3
+
+    with pytest.raises(ValueError):
+        dm.to_fp(**args)
+
+    args["mol"] = "dsdsdsd"
+    with pytest.raises(ValueError):
+        dm.to_fp(**args)
