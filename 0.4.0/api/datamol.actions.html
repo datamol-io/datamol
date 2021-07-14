@@ -1,0 +1,2453 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+    
+    
+      
+        <title>datamol.actions - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamolactions" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.actions
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
+        Preprocessing Molecules
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
+        Cluster Molecules
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
+        Fragment and Scaffold
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.html" class="md-nav__link">
+        datamol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.actions
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.actions.html" class="md-nav__link md-nav__link--active">
+        datamol.actions
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.add_bond_between" class="md-nav__link">
+    add_bond_between()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add" class="md-nav__link">
+    all_atom_add()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_atom_add()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace" class="md-nav__link">
+    all_atom_replace()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_atom_replace()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add" class="md-nav__link">
+    all_bond_add()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_bond_add()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_remove" class="md-nav__link">
+    all_bond_remove()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble" class="md-nav__link">
+    all_fragment_assemble()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_assemble()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach" class="md-nav__link">
+    all_fragment_attach()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_attach()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond" class="md-nav__link">
+    all_fragment_on_bond()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_on_bond()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update" class="md-nav__link">
+    all_fragment_update()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_update()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point" class="md-nav__link">
+    all_join_on_attach_point()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_join_on_attach_point()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble" class="md-nav__link">
+    all_mmpa_assemble()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_mmpa_assemble()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply" class="md-nav__link">
+    all_transform_apply()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_transform_apply()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange" class="md-nav__link">
+    mmpa_fragment_exchange()
+  </a>
+  
+    <nav class="md-nav" aria-label="mmpa_fragment_exchange()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.pick_atom_idx" class="md-nav__link">
+    pick_atom_idx()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.update_bond" class="md-nav__link">
+    update_bond()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.add_bond_between" class="md-nav__link">
+    add_bond_between()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add" class="md-nav__link">
+    all_atom_add()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_atom_add()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_add--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace" class="md-nav__link">
+    all_atom_replace()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_atom_replace()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_atom_replace--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add" class="md-nav__link">
+    all_bond_add()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_bond_add()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_add--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_bond_remove" class="md-nav__link">
+    all_bond_remove()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble" class="md-nav__link">
+    all_fragment_assemble()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_assemble()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_assemble--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach" class="md-nav__link">
+    all_fragment_attach()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_attach()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_attach--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond" class="md-nav__link">
+    all_fragment_on_bond()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_on_bond()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_on_bond--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update" class="md-nav__link">
+    all_fragment_update()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_fragment_update()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_fragment_update--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point" class="md-nav__link">
+    all_join_on_attach_point()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_join_on_attach_point()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_join_on_attach_point--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble" class="md-nav__link">
+    all_mmpa_assemble()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_mmpa_assemble()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_mmpa_assemble--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply" class="md-nav__link">
+    all_transform_apply()
+  </a>
+  
+    <nav class="md-nav" aria-label="all_transform_apply()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.all_transform_apply--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange" class="md-nav__link">
+    mmpa_fragment_exchange()
+  </a>
+  
+    <nav class="md-nav" aria-label="mmpa_fragment_exchange()">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange--arguments" class="md-nav__link">
+    Arguments
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.actions._actions.mmpa_fragment_exchange--returns" class="md-nav__link">
+    Returns
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.pick_atom_idx" class="md-nav__link">
+    pick_atom_idx()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.actions._actions.update_bond" class="md-nav__link">
+    update_bond()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.actions.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="datamolactions"><code>datamol.actions</code><a class="headerlink" href="#datamolactions" title="Permanent link">&para;</a></h1>
+<p>All the below functions are accessible under <code>datamol.actions</code>.</p>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.add_bond_between" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">add_bond_between</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">bond_type</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.add_bond_between" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Add a new bond between atom</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">add_bond_between</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">,</span> <span class="n">bond_type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a new bond between atom&quot;&quot;&quot;</span>
+    <span class="n">emol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">EditableMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">emol</span><span class="o">.</span><span class="n">AddBond</span><span class="p">(</span><span class="n">a1</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">a2</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">bond_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">emol</span><span class="o">.</span><span class="n">GetMol</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_atom_add" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_atom_add</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;Cl&#39;</span><span class="p">,</span> <span class="s1">&#39;Br&#39;</span><span class="p">],</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_atom_add" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Add a new atom on the mol, by considering all bond type</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<h5 id="datamol.actions._actions.all_atom_add--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_atom_add--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    Input molecule
+!!! atom_types "list"
+    List of atom symbol to use as replacement
+    (Default: ["C", "N", "O", "F", "Cl", "Br"])
+!!! asmols "bool, optional"
+    Whether to return output as molecule or smiles
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity
+</code></pre>
+<h5 id="datamol.actions._actions.all_atom_add--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_atom_add--returns" title="Permanent link">&para;</a></h5>
+<pre><code>All possible molecules with one additional atom added
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_atom_add</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span>
+    <span class="n">atom_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">,</span> <span class="s2">&quot;F&quot;</span><span class="p">,</span> <span class="s2">&quot;Cl&quot;</span><span class="p">,</span> <span class="s2">&quot;Br&quot;</span><span class="p">],</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add a new atom on the mol, by considering all bond type</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            Input molecule</span>
+<span class="sd">        atom_types: list</span>
+<span class="sd">            List of atom symbol to use as replacement</span>
+<span class="sd">            (Default: [&quot;C&quot;, &quot;N&quot;, &quot;O&quot;, &quot;F&quot;, &quot;Cl&quot;, &quot;Br&quot;])</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return output as molecule or smiles</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        All possible molecules with one additional atom added</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">for</span> <span class="n">atom_symb</span> <span class="ow">in</span> <span class="n">atom_types</span><span class="p">:</span>
+                <span class="n">emol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                <span class="n">new_index</span> <span class="o">=</span> <span class="n">emol</span><span class="o">.</span><span class="n">AddAtom</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">Atom</span><span class="p">(</span><span class="n">atom_symb</span><span class="p">))</span>
+                <span class="n">emol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">new_mols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_all_atom_join</span><span class="p">(</span><span class="n">emol</span><span class="p">,</span> <span class="n">atom</span><span class="p">,</span> <span class="n">emol</span><span class="o">.</span><span class="n">GetMol</span><span class="p">()</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">new_index</span><span class="p">)))</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+                    <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+
+        <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">new_mols</span><span class="p">]</span>
+        <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">x</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_atom_replace" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_atom_replace</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;N&#39;</span><span class="p">,</span> <span class="s1">&#39;S&#39;</span><span class="p">,</span> <span class="s1">&#39;O&#39;</span><span class="p">],</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_atom_replace" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Replace all non-hydrogen atoms by other possibilities.</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<h5 id="datamol.actions._actions.all_atom_replace--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_atom_replace--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    Input molecule
+!!! atom_types "list"
+    List of atom symbol to use as replacement
+    (Default: ['C', 'N', 'S', 'O'])
+!!! asmols "bool, optional"
+    Whether to return output as molecule or smiles
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity
+</code></pre>
+<h5 id="datamol.actions._actions.all_atom_replace--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_atom_replace--returns" title="Permanent link">&para;</a></h5>
+<pre><code>All possible molecules with atoms replaced
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_atom_replace</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span> <span class="n">atom_types</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;C&quot;</span><span class="p">,</span> <span class="s2">&quot;N&quot;</span><span class="p">,</span> <span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;O&quot;</span><span class="p">],</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Replace all non-hydrogen atoms by other possibilities.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            Input molecule</span>
+<span class="sd">        atom_types: list</span>
+<span class="sd">            List of atom symbol to use as replacement</span>
+<span class="sd">            (Default: [&#39;C&#39;, &#39;N&#39;, &#39;S&#39;, &#39;O&#39;])</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return output as molecule or smiles</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        All possible molecules with atoms replaced</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+            <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">atom_symb</span> <span class="ow">in</span> <span class="n">atom_types</span><span class="p">:</span>
+                    <span class="n">emol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+                    <span class="n">emol</span><span class="o">.</span><span class="n">ReplaceAtom</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Atom</span><span class="p">(</span><span class="n">atom_symb</span><span class="p">))</span>
+                    <span class="n">new_mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">emol</span><span class="p">)</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+                        <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                        <span class="k">break</span>
+
+        <span class="c1"># Sanitize and remove bad molecules</span>
+        <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">new_mols</span><span class="p">]</span>
+        <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>  <span class="c1"># Return SMILES</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_mols</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_bond_add" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_bond_add</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">allowed_ring_sizes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_bond_add" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Add bond to a molecule</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<h5 id="datamol.actions._actions.all_bond_add--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_bond_add--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    Input molecule
+!!! allowed_ring_sizes "list, optional"
+    Set of integer allowed ring sizes; used to remove some
+    actions that would create rings with disallowed sizes.
+!!! bond_between_rings "bool, optional"
+    Whether to allow actions that add bonds
+    between atoms that are both in rings.
+!!! asmols "bool, optional"
+    Whether to return output as molecule or smiles
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity
+</code></pre>
+<h5 id="datamol.actions._actions.all_bond_add--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_bond_add--returns" title="Permanent link">&para;</a></h5>
+<pre><code>All possible molecules with additional bond added between atoms
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_bond_add</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span>
+    <span class="n">allowed_ring_sizes</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Add bond to a molecule</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            Input molecule</span>
+<span class="sd">        allowed_ring_sizes: list, optional</span>
+<span class="sd">            Set of integer allowed ring sizes; used to remove some</span>
+<span class="sd">            actions that would create rings with disallowed sizes.</span>
+<span class="sd">        bond_between_rings: bool, optional</span>
+<span class="sd">            Whether to allow actions that add bonds</span>
+<span class="sd">            between atoms that are both in rings.</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return output as molecule or smiles</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        All possible molecules with additional bond added between atoms</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">num_atoms</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">for</span> <span class="n">i1</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">num_atoms</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">a1</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">i1</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">a1</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">for</span> <span class="n">i2</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">i1</span> <span class="o">+</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num_atoms</span><span class="p">):</span>
+            <span class="n">a2</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">i2</span><span class="p">)</span>
+            <span class="c1"># Chem.rdmolops.GetShortestPath(mol, i1, i2)</span>
+            <span class="n">all_paths</span> <span class="o">=</span> <span class="n">get_all_path_between</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">,</span> <span class="n">ignore_cycle_basis</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="n">all_path_len</span> <span class="o">=</span> <span class="p">{</span><span class="nb">len</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">all_paths</span><span class="p">}</span>
+            <span class="k">if</span> <span class="n">a2</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="c1"># no bond between atoms already in rings</span>
+            <span class="n">bond</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="n">i1</span><span class="p">,</span> <span class="n">i2</span><span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">bond_between_rings</span> <span class="ow">and</span> <span class="n">a1</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()</span> <span class="ow">and</span> <span class="n">a2</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">():</span>
+                <span class="k">continue</span>
+            <span class="c1"># no bond to form large rings</span>
+            <span class="k">if</span> <span class="p">(</span>
+                <span class="p">(</span><span class="n">bond</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="p">(</span><span class="n">allowed_ring_sizes</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+                <span class="ow">and</span> <span class="ow">not</span> <span class="n">all_path_len</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="n">allowed_ring_sizes</span><span class="p">)</span>
+            <span class="p">):</span>
+                <span class="k">continue</span>
+            <span class="n">new_mols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">_all_atom_join</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">a1</span><span class="p">,</span> <span class="n">a2</span><span class="p">))</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+                <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="k">break</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">list</span><span class="p">({</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">x</span><span class="p">})</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">m</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">m</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_bond_remove" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_bond_remove</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">as_mol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_bond_decrease</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">allow_atom_trim</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_bond_remove" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Remove bonds from a molecule</p>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>This can be computationally expensive.</p>
+</div>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>Input molecule</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>allow_bond_decrease</code></td>
+        <td><code>bool</code></td>
+        <td><p>Allow decreasing bond type in addition to bond cut</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>max_num_action</code></td>
+        <td><code></code></td>
+        <td><p>Maximum number of action to reduce complexity</p></td>
+        <td><code>inf</code></td>
+      </tr>
+      <tr>
+        <td><code>allow_atom_trim</code></td>
+        <td><code>bool</code></td>
+        <td><p>Allow bond removal even when it results in dm.SINGLE_BOND</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code></code></td>
+      <td><p>All possible molecules from removing bonds</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_bond_remove</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">as_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">allow_bond_decrease</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">allow_atom_trim</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Remove bonds from a molecule</span>
+
+<span class="sd">    Warning:</span>
+<span class="sd">        This can be computationally expensive.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: Input molecule</span>
+<span class="sd">        allow_bond_decrease: Allow decreasing bond type in addition to bond cut</span>
+<span class="sd">        max_num_action: Maximum number of action to reduce complexity</span>
+<span class="sd">        allow_atom_trim: Allow bond removal even when it results in dm.SINGLE_BOND</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        All possible molecules from removing bonds</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">Kekulize</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">clearAromaticFlags</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">new_mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">original_bond_type</span> <span class="o">=</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">()</span>
+        <span class="n">emol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">emol</span><span class="o">.</span><span class="n">RemoveBond</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">(),</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">())</span>
+        <span class="n">new_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">emol</span><span class="o">.</span><span class="n">GetMol</span><span class="p">())</span>
+
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">new_mol</span><span class="p">:</span>
+            <span class="k">continue</span>
+
+        <span class="n">frag_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">new_mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+        <span class="n">has_single_atom</span> <span class="o">=</span> <span class="nb">any</span><span class="p">([</span><span class="n">x</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">&lt;</span> <span class="mi">2</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frag_list</span><span class="p">])</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">has_single_atom</span> <span class="ow">or</span> <span class="n">allow_atom_trim</span><span class="p">:</span>
+            <span class="n">new_mols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">frag_list</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">allow_bond_decrease</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">original_bond_type</span> <span class="ow">in</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">DOUBLE_BOND</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">TRIPLE_BOND</span><span class="p">]:</span>
+                <span class="n">new_mol</span> <span class="o">=</span> <span class="n">update_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">SINGLE_BOND</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">new_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">new_mols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">new_mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+            <span class="k">if</span> <span class="n">original_bond_type</span> <span class="o">==</span> <span class="n">dm</span><span class="o">.</span><span class="n">TRIPLE_BOND</span><span class="p">:</span>
+                <span class="n">new_mol</span> <span class="o">=</span> <span class="n">update_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">DOUBLE_BOND</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">new_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="n">new_mols</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">new_mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">)))</span>
+
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">as_mol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">x</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">new_mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_fragment_assemble" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_fragment_assemble</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">seen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_fragment_assemble" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Assemble a set of fragment into a new molecule</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<h5 id="datamol.actions._actions.all_fragment_assemble--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_fragment_assemble--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! fragmentlist "list"
+    List of blocks to use for replacement, or addition to molparent
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity. No limit by default
+!!! asmols "bool, optional"
+    Whether to return smiles or mols
+!!! seen "list, optional"
+    List of initial molecules
+</code></pre>
+<h5 id="datamol.actions._actions.all_fragment_assemble--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_fragment_assemble--returns" title="Permanent link">&para;</a></h5>
+<pre><code>reconstructed molecules
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_fragment_assemble</span><span class="p">(</span>
+    <span class="n">fragmentlist</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">seen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Assemble a set of fragment into a new molecule</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        fragmentlist: list</span>
+<span class="sd">            List of blocks to use for replacement, or addition to molparent</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity. No limit by default</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return smiles or mols</span>
+<span class="sd">        seen: list, optional</span>
+<span class="sd">            List of initial molecules</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        reconstructed molecules</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">dm</span><span class="o">.</span><span class="n">assemble</span><span class="o">.</span><span class="n">assemble_brics_order</span><span class="p">(</span>
+        <span class="n">fragmentlist</span><span class="p">,</span> <span class="n">seen</span><span class="o">=</span><span class="n">seen</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="n">max_num_action</span>
+    <span class="p">):</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_fragment_attach" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_fragment_attach</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fragmentlist</span><span class="p">,</span> <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_fragment_attach" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>List all possible way to attach a list of fragment to a dm.SINGLE_BOND molecule.</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<h5 id="datamol.actions._actions.all_fragment_attach--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_fragment_attach--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    Input molecule
+!!! fragmentlist "list of &lt;Chem.Mol&gt;"
+    Molecular fragments to attach
+!!! bond_between_rings "bool, optional"
+    Whether to allow bond between two rings atoms
+    (Default: True)
+!!! max_num_action "int, optional"
+    Maximum fragment attachment to allow. Reduce time complexity
+    (Default: 10)
+!!! asmols "bool, optional"
+    Whether to return output as molecule or smiles
+</code></pre>
+<h5 id="datamol.actions._actions.all_fragment_attach--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_fragment_attach--returns" title="Permanent link">&para;</a></h5>
+<pre><code>All possible molecules resulting from attaching the molecular fragment to the root molecule
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_fragment_attach</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span>
+    <span class="n">fragmentlist</span><span class="p">,</span>
+    <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;List all possible way to attach a list of fragment to a dm.SINGLE_BOND molecule.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            Input molecule</span>
+<span class="sd">        fragmentlist: list of &lt;Chem.Mol&gt;</span>
+<span class="sd">            Molecular fragments to attach</span>
+<span class="sd">        bond_between_rings: bool, optional</span>
+<span class="sd">            Whether to allow bond between two rings atoms</span>
+<span class="sd">            (Default: True)</span>
+<span class="sd">        max_num_action: int, optional</span>
+<span class="sd">            Maximum fragment attachment to allow. Reduce time complexity</span>
+<span class="sd">            (Default: 10)</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return output as molecule or smiles</span>
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        All possible molecules resulting from attaching the molecular fragment to the root molecule</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fragment_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="n">mol_atom_count</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+    <span class="n">generators</span> <span class="o">=</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">)</span>
+    <span class="n">empty_generators</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">generators</span><span class="p">))</span>
+    <span class="k">while</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragment_set</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">max_num_action</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">np</span><span class="o">.</span><span class="n">all</span><span class="p">(</span><span class="n">empty_generators</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">fragment</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragment_set</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">max_num_action</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">generators</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">generators</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">_compute_fragment_join</span><span class="p">(</span>
+                    <span class="n">mol</span><span class="p">,</span> <span class="n">fragment</span><span class="p">,</span> <span class="n">mol_atom_count</span><span class="p">,</span> <span class="n">bond_between_rings</span><span class="p">,</span> <span class="n">asMols</span>
+                <span class="p">)</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">empty_generators</span><span class="p">[</span><span class="n">i</span><span class="p">]:</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">fragment_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="nb">next</span><span class="p">(</span><span class="n">generators</span><span class="p">[</span><span class="n">i</span><span class="p">]))</span>
+                <span class="k">except</span> <span class="ne">StopIteration</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                    <span class="n">empty_generators</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+                    <span class="k">continue</span>
+    <span class="k">return</span> <span class="n">fragment_set</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_fragment_on_bond" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_fragment_on_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">break_aromatic</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_fragment_on_bond" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Fragment all possible bond in a molecule and return the set of resulting fragments
+This is similar to <code>random_bond_cut</code>, but is not stochastic as it does not return a random fragment
+but all the fragments resulting from all potential bond break in the molecule.</p>
+<p>.. note::
+    This will always be a subset of all_bond_remove, the main difference being that all_bond_remove, allow decreasing
+    bond count, while this one will always break a molecule into two.</p>
+<h5 id="datamol.actions._actions.all_fragment_on_bond--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_fragment_on_bond--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    input molecule
+!!! asmols "bool, optional"
+    Whether to return results as mols or smiles
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity
+!!! break_aromatic "bool, optional"
+    Whether to attempt to break even aromatic bonds
+    (Default: True)
+</code></pre>
+<h5 id="datamol.actions._actions.all_fragment_on_bond--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_fragment_on_bond--returns" title="Permanent link">&para;</a></h5>
+<pre><code>set of fragments
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_fragment_on_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span> <span class="n">break_aromatic</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fragment all possible bond in a molecule and return the set of resulting fragments</span>
+<span class="sd">    This is similar to `random_bond_cut`, but is not stochastic as it does not return a random fragment</span>
+<span class="sd">    but all the fragments resulting from all potential bond break in the molecule.</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        This will always be a subset of all_bond_remove, the main difference being that all_bond_remove, allow decreasing</span>
+<span class="sd">        bond count, while this one will always break a molecule into two.</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return results as mols or smiles</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity</span>
+<span class="sd">        break_aromatic: bool, optional</span>
+<span class="sd">            Whether to attempt to break even aromatic bonds</span>
+<span class="sd">            (Default: True)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        set of fragments</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">GetRingInfo</span><span class="p">()</span><span class="o">.</span><span class="n">AtomRings</span><span class="p">()</span>
+    <span class="n">fragment_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="n">bonds</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">())</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="k">if</span> <span class="n">bonds</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">break_aromatic</span><span class="p">:</span>
+            <span class="n">Chem</span><span class="o">.</span><span class="n">Kekulize</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">clearAromaticFlags</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">bonds</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="n">break_aromatic</span> <span class="ow">or</span> <span class="ow">not</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">():</span>
+                <span class="n">truncate</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">FragmentOnBonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()],</span> <span class="n">addDummies</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+                <span class="n">truncate</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">truncate</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">truncate</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">frag</span> <span class="ow">in</span> <span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">truncate</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">):</span>
+                        <span class="n">frag</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">frag</span><span class="p">:</span>
+                            <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+                                <span class="n">frag</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+                            <span class="n">fragment_set</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">frag</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragment_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+                            <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                            <span class="k">break</span>
+    <span class="k">return</span> <span class="n">fragment_set</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_fragment_update" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_fragment_update</span><span class="p">(</span><span class="n">molparent</span><span class="p">,</span> <span class="n">fragmentlist</span><span class="p">,</span> <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_fragment_update" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Break molecule a molecules into all set of fragment (including the molecule itself).
+Then enumerate all possible combination with blocks from the fragmentlist.
+This corresponds to exploring all valid actions by adding/replacing fragments in a molecules.</p>
+<p>.. warning::
+    This is computationally expensive</p>
+<p>.. note::
+    You should perform a valency check after</p>
+<h5 id="datamol.actions._actions.all_fragment_update--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_fragment_update--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! molparent "&lt;Chem.Mol&gt;"
+    input molecule
+!!! fragmentlist "list"
+    List of blocks to use for replacement, or addition to molparent
+!!! bond_between_rings "bool, optional"
+    Whether to allow bond between rings
+    (Default: True)
+!!! max_num_action "float, optional"
+    Maximum number of action to reduce complexity
+!!! asmols "bool, optional"
+    Whether to return smiles or mols
+</code></pre>
+<h5 id="datamol.actions._actions.all_fragment_update--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_fragment_update--returns" title="Permanent link">&para;</a></h5>
+<pre><code>set of modified mols
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_fragment_update</span><span class="p">(</span>
+    <span class="n">molparent</span><span class="p">,</span>
+    <span class="n">fragmentlist</span><span class="p">,</span>
+    <span class="n">bond_between_rings</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Break molecule a molecules into all set of fragment (including the molecule itself).</span>
+<span class="sd">    Then enumerate all possible combination with blocks from the fragmentlist.</span>
+<span class="sd">    This corresponds to exploring all valid actions by adding/replacing fragments in a molecules.</span>
+
+<span class="sd">    .. warning::</span>
+<span class="sd">        This is computationally expensive</span>
+
+<span class="sd">    .. note::</span>
+<span class="sd">        You should perform a valency check after</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        molparent: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule</span>
+<span class="sd">        fragmentlist: list</span>
+<span class="sd">            List of blocks to use for replacement, or addition to molparent</span>
+<span class="sd">        bond_between_rings: bool, optional</span>
+<span class="sd">            Whether to allow bond between rings</span>
+<span class="sd">            (Default: True)</span>
+<span class="sd">        max_num_action: float, optional</span>
+<span class="sd">            Maximum number of action to reduce complexity</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return smiles or mols</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        set of modified mols</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">fragment_set</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="n">mol_frags</span> <span class="o">=</span> <span class="n">anybreak</span><span class="p">(</span><span class="n">molparent</span><span class="p">,</span> <span class="n">rem_parent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_frags</span><span class="p">:</span>
+        <span class="n">mol_update</span> <span class="o">=</span> <span class="n">all_fragment_attach</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span> <span class="n">fragmentlist</span><span class="p">,</span> <span class="n">bond_between_rings</span><span class="p">,</span> <span class="n">max_num_action</span><span class="p">,</span> <span class="n">asMols</span>
+        <span class="p">)</span>
+        <span class="n">fragment_set</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mol_update</span><span class="p">)</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragment_set</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">max_num_action</span><span class="p">:</span>
+            <span class="k">break</span>
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">fragment_set</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_join_on_attach_point" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_join_on_attach_point</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_join_on_attach_point" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Join two molecules on all possible attaching point</p>
+<h5 id="datamol.actions._actions.all_join_on_attach_point--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_join_on_attach_point--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol1 "&lt;Chem.Mol&gt;"
+    input molecule 1
+!!! mol2 "&lt;Chem.Mol&gt;"
+    input molecule 2
+</code></pre>
+<h5 id="datamol.actions._actions.all_join_on_attach_point--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_join_on_attach_point--returns" title="Permanent link">&para;</a></h5>
+<pre><code>iterator of all possible way to attach both molecules from dummy indicators.
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_join_on_attach_point</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Join two molecules on all possible attaching point</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ---------</span>
+<span class="sd">        mol1: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule 1</span>
+<span class="sd">        mol2: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule 2</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        iterator of all possible way to attach both molecules from dummy indicators.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">atom_map_min</span> <span class="o">=</span> <span class="mi">100</span>
+    <span class="n">mol_idxs</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">mod_mols</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">ind</span><span class="p">,</span> <span class="n">m</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">]):</span>
+        <span class="n">atms</span> <span class="o">=</span> <span class="p">[(</span><span class="n">a</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">a</span><span class="p">)</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">m</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">a</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">()</span> <span class="ow">and</span> <span class="n">a</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="n">atms</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="mi">0</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">a_idx</span><span class="p">,</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">atms</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">a_nei</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">GetNeighbors</span><span class="p">():</span>
+                <span class="n">a_nei</span><span class="o">.</span><span class="n">SetAtomMapNum</span><span class="p">(</span><span class="n">atom_map_min</span> <span class="o">+</span> <span class="n">count</span><span class="p">)</span>
+                <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="n">mod_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="n">mod_mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mod_mol</span><span class="p">)</span>
+        <span class="n">mol_idxs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mod_mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">GetAtomMapNum</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="n">atom_map_min</span><span class="p">]</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">mol_idxs</span><span class="p">):</span>
+        <span class="k">yield</span> <span class="n">random_fragment_add</span><span class="p">(</span><span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mod_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span> <span class="n">copy</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">mod_mols</span><span class="p">[</span><span class="mi">1</span><span class="p">]),</span> <span class="n">ind1</span><span class="p">,</span> <span class="n">ind2</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_mmpa_assemble" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_mmpa_assemble</span><span class="p">(</span><span class="n">molist</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_mmpa_assemble" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Enumerate all mmpa assembly of molecules in molist</p>
+<h5 id="datamol.actions._actions.all_mmpa_assemble--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_mmpa_assemble--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! molist "list of &lt;Chem.Mol&gt;"
+    List of molecules to fragmente and reconstruct
+!!! asmols "bool, optional"
+    Whether to return smiles or mols
+!!! max_num_action "int, optional"
+    Maximum number of assembly
+    (Default: inf)
+</code></pre>
+<h5 id="datamol.actions._actions.all_mmpa_assemble--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_mmpa_assemble--returns" title="Permanent link">&para;</a></h5>
+<pre><code>!!! res "list of &lt;Chem.Mol&gt;"
+    Molecules obtained by merging core and side_chains
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_mmpa_assemble</span><span class="p">(</span><span class="n">molist</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Enumerate all mmpa assembly of molecules in molist</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        molist: list of &lt;Chem.Mol&gt;</span>
+<span class="sd">            List of molecules to fragmente and reconstruct</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return smiles or mols</span>
+<span class="sd">        max_num_action: int, optional</span>
+<span class="sd">            Maximum number of assembly</span>
+<span class="sd">            (Default: inf)</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        res: list of &lt;Chem.Mol&gt;</span>
+<span class="sd">            Molecules obtained by merging core and side_chains</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="n">cores</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">side_chains</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">molist</span><span class="p">:</span>
+        <span class="n">mol_frag</span> <span class="o">=</span> <span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">mol_frag</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="n">_</span><span class="p">,</span> <span class="n">mol_frag</span> <span class="o">=</span> <span class="nb">map</span><span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">zip</span><span class="p">(</span><span class="o">*</span><span class="n">mol_frag</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mol_frag</span><span class="p">:</span>
+            <span class="n">core</span><span class="p">,</span> <span class="n">sidechain</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span>
+            <span class="n">cores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">core</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;[*:1]&quot;</span><span class="p">,</span> <span class="s2">&quot;[1*]&quot;</span><span class="p">)))</span>
+            <span class="n">side_chains</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">sidechain</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;[*:1]&quot;</span><span class="p">,</span> <span class="s2">&quot;[1*]&quot;</span><span class="p">)))</span>
+    <span class="n">new_mols</span> <span class="o">=</span> <span class="n">_compute_mmpa_assembly</span><span class="p">(</span><span class="n">cores</span><span class="p">,</span> <span class="n">side_chains</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">max_num_action</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+        <span class="n">new_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">new_mols</span> <span class="k">if</span> <span class="n">x</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">new_mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.all_transform_apply" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">all_transform_apply</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">rxns</span><span class="p">,</span> <span class="n">max_num_action</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.all_transform_apply" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Apply a transformation defined as a reaction from a set of reaction to the input molecule.</p>
+<p>The reaction need to be one reactant-only</p>
+<h5 id="datamol.actions._actions.all_transform_apply--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.all_transform_apply--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol "&lt;Chem.Mol&gt;"
+    Input molecule
+!!! rnxs "list"
+    list of reactions/ reaction smarts
+!!! max_num_action "int, optional"
+    Maximum number of result to return
+    (Default: inf)
+!!! asmols "bool, optional"
+    Whether to return smiles or mols
+</code></pre>
+<h5 id="datamol.actions._actions.all_transform_apply--returns">Returns<a class="headerlink" href="#datamol.actions._actions.all_transform_apply--returns" title="Permanent link">&para;</a></h5>
+<pre><code>Products obtained from applying the chemical reactions
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">all_transform_apply</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span>
+    <span class="n">rxns</span><span class="p">,</span>
+    <span class="n">max_num_action</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;Inf&quot;</span><span class="p">),</span>
+    <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Apply a transformation defined as a reaction from a set of reaction to the input molecule.</span>
+
+<span class="sd">    The reaction need to be one reactant-only</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol: &lt;Chem.Mol&gt;</span>
+<span class="sd">            Input molecule</span>
+<span class="sd">        rnxs: list</span>
+<span class="sd">            list of reactions/ reaction smarts</span>
+<span class="sd">        max_num_action: int, optional</span>
+<span class="sd">            Maximum number of result to return</span>
+<span class="sd">            (Default: inf)</span>
+<span class="sd">        asMols: bool, optional</span>
+<span class="sd">            Whether to return smiles or mols</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        Products obtained from applying the chemical reactions</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mols</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">rxns</span><span class="p">:</span>
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">max_num_action</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">rxn</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">ReactionFromSmarts</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">pcdts</span> <span class="o">=</span> <span class="p">[</span><span class="n">products</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">products</span> <span class="ow">in</span> <span class="n">rxn</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">([</span><span class="n">mol</span><span class="p">])]</span>
+                <span class="n">pcdts</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pcdts</span><span class="p">]</span>
+                <span class="n">mols</span><span class="o">.</span><span class="n">update</span><span class="p">([</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">pcdts</span> <span class="k">if</span> <span class="n">x</span><span class="p">])</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="k">pass</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">np</span><span class="o">.</span><span class="n">isfinite</span><span class="p">(</span><span class="n">max_num_action</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[:</span><span class="n">max_num_action</span><span class="p">]</span>
+
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">asMols</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.mmpa_fragment_exchange" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">mmpa_fragment_exchange</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.mmpa_fragment_exchange" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Perform a fragment exchange between two molecules using mmpa rules</p>
+<h5 id="datamol.actions._actions.mmpa_fragment_exchange--arguments">Arguments<a class="headerlink" href="#datamol.actions._actions.mmpa_fragment_exchange--arguments" title="Permanent link">&para;</a></h5>
+<pre><code>!!! mol1 "&lt;Chem.Mol&gt;"
+    input molecule 1
+!!! mol2 "&lt;Chem.Mol&gt;"
+    input molecule 1
+!!! return_all "bool, optional"
+    Whether to return list of all molecules
+</code></pre>
+<h5 id="datamol.actions._actions.mmpa_fragment_exchange--returns">Returns<a class="headerlink" href="#datamol.actions._actions.mmpa_fragment_exchange--returns" title="Permanent link">&para;</a></h5>
+<pre><code>modified_mol1, modified_mol2
+    Molecules obtained by exchanging fragment between mol1 and mol2.
+    In case of failure, mol1, mol2 are returned
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_fragment_exchange</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">return_all</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Perform a fragment exchange between two molecules using mmpa rules</span>
+
+<span class="sd">    Arguments</span>
+<span class="sd">    ----------</span>
+<span class="sd">        mol1: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule 1</span>
+<span class="sd">        mol2: &lt;Chem.Mol&gt;</span>
+<span class="sd">            input molecule 1</span>
+<span class="sd">        return_all: bool, optional</span>
+<span class="sd">            Whether to return list of all molecules</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">        modified_mol1, modified_mol2</span>
+<span class="sd">            Molecules obtained by exchanging fragment between mol1 and mol2.</span>
+<span class="sd">            In case of failure, mol1, mol2 are returned</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">unwanted</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="p">[</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">]]</span> <span class="o">+</span> <span class="p">[</span><span class="kc">None</span><span class="p">]</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">all_mmpa_assemble</span><span class="p">([</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">])</span>
+    <span class="c1"># find unique</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">res</span><span class="p">])</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">res</span> <span class="o">-</span> <span class="nb">set</span><span class="p">(</span><span class="n">unwanted</span><span class="p">))</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">sm</span> <span class="ow">in</span> <span class="n">res</span><span class="p">:</span>
+        <span class="n">r</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">r</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">sm</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">continue</span>
+        <span class="k">if</span> <span class="n">r</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">out</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">r</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">return_all</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">out</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="n">out</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">])</span>
+    <span class="k">return</span> <span class="n">out</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">out</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.pick_atom_idx" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">pick_atom_idx</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prepick</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.pick_atom_idx" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>pick an atom from the molecule</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pick_atom_idx</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prepick</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;pick an atom from the molecule&quot;&quot;&quot;</span>
+    <span class="n">mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">()</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="n">prepick</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">prepick</span> <span class="o">&gt;=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">prepick</span> <span class="o">&lt;</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()):</span>
+        <span class="n">pickable_atoms</span> <span class="o">=</span> <span class="p">[</span><span class="n">a</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span> <span class="k">if</span> <span class="n">a</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">]</span>
+        <span class="k">if</span> <span class="n">pickable_atoms</span><span class="p">:</span>
+            <span class="n">prepick</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="n">pickable_atoms</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">prepick</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="k">return</span> <span class="n">prepick</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.actions._actions.update_bond" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">actions</span><span class="o">.</span><span class="n">_actions</span><span class="o">.</span><span class="n">update_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">bond_type</span><span class="p">)</span></code>
+
+
+<a href="#datamol.actions._actions.update_bond" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Update bond type between atoms</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/actions/_actions.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">update_bond</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">bond</span><span class="p">,</span> <span class="n">bond_type</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Update bond type between atoms&quot;&quot;&quot;</span>
+    <span class="n">new_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
+        <span class="n">new_bond</span> <span class="o">=</span> <span class="n">new_mol</span><span class="o">.</span><span class="n">GetBondWithIdx</span><span class="p">(</span><span class="n">bond</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">())</span>
+        <span class="n">new_bond</span><span class="o">.</span><span class="n">SetBondType</span><span class="p">(</span><span class="n">bond_type</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="datamol.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              datamol
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="datamol.conformers.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.conformers" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              datamol.conformers
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright 2020 - 2021 Valence
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
