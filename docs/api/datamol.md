@@ -16,6 +16,7 @@ The below sections shows you the directly available Datamol functions. For other
 ::: datamol:set_mol_props
 ::: datamol:copy_mol_props
 ::: datamol:atom_indices_to_mol
+::: datamol:same_mol
 
 ### Fix, sanitize and standardize
 
