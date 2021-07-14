@@ -67,7 +67,7 @@ jobs:
       - name: Install library
         run: |
           conda activate datamol
-          python -m pip install .
+          python -m pip install -e .  # `-e` required for correct `coverage` run.
 
       - name: Run tests
         run: |
