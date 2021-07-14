@@ -6,11 +6,11 @@ exclude = 'typings/'
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--verbose --cov --cov-report term"
+addopts = "--verbose --cov --cov-report xml --cov-report term"
 testpaths = ["tests"]
 
 [tool.coverage.run]
 omit = ["setup.py", "tests/*"]
 
 [tool.coverage.xml]
-output = "cov.xml"
+output = "coverage.xml"

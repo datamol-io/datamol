@@ -1,5 +1,6 @@
 *.env
 cov.xml
+coverage.xml
 
 .vscode/
 
