@@ -14,7 +14,6 @@
 [![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-org/datamol/blob/master/LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
-[![Codecov](https://codecov.io/gh/datamol-org/datamol/branch/master/graph/badge.svg?token=2ETG8SA7IG)](https://codecov.io/gh/datamol-org/datamol)[![DeepSource](https://deepsource.io/gh/datamol-org/datamol.svg/?label=active+issues&show_trend=true&token=-TDRMCR2_SYH9PQZI4RG4WV1)](https://deepsource.io/gh/datamol-org/datamol/?ref=repository-badge)
 
 Datamol is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
