@@ -265,7 +265,14 @@ def to_fp(
 
     # Convert input to mol if needed
     if isinstance(mol, str):
-        mol = dm.to_mol(mol)
+        mol_obj = dm.to_mol(mol)
+    else:
+        mol_obj = mol
+
+    if mol_obj is None:
+        raise ValueError(f"It seems like the input molecule '{mol}' is invalid.")
+
+    mol = mol_obj
 
     # Deal with new API introduced in >=0.4 + throw a warning if needed.
     if "fp_size" in fp_args:

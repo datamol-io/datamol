@@ -390,3 +390,26 @@ def test_sanitize_mol_multiple_conformers_no_warning(caplog):
     # Check no warning log
     dm.sanitize_mol(mol, verbose=False)
     assert caplog.text == ""
+
+
+def test_same_mol():
+    mol1 = dm.to_mol("CC(=O)Oc1ccccc1C(=O)O")
+    mol2 = dm.to_mol("C1OC1CC")
+
+    assert dm.same_mol(mol1, mol2) is False
+    assert dm.same_mol(mol1, mol1) is True
+    assert dm.same_mol(mol2, mol2) is True
+    assert dm.same_mol(None, mol2) is False
+    assert dm.same_mol(mol1, None) is False
+    assert dm.same_mol(None, None) is False
+
+    # check with not sane molecule
+    mol1 = dm.to_mol("c1ccccc1")
+    mol2 = dm.to_mol("C1=CC=CC=C1", sanitize=False)  # not sane benzene but still a benzene molecule
+
+    assert dm.same_mol(mol1, mol2) is True
+    assert dm.same_mol(mol1, mol1) is True
+    assert dm.same_mol(mol2, mol2) is True
+    assert dm.same_mol(None, mol2) is False
+    assert dm.same_mol(mol1, None) is False
+    assert dm.same_mol(None, None) is False

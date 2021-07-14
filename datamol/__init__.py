@@ -19,6 +19,7 @@ from .mol import AROMATIC_BOND
 
 from .mol import copy_mol
 from .mol import to_mol
+from .mol import same_mol
 from .mol import reorder_atoms
 from .mol import randomize_atoms
 from .mol import to_neutral

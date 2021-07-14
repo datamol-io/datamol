@@ -85,6 +85,22 @@ def to_mol(
     return _mol
 
 
+def same_mol(mol1: Optional[Chem.rdchem.Mol], mol2: Optional[Chem.rdchem.Mol]):
+    """Check two molecules are the same by comparing their InChiKey.
+
+    Invalid molecules (None) are always considered as not the same.
+
+    Args:
+        mol1: A molecule.
+        mol2: A molecule.
+    """
+
+    if mol1 is None or mol2 is None:
+        return False
+
+    return dm.to_inchikey(mol1) == dm.to_inchikey(mol2)
+
+
 def reorder_atoms(
     mol: Chem.rdchem.Mol,
     break_ties: bool = True,
