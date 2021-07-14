@@ -74,13 +74,15 @@ jobs:
           conda activate datamol
           pytest
 
-      - uses: codecov/codecov-action@v1
+      - name: Codecov Upload
+        uses: codecov/codecov-action@v1
         with:
           files: ./coverage.xml
           flags: unittests
           name: codecov-umbrella
           fail_ci_if_error: true
-          verbose: true
+          verbose: false
+          env_vars: ${{ matrix.os }},${{ matrix.python-version }},${{ matrix.rdkit-version }}
 
       - name: Test building the doc
         run: |
