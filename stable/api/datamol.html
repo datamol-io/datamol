@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.1.7">
+      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ca7ac06f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
@@ -46,6 +46,8 @@
     
     
       
+
+
     
     
   </head>
@@ -78,7 +80,7 @@
     
       <header class="md-header" data-md-component="header">
   <nav class="md-header__inner md-grid" aria-label="Header">
-    <a href=".." title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -170,7 +172,7 @@
 
 <nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
   <label class="md-nav__title" for="__drawer">
-    <a href=".." title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
       
   <img src="../images/logo.png" alt="logo">
 
@@ -532,6 +534,13 @@
           <li class="md-nav__item">
   <a href="#datamol.fp.fp_to_array" class="md-nav__link">
     fp_to_array()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fp.list_supported_fingerprints" class="md-nav__link">
+    list_supported_fingerprints()
   </a>
   
 </li>
@@ -1289,6 +1298,13 @@
           <li class="md-nav__item">
   <a href="#datamol.fp.fp_to_array" class="md-nav__link">
     fp_to_array()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fp.list_supported_fingerprints" class="md-nav__link">
+    list_supported_fingerprints()
   </a>
   
 </li>
@@ -3465,7 +3481,7 @@ e.g. [H]-[CH2]-[<em>] -&gt; [H]-[CH3]-[</em>]</p></td>
 
 
 <h3 id="datamol.fp.fp_to_array" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">fp_to_array</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=&lt;</span><span class="k">class</span> <span class="err">&#39;</span><span class="nc">int</span><span class="s1">&#39;&gt;)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">fp_to_array</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span></code>
 
 
 <a href="#datamol.fp.fp_to_array" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -3476,21 +3492,104 @@ e.g. [H]-[CH2]-[<em>] -&gt; [H]-[CH3]-[</em>]</p></td>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>This implementation has shown to be faster than using <code>DataStructs.ConvertToNumpyArray</code>
-by a factor of ~4.</p>
+by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863">https://github.com/rdkit/rdkit/discussions/3863</a>.</p>
 </div>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>fp</code></td>
+        <td><code>Union[numpy.ndarray, rdkit.DataStructs.cDataStructs.SparseBitVect, rdkit.DataStructs.cDataStructs.ExplicitBitVect, rdkit.DataStructs.cDataStructs.UIntSparseIntVect]</code></td>
+        <td><p>The fingerprint.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
         <details class="quote">
           <summary>Source code in <code>datamol/fp.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fp_to_array</span><span class="p">(</span><span class="n">fp</span><span class="p">:</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">ExplicitBitVect</span><span class="p">,</span> <span class="n">dtype</span><span class="p">:</span> <span class="nb">type</span> <span class="o">=</span> <span class="nb">int</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fp_to_array</span><span class="p">(</span>
+    <span class="n">fp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">,</span> <span class="n">UIntSparseIntVect</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Convert rdkit fingerprint to numpy array.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        This implementation has shown to be faster than using `DataStructs.ConvertToNumpyArray`</span>
-<span class="sd">        by a factor of ~4.</span>
+<span class="sd">        by a factor of ~4. See https://github.com/rdkit/rdkit/discussions/3863.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fp: The fingerprint.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">fp</span>
-    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">ToBitString</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="s2">&quot;u1&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">fp</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">):</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">GetNumBits</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">on_bits</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">GetOnBits</span><span class="p">())</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="n">on_bits</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span>
+        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">):</span>
+        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">ToBitString</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="s2">&quot;u1&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
+        <span class="n">fp</span><span class="p">,</span>
+        <span class="p">(</span>
+            <span class="n">UIntSparseIntVect</span><span class="p">,</span>
+            <span class="n">IntSparseIntVect</span><span class="p">,</span>
+            <span class="n">LongSparseIntVect</span><span class="p">,</span>
+            <span class="n">ULongSparseIntVect</span><span class="p">,</span>
+        <span class="p">),</span>
+    <span class="p">):</span>
+        <span class="n">tmp</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">GetLength</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+        <span class="n">bit_idx</span><span class="p">,</span> <span class="n">values</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">GetNonzeroElements</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()))</span><span class="o">.</span><span class="n">T</span>
+        <span class="n">tmp</span><span class="p">[</span><span class="n">bit_idx</span><span class="p">]</span> <span class="o">=</span> <span class="n">values</span>
+        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">tmp</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The fingerprint of type &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; is not supported. &quot;</span>
+            <span class="s2">&quot;Please open a ticket at https://github.com/datamol-org/datamol/issues.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">fp_out</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.fp.list_supported_fingerprints" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">list_supported_fingerprints</span><span class="p">()</span></code>
+
+
+<a href="#datamol.fp.list_supported_fingerprints" class="headerlink" title="Permanent link">&para;</a></h3>
+
+    <div class="doc doc-contents first">
+
+      <p>Return the supported fingerprints in datamol.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/fp.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">list_supported_fingerprints</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;Return the supported fingerprints in datamol.&quot;&quot;&quot;</span>
+
+    <span class="k">return</span> <span class="n">_FP_FUNCS</span>
 </code></pre></div>
         </details>
     </div>
@@ -3504,18 +3603,14 @@ by a factor of ~4.</p>
 
 
 <h3 id="datamol.fp.to_fp" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fp_size</span><span class="o">=</span><span class="mi">2048</span><span class="p">,</span> <span class="n">radius</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">use_features</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">fp</span><span class="o">.</span><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s1">&#39;ecfp&#39;</span><span class="p">,</span> <span class="n">fold_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span></code>
 
 
 <a href="#datamol.fp.to_fp" class="headerlink" title="Permanent link">&para;</a></h3>
 
     <div class="doc doc-contents first">
 
-      <p>Transform a molecule from smiles to morgan fingerprint.</p>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>That function should be expanded to compute more type of fingerprints.</p>
-</div>
+      <p>Compute the molecular fingerprint given a molecule or a SMILES.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -3535,28 +3630,30 @@ by a factor of ~4.</p>
         <td><em>required</em></td>
       </tr>
       <tr>
-        <td><code>fp_size</code></td>
-        <td><code>int</code></td>
-        <td><p>Size of morgan fingerprint. Default to 2048.</p></td>
-        <td><code>2048</code></td>
-      </tr>
-      <tr>
-        <td><code>radius</code></td>
-        <td><code>int</code></td>
-        <td><p>Radius of the morgan fingerprints. Default to 3.</p></td>
-        <td><code>3</code></td>
-      </tr>
-      <tr>
-        <td><code>use_features</code></td>
-        <td><code>bool</code></td>
-        <td><p>Whether to use atom features. Default to True.</p></td>
-        <td><code>True</code></td>
-      </tr>
-      <tr>
         <td><code>as_array</code></td>
         <td><code>bool</code></td>
         <td><p>Whether to return a numpy array of an RDKit vec. Default to True.</p></td>
         <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>fp_type</code></td>
+        <td><code>str</code></td>
+        <td><p>The type of the fingerprint. See <code>dm.list_supported_fingerprints()</code> for a
+complete list.</p></td>
+        <td><code>&#39;ecfp&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>fold_size</code></td>
+        <td><code>int</code></td>
+        <td><p>If set, fold the fingerprint to the <code>fold_size</code>. If set, returned array is
+always a numpy array.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>fp_args</code></td>
+        <td><code></code></td>
+        <td><p>Arguments to build the fingerprint. Refer to the official RDKit documentation.</p></td>
+        <td><code>{}</code></td>
       </tr>
   </tbody>
 </table>
@@ -3570,7 +3667,7 @@ by a factor of ~4.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Union[numpy.ndarray, rdkit.DataStructs.cDataStructs.ExplicitBitVect]</code></td>
+      <td><code>Union[numpy.ndarray, rdkit.DataStructs.cDataStructs.SparseBitVect, rdkit.DataStructs.cDataStructs.ExplicitBitVect]</code></td>
       <td><p>A fingerprint vector or None</p></td>
     </tr>
   </tbody>
@@ -3579,39 +3676,68 @@ by a factor of ~4.</p>
           <summary>Source code in <code>datamol/fp.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_fp</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">fp_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2048</span><span class="p">,</span>
-    <span class="n">radius</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
-    <span class="n">use_features</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">as_array</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">ExplicitBitVect</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Transform a molecule from smiles to morgan fingerprint.</span>
-
-<span class="sd">    Note:</span>
-<span class="sd">        That function should be expanded to compute more type of fingerprints.</span>
+    <span class="n">fp_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ecfp&quot;</span><span class="p">,</span>
+    <span class="n">fold_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">fp_args</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Compute the molecular fingerprint given a molecule or a SMILES.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol (Chem.Mol or str): a molecule or a SMILES.</span>
-<span class="sd">        fp_size (int, optional): Size of morgan fingerprint. Default to 2048.</span>
-<span class="sd">        radius (int, optional): Radius of the morgan fingerprints. Default to 3.</span>
-<span class="sd">        use_features: Whether to use atom features. Default to True.</span>
+<span class="sd">        mol: a molecule or a SMILES.</span>
 <span class="sd">        as_array: Whether to return a numpy array of an RDKit vec. Default to True.</span>
+<span class="sd">        fp_type: The type of the fingerprint. See `dm.list_supported_fingerprints()` for a</span>
+<span class="sd">            complete list.</span>
+<span class="sd">        fold_size: If set, fold the fingerprint to the `fold_size`. If set, returned array is</span>
+<span class="sd">            always a numpy array.</span>
+<span class="sd">        fp_args: Arguments to build the fingerprint. Refer to the official RDKit documentation.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A fingerprint vector or None</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="c1"># Get fp function</span>
+    <span class="n">fp_func</span> <span class="o">=</span> <span class="n">_FP_FUNCS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fp_type</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fp_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The fingerprint &#39;</span><span class="si">{</span><span class="n">fp_type</span><span class="si">}</span><span class="s2">&#39; is not available. Use `dm.list_supported_fingerprints()` to &quot;</span>
+            <span class="s2">&quot;get a complete list of the available fingerprints.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Convert input to mol if needed</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-    <span class="n">fp</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">GetMorganFingerprintAsBitVect</span><span class="p">(</span>
-        <span class="n">mol</span><span class="p">,</span>
-        <span class="n">radius</span><span class="p">,</span>
-        <span class="n">nBits</span><span class="o">=</span><span class="n">fp_size</span><span class="p">,</span>
-        <span class="n">useFeatures</span><span class="o">=</span><span class="n">use_features</span><span class="p">,</span>
-    <span class="p">)</span>
+    <span class="c1"># Deal with new API introduced in &gt;=0.4 + throw a warning if needed.</span>
+    <span class="k">if</span> <span class="s2">&quot;fp_size&quot;</span> <span class="ow">in</span> <span class="n">fp_args</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Using `fp_size` is now deprecated and will be removed in datamol 0.5.0. Please use `nBits` instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fp_args</span><span class="p">[</span><span class="s2">&quot;nBits&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fp_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;fp_size&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">as_array</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">fp_to_array</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;use_features&quot;</span> <span class="ow">in</span> <span class="n">fp_args</span><span class="p">:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+            <span class="s2">&quot;Using `use_features` is now deprecated and will be removed in datamol 0.5.0. Please use `useFeatures` instead.&quot;</span><span class="p">,</span>
+            <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">fp_args</span><span class="p">[</span><span class="s2">&quot;useFeatures&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">fp_args</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="s2">&quot;use_features&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Insert default values.</span>
+    <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">_FP_DEFAULT_ARGS</span><span class="p">[</span><span class="n">fp_type</span><span class="p">]</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">fp_args</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">value</span><span class="p">)</span>
+
+    <span class="c1"># Compute the fingerprint</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">fp_func</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span>
+
+    <span class="c1"># Fold the fp if needed.</span>
+    <span class="k">if</span> <span class="n">fold_size</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">fold_count_fp</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">dim</span><span class="o">=</span><span class="n">fold_size</span><span class="p">)</span>
+
+    <span class="c1"># Convert to a numpy array</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fold_size</span> <span class="ow">and</span> <span class="n">as_array</span><span class="p">:</span>
+        <span class="n">fp</span> <span class="o">=</span> <span class="n">fp_to_array</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fp</span>
 </code></pre></div>
@@ -7682,10 +7808,10 @@ parallelization. Set to None to use all available cores.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.b0710199.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.477d984a.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.76f349be.min.js"></script>
+      <script src="../assets/javascripts/bundle.ddd52ceb.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
