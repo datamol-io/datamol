@@ -1,7 +1,7 @@
 **Added:**
 
 * More tests for the `dm.similarity` modules + check against RDKit equivalent methods.
-* `dm.same_mol(mol1, mol2)` to check whether 2 molecules are the same based on their canonical SMILES.
+* `dm.same_mol(mol1, mol2)` to check whether 2 molecules are the same based on their InChiKey.
 
 **Changed:**
 

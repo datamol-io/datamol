@@ -86,7 +86,7 @@ def to_mol(
 
 
 def same_mol(mol1: Optional[Chem.rdchem.Mol], mol2: Optional[Chem.rdchem.Mol]):
-    """Check two molecules are the same by comparing their RDKit canonical SMILES.
+    """Check two molecules are the same by comparing their InChiKey.
 
     Invalid molecules (None) are always considered as not the same.
 
@@ -98,7 +98,7 @@ def same_mol(mol1: Optional[Chem.rdchem.Mol], mol2: Optional[Chem.rdchem.Mol]):
     if mol1 is None or mol2 is None:
         return False
 
-    return dm.to_smiles(mol1, canonical=True) == dm.to_smiles(mol2, canonical=True)
+    return dm.to_inchikey(mol1) == dm.to_inchikey(mol2)
 
 
 def reorder_atoms(

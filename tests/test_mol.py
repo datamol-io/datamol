@@ -402,3 +402,14 @@ def test_same_mol():
     assert dm.same_mol(None, mol2) is False
     assert dm.same_mol(mol1, None) is False
     assert dm.same_mol(None, None) is False
+
+    # check with not sane molecule
+    mol1 = dm.to_mol("c1ccccc1")
+    mol2 = dm.to_mol("C1=CC=CC=C1", sanitize=False)  # not sane benzene but still a benzene molecule
+
+    assert dm.same_mol(mol1, mol2) is True
+    assert dm.same_mol(mol1, mol1) is True
+    assert dm.same_mol(mol2, mol2) is True
+    assert dm.same_mol(None, mol2) is False
+    assert dm.same_mol(mol1, None) is False
+    assert dm.same_mol(None, None) is False
