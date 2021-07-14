@@ -51,6 +51,7 @@ from . import fragment
 from . import scaffold
 from . import reactions
 from . import actions
+from . import molar
 
 from .convert import to_smiles
 from .convert import to_selfies
@@ -64,6 +65,7 @@ from .convert import from_df
 
 from .fp import to_fp
 from .fp import fp_to_array
+from .fp import list_supported_fingerprints
 
 from .similarity import pdist
 from .similarity import cdist

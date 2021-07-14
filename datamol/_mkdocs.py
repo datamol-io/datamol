@@ -124,7 +124,8 @@ def generate_mkdocs_api(docs_dir):
             #         assert data["attr_type"].unique().tolist() == ['type', 'function']
 
             for _, attr_child in data.iterrows():
-                f.write(f"::: {row['parent']}.{row['attr']}:{attr_child['attr']}\n")
+                if attr_child["attr"] not in ["np", "Iterable", "Union"]:
+                    f.write(f"::: {row['parent']}.{row['attr']}:{attr_child['attr']}\n")
             f.write("\n")
 
     logger.info(f"API doc generation is done.")
