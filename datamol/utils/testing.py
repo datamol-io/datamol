@@ -51,7 +51,6 @@ def cdist_rdkit(
     mols1: List[Union[str, Chem.rdchem.Mol]],
     mols2: List[Union[str, Chem.rdchem.Mol]],
     n_jobs: Optional[int] = 1,
-    squareform: bool = True,
     **fp_args,
 ) -> np.ndarray:
     """Equivalent to `dm.similarity.cdist` but uses the RDKit API.
