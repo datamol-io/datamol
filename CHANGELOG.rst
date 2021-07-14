@@ -4,6 +4,21 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.0
+====================
+
+**Added:**
+
+* Add support for more fingerprint types.
+* Two utility functions for molar concentration conversion: `dm.molar_to_log()` and `dm.log_to_molar()`.
+* Add the `dm.utils.fs` module to work with any type of paths (remote or local).
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.3.9
 ====================
 
