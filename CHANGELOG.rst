@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.1
+====================
+
+**Changed:**
+
+* A better and manually curated API documentation.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.0
 ====================
 
