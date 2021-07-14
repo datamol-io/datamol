@@ -346,18 +346,6 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.actions.html" class="md-nav__link">
-        datamol.actions
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
       <a href="datamol.conformers.html" class="md-nav__link">
         datamol.conformers
       </a>
@@ -370,8 +358,8 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.fragment.html" class="md-nav__link">
-        datamol.fragment
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
       </a>
     </li>
   
@@ -382,8 +370,8 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.reactions.html" class="md-nav__link">
-        datamol.reactions
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
       </a>
     </li>
   
@@ -427,16 +415,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#working-with-molecular-scaffolds" class="md-nav__link">
+    Working with molecular scaffolds
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with molecular scaffolds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" class="md-nav__link">
     fuzzy_scaffolding()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.scaffold._fuzzy.trim_side_chain" class="md-nav__link">
     trim_side_chain()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -453,8 +454,8 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.utils.html" class="md-nav__link">
-        datamol.utils
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
       </a>
     </li>
   
@@ -465,8 +466,32 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.viz.html" class="md-nav__link">
-        datamol.viz
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
       </a>
     </li>
   
@@ -534,16 +559,29 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#working-with-molecular-scaffolds" class="md-nav__link">
+    Working with molecular scaffolds
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with molecular scaffolds">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" class="md-nav__link">
     fuzzy_scaffolding()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.scaffold._fuzzy.trim_side_chain" class="md-nav__link">
     trim_side_chain()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -565,24 +603,25 @@
                 
                 
                 <h1 id="datamolscaffold"><code>datamol.scaffold</code><a class="headerlink" href="#datamolscaffold" title="Permanent link">&para;</a></h1>
-<p>All the below functions are accessible under <code>datamol.scaffold</code>.</p>
+<h2 id="working-with-molecular-scaffolds">Working with molecular scaffolds<a class="headerlink" href="#working-with-molecular-scaffolds" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-object doc-function">
 
 
 
-<h3 id="datamol.scaffold._fuzzy.fuzzy_scaffolding" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">scaffold</span><span class="o">.</span><span class="n">_fuzzy</span><span class="o">.</span><span class="n">fuzzy_scaffolding</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">enforce_subs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_atom_cuttoff</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">additional_templates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_non_ring</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mcs_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+<h4 id="datamol.scaffold._fuzzy.fuzzy_scaffolding" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fuzzy_scaffolding</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">enforce_subs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_atom_cuttoff</span><span class="o">=</span><span class="mi">8</span><span class="p">,</span> <span class="n">additional_templates</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ignore_non_ring</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mcs_params</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
 
 
-<a href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.scaffold._fuzzy.fuzzy_scaffolding" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
       <p>Generate fuzzy scaffold with enforceable group that needs to appear
 in the core, forcing to keep the full side chain if required.</p>
-<p>NOTE(hadim): consider parallelize this (if possible).</p>
+<p>NOTE(hadim): consider parallelize this (if possible).
+NOTE(hadim): consider refactoring this function in smaller reusable functions.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -643,16 +682,15 @@ in the core, forcing to keep the full side chain if required.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>scaffolds</code></td>
-      <td><p>set
-    All found scaffolds in the molecules as valid smiles
-scaffold_infos: dict of dict
-    Infos on the scaffold mapping, ignoring any side chain that had to be enforced.
-    Key corresponds to generic scaffold smiles
-    Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
-    Values at ['mols'] corresponds to list of molecules matching the scaffold
-scaffold_to_group: dict of list
-    Map between each generic scaffold and the R-groups decomposition row</p></td>
+      <td><code></code></td>
+      <td><ul>
+<li><code>set</code> - <code>scaffolds</code> - All found scaffolds in the molecules as valid smiles.</li>
+<li><code>Dict[Dict]</code> - <code>scaffold_infos</code> - Infos on the scaffold mapping, ignoring any side chain that had
+        to be enforced. Key corresponds to generic scaffold smiles
+        Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
+        Values at ['mols'] corresponds to list of molecules matching the scaffold</li>
+<li><code>Dict[List]</code> - <code>scaffold_to_group</code> - Map between each generic scaffold and the R-groups decomposition row.</li>
+</ul></td>
     </tr>
   </tbody>
 </table>
@@ -670,6 +708,7 @@ scaffold_to_group: dict of list
 <span class="sd">    in the core, forcing to keep the full side chain if required.</span>
 
 <span class="sd">    NOTE(hadim): consider parallelize this (if possible).</span>
+<span class="sd">    NOTE(hadim): consider refactoring this function in smaller reusable functions.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: List of all molecules</span>
@@ -680,15 +719,12 @@ scaffold_to_group: dict of list
 <span class="sd">        mcs_params: Arguments of MCS algorithm.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        scaffolds: set</span>
-<span class="sd">            All found scaffolds in the molecules as valid smiles</span>
-<span class="sd">        scaffold_infos: dict of dict</span>
-<span class="sd">            Infos on the scaffold mapping, ignoring any side chain that had to be enforced.</span>
-<span class="sd">            Key corresponds to generic scaffold smiles</span>
-<span class="sd">            Values at [&#39;smarts&#39;] corresponds to smarts representation of the true scaffold (from MCS)</span>
-<span class="sd">            Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
-<span class="sd">        scaffold_to_group: dict of list</span>
-<span class="sd">            Map between each generic scaffold and the R-groups decomposition row</span>
+<span class="sd">        - `set` - `scaffolds` - All found scaffolds in the molecules as valid smiles.</span>
+<span class="sd">        - `Dict[Dict]` - `scaffold_infos` - Infos on the scaffold mapping, ignoring any side chain that had</span>
+<span class="sd">                to be enforced. Key corresponds to generic scaffold smiles</span>
+<span class="sd">                Values at [&#39;smarts&#39;] corresponds to smarts representation of the true scaffold (from MCS)</span>
+<span class="sd">                Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
+<span class="sd">        - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">enforce_subs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -829,11 +865,11 @@ scaffold_to_group: dict of list
 
 
 
-<h3 id="datamol.scaffold._fuzzy.trim_side_chain" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">scaffold</span><span class="o">.</span><span class="n">_fuzzy</span><span class="o">.</span><span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">)</span></code>
+<h4 id="datamol.scaffold._fuzzy.trim_side_chain" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">)</span></code>
 
 
-<a href="#datamol.scaffold._fuzzy.trim_side_chain" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.scaffold._fuzzy.trim_side_chain" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -908,7 +944,7 @@ scaffold_to_group: dict of list
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="datamol.reactions.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.reactions" rel="prev">
+        <a href="datamol.fragment.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.fragment" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -917,20 +953,20 @@ scaffold_to_group: dict of list
               <span class="md-footer__direction">
                 Previous
               </span>
-              datamol.reactions
+              datamol.fragment
             </div>
           </div>
         </a>
       
       
         
-        <a href="datamol.utils.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.utils" rel="next">
+        <a href="datamol.reactions.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.reactions" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              datamol.utils
+              datamol.reactions
             </div>
           </div>
           <div class="md-footer__button md-icon">
