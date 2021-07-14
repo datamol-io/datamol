@@ -78,8 +78,5 @@ jobs:
         run: |
           conda activate datamol
 
-          # Regenerate the API doc
-          python -m datamol._mkdocs
-
           # Build and serve the doc
           mkdocs build

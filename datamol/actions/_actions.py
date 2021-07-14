@@ -111,8 +111,7 @@ def _compute_mmpa_assembly(cores, side_chains, max_num_action=float("Inf")):
 
     Note that this is based on a dm.SINGLE_BOND mmpa cut.
 
-    Arguments
-    ----------
+    Args:
         cores: list of <Chem.Mol>
             List of core
         side_chains: list of <Chem.Mol>
@@ -121,8 +120,7 @@ def _compute_mmpa_assembly(cores, side_chains, max_num_action=float("Inf")):
             Maximum number of assembly
             (Default: inf)
 
-    Returns
-    -------
+    Returns:
         res: list of <Chem.Mol>
             Molecules obtained by merging core and side_chains
     """
@@ -153,8 +151,7 @@ def all_join_on_attach_point(mol1, mol2):
         mol2: <Chem.Mol>
             input molecule 2
 
-    Returns
-    -------
+    Returns:
         iterator of all possible way to attach both molecules from dummy indicators.
     """
     atom_map_min = 100
@@ -189,8 +186,7 @@ def all_fragment_attach(
     .. warning::
         This is computationally expensive
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             Input molecule
         fragmentlist: list of <Chem.Mol>
@@ -203,8 +199,7 @@ def all_fragment_attach(
             (Default: 10)
         asMols: bool, optional
             Whether to return output as molecule or smiles
-    Returns
-    -------
+    Returns:
         All possible molecules resulting from attaching the molecular fragment to the root molecule
 
     """
@@ -241,8 +236,7 @@ def all_atom_add(
     .. warning::
         This is computationally expensive
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             Input molecule
         atom_types: list
@@ -252,8 +246,7 @@ def all_atom_add(
             Whether to return output as molecule or smiles
         max_num_action: float, optional
             Maximum number of action to reduce complexity
-    Returns
-    -------
+    Returns:
         All possible molecules with one additional atom added
 
     """
@@ -289,8 +282,7 @@ def all_atom_replace(
     .. warning::
         This is computationally expensive
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             Input molecule
         atom_types: list
@@ -301,8 +293,7 @@ def all_atom_replace(
         max_num_action: float, optional
             Maximum number of action to reduce complexity
 
-    Returns
-    -------
+    Returns:
         All possible molecules with atoms replaced
 
     """
@@ -343,8 +334,7 @@ def all_bond_add(
     .. warning::
         This is computationally expensive
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             Input molecule
         allowed_ring_sizes: list, optional
@@ -358,8 +348,7 @@ def all_bond_add(
         max_num_action: float, optional
             Maximum number of action to reduce complexity
 
-    Returns
-    -------
+    Returns:
         All possible molecules with additional bond added between atoms
     """
     new_mols = []
@@ -470,8 +459,7 @@ def all_fragment_on_bond(mol, asMols=False, max_num_action=float("Inf"), break_a
         This will always be a subset of all_bond_remove, the main difference being that all_bond_remove, allow decreasing
         bond count, while this one will always break a molecule into two.
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             input molecule
         asMols: bool, optional
@@ -482,8 +470,7 @@ def all_fragment_on_bond(mol, asMols=False, max_num_action=float("Inf"), break_a
             Whether to attempt to break even aromatic bonds
             (Default: True)
 
-    Returns
-    -------
+    Returns:
         set of fragments
 
     """
@@ -532,8 +519,7 @@ def all_fragment_update(
     .. note::
         You should perform a valency check after
 
-    Arguments
-    ----------
+    Args:
         molparent: <Chem.Mol>
             input molecule
         fragmentlist: list
@@ -546,8 +532,7 @@ def all_fragment_update(
         asMols: bool, optional
             Whether to return smiles or mols
 
-    Returns
-    -------
+    Returns:
         set of modified mols
     """
     fragment_set = set([])
@@ -565,8 +550,7 @@ def all_fragment_update(
 def all_mmpa_assemble(molist, max_num_action=float("Inf"), asMols=True, **kwargs):
     """Enumerate all mmpa assembly of molecules in molist
 
-    Arguments
-    ----------
+    Args:
         molist: list of <Chem.Mol>
             List of molecules to fragmente and reconstruct
         asMols: bool, optional
@@ -575,8 +559,7 @@ def all_mmpa_assemble(molist, max_num_action=float("Inf"), asMols=True, **kwargs
             Maximum number of assembly
             (Default: inf)
 
-    Returns
-    -------
+    Returns:
         res: list of <Chem.Mol>
             Molecules obtained by merging core and side_chains
     """
@@ -610,8 +593,7 @@ def all_fragment_assemble(
     .. warning::
         This is computationally expensive
 
-    Arguments
-    ----------
+    Args:
         fragmentlist: list
             List of blocks to use for replacement, or addition to molparent
         max_num_action: float, optional
@@ -621,8 +603,7 @@ def all_fragment_assemble(
         seen: list, optional
             List of initial molecules
 
-    Returns
-    -------
+    Returns:
         reconstructed molecules
 
     """
@@ -651,8 +632,7 @@ def all_transform_apply(
 
     The reaction need to be one reactant-only
 
-    Arguments
-    ----------
+    Args:
         mol: <Chem.Mol>
             Input molecule
         rnxs: list
@@ -663,8 +643,7 @@ def all_transform_apply(
         asMols: bool, optional
             Whether to return smiles or mols
 
-    Returns
-    -------
+    Returns:
         Products obtained from applying the chemical reactions
     """
 
@@ -694,8 +673,7 @@ def all_transform_apply(
 def mmpa_fragment_exchange(mol1, mol2, return_all=False, **kwargs):
     """Perform a fragment exchange between two molecules using mmpa rules
 
-    Arguments
-    ----------
+    Args:
         mol1: <Chem.Mol>
             input molecule 1
         mol2: <Chem.Mol>
@@ -703,8 +681,7 @@ def mmpa_fragment_exchange(mol1, mol2, return_all=False, **kwargs):
         return_all: bool, optional
             Whether to return list of all molecules
 
-    Returns
-    -------
+    Returns:
         modified_mol1, modified_mol2
             Molecules obtained by exchanging fragment between mol1 and mol2.
             In case of failure, mol1, mol2 are returned

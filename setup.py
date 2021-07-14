@@ -10,6 +10,7 @@ install_requires = [
     "pandas",
     "numpy",
     "scipy",
+    "matplotlib",
     "pillow",
     "selfies",
 ]

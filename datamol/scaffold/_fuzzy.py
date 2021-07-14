@@ -76,6 +76,7 @@ def fuzzy_scaffolding(
     in the core, forcing to keep the full side chain if required.
 
     NOTE(hadim): consider parallelize this (if possible).
+    NOTE(hadim): consider refactoring this function in smaller reusable functions.
 
     Args:
         mols: List of all molecules
@@ -86,15 +87,12 @@ def fuzzy_scaffolding(
         mcs_params: Arguments of MCS algorithm.
 
     Returns:
-        scaffolds: set
-            All found scaffolds in the molecules as valid smiles
-        scaffold_infos: dict of dict
-            Infos on the scaffold mapping, ignoring any side chain that had to be enforced.
-            Key corresponds to generic scaffold smiles
-            Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
-            Values at ['mols'] corresponds to list of molecules matching the scaffold
-        scaffold_to_group: dict of list
-            Map between each generic scaffold and the R-groups decomposition row
+        - `set` - `scaffolds` - All found scaffolds in the molecules as valid smiles.
+        - `Dict[Dict]` - `scaffold_infos` - Infos on the scaffold mapping, ignoring any side chain that had
+                to be enforced. Key corresponds to generic scaffold smiles
+                Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
+                Values at ['mols'] corresponds to list of molecules matching the scaffold
+        - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.
     """
 
     if enforce_subs is None:

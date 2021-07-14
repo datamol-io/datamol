@@ -1,5 +1,7 @@
 from ._version import __version__
 
+from . import utils
+
 from .utils import parallelized
 from .utils import JobRunner
 
@@ -66,6 +68,7 @@ from .convert import from_df
 from .fp import to_fp
 from .fp import fp_to_array
 from .fp import list_supported_fingerprints
+from .fp import fold_count_fp
 
 from .similarity import pdist
 from .similarity import cdist
