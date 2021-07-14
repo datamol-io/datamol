@@ -346,18 +346,6 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.actions.html" class="md-nav__link">
-        datamol.actions
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
       <a href="datamol.conformers.html" class="md-nav__link">
         datamol.conformers
       </a>
@@ -370,8 +358,32 @@
   
   
     <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="datamol.fragment.html" class="md-nav__link">
         datamol.fragment
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
       </a>
     </li>
   
@@ -415,37 +427,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#working-with-chemical-reactions" class="md-nav__link">
+    Working with chemical reactions
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with chemical reactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.apply_reaction" class="md-nav__link">
     apply_reaction()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.can_react" class="md-nav__link">
     can_react()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.compute_reaction_product" class="md-nav__link">
     compute_reaction_product()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.inverse_reaction" class="md-nav__link">
     inverse_reaction()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.is_reaction_ok" class="md-nav__link">
     is_reaction_ok()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -462,8 +487,20 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.scaffold.html" class="md-nav__link">
-        datamol.scaffold
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
       </a>
     </li>
   
@@ -476,18 +513,6 @@
     <li class="md-nav__item">
       <a href="datamol.utils.html" class="md-nav__link">
         datamol.utils
-      </a>
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.viz.html" class="md-nav__link">
-        datamol.viz
       </a>
     </li>
   
@@ -555,37 +580,50 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#working-with-chemical-reactions" class="md-nav__link">
+    Working with chemical reactions
+  </a>
+  
+    <nav class="md-nav" aria-label="Working with chemical reactions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.apply_reaction" class="md-nav__link">
     apply_reaction()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.can_react" class="md-nav__link">
     can_react()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.compute_reaction_product" class="md-nav__link">
     compute_reaction_product()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.inverse_reaction" class="md-nav__link">
     inverse_reaction()
   </a>
   
 </li>
-      
-        <li class="md-nav__item">
+        
+          <li class="md-nav__item">
   <a href="#datamol.reactions._reactions.is_reaction_ok" class="md-nav__link">
     is_reaction_ok()
   </a>
+  
+</li>
+        
+      </ul>
+    </nav>
   
 </li>
       
@@ -607,18 +645,18 @@
                 
                 
                 <h1 id="datamolreactions"><code>datamol.reactions</code><a class="headerlink" href="#datamolreactions" title="Permanent link">&para;</a></h1>
-<p>All the below functions are accessible under <code>datamol.reactions</code>.</p>
+<h2 id="working-with-chemical-reactions">Working with chemical reactions<a class="headerlink" href="#working-with-chemical-reactions" title="Permanent link">&para;</a></h2>
 
 
   <div class="doc doc-object doc-function">
 
 
 
-<h3 id="datamol.reactions._reactions.apply_reaction" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<h4 id="datamol.reactions._reactions.apply_reaction" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">react_pos</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.apply_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.reactions._reactions.apply_reaction" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -642,11 +680,11 @@
 
 
 
-<h3 id="datamol.reactions._reactions.can_react" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span></code>
+<h4 id="datamol.reactions._reactions.can_react" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">mol</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.can_react" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.reactions._reactions.can_react" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -670,11 +708,11 @@
 
 
 
-<h3 id="datamol.reactions._reactions.compute_reaction_product" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<h4 id="datamol.reactions._reactions.compute_reaction_product" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">compute_reaction_product</span><span class="p">(</span><span class="n">out</span><span class="p">,</span> <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.compute_reaction_product" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.reactions._reactions.compute_reaction_product" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -703,11 +741,11 @@
 
 
 
-<h3 id="datamol.reactions._reactions.inverse_reaction" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
+<h4 id="datamol.reactions._reactions.inverse_reaction" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.inverse_reaction" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.reactions._reactions.inverse_reaction" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -736,11 +774,11 @@
 
 
 
-<h3 id="datamol.reactions._reactions.is_reaction_ok" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">_reactions</span><span class="o">.</span><span class="n">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
+<h4 id="datamol.reactions._reactions.is_reaction_ok" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">)</span></code>
 
 
-<a href="#datamol.reactions._reactions.is_reaction_ok" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.reactions._reactions.is_reaction_ok" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -775,7 +813,7 @@
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="datamol.fragment.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.fragment" rel="prev">
+        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.scaffold" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -784,20 +822,20 @@
               <span class="md-footer__direction">
                 Previous
               </span>
-              datamol.fragment
+              datamol.scaffold
             </div>
           </div>
         </a>
       
       
         
-        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.scaffold" rel="next">
+        <a href="datamol.actions.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.actions" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              datamol.scaffold
+              datamol.actions
             </div>
           </div>
           <div class="md-footer__button md-icon">

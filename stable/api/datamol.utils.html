@@ -346,8 +346,8 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.actions.html" class="md-nav__link">
-        datamol.actions
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
       </a>
     </li>
   
@@ -358,8 +358,8 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.conformers.html" class="md-nav__link">
-        datamol.conformers
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
       </a>
     </li>
   
@@ -382,6 +382,18 @@
   
   
     <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
       <a href="datamol.reactions.html" class="md-nav__link">
         datamol.reactions
       </a>
@@ -394,8 +406,20 @@
   
   
     <li class="md-nav__item">
-      <a href="datamol.scaffold.html" class="md-nav__link">
-        datamol.scaffold
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
       </a>
     </li>
   
@@ -439,60 +463,25 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#parallelization-helpers" class="md-nav__link">
+    Parallelization helpers
+  </a>
+  
+    <nav class="md-nav" aria-label="Parallelization helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
+    parallelized()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#datamol.utils.jobs.JobRunner" class="md-nav__link">
     JobRunner
   </a>
   
-    <nav class="md-nav" aria-label="JobRunner">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.is_sequential" class="md-nav__link">
-    is_sequential
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.__call__" class="md-nav__link">
-    __call__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.get_iterator_length" class="md-nav__link">
-    get_iterator_length()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.parallel" class="md-nav__link">
-    parallel()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.sequential" class="md-nav__link">
-    sequential()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.wrap_fn" class="md-nav__link">
-    wrap_fn()
-  </a>
-  
 </li>
         
       </ul>
@@ -501,222 +490,113 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.utils.decorators.decorators" class="md-nav__link">
-    decorators
+  <a href="#filesystem-related-utility-functions" class="md-nav__link">
+    Filesystem related utility functions
   </a>
   
-    <nav class="md-nav" aria-label="decorators">
+    <nav class="md-nav" aria-label="Filesystem related utility functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.decorators.decorators.disable_on_os" class="md-nav__link">
-    disable_on_os()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs" class="md-nav__link">
-    fs
-  </a>
-  
-    <nav class="md-nav" aria-label="fs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.copy_file" class="md-nav__link">
-    copy_file()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.exists" class="md-nav__link">
-    exists()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_basename" class="md-nav__link">
-    get_basename()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_cache_dir" class="md-nav__link">
-    get_cache_dir()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_extension" class="md-nav__link">
+  <a href="#datamol.utils.fs.get_extension" class="md-nav__link">
     get_extension()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_mapper" class="md-nav__link">
-    get_mapper()
+  <a href="#datamol.utils.fs.exists" class="md-nav__link">
+    exists()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_protocol" class="md-nav__link">
-    get_protocol()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_size" class="md-nav__link">
-    get_size()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.glob" class="md-nav__link">
-    glob()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_dir" class="md-nav__link">
-    is_dir()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_file" class="md-nav__link">
+  <a href="#datamol.utils.fs.is_file" class="md-nav__link">
     is_file()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_local_path" class="md-nav__link">
+  <a href="#datamol.utils.fs.is_dir" class="md-nav__link">
+    is_dir()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.get_protocol" class="md-nav__link">
+    get_protocol()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.is_local_path" class="md-nav__link">
     is_local_path()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.join" class="md-nav__link">
+  <a href="#datamol.utils.fs.join" class="md-nav__link">
     join()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.md5" class="md-nav__link">
+  <a href="#datamol.utils.fs.get_size" class="md-nav__link">
+    get_size()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.copy_file" class="md-nav__link">
+    copy_file()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.md5" class="md-nav__link">
     md5()
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs" class="md-nav__link">
-    jobs
-  </a>
-  
-    <nav class="md-nav" aria-label="jobs">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner" class="md-nav__link">
-    JobRunner
-  </a>
-  
-    <nav class="md-nav" aria-label="JobRunner">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.is_sequential" class="md-nav__link">
-    is_sequential
+  <a href="#datamol.utils.fs.glob" class="md-nav__link">
+    glob()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.__call__" class="md-nav__link">
-    __call__()
+  <a href="#datamol.utils.fs.get_cache_dir" class="md-nav__link">
+    get_cache_dir()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.__init__" class="md-nav__link">
-    __init__()
+  <a href="#datamol.utils.fs.get_mapper" class="md-nav__link">
+    get_mapper()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.get_iterator_length" class="md-nav__link">
-    get_iterator_length()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.parallel" class="md-nav__link">
-    parallel()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.sequential" class="md-nav__link">
-    sequential()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.wrap_fn" class="md-nav__link">
-    wrap_fn()
+  <a href="#datamol.utils.fs.get_basename" class="md-nav__link">
+    get_basename()
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.parallelized" class="md-nav__link">
-    parallelized()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
-    parallelized()
-  </a>
   
 </li>
       
@@ -724,18 +604,6 @@
   
 </nav>
       
-    </li>
-  
-
-          
-            
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.viz.html" class="md-nav__link">
-        datamol.viz
-      </a>
     </li>
   
 
@@ -802,60 +670,25 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
+  <a href="#parallelization-helpers" class="md-nav__link">
+    Parallelization helpers
+  </a>
+  
+    <nav class="md-nav" aria-label="Parallelization helpers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
+    parallelized()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#datamol.utils.jobs.JobRunner" class="md-nav__link">
     JobRunner
   </a>
   
-    <nav class="md-nav" aria-label="JobRunner">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.is_sequential" class="md-nav__link">
-    is_sequential
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.__call__" class="md-nav__link">
-    __call__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.__init__" class="md-nav__link">
-    __init__()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.get_iterator_length" class="md-nav__link">
-    get_iterator_length()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.parallel" class="md-nav__link">
-    parallel()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.sequential" class="md-nav__link">
-    sequential()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.JobRunner.wrap_fn" class="md-nav__link">
-    wrap_fn()
-  </a>
-  
 </li>
         
       </ul>
@@ -864,222 +697,113 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#datamol.utils.decorators.decorators" class="md-nav__link">
-    decorators
+  <a href="#filesystem-related-utility-functions" class="md-nav__link">
+    Filesystem related utility functions
   </a>
   
-    <nav class="md-nav" aria-label="decorators">
+    <nav class="md-nav" aria-label="Filesystem related utility functions">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.decorators.decorators.disable_on_os" class="md-nav__link">
-    disable_on_os()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs" class="md-nav__link">
-    fs
-  </a>
-  
-    <nav class="md-nav" aria-label="fs">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.copy_file" class="md-nav__link">
-    copy_file()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.exists" class="md-nav__link">
-    exists()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_basename" class="md-nav__link">
-    get_basename()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_cache_dir" class="md-nav__link">
-    get_cache_dir()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_extension" class="md-nav__link">
+  <a href="#datamol.utils.fs.get_extension" class="md-nav__link">
     get_extension()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_mapper" class="md-nav__link">
-    get_mapper()
+  <a href="#datamol.utils.fs.exists" class="md-nav__link">
+    exists()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_protocol" class="md-nav__link">
-    get_protocol()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.get_size" class="md-nav__link">
-    get_size()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.glob" class="md-nav__link">
-    glob()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_dir" class="md-nav__link">
-    is_dir()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_file" class="md-nav__link">
+  <a href="#datamol.utils.fs.is_file" class="md-nav__link">
     is_file()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.is_local_path" class="md-nav__link">
+  <a href="#datamol.utils.fs.is_dir" class="md-nav__link">
+    is_dir()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.get_protocol" class="md-nav__link">
+    get_protocol()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.is_local_path" class="md-nav__link">
     is_local_path()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.join" class="md-nav__link">
+  <a href="#datamol.utils.fs.join" class="md-nav__link">
     join()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.fs.fs.md5" class="md-nav__link">
+  <a href="#datamol.utils.fs.get_size" class="md-nav__link">
+    get_size()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.copy_file" class="md-nav__link">
+    copy_file()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.utils.fs.md5" class="md-nav__link">
     md5()
   </a>
   
 </li>
         
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs" class="md-nav__link">
-    jobs
-  </a>
-  
-    <nav class="md-nav" aria-label="jobs">
-      <ul class="md-nav__list">
-        
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner" class="md-nav__link">
-    JobRunner
-  </a>
-  
-    <nav class="md-nav" aria-label="JobRunner">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.is_sequential" class="md-nav__link">
-    is_sequential
+  <a href="#datamol.utils.fs.glob" class="md-nav__link">
+    glob()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.__call__" class="md-nav__link">
-    __call__()
+  <a href="#datamol.utils.fs.get_cache_dir" class="md-nav__link">
+    get_cache_dir()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.__init__" class="md-nav__link">
-    __init__()
+  <a href="#datamol.utils.fs.get_mapper" class="md-nav__link">
+    get_mapper()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.get_iterator_length" class="md-nav__link">
-    get_iterator_length()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.parallel" class="md-nav__link">
-    parallel()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.sequential" class="md-nav__link">
-    sequential()
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.JobRunner.wrap_fn" class="md-nav__link">
-    wrap_fn()
+  <a href="#datamol.utils.fs.get_basename" class="md-nav__link">
+    get_basename()
   </a>
   
 </li>
         
       </ul>
     </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.jobs.parallelized" class="md-nav__link">
-    parallelized()
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#datamol.utils.jobs.parallelized" class="md-nav__link">
-    parallelized()
-  </a>
   
 </li>
       
@@ -1101,19 +825,143 @@
                 
                 
                 <h1 id="datamolutils"><code>datamol.utils</code><a class="headerlink" href="#datamolutils" title="Permanent link">&para;</a></h1>
-<p>All the below functions are accessible under <code>datamol.utils</code>.</p>
+<h2 id="parallelization-helpers">Parallelization helpers<a class="headerlink" href="#parallelization-helpers" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.jobs.parallelized" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.jobs.parallelized" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Run a function in parallel.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>fn</code></td>
+        <td><code>Callable</code></td>
+        <td><p>The function to run in parallel.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>inputs_list</code></td>
+        <td><code>Iterable[Any]</code></td>
+        <td><p>List of inputs to pass to <code>fn</code>.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>scheduler</code></td>
+        <td><code>str</code></td>
+        <td><p>Choose between ["processes", "threads"]. Defaults
+to None which uses the default joblib "loky" scheduler.</p></td>
+        <td><code>&#39;processes&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>n_jobs</code></td>
+        <td><code>Optional[int]</code></td>
+        <td><p>Number of process. Use 0 or None to force sequential.
+    Use -1 to use all the available processors. For details see
+    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
+        <td><code>-1</code></td>
+      </tr>
+      <tr>
+        <td><code>progress</code></td>
+        <td><code>bool</code></td>
+        <td><p>Display a progress bar. Defaults to False.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>arg_type</code></td>
+        <td><code>str</code></td>
+        <td><p>One of ["arg", "args", "kwargs]:
+- "arg": the input is passed as an argument: <code>fn(arg)</code> (default).
+- "args": the input is passed as a list: <code>fn(*args)</code>.
+- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
+        <td><code>&#39;arg&#39;</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Optional[List[Any]]</code></td>
+      <td><p>The results of the execution as a list.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parallelized</span><span class="p">(</span>
+    <span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+    <span class="n">inputs_list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+    <span class="n">scheduler</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;processes&quot;</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Run a function in parallel.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fn: The function to run in parallel.</span>
+<span class="sd">        inputs_list: List of inputs to pass to `fn`.</span>
+<span class="sd">        scheduler: Choose between [&quot;processes&quot;, &quot;threads&quot;]. Defaults</span>
+<span class="sd">            to None which uses the default joblib &quot;loky&quot; scheduler.</span>
+<span class="sd">        n_jobs: Number of process. Use 0 or None to force sequential.</span>
+<span class="sd">                Use -1 to use all the available processors. For details see</span>
+<span class="sd">                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</span>
+<span class="sd">        progress: Display a progress bar. Defaults to False.</span>
+<span class="sd">        arg_type: One of [&quot;arg&quot;, &quot;args&quot;, &quot;kwargs]:</span>
+<span class="sd">            - &quot;arg&quot;: the input is passed as an argument: `fn(arg)` (default).</span>
+<span class="sd">            - &quot;args&quot;: the input is passed as a list: `fn(*args)`.</span>
+<span class="sd">            - &quot;kwargs&quot;: the input is passed as a map: `fn(**kwargs)`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        The results of the execution as a list.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">runner</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="n">arg_type</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
 
 
   <div class="doc doc-object doc-class">
 
 
 
-<h3 id="datamol.utils.jobs.JobRunner" class="doc doc-heading">
-        <code>datamol.utils.jobs.JobRunner</code>
+<h4 id="datamol.utils.jobs.JobRunner" class="doc doc-heading">
+        <code>JobRunner</code>
 
 
 
-<a href="#datamol.utils.jobs.JobRunner" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.utils.jobs.JobRunner" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -1132,7 +980,7 @@
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.is_sequential" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.is_sequential" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">is_sequential</span></code>
 
   <span class="doc doc-properties">
@@ -1140,7 +988,7 @@
       <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
   </span>
 
-<a href="#datamol.utils.jobs.JobRunner.is_sequential" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.is_sequential" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1158,14 +1006,14 @@
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.__call__" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.__call__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-<a href="#datamol.utils.jobs.JobRunner.__call__" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1192,14 +1040,14 @@
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.__init__" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.__init__" class="doc doc-heading">
 <code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
   </span>
 
-<a href="#datamol.utils.jobs.JobRunner.__init__" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1308,14 +1156,14 @@ parameter is specified.</p></td>
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.get_iterator_length" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.get_iterator_length" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
   </span>
 
-<a href="#datamol.utils.jobs.JobRunner.get_iterator_length" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.get_iterator_length" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1345,11 +1193,11 @@ parameter is specified.</p></td>
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.parallel" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.parallel" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable_fn</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.jobs.JobRunner.parallel" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.parallel" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1428,11 +1276,11 @@ parameter is specified.</p></td>
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.sequential" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.sequential" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable_fn</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.jobs.JobRunner.sequential" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.sequential" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1511,14 +1359,14 @@ parameter is specified.</p></td>
 
 
 
-<h4 id="datamol.utils.jobs.JobRunner.wrap_fn" class="doc doc-heading">
+<h5 id="datamol.utils.jobs.JobRunner.wrap_fn" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">wrap_fn</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
   </span>
 
-<a href="#datamol.utils.jobs.JobRunner.wrap_fn" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.jobs.JobRunner.wrap_fn" class="headerlink" title="Permanent link">&para;</a></h5>
 
     <div class="doc doc-contents ">
 
@@ -1555,46 +1403,24 @@ parameter is specified.</p></td>
 
   </div>
 
-
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h3 id="datamol.utils.decorators.decorators" class="doc doc-heading">
-        <code>datamol.utils.decorators.decorators</code>
-
-
-
-<a href="#datamol.utils.decorators.decorators" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
+<h2 id="filesystem-related-utility-functions">Filesystem related utility functions<a class="headerlink" href="#filesystem-related-utility-functions" title="Permanent link">&para;</a></h2>
+<p>Build on top of <a href="https://github.com/intake/filesystem_spec"><code>fsspec</code></a> to manipulate and work with remote or local paths in a transparent manner.</p>
+<p>The below functions are available under <code>datamol.utils.fs</code>.</p>
 
 
   <div class="doc doc-object doc-function">
 
 
 
-<h4 id="datamol.utils.decorators.decorators.disable_on_os" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">disable_on_os</span><span class="p">(</span><span class="n">os_names</span><span class="p">)</span></code>
+<h4 id="datamol.utils.fs.get_extension" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.decorators.decorators.disable_on_os" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.get_extension" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
-      <p>A decorator to disable a function raising an error if the OS detected is not supported.</p>
+      <p>Get the extension of a file.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1608,52 +1434,23 @@ parameter is specified.</p></td>
   </thead>
   <tbody>
       <tr>
-        <td><code>os_names</code></td>
-        <td><code>Union[str, List[str]]</code></td>
-        <td><p>OS names to disable this function. Valid OS names are: <code>["linux", "osx", "win"]</code>.</p></td>
+        <td><code>path</code></td>
+        <td><code>Union[str, os.PathLike]</code></td>
+        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>datamol/utils/decorators.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">disable_on_os</span><span class="p">(</span><span class="n">os_names</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]):</span>
-    <span class="sd">&quot;&quot;&quot;A decorator to disable a function raising an error if the OS detected is not supported.</span>
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Get the extension of a file.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        os_names: OS names to disable this function. Valid OS names are: `[&quot;linux&quot;, &quot;osx&quot;, &quot;win&quot;]`.</span>
+<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">os_names</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">os_names</span> <span class="o">=</span> <span class="p">[</span><span class="n">os_names</span><span class="p">]</span>
-
-    <span class="n">valid_os_names</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">for</span> <span class="n">os_name</span> <span class="ow">in</span> <span class="n">os_names</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">os_name</span> <span class="o">==</span> <span class="s2">&quot;linux&quot;</span><span class="p">:</span>
-            <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Linux&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os_name</span> <span class="o">==</span> <span class="s2">&quot;win&quot;</span><span class="p">:</span>
-            <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Windows&quot;</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">os_name</span> <span class="o">==</span> <span class="s2">&quot;osx&quot;</span><span class="p">:</span>
-            <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="s2">&quot;Darwin&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">valid_os_names</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">os_name</span><span class="p">)</span>
-
-    <span class="k">def</span> <span class="nf">real_decorator</span><span class="p">(</span><span class="n">function</span><span class="p">:</span> <span class="n">Callable</span><span class="p">):</span>
-        <span class="nd">@wraps</span><span class="p">(</span><span class="n">function</span><span class="p">)</span>
-        <span class="k">def</span> <span class="nf">wrapper</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-
-            <span class="k">if</span> <span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">valid_os_names</span><span class="p">:</span>
-                <span class="n">retval</span> <span class="o">=</span> <span class="n">function</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-                <span class="k">return</span> <span class="n">retval</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;The function </span><span class="si">{</span><span class="n">function</span><span class="o">.</span><span class="vm">__name__</span><span class="si">}</span><span class="s2"> is not supported&quot;</span>
-                    <span class="sa">f</span><span class="s2">&quot; for the platform &#39;</span><span class="si">{</span><span class="n">platform</span><span class="o">.</span><span class="n">system</span><span class="p">()</span><span class="si">}</span><span class="s2">&#39;.&quot;</span>
-                <span class="p">)</span>
-
-        <span class="k">return</span> <span class="n">wrapper</span>
-
-    <span class="k">return</span> <span class="n">real_decorator</span>
+    <span class="n">basename</span> <span class="o">=</span> <span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">basename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div>
         </details>
     </div>
@@ -1662,40 +1459,56 @@ parameter is specified.</p></td>
 
 
 
+  <div class="doc doc-object doc-function">
 
 
 
-  </div>
-
-    </div>
-
-  </div>
+<h4 id="datamol.utils.fs.exists" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h3 id="datamol.utils.fs.fs" class="doc doc-heading">
-        <code>datamol.utils.fs.fs</code>
-
-
-
-<a href="#datamol.utils.fs.fs" class="headerlink" title="Permanent link">&para;</a></h3>
+<a href="#datamol.utils.fs.exists" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
-      <p>The <code>fs</code> module makes it easier to work with all type of path (the ones supported by <code>fsspec</code>).</p>
+      <p>Check whether a file or a directory exists.</p>
+<p>Important: File-like object always exists.</p>
 
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>path</code></td>
+        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
+        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Check whether a file or a directory exists.</span>
 
+<span class="sd">    Important: File-like object always exists.</span>
 
-  <div class="doc doc-children">
+<span class="sd">    Args:</span>
+<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
 
-
-
-
-
+  </div>
 
 
 
@@ -1703,13 +1516,324 @@ parameter is specified.</p></td>
 
 
 
-<h4 id="datamol.utils.fs.fs.copy_file" class="doc doc-heading">
+<h4 id="datamol.utils.fs.is_file" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.is_file" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Check whether a file exists.</p>
+<p>Important: File-like object always exists.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>path</code></td>
+        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
+        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
+
+<span class="sd">    Important: File-like object always exists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+        <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.is_dir" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.is_dir" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Check whether a file exists.</p>
+<p>Important: File-like object always exists.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>path</code></td>
+        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
+        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
+
+<span class="sd">    Important: File-like object always exists.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+        <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
+        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
+        <span class="k">return</span> <span class="kc">True</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.get_protocol" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.get_protocol" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Return the name of the path protocol.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>path</code></td>
+        <td><code>Union[str, os.PathLike]</code></td>
+        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Return the name of the path protocol.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="n">protocol</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>
+
+    <span class="k">if</span> <span class="s2">&quot;s3&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;s3&quot;</span>
+    <span class="k">elif</span> <span class="s2">&quot;gs&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">&quot;gs&quot;</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">protocol</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.is_local_path" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.is_local_path" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Check whether a path is local.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Check whether a path is local.&quot;&quot;&quot;</span>
+    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.join" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.join" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Join paths together. The first element determine the
+filesystem to use (and so the separator.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>paths</code></td>
+        <td><code></code></td>
+        <td><p>a list of paths supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><code>()</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Join paths together. The first element determine the</span>
+<span class="sd">    filesystem to use (and so the separator.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
+    <span class="n">source_path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">full_path</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.get_size" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.get_size" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Get the size of a file given its path. Return None if the
+size can't be retrieved.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Get the size of a file given its path. Return None if the</span>
+<span class="sd">    size can&#39;t be retrieved.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
+        <span class="n">fs_local</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs_local</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+        <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">return</span> <span class="n">file_size</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.copy_file" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">copy_file</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">chunk_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">leave_progress</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.fs.fs.copy_file" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.copy_file" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
       <p>Copy one file to another location across different filesystem (local, S3, GCS, etc).</p>
 
@@ -1873,68 +1997,16 @@ size is <code>None</code>, it is set to 2048.</p></td>
 
 
 
-<h4 id="datamol.utils.fs.fs.exists" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">exists</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+<h4 id="datamol.utils.fs.md5" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.fs.fs.exists" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.md5" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
-      <p>Check whether a file or a directory exists.</p>
-<p>Important: HTTP file and file-like object always exists.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>path</code></td>
-        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
-        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Check whether a file or a directory exists.</span>
-
-<span class="sd">    Important: HTTP file and file-like object always exists.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.get_basename" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.get_basename" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Get the basename of a file or a folder.</p>
+      <p>Return the md5 hash of a file.</p>
+<p>NOTE(hadim): Use fsspec caching here maybe.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1948,25 +2020,28 @@ size is <code>None</code>, it is set to 2048.</p></td>
   </thead>
   <tbody>
       <tr>
-        <td><code>path</code></td>
+        <td><code>filepath</code></td>
         <td><code>Union[str, os.PathLike]</code></td>
-        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+        <td><p>The path to the file to compute the MD5 hash on.</p></td>
         <td><em>required</em></td>
       </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Get the basename of a file or a folder.</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Return the md5 hash of a file.</span>
+
+<span class="sd">    NOTE(hadim): Use fsspec caching here maybe.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
+<span class="sd">        filepath: The path to the file to compute the MD5 hash on.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="n">clean_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
-    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">clean_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
+        <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">file_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
+    <span class="k">return</span> <span class="n">file_hash</span>
 </code></pre></div>
         </details>
     </div>
@@ -1979,13 +2054,76 @@ size is <code>None</code>, it is set to 2048.</p></td>
 
 
 
-<h4 id="datamol.utils.fs.fs.get_cache_dir" class="doc doc-heading">
+<h4 id="datamol.utils.fs.glob" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.utils.fs.glob" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Find files by glob-matching.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>path</code></td>
+        <td><code>str</code></td>
+        <td><p>A glob-style path.</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Find files by glob-matching.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        path: A glob-style path.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get the list of paths</span>
+    <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
+    <span class="n">data_paths</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="c1"># Append path prefix if needed</span>
+    <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span> <span class="s2">&quot;http&quot;</span><span class="p">]:</span>
+        <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
+            <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="n">data_paths</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_paths</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">data_paths</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.utils.fs.get_cache_dir" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_cache_dir</span><span class="p">(</span><span class="n">app_name</span><span class="p">,</span> <span class="n">suffix</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">create</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.fs.fs.get_cache_dir" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.get_cache_dir" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
       <p>Get a local cache directory for a given application name.</p>
 
@@ -2061,64 +2199,13 @@ already exist.</p></td>
 
 
 
-<h4 id="datamol.utils.fs.fs.get_extension" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.get_extension" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Get the extension of a file.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>path</code></td>
-        <td><code>Union[str, os.PathLike]</code></td>
-        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Get the extension of a file.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">basename</span> <span class="o">=</span> <span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">basename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.get_mapper" class="doc doc-heading">
+<h4 id="datamol.utils.fs.get_mapper" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.fs.fs.get_mapper" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.get_mapper" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
       <p>Get the fsspec mapper.</p>
 
@@ -2162,15 +2249,15 @@ already exist.</p></td>
 
 
 
-<h4 id="datamol.utils.fs.fs.get_protocol" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
+<h4 id="datamol.utils.fs.get_basename" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
 
 
-<a href="#datamol.utils.fs.fs.get_protocol" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.utils.fs.get_basename" class="headerlink" title="Permanent link">&para;</a></h4>
 
-    <div class="doc doc-contents ">
+    <div class="doc doc-contents first">
 
-      <p>Return the name of the path protocol.</p>
+      <p>Get the basename of a file or a folder.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -2193,1142 +2280,16 @@ already exist.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Return the name of the path protocol.</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+    <span class="sd">&quot;&quot;&quot;Get the basename of a file or a folder.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
+    <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="n">protocol</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>
-
-    <span class="k">if</span> <span class="s2">&quot;s3&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;s3&quot;</span>
-    <span class="k">elif</span> <span class="s2">&quot;gs&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;gs&quot;</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">protocol</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.get_size" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.get_size" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Get the size of a file given its path. Return None if the
-size can't be retrieved.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Get the size of a file given its path. Return None if the</span>
-<span class="sd">    size can&#39;t be retrieved.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
-        <span class="n">fs_local</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
-        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs_local</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
-        <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
-        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
-        <span class="n">file_size</span> <span class="o">=</span> <span class="n">file</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="n">file</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="n">file_size</span> <span class="o">=</span> <span class="kc">None</span>
-
-    <span class="k">return</span> <span class="n">file_size</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.glob" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.glob" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Find files by glob-matching.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>path</code></td>
-        <td><code>str</code></td>
-        <td><p>A glob-style path.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Find files by glob-matching.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path: A glob-style path.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="c1"># Get the list of paths</span>
-    <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
-    <span class="n">data_paths</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-    <span class="c1"># Append path prefix if needed</span>
-    <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span> <span class="s2">&quot;http&quot;</span><span class="p">]:</span>
-        <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
-            <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-
-        <span class="n">data_paths</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">protocol</span><span class="si">}</span><span class="s2">://</span><span class="si">{</span><span class="n">d</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">data_paths</span><span class="p">]</span>
-
-    <span class="k">return</span> <span class="n">data_paths</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.is_dir" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.is_dir" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Check whether a file exists.</p>
-<p>Important: File-like object always exists.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>path</code></td>
-        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
-        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
-
-<span class="sd">    Important: File-like object always exists.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
-        <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
-        <span class="k">return</span> <span class="kc">True</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.is_file" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.is_file" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Check whether a file exists.</p>
-<p>Important: File-like object always exists.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>path</code></td>
-        <td><code>Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]</code></td>
-        <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
-
-<span class="sd">    Important: File-like object always exists.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
-        <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-
-    <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
-        <span class="k">return</span> <span class="kc">True</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.is_local_path" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.is_local_path" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Check whether a path is local.</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Check whether a path is local.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.join" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.join" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Join paths together. The first element determine the
-filesystem to use (and so the separator.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>paths</code></td>
-        <td><code></code></td>
-        <td><p>a list of paths supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
-        <td><code>()</code></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Join paths together. The first element determine the</span>
-<span class="sd">    filesystem to use (and so the separator.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
-    <span class="n">source_path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
-    <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">full_path</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.fs.fs.md5" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.fs.fs.md5" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Return the md5 hash of a file.</p>
-<p>NOTE(hadim): Use fsspec caching here maybe.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>filepath</code></td>
-        <td><code>Union[str, os.PathLike]</code></td>
-        <td><p>The path to the file to compute the MD5 hash on.</p></td>
-        <td><em>required</em></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-    <span class="sd">&quot;&quot;&quot;Return the md5 hash of a file.</span>
-
-<span class="sd">    NOTE(hadim): Use fsspec caching here maybe.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        filepath: The path to the file to compute the MD5 hash on.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-        <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
-        <span class="n">file_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">file_hash</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-module">
-
-
-
-<h3 id="datamol.utils.jobs.jobs" class="doc doc-heading">
-        <code>datamol.utils.jobs.jobs</code>
-
-
-
-<a href="#datamol.utils.jobs.jobs" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-
-  <div class="doc doc-object doc-class">
-
-
-
-<h4 id="datamol.utils.jobs.jobs.JobRunner" class="doc doc-heading">
-        <code>JobRunner</code>
-
-
-
-<a href="#datamol.utils.jobs.jobs.JobRunner" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-
-
-
-
-  <div class="doc doc-children">
-
-
-
-
-
-
-  <div class="doc doc-object doc-attribute">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.is_sequential" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">is_sequential</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-property"><code>property</code></small>
-      <small class="doc doc-property doc-property-readonly"><code>readonly</code></small>
-  </span>
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.is_sequential" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Check whether the job is sequential or parallel</p>
-    </div>
-
-  </div>
-
-
-
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.__call__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.__call__" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Run job using the n_jobs attribute to determine regime</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run job using the n_jobs attribute to determine regime</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_sequential</span><span class="p">:</span>
-        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-    <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-special"><code>special</code></small>
-  </span>
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.__init__" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which
-allows taking advantage of its features, while the progress bar use tqdm</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>n_jobs</code></td>
-        <td><code>Optional[int]</code></td>
-        <td><p>Number of process. Use 0 or None to force sequential.
-Use -1 to use all the available processors. For details see
-<a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
-        <td><code>-1</code></td>
-      </tr>
-      <tr>
-        <td><code>prefer</code></td>
-        <td><code>str</code></td>
-        <td><p>Choose from ['processes', 'threads'] or None. Default to None.
-Soft hint to choose the default backend if no specific backend
-was selected with the parallel_backend context manager. The
-default process-based backend is 'loky' and the default
-thread-based backend is 'threading'. Ignored if the <code>backend</code>
-parameter is specified.</p></td>
-        <td><code>None</code></td>
-      </tr>
-      <tr>
-        <td><code>progress</code></td>
-        <td><code>bool</code></td>
-        <td><p>whether to display progress bar</p></td>
-        <td><code>False</code></td>
-      </tr>
-      <tr>
-        <td><code>job_kwargs</code></td>
-        <td><code></code></td>
-        <td><p>Any additional keyword argument supported by joblib.Parallel.</p></td>
-        <td><code>{}</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Examples:</strong></p>
-    
-      <div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
-<span class="n">runner</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">)</span>
-<span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">])</span>
-</code></pre></div>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which</span>
-<span class="sd">    allows taking advantage of its features, while the progress bar use tqdm</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        n_jobs: Number of process. Use 0 or None to force sequential.</span>
-<span class="sd">            Use -1 to use all the available processors. For details see</span>
-<span class="sd">            https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</span>
-<span class="sd">        prefer: Choose from [&#39;processes&#39;, &#39;threads&#39;] or None. Default to None.</span>
-<span class="sd">            Soft hint to choose the default backend if no specific backend</span>
-<span class="sd">            was selected with the parallel_backend context manager. The</span>
-<span class="sd">            default process-based backend is &#39;loky&#39; and the default</span>
-<span class="sd">            thread-based backend is &#39;threading&#39;. Ignored if the ``backend``</span>
-<span class="sd">            parameter is specified.</span>
-<span class="sd">        progress: whether to display progress bar</span>
-<span class="sd">        job_kwargs: Any additional keyword argument supported by joblib.Parallel.</span>
-
-<span class="sd">    Example:</span>
-
-<span class="sd">    ```python</span>
-<span class="sd">    import datamol as dm</span>
-<span class="sd">    runner = dm.JobRunner(n_jobs=4, progress=True, prefer=&quot;threads&quot;)</span>
-<span class="sd">    results = runner(lambda x: x**2, [1, 2, 3, 4])</span>
-<span class="sd">    ```</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">prefer</span> <span class="o">=</span> <span class="n">prefer</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span> <span class="o">=</span> <span class="n">job_kwargs</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefer</span><span class="p">)</span>
-    <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">progress</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.get_iterator_length" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
-  </span>
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.get_iterator_length" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Attempt to get the length of an iterator</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Attempt to get the length of an iterator&quot;&quot;&quot;</span>
-    <span class="n">total_length</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">total_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
-        <span class="c1"># most likely a generator, ignore</span>
-        <span class="k">pass</span>
-    <span class="k">return</span> <span class="n">total_length</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.parallel" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">parallel</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable_fn</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.parallel" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Run job in parallel</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>callable_fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>function to call</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Iterable[Any]</code></td>
-        <td><p>input data</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>arg_type</code></td>
-        <td><code>Optional[str]</code></td>
-        <td><p>function argument type ('arg'/None or 'args' or 'kwargs')</p></td>
-        <td><code>None</code></td>
-      </tr>
-      <tr>
-        <td><code>fn_kwargs</code></td>
-        <td><code>dict</code></td>
-        <td><p>optional keyword argument to pass to the callable funciton</p></td>
-        <td><code>{}</code></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parallel</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">callable_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
-    <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run job in parallel</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        callable_fn (callable): function to call</span>
-<span class="sd">        data (iterable): input data</span>
-<span class="sd">        arg_type (str, optional): function argument type (&#39;arg&#39;/None or &#39;args&#39; or &#39;kwargs&#39;)</span>
-<span class="sd">        fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">_parallel_helper</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="p">)</span>
-    <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">)(</span>
-        <span class="n">delayed</span><span class="p">(</span><span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">))(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">data</span>
-    <span class="p">)</span>
-    <span class="k">return</span> <span class="n">results</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.sequential" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">callable_fn</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.sequential" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Run job in sequential version</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>callable_fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>function to call</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>data</code></td>
-        <td><code>Iterable[Any]</code></td>
-        <td><p>input data</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>arg_type</code></td>
-        <td><code>Optional[str]</code></td>
-        <td><p>function argument type ('arg'/None or 'args' or 'kwargs')</p></td>
-        <td><code>None</code></td>
-      </tr>
-      <tr>
-        <td><code>fn_kwargs</code></td>
-        <td><code>dict</code></td>
-        <td><p>optional keyword argument to pass to the callable funciton</p></td>
-        <td><code>{}</code></td>
-      </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sequential</span><span class="p">(</span>
-    <span class="bp">self</span><span class="p">,</span>
-    <span class="n">callable_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
-    <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">,</span>
-<span class="p">):</span>
-    <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Run job in sequential version</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        callable_fn (callable): function to call</span>
-<span class="sd">        data (iterable): input data</span>
-<span class="sd">        arg_type (str, optional): function argument type (&#39;arg&#39;/None or &#39;args&#39; or &#39;kwargs&#39;)</span>
-<span class="sd">        fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="n">res</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)(</span><span class="n">dt</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">)</span>
-    <span class="p">]</span>
-    <span class="k">return</span> <span class="n">res</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-method">
-
-
-
-<h5 id="datamol.utils.jobs.jobs.JobRunner.wrap_fn" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">wrap_fn</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span></code>
-
-  <span class="doc doc-properties">
-      <small class="doc doc-property doc-property-staticmethod"><code>staticmethod</code></small>
-  </span>
-
-<a href="#datamol.utils.jobs.jobs.JobRunner.wrap_fn" class="headerlink" title="Permanent link">&para;</a></h5>
-
-    <div class="doc doc-contents ">
-
-      <p>Small wrapper around a callable to properly format it's argument</p>
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="nd">@staticmethod</span>
-<span class="k">def</span> <span class="nf">wrap_fn</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Small wrapper around a callable to properly format it&#39;s argument&quot;&quot;&quot;</span>
-    <span class="c1"># EN probably use something like (moms.utils.commons.is_callable) ?</span>
-    <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">arg_type</span> <span class="o">==</span> <span class="s2">&quot;kwargs&quot;</span><span class="p">:</span>
-            <span class="n">fn_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
-        <span class="k">elif</span> <span class="n">arg_type</span> <span class="o">==</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
-        <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
-
-    <span class="k">return</span> <span class="n">_run</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h4 id="datamol.utils.jobs.jobs.parallelized" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.jobs.jobs.parallelized" class="headerlink" title="Permanent link">&para;</a></h4>
-
-    <div class="doc doc-contents ">
-
-      <p>Run a function in parallel.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>The function to run in parallel.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>inputs_list</code></td>
-        <td><code>Iterable[Any]</code></td>
-        <td><p>List of inputs to pass to <code>fn</code>.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>scheduler</code></td>
-        <td><code>str</code></td>
-        <td><p>Choose between ["processes", "threads"]. Defaults
-to None which uses the default joblib "loky" scheduler.</p></td>
-        <td><code>&#39;processes&#39;</code></td>
-      </tr>
-      <tr>
-        <td><code>n_jobs</code></td>
-        <td><code>Optional[int]</code></td>
-        <td><p>Number of process. Use 0 or None to force sequential.
-    Use -1 to use all the available processors. For details see
-    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
-        <td><code>-1</code></td>
-      </tr>
-      <tr>
-        <td><code>progress</code></td>
-        <td><code>bool</code></td>
-        <td><p>Display a progress bar. Defaults to False.</p></td>
-        <td><code>False</code></td>
-      </tr>
-      <tr>
-        <td><code>arg_type</code></td>
-        <td><code>str</code></td>
-        <td><p>One of ["arg", "args", "kwargs]:
-- "arg": the input is passed as an argument: <code>fn(arg)</code> (default).
-- "args": the input is passed as a list: <code>fn(*args)</code>.
-- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
-        <td><code>&#39;arg&#39;</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Optional[List[Any]]</code></td>
-      <td><p>The results of the execution as a list.</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parallelized</span><span class="p">(</span>
-    <span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">inputs_list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
-    <span class="n">scheduler</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;processes&quot;</span><span class="p">,</span>
-    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Run a function in parallel.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        fn: The function to run in parallel.</span>
-<span class="sd">        inputs_list: List of inputs to pass to `fn`.</span>
-<span class="sd">        scheduler: Choose between [&quot;processes&quot;, &quot;threads&quot;]. Defaults</span>
-<span class="sd">            to None which uses the default joblib &quot;loky&quot; scheduler.</span>
-<span class="sd">        n_jobs: Number of process. Use 0 or None to force sequential.</span>
-<span class="sd">                Use -1 to use all the available processors. For details see</span>
-<span class="sd">                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</span>
-<span class="sd">        progress: Display a progress bar. Defaults to False.</span>
-<span class="sd">        arg_type: One of [&quot;arg&quot;, &quot;args&quot;, &quot;kwargs]:</span>
-<span class="sd">            - &quot;arg&quot;: the input is passed as an argument: `fn(arg)` (default).</span>
-<span class="sd">            - &quot;args&quot;: the input is passed as a list: `fn(*args)`.</span>
-<span class="sd">            - &quot;kwargs&quot;: the input is passed as a map: `fn(**kwargs)`.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The results of the execution as a list.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">runner</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="n">arg_type</span><span class="p">)</span>
-</code></pre></div>
-        </details>
-    </div>
-
-  </div>
-
-
-
-
-
-
-  </div>
-
-    </div>
-
-  </div>
-
-
-
-  <div class="doc doc-object doc-function">
-
-
-
-<h3 id="datamol.utils.jobs.parallelized" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">datamol</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">jobs</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">)</span></code>
-
-
-<a href="#datamol.utils.jobs.parallelized" class="headerlink" title="Permanent link">&para;</a></h3>
-
-    <div class="doc doc-contents first">
-
-      <p>Run a function in parallel.</p>
-
-<p><strong>Parameters:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Type</th>
-      <th>Description</th>
-      <th>Default</th>
-    </tr>
-  </thead>
-  <tbody>
-      <tr>
-        <td><code>fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>The function to run in parallel.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>inputs_list</code></td>
-        <td><code>Iterable[Any]</code></td>
-        <td><p>List of inputs to pass to <code>fn</code>.</p></td>
-        <td><em>required</em></td>
-      </tr>
-      <tr>
-        <td><code>scheduler</code></td>
-        <td><code>str</code></td>
-        <td><p>Choose between ["processes", "threads"]. Defaults
-to None which uses the default joblib "loky" scheduler.</p></td>
-        <td><code>&#39;processes&#39;</code></td>
-      </tr>
-      <tr>
-        <td><code>n_jobs</code></td>
-        <td><code>Optional[int]</code></td>
-        <td><p>Number of process. Use 0 or None to force sequential.
-    Use -1 to use all the available processors. For details see
-    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
-        <td><code>-1</code></td>
-      </tr>
-      <tr>
-        <td><code>progress</code></td>
-        <td><code>bool</code></td>
-        <td><p>Display a progress bar. Defaults to False.</p></td>
-        <td><code>False</code></td>
-      </tr>
-      <tr>
-        <td><code>arg_type</code></td>
-        <td><code>str</code></td>
-        <td><p>One of ["arg", "args", "kwargs]:
-- "arg": the input is passed as an argument: <code>fn(arg)</code> (default).
-- "args": the input is passed as a list: <code>fn(*args)</code>.
-- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
-        <td><code>&#39;arg&#39;</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Optional[List[Any]]</code></td>
-      <td><p>The results of the execution as a list.</p></td>
-    </tr>
-  </tbody>
-</table>
-        <details class="quote">
-          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">parallelized</span><span class="p">(</span>
-    <span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
-    <span class="n">inputs_list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
-    <span class="n">scheduler</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;processes&quot;</span><span class="p">,</span>
-    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Run a function in parallel.</span>
-
-<span class="sd">    Args:</span>
-<span class="sd">        fn: The function to run in parallel.</span>
-<span class="sd">        inputs_list: List of inputs to pass to `fn`.</span>
-<span class="sd">        scheduler: Choose between [&quot;processes&quot;, &quot;threads&quot;]. Defaults</span>
-<span class="sd">            to None which uses the default joblib &quot;loky&quot; scheduler.</span>
-<span class="sd">        n_jobs: Number of process. Use 0 or None to force sequential.</span>
-<span class="sd">                Use -1 to use all the available processors. For details see</span>
-<span class="sd">                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</span>
-<span class="sd">        progress: Display a progress bar. Defaults to False.</span>
-<span class="sd">        arg_type: One of [&quot;arg&quot;, &quot;args&quot;, &quot;kwargs]:</span>
-<span class="sd">            - &quot;arg&quot;: the input is passed as an argument: `fn(arg)` (default).</span>
-<span class="sd">            - &quot;args&quot;: the input is passed as a list: `fn(*args)`.</span>
-<span class="sd">            - &quot;kwargs&quot;: the input is passed as a map: `fn(**kwargs)`.</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        The results of the execution as a list.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">runner</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="n">arg_type</span><span class="p">)</span>
+    <span class="n">clean_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
+    <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">clean_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div>
         </details>
     </div>
@@ -3353,7 +2314,7 @@ to None which uses the default joblib "loky" scheduler.</p></td>
     <nav class="md-footer__inner md-grid" aria-label="Footer">
       
         
-        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.scaffold" rel="prev">
+        <a href="datamol.molar.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.molar" rel="prev">
           <div class="md-footer__button md-icon">
             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
           </div>
@@ -3362,20 +2323,20 @@ to None which uses the default joblib "loky" scheduler.</p></td>
               <span class="md-footer__direction">
                 Previous
               </span>
-              datamol.scaffold
+              datamol.molar
             </div>
           </div>
         </a>
       
       
         
-        <a href="datamol.viz.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.viz" rel="next">
+        <a href="../contribute.html" class="md-footer__link md-footer__link--next" aria-label="Next: Contribute" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              datamol.viz
+              Contribute
             </div>
           </div>
           <div class="md-footer__button md-icon">
