@@ -1,6 +1,7 @@
 **Added:**
 
-* <news item>
+* Better doc about compat and CI
+* Add a datamol Mol type: `dm.Mol` identical to `Chem.rdchem.Mol`
 
 **Changed:**
 
