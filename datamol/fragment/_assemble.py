@@ -273,7 +273,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
 
 
 def break_mol(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     minFragmentSize: int = 1,
     silent: bool = True,
     onlyUseReactions: list = [],
