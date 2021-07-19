@@ -1,5 +1,9 @@
 from ._version import __version__
 
+from rdkit import Chem
+
+Mol = Chem.rdchem.Mol
+
 from . import utils
 
 from .utils import parallelized
