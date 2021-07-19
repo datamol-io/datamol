@@ -72,7 +72,7 @@ def test_all_atom_join():
     assert dm.same_mol(mols[0], mol)
 
     mols = dm.actions.all_atom_join(mol, 7, 8)
-    assert dm.to_inchikey(mols[0]) == 'HGYLTEABMPLEAQ-UHFFFAOYSA-N'
+    assert dm.to_inchikey(mols[0]) == "HGYLTEABMPLEAQ-UHFFFAOYSA-N"
 
     mols = dm.actions.all_atom_join(mol, 7, 6)
-    assert dm.to_inchikey(mols[0]) == 'WSZJSUJBYYBSDX-UHFFFAOYSA-N'
+    assert dm.to_inchikey(mols[0]) == "WSZJSUJBYYBSDX-UHFFFAOYSA-N"

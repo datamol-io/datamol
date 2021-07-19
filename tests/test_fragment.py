@@ -63,3 +63,16 @@ def test_break_mol():
     assert fragments == ["CCC", "O", "C", "c1ccncc1", "c1ccccc1"]
     assert list(tree.nodes) == [0, 1, 2, 3, 4, 5, 6, 7, 8]
     assert list(tree.edges) == [(0, 1), (0, 2), (2, 3), (2, 4), (4, 5), (4, 6), (6, 7), (6, 8)]
+
+
+def test_assemble_build():
+    mols = [[dm.to_mol("CCCO"), dm.to_mol("CCCCCCCO")], [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")]]
+
+    results = list(dm.fragment.build(mols))
+    assert len(results) == 71
+
+    results = list(dm.fragment.build(mols, mode="rxn"))
+    assert len(results) == 0
+
+    results = list(dm.fragment.build(mols, mode=None))
+    assert len(results) == 0

@@ -84,3 +84,17 @@ def test_conformers():
     # multiple conformers
     view = dm.viz.conformers(mol, n_confs=12)
     assert type(view) == widgets.GridspecLayout
+
+
+def test_circle_grid(tmp_path):
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+    im = dm.viz.circle_grid(
+        mol,
+        [
+            [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")],
+            [dm.to_mol("CCCO"), dm.to_mol("CCCCCCCO")],
+        ],
+    )
+
+    im.save(tmp_path / "image.png")

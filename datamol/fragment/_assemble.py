@@ -376,10 +376,12 @@ def break_mol(
 
 def build(ll_mols, max_n_mols=float("inf"), mode="brics", frag_rxn=None, ADD_RNXS=[]):
     """Build a super molecule from a list of fragments"""
+
     seen = set()
     stop = False
     CUR_RXNS = []
     CUR_RXNS_TYPE = []
+
     if mode == "brics":
         CUR_RXNS = ALL_BRICS_RETRO
         CUR_RXNS_TYPE = ALL_BRICS_TYPE
@@ -402,9 +404,11 @@ def build(ll_mols, max_n_mols=float("inf"), mode="brics", frag_rxn=None, ADD_RNX
         if (frag_rxn is not None) and (frag_rxn.strip('"') == rxn_type):
             CUR_RXNS = [CUR_RXNS[i]]
             break
+
     for fraglist in itertools.product(*ll_mols):
         if stop:
             break
+
         fraglist = list(fraglist)
         for rxn in CUR_RXNS:  # should be size==1 if frag_rxn is provided
             ps = []
@@ -497,6 +501,7 @@ def assemble_fragment_iter(
     if scrambleReagents:
         seens = list(seens)
         random.shuffle(seens, random=random.random)
+
     for seen in seens:
         nextSteps = []
         for rxn in RXNS:

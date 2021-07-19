@@ -5,7 +5,7 @@
 
 **Changed:**
 
-* <news item>
+* Bump test coverage from 70% to 80%.
 
 **Deprecated:**
 
