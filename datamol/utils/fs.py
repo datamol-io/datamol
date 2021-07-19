@@ -65,7 +65,7 @@ def get_mapper(path: Union[str, os.PathLike]):
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
-    return fsspec.get_mapper(path)
+    return fsspec.get_mapper(str(path))
 
 
 def get_basename(path: Union[str, os.PathLike]):
@@ -117,7 +117,6 @@ def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return mapper.fs.isfile(path)
 
     else:
-        # NOTE(hadim): file-like objects always exist right?
         return True
 
 
@@ -137,8 +136,7 @@ def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return mapper.fs.isdir(path)
 
     else:
-        # NOTE(hadim): file-like objects always exist right?
-        return True
+        return False
 
 
 def get_protocol(path: Union[str, os.PathLike]):
@@ -161,7 +159,7 @@ def get_protocol(path: Union[str, os.PathLike]):
 
 def is_local_path(path: Union[str, os.PathLike]):
     """Check whether a path is local."""
-    return get_protocol(path) == "file"
+    return get_protocol(str(path)) == "file"
 
 
 def join(*paths):
