@@ -351,7 +351,7 @@ def all_atom_add(
 
 def all_atom_replace(
     mol,
-    atom_types=["C", "N", "S", "O"],
+    atom_types=None,
     asMols=True,
     max_num_action=float("Inf"),
     **kwargs,
@@ -376,6 +376,8 @@ def all_atom_replace(
         All possible molecules with atoms replaced
 
     """
+    if atom_types is None:
+        atom_types = ["C", "N", "S", "O"]
     new_mols = []
     stop = False
     with dm.without_rdkit_log():
