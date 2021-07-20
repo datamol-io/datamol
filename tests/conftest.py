@@ -3,7 +3,6 @@ import pathlib
 from loguru import logger
 
 import pytest
-from _pytest.logging import caplog as _caplog
 
 
 DATA_DIR_PATH = pathlib.Path(__file__).parent.resolve() / "data"
@@ -39,6 +38,9 @@ def pytest_configure(config):
 @pytest.fixture
 def datadir(request):
     return DATA_DIR_PATH
+
+
+from _pytest.logging import caplog as _caplog  # Mandatory for the below monkeypatch function.
 
 
 @pytest.fixture

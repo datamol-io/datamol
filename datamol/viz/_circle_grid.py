@@ -13,8 +13,8 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 
 
 def circle_grid(
-    center_mol: Chem.Mol,
-    circle_mols: List[List[Chem.Mol]],
+    center_mol: Chem.rdchem.Mol,
+    circle_mols: List[List[Chem.rdchem.Mol]],
     legend: str = None,
     mol_size: Tuple[int, int] = (200, 200),
     circle_margin: int = 50,
@@ -35,8 +35,8 @@ def circle_grid(
 class MolsCircleGrid:
     def __init__(
         self,
-        center_mol: Chem.Mol,
-        circle_mols: List[List[Chem.Mol]],
+        center_mol: Chem.rdchem.Mol,
+        circle_mols: List[List[Chem.rdchem.Mol]],
         legend: str = None,
         mol_size: Tuple[int, int] = (200, 200),
         circle_margin: int = 50,
@@ -67,7 +67,7 @@ class MolsCircleGrid:
 
     def show(self, crop=False):
         if crop:
-            crop_img = ImageOps.crop(self.image, border=(1, 1, 1, 1))
+            crop_img = ImageOps.crop(self.image, border=1)
         else:
             crop_img = self.image
         return crop_img.show()

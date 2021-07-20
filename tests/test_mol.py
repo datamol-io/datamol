@@ -218,6 +218,8 @@ def test_set_mol_props():
     assert mol_props["string"] == props["string"]
     assert mol_props["something_else"] == str(props["something_else"])
 
+    dm.set_mol_props(mol, props, copy=True)
+
 
 def test_copy_mol_props():
     source = dm.to_mol("CCC")
@@ -259,8 +261,13 @@ def test_enumerate_stereo():
 
 
 def test_atom_indices_to_mol():
-    mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+    mol: dm.Mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
+
     dm.atom_indices_to_mol(mol)
+    for atom in mol.GetAtoms():
+        assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
+
+    dm.atom_indices_to_mol(mol, copy=True)
     for atom in mol.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
 

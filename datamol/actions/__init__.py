@@ -1,7 +1,9 @@
 from ._actions import pick_atom_idx
 from ._actions import add_bond_between
+from ._actions import remove_bond_between
 from ._actions import update_bond
-
+from ._actions import compute_fragment_join
+from ._actions import all_atom_join
 from ._actions import all_join_on_attach_point
 from ._actions import all_fragment_attach
 from ._actions import all_atom_add

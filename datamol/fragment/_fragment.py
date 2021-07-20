@@ -5,7 +5,6 @@ from typing import Any
 from rdkit import Chem
 from rdkit.Chem import BRICS
 from rdkit.Chem import Recap
-from rdkit.Chem import rdRGroupDecomposition
 from rdkit.Chem import rdMMPA
 
 from rdkit.Chem.Fraggle import FraggleSim
@@ -14,7 +13,7 @@ import datamol as dm
 
 
 def brics(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     singlepass: bool = True,
     remove_parent: bool = False,
     sanitize: bool = True,
@@ -45,7 +44,7 @@ def brics(
 
 
 def frag(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     remove_parent: bool = False,
     sanitize: bool = True,
     fix: bool = True,
@@ -80,7 +79,7 @@ def frag(
 
 
 def recap(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     remove_parent: bool = False,
     sanitize: bool = True,
     fix: bool = True,
@@ -109,7 +108,7 @@ def recap(
 
 
 def anybreak(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     remove_parent: bool = False,
     sanitize: bool = True,
     fix: bool = True,
@@ -185,7 +184,7 @@ def mmpa_frag(
     return set(frags)
 
 
-def mmpa_cut(mol: Chem.Mol, rdkit_pattern: bool = False) -> Optional[Set[Any]]:
+def mmpa_cut(mol: Chem.rdchem.Mol, rdkit_pattern: bool = False) -> Optional[Set[Any]]:
     """Cut molecules to perform mmpa analysis later
 
     Args:

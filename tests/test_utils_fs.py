@@ -1,3 +1,6 @@
+import pytest
+
+import fsspec
 import datamol as dm
 
 
@@ -13,3 +16,134 @@ def test_copy_files(tmp_path):
 
     with open(destination_path) as f:
         f.read() == content
+
+
+@pytest.mark.skip_platform("win")
+def test_cache_dir():
+    cache_dir = dm.utils.fs.get_cache_dir("my_app")
+    assert str(cache_dir).endswith("my_app")
+    assert cache_dir.exists()
+    assert cache_dir.is_dir()
+
+    cache_dir = dm.utils.fs.get_cache_dir("my_app", suffix="likelydonotalreadyexist", create=False)
+    assert str(cache_dir).endswith("likelydonotalreadyexist")
+    assert not cache_dir.exists()
+    assert not cache_dir.is_dir()
+
+    cache_dir = dm.utils.fs.get_cache_dir("my_app", suffix="iamasuffix")
+    assert str(cache_dir).endswith("iamasuffix")
+    assert "my_app" in str(cache_dir)
+    assert cache_dir.exists()
+    assert cache_dir.is_dir()
+
+
+def test_get_mapper(tmp_path):
+    fsmapper = dm.utils.fs.get_mapper(str(tmp_path / "test.txt"))
+    assert fsmapper.fs.protocol == "file"
+
+
+def test_get_basename(tmp_path):
+    dm.utils.fs.get_basename(str(tmp_path / "test.txt")) == "test.txt"
+    dm.utils.fs.get_basename("s3://a-bucket-that-likely-do-not-exist/test.txt") == "test.txt"
+
+
+def test_get_extension(tmp_path):
+    dm.utils.fs.get_extension(str(tmp_path / "test.txt")) == "txt"
+    dm.utils.fs.get_extension("s3://a-bucket-that-likely-do-not-exist/test.txt") == "txt"
+
+
+def test_exists(tmp_path):
+    tmp_file = tmp_path / "test.txt"
+
+    assert not dm.utils.fs.exists(tmp_file)
+    assert not dm.utils.fs.is_file(tmp_file)
+
+    assert dm.utils.fs.is_dir(tmp_path)
+    assert not dm.utils.fs.is_dir(tmp_path / "likely-does-not-exist")
+
+    with open(tmp_file, "w") as f:
+        f.write("hello")
+
+    assert dm.utils.fs.exists(tmp_file)
+    assert dm.utils.fs.is_file(tmp_file)
+
+    assert dm.utils.fs.is_file(open(tmp_file))
+    assert not dm.utils.fs.is_dir(open(tmp_file))
+
+
+def test_get_protocol(tmp_path):
+    assert dm.utils.fs.get_protocol(tmp_path / "ahahah.txt") == "file"
+    assert dm.utils.fs.get_protocol("s3://a-bucket-that-likely-do-not-exist/test.txt") == "s3"
+
+
+def test_is_local_path(tmp_path):
+    assert dm.utils.fs.is_local_path(tmp_path / "ahahah.txt")
+    assert not dm.utils.fs.is_local_path("s3://a-bucket-that-likely-do-not-exist/test.txt")
+
+
+@pytest.mark.skip_platform("win")
+def test_join(tmp_path):
+    assert (
+        dm.utils.fs.join("s3://a-bucket-that-likely-do-not-exist", "test.txt")
+        == "s3://a-bucket-that-likely-do-not-exist/test.txt"
+    )
+    assert dm.utils.fs.join(tmp_path, "test.txt") == str(tmp_path / "test.txt")
+
+
+def test_get_size(tmp_path):
+    tmp_file = tmp_path / "test.txt"
+
+    with open(tmp_file, "w") as f:
+        f.write("hello")
+
+    assert dm.utils.fs.get_size(tmp_file) > 0
+    assert dm.utils.fs.get_size(open(tmp_file)) > 0
+    assert dm.utils.fs.get_size(fsspec.open(tmp_file)) > 0
+
+
+def test_md5(tmp_path):
+    tmp_file = tmp_path / "test.txt"
+
+    with open(tmp_file, "w") as f:
+        f.write("hello")
+
+    assert dm.utils.fs.md5(tmp_file) == "5d41402abc4b2a76b9719d911017c592"
+
+
+@pytest.mark.skip_platform("win")
+def test_glob(tmp_path):
+    for i in range(5):
+        tmp_file = tmp_path / f"test_{i}.txt"
+
+        with open(tmp_file, "w") as f:
+            f.write("hello")
+
+    assert len(dm.utils.fs.glob(tmp_path / "*.txt")) == 5
+    assert set(dm.utils.fs.glob(tmp_path / "*.txt")) == {
+        str(tmp_path / "test_0.txt"),
+        str(tmp_path / "test_1.txt"),
+        str(tmp_path / "test_2.txt"),
+        str(tmp_path / "test_3.txt"),
+        str(tmp_path / "test_4.txt"),
+    }
+
+
+def test_copy_file(tmp_path):
+    tmp_file = tmp_path / "test.txt"
+
+    with open(tmp_file, "w") as f:
+        f.write("hello")
+
+    tmp_file2 = tmp_path / "test2.txt"
+    assert not dm.utils.fs.is_file(tmp_file2)
+    dm.utils.fs.copy_file(tmp_file, tmp_file2)
+    assert dm.utils.fs.is_file(tmp_file2)
+    assert open(tmp_file2).read() == "hello"
+
+    with pytest.raises(ValueError):
+        dm.utils.fs.copy_file(tmp_file, tmp_file2)
+
+    tmp_file3 = tmp_path / "test3.txt"
+    dm.utils.fs.copy_file(tmp_file, tmp_file3, progress=True)
+    assert dm.utils.fs.is_file(tmp_file3)
+    assert open(tmp_file3).read() == "hello"

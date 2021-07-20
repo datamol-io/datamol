@@ -1,3 +1,7 @@
+from typing import Union
+from typing import List
+from typing import Optional
+
 import copy
 import itertools
 import operator
@@ -11,8 +15,9 @@ from rdkit.Chem import rdmolops
 import datamol as dm
 
 
-def pick_atom_idx(mol, prepick=None):
+def pick_atom_idx(mol: Chem.rdchem.Mol, prepick: Optional[int] = None):
     """pick an atom from the molecule"""
+
     mol.UpdatePropertyCache()
     if not (prepick is not None and prepick >= 0 and prepick < mol.GetNumAtoms()):
         pickable_atoms = [a.GetIdx() for a in mol.GetAtoms() if a.GetImplicitValence() > 0]
@@ -23,32 +28,98 @@ def pick_atom_idx(mol, prepick=None):
     return prepick
 
 
-def add_bond_between(mol, a1, a2, bond_type):
+def add_bond_between(
+    mol: Chem.rdchem.Mol,
+    a1: Union[int, Chem.rdchem.Atom],
+    a2: Union[int, Chem.rdchem.Atom],
+    bond_type: Chem.rdchem.BondType,
+    sanitize: bool = True,
+):
     """Add a new bond between atom"""
-    emol = Chem.EditableMol(mol)
-    emol.AddBond(a1.GetIdx(), a2.GetIdx(), bond_type)
-    return dm.sanitize_mol(emol.GetMol())
+
+    if isinstance(a1, Chem.rdchem.Atom):
+        a1 = a1.GetIdx()
+
+    if isinstance(a2, Chem.rdchem.Atom):
+        a2 = a2.GetIdx()
+
+    emol = Chem.EditableMol(dm.copy_mol(mol))
+    emol.AddBond(a1, a2, bond_type)
+
+    if sanitize:
+        return dm.sanitize_mol(emol.GetMol())
+
+    return emol.GetMol()
 
 
-def update_bond(mol, bond, bond_type):
+def remove_bond_between(
+    mol: Chem.rdchem.Mol,
+    a1: Union[int, Chem.rdchem.Atom],
+    a2: Union[int, Chem.rdchem.Atom],
+    sanitize: bool = True,
+):
+    """Remove a bond between atoms."""
+
+    if isinstance(a1, Chem.rdchem.Atom):
+        a1 = a1.GetIdx()
+
+    if isinstance(a2, Chem.rdchem.Atom):
+        a2 = a2.GetIdx()
+
+    emol = Chem.EditableMol(dm.copy_mol(mol))
+    emol.RemoveBond(a1, a2)
+
+    if sanitize:
+        return dm.sanitize_mol(emol.GetMol())
+
+    return emol.GetMol()
+
+
+def update_bond(
+    mol: Chem.rdchem.Mol,
+    bond: Union[int, Chem.rdchem.Bond],
+    bond_type: Chem.rdchem.BondType,
+    sanitize: bool = True,
+):
     """Update bond type between atoms"""
     new_mol = dm.copy_mol(mol)
+
+    if isinstance(bond, Chem.rdchem.Bond):
+        bond = bond.GetIdx()
+
     with dm.without_rdkit_log():
-        new_bond = new_mol.GetBondWithIdx(bond.GetIdx())
+        new_bond = new_mol.GetBondWithIdx(bond)
         new_bond.SetBondType(bond_type)
-    return dm.sanitize_mol(new_mol)
+
+    if sanitize:
+        return dm.sanitize_mol(new_mol)
+
+    return new_mol
 
 
-def _all_atom_join(mol, a1, a2):
-    """Join two atoms (a1, a2) in a molecule in all possible valid manner"""
+def all_atom_join(
+    mol: Chem.rdchem.Mol,
+    a1: Union[int, Chem.rdchem.Atom],
+    a2: Union[int, Chem.rdchem.Atom],
+):
+    """Join two atoms (a1, a2) in a molecule in all possible valid manner."""
+
+    if isinstance(a1, int):
+        a1 = mol.GetAtomWithIdx(a1)
+
+    if isinstance(a2, int):
+        a2 = mol.GetAtomWithIdx(a2)
+
     new_mols = []
     with dm.without_rdkit_log():
         try:
             Chem.Kekulize(mol, clearAromaticFlags=True)
         except:
             pass
+
         v1, v2 = a1.GetImplicitValence(), a2.GetImplicitValence()
         bond = mol.GetBondBetweenAtoms(a1.GetIdx(), a2.GetIdx())
+
         if bond is None:
             if v1 > 0 and v2 > 0:
                 new_mols.append(add_bond_between(mol, a1, a2, dm.SINGLE_BOND))
@@ -66,37 +137,45 @@ def _all_atom_join(mol, a1, a2):
         elif bond.GetBondType() == dm.DOUBLE_BOND:
             if v1 > 0 and v2 > 0:
                 new_mols.append(update_bond(mol, bond, dm.TRIPLE_BOND))
+
     return [mol for mol in new_mols if mol is not None]
 
 
-def _compute_fragment_join(
-    mol,
-    fragment,
-    mol_atom_count,
-    bond_between_rings=True,
-    asMols=True,
+def compute_fragment_join(
+    mol: Chem.rdchem.Mol,
+    fragment: Chem.rdchem.Mol,
+    mol_atom_count: int,
+    bond_between_rings: bool = True,
+    asMols: bool = True,
 ):
-    """List all posibilities of where a fragment can be attached to a mol"""
+    """List all posibilities of where a fragment can be attached to a mol."""
+
     fragment = copy.copy(
         fragment
     )  # need to copy the fragment copy is faster than all the other methods
+
     with dm.without_rdkit_log():
+
         combined = Chem.CombineMols(mol, fragment)
         for i1 in range(mol.GetNumAtoms()):
             a1 = combined.GetAtomWithIdx(i1)
+
             if a1.GetImplicitValence() == 0:
                 continue
+
             for i2 in range(fragment.GetNumAtoms()):
                 i2 += mol_atom_count
                 a2 = combined.GetAtomWithIdx(i2)
                 if a2.GetImplicitValence() == 0:
                     continue
+
                 # no bond between atoms already in rings
                 if not bond_between_rings and a1.IsInRing() and a2.IsInRing():
                     continue
+
                 # no bond to form large rings
                 else:
-                    possibilities = _all_atom_join(combined, a1, a2)
+                    possibilities = all_atom_join(combined, a1, a2)
                     for x in possibilities:
                         x = dm.sanitize_mol(x)
                         if x is not None:
@@ -105,25 +184,28 @@ def _compute_fragment_join(
                             yield x
 
 
-def _compute_mmpa_assembly(cores, side_chains, max_num_action=float("Inf")):
+def _compute_mmpa_assembly(
+    cores: List[Chem.rdchem.Mol],
+    side_chains: List[Chem.rdchem.Mol],
+    max_num_action: int = None,
+):
     """Enumerate core and side_chains assembly combination.
     Input Core and side_chain are expected to have [1*] in place of the attachment point
 
     Note that this is based on a dm.SINGLE_BOND mmpa cut.
 
     Args:
-        cores: list of <Chem.Mol>
-            List of core
-        side_chains: list of <Chem.Mol>
-            List of side chains
-        max_num_action: int, optional
-            Maximum number of assembly
-            (Default: inf)
+        cores: List of core.
+        side_chains: List of side chains.
+        max_num_action: Maximum number of assembly. None means infinite.
 
     Returns:
-        res: list of <Chem.Mol>
-            Molecules obtained by merging core and side_chains
+        mols: Molecules obtained by merging core and side_chains.
     """
+
+    if max_num_action is None:
+        max_num_action = int(float("Inf"))
+
     reaction = AllChem.ReactionFromSmarts("[*:1]-[1*].[1*]-[*:2]>>[*:1]-[*:2]")
     molecules = []
     n_seen = 0
@@ -141,15 +223,12 @@ def _compute_mmpa_assembly(cores, side_chains, max_num_action=float("Inf")):
     return molecules
 
 
-def all_join_on_attach_point(mol1, mol2):
+def all_join_on_attach_point(mol1: Chem.rdchem.Mol, mol2: Chem.rdchem.Mol):
     """Join two molecules on all possible attaching point
 
-    Arguments
-    ---------
-        mol1: <Chem.Mol>
-            input molecule 1
-        mol2: <Chem.Mol>
-            input molecule 2
+    Args:
+        mol1: Input molecule 1.
+        mol2: Input molecule 2.
 
     Returns:
         iterator of all possible way to attach both molecules from dummy indicators.
@@ -158,6 +237,7 @@ def all_join_on_attach_point(mol1, mol2):
     mol_idxs = []
     count = 0
     mod_mols = []
+
     for ind, m in enumerate([mol1, mol2]):
         atms = [(a.GetIdx(), a) for a in m.GetAtoms() if not a.IsInRing() and a.GetAtomicNum() == 0]
         atms.sort(reverse=True, key=operator.itemgetter(0))
@@ -170,16 +250,17 @@ def all_join_on_attach_point(mol1, mol2):
         mol_idxs.append(
             [a.GetIdx() for a in mod_mol.GetAtoms() if a.GetAtomMapNum() >= atom_map_min]
         )
+
     for ind1, ind2 in itertools.product(*mol_idxs):
         yield random_fragment_add(copy.copy(mod_mols[0]), copy.copy(mod_mols[1]), ind1, ind2)
 
 
 def all_fragment_attach(
-    mol,
-    fragmentlist,
-    bond_between_rings=True,
-    max_num_action=10,
-    asMols=True,
+    mol: Chem.rdchem.Mol,
+    fragmentlist: List[Chem.rdchem.Mol],
+    bond_between_rings: bool = True,
+    max_num_action: int = 10,
+    asMols: bool = True,
 ):
     """List all possible way to attach a list of fragment to a dm.SINGLE_BOND molecule.
 
@@ -187,18 +268,12 @@ def all_fragment_attach(
         This is computationally expensive
 
     Args:
-        mol: <Chem.Mol>
-            Input molecule
-        fragmentlist: list of <Chem.Mol>
-            Molecular fragments to attach
-        bond_between_rings: bool, optional
-            Whether to allow bond between two rings atoms
-            (Default: True)
-        max_num_action: int, optional
-            Maximum fragment attachment to allow. Reduce time complexity
-            (Default: 10)
-        asMols: bool, optional
-            Whether to return output as molecule or smiles
+        mol: Input molecule
+        fragmentlist: Molecular fragments to attach.
+        bond_between_rings: Whether to allow bond between two rings atoms
+        max_num_action: Maximum fragment attachment to allow. Reduce time complexity
+        asMols: Whether to return output as molecule or smiles
+
     Returns:
         All possible molecules resulting from attaching the molecular fragment to the root molecule
 
@@ -212,7 +287,7 @@ def all_fragment_attach(
             if len(fragment_set) >= max_num_action:
                 break
             if generators[i] is None:
-                generators[i] = _compute_fragment_join(
+                generators[i] = compute_fragment_join(
                     mol, fragment, mol_atom_count, bond_between_rings, asMols
                 )
             if not empty_generators[i]:
@@ -262,7 +337,7 @@ def all_atom_add(
                 emol = Chem.RWMol(mol)
                 new_index = emol.AddAtom(Chem.Atom(atom_symb))
                 emol.UpdatePropertyCache(strict=False)
-                new_mols.extend(_all_atom_join(emol, atom, emol.GetMol().GetAtomWithIdx(new_index)))
+                new_mols.extend(all_atom_join(emol, atom, emol.GetMol().GetAtomWithIdx(new_index)))
                 if len(new_mols) > max_num_action:
                     stop = True
                     break
@@ -275,7 +350,11 @@ def all_atom_add(
 
 
 def all_atom_replace(
-    mol, atom_types=["C", "N", "S", "O"], asMols=True, max_num_action=float("Inf"), **kwargs
+    mol,
+    atom_types=None,
+    asMols=True,
+    max_num_action=float("Inf"),
+    **kwargs,
 ):
     """Replace all non-hydrogen atoms by other possibilities.
 
@@ -297,6 +376,8 @@ def all_atom_replace(
         All possible molecules with atoms replaced
 
     """
+    if atom_types is None:
+        atom_types = ["C", "N", "S", "O"]
     new_mols = []
     stop = False
     with dm.without_rdkit_log():
@@ -378,7 +459,7 @@ def all_bond_add(
                 and not all_path_len.issubset(allowed_ring_sizes)
             ):
                 continue
-            new_mols.extend(_all_atom_join(mol, a1, a2))
+            new_mols.extend(all_atom_join(mol, a1, a2))
             if len(new_mols) > max_num_action:
                 stop = True
                 break
@@ -506,7 +587,6 @@ def all_fragment_update(
     bond_between_rings=True,
     max_num_action=float("Inf"),
     asMols=False,
-    **kwargs,
 ):
     """
     Break molecule a molecules into all set of fragment (including the molecule itself).
@@ -536,7 +616,7 @@ def all_fragment_update(
         set of modified mols
     """
     fragment_set = set([])
-    mol_frags = anybreak(molparent, rem_parent=False)
+    mol_frags = dm.fragment.anybreak(molparent, remove_parent=False)
     for mol in mol_frags:
         mol_update = all_fragment_attach(
             mol, fragmentlist, bond_between_rings, max_num_action, asMols
@@ -567,7 +647,7 @@ def all_mmpa_assemble(molist, max_num_action=float("Inf"), asMols=True, **kwargs
     cores = []
     side_chains = []
     for mol in molist:
-        mol_frag = mmpa_frag(mol, max_bond_cut=30)
+        mol_frag = dm.fragment.mmpa_frag(mol, max_bond_cut=30)
         if not mol_frag:
             continue
         _, mol_frag = map(list, zip(*mol_frag))
@@ -586,7 +666,6 @@ def all_fragment_assemble(
     max_num_action=float("Inf"),
     asMols=True,
     seen=None,
-    **kwargs,
 ):
     """Assemble a set of fragment into a new molecule
 
@@ -608,8 +687,11 @@ def all_fragment_assemble(
 
     """
     mols = []
-    for m in dm.assemble.assemble_brics_order(
-        fragmentlist, seen=seen, allow_incomplete=False, max_n_mols=max_num_action
+    for m in dm.fragment.assemble_fragment_order(
+        fragmentlist,
+        seen=seen,
+        allow_incomplete=False,
+        max_n_mols=max_num_action,
     ):
         if len(mols) > max_num_action:
             break
@@ -625,7 +707,6 @@ def all_transform_apply(
     rxns,
     max_num_action=float("Inf"),
     asMols=True,
-    **kwargs,
 ):
     """
     Apply a transformation defined as a reaction from a set of reaction to the input molecule.

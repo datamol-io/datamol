@@ -85,11 +85,20 @@ dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 
 Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-| `datamol` | `python`      | `rdkit`               |
-| --------- | ------------- | --------------------- |
-| `0.3`     | `>=3.7,<=3.9` | `>=2020.09,<=2021.03` |
+See below the associated versions of Python and RDKit, for which a minor version of Datamol has been tested during its whole lifecycle.
+
+| `datamol` | `python`     | `rdkit`              |
+| --------- | ------------ | -------------------- |
+| `0.4`     | `[3.8, 3.9]` | [`2020.09, 2021.03`] |
+| `0.3`     | `[3.8, 3.9]` | [`2020.09, 2021.03`] |
 
 ## CI Status
+
+The CI run tests and perform code quality checks for the following combinations:
+
+- The three major platforms: Windows, OSX and Linux.
+- The two latest Python versions.
+- The two latest RDKit versions.
 
 |                                         | `master`                                                                                                                                                                           |
 | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

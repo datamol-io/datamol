@@ -10,7 +10,7 @@ def _get_networkx():
         raise ImportError("You must install networkx from https://networkx.org/.")
 
 
-def to_graph(mol: Chem.Mol):
+def to_graph(mol: Chem.rdchem.Mol):
     """Convert a molecule to a network x graph. A list of properties are added
     to every nodes and edges.
 
@@ -48,7 +48,7 @@ def to_graph(mol: Chem.Mol):
 
 
 def get_all_path_between(
-    mol: Chem.Mol,
+    mol: Chem.rdchem.Mol,
     atom_idx_1: int,
     atom_idx_2: int,
     ignore_cycle_basis: bool = False,
