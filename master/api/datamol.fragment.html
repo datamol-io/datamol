@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
@@ -824,7 +824,7 @@
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">anybreak</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -915,7 +915,7 @@
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">brics</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">singlepass</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1005,7 +1005,7 @@
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">frag</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1099,7 +1099,7 @@
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">recap</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1191,7 +1191,7 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_cut</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">rdkit_pattern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_cut</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">rdkit_pattern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Cut molecules to perform mmpa analysis later</span>
 
 <span class="sd">    Args:</span>
@@ -1414,6 +1414,7 @@ This is equivalent to enabling the addition of new fragments.</p></td>
     <span class="k">if</span> <span class="n">scrambleReagents</span><span class="p">:</span>
         <span class="n">seens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">seens</span><span class="p">)</span>
         <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seens</span><span class="p">,</span> <span class="n">random</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+
     <span class="k">for</span> <span class="n">seen</span> <span class="ow">in</span> <span class="n">seens</span><span class="p">:</span>
         <span class="n">nextSteps</span> <span class="o">=</span> <span class="p">[]</span>
         <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">RXNS</span><span class="p">:</span>
@@ -1576,7 +1577,7 @@ This is equivalent to enabling the addition of new fragments.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">break_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">minFragmentSize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">silent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">onlyUseReactions</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
@@ -1701,10 +1702,12 @@ This is equivalent to enabling the addition of new fragments.</p></td>
           <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">ll_mols</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;brics&quot;</span><span class="p">,</span> <span class="n">frag_rxn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ADD_RNXS</span><span class="o">=</span><span class="p">[]):</span>
     <span class="sd">&quot;&quot;&quot;Build a super molecule from a list of fragments&quot;&quot;&quot;</span>
+
     <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="p">[]</span>
+
     <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;brics&quot;</span><span class="p">:</span>
         <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span>
         <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="n">ALL_BRICS_TYPE</span>
@@ -1727,9 +1730,11 @@ This is equivalent to enabling the addition of new fragments.</p></td>
         <span class="k">if</span> <span class="p">(</span><span class="n">frag_rxn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">frag_rxn</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">rxn_type</span><span class="p">):</span>
             <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="p">[</span><span class="n">CUR_RXNS</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
             <span class="k">break</span>
+
     <span class="k">for</span> <span class="n">fraglist</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">ll_mols</span><span class="p">):</span>
         <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
             <span class="k">break</span>
+
         <span class="n">fraglist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fraglist</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">CUR_RXNS</span><span class="p">:</span>  <span class="c1"># should be size==1 if frag_rxn is provided</span>
             <span class="n">ps</span> <span class="o">=</span> <span class="p">[]</span>

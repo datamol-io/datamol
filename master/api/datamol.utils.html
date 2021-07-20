@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.1, mkdocs-material-7.1.10">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.1.11">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.1fe995fd.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.3754935a.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.f1a3b89f.min.css">
@@ -1564,7 +1564,6 @@ parameter is specified.</p></td>
         <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
         <span class="k">return</span> <span class="kc">True</span>
 </code></pre></div>
         </details>
@@ -1626,8 +1625,7 @@ parameter is specified.</p></td>
         <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="c1"># NOTE(hadim): file-like objects always exist right?</span>
-        <span class="k">return</span> <span class="kc">True</span>
+        <span class="k">return</span> <span class="kc">False</span>
 </code></pre></div>
         </details>
     </div>
@@ -1713,7 +1711,7 @@ parameter is specified.</p></td>
           <summary>Source code in <code>datamol/utils/fs.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
     <span class="sd">&quot;&quot;&quot;Check whether a path is local.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
+    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
 </code></pre></div>
         </details>
     </div>
@@ -2098,6 +2096,7 @@ size is <code>None</code>, it is set to 2048.</p></td>
 
     <span class="c1"># Append path prefix if needed</span>
     <span class="k">if</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span> <span class="ow">not</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;https&quot;</span><span class="p">,</span> <span class="s2">&quot;http&quot;</span><span class="p">]:</span>
+
         <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">):</span>
             <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -2236,7 +2235,7 @@ already exist.</p></td>
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre></div>
         </details>
     </div>
