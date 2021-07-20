@@ -18,6 +18,7 @@ def test_copy_files(tmp_path):
         f.read() == content
 
 
+@pytest.mark.skip_platform("win")
 def test_cache_dir():
     cache_dir = dm.utils.fs.get_cache_dir("my_app")
     assert str(cache_dir).endswith("my_app")
@@ -80,6 +81,7 @@ def test_is_local_path(tmp_path):
     assert not dm.utils.fs.is_local_path("s3://a-bucket-that-likely-do-not-exist/test.txt")
 
 
+@pytest.mark.skip_platform("win")
 def test_join(tmp_path):
     assert (
         dm.utils.fs.join("s3://a-bucket-that-likely-do-not-exist", "test.txt")
@@ -125,6 +127,7 @@ def test_glob(tmp_path):
     }
 
 
+@pytest.mark.skip_platform("win")
 def test_copy_file(tmp_path):
     tmp_file = tmp_path / "test.txt"
 

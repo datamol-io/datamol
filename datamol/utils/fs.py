@@ -324,6 +324,7 @@ def glob(path: str, **kwargs) -> List[str]:
 
     # Append path prefix if needed
     if fs.protocol not in ["file", "https", "http"]:
+
         protocol = fs.protocol
         if isinstance(protocol, tuple):
             protocol = fs.protocol[0]
