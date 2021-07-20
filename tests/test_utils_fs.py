@@ -110,6 +110,7 @@ def test_md5(tmp_path):
     assert dm.utils.fs.md5(tmp_file) == "5d41402abc4b2a76b9719d911017c592"
 
 
+@pytest.mark.skip_platform("win")
 def test_glob(tmp_path):
     for i in range(5):
         tmp_file = tmp_path / f"test_{i}.txt"
@@ -127,7 +128,6 @@ def test_glob(tmp_path):
     }
 
 
-@pytest.mark.skip_platform("win")
 def test_copy_file(tmp_path):
     tmp_file = tmp_path / "test.txt"
 
