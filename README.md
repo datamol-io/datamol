@@ -5,6 +5,7 @@
 
 ---
 
+[![DOI](https://zenodo.org/badge/341603042.svg)](https://zenodo.org/badge/latestdoi/341603042)
 [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/master?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb)
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
@@ -80,6 +81,10 @@ sasa = dm.conformers.sasa(mol_with_conformers)
 mols = dm.read_sdf("s3://my-awesome-data-lake/smiles.sdf", as_df=False)
 dm.to_sdf(mols, "gs://data-bucket/smiles.sdf")
 ```
+
+## How to cite
+
+Please cite Datamol if you use it in your research: [![DOI](https://zenodo.org/badge/341603042.svg)](https://zenodo.org/badge/latestdoi/341603042).
 
 ## Compatibilities
 
