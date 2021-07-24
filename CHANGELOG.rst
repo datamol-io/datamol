@@ -4,6 +4,27 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.3
+====================
+
+**Added:**
+
+* Add a DOI so datamol can get properly cited.
+* Better doc about compat and CI
+* Add a datamol Mol type: `dm.Mol` identical to `Chem.rdchem.Mol`
+
+**Changed:**
+
+* Bump test coverage from 70% to 80%.
+
+**Authors:**
+
+* DeepSource Bot
+* Hadrien Mary
+* deepsource-autofix[bot]
+
+
+
 v0.4.2
 ====================
 
