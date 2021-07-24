@@ -1,5 +1,6 @@
 **Added:**
 
+* Add a DOI so datamol can get properly cited.
 * Better doc about compat and CI
 * Add a datamol Mol type: `dm.Mol` identical to `Chem.rdchem.Mol`
 
