@@ -10,7 +10,7 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 20
+  num_commits: 23
   first_commit: 2020-10-24 11:46:22
 - name: michelml
   email: michmoreau.l@gmail.com
@@ -32,3 +32,11 @@
   email: ishankumar216@gmail.com
   num_commits: 5
   first_commit: 2021-05-10 11:45:15
+- name: deepsource-autofix[bot]
+  email: 62050782+deepsource-autofix[bot]@users.noreply.github.com
+  num_commits: 1
+  first_commit: 2021-07-19 17:58:37
+- name: DeepSource Bot
+  email: bot@deepsource.io
+  num_commits: 1
+  first_commit: 2021-07-14 17:41:40
