@@ -119,7 +119,7 @@ class TestJobs(unittest.TestCase):
             n_jobs=None,
             arg_type="kwargs",
             progress=True,
-            verbose=100
+            verbose=100,
         )
         assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
 
@@ -134,6 +134,6 @@ class TestJobs(unittest.TestCase):
             n_jobs=None,
             arg_type="kwargs",
             progress=True,
-            tqdm_kwargs=dict(desc="My progress bar")
+            tqdm_kwargs=dict(desc="My progress bar"),
         )
         assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
