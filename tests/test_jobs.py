@@ -107,3 +107,33 @@ class TestJobs(unittest.TestCase):
             progress=False,
         )
         assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+    def test_job_kwargs(self):
+        def fn(x):
+            return x ** 2
+
+        results = dm.parallelized(
+            fn,
+            [{"x": i} for i in range(10)],
+            scheduler="processes",
+            n_jobs=None,
+            arg_type="kwargs",
+            progress=True,
+            verbose=100
+        )
+        assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+    def test_tqdm_kwargs(self):
+        def fn(x):
+            return x ** 2
+
+        results = dm.parallelized(
+            fn,
+            [{"x": i} for i in range(10)],
+            scheduler="processes",
+            n_jobs=None,
+            arg_type="kwargs",
+            progress=True,
+            tqdm_kwargs=dict(desc="My progress bar")
+        )
+        assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
