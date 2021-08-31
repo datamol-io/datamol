@@ -16,6 +16,7 @@ class JobRunner:
         n_jobs: Optional[int] = -1,
         prefer: str = None,
         progress: bool = False,
+        tqdm_kwargs: dict = None,
         **job_kwargs,
     ):
         """
@@ -33,7 +34,8 @@ class JobRunner:
                 thread-based backend is 'threading'. Ignored if the ``backend``
                 parameter is specified.
             progress: whether to display progress bar
-            job_kwargs: Any additional keyword argument supported by joblib.Parallel.
+            tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
+            job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
         Example:
 
@@ -48,6 +50,7 @@ class JobRunner:
         self.job_kwargs = job_kwargs
         self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer)
         self.no_progress = not progress
+        self.tqdm_kwargs = tqdm_kwargs or {}
 
     @property
     def is_sequential(self):
@@ -95,10 +98,11 @@ class JobRunner:
             arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
             fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
         """
+
         total_length = JobRunner.get_iterator_length(data)
         res = [
             JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs)(dt)
-            for dt in tqdm(data, total=total_length, disable=self.no_progress)
+            for dt in tqdm(data, total=total_length, disable=self.no_progress, **self.tqdm_kwargs)
         ]
         return res
 
@@ -177,6 +181,8 @@ def parallelized(
     n_jobs: Optional[int] = -1,
     progress: bool = False,
     arg_type: str = "arg",
+    tqdm_kwargs: dict = None,
+    **job_kwargs,
 ) -> Optional[List[Any]]:
     """Run a function in parallel.
 
@@ -193,10 +199,18 @@ def parallelized(
             - "arg": the input is passed as an argument: `fn(arg)` (default).
             - "args": the input is passed as a list: `fn(*args)`.
             - "kwargs": the input is passed as a map: `fn(**kwargs)`.
+        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
+        job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
     Returns:
         The results of the execution as a list.
     """
 
-    runner = JobRunner(n_jobs=n_jobs, progress=progress, prefer=scheduler)
+    runner = JobRunner(
+        n_jobs=n_jobs,
+        progress=progress,
+        prefer=scheduler,
+        tqdm_kwargs=tqdm_kwargs,
+        **job_kwargs,
+    )
     return runner(fn, inputs_list, arg_type=arg_type)
