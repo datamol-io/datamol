@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.4
+====================
+
+**Added:**
+
+* Add `tqdm_kwargs` to `dm.utils.JobRunner()`
+* Add `tqdm_kwargs` to `dm.utils.parallelized()`
+
+**Changed:**
+
+* Propagate `job_kwargs` to dm.utils.parallelized()`
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.3
 ====================
 
