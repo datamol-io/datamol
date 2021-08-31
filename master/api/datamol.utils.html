@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
     
     
       
@@ -20,10 +20,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.fe914879.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.be71726b.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.ba0d045b.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
         
       
     
@@ -837,7 +837,7 @@
 
 
 <h4 id="datamol.utils.jobs.parallelized" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
 
 
 <a href="#datamol.utils.jobs.parallelized" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -899,6 +899,18 @@ to None which uses the default joblib "loky" scheduler.</p></td>
 - "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
         <td><code>&#39;arg&#39;</code></td>
       </tr>
+      <tr>
+        <td><code>tqdm_kwargs</code></td>
+        <td><code>dict</code></td>
+        <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>job_kwargs</code></td>
+        <td><code></code></td>
+        <td><p>Any additional arguments supported by <code>joblib.Parallel</code>.</p></td>
+        <td><code>{}</code></td>
+      </tr>
   </tbody>
 </table>
 <p><strong>Returns:</strong></p>
@@ -925,6 +937,8 @@ to None which uses the default joblib "loky" scheduler.</p></td>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
+    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Run a function in parallel.</span>
 
@@ -941,12 +955,20 @@ to None which uses the default joblib "loky" scheduler.</p></td>
 <span class="sd">            - &quot;arg&quot;: the input is passed as an argument: `fn(arg)` (default).</span>
 <span class="sd">            - &quot;args&quot;: the input is passed as a list: `fn(*args)`.</span>
 <span class="sd">            - &quot;kwargs&quot;: the input is passed as a map: `fn(**kwargs)`.</span>
+<span class="sd">        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
+<span class="sd">        job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        The results of the execution as a list.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">)</span>
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span>
+        <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+        <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span>
+        <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+        <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="n">tqdm_kwargs</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
+    <span class="p">)</span>
     <span class="k">return</span> <span class="n">runner</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="n">arg_type</span><span class="p">)</span>
 </code></pre></div>
         </details>
@@ -1045,7 +1067,7 @@ to None which uses the default joblib "loky" scheduler.</p></td>
 
 
 <h5 id="datamol.utils.jobs.JobRunner.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -1095,9 +1117,15 @@ parameter is specified.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
+        <td><code>tqdm_kwargs</code></td>
+        <td><code>dict</code></td>
+        <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>job_kwargs</code></td>
         <td><code></code></td>
-        <td><p>Any additional keyword argument supported by joblib.Parallel.</p></td>
+        <td><p>Any additional arguments supported by <code>joblib.Parallel</code>.</p></td>
         <td><code>{}</code></td>
       </tr>
   </tbody>
@@ -1116,6 +1144,7 @@ parameter is specified.</p></td>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -1133,7 +1162,8 @@ parameter is specified.</p></td>
 <span class="sd">            thread-based backend is &#39;threading&#39;. Ignored if the ``backend``</span>
 <span class="sd">            parameter is specified.</span>
 <span class="sd">        progress: whether to display progress bar</span>
-<span class="sd">        job_kwargs: Any additional keyword argument supported by joblib.Parallel.</span>
+<span class="sd">        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
+<span class="sd">        job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
 
 <span class="sd">    Example:</span>
 
@@ -1148,6 +1178,7 @@ parameter is specified.</p></td>
     <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span> <span class="o">=</span> <span class="n">job_kwargs</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefer</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">progress</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span> <span class="o">=</span> <span class="n">tqdm_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 </code></pre></div>
         </details>
     </div>
@@ -1345,10 +1376,11 @@ parameter is specified.</p></td>
 <span class="sd">        arg_type (str, optional): function argument type (&#39;arg&#39;/None or &#39;args&#39; or &#39;kwargs&#39;)</span>
 <span class="sd">        fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">res</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)(</span><span class="n">dt</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">res</span>
 </code></pre></div>
@@ -2372,10 +2404,10 @@ already exist.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.53c85856.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.716f8af4.min.js"></script>
+      <script src="../assets/javascripts/bundle.56a63758.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
