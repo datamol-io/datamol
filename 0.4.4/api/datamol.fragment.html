@@ -1,0 +1,1844 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.5">
+    
+    
+      
+        <title>datamol.fragment - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.be71726b.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+    
+      
+
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    <script>function __prefix(e){return new URL("..",location).pathname+"."+e}function __get(e,t=localStorage){return JSON.parse(t.getItem(__prefix(e)))}</script>
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamolfragment" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.fragment
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      <label class="md-nav__link" for="__nav_3">
+        Tutorials
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
+        Preprocessing Molecules
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
+        Cluster Molecules
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
+        Fragment and Scaffold
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      <label class="md-nav__link" for="__nav_4">
+        API
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.html" class="md-nav__link">
+        datamol
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.fragment
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.fragment.html" class="md-nav__link md-nav__link--active">
+        datamol.fragment
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#molecule-fragmentation" class="md-nav__link">
+    Molecule fragmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Molecule fragmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.anybreak" class="md-nav__link">
+    anybreak()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.brics" class="md-nav__link">
+    brics()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.frag" class="md-nav__link">
+    frag()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.recap" class="md-nav__link">
+    recap()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mmpa-fragmentation" class="md-nav__link">
+    MMPA fragmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="MMPA fragmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.mmpa_cut" class="md-nav__link">
+    mmpa_cut()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.mmpa_frag" class="md-nav__link">
+    mmpa_frag()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#molecule-assembly" class="md-nav__link">
+    Molecule assembly
+  </a>
+  
+    <nav class="md-nav" aria-label="Molecule assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.assemble_fragment_iter" class="md-nav__link">
+    assemble_fragment_iter()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.assemble_fragment_order" class="md-nav__link">
+    assemble_fragment_order()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.break_mol" class="md-nav__link">
+    break_mol()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.build" class="md-nav__link">
+    build()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#molecule-fragmentation" class="md-nav__link">
+    Molecule fragmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="Molecule fragmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.anybreak" class="md-nav__link">
+    anybreak()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.brics" class="md-nav__link">
+    brics()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.frag" class="md-nav__link">
+    frag()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.recap" class="md-nav__link">
+    recap()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mmpa-fragmentation" class="md-nav__link">
+    MMPA fragmentation
+  </a>
+  
+    <nav class="md-nav" aria-label="MMPA fragmentation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.mmpa_cut" class="md-nav__link">
+    mmpa_cut()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._fragment.mmpa_frag" class="md-nav__link">
+    mmpa_frag()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#molecule-assembly" class="md-nav__link">
+    Molecule assembly
+  </a>
+  
+    <nav class="md-nav" aria-label="Molecule assembly">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.assemble_fragment_iter" class="md-nav__link">
+    assemble_fragment_iter()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.assemble_fragment_order" class="md-nav__link">
+    assemble_fragment_order()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.break_mol" class="md-nav__link">
+    break_mol()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.fragment._assemble.build" class="md-nav__link">
+    build()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.fragment.md" title="Edit this page" class="md-content__button md-icon">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+                  </a>
+                
+                
+                <h1 id="datamolfragment"><code>datamol.fragment</code><a class="headerlink" href="#datamolfragment" title="Permanent link">&para;</a></h1>
+<h2 id="molecule-fragmentation">Molecule fragmentation<a class="headerlink" href="#molecule-fragmentation" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.anybreak" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">anybreak</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.anybreak" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Fragment molecule by applying brics first, then fall back to frag.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>remove_parent</code></td>
+        <td><code>bool</code></td>
+        <td><p>Remove parent from the fragments.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to sanitize the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>fix</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to fix the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">anybreak</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fragment molecule by applying brics first, then fall back to frag.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        remove_parent: Remove parent from the fragments.</span>
+<span class="sd">        sanitize: Wether to sanitize the fragments.</span>
+<span class="sd">        fix: Wether to fix the fragments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">brics</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="n">fix</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="n">remove_parent</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">pass</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="n">remove_parent</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="n">fix</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">frags</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.brics" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">brics</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">singlepass</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.brics" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Run BRICS on the molecules and potentially fix dummy atoms.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>singlepass</code></td>
+        <td><code>bool</code></td>
+        <td><p>Single pass for <code>BRICSDecompose</code>.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>remove_parent</code></td>
+        <td><code>bool</code></td>
+        <td><p>Remove parent from the fragments.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to sanitize the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>fix</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to fix the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">brics</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">singlepass</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Run BRICS on the molecules and potentially fix dummy atoms.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        singlepass: Single pass for `BRICSDecompose`.</span>
+<span class="sd">        remove_parent: Remove parent from the fragments.</span>
+<span class="sd">        sanitize: Wether to sanitize the fragments.</span>
+<span class="sd">        fix: Wether to fix the fragments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="n">BRICS</span><span class="o">.</span><span class="n">BRICSDecompose</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">returnMols</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">singlePass</span><span class="o">=</span><span class="n">singlepass</span><span class="p">)</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">fix</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">sanitize</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">remove_parent</span><span class="p">:</span>
+        <span class="n">frags</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">return</span> <span class="n">frags</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.frag" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.frag" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Generate all possible fragmentation of a molecule.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>remove_parent</code></td>
+        <td><code>bool</code></td>
+        <td><p>Remove parent from the fragments.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to sanitize the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>fix</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to fix the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">frag</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Generate all possible fragmentation of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        remove_parent: Remove parent from the fragments.</span>
+<span class="sd">        sanitize: Wether to sanitize the fragments.</span>
+<span class="sd">        fix: Wether to fix the fragments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="n">FraggleSim</span><span class="o">.</span><span class="n">generate_fraggle_fragmentation</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="n">smiles</span> <span class="o">=</span> <span class="nb">set</span><span class="p">([])</span>
+    <span class="k">for</span> <span class="n">seq</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">:</span>
+        <span class="n">smiles</span> <span class="o">|=</span> <span class="p">{</span><span class="n">s</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">seq</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)}</span>
+
+    <span class="n">smiles</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">sorted</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">reverse</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">smiles</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">fix</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">sanitize</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">remove_parent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">frags</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">mol</span><span class="p">]</span> <span class="o">+</span> <span class="n">frags</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.recap" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">recap</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.recap" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Fragment the molecule using the recap algorithm.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>remove_parent</code></td>
+        <td><code>bool</code></td>
+        <td><p>Remove parent from the fragments.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>sanitize</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to sanitize the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>fix</code></td>
+        <td><code>bool</code></td>
+        <td><p>Wether to fix the fragments.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">recap</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">remove_parent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Fragment the molecule using the recap algorithm.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        remove_parent: Remove parent from the fragments.</span>
+<span class="sd">        sanitize: Wether to sanitize the fragments.</span>
+<span class="sd">        fix: Wether to fix the fragments.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">res</span> <span class="o">=</span> <span class="n">Recap</span><span class="o">.</span><span class="n">RecapDecompose</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">GetAllChildren</span><span class="p">()</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
+
+    <span class="k">if</span> <span class="n">fix</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">sanitize</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">]</span>
+
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">frags</span> <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">remove_parent</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">frags</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">mol</span><span class="p">]</span> <span class="o">+</span> <span class="n">frags</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+<h2 id="mmpa-fragmentation">MMPA fragmentation<a class="headerlink" href="#mmpa-fragmentation" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.mmpa_cut" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mmpa_cut</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">rdkit_pattern</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.mmpa_cut" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Cut molecules to perform mmpa analysis later</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>Molecule to fragment.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>rdkit_pattern</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to perform the fragmentation
+using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Optional[Set[Any]]</code></td>
+      <td><p>List of 'smiles,core,chains'</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_cut</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">rdkit_pattern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Cut molecules to perform mmpa analysis later</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: Molecule to fragment.</span>
+<span class="sd">        rdkit_pattern: Whether to perform the fragmentation</span>
+<span class="sd">            using the default rdkit pattern: [#6+0;!$(*=, #[!#6])]!@!=!#[*]&quot;</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of &#39;smiles,core,chains&#39;</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">mol</span>
+
+    <span class="n">outlines</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+
+    <span class="n">smiles</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rdkit_pattern</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">max_cut</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># heavy atoms</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;[!#1]!@!=!#[!#1]&quot;</span><span class="p">,</span> <span class="n">max_cut</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">30</span><span class="p">)</span>
+        <span class="n">frags</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;[!#1]!@!=!#[!#1]&quot;</span><span class="p">,</span> <span class="n">max_cut</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">30</span><span class="p">))</span>
+
+    <span class="n">frags</span> <span class="o">=</span> <span class="nb">set</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">core</span><span class="p">,</span> <span class="n">chains</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">core</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">chains</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">outlines</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="c1"># hydrogen splitting</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">smiles</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="n">n</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumHeavyAtoms</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">n</span> <span class="o">&lt;</span> <span class="mi">60</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_cut</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">h_split</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">core</span><span class="p">,</span> <span class="n">chains</span> <span class="ow">in</span> <span class="n">frags</span><span class="p">:</span>
+            <span class="n">output</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">smiles</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">core</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">chains</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
+            <span class="n">outlines</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">output</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">outlines</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._fragment.mmpa_frag" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mmpa_frag</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">max_cut</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">max_bond_cut</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">h_split</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._fragment.mmpa_frag" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Fragment molecule on specific bonds suitable for a MMPA analysis.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code></code></td>
+        <td><p>Molecule to fragment.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>pattern</code></td>
+        <td><code>str</code></td>
+        <td><p>Bond pattern to split on. Will use default rdkit pattern
+'[#6+0;!$(<em>=,#[!#6])]!@!=!#[</em>]' if not provided.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>max_cut</code></td>
+        <td><code>int</code></td>
+        <td><p>Number of cuts.</p></td>
+        <td><code>1</code></td>
+      </tr>
+      <tr>
+        <td><code>max_bond_cut</code></td>
+        <td><code>int</code></td>
+        <td><p>Maximum number of bond to cut. Default to 20.</p></td>
+        <td><code>20</code></td>
+      </tr>
+      <tr>
+        <td><code>h_split</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to split at hydrogen position too.
+This is equivalent to enabling the addition of new fragments.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Optional[Set[rdkit.Chem.rdchem.Mol]]</code></td>
+      <td><p>List of fragments</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_frag</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">,</span>
+    <span class="n">pattern</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">max_cut</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">max_bond_cut</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">h_split</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;Fragment molecule on specific bonds suitable for a MMPA analysis.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: Molecule to fragment.</span>
+<span class="sd">        pattern: Bond pattern to split on. Will use default rdkit pattern</span>
+<span class="sd">            &#39;[#6+0;!$(*=,#[!#6])]!@!=!#[*]&#39; if not provided.</span>
+<span class="sd">        max_cut: Number of cuts.</span>
+<span class="sd">        max_bond_cut: Maximum number of bond to cut. Default to 20.</span>
+<span class="sd">        h_split:  Whether to split at hydrogen position too.</span>
+<span class="sd">            This is equivalent to enabling the addition of new fragments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of fragments</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">frags</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">pattern</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">rdMMPA</span><span class="o">.</span><span class="n">FragmentMol</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">maxCuts</span><span class="o">=</span><span class="n">max_cut</span><span class="p">,</span>
+            <span class="n">resultsAsMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">maxCutBonds</span><span class="o">=</span><span class="n">max_bond_cut</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">elif</span> <span class="n">pattern</span><span class="p">:</span>
+        <span class="n">frags</span> <span class="o">=</span> <span class="n">rdMMPA</span><span class="o">.</span><span class="n">FragmentMol</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">pattern</span><span class="o">=</span><span class="n">pattern</span><span class="p">,</span>
+            <span class="n">maxCuts</span><span class="o">=</span><span class="n">max_cut</span><span class="p">,</span>
+            <span class="n">resultsAsMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">maxCutBonds</span><span class="o">=</span><span class="n">max_bond_cut</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">h_split</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">frags</span> <span class="o">+=</span> <span class="n">rdMMPA</span><span class="o">.</span><span class="n">FragmentMol</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;[#1]!@!=!#[!#1]&quot;</span><span class="p">,</span>
+            <span class="n">maxCuts</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+            <span class="n">resultsAsMols</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">maxCutBonds</span><span class="o">=</span><span class="n">max_bond_cut</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+<h2 id="molecule-assembly">Molecule assembly<a class="headerlink" href="#molecule-assembly" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._assemble.assemble_fragment_iter" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">assemble_fragment_iter</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">,</span> <span class="n">seens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">scrambleReagents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">maxdepth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">as_smiles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._assemble.assemble_fragment_iter" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Perform an assembly from fragment given all potential RXNS transformation.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_iter</span><span class="p">(</span>
+    <span class="n">fragmentlist</span><span class="p">,</span>
+    <span class="n">seens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">scrambleReagents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_n_mols</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span>
+    <span class="n">maxdepth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+    <span class="n">as_smiles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Perform an assembly from fragment given all potential RXNS transformation.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">RXNS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span>
+
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="k">if</span> <span class="n">max_n_mols</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">return</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">seens</span><span class="p">:</span>
+        <span class="n">seens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">scrambleReagents</span><span class="p">:</span>
+        <span class="n">seens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">seens</span><span class="p">)</span>
+        <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">seens</span><span class="p">,</span> <span class="n">random</span><span class="o">=</span><span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">seen</span> <span class="ow">in</span> <span class="n">seens</span><span class="p">:</span>
+        <span class="n">nextSteps</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">RXNS</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">fg</span> <span class="ow">in</span> <span class="n">fragmentlist</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">pSmi</span> <span class="ow">in</span> <span class="n">_run_at_all_rct</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">fg</span><span class="p">,</span> <span class="n">seen</span><span class="p">):</span>
+                    <span class="k">if</span> <span class="n">pSmi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pSmi</span><span class="p">)</span>
+                        <span class="k">yield</span> <span class="n">m</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">as_smiles</span> <span class="k">else</span> <span class="n">pSmi</span>
+                    <span class="k">if</span> <span class="n">_can_continue_with</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">rxn</span><span class="p">):</span>
+                        <span class="n">nextSteps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">nextSteps</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">&lt;=</span> <span class="n">max_n_mols</span> <span class="ow">and</span> <span class="n">maxdepth</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">assemble_fragment_iter</span><span class="p">(</span>
+                <span class="n">fragmentlist</span><span class="p">,</span>
+                <span class="n">seens</span><span class="o">=</span><span class="n">nextSteps</span><span class="p">,</span>
+                <span class="n">scrambleReagents</span><span class="o">=</span><span class="n">scrambleReagents</span><span class="p">,</span>
+                <span class="n">max_n_mols</span><span class="o">=</span><span class="p">(</span><span class="n">max_n_mols</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)),</span>
+                <span class="n">maxdepth</span><span class="o">=</span><span class="n">maxdepth</span> <span class="o">-</span> <span class="mi">1</span><span class="p">,</span>
+            <span class="p">):</span>
+                <span class="n">pSmi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="kc">True</span><span class="p">)</span>
+                <span class="k">if</span> <span class="n">pSmi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">pSmi</span><span class="p">)</span>
+                    <span class="k">yield</span> <span class="n">p</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">as_smiles</span> <span class="k">else</span> <span class="n">pSmi</span>
+                    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">max_n_mols</span><span class="p">:</span>
+                        <span class="k">return</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._assemble.assemble_fragment_order" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">assemble_fragment_order</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">,</span> <span class="n">seen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">allow_incomplete</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._assemble.assemble_fragment_order" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm</p>
+<p>..note ::
+    We are of course assuming:
+    1. that the order in the fragmentlist matter :D !
+    2. that none of the fragment has explicitly defined hydrogen atoms.
+    3. only a list of unique molecule is internally maintained</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>fragmentlist</code></td>
+        <td><code></code></td>
+        <td><p>list of original fragments to grow</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>seen</code></td>
+        <td><code></code></td>
+        <td><p>original molecules used as base. If none, the first element of fragment list will be poped out</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>allow_incomplete</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to accept assembled molecules with missing fragment</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_order</span><span class="p">(</span>
+    <span class="n">fragmentlist</span><span class="p">,</span>
+    <span class="n">seen</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+    <span class="n">allow_incomplete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">max_n_mols</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span>
+    <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm</span>
+
+<span class="sd">    ..note ::</span>
+<span class="sd">        We are of course assuming:</span>
+<span class="sd">        1. that the order in the fragmentlist matter :D !</span>
+<span class="sd">        2. that none of the fragment has explicitly defined hydrogen atoms.</span>
+<span class="sd">        3. only a list of unique molecule is internally maintained</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        fragmentlist: list of original fragments to grow</span>
+<span class="sd">        seen: original molecules used as base. If none, the first element of fragment list will be poped out</span>
+<span class="sd">        allow_incomplete: Whether to accept assembled molecules with missing fragment</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">RXNS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span>
+
+    <span class="n">fragmentlist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">)</span>
+    <span class="n">yield_counter</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">if</span> <span class="n">seen</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="n">fragmentlist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">seen</span> <span class="o">=</span> <span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">seen</span><span class="p">)]</span>  <span class="c1"># only one molecule to assemble</span>
+    <span class="k">while</span> <span class="n">yield_counter</span> <span class="o">&lt;</span> <span class="n">max_n_mols</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">fragmentlist</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="c1"># find all the way to add this fragment to seen</span>
+        <span class="n">frag</span> <span class="o">=</span> <span class="n">fragmentlist</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+        <span class="n">level_set</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">]</span>
+        <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">sm</span> <span class="ow">in</span> <span class="n">level_set</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="c1"># there is no point in even trying something on molecules that cannot be kekulized</span>
+                <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">RXNS</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">mSmi</span> <span class="ow">in</span> <span class="n">_run_at_all_rct</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">frag</span><span class="p">,</span> <span class="n">sm</span><span class="p">):</span>
+                        <span class="k">if</span> <span class="n">allow_incomplete</span> <span class="ow">and</span> <span class="n">mSmi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                            <span class="k">yield</span> <span class="n">m</span>
+                            <span class="n">yield_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mSmi</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+                <span class="k">pass</span>
+
+    <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">yield_counter</span> <span class="o">&lt;</span> <span class="n">max_n_mols</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+            <span class="n">yield_counter</span> <span class="o">+=</span> <span class="mi">1</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._assemble.break_mol" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">break_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">minFragmentSize</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">silent</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">onlyUseReactions</span><span class="o">=</span><span class="p">[],</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;brics&#39;</span><span class="p">,</span> <span class="n">returnTree</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#datamol.fragment._assemble.break_mol" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Breaks a molecules into a list of fragment.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">break_mol</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">minFragmentSize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">silent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">onlyUseReactions</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="n">randomize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;brics&quot;</span><span class="p">,</span>
+    <span class="n">returnTree</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Breaks a molecules into a list of fragment.&quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;brics&quot;</span><span class="p">:</span>
+        <span class="n">all_reactions</span> <span class="o">=</span> <span class="n">ALL_BRICS</span>
+        <span class="n">all_reactions_type</span> <span class="o">=</span> <span class="n">ALL_BRICS_TYPE</span>
+    <span class="k">elif</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;rxn&quot;</span><span class="p">:</span>
+        <span class="n">all_reactions</span> <span class="o">=</span> <span class="n">ALL_RXNS</span>
+        <span class="n">all_reactions_type</span> <span class="o">=</span> <span class="n">ALL_RXNS_TYPE</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">all_reactions</span> <span class="o">=</span> <span class="n">ALL_BRICS</span> <span class="o">+</span> <span class="n">ALL_RXNS</span>
+        <span class="n">all_reactions_type</span> <span class="o">=</span> <span class="n">ALL_BRICS_TYPE</span> <span class="o">+</span> <span class="n">ALL_RXNS_TYPE</span>
+    <span class="k">if</span> <span class="n">randomize</span><span class="p">:</span>
+        <span class="n">p</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">all_reactions</span><span class="p">))</span>
+        <span class="n">all_reactions</span> <span class="o">=</span> <span class="p">[</span><span class="n">all_reactions</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">p</span><span class="p">]</span>
+        <span class="n">all_reactions_type</span> <span class="o">=</span> <span class="p">[</span><span class="n">all_reactions_type</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="k">for</span> <span class="n">ind</span> <span class="ow">in</span> <span class="n">p</span><span class="p">]</span>
+
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">_get_networkx</span><span class="p">()</span>
+    <span class="n">mSmi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">DiGraph</span><span class="p">()</span>
+    <span class="n">node_num</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node_num</span><span class="p">,</span> <span class="n">smiles</span><span class="o">=</span><span class="n">mSmi</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">allNodes</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">activePool</span> <span class="o">=</span> <span class="p">{</span><span class="n">mSmi</span><span class="p">:</span> <span class="n">node_num</span><span class="p">}</span>
+    <span class="n">allNodes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mSmi</span><span class="p">)</span>
+    <span class="k">while</span> <span class="n">activePool</span><span class="p">:</span>
+        <span class="n">nSmi</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">activePool</span><span class="o">.</span><span class="n">keys</span><span class="p">())[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">parent</span> <span class="o">=</span> <span class="n">activePool</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">nSmi</span><span class="p">)</span>
+        <span class="n">node</span> <span class="o">=</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">]</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">node</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">rxnIdx</span><span class="p">,</span> <span class="n">reaction</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">all_reactions_type</span><span class="p">,</span> <span class="n">all_reactions</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">onlyUseReactions</span> <span class="ow">and</span> <span class="n">rxnIdx</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">onlyUseReactions</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">ps</span> <span class="o">=</span> <span class="n">reaction</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">mol</span><span class="p">,))</span>
+            <span class="k">if</span> <span class="n">ps</span><span class="p">:</span>
+
+                <span class="n">all_pass</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="nb">all</span><span class="p">([</span><span class="n">prod</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(</span><span class="n">onlyExplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">minFragmentSize</span> <span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">p_</span><span class="p">])</span>
+                    <span class="k">for</span> <span class="n">p_</span> <span class="ow">in</span> <span class="n">ps</span>
+                <span class="p">]</span>
+                <span class="n">nz_i</span> <span class="o">=</span> <span class="mi">0</span>
+                <span class="k">while</span> <span class="n">nz_i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_pass</span><span class="p">)</span> <span class="ow">and</span> <span class="ow">not</span> <span class="n">all_pass</span><span class="p">[</span><span class="n">nz_i</span><span class="p">]:</span>
+                    <span class="n">nz_i</span> <span class="o">+=</span> <span class="mi">1</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">silent</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="n">nSmi</span><span class="p">,</span> <span class="s2">&quot;-&gt;&quot;</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">ps</span><span class="p">),</span> <span class="s2">&quot;products and selected &quot;</span><span class="p">,</span> <span class="n">nz_i</span><span class="p">)</span>
+                    <span class="c1"># display(MolsToGridImage(list(itertools.chain(*list(ps))), molsPerRow=2))</span>
+                <span class="n">prodSeq</span> <span class="o">=</span> <span class="n">ps</span><span class="p">[</span><span class="n">nz_i</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">all_pass</span><span class="p">)]</span>
+                <span class="n">seqOk</span> <span class="o">=</span> <span class="kc">True</span>
+                <span class="c1"># we want to disqualify small fragments, so sort the product sequence by size</span>
+                <span class="n">prodSeq</span> <span class="o">=</span> <span class="p">[(</span><span class="n">prod</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(</span><span class="n">onlyExplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">prod</span><span class="p">)</span> <span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">prodSeq</span><span class="p">]</span>
+                <span class="n">prodSeq</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+                <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">prodSeq</span><span class="p">:</span>
+                    <span class="n">prod</span><span class="o">.</span><span class="n">sanitized</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeMol</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span>
+                    <span class="k">except</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+                            <span class="n">seqOk</span> <span class="o">=</span> <span class="kc">False</span>
+                            <span class="k">break</span>
+                        <span class="k">continue</span>
+                    <span class="n">pSmi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">prod</span><span class="p">,</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                    <span class="n">seqOk</span> <span class="o">=</span> <span class="n">seqOk</span> <span class="ow">and</span> <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">pSmi</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span>
+
+                    <span class="n">notDummies</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">atm</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()</span> <span class="o">!=</span> <span class="s2">&quot;*&quot;</span> <span class="k">for</span> <span class="n">atm</span> <span class="ow">in</span> <span class="n">prod</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()])</span>
+                    <span class="c1"># nDummies = pSmi.count(&#39;*&#39;)</span>
+                    <span class="c1"># if minFragmentSize &gt; 0 and (nats - nDummies &lt; minFragmentSize):</span>
+                    <span class="k">if</span> <span class="n">minFragmentSize</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">notDummies</span> <span class="o">&lt;</span> <span class="n">minFragmentSize</span><span class="p">:</span>
+                        <span class="n">seqOk</span> <span class="o">=</span> <span class="kc">False</span>
+                        <span class="k">break</span>
+                    <span class="n">prod</span><span class="o">.</span><span class="n">pSmi</span> <span class="o">=</span> <span class="n">pSmi</span>
+
+                <span class="k">if</span> <span class="n">seqOk</span><span class="p">:</span>
+                    <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">prodSeq</span><span class="p">:</span>
+                        <span class="k">if</span> <span class="ow">not</span> <span class="n">prod</span><span class="o">.</span><span class="n">sanitized</span><span class="p">:</span>
+                            <span class="k">continue</span>
+                        <span class="n">pSmi</span> <span class="o">=</span> <span class="n">prod</span><span class="o">.</span><span class="n">pSmi</span>
+                        <span class="n">node_num</span> <span class="o">+=</span> <span class="mi">1</span>
+                        <span class="n">usmi</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">prod</span><span class="p">),</span> <span class="n">isomericSmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+                        <span class="n">G</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span><span class="n">node_num</span><span class="p">,</span> <span class="n">smiles</span><span class="o">=</span><span class="n">usmi</span><span class="p">,</span> <span class="n">mol</span><span class="o">=</span><span class="n">prod</span><span class="p">)</span>
+                        <span class="n">G</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span><span class="n">parent</span><span class="p">,</span> <span class="n">node_num</span><span class="p">)</span>
+                        <span class="k">if</span> <span class="n">usmi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allNodes</span><span class="p">:</span>
+                            <span class="n">activePool</span><span class="p">[</span><span class="n">pSmi</span><span class="p">]</span> <span class="o">=</span> <span class="n">node_num</span>
+                            <span class="n">allNodes</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">usmi</span><span class="p">)</span>
+                    <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">parent</span><span class="p">][</span><span class="s2">&quot;rxn&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rxnIdx</span>
+                    <span class="k">break</span>  <span class="c1"># at least one reaction matches</span>
+
+    <span class="n">leaves_smiles</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">[</span><span class="n">n</span><span class="p">][</span><span class="s2">&quot;smiles&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">G</span><span class="o">.</span><span class="n">nodes</span><span class="p">()</span> <span class="k">if</span> <span class="n">G</span><span class="o">.</span><span class="n">in_degree</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">G</span><span class="o">.</span><span class="n">out_degree</span><span class="p">(</span><span class="n">n</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
+    <span class="p">]</span>
+    <span class="k">if</span> <span class="n">returnTree</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">leaves_smiles</span><span class="p">,</span> <span class="n">allNodes</span><span class="p">,</span> <span class="n">G</span>
+    <span class="k">return</span> <span class="n">leaves_smiles</span><span class="p">,</span> <span class="n">allNodes</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.fragment._assemble.build" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">build</span><span class="p">(</span><span class="n">ll_mols</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="n">inf</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;brics&#39;</span><span class="p">,</span> <span class="n">frag_rxn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ADD_RNXS</span><span class="o">=</span><span class="p">[])</span></code>
+
+
+<a href="#datamol.fragment._assemble.build" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Build a super molecule from a list of fragments</p>
+
+        <details class="quote">
+          <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">ll_mols</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;brics&quot;</span><span class="p">,</span> <span class="n">frag_rxn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ADD_RNXS</span><span class="o">=</span><span class="p">[]):</span>
+    <span class="sd">&quot;&quot;&quot;Build a super molecule from a list of fragments&quot;&quot;&quot;</span>
+
+    <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
+    <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
+    <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="k">if</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;brics&quot;</span><span class="p">:</span>
+        <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span>
+        <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="n">ALL_BRICS_TYPE</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="o">==</span> <span class="s2">&quot;rxn&quot;</span><span class="p">:</span>
+        <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="n">ALL_RXNS_RETRO</span>
+        <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="n">ALL_RXNS_TYPE</span>
+    <span class="k">elif</span> <span class="n">mode</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span> <span class="o">+</span> <span class="n">ALL_RXNS_RETRO</span>
+        <span class="n">CUR_RXNS_TYPE</span> <span class="o">=</span> <span class="n">ALL_BRICS_TYPE</span> <span class="o">+</span> <span class="n">ALL_RXNS_TYPE</span>
+
+    <span class="k">if</span> <span class="n">ADD_RNXS</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">ADD_RNXS_TYPE</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;RXN-</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">ADD_RNXS</span><span class="p">))]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ADD_RNXS</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
+            <span class="n">ADD_RNXS_TYPE</span> <span class="o">=</span> <span class="n">ADD_RNXS</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span>
+            <span class="n">ADD_RNXS</span> <span class="o">=</span> <span class="n">ADD_RNXS</span><span class="o">.</span><span class="n">values</span><span class="p">()</span>
+        <span class="n">CUR_RXNS</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ADD_RNXS</span><span class="p">)</span>
+        <span class="n">CUR_RXNS_TYPE</span> <span class="o">+=</span> <span class="nb">list</span><span class="p">(</span><span class="n">ADD_RNXS_TYPE</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">rxn_type</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">CUR_RXNS_TYPE</span><span class="p">):</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">frag_rxn</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="n">frag_rxn</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;&quot;&#39;</span><span class="p">)</span> <span class="o">==</span> <span class="n">rxn_type</span><span class="p">):</span>
+            <span class="n">CUR_RXNS</span> <span class="o">=</span> <span class="p">[</span><span class="n">CUR_RXNS</span><span class="p">[</span><span class="n">i</span><span class="p">]]</span>
+            <span class="k">break</span>
+
+    <span class="k">for</span> <span class="n">fraglist</span> <span class="ow">in</span> <span class="n">itertools</span><span class="o">.</span><span class="n">product</span><span class="p">(</span><span class="o">*</span><span class="n">ll_mols</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">stop</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">fraglist</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">fraglist</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">rxn</span> <span class="ow">in</span> <span class="n">CUR_RXNS</span><span class="p">:</span>  <span class="c1"># should be size==1 if frag_rxn is provided</span>
+            <span class="n">ps</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">ps</span> <span class="o">=</span> <span class="n">_run_at_all_rct</span><span class="p">(</span><span class="n">rxn</span><span class="p">,</span> <span class="n">fraglist</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">fraglist</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+                <span class="k">pass</span>
+            <span class="k">for</span> <span class="n">m</span><span class="p">,</span> <span class="n">mSmi</span> <span class="ow">in</span> <span class="n">ps</span><span class="p">:</span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">seen</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">max_n_mols</span><span class="p">:</span>
+                    <span class="n">stop</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+                <span class="k">if</span> <span class="n">mSmi</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">seen</span><span class="p">:</span>
+                    <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mSmi</span><span class="p">)</span>
+                    <span class="k">yield</span> <span class="n">m</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="datamol.viz.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.viz" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              datamol.viz
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.scaffold" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              datamol.scaffold
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+          <div class="md-footer-copyright__highlight">
+            Copyright 2020 - 2021 Valence
+          </div>
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+        
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.56a63758.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
