@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.5
+====================
+
+**Added:**
+
+* Add missing appdirs dependency
+* Add missing appdirs dependency
+
+**Fixed:**
+
+* Propagate tqdm_kwargs for parallel (was only done for sequential)
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.4
 ====================
 
