@@ -124,7 +124,7 @@ class JobRunner:
         """
         runner = JobRunner._parallel_helper(**self.job_kwargs)
         total_length = JobRunner.get_iterator_length(data)
-        results = runner(total=total_length, disable=self.no_progress)(
+        results = runner(total=total_length, disable=self.no_progress, **self.tqdm_kwargs)(
             delayed(JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs))(dt) for dt in data
         )
         return results
