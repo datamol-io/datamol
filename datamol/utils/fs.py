@@ -153,8 +153,9 @@ def get_protocol(path: Union[str, os.PathLike]):
         return "s3"
     elif "gs" in protocol:
         return "gs"
-    else:
-        return protocol
+    elif isinstance(protocol, (tuple, list)):
+        return protocol[0]
+    return protocol
 
 
 def is_local_path(path: Union[str, os.PathLike]):
@@ -317,18 +318,12 @@ def glob(path: str, **kwargs) -> List[str]:
     Args:
         path: A glob-style path.
     """
-
     # Get the list of paths
     fs = get_mapper(path).fs
     data_paths = fs.glob(path, **kwargs)
-
+    protocol = get_protocol(path)
     # Append path prefix if needed
-    if fs.protocol not in ["file", "https", "http"]:
-
-        protocol = fs.protocol
-        if isinstance(protocol, tuple):
-            protocol = fs.protocol[0]
-
+    if protocol not in ["file", "https", "http"]:
         data_paths = [f"{protocol}://{d}" for d in data_paths]
 
     return data_paths
