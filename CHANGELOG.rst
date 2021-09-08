@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.6
+====================
+
+**Changed:**
+
+* `get_protocol` is more general
+
+**Fixed:**
+
+* Bug in fs.glob due to protocol being a list
+
+**Authors:**
+
+* Emmanuel Noutahi
+
+
+
 v0.4.5
 ====================
 
