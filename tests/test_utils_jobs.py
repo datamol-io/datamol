@@ -101,7 +101,7 @@ class TestJobs(unittest.TestCase):
 
         results = dm.parallelized(
             fn,
-            [i for i in range(10)],
+            range(10),
             scheduler="processes",
             n_jobs=None,
             progress=False,
@@ -137,3 +137,28 @@ class TestJobs(unittest.TestCase):
             tqdm_kwargs=dict(desc="My progress bar"),
         )
         assert results == [0, 1, 4, 9, 16, 25, 36, 49, 64, 81]
+
+    def test_with_batch_size(self):
+        def _fn(n):
+            return n
+
+        def _fn_return_none(n):
+            return None
+
+        results = dm.utils.parallelized(
+            _fn,
+            range(997),
+            n_jobs=-1,
+            progress=True,
+            batch_size=10,
+        )
+        assert len(results) == 997
+
+        results = dm.utils.parallelized(
+            _fn_return_none,
+            range(997),
+            n_jobs=-1,
+            progress=True,
+            batch_size=10,
+        )
+        assert len(results) == 997
