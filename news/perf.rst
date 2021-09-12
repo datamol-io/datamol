@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* Add a `batch_size` option to `dm.utils.parallelized`. The default behaviour `batch_size=None` is unchanged and so 100% backward compatible.
 
 **Deprecated:**
 

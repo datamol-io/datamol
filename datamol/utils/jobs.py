@@ -1,12 +1,16 @@
 from typing import Iterable
+from typing import Sequence
 from typing import Callable
 from typing import Optional
 from typing import Any
 from typing import List
 
 import contextlib
+import itertools
+
 import joblib
 from joblib import Parallel, delayed
+
 from tqdm.auto import tqdm
 
 
@@ -14,6 +18,7 @@ class JobRunner:
     def __init__(
         self,
         n_jobs: Optional[int] = -1,
+        batch_size: int = None,
         prefer: str = None,
         progress: bool = False,
         tqdm_kwargs: dict = None,
@@ -27,6 +32,9 @@ class JobRunner:
             n_jobs: Number of process. Use 0 or None to force sequential.
                 Use -1 to use all the available processors. For details see
                 https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
+            batch_size: Whether to automatically batch `inputs_list`. You should only use it when the length
+                of `inputs_list` is very large (>100k elements). The length of `inputs_list` must also be
+                defined.
             prefer: Choose from ['processes', 'threads'] or None. Default to None.
                 Soft hint to choose the default backend if no specific backend
                 was selected with the parallel_backend context manager. The
@@ -45,7 +53,9 @@ class JobRunner:
         results = runner(lambda x: x**2, [1, 2, 3, 4])
         ```
         """
+
         self.n_jobs = n_jobs
+        self.batch_size = batch_size
         self.prefer = prefer
         self.job_kwargs = job_kwargs
         self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer)
@@ -60,7 +70,7 @@ class JobRunner:
     @staticmethod
     def wrap_fn(fn: Callable, arg_type: Optional[str] = None, **fn_kwargs):
         """Small wrapper around a callable to properly format it's argument"""
-        # EN probably use something like (moms.utils.commons.is_callable) ?
+
         def _run(args: Any):
             if arg_type == "kwargs":
                 fn_kwargs.update(**args)
@@ -70,6 +80,124 @@ class JobRunner:
             return fn(args, **fn_kwargs)
 
         return _run
+
+    def sequential(
+        self,
+        callable_fn: Callable,
+        data: Iterable[Any],
+        arg_type: Optional[str] = None,
+        **fn_kwargs,
+    ):
+        """
+        Run job in sequential version
+
+        Args:
+            callable_fn (callable): function to call
+            data (iterable): input data
+            arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
+            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
+        """
+
+        data, total_length, original_length = self._batch_inputs(data)
+
+        results = [
+            JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs)(dt)
+            for dt in tqdm(data, total=total_length, disable=self.no_progress, **self.tqdm_kwargs)
+        ]
+
+        results = self._unbatch_results(results, original_length)
+        return results
+
+    def parallel(
+        self,
+        callable_fn: Callable,
+        data: Iterable[Any],
+        arg_type: Optional[str] = None,
+        **fn_kwargs,
+    ):
+        """
+        Run job in parallel
+
+        Args:
+            callable_fn (callable): function to call
+            data (iterable): input data
+            arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
+            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
+        """
+
+        data, total_length, original_length = self._batch_inputs(data)
+
+        runner = JobRunner._parallel_helper(**self.job_kwargs)
+        results = runner(total=total_length, disable=self.no_progress, **self.tqdm_kwargs)(
+            delayed(JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs))(dt) for dt in data
+        )
+
+        assert results is not None
+        results = self._unbatch_results(results, original_length)
+        return results
+
+    def __call__(self, *args, **kwargs):
+        """
+        Run job using the n_jobs attribute to determine regime
+        """
+        if self.is_sequential:
+            return self.sequential(*args, **kwargs)
+        return self.parallel(*args, **kwargs)
+
+    def _batch_inputs(self, data: Iterable[Any]):
+        """Batch the input data is `batch_size` is set. Return unchanged otherwise."""
+
+        total_length = JobRunner.get_iterator_length(data)
+        original_length = total_length
+
+        if self.batch_size is None or self.batch_size == 1:
+            return data, total_length, original_length
+
+        # If batch_size is set, the length of the inputs must be defined.
+        if total_length is None or not isinstance(data, Sequence):
+            raise ValueError(
+                f"batch_size is set to {self.batch_size} but the length of the input data are not defined (`__len__()`)."
+            )
+
+        batch_data = [
+            data[i : i + self.batch_size] for i in range(0, total_length, self.batch_size)
+        ]
+
+        return batch_data, len(batch_data), original_length
+
+    def _unbatch_results(self, results: Sequence[Any], original_length: Optional[int]):
+        """Unbatch the input data is `batch_size` is set. Return unchanged otherwise."""
+
+        if self.batch_size is None or self.batch_size == 1:
+            return results
+
+        try:
+            # Since results is an iterable we can't check the type of the first
+            # item which can sometime be None.
+            return JobRunner.flatten_list_of_lists(results)
+
+        except TypeError:
+
+            # Batch is not allowed on Iterable without defined length.
+            assert original_length is not None
+
+            # Return a list of None of the same size of the input.
+            return [None] * original_length
+
+    @staticmethod
+    def _parallel_helper(**joblib_args):
+        r"""
+        Parallel helper function for joblib with tqdm support
+        """
+
+        def run(**tq_args):
+            def tmp(op_iter):
+                with _tqdm_callback(tqdm(**tq_args)):
+                    return Parallel(**joblib_args)(op_iter)
+
+            return tmp
+
+        return run
 
     @staticmethod
     def get_iterator_length(data):
@@ -82,75 +210,13 @@ class JobRunner:
             pass
         return total_length
 
-    def sequential(
-        self,
-        callable_fn: Callable,
-        data: Iterable[Any],
-        arg_type: Optional[str] = None,
-        **fn_kwargs,
-    ):
-        r"""
-        Run job in sequential version
-
-        Args:
-            callable_fn (callable): function to call
-            data (iterable): input data
-            arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
-            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
-        """
-
-        total_length = JobRunner.get_iterator_length(data)
-        res = [
-            JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs)(dt)
-            for dt in tqdm(data, total=total_length, disable=self.no_progress, **self.tqdm_kwargs)
-        ]
-        return res
-
-    def parallel(
-        self,
-        callable_fn: Callable,
-        data: Iterable[Any],
-        arg_type: Optional[str] = None,
-        **fn_kwargs,
-    ):
-        r"""
-        Run job in parallel
-
-        Args:
-            callable_fn (callable): function to call
-            data (iterable): input data
-            arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
-            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
-        """
-        runner = JobRunner._parallel_helper(**self.job_kwargs)
-        total_length = JobRunner.get_iterator_length(data)
-        results = runner(total=total_length, disable=self.no_progress, **self.tqdm_kwargs)(
-            delayed(JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs))(dt) for dt in data
-        )
-        return results
-
-    def __call__(self, *args, **kwargs):
-        """
-        Run job using the n_jobs attribute to determine regime
-        """
-        if self.is_sequential:
-            return self.sequential(*args, **kwargs)
-        return self.parallel(*args, **kwargs)
-
     @staticmethod
-    def _parallel_helper(**joblib_args):
-        r"""
-        Parallel helper function for joblib with tqdm support
+    def flatten_list_of_lists(data: Iterable[Any]):
+        """Fast list of lists flatten function.
+
+        See https://stackoverflow.com/a/40813764/458130.
         """
-
-        def run(**tq_args):
-            def tmp(op_iter):
-                with _tqdm_callback(tqdm(**tq_args)) as pbar:
-                    return Parallel(**joblib_args)(op_iter)
-
-            return tmp
-
-        return run
+        return list(itertools.chain.from_iterable(data))
 
 
 @contextlib.contextmanager
@@ -179,11 +245,12 @@ def parallelized(
     inputs_list: Iterable[Any],
     scheduler: str = "processes",
     n_jobs: Optional[int] = -1,
+    batch_size: int = None,
     progress: bool = False,
     arg_type: str = "arg",
     tqdm_kwargs: dict = None,
     **job_kwargs,
-) -> Optional[List[Any]]:
+) -> Sequence[Optional[Any]]:
     """Run a function in parallel.
 
     Args:
@@ -194,6 +261,9 @@ def parallelized(
         n_jobs: Number of process. Use 0 or None to force sequential.
                 Use -1 to use all the available processors. For details see
                 https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
+        batch_size: Whether to automatically batch `inputs_list`. You should only use it when the length
+            of `inputs_list` is very large (>100k elements). The length of `inputs_list` must also be
+            defined.
         progress: Display a progress bar. Defaults to False.
         arg_type: One of ["arg", "args", "kwargs]:
             - "arg": the input is passed as an argument: `fn(arg)` (default).
@@ -208,6 +278,7 @@ def parallelized(
 
     runner = JobRunner(
         n_jobs=n_jobs,
+        batch_size=batch_size,
         progress=progress,
         prefer=scheduler,
         tqdm_kwargs=tqdm_kwargs,
