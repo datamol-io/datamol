@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.7
+====================
+
+**Added:**
+
+* Add a new function to measure execution time `dm.utils.perf.watch_duration`.
+
+**Changed:**
+
+* Add a `batch_size` option to `dm.utils.parallelized`. The default behaviour `batch_size=None` is unchanged and so 100% backward compatible.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.6
 ====================
 
