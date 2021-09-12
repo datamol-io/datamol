@@ -101,7 +101,7 @@ class TestJobs(unittest.TestCase):
 
         results = dm.parallelized(
             fn,
-            [i for i in range(10)],
+            range(10),
             scheduler="processes",
             n_jobs=None,
             progress=False,

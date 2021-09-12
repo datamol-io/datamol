@@ -33,7 +33,7 @@ class watch_duration:
 
     Args:
         log: Whether to log the measured duration.
-        human_duration: Whether to log duration in a human way
+        log_human_duration: Whether to log duration in a human way
             depending on the amount.
 
     Example:
@@ -51,21 +51,24 @@ class watch_duration:
     ```
     """
 
-    def __init__(self, log: bool = True, human_duration: bool = True):
+    def __init__(self, log: bool = True, log_human_duration: bool = True):
         self.log = log
-        self.human_duration = human_duration
+        self.log_human_duration = log_human_duration
+
+        self.duration = None
+        self.duration_minutes = None
 
     def __enter__(self):
         self.start = time.time()
         return self
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, **kwargs):
         self.end = time.time()
         self.duration = self.end - self.start
         self.duration_minutes = self.duration / 60
 
         if self.log:
-            if self.human_duration:
+            if self.log_human_duration:
                 logger.info(f"Duration {human_duration(self.duration)}.")
             else:
                 logger.info(f"Duration {self.duration_minutes:.2f} minutes")
