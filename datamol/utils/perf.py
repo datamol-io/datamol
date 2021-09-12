@@ -55,6 +55,8 @@ class watch_duration:
         self.log = log
         self.log_human_duration = log_human_duration
 
+        self.start = None
+        self.end = None
         self.duration = None
         self.duration_minutes = None
 
@@ -63,6 +65,9 @@ class watch_duration:
         return self
 
     def __exit__(self, **kwargs):
+
+        assert self.start is not None and self.end is not None
+
         self.end = time.time()
         self.duration = self.end - self.start
         self.duration_minutes = self.duration / 60
