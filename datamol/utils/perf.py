@@ -64,9 +64,9 @@ class watch_duration:
         self.start = time.time()
         return self
 
-    def __exit__(self, **kwargs):
+    def __exit__(self, *_):
 
-        assert self.start is not None and self.end is not None
+        assert self.start is not None
 
         self.end = time.time()
         self.duration = self.end - self.start
