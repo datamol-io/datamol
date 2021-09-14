@@ -3,7 +3,6 @@ from typing import Sequence
 from typing import Callable
 from typing import Optional
 from typing import Any
-from typing import List
 
 import contextlib
 import itertools
@@ -154,7 +153,7 @@ class JobRunner:
             return data, total_length, original_length
 
         # If batch_size is set, the length of the inputs must be defined.
-        if total_length is None or not isinstance(data, Sequence):
+        if total_length is None or not isinstance(data, Iterable):
             raise ValueError(
                 f"batch_size is set to {self.batch_size} but the length of the input data are not defined (`__len__()`)."
             )

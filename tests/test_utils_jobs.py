@@ -2,6 +2,7 @@ import math
 import numbers
 import operator
 import unittest
+import numpy as np
 from functools import reduce
 
 import datamol as dm
@@ -42,10 +43,16 @@ class TestJobs(unittest.TestCase):
         )
         self.assertEqual(o4, [6, 4 * 5 * 6, 0])
 
+        o5 = jobrunner(random_fn, np.asarray([9, 25, 1024]), op="add")
+        self.assertEqual(o5, [9, 25, 1024])
+
     def test_parallel(self):
         jobrunner1 = dm.JobRunner(n_jobs=4, progress=True)  # use loky backend
         o1 = jobrunner1(random_fn, [9, 25, 1024], op="add")
         self.assertEqual(o1, [9, 25, 1024])
+
+        o5 = jobrunner1(random_fn, np.asarray([9, 25, 1024]), op="add")
+        self.assertEqual(o5, [9, 25, 1024])
 
         o3 = jobrunner1(random_fn, [(1, 2, 3), (4, 5, 6), (3, 4, 0)], arg_type="args", op="mul")
         self.assertEqual(o3, [6, 4 * 5 * 6, 0])
