@@ -1,0 +1,50 @@
+:root {
+  --datamol-primary: #f2994a;
+  --datamol-secondary: #343a40;
+
+  /* Primary color shades */
+  --md-primary-fg-color: var(--datamol-primary);
+  --md-primary-fg-color--light: var(--datamol-primary);
+  --md-primary-fg-color--dark: var(--datamol-primary);
+  --md-primary-bg-color: var(--datamol-secondary);
+  --md-primary-bg-color--light: var(--datamol-secondary);
+  --md-text-link-color: var(--datamol-secondary);
+
+  /* Accent color shades */
+  --md-accent-fg-color: var(--datamol-secondary);
+  --md-accent-fg-color--transparent: var(--datamol-secondary);
+  --md-accent-bg-color: var(--datamol-secondary);
+  --md-accent-bg-color--light: var(--datamol-secondary);
+}
+
+:root > * {
+  /* Code block color shades */
+  --md-code-bg-color: hsla(0, 0%, 96%, 1);
+  --md-code-fg-color: hsla(200, 18%, 26%, 1);
+
+  /* Footer */
+  --md-footer-bg-color: var(--datamol-primary);
+  /* --md-footer-bg-color--dark: hsla(0, 0%, 0%, 0.32); */
+  --md-footer-fg-color: var(--datamol-secondary);
+  --md-footer-fg-color--light: var(--datamol-secondary);
+  --md-footer-fg-color--lighter: var(--datamol-secondary);
+}
+
+/* Increase the size of the logo */
+.md-header__button.md-logo img,
+.md-header__button.md-logo svg {
+  width: 4em;
+  height: 4em;
+}
+
+/* Reduce the margin around the logo */
+.md-header__button.md-logo {
+  margin: 0em;
+  padding: 0em;
+}
+
+/* Remove the `In` and `Out` block in rendered Jupyter notebooks */
+.md-container .jp-Cell-outputWrapper .jp-OutputPrompt.jp-OutputArea-prompt,
+.md-container .jp-Cell-inputWrapper .jp-InputPrompt.jp-InputArea-prompt {
+  display: none;
+}
