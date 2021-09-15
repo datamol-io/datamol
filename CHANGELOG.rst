@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.8
+====================
+
+**Removed:**
+
+* Revert batch_size fix to use default joblib instead
+
+**Fixed:**
+
+* Issue #58: sequence bug in parallel.
+
+**Authors:**
+
+* Emmanuel Noutahi
+
+
+
 v0.4.7
 ====================
 
