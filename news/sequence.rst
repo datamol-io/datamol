@@ -12,7 +12,7 @@
 
 **Removed:**
 
-* <news item>
+* Revert batch_size fix to use default joblib instead
 
 **Fixed:**
 

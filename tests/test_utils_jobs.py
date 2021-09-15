@@ -147,7 +147,7 @@ class TestJobs(unittest.TestCase):
 
     def test_with_batch_size(self):
         def _fn(n):
-            return n
+            return n * 3
 
         def _fn_return_none(n):
             return None

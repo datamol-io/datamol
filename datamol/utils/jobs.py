@@ -31,9 +31,8 @@ class JobRunner:
             n_jobs: Number of process. Use 0 or None to force sequential.
                 Use -1 to use all the available processors. For details see
                 https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
-            batch_size: Whether to automatically batch `inputs_list`. You should only use it when the length
-                of `inputs_list` is very large (>100k elements). The length of `inputs_list` must also be
-                defined.
+            batch_size: Whether to  batch `inputs_list`. You can specify batch_size when the length
+                of `inputs_list` is very large (>100k elements). By default, the auto batching of joblib is used.
             prefer: Choose from ['processes', 'threads'] or None. Default to None.
                 Soft hint to choose the default backend if no specific backend
                 was selected with the parallel_backend context manager. The
@@ -54,10 +53,10 @@ class JobRunner:
         """
 
         self.n_jobs = n_jobs
-        self.batch_size = batch_size
+        self.batch_size = batch_size or "auto"
         self.prefer = prefer
         self.job_kwargs = job_kwargs
-        self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer)
+        self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer, batch_size=self.batch_size)
         self.no_progress = not progress
         self.tqdm_kwargs = tqdm_kwargs or {}
 
@@ -96,15 +95,12 @@ class JobRunner:
             arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
             fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
         """
-
-        data, total_length, original_length = self._batch_inputs(data)
+        total_length = JobRunner.get_iterator_length(data)
 
         results = [
             JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs)(dt)
             for dt in tqdm(data, total=total_length, disable=self.no_progress, **self.tqdm_kwargs)
         ]
-
-        results = self._unbatch_results(results, original_length)
         return results
 
     def parallel(
@@ -124,15 +120,13 @@ class JobRunner:
             fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
         """
 
-        data, total_length, original_length = self._batch_inputs(data)
+        total_length = JobRunner.get_iterator_length(data)
 
         runner = JobRunner._parallel_helper(**self.job_kwargs)
         results = runner(total=total_length, disable=self.no_progress, **self.tqdm_kwargs)(
             delayed(JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs))(dt) for dt in data
         )
 
-        assert results is not None
-        results = self._unbatch_results(results, original_length)
         return results
 
     def __call__(self, *args, **kwargs):
@@ -142,46 +136,6 @@ class JobRunner:
         if self.is_sequential:
             return self.sequential(*args, **kwargs)
         return self.parallel(*args, **kwargs)
-
-    def _batch_inputs(self, data: Iterable[Any]):
-        """Batch the input data is `batch_size` is set. Return unchanged otherwise."""
-
-        total_length = JobRunner.get_iterator_length(data)
-        original_length = total_length
-
-        if self.batch_size is None or self.batch_size == 1:
-            return data, total_length, original_length
-
-        # If batch_size is set, the length of the inputs must be defined.
-        if total_length is None or not isinstance(data, Iterable):
-            raise ValueError(
-                f"batch_size is set to {self.batch_size} but the length of the input data are not defined (`__len__()`)."
-            )
-
-        batch_data = [
-            data[i : i + self.batch_size] for i in range(0, total_length, self.batch_size)
-        ]
-
-        return batch_data, len(batch_data), original_length
-
-    def _unbatch_results(self, results: Sequence[Any], original_length: Optional[int]):
-        """Unbatch the input data is `batch_size` is set. Return unchanged otherwise."""
-
-        if self.batch_size is None or self.batch_size == 1:
-            return results
-
-        try:
-            # Since results is an iterable we can't check the type of the first
-            # item which can sometime be None.
-            return JobRunner.flatten_list_of_lists(results)
-
-        except TypeError:
-
-            # Batch is not allowed on Iterable without defined length.
-            assert original_length is not None
-
-            # Return a list of None of the same size of the input.
-            return [None] * original_length
 
     @staticmethod
     def _parallel_helper(**joblib_args):
@@ -208,14 +162,6 @@ class JobRunner:
             # most likely a generator, ignore
             pass
         return total_length
-
-    @staticmethod
-    def flatten_list_of_lists(data: Iterable[Any]):
-        """Fast list of lists flatten function.
-
-        See https://stackoverflow.com/a/40813764/458130.
-        """
-        return list(itertools.chain.from_iterable(data))
 
 
 @contextlib.contextmanager
