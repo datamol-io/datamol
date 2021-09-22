@@ -4,6 +4,25 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.9
+====================
+
+**Added:**
+
+* `to_smarts` for exporting molecule objects as SMARTS
+* `from_smarts` for reading molecule from SMARTS string
+
+**Changed:**
+
+* Allow exporting smiles in kekule representaiton 
+* `to_smarts` is properly renamed into `smiles_as_smarts`
+
+**Authors:**
+
+* Emmanuel Noutahi
+
+
+
 v0.4.8
 ====================
 
