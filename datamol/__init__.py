@@ -64,6 +64,8 @@ from .convert import to_smiles
 from .convert import to_selfies
 from .convert import from_selfies
 from .convert import to_smarts
+from .convert import from_smarts
+from .convert import smiles_as_smarts
 from .convert import to_inchi
 from .convert import to_inchikey
 from .convert import from_inchi
