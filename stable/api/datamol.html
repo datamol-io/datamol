@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.6">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.2.8">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.802231af.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.92558b1b.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -627,6 +627,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#datamol.convert.smiles_as_smarts" class="md-nav__link">
+    smiles_as_smarts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#datamol.convert.to_selfies" class="md-nav__link">
     to_selfies()
   </a>
@@ -643,6 +650,13 @@
           <li class="md-nav__item">
   <a href="#datamol.convert.to_smarts" class="md-nav__link">
     to_smarts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.convert.from_smarts" class="md-nav__link">
+    from_smarts()
   </a>
   
 </li>
@@ -1402,6 +1416,13 @@
 </li>
         
           <li class="md-nav__item">
+  <a href="#datamol.convert.smiles_as_smarts" class="md-nav__link">
+    smiles_as_smarts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#datamol.convert.to_selfies" class="md-nav__link">
     to_selfies()
   </a>
@@ -1418,6 +1439,13 @@
           <li class="md-nav__item">
   <a href="#datamol.convert.to_smarts" class="md-nav__link">
     to_smarts()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.convert.from_smarts" class="md-nav__link">
+    from_smarts()
   </a>
   
 </li>
@@ -4099,7 +4127,7 @@ can exist.</p></td>
 
 
 <h4 id="datamol.convert.to_smiles" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">explicit_bonds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">explicit_hs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cxsmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_to_fail</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">canonical</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ordered</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">explicit_bonds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">explicit_hs</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">randomize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cxsmiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_to_fail</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.convert.to_smiles" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -4136,6 +4164,12 @@ can exist.</p></td>
         <td><code>bool</code></td>
         <td><p>whether to include information about stereochemistry in the SMILES.</p></td>
         <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>kekulize</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to return the kekule version of the SMILES.</p></td>
+        <td><code>False</code></td>
       </tr>
       <tr>
         <td><code>ordered</code></td>
@@ -4181,6 +4215,7 @@ can exist.</p></td>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">isomeric</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">kekulize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">ordered</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">explicit_bonds</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">explicit_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -4194,6 +4229,7 @@ can exist.</p></td>
 <span class="sd">        mol: a molecule.</span>
 <span class="sd">        canonical: if false no attempt will be made to canonicalize the molecule.</span>
 <span class="sd">        isomeric: whether to include information about stereochemistry in the SMILES.</span>
+<span class="sd">        kekulize: whether to return the kekule version of the SMILES.</span>
 <span class="sd">        ordered: whether to force reordering of the atoms first.</span>
 <span class="sd">        explicit_bonds: if true, all bond orders will be explicitly indicated in the output SMILES.</span>
 <span class="sd">        explicit_hs: if true, all H counts will be explicitly indicated in the output SMILES.</span>
@@ -4218,6 +4254,7 @@ can exist.</p></td>
                 <span class="n">canonical</span><span class="o">=</span><span class="n">canonical</span><span class="p">,</span>
                 <span class="n">allBondsExplicit</span><span class="o">=</span><span class="n">explicit_bonds</span><span class="p">,</span>
                 <span class="n">allHsExplicit</span><span class="o">=</span><span class="n">explicit_hs</span><span class="p">,</span>
+                <span class="n">kekuleSmiles</span><span class="o">=</span><span class="n">kekulize</span><span class="p">,</span>
             <span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
@@ -4227,6 +4264,7 @@ can exist.</p></td>
                 <span class="n">canonical</span><span class="o">=</span><span class="n">canonical</span><span class="p">,</span>
                 <span class="n">allBondsExplicit</span><span class="o">=</span><span class="n">explicit_bonds</span><span class="p">,</span>
                 <span class="n">allHsExplicit</span><span class="o">=</span><span class="n">explicit_hs</span><span class="p">,</span>
+                <span class="n">kekuleSmiles</span><span class="o">=</span><span class="n">kekulize</span><span class="p">,</span>
             <span class="p">)</span>
 
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
@@ -4237,6 +4275,108 @@ can exist.</p></td>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">smiles</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.convert.smiles_as_smarts" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">smiles_as_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">keep_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.convert.smiles_as_smarts" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Convert a smiles to a smarts if possible</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Union[str, rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>a molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>keep_hs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to keep hydrogen. This will increase the count of H atoms
+for atoms with attached hydrogens to create a valid smarts without further substitution allowed
+e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>Optional[str]</code></td>
+      <td><p>smarts of the molecule</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/convert.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">smiles_as_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">keep_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a smiles to a smarts if possible</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        keep_hs: Whether to keep hydrogen. This will increase the count of H atoms</span>
+<span class="sd">            for atoms with attached hydrogens to create a valid smarts without further substitution allowed</span>
+<span class="sd">            e.g. [H]-[CH]-[*] -&gt; [H]-[CH2]-[*]</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        smarts of the molecule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="c1"># Change the isotope to 99</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
+        <span class="k">if</span> <span class="n">keep_hs</span><span class="p">:</span>
+            <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">na</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">na</span> <span class="ow">in</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetNeighbors</span><span class="p">())</span>
+            <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
+                <span class="n">atom</span><span class="o">.</span><span class="n">SetNumExplicitHs</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">()</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span>
+        <span class="n">atom</span><span class="o">.</span><span class="n">SetIsotope</span><span class="p">(</span><span class="mi">99</span><span class="p">)</span>
+
+    <span class="c1"># Print out the smiles, all the atom attributes will be fully specified</span>
+    <span class="n">smarts</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">explicit_bonds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">smarts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Remove the 99 isotope labels</span>
+    <span class="n">smarts</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[99&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="n">smarts</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">smarts</span>
 </code></pre></div>
         </details>
     </div>
@@ -4412,14 +4552,14 @@ can exist.</p></td>
 
 
 <h4 id="datamol.convert.to_smarts" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">keep_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
 
 
 <a href="#datamol.convert.to_smarts" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
-      <p>Convert a molecule to a smarts.</p>
+      <p>Convert a mol to SMARTS format</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -4434,73 +4574,80 @@ can exist.</p></td>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code>Union[str, rdkit.Chem.rdchem.Mol]</code></td>
+        <td><code>Mol</code></td>
         <td><p>a molecule.</p></td>
         <td><em>required</em></td>
       </tr>
-      <tr>
-        <td><code>keep_hs</code></td>
-        <td><code>bool</code></td>
-        <td><p>Whether to keep hydrogen. This will increase the count of H atoms
-for atoms with attached hydrogens to create a valid smarts.
-e.g. [H]-[CH2]-[<em>] -&gt; [H]-[CH3]-[</em>]</p></td>
-        <td><code>True</code></td>
-      </tr>
-  </tbody>
-</table>
-<p><strong>Returns:</strong></p>
-<table>
-  <thead>
-    <tr>
-      <th>Type</th>
-      <th>Description</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td><code>Optional[str]</code></td>
-      <td><p>smarts of the molecule</p></td>
-    </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">keep_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Convert a molecule to a smarts.</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a mol to SMARTS format</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
-<span class="sd">        keep_hs: Whether to keep hydrogen. This will increase the count of H atoms</span>
-<span class="sd">            for atoms with attached hydrogens to create a valid smarts.</span>
-<span class="sd">            e.g. [H]-[CH2]-[*] -&gt; [H]-[CH3]-[*]</span>
-
-<span class="sd">    Returns:</span>
-<span class="sd">        smarts of the molecule</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmarts</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
 
-    <span class="c1"># Change the isotope to 42</span>
-    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>  <span class="c1"># type: ignore</span>
-        <span class="k">if</span> <span class="n">keep_hs</span><span class="p">:</span>
-            <span class="n">s</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">na</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">na</span> <span class="ow">in</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetNeighbors</span><span class="p">())</span>
-            <span class="k">if</span> <span class="n">s</span><span class="p">:</span>
-                <span class="n">atom</span><span class="o">.</span><span class="n">SetNumExplicitHs</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetTotalNumHs</span><span class="p">()</span> <span class="o">+</span> <span class="n">s</span><span class="p">)</span>
-        <span class="n">atom</span><span class="o">.</span><span class="n">SetIsotope</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
+  </div>
 
-    <span class="c1"># Print out the smiles, all the atom attributes will be fully specified</span>
-    <span class="n">smarts</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">explicit_bonds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.convert.from_smarts" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">from_smarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span></code>
+
+
+<a href="#datamol.convert.from_smarts" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Convert a SMARTS string to a molecule</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>smarts</code></td>
+        <td><code>Optional[str]</code></td>
+        <td><p>a smarts string</p></td>
+        <td><em>required</em></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/convert.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_smarts</span><span class="p">(</span>
+    <span class="n">smarts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert a SMARTS string to a molecule</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        smarts: a smarts string</span>
+<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">smarts</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-
-    <span class="c1"># Remove the 42 isotope labels</span>
-    <span class="n">smarts</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;\[42&quot;</span><span class="p">,</span> <span class="s2">&quot;[&quot;</span><span class="p">,</span> <span class="n">smarts</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">smarts</span>
+    <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -7371,10 +7518,10 @@ model training.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.409db549.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.94ec81fe.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.756773cc.min.js"></script>
+      <script src="../assets/javascripts/bundle.48dfec6c.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
