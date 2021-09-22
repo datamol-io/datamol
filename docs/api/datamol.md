@@ -45,9 +45,11 @@ The below sections shows you the directly available Datamol functions. For other
 ## Convert molecule(s)
 
 ::: datamol:to_smiles
+::: datamol:smiles_as_smarts
 ::: datamol:to_selfies
 ::: datamol:from_selfies
 ::: datamol:to_smarts
+::: datamol:from_smarts
 ::: datamol:to_inchi
 ::: datamol:to_inchikey
 ::: datamol:from_inchi

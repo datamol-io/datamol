@@ -20,6 +20,7 @@ def to_smiles(
     mol: Chem.rdchem.Mol,
     canonical: bool = True,
     isomeric: bool = True,
+    kekulize: bool = False,
     ordered: bool = False,
     explicit_bonds: bool = False,
     explicit_hs: bool = False,
@@ -33,6 +34,7 @@ def to_smiles(
         mol: a molecule.
         canonical: if false no attempt will be made to canonicalize the molecule.
         isomeric: whether to include information about stereochemistry in the SMILES.
+        kekulize: whether to return the kekule version of the SMILES.
         ordered: whether to force reordering of the atoms first.
         explicit_bonds: if true, all bond orders will be explicitly indicated in the output SMILES.
         explicit_hs: if true, all H counts will be explicitly indicated in the output SMILES.
@@ -57,6 +59,7 @@ def to_smiles(
                 canonical=canonical,
                 allBondsExplicit=explicit_bonds,
                 allHsExplicit=explicit_hs,
+                kekuleSmiles=kekulize,
             )
 
         else:
@@ -66,6 +69,7 @@ def to_smiles(
                 canonical=canonical,
                 allBondsExplicit=explicit_bonds,
                 allHsExplicit=explicit_hs,
+                kekuleSmiles=kekulize,
             )
 
     except Exception as e:
@@ -122,14 +126,14 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem
     return smiles
 
 
-def to_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optional[str]:
-    """Convert a molecule to a smarts.
+def smiles_as_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optional[str]:
+    """Convert a smiles to a smarts if possible
 
     Args:
         mol: a molecule.
         keep_hs: Whether to keep hydrogen. This will increase the count of H atoms
-            for atoms with attached hydrogens to create a valid smarts.
-            e.g. [H]-[CH2]-[*] -> [H]-[CH3]-[*]
+            for atoms with attached hydrogens to create a valid smarts without further substitution allowed
+            e.g. [H]-[CH]-[*] -> [H]-[CH2]-[*]
 
     Returns:
         smarts of the molecule
@@ -141,13 +145,13 @@ def to_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optiona
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
 
-    # Change the isotope to 42
+    # Change the isotope to 99
     for atom in mol.GetAtoms():  # type: ignore
         if keep_hs:
             s = sum(na.GetAtomicNum() == 1 for na in atom.GetNeighbors())
             if s:
                 atom.SetNumExplicitHs(atom.GetTotalNumHs() + s)
-        atom.SetIsotope(42)
+        atom.SetIsotope(99)
 
     # Print out the smiles, all the atom attributes will be fully specified
     smarts = to_smiles(mol, isomeric=True, explicit_bonds=True)
@@ -155,8 +159,8 @@ def to_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optiona
     if smarts is None:
         return None
 
-    # Remove the 42 isotope labels
-    smarts = re.sub(r"\[42", "[", smarts)
+    # Remove the 99 isotope labels
+    smarts = re.sub(r"\[99", "[", smarts)
     return smarts
 
 
@@ -174,6 +178,19 @@ def to_inchi(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
         mol = dm.to_mol(mol)
 
     return Chem.MolToInchi(mol)
+
+
+def to_smarts(mol: Chem.rdchem.Mol) -> Optional[str]:
+    """Convert a mol to SMARTS format
+
+    Args:
+        mol: a molecule.
+    """
+
+    if mol is None:
+        return None
+
+    return Chem.MolToSmarts(mol)
 
 
 def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
@@ -211,6 +228,20 @@ def from_inchi(
         return None
 
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
+
+
+def from_smarts(
+    smarts: Optional[str],
+) -> Optional[Chem.rdchem.Mol]:
+    """Convert a SMARTS string to a molecule
+
+    Args:
+        smarts: a smarts string
+    """
+
+    if smarts is None:
+        return None
+    return Chem.MolFromSmarts(smarts)
 
 
 def to_df(

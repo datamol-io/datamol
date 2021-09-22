@@ -38,6 +38,12 @@ def test_to_smiles():
     )
     assert smiles == "[CH3][C](=[O])[O][c]1[cH][cH][cH][cH][c]1[C](=[O])[OH]"
 
+    mol = dm.to_mol(mol, kekulize=True)
+    smiles = dm.to_smiles(
+        mol, isomeric=True, ordered=False, explicit_bonds=False, explicit_hs=False, kekulize=True
+    )
+    assert smiles == "CC(=O)OC1=CC=CC=C1C(=O)O"
+
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     randomized_smiles = dm.to_smiles(mol, randomize=True)
@@ -73,17 +79,32 @@ def test_from_selfies():
     assert dm.to_smiles(mol) == "CC(=O)Oc1ccccc1C(=O)O"
 
 
-def test_to_smarts():
+def test_smiles_as_smarts():
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
 
-    smarts = dm.to_smarts(mol, keep_hs=True)
+    smarts = dm.smiles_as_smarts(mol, keep_hs=True)
     assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
 
-    smarts = dm.to_smarts(mol, keep_hs=False)
+    smarts = dm.smiles_as_smarts(smiles, keep_hs=False)
     assert smarts == "[CH3]-[C](=[O])-[O]-[c]1:[cH]:[cH]:[cH]:[cH]:[c]:1-[C](=[O])-[OH]"
 
-    assert dm.to_smarts(None) is None
+    assert dm.smiles_as_smarts(None) is None
+
+
+def test_to_smarts():
+    smarts = "[OX2H][CX3]=[OX1]"
+    mol = Chem.MolFromSmarts(smarts)
+    expected_out = dm.to_smarts(mol)
+    assert expected_out == "[O&X2&H1][C&X3]=[O&X1]"
+
+
+def test_from_smarts():
+    smarts = "[OX2H][CX3]=[OX1]"
+    smiles = "O=C(C)Oc1ccccc1C(=O)O"
+    query = dm.from_smarts(smarts)
+    mol = dm.to_mol(smiles)
+    assert mol.HasSubstructMatch(query)
 
 
 def test_inchi():
