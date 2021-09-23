@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.10
+====================
+
+**Removed:**
+
+* `py.typed` file that seems unused beside confusing static analyzer tools.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.9
 ====================
 
