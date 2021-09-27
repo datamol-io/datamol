@@ -373,6 +373,7 @@ def recursive_ls(dir_path: str, _fs=None):
 
     return all_paths
 
+
 # def copy_dir():
 #     source = "/home/hadim/test-dm/original/"
 #     source = "gs://hadrien-data/test-dm/original"
