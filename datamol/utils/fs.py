@@ -139,15 +139,17 @@ def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return False
 
 
-def get_protocol(path: Union[str, os.PathLike]):
+def get_protocol(path: Union[str, os.PathLike], fs: fsspec.AbstractFileSystem = None):
     """Return the name of the path protocol.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
 
-    mapper = get_mapper(path)
-    protocol = mapper.fs.protocol
+    if fs is None:
+        fs = get_mapper(path).fs
+
+    protocol = fs.protocol
 
     if "s3" in protocol:
         return "s3"
@@ -243,7 +245,7 @@ def copy_file(
         destination_file = destination
 
     if not is_file(source_file):
-        raise ValueError(f"The file being copied does not exist: {source}")
+        raise ValueError(f"The file being copied does not exist or is not a file: {source}")
 
     if not force and is_file(destination_file):
         raise ValueError(f"The destination file to copy already exists: {destination}")
@@ -327,3 +329,83 @@ def glob(path: str, **kwargs) -> List[str]:
         data_paths = [f"{protocol}://{d}" for d in data_paths]
 
     return data_paths
+
+
+def prefix_with_protocol(path: str, fs: fsspec.AbstractFileSystem):
+    """Given a filesystem, prefix a path with the protocol.
+
+    Args:
+        path: The path to prefix.
+        fs: The filesystem to prefix with.
+    """
+    protocol = get_protocol(path, fs=fs)
+    if protocol != "file":
+        return f"{protocol}://{path}"
+    return path
+
+
+def recursive_ls(dir_path: str, _fs=None):
+    """Recursively list all files and directories within
+    a given directory. Every list element is a tuple
+    similar to:
+
+    `[("/my/path/hello.txt", "file"), ("/my/path/dir1", "directory"), ...]`
+
+    Args:
+        dir_path: Directory path.
+    """
+
+    if _fs is None:
+        fs = get_mapper(dir_path).fs
+    else:
+        fs = _fs
+
+    all_paths = []
+    for path in fs.ls(dir_path, detail=True):
+
+        prefixed_path = prefix_with_protocol(path["name"], fs=fs)
+
+        if path["type"] == "directory":
+            all_paths.append((prefixed_path, "directory"))
+            all_paths += recursive_ls(path["name"], _fs=fs)
+        elif path["type"] == "file":
+            all_paths.append((prefixed_path, "file"))
+
+    return all_paths
+
+# def copy_dir():
+#     source = "/home/hadim/test-dm/original/"
+#     source = "gs://hadrien-data/test-dm/original"
+
+#     destination = "/home/hadim/test-dm/destination"
+
+#     chunk_size: int = None
+#     force: bool = False
+#     progress: bool = False
+#     leave_progress: bool = True
+#     global_progress: bool = True
+#     global_leave_progress: bool = True
+
+#     # Sanity check
+#     if not dm.utils.fs.is_dir(source):
+#         raise ValueError(f"The directory being copied does not exist or is not a directory: {source}")
+
+#     # Get the source filesystem
+#     source_fs = dm.utils.fs.get_mapper(source).fs
+
+#     # Get the destination filesystem
+#     destination_fs = dm.utils.fs.get_mapper(destination).fs
+
+#     # List all files and directories
+#     all_paths = dm.utils.fs.recursive_ls(dir_path)
+
+#     for path, path_type in tqdm(all_paths):
+
+#         if path_type == "directory":
+#             # call makedir
+#             pass
+#         elif path_type == "file":
+#             pass
+#             # dm.utils.fs.copy_file(
+
+#     # TODO: find a way to get the relative path to the source
