@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.0">
+      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.8b42a75e.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.24c991ad.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -1922,8 +1922,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: the molecule if some conversion have been made. If the conversion fails
+      <td><code>mol</code></td>
+      <td><p>the molecule if some conversion have been made. If the conversion fails
 None is returned so make sure that you handle this case on your own.</p></td>
     </tr>
   </tbody>
@@ -2098,8 +2098,8 @@ regardless of its original representation.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: a molecule.</p></td>
+      <td><code>mol</code></td>
+      <td><p>a molecule.</p></td>
     </tr>
   </tbody>
 </table>
@@ -2185,8 +2185,8 @@ regardless of its original representation.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: a molecule.</p></td>
+      <td><code>mol</code></td>
+      <td><p>a molecule.</p></td>
     </tr>
   </tbody>
 </table>
@@ -2258,8 +2258,8 @@ regardless of its original representation.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: a molecule.</p></td>
+      <td><code>mol</code></td>
+      <td><p>a molecule.</p></td>
     </tr>
   </tbody>
 </table>
@@ -2641,8 +2641,8 @@ molecule already contains hydrogens.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: a molecule.</p></td>
+      <td><code>mol</code></td>
+      <td><p>a molecule.</p></td>
     </tr>
   </tbody>
 </table>
@@ -3374,7 +3374,7 @@ that should not be in the graph.</p>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>input molecule with incorrect valence for some atoms</p></td>
         <td><em>required</em></td>
       </tr>
@@ -3764,8 +3764,8 @@ but not the ethane fragment.</p>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
-      <td><p>mol: Molecule with dummy replaced</p></td>
+      <td><code>mol</code></td>
+      <td><p>Molecule with dummy replaced</p></td>
     </tr>
   </tbody>
 </table>
@@ -4006,7 +4006,7 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p></td>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>The molecule whose state we should enumerate.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -4467,8 +4467,8 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>Optional[str]</code></td>
-      <td><p>selfies: SELFIES string.</p></td>
+      <td><code>selfies</code></td>
+      <td><p>SELFIES string.</p></td>
     </tr>
   </tbody>
 </table>
@@ -4536,7 +4536,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
       </tr>
       <tr>
         <td><code>as_mol</code></td>
-        <td><code>bool</code></td>
+        <td><code>str</code></td>
         <td><p>whether to return a mol or a smiles.</p></td>
         <td><code>False</code></td>
       </tr>
@@ -5227,7 +5227,7 @@ Avoid when loading a very large file.</p></td>
       </tr>
       <tr>
         <td><code>kwargs</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>Arguments to pass to <code>pd.read_csv()</code>.</p></td>
         <td><code>{}</code></td>
       </tr>
@@ -5243,8 +5243,8 @@ Avoid when loading a very large file.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>DataFrame</code></td>
-      <td><p>df: a <code>pandas.DataFrame</code></p></td>
+      <td><code>df</code></td>
+      <td><p>a <code>pandas.DataFrame</code></p></td>
     </tr>
   </tbody>
 </table>
@@ -5335,7 +5335,7 @@ Avoid when loading a very large file.</p></td>
       </tr>
       <tr>
         <td><code>kwargs</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>Arguments to pass to <code>pd.read_excel()</code>.</p></td>
         <td><code>{}</code></td>
       </tr>
@@ -5351,8 +5351,8 @@ Avoid when loading a very large file.</p></td>
   </thead>
   <tbody>
     <tr>
-      <td><code>DataFrame</code></td>
-      <td><p>df: a <code>pandas.DataFrame</code></p></td>
+      <td><code>df</code></td>
+      <td><p>a <code>pandas.DataFrame</code></p></td>
     </tr>
   </tbody>
 </table>
@@ -5860,7 +5860,7 @@ form (1D vector).</p></td>
       </tr>
       <tr>
         <td><code>**fp_args</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>list of args to pass to <code>to_fp()</code>.</p></td>
         <td><code>{}</code></td>
       </tr>
@@ -5973,7 +5973,7 @@ parallelization. Set to None to use all available cores.</p></td>
       </tr>
       <tr>
         <td><code>**fp_args</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>list of args to pass to <code>to_fp()</code>.</p></td>
         <td><code>{}</code></td>
       </tr>
@@ -6096,7 +6096,7 @@ always a numpy array.</p></td>
       </tr>
       <tr>
         <td><code>fp_args</code></td>
-        <td><code></code></td>
+        <td></td>
         <td><p>Arguments to build the fingerprint. Refer to the official RDKit documentation.</p></td>
         <td><code>{}</code></td>
       </tr>
@@ -6745,7 +6745,7 @@ set of picked molecules. Default to None.</p></td>
       </tr>
       <tr>
         <td><code>feature_fn</code></td>
-        <td><code>Callable</code></td>
+        <td><code>callable</code></td>
         <td><p>A feature function that takes a Chem.rdchem.Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
 Default to None.</p></td>
@@ -7059,7 +7059,7 @@ to every nodes and edges.</p>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code>Mol</code></td>
+        <td><code>Chem.Mol</code></td>
         <td><p>a molecule.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -7152,7 +7152,7 @@ to every nodes and edges.</p>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code>Mol</code></td>
+        <td><code>Chem.Mol</code></td>
         <td><p>a molecule</p></td>
         <td><em>required</em></td>
       </tr>
@@ -7338,7 +7338,8 @@ Defaults to False.</p></td>
 
 
 <h4 id="datamol.log.without_rdkit_log" class="doc doc-heading">
-        <code>without_rdkit_log</code>
+        <code>
+without_rdkit_log        </code>
 
 
 
@@ -7559,10 +7560,10 @@ model training.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.f8263e09.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.e99e714c.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.4fc53ad4.min.js"></script>
+      <script src="../assets/javascripts/bundle.bc35569b.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
