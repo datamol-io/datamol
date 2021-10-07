@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.4.11
+====================
+
+**Fixed:**
+
+* Force the input value(s) of `dm.molar.log_to_molar` to be a float since power of integers are not allowed.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.4.10
 ====================
 
