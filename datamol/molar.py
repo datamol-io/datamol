@@ -47,4 +47,4 @@ def log_to_molar(
             f"The unit '{unit}' is not supported. Choose from {set(_MOLAR_SCALES.keys())}."
         )
 
-    return 10 ** (-1 * np.array(values)) / _MOLAR_SCALES[unit]
+    return 10 ** (-1 * np.array(values, dtype="float")) / _MOLAR_SCALES[unit]
