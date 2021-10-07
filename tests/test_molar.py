@@ -7,6 +7,7 @@ import pandas as pd
 
 MOLAR_TEST_VALUES = pd.DataFrame(
     [
+        (1, 6, "uM"),
         (0.059, 7.229147988357856, "uM"),
         (0.024, 7.61978876, "uM"),
         (0.187, 6.72815839, "uM"),
@@ -56,3 +57,8 @@ def test_log_to_molar():
     # test wrong unit
     with pytest.raises(ValueError):
         dm.molar.log_to_molar(7.214, unit="kcal/mol")
+
+
+def test_log_to_molar_with_integer():
+
+    dm.molar.log_to_molar(6, unit="uM")
