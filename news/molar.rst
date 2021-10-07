@@ -16,7 +16,7 @@
 
 **Fixed:**
 
-* Forge the input value(s) of `dm.molar.log_to_molar` to be a float since power of integers are not allowed.
+* Force the input value(s) of `dm.molar.log_to_molar` to be a float since power of integers are not allowed.
 
 **Security:**
 
