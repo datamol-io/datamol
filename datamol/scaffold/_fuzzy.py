@@ -73,10 +73,7 @@ def fuzzy_scaffolding(
     mcs_params: Dict[Any, Any] = None,
 ):
     """Generate fuzzy scaffold with enforceable group that needs to appear
-    in the core, forcing to keep the full side chain if required.
-
-    NOTE(hadim): consider parallelize this (if possible).
-    NOTE(hadim): consider refactoring this function in smaller reusable functions.
+    in the core, forcing to keep the full side chain if required
 
     Args:
         mols: List of all molecules
@@ -94,6 +91,9 @@ def fuzzy_scaffolding(
                 Values at ['mols'] corresponds to list of molecules matching the scaffold
         - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.
     """
+    
+    # NOTE(hadim): consider parallelize this (if possible).
+    # NOTE(hadim): consider refactoring this function in smaller reusable functions.
 
     if enforce_subs is None:
         enforce_subs = []
