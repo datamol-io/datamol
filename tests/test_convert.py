@@ -57,7 +57,7 @@ def test_to_selfies():
     mol = dm.to_mol(smiles)
 
     true_sf = (
-        "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
+        "[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]"
     )
 
     selfies = dm.to_selfies(smiles)
@@ -69,7 +69,7 @@ def test_to_selfies():
 
 def test_from_selfies():
     selfies = (
-        "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
+        "[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]"
     )
 
     smiles = dm.from_selfies(selfies, as_mol=False)
