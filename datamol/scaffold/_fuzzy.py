@@ -91,7 +91,7 @@ def fuzzy_scaffolding(
                 Values at ['mols'] corresponds to list of molecules matching the scaffold
         - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.
     """
-    
+
     # NOTE(hadim): consider parallelize this (if possible).
     # NOTE(hadim): consider refactoring this function in smaller reusable functions.
 
