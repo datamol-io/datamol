@@ -13,7 +13,7 @@ install_requires = [
     "matplotlib",
     "pillow",
     "selfies",
-    "appdirs"
+    "appdirs",
 ]
 
 setup(
