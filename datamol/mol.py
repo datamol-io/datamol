@@ -26,7 +26,7 @@ AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
 
 
-def copy_mol(mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
+def copy_mol(mol: dm.Mol) -> dm.Mol:
     """Copy a molecule and return a new one.
 
     Args:
@@ -36,7 +36,7 @@ def copy_mol(mol: Chem.rdchem.Mol) -> Chem.rdchem.Mol:
 
 
 def to_mol(
-    mol: str,
+    mol: Union[str, dm.Mol],
     add_hs: bool = False,
     explicit_only: bool = False,
     ordered: bool = False,
@@ -46,7 +46,7 @@ def to_mol(
     """Convert an input molecule (smiles representation) into a `Chem.rdchem.Mol`.
 
     Args:
-        mol: SMILES of a molecule or a molecule.
+        mol: A SMILES or a molecule.
         add_hs: Whether hydrogens should be added the molecule.
         explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True.

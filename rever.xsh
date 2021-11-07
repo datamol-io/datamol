@@ -3,6 +3,7 @@
 $PROJECT = $GITHUB_REPO  = 'datamol'
 $GITHUB_ORG = 'datamol-org'
 $PUSH_TAG_REMOTE = 'git@github.com:datamol-org/datamol.git'
+$GHRELEASE_TARGET = 'main'
 
 # Logic
 

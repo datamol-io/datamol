@@ -2,7 +2,7 @@ name: doc
 
 on:
   push:
-    branches: ["master"]
+    branches: ["main"]
     tags: ["*"]
 
 jobs:
@@ -57,9 +57,9 @@ jobs:
 
           TAG_OR_BRANCH_NAME=${GITHUB_REF##*/}
 
-          if [ $TAG_OR_BRANCH_NAME = "master" ]; then
-            echo "Build and deploy the doc on master"
-            mike deploy --push --force master
+          if [ $TAG_OR_BRANCH_NAME = "main" ]; then
+            echo "Build and deploy the doc on main"
+            mike deploy --push --force main
           else
             echo "Build and deploy the doc on $TAG_OR_BRANCH_NAME"
 
