@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.24c991ad.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -379,6 +379,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -1185,6 +1187,8 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -1873,8 +1877,8 @@
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code>str</code></td>
-        <td><p>SMILES of a molecule or a molecule.</p></td>
+        <td><code>Union[str, rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>A SMILES or a molecule.</p></td>
         <td><em>required</em></td>
       </tr>
       <tr>
@@ -1931,7 +1935,7 @@ None is returned so make sure that you handle this case on your own.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">explicit_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">ordered</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1941,7 +1945,7 @@ None is returned so make sure that you handle this case on your own.</p></td>
     <span class="sd">&quot;&quot;&quot;Convert an input molecule (smiles representation) into a `Chem.rdchem.Mol`.</span>
 
 <span class="sd">    Args:</span>
-<span class="sd">        mol: SMILES of a molecule or a molecule.</span>
+<span class="sd">        mol: A SMILES or a molecule.</span>
 <span class="sd">        add_hs: Whether hydrogens should be added the molecule.</span>
 <span class="sd">        explicit_only: Whether to only add explicit hydrogen or both</span>
 <span class="sd">            (implicit and explicit). when `add_hs` is set to True.</span>
@@ -2021,7 +2025,7 @@ None is returned so make sure that you handle this case on your own.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a molecule and return a new one.</span>
 
 <span class="sd">    Args:</span>
@@ -7560,10 +7564,10 @@ model training.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.e99e714c.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bc35569b.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

@@ -12,7 +12,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.2, mkdocs-material-7.3.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-7.3.6">
     
     
       
@@ -20,7 +20,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.24c991ad.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.a57b2b03.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.3f5d1f46.min.css">
@@ -435,6 +435,8 @@
       </a>
       
         
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -588,6 +590,8 @@
                 <div class="md-sidebar__scrollwrap">
                   <div class="md-sidebar__inner">
                     
+
+
 <nav class="md-nav md-nav--secondary" aria-label="Table of contents">
   
   
@@ -662,9 +666,7 @@
     <div class="doc doc-contents first">
 
       <p>Generate fuzzy scaffold with enforceable group that needs to appear
-in the core, forcing to keep the full side chain if required.</p>
-<p>NOTE(hadim): consider parallelize this (if possible).
-NOTE(hadim): consider refactoring this function in smaller reusable functions.</p>
+in the core, forcing to keep the full side chain if required</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -748,10 +750,7 @@ NOTE(hadim): consider refactoring this function in smaller reusable functions.</
     <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate fuzzy scaffold with enforceable group that needs to appear</span>
-<span class="sd">    in the core, forcing to keep the full side chain if required.</span>
-
-<span class="sd">    NOTE(hadim): consider parallelize this (if possible).</span>
-<span class="sd">    NOTE(hadim): consider refactoring this function in smaller reusable functions.</span>
+<span class="sd">    in the core, forcing to keep the full side chain if required</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: List of all molecules</span>
@@ -769,6 +768,9 @@ NOTE(hadim): consider refactoring this function in smaller reusable functions.</
 <span class="sd">                Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
 <span class="sd">        - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># NOTE(hadim): consider parallelize this (if possible).</span>
+    <span class="c1"># NOTE(hadim): consider refactoring this function in smaller reusable functions.</span>
 
     <span class="k">if</span> <span class="n">enforce_subs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">enforce_subs</span> <span class="o">=</span> <span class="p">[]</span>
@@ -1044,10 +1046,10 @@ NOTE(hadim): consider refactoring this function in smaller reusable functions.</
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.e99e714c.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.fcfe8b6d.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.bc35569b.min.js"></script>
+      <script src="../assets/javascripts/bundle.b1047164.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
