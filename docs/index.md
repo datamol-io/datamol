@@ -19,10 +19,10 @@ mamba install -c conda-forge datamol
 ```
 
 !!! tips
-    You can replace `mamba` by `conda`.
+You can replace `mamba` by `conda`.
 
 !!! note
-    We highly recommend using a Conda Python distribution to install Datamol. The package is also pip installable if you need it: `pip install datamol`.
+We highly recommend using a Conda Python distribution to install Datamol. The package is also pip installable if you need it: `pip install datamol`.
 
 ## Quick API Tour
 
@@ -75,7 +75,8 @@ Version compatibilities are an essential topic for production-software stacks. W
 
 See below the associated versions of Python and RDKit, for which a minor version of Datamol has been tested during its whole lifecycle.
 
-| `datamol` | `python`     | `rdkit`              |
-| --------- | ------------ | -------------------- |
-| `0.4`     | `[3.8, 3.9]` | [`2020.09, 2021.03`] |
-| `0.3`     | `[3.8, 3.9]` | [`2020.09, 2021.03`] |
+| `datamol`  | `python`     | `rdkit`              |
+| ---------- | ------------ | -------------------- |
+| `>0.4.11`  | `[3.8, 3.9]` | `[2021.03, 2021.09]` |
+| `<=0.4.11` | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
+| `0.3`      | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
