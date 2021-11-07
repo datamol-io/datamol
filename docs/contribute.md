@@ -23,7 +23,7 @@ Datamol uses Github Actions to:
 - **Check** the code:
   - Formatting with `black`.
   - Static type check with `mypy`.
-- **Documentation**: build and deploy the documentation on `master` and for every new git tag.
+- **Documentation**: build and deploy the documentation on `main` and for every new git tag.
 
 ## Run tests
 
@@ -42,7 +42,7 @@ mike serve
 
 ### Multi-versionning
 
-The doc is built for eash push on `master` and every git tags using [mike](https://github.com/jimporter/mike). Everything is automated using Github Actions. Please refer to the official mike's documentation for the details.
+The doc is built for eash push on `main` and every git tags using [mike](https://github.com/jimporter/mike). Everything is automated using Github Actions. Please refer to the official mike's documentation for the details.
 
 ## Release a new version
 

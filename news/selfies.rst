@@ -4,6 +4,7 @@
 
 **Changed:**
 
+* The default git branch is now `main`
 * `appdirs` is now an hard dep.
 * Change CI to use rdkit `[2021.03, 2021.09]` and add the info the readme and doc.
 
