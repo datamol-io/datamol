@@ -75,8 +75,8 @@ Version compatibilities are an essential topic for production-software stacks. W
 
 See below the associated versions of Python and RDKit, for which a minor version of Datamol has been tested during its whole lifecycle.
 
-| `datamol`  | `python`     | `rdkit`              |
-| ---------- | ------------ | -------------------- |
-| `>0.4.11`  | `[3.8, 3.9]` | `[2021.03, 2021.09]` |
-| `<=0.4.11` | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
-| `0.3`      | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
+| `datamol` | `python`     | `rdkit`              |
+| --------- | ------------ | -------------------- |
+| `0.5`     | `[3.8, 3.9]` | `[2021.03, 2021.09]` |
+| `0.4`     | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
+| `0.3`     | `[3.8, 3.9]` | `[2020.09, 2021.03]` |
