@@ -1,10 +1,11 @@
 **Added:**
 
-* Add `dm.utils.fs.copy_dir()`.
+* Add `dm.utils.fs.copy_dir()` to recursively copy directories across filesystems + tests.
+* Add `dm.utils.fs.mkdir` + tests.
 
 **Changed:**
 
-* <news item>
+* Set `fsspec` minimum version to `>=2021.09`
 
 **Deprecated:**
 

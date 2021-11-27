@@ -11,6 +11,9 @@ import hashlib
 import pathlib
 
 import fsspec
+import fsspec.utils
+
+from .jobs import parallelized
 
 
 def _import_tqdm():
@@ -216,7 +219,7 @@ def copy_file(
         destination: path or file-like object to copy to.
         chunk_size: the chunk size to use. If progress is enabled the chunk
             size is `None`, it is set to 2048.
-        force: whether to overwrite the destination file it it exists.
+        force: whether to overwrite the destination file if it exists.
         progress: whether to display a progress bar.
         leave_progress: whether to hide the progress bar once the copy is done.
     """
@@ -299,10 +302,18 @@ def copy_file(
                     pbar.close()
 
 
+def mkdir(dir_path: Union[str, os.PathLike]):
+    """Create a directory.
+
+    Args:
+        dir_path: The path of the directory to create.
+    """
+    fs = get_mapper(str(dir_path)).fs
+    fs.mkdir(str(dir_path))
+
+
 def md5(filepath: Union[str, os.PathLike]):
     """Return the md5 hash of a file.
-
-    NOTE(hadim): Use fsspec caching here maybe.
 
     Args:
         filepath: The path to the file to compute the MD5 hash on.
@@ -331,20 +342,7 @@ def glob(path: str, **kwargs) -> List[str]:
     return data_paths
 
 
-def prefix_with_protocol(path: str, fs: fsspec.AbstractFileSystem):
-    """Given a filesystem, prefix a path with the protocol.
-
-    Args:
-        path: The path to prefix.
-        fs: The filesystem to prefix with.
-    """
-    protocol = get_protocol(path, fs=fs)
-    if protocol != "file":
-        return f"{protocol}://{path}"
-    return path
-
-
-def recursive_ls(dir_path: str, _fs=None):
+def recursive_ls(dir_path: str, with_directory: bool = True, _fs=None):
     """Recursively list all files and directories within
     a given directory. Every list element is a tuple
     similar to:
@@ -353,6 +351,7 @@ def recursive_ls(dir_path: str, _fs=None):
 
     Args:
         dir_path: Directory path.
+        with_directory: Whether to include the directories in the list.
     """
 
     if _fs is None:
@@ -363,50 +362,93 @@ def recursive_ls(dir_path: str, _fs=None):
     all_paths = []
     for path in fs.ls(dir_path, detail=True):
 
-        prefixed_path = prefix_with_protocol(path["name"], fs=fs)
+        prefixed_path = fsspec.utils._unstrip_protocol(path["name"], fs)
 
         if path["type"] == "directory":
-            all_paths.append((prefixed_path, "directory"))
-            all_paths += recursive_ls(path["name"], _fs=fs)
+
+            # Add separator at the end to indicate it's a directory
+            if not prefixed_path.endswith(fs.sep):
+                prefixed_path = f"{prefixed_path}{fs.sep}"
+
+            if with_directory:
+                all_paths.append(prefixed_path)
+
+            all_paths += recursive_ls(path["name"], _fs=fs, with_directory=with_directory)
+
         elif path["type"] == "file":
-            all_paths.append((prefixed_path, "file"))
+            all_paths.append(prefixed_path)
 
     return all_paths
 
 
-# def copy_dir():
-#     source = "/home/hadim/test-dm/original/"
-#     source = "gs://hadrien-data/test-dm/original"
+def copy_dir(
+    source: Union[str, pathlib.Path],
+    destination: Union[str, pathlib.Path],
+    force: bool = False,
+    progress: bool = False,
+    leave_progress: bool = True,
+    file_progress: bool = False,
+    file_leave_progress: bool = False,
+    chunk_size: int = None,
+):
+    """Copy one directory to another location across different filesystem (local, S3, GCS, etc).
 
-#     destination = "/home/hadim/test-dm/destination"
+    Args:
+        source: Path to the source directory.
+        destination: Path to the destination directory.
+        chunk_size: the chunk size to use. If progress is enabled the chunk
+            size is `None`, it is set to 2048.
+        force: whether to overwrite the destination directory if it exists.
+        progress: Whether to display a progress bar.
+        leave_progress: Whether to hide the progress bar once the copy is done.
+        file_progress: Whether to display a progress bar for each file.
+        file_leave_progress: Whether to hide the progress bar once a file copy is done.
+        chunk_size: See `dm.utils.fs.copy_file`.
+    """
 
-#     chunk_size: int = None
-#     force: bool = False
-#     progress: bool = False
-#     leave_progress: bool = True
-#     global_progress: bool = True
-#     global_leave_progress: bool = True
+    source = str(source)
+    destination = str(destination)
 
-#     # Sanity check
-#     if not dm.utils.fs.is_dir(source):
-#         raise ValueError(f"The directory being copied does not exist or is not a directory: {source}")
+    # Sanity check
+    if not is_dir(source):
+        raise ValueError(
+            f"The directory being copied does not exist or is not a directory: {source}"
+        )
 
-#     # Get the source filesystem
-#     source_fs = dm.utils.fs.get_mapper(source).fs
+    if not force and is_dir(destination):
+        raise ValueError(f"The destination folder to copy already exists: {destination}")
 
-#     # Get the destination filesystem
-#     destination_fs = dm.utils.fs.get_mapper(destination).fs
+    # Get all the paths of the input folder
+    input_paths = recursive_ls(str(source), with_directory=True)
 
-#     # List all files and directories
-#     all_paths = dm.utils.fs.recursive_ls(dir_path)
+    # Build all the output paths
+    output_paths: List[str] = fsspec.utils.other_paths(input_paths, destination)  # type: ignore
 
-#     for path, path_type in tqdm(all_paths):
+    source_fs = get_mapper(source).fs
+    destination_fs = get_mapper(destination).fs
 
-#         if path_type == "directory":
-#             # call makedir
-#             pass
-#         elif path_type == "file":
-#             pass
-#             # dm.utils.fs.copy_file(
+    def _copy_source_to_destination(input_path, output_path):
+        # A directory
+        if input_path.endswith(source_fs.sep):
+            destination_fs.mkdir(output_path)
 
-#     # TODO: find a way to get the relative path to the source
+        # A file
+        else:
+            copy_file(
+                input_path,
+                output_path,
+                force=force,
+                progress=file_progress,
+                leave_progress=file_leave_progress,
+                chunk_size=chunk_size,
+            )
+
+    # Copy source files/directories to destination in parallel
+    parallelized(
+        _copy_source_to_destination,
+        inputs_list=list(zip(input_paths, output_paths)),
+        arg_type="args",
+        progress=progress,
+        tqdm_kwargs=dict(leave=leave_progress),
+        scheduler="threads",
+    )
