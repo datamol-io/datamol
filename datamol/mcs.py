@@ -18,6 +18,25 @@ def find_mcs_with_details(
     seed_smarts: str = "",
     **kwargs,
 ):
+    """Find the maximum common substructure from a list of molecules.
+
+    Args:
+        mols: List of molecules.
+        maximize_bonds: Maximize the number of bonds in the substructure.
+        threshold: The threshold for the MCS.
+        timeout: The timeout for the MCS.
+        verbose: Whether to enable verbose mode.
+        match_valences: Whether to match valences.
+        ring_matches_ring_only: Whether to match rings only.
+        complete_rings_only: Whether to match complete rings only.
+        match_chiral_tag: Whether to match chiral tags.
+        seed_smarts: The seed SMARTS.
+        kwargs: Additional arguments for the MCS.
+    """
+
+    # NOTE(hadim): eventually propagate enums from
+    # AtomCompare and BondCompare. Details at
+    # https://www.rdkit.org/docs/source/rdkit.Chem.rdFMCS.html
 
     args = {}
     args["maximizeBonds"] = maximize_bonds
@@ -48,6 +67,21 @@ def find_mcs(
     seed_smarts: str = "",
     **kwargs,
 ):
+    """Find the maximum common substructure from a list of molecules.
+
+    Args:
+        mols: List of molecules.
+        maximize_bonds: Maximize the number of bonds in the substructure.
+        threshold: The threshold for the MCS.
+        timeout: The timeout for the MCS.
+        verbose: Whether to enable verbose mode.
+        match_valences: Whether to match valences.
+        ring_matches_ring_only: Whether to match rings only.
+        complete_rings_only: Whether to match complete rings only.
+        match_chiral_tag: Whether to match chiral tags.
+        seed_smarts: The seed SMARTS.
+        kwargs: Additional arguments for the MCS.
+    """
 
     mcs = find_mcs_with_details(
         mols=mols,

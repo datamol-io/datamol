@@ -30,6 +30,7 @@ def to_image(
     stereo_annotations: bool = True,
     legend_fontsize: int = 16,
     kekulize: bool = True,
+    align: Union[bool, dm.Mol] = False,
     **kwargs,
 ):
     """Generate an image out of a molecule or a list of molecules.
@@ -49,6 +50,10 @@ def to_image(
         bond_indices: Whether to draw the bond indices.
         legend_fontsize: Font size for the legend.
         kekulize: Run kekulization routine on molecules. Skipped if fails.
+        align: Whether to align the 2D coordinates of the molecules. If True
+            or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.
+            If `align` is set to a molecule object, this molecule will be used as a pattern
+            for the alignment. If `align` is set to True, the MCS will be computed.
         kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
@@ -89,6 +94,12 @@ def to_image(
 
         _mols.append(_mol)
     mols = _mols
+
+    # Whether to align the molecules
+    if align is True:
+        dm.viz.utils.align_2d_coordinates(mols)
+    elif isinstance(align, dm.Mol):
+        dm.viz.utils.align_2d_coordinates(mols, pattern=align)
 
     _highlight_atom = highlight_atom
     if highlight_atom is not None and isinstance(highlight_atom[0], int):
