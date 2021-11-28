@@ -344,10 +344,7 @@ def glob(path: str, **kwargs) -> List[str]:
 
 def recursive_ls(dir_path: str, with_directory: bool = True, _fs=None):
     """Recursively list all files and directories within
-    a given directory. Every list element is a tuple
-    similar to:
-
-    `[("/my/path/hello.txt", "file"), ("/my/path/dir1", "directory"), ...]`
+    a given directory.
 
     Args:
         dir_path: Directory path.
