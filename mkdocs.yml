@@ -19,6 +19,7 @@ nav:
       - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
   - API:
       - datamol: api/datamol.md
+      - datamol.descriptors: api/datamol.descriptors.md
       - datamol.conformers: api/datamol.conformers.md
       - datamol.viz: api/datamol.viz.md
       - datamol.fragment: api/datamol.fragment.md
