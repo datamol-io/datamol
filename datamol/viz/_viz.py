@@ -1,14 +1,17 @@
-import fsspec
-
 from typing import Union
 from typing import List
 from typing import Tuple
+
+import fsspec
 
 from rdkit.Chem import Draw
 
 import PIL
 
 import datamol as dm
+
+
+from .utils import prepare_mol_for_drawing
 
 
 def to_image(
@@ -75,25 +78,7 @@ def to_image(
             legends = legends[:max_mols]
 
     # Prepare molecules before drawing
-    # Code is inspired from `rdkit.Chem.Draw._moltoimg`.
-    _mols = []
-    for mol in mols:
-        if mol is not None:
-            try:
-                with dm.without_rdkit_log():
-                    try:
-                        mol.GetAtomWithIdx(0).GetExplicitValence()  # type: ignore
-                    except RuntimeError:
-                        mol.UpdatePropertyCache(False)  # type: ignore
-                    _kekulize = Draw._okToKekulizeMol(mol, kekulize)
-                    _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=_kekulize)
-            except ValueError:  # <- can happen on a kekulization failure
-                _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=False)
-        else:
-            _mol = None
-
-        _mols.append(_mol)
-    mols = _mols
+    mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
 
     # Whether to align the molecules
     if align is True:
