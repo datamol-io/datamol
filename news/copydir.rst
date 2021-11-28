@@ -9,7 +9,7 @@
 
 **Changed:**
 
-* Set `fsspec` minimum version to `>=2021.09`.
+* Set `fsspec` minimum version to `>=2021.9`.
 * Pimp up `dm.utils.to_image` to make it more robust (don't fail on certain molecules due to incorrect aromaticity) and also propagate more drawing options to RDKit such as `legend_fontsize` and others.
 * Add a new `align` argument in `dm.to_image()` to align the 2d coordinates of the molecules.
 

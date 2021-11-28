@@ -6,7 +6,7 @@ install_requires = [
     "tqdm",
     "loguru",
     "joblib",
-    "fsspec>=2021.6",
+    "fsspec>=2021.9",
     "pandas",
     "numpy",
     "scipy",
