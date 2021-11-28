@@ -1,3 +1,5 @@
+import itertools
+
 import fsspec
 
 from typing import Union
@@ -30,7 +32,7 @@ def to_image(
     kekulize: bool = True,
     **kwargs,
 ):
-    """Generate an image out of a molecule or a list of molecule.
+    """Generate an image out of a molecule or a list of molecules.
 
     Args:
         mols: One or a list of molecules.
@@ -55,7 +57,7 @@ def to_image(
     if isinstance(mol_size, int):
         mol_size = (mol_size, mol_size)
 
-    if isinstance(mols, Chem.rdchem.Mol):
+    if isinstance(mols, dm.Mol):
         mols = [mols]
 
     if isinstance(legends, str):
@@ -106,13 +108,13 @@ def to_image(
     draw_options.addBondIndices = bond_indices
     draw_options.addStereoAnnotation = stereo_annotations
 
-    # Add the custom drawing options and raise an error if the option
-    # is not invalid.
+    # Add the custom drawing options.
+    _kwargs = {}
     for k, v in kwargs.items():
-        if not hasattr(draw_options, k):
-            raise ValueError(f"'{k}' is not a valid argument for MolDrawOptions.")
-        else:
+        if hasattr(draw_options, k):
             setattr(draw_options, k, v)
+        else:
+            _kwargs[k] = v
 
     image = Draw.MolsToGridImage(
         mols,
@@ -123,6 +125,7 @@ def to_image(
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
         drawOptions=draw_options,
+        **_kwargs,
     )
 
     if outfile is not None:
