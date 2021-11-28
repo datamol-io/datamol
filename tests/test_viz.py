@@ -45,6 +45,19 @@ def test_to_image():
     dm.viz.to_image(mol, indices=True, mol_size=400)
 
 
+def test_to_image_incorrect_aromaticity():
+    query = "C-c1cn(-C-2-[N,O:3]-[#6@H](-C-[#6,#8:1]-[*:2])-C(-[#8])-C-2-[#1,#8,#9:4])c2ncnc(-C)c12"
+    mol = dm.from_smarts(query)
+    dm.to_image(
+        mol,
+        mol_size=300,
+        use_svg=False,
+        legends="a legend",
+        legend_fontsize=40,
+        stereo_annotations=False,
+    )
+
+
 def test_to_image_save_file(tmpdir):
     smiles = "CCCOCc1cc(c2ncccc2)ccc1"
     mol = dm.to_mol(smiles)
