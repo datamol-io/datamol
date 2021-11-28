@@ -1,12 +1,9 @@
-import itertools
-
 import fsspec
 
 from typing import Union
 from typing import List
 from typing import Tuple
 
-from rdkit import Chem
 from rdkit.Chem import Draw
 
 import PIL
