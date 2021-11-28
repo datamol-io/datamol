@@ -81,16 +81,19 @@ def to_image(
     # Code is inspired from `rdkit.Chem.Draw._moltoimg`.
     _mols = []
     for mol in mols:
-        try:
-            with dm.without_rdkit_log():
-                try:
-                    mol.GetAtomWithIdx(0).GetExplicitValence()  # type: ignore
-                except RuntimeError:
-                    mol.UpdatePropertyCache(False)  # type: ignore
-                _kekulize = Draw._okToKekulizeMol(mol, kekulize)
-                _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=_kekulize)
-        except ValueError:  # <- can happen on a kekulization failure
-            _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=False)
+        if mol is not None:
+            try:
+                with dm.without_rdkit_log():
+                    try:
+                        mol.GetAtomWithIdx(0).GetExplicitValence()  # type: ignore
+                    except RuntimeError:
+                        mol.UpdatePropertyCache(False)  # type: ignore
+                    _kekulize = Draw._okToKekulizeMol(mol, kekulize)
+                    _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=_kekulize)
+            except ValueError:  # <- can happen on a kekulization failure
+                _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=False)
+        else:
+            _mol = None
 
         _mols.append(_mol)
     mols = _mols
