@@ -53,6 +53,10 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
     or incorrect valence or aromaticity.
 
     Code is inspired from `rdkit.Chem.Draw._moltoimg`.
+
+    Args:
+        mol: A molecule to prepare. If set to None, the function will return None.
+        kekulize: Whether to kekulize the molecule.
     """
 
     if mol is None:
