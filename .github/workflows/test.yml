@@ -8,7 +8,6 @@ on:
     branches:
       - "*"
       - "!gh-pages"
-    types: [review_requested, ready_for_review]
 
 jobs:
   test:
@@ -20,6 +19,7 @@ jobs:
         rdkit-version: [2021.03, 2021.09]
 
     runs-on: ${{ matrix.os }}
+    timeout-minutes: 30
 
     defaults:
       run:
