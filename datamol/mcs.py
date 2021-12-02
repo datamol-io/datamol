@@ -8,11 +8,11 @@ import datamol as dm
 def find_mcs_with_details(
     mols: List[dm.Mol],
     maximize_bonds: bool = True,
-    threshold: float = 1.0,
+    threshold: float = 0.0,
     timeout: int = 5,
     verbose: bool = False,
     match_valences: bool = False,
-    ring_matches_ring_only: bool = False,
+    ring_matches_ring_only: bool = True,
     complete_rings_only: bool = False,
     match_chiral_tag: bool = False,
     seed_smarts: str = "",
