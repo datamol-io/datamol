@@ -682,13 +682,19 @@ def enumerate_tautomers(mol: Chem.rdchem.Mol, n_variants: int = 20):
         mol: The molecule whose state we should enumerate.
         n_variants: The maximum amount of molecules that should be returned.
     """
-    # safety first
-    mol = copy_mol(mol)
-
     enumerator = rdMolStandardize.TautomerEnumerator()
     enumerator.SetMaxTautomers(n_variants)
     tautomers = enumerator.Enumerate(mol)
     return list(tautomers)
+
+
+def canonical_tautomer(mol: dm.Mol):
+    """Get the canonical tautomer of the current molecule.
+
+    Args:
+        mol: A molecule.
+    """
+    return rdMolStandardize.CanonicalTautomer(mol)
 
 
 def enumerate_stereoisomers(

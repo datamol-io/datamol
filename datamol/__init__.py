@@ -48,6 +48,7 @@ from .mol import copy_mol_props
 from .mol import enumerate_stereoisomers
 from .mol import enumerate_tautomers
 from .mol import atom_indices_to_mol
+from .mol import canonical_tautomer
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse

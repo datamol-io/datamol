@@ -420,3 +420,13 @@ def test_same_mol():
     assert dm.same_mol(None, mol2) is False
     assert dm.same_mol(mol1, None) is False
     assert dm.same_mol(None, None) is False
+
+
+def test_canonical_tautomer():
+    smiles = "Oc1c(cccc3)c3nc2ccncc12"
+    mol = dm.to_mol(smiles)
+
+    canonical_mol = dm.canonical_tautomer(mol)
+
+    assert dm.to_smiles(canonical_mol) == "O=c1c2ccccc2[nH]c2ccncc12"
+    assert dm.to_inchikey(canonical_mol) == dm.to_inchikey(mol)
