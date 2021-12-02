@@ -23,7 +23,7 @@ def find_mcs_with_details(
     Args:
         mols: List of molecules.
         maximize_bonds: Maximize the number of bonds in the substructure.
-        threshold: The threshold for the MCS.
+        threshold: The threshold for the MCS (between 0 and 1).
         timeout: The timeout for the MCS.
         verbose: Whether to enable verbose mode.
         match_valences: Whether to match valences.

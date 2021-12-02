@@ -77,14 +77,14 @@ def to_image(
         if legends is not None:
             legends = legends[:max_mols]
 
-    # Prepare molecules before drawing
-    mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
-
     # Whether to align the molecules
     if align is True:
         dm.viz.utils.align_2d_coordinates(mols)
     elif isinstance(align, dm.Mol):
         dm.viz.utils.align_2d_coordinates(mols, pattern=align)
+
+    # Prepare molecules before drawing
+    mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
 
     _highlight_atom = highlight_atom
     if highlight_atom is not None and isinstance(highlight_atom[0], int):
