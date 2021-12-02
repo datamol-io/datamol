@@ -37,6 +37,25 @@ qed = Descriptors.qed
 clogp = Descriptors.MolLogP  # type: ignore
 sas = sascorer.calculateScore
 
+
+def any_descriptor(name: str) -> Callable:
+    """Return a descriptor function by name either from
+    `rdkit.Chem import Descriptors` or `rdkit.Chem.rdMolDescriptors`.
+
+    Args:
+        name: Descriptor name.
+    """
+    fn = getattr(Descriptors, name, None)
+
+    if fn is None:
+        fn = getattr(rdMolDescriptors, name, None)
+
+    if fn is None:
+        raise ValueError(f"Descriptor {name} not found.")
+
+    return fn
+
+
 _DEFAULT_PROPERTIES_FN = {
     "mw": mw,
     "fsp3": fsp3,

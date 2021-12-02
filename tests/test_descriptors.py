@@ -1,3 +1,5 @@
+import pytest
+
 import pandas as pd
 import datamol as dm
 
@@ -113,3 +115,16 @@ def test_batch_compute_many_descriptors():
         "sas",
     ]
     assert props.shape == (642, 18)
+
+
+def test_any_descriptor():
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+    value = dm.descriptors.any_descriptor("MaxPartialCharge")(mol)
+    assert pytest.approx(value) == 0.33900378687731025
+
+    value = dm.descriptors.any_descriptor("CalcFractionCSP3")(mol)
+    assert pytest.approx(value) == 0.1111111111111111
+
+    with pytest.raises(ValueError):
+        dm.descriptors.any_descriptor("DOES NOT EXIST")
