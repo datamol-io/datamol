@@ -10,9 +10,9 @@ def test_find_mcs_with_details():
         "C=CC(=O)Nc1cc2c(Nc3ccc(Br)cc3F)ncnc2cc1OCCNC(=O)CN(C)C",
     ]
     mols = [dm.to_mol(s) for s in smiles_list]
-    mcs = dm.find_mcs_with_details(mols=mols, timeout=1)
+    mcs = dm.find_mcs_with_details(mols=mols, timeout=2)
 
-    excepted_smarts = "[#6]-[#6]-[#8]-[#6]1:[#6]:[#6]2:[#7]:[#6]:[#7]:[#6](:[#6]:2:[#6]:[#6]:1-[#7]-[#6](=[#8])-[#6]=[#6])-[#7]-[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1"
+    excepted_smarts = "[#6&!R]-&!@[#6&!R]-&!@[#8&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]2:&@[#7&R]:&@[#6&R]:&@[#7&R]:&@[#6&R](:&@[#6&R]:&@2:&@[#6&R]:&@[#6&R]:&@1-&!@[#7&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#6&!R]=&!@[#6&!R])-&!@[#7&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@1"
 
     # Load/export SMARTS to check RDKit versions compatibility.
     excepted_smarts_mol = dm.from_smarts(excepted_smarts)
@@ -30,11 +30,13 @@ def test_find_mcs():
         "C=CC(=O)Nc1cc2c(Nc3ccc(Br)cc3F)ncnc2cc1OCCNC(=O)CN(C)C",
     ]
     mols = [dm.to_mol(s) for s in smiles_list]
-    smarts = dm.find_mcs(mols=mols, timeout=1)
+    smarts = dm.find_mcs(mols=mols, timeout=2)
 
     # Load/export SMARTS to check RDKit versions compatibility.
-    excepted_smarts = "[#6]-[#6]-[#8]-[#6]1:[#6]:[#6]2:[#7]:[#6]:[#7]:[#6](:[#6]:2:[#6]:[#6]:1-[#7]-[#6](=[#8])-[#6]=[#6])-[#7]-[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1"
+    excepted_smarts = "[#6&!R]-&!@[#6&!R]-&!@[#8&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]2:&@[#7&R]:&@[#6&R]:&@[#7&R]:&@[#6&R](:&@[#6&R]:&@2:&@[#6&R]:&@[#6&R]:&@1-&!@[#7&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#6&!R]=&!@[#6&!R])-&!@[#7&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@1"
     excepted_smarts_mol = dm.from_smarts(excepted_smarts)
     excepted_smarts = dm.to_smarts(excepted_smarts_mol)
+
+    print(smarts)
 
     assert smarts == excepted_smarts

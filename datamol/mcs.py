@@ -77,14 +77,17 @@ def find_mcs_with_details(
 def find_mcs(
     mols: List[dm.Mol],
     maximize_bonds: bool = True,
-    threshold: float = 1.0,
+    threshold: float = 0.0,
     timeout: int = 5,
     verbose: bool = False,
     match_valences: bool = False,
-    ring_matches_ring_only: bool = False,
+    ring_matches_ring_only: bool = True,
     complete_rings_only: bool = False,
     match_chiral_tag: bool = False,
     seed_smarts: str = "",
+    atom_compare: str = "CompareElements",
+    bond_compare: str = "CompareOrder",
+    ring_compare: str = "IgnoreRingFusion",
     **kwargs,
 ):
     """Find the maximum common substructure from a list of molecules.
@@ -100,6 +103,10 @@ def find_mcs(
         complete_rings_only: Whether to match complete rings only.
         match_chiral_tag: Whether to match chiral tags.
         seed_smarts: The seed SMARTS.
+        atom_compare: One of "CompareAny", "CompareAnyHeavyAtom", "CompareElements",
+            "CompareIsotopes".
+        bond_compare: One of "CompareAny", "CompareOrder", "CompareOrderExact".
+        ring_compare: One of "IgnoreRingFusion", "PermissiveRingFusion", "StrictRingFusion".
         kwargs: Additional arguments for the MCS.
     """
 
@@ -114,6 +121,9 @@ def find_mcs(
         complete_rings_only=complete_rings_only,
         match_chiral_tag=match_chiral_tag,
         seed_smarts=seed_smarts,
+        atom_compare=atom_compare,
+        bond_compare=bond_compare,
+        ring_compare=ring_compare,
         **kwargs,
     )
     return mcs.smartsString
