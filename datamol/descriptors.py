@@ -1,6 +1,7 @@
 from typing import Callable
 from typing import Dict
 from typing import List
+from typing import Union
 
 import sys
 import functools
@@ -80,7 +81,7 @@ _DEFAULT_PROPERTIES_FN = {
 
 def compute_many_descriptors(
     mol: Mol,
-    properties_fn: Dict[str, Callable] = None,
+    properties_fn: Dict[str, Union[Callable, str]] = None,
     add_properties: bool = True,
 ) -> dict:
     """Compute a list of opiniated molecular properties.
@@ -88,7 +89,9 @@ def compute_many_descriptors(
     Args:
         mol: A molecule.
         properties_fn: A list of functions that compute properties. If None,
-            a default list of properties is used.
+            a default list of properties is used. If the function is a string,
+            `dm.descriptors.any_descriptor()` is used to retrieve the descriptor
+            function.
         add_properties: Whether to add the computed properties to the default list.
 
     Returns:
@@ -102,6 +105,10 @@ def compute_many_descriptors(
 
     props = {}
     for k, v in properties_fn.items():
+
+        if isinstance(v, str):
+            v = any_descriptor(v)
+
         props[k] = v(mol)
 
     return props
@@ -109,7 +116,7 @@ def compute_many_descriptors(
 
 def batch_compute_many_descriptors(
     mols: List[Mol],
-    properties_fn: Dict[str, Callable] = None,
+    properties_fn: Dict[str, Union[Callable, str]] = None,
     add_properties: bool = True,
     n_jobs: int = 1,
     batch_size: int = None,
@@ -121,7 +128,9 @@ def batch_compute_many_descriptors(
     Args:
         mols: A list of molecules.
         properties_fn: A list of functions that compute properties. If None,
-            a default list of properties is used.
+            a default list of properties is used. If the function is a string,
+            `dm.descriptors.any_descriptor()` is used to retrieve the descriptor
+            function.
         add_properties: Whether to add the computed properties to the default list.
 
     Returns:
