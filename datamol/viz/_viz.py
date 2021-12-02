@@ -30,7 +30,7 @@ def to_image(
     stereo_annotations: bool = True,
     legend_fontsize: int = 16,
     kekulize: bool = True,
-    align: Union[bool, dm.Mol] = False,
+    align: Union[bool, dm.Mol, str] = False,
     **kwargs,
 ):
     """Generate an image out of a molecule or a list of molecules.
@@ -52,8 +52,8 @@ def to_image(
         kekulize: Run kekulization routine on molecules. Skipped if fails.
         align: Whether to align the 2D coordinates of the molecules. If True
             or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.
-            If `align` is set to a molecule object, this molecule will be used as a pattern
-            for the alignment. If `align` is set to True, the MCS will be computed.
+            If `align` is set to a molecule object or a string, this molecule will be used as a
+            pattern for the alignment. If `align` is set to True, the MCS will be computed.
             **Warning**:
                 - This will slow down the process. You can pre-compute the alignment by calling
                 `dm.viz.utils.align_2d_coordinates`.
@@ -84,9 +84,11 @@ def to_image(
 
     # Whether to align the molecules
     if align is True:
-        dm.viz.utils.align_2d_coordinates(mols)
+        mols = dm.viz.utils.align_2d_coordinates(mols, copy=False)
     elif isinstance(align, dm.Mol):
-        dm.viz.utils.align_2d_coordinates(mols, pattern=align)
+        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=align, copy=False)
+    elif isinstance(align, str):
+        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=dm.from_smarts(align), copy=False)
 
     # Prepare molecules before drawing
     mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
