@@ -49,7 +49,7 @@ def align_2d_coordinates(mols: List[dm.Mol], pattern: dm.Mol = None, **mcs_args)
 
 
 def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Optional[dm.Mol]:
-    """Prepare the molecule before drawing to avoid any error due to unsane molecule
+    """Prepare the molecule before drawing to avoid any error due to unsanitized molecule
     or incorrect valence or aromaticity.
 
     Code is inspired from `rdkit.Chem.Draw._moltoimg`.

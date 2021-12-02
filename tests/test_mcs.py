@@ -14,6 +14,10 @@ def test_find_mcs_with_details():
 
     excepted_smarts = "[#6]-[#6]-[#8]-[#6]1:[#6]:[#6]2:[#7]:[#6]:[#7]:[#6](:[#6]:2:[#6]:[#6]:1-[#7]-[#6](=[#8])-[#6]=[#6])-[#7]-[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1"
 
+    # Load/export SMARTS to check RDKit versions compatibility.
+    excepted_smarts_mol = dm.from_smarts(excepted_smarts)
+    excepted_smarts = dm.to_smarts(excepted_smarts_mol)
+
     assert mcs.smartsString == excepted_smarts
 
 
@@ -28,6 +32,9 @@ def test_find_mcs():
     mols = [dm.to_mol(s) for s in smiles_list]
     smarts = dm.find_mcs(mols=mols, timeout=1)
 
+    # Load/export SMARTS to check RDKit versions compatibility.
     excepted_smarts = "[#6]-[#6]-[#8]-[#6]1:[#6]:[#6]2:[#7]:[#6]:[#7]:[#6](:[#6]:2:[#6]:[#6]:1-[#7]-[#6](=[#8])-[#6]=[#6])-[#7]-[#6]1:[#6]:[#6]:[#6]:[#6]:[#6]:1"
+    excepted_smarts_mol = dm.from_smarts(excepted_smarts)
+    excepted_smarts = dm.to_smarts(excepted_smarts_mol)
 
     assert smarts == excepted_smarts
