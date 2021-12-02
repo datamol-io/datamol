@@ -694,7 +694,8 @@ def canonical_tautomer(mol: dm.Mol):
     Args:
         mol: A molecule.
     """
-    return rdMolStandardize.CanonicalTautomer(mol)
+    enumerator = rdMolStandardize.TautomerEnumerator()
+    return enumerator.Canonicalize(mol)
 
 
 def enumerate_stereoisomers(
