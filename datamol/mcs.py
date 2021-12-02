@@ -8,7 +8,7 @@ import datamol as dm
 def find_mcs_with_details(
     mols: List[dm.Mol],
     maximize_bonds: bool = True,
-    threshold: float = 0.0,
+    threshold: float = 1.0,
     timeout: int = 5,
     verbose: bool = False,
     match_valences: bool = False,

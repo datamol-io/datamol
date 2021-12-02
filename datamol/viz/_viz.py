@@ -54,6 +54,11 @@ def to_image(
             or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.
             If `align` is set to a molecule object, this molecule will be used as a pattern
             for the alignment. If `align` is set to True, the MCS will be computed.
+            **Warning**:
+                - This will slow down the process. You can pre-compute the alignment by calling
+                `dm.viz.utils.align_2d_coordinates`.
+                - In some cases, the alignment will fail. So you should always check it visually.
+                Please report any list of molecules failing to align.
         kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
