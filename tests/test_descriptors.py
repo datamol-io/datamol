@@ -83,6 +83,19 @@ def test_compute_many_descriptors():
     assert true_values_2.equals(props)
 
 
+def test_compute_many_descriptors_with_function_as_string():
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+    results = dm.descriptors.compute_many_descriptors(
+        mol,
+        properties_fn={"max_partial_charge": "MaxPartialCharge"},
+        add_properties=False,
+    )
+
+    assert "max_partial_charge" in results.keys()
+    assert pytest.approx(0.33900378687731025) == results["max_partial_charge"]
+
+
 def test_batch_compute_many_descriptors():
     data = dm.data.freesolv()
     mols = data["smiles"].apply(dm.to_mol).tolist()
