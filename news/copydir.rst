@@ -7,6 +7,7 @@
 * Add a new `mcs` module backed by `rdkit.Chem.rdFMCS` with `find_mcs_with_details` and `find_mcs` functions + tests.
 * Add a new function `dm.viz.utils.align_2d_coordinates` to align 2d coordinates of molecules using either a given pattern or MCS.
 * Add `dm.canonical_tautomer` to canonicalize tautomers.
+* Add `dm.remove_stereochemistry()`.
 
 **Changed:**
 

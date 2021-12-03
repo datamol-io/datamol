@@ -430,3 +430,9 @@ def test_canonical_tautomer():
 
     assert dm.to_smiles(canonical_mol) == "O=c1c2ccccc2[nH]c2ccncc12"
     assert dm.to_inchikey(canonical_mol) == dm.to_inchikey(mol)
+
+
+def test_remove_stereochemistry():
+    mol = dm.to_mol("C[C@H]1CCC[C@@H](C)[C@@H]1Cl")
+    mol_no_stereo = dm.remove_stereochemistry(mol)
+    assert dm.to_smiles(mol_no_stereo) == "CC1CCCC(C)C1Cl"

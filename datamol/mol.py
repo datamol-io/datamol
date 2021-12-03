@@ -766,3 +766,17 @@ def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
     for atom in mol.GetAtoms():
         atom.SetProp("molAtomMapNumber", str(atom.GetIdx()))
     return mol
+
+
+def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
+    """Removes all stereochemistry info from the molecule.
+
+    Args:
+        mol: a molecule
+        copy: Whether to copy the molecule.
+    """
+
+    if copy is True:
+        mol = copy_mol(mol)
+    rdmolops.RemoveStereochemistry(mol)
+    return mol
