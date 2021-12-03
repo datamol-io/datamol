@@ -11,6 +11,8 @@ def test_descriptors():
     dm.descriptors.fsp3(mol)
     dm.descriptors.n_hba(mol)
     dm.descriptors.n_hbd(mol)
+    dm.descriptors.n_lipinski_hba(mol)
+    dm.descriptors.n_lipinski_hbd(mol)
     dm.descriptors.n_rings(mol)
     dm.descriptors.n_hetero_atoms(mol)
     dm.descriptors.n_heavy_atoms(mol)
@@ -18,8 +20,6 @@ def test_descriptors():
     dm.descriptors.n_aliphatic_rings(mol)
     dm.descriptors.n_aromatic_rings(mol)
     dm.descriptors.n_saturated_rings(mol)
-    dm.descriptors.n_H_acceptors(mol)
-    dm.descriptors.n_H_donors(mol)
     dm.descriptors.n_radical_electrons(mol)
     dm.descriptors.tpsa(mol)
     dm.descriptors.qed(mol)
@@ -35,22 +35,26 @@ def test_compute_many_descriptors():
         {
             "mw": 319.181525512,
             "fsp3": 0.5,
-            "n_hba": 3,
-            "n_hbd": 1,
-            "n_rings": 2,
-            "n_hetero_atoms": 4,
-            "n_heavy_atoms": 22,
-            "n_rotatable_bonds": 8,
-            "n_aliphatic_rings": 0,
-            "n_aromatic_rings": 2,
-            "n_saturated_rings": 0,
-            "n_H_acceptors": 3,
-            "n_H_donors": 1,
-            "n_radical_electrons": 0,
+            "n_lipinski_hba": 3.0,
+            "n_lipinski_hbd": 1.0,
+            "n_rings": 2.0,
+            "n_hetero_atoms": 4.0,
+            "n_heavy_atoms": 22.0,
+            "n_rotatable_bonds": 8.0,
+            "n_radical_electrons": 0.0,
             "tpsa": 28.16,
             "qed": 0.7564117572128701,
             "clogp": 4.810600000000004,
             "sas": 2.670786229594949,
+            "n_aliphatic_carbocycles": 0.0,
+            "n_aliphatic_heterocyles": 0.0,
+            "n_aliphatic_rings": 0.0,
+            "n_aromatic_carbocycles": 1.0,
+            "n_aromatic_heterocyles": 1.0,
+            "n_aromatic_rings": 2.0,
+            "n_saturated_carbocycles": 0.0,
+            "n_saturated_heterocyles": 0.0,
+            "n_saturated_rings": 0.0,
         }
     )
 
@@ -107,27 +111,31 @@ def test_batch_compute_many_descriptors():
         progress=False,
     )
 
-    assert props.columns.tolist() == [
+    assert set(props.columns.tolist()) == {
         "mw",
         "fsp3",
-        "n_hba",
-        "n_hbd",
+        "n_lipinski_hba",
+        "n_lipinski_hbd",
         "n_rings",
         "n_hetero_atoms",
         "n_heavy_atoms",
         "n_rotatable_bonds",
-        "n_aliphatic_rings",
-        "n_aromatic_rings",
-        "n_saturated_rings",
-        "n_H_acceptors",
-        "n_H_donors",
         "n_radical_electrons",
         "tpsa",
         "qed",
         "clogp",
         "sas",
-    ]
-    assert props.shape == (642, 18)
+        "n_aliphatic_carbocycles",
+        "n_aliphatic_heterocyles",
+        "n_aliphatic_rings",
+        "n_aromatic_carbocycles",
+        "n_aromatic_heterocyles",
+        "n_aromatic_rings",
+        "n_saturated_carbocycles",
+        "n_saturated_heterocyles",
+        "n_saturated_rings",
+    }
+    assert props.shape == (642, 22)
 
 
 def test_any_descriptor():

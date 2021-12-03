@@ -12,6 +12,7 @@ import pandas as pd
 from rdkit.Chem import Descriptors
 from rdkit.Chem import rdMolDescriptors
 from rdkit.Chem import RDConfig
+from rdkit.Chem import Lipinski
 
 sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
 import sascorer  # type:ignore
@@ -23,20 +24,31 @@ mw = rdMolDescriptors.CalcExactMolWt
 fsp3 = rdMolDescriptors.CalcFractionCSP3
 n_hba = rdMolDescriptors.CalcNumHBA
 n_hbd = rdMolDescriptors.CalcNumHBD
+n_lipinski_hba = rdMolDescriptors.CalcNumLipinskiHBA
+n_lipinski_hbd = rdMolDescriptors.CalcNumLipinskiHBD
 n_rings = rdMolDescriptors.CalcNumRings
 n_hetero_atoms = rdMolDescriptors.CalcNumHeteroatoms
 n_heavy_atoms = Descriptors.HeavyAtomCount  # type: ignore
 n_rotatable_bonds = rdMolDescriptors.CalcNumRotatableBonds
-n_aliphatic_rings = Descriptors.NumAliphaticRings  # type: ignore
-n_aromatic_rings = Descriptors.NumAromaticRings  # type: ignore
-n_saturated_rings = Descriptors.NumSaturatedRings  # type: ignore
-n_H_acceptors = Descriptors.NumHAcceptors  # type: ignore
-n_H_donors = Descriptors.NumHDonors  # type: ignore
 n_radical_electrons = Descriptors.NumRadicalElectrons
 tpsa = rdMolDescriptors.CalcTPSA
 qed = Descriptors.qed
 clogp = Descriptors.MolLogP  # type: ignore
 sas = sascorer.calculateScore
+n_NHOH = Lipinski.NHOHCount
+n_NO = Lipinski.NOCount
+
+n_aliphatic_carbocycles = Lipinski.NumAliphaticCarbocycles  # type: ignore
+n_aliphatic_heterocyles = Lipinski.NumAliphaticHeterocycles  # type: ignore
+n_aliphatic_rings = Lipinski.NumAliphaticRings  # type: ignore
+
+n_aromatic_carbocycles = Lipinski.NumAromaticCarbocycles  # type: ignore
+n_aromatic_heterocyles = Lipinski.NumAromaticHeterocycles  # type: ignore
+n_aromatic_rings = Lipinski.NumAromaticRings  # type: ignore
+
+n_saturated_carbocycles = Lipinski.NumSaturatedCarbocycles  # type: ignore
+n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
+n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
 
 
 def any_descriptor(name: str) -> Callable:
@@ -60,22 +72,26 @@ def any_descriptor(name: str) -> Callable:
 _DEFAULT_PROPERTIES_FN = {
     "mw": mw,
     "fsp3": fsp3,
-    "n_hba": n_hba,
-    "n_hbd": n_hbd,
+    "n_lipinski_hba": n_lipinski_hba,
+    "n_lipinski_hbd": n_lipinski_hbd,
     "n_rings": n_rings,
     "n_hetero_atoms": n_hetero_atoms,
     "n_heavy_atoms": n_heavy_atoms,
     "n_rotatable_bonds": n_rotatable_bonds,
-    "n_aliphatic_rings": n_aliphatic_rings,
-    "n_aromatic_rings": n_aromatic_rings,
-    "n_saturated_rings": n_saturated_rings,
-    "n_H_acceptors": n_H_acceptors,
-    "n_H_donors": n_H_donors,
     "n_radical_electrons": n_radical_electrons,
     "tpsa": tpsa,
     "qed": qed,
     "clogp": clogp,
     "sas": sas,
+    "n_aliphatic_carbocycles": n_aliphatic_carbocycles,
+    "n_aliphatic_heterocyles": n_aliphatic_heterocyles,
+    "n_aliphatic_rings": n_aliphatic_rings,
+    "n_aromatic_carbocycles": n_aromatic_carbocycles,
+    "n_aromatic_heterocyles": n_aromatic_heterocyles,
+    "n_aromatic_rings": n_aromatic_rings,
+    "n_saturated_carbocycles": n_saturated_carbocycles,
+    "n_saturated_heterocyles": n_saturated_heterocyles,
+    "n_saturated_rings": n_saturated_rings,
 }
 
 
