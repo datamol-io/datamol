@@ -325,7 +325,7 @@ def md5(filepath: Union[str, os.PathLike]):
     return file_hash
 
 
-def glob(path: str, **kwargs) -> List[str]:
+def glob(path: str, detail: bool = False, **kwargs) -> List[str]:
     """Find files by glob-matching.
 
     Args:
@@ -333,49 +333,9 @@ def glob(path: str, **kwargs) -> List[str]:
     """
     # Get the list of paths
     fs = get_mapper(path).fs
-    data_paths = fs.glob(path, **kwargs)
-    protocol = get_protocol(path)
-    # Append path prefix if needed
-    if protocol not in ["file", "https", "http"]:
-        data_paths = [f"{protocol}://{d}" for d in data_paths]
-
-    return data_paths
-
-
-def recursive_ls(dir_path: str, with_directory: bool = True, _fs=None):
-    """Recursively list all files and directories within
-    a given directory.
-
-    Args:
-        dir_path: Directory path.
-        with_directory: Whether to include the directories in the list.
-    """
-
-    if _fs is None:
-        fs = get_mapper(dir_path).fs
-    else:
-        fs = _fs
-
-    all_paths = []
-    for path in fs.ls(dir_path, detail=True):
-
-        prefixed_path = fsspec.utils._unstrip_protocol(path["name"], fs)
-
-        if path["type"] == "directory":
-
-            # Add separator at the end to indicate it's a directory
-            if not prefixed_path.endswith(fs.sep):
-                prefixed_path = f"{prefixed_path}{fs.sep}"
-
-            if with_directory:
-                all_paths.append(prefixed_path)
-
-            all_paths += recursive_ls(path["name"], _fs=fs, with_directory=with_directory)
-
-        elif path["type"] == "file":
-            all_paths.append(prefixed_path)
-
-    return all_paths
+    paths = fs.glob(path, detail=detail, **kwargs)
+    paths = [fsspec.utils._unstrip_protocol(d, fs) for d in paths]
+    return paths
 
 
 def copy_dir(
@@ -406,6 +366,9 @@ def copy_dir(
     source = str(source)
     destination = str(destination)
 
+    source_fs = get_mapper(source).fs
+    destination_fs = get_mapper(destination).fs
+
     # Sanity check
     if not is_dir(source):
         raise ValueError(
@@ -415,18 +378,25 @@ def copy_dir(
     if not force and is_dir(destination):
         raise ValueError(f"The destination folder to copy already exists: {destination}")
 
-    # Get all the paths of the input folder
-    input_paths = recursive_ls(str(source), with_directory=True)
+    # Get all input paths with details
+    # NOTE(hadim): we could have use `.glob(..., detail=True)` here but that API is inconsistent
+    # between the backends resulting in different object types being returned (dict, list, etc).
+    detailed_paths = source_fs.find(source, withdirs=True, detail=True)
+    detailed_paths = list(detailed_paths.values())
+
+    # Get list of input types
+    input_types = [d["type"] for d in detailed_paths]
+
+    # Get list of input path + add protocol if needed
+    input_paths = [d["name"] for d in detailed_paths]
+    input_paths = [fsspec.utils._unstrip_protocol(p, source_fs) for p in input_paths]
 
     # Build all the output paths
     output_paths: List[str] = fsspec.utils.other_paths(input_paths, destination)  # type: ignore
 
-    source_fs = get_mapper(source).fs
-    destination_fs = get_mapper(destination).fs
-
-    def _copy_source_to_destination(input_path, output_path):
+    def _copy_source_to_destination(input_path, input_type, output_path):
         # A directory
-        if input_path.endswith(source_fs.sep):
+        if input_type == "directory":
             destination_fs.mkdir(output_path)
 
         # A file
@@ -443,7 +413,7 @@ def copy_dir(
     # Copy source files/directories to destination in parallel
     parallelized(
         _copy_source_to_destination,
-        inputs_list=list(zip(input_paths, output_paths)),
+        inputs_list=list(zip(input_paths, input_types, output_paths)),
         arg_type="args",
         progress=progress,
         tqdm_kwargs=dict(leave=leave_progress),
