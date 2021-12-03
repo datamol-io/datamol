@@ -169,14 +169,6 @@ def test_glob(tmp_path):
             f.write("hello")
 
     assert len(dm.utils.fs.glob(tmp_path / "*.txt")) == 5
-    assert set(dm.utils.fs.glob(tmp_path / "*.txt")) == {
-        str(tmp_path / "test_0.txt"),
-        str(tmp_path / "test_1.txt"),
-        str(tmp_path / "test_2.txt"),
-        str(tmp_path / "test_3.txt"),
-        str(tmp_path / "test_4.txt"),
-    }
-
 
 def test_copy_file(tmp_path):
     tmp_file = tmp_path / "test.txt"
