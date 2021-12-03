@@ -8,12 +8,15 @@
 * Add a new function `dm.viz.utils.align_2d_coordinates` to align 2d coordinates of molecules using either a given pattern or MCS.
 * Add `dm.canonical_tautomer` to canonicalize tautomers.
 * Add `dm.remove_stereochemistry()`.
+* Add a `bond_line_width` arg to `to_image`.
 
 **Changed:**
 
 * Set `fsspec` minimum version to `>=2021.9`.
 * Pimp up `dm.utils.to_image` to make it more robust (don't fail on certain molecules due to incorrect aromaticity) and also propagate more drawing options to RDKit such as `legend_fontsize` and others.
 * Add a new `align` argument in `dm.to_image()` to align the 2d coordinates of the molecules.
+* In `dm.to_image`, `use_svg` is now set to `True` by default.
+* Change the default `mol_size` from 200 to 300 in `to_image`.
 
 **Deprecated:**
 

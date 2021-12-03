@@ -18,8 +18,8 @@ def to_image(
     mols: Union[List[dm.Mol], dm.Mol],
     legends: Union[List[Union[str, None]], str, None] = None,
     n_cols: int = 4,
-    use_svg: bool = False,
-    mol_size: Union[Tuple[int, int], int] = (200, 200),
+    use_svg: bool = True,
+    mol_size: Union[Tuple[int, int], int] = (300, 300),
     highlight_atom: List[List[int]] = None,
     highlight_bond: List[List[int]] = None,
     outfile: str = None,
@@ -27,6 +27,7 @@ def to_image(
     copy: bool = True,
     indices: bool = False,
     bond_indices: bool = False,
+    bond_line_width: int = 2,
     stereo_annotations: bool = True,
     legend_fontsize: int = 16,
     kekulize: bool = True,
@@ -48,6 +49,7 @@ def to_image(
         copy: Whether to copy the molecules or not.
         indices: Whether to draw the atom indices.
         bond_indices: Whether to draw the bond indices.
+        bond_line_width: The width of the bond lines.
         legend_fontsize: Font size for the legend.
         kekulize: Run kekulization routine on molecules. Skipped if fails.
         align: Whether to align the 2D coordinates of the molecules. If True
@@ -110,6 +112,7 @@ def to_image(
     draw_options.addAtomIndices = indices
     draw_options.addBondIndices = bond_indices
     draw_options.addStereoAnnotation = stereo_annotations
+    draw_options.bondLineWidth = bond_line_width
 
     # Add the custom drawing options.
     _kwargs = {}
