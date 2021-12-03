@@ -4,7 +4,7 @@
 * Add `dm.utils.fs.mkdir` + tests.
 * Add a new `dm.descriptors` module with `compute_many_descriptors` and `batch_compute_many_descriptors` + tests.
 * Add `dm.viz.match_substructure` to highlight one or more substructures in a list of molecules + tests. Note that the current function does not show different colors per match and submatch because of a limitation in `MolsToGridImage`. We plan to address this in a future version of datamol.
-* Add a new `mcs` module backed by `rdkit.Chem.rdFMCS` with `find_mcs_with_details` and `find_mcs` functions + tests.
+* Add a new `mcs` module backed by `rdkit.Chem.rdFMCS` with `find_mcs` function + tests.
 * Add a new function `dm.viz.utils.align_2d_coordinates` to align 2d coordinates of molecules using either a given pattern or MCS.
 * Add `dm.canonical_tautomer` to canonicalize tautomers.
 * Add `dm.remove_stereochemistry()`.

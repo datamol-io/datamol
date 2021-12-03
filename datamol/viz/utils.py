@@ -29,13 +29,13 @@ def align_2d_coordinates(
         mols = [dm.copy_mol(mol) for mol in mols]
 
     if pattern is None:
-        mcs = dm.find_mcs_with_details(mols=mols, **mcs_args)
+        mcs_smarts = dm.find_mcs(mols=mols, **mcs_args)
 
-        if mcs.smartsString is None or mcs.smartsString == "":
+        if mcs_smarts is None:
             # Do nothing
             return mols
 
-        pattern = dm.from_smarts(mcs.smartsString)
+        pattern = dm.from_smarts(mcs_smarts)
 
     AllChem.Compute2DCoords(pattern)  # type: ignore
 

@@ -98,5 +98,4 @@ from . import viz
 
 from .viz import to_image
 
-from .mcs import find_mcs_with_details
 from .mcs import find_mcs

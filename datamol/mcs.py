@@ -9,7 +9,7 @@ ALLOWED_BOND_COMPARE = ["CompareAny", "CompareOrder", "CompareOrderExact"]
 ALLOWED_RING_COMPARE = ["IgnoreRingFusion", "PermissiveRingFusion", "StrictRingFusion"]
 
 
-def find_mcs_with_details(
+def find_mcs(
     mols: List[dm.Mol],
     maximize_bonds: bool = True,
     threshold: float = 0.0,
@@ -23,6 +23,7 @@ def find_mcs_with_details(
     atom_compare: str = "CompareElements",
     bond_compare: str = "CompareOrder",
     ring_compare: str = "IgnoreRingFusion",
+    with_details: bool = False,
     **kwargs,
 ):
     """Find the maximum common substructure from a list of molecules.
@@ -42,6 +43,7 @@ def find_mcs_with_details(
             "CompareIsotopes".
         bond_compare: One of "CompareAny", "CompareOrder", "CompareOrderExact".
         ring_compare: One of "IgnoreRingFusion", "PermissiveRingFusion", "StrictRingFusion".
+        with_details: Whether to return the RDKit MCS object or just the SMARTS string.
         kwargs: Additional arguments for the MCS.
     """
 
@@ -71,59 +73,11 @@ def find_mcs_with_details(
     args.update(kwargs)
 
     mcs = rdFMCS.FindMCS(mols, **args)
-    return mcs
 
+    if with_details:
+        return mcs
 
-def find_mcs(
-    mols: List[dm.Mol],
-    maximize_bonds: bool = True,
-    threshold: float = 0.0,
-    timeout: int = 5,
-    verbose: bool = False,
-    match_valences: bool = False,
-    ring_matches_ring_only: bool = True,
-    complete_rings_only: bool = False,
-    match_chiral_tag: bool = False,
-    seed_smarts: str = "",
-    atom_compare: str = "CompareElements",
-    bond_compare: str = "CompareOrder",
-    ring_compare: str = "IgnoreRingFusion",
-    **kwargs,
-):
-    """Find the maximum common substructure from a list of molecules.
-
-    Args:
-        mols: List of molecules.
-        maximize_bonds: Maximize the number of bonds in the substructure.
-        threshold: The threshold for the MCS.
-        timeout: The timeout for the MCS.
-        verbose: Whether to enable verbose mode.
-        match_valences: Whether to match valences.
-        ring_matches_ring_only: Whether to match rings only.
-        complete_rings_only: Whether to match complete rings only.
-        match_chiral_tag: Whether to match chiral tags.
-        seed_smarts: The seed SMARTS.
-        atom_compare: One of "CompareAny", "CompareAnyHeavyAtom", "CompareElements",
-            "CompareIsotopes".
-        bond_compare: One of "CompareAny", "CompareOrder", "CompareOrderExact".
-        ring_compare: One of "IgnoreRingFusion", "PermissiveRingFusion", "StrictRingFusion".
-        kwargs: Additional arguments for the MCS.
-    """
-
-    mcs = find_mcs_with_details(
-        mols=mols,
-        maximize_bonds=maximize_bonds,
-        threshold=threshold,
-        timeout=timeout,
-        verbose=verbose,
-        match_valences=match_valences,
-        ring_matches_ring_only=ring_matches_ring_only,
-        complete_rings_only=complete_rings_only,
-        match_chiral_tag=match_chiral_tag,
-        seed_smarts=seed_smarts,
-        atom_compare=atom_compare,
-        bond_compare=bond_compare,
-        ring_compare=ring_compare,
-        **kwargs,
-    )
-    return mcs.smartsString
+    smarts = mcs.smartsString
+    if smarts == "":
+        smarts = None
+    return smarts
