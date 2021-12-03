@@ -8,32 +8,6 @@ import datamol as dm
 from ._viz import to_image
 
 
-def find_bonds_from_atom_list(mol: dm.Mol, atom_indices: List[List[int]]):
-    """Return a list of list of existing bond indices between a list
-    of list of atom indices.
-
-    Args:
-        mol: A molecule.
-        atom_indices: A list of list of atom indices.
-    """
-
-    bonds = []
-
-    for atom_indices_single in atom_indices:
-
-        bonds_single = []
-
-        # Test all possible combinations for existing bonds
-        for a1_idx, a2_idx in itertools.combinations(atom_indices_single, 2):
-            bond = mol.GetBondBetweenAtoms(a1_idx, a2_idx)
-            if bond is not None:
-                bonds_single.append(bond.GetIdx())
-
-        bonds.append(bonds_single)
-
-    return bonds
-
-
 def match_substructure(
     mols: Union[List[dm.Mol], dm.Mol],
     patterns: Union[List[dm.Mol], dm.Mol],
@@ -77,12 +51,16 @@ def match_substructure(
 
         for pattern in patterns:
 
-            atom_indices += list(mol.GetSubstructMatches(pattern, uniquify=True))
+            matches = list(mol.GetSubstructMatches(pattern, uniquify=True))
 
             if highlight_bonds:
-                bond_indices += dm.viz.find_bonds_from_atom_list(mol, atom_indices)
+                bond_indices += [
+                    dm.atom_list_to_bond(mol, match, bond_as_idx=True) for match in matches
+                ]
             else:
                 bond_indices += []
+
+            atom_indices += matches
 
         # NOTE(hadim): we must flatten the atom/bond indices, since `MolsToGridImage`
         # don't accept multiple list of indices for every single molecule.
