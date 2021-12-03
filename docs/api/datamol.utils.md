@@ -26,5 +26,4 @@ The below functions are available under `datamol.utils.fs`.
 ::: datamol.utils.fs:get_mapper
 ::: datamol.utils.fs:get_basename
 ::: datamol.utils.fs:copy_dir
-::: datamol.utils.fs:recursive_ls
 ::: datamol.utils.fs:mkdir
