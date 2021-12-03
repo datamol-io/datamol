@@ -341,7 +341,7 @@ def standardize_mol(
         mol = uncharger.uncharge(mol)
 
     if stereo:
-        Chem.AssignStereochemistry(mol, force=False, cleanIt=True)
+        Chem.AssignStereochemistry(mol, force=False, cleanIt=True)  # type: ignore
 
     return mol
 
@@ -780,3 +780,38 @@ def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
         mol = copy_mol(mol)
     rdmolops.RemoveStereochemistry(mol)
     return mol
+
+
+def atom_list_to_bond(
+    mol: dm.Mol,
+    atom_indices: List[int],
+    bond_as_idx: bool = False,
+):
+    """Return a list of existing bond indices between a list of
+    atom indices.
+
+    Args:
+        mol: A molecule.
+        atom_indices: A list of atom indices.
+    """
+
+    # Build an atom map
+    atom_map = {}
+    submol = Chem.PathToSubmol(mol, atom_indices, atomMap=atom_map)  # type: ignore
+    atom_map_reversed = {v: k for k, v in atom_map.items()}
+
+    bonds = []
+
+    for bond in submol.GetBonds():
+        a1, a2 = bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()
+        ori_a1 = atom_map_reversed[a1]
+        ori_a2 = atom_map_reversed[a2]
+
+        if ori_a1 in atom_indices and ori_a2 in atom_indices:
+            ori_bond = mol.GetBondBetweenAtoms(ori_a1, ori_a2)
+            if bond_as_idx:
+                bonds.append(ori_bond.GetIdx())
+            else:
+                bonds.append(ori_bond)
+
+    return bonds

@@ -9,6 +9,8 @@
 * Add `dm.canonical_tautomer` to canonicalize tautomers.
 * Add `dm.remove_stereochemistry()`.
 * Add a `bond_line_width` arg to `to_image`.
+* Add `dm.atom_list_to_bond()`
+* Add `enable` flag to `dm.without_rdkit_log()`
 
 **Changed:**
 

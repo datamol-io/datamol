@@ -50,6 +50,7 @@ from .mol import enumerate_tautomers
 from .mol import atom_indices_to_mol
 from .mol import canonical_tautomer
 from .mol import remove_stereochemistry
+from .mol import atom_list_to_bond
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse

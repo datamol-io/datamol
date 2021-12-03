@@ -36,3 +36,17 @@ def test_rdkit_log(capfd):
     with dm.without_rdkit_log():
         check_logs_are_not_shown(capfd)
     check_logs_are_not_shown(capfd)
+
+
+@pytest.mark.skip_platform("win")
+def test_rdkit_log_enable(capfd):
+
+    dm.enable_rdkit_log()
+
+    with dm.without_rdkit_log():
+        check_logs_are_not_shown(capfd)
+
+    with dm.without_rdkit_log(enable=False):
+        check_logs_are_shown(capfd)
+
+    check_logs_are_shown(capfd)

@@ -436,3 +436,13 @@ def test_remove_stereochemistry():
     mol = dm.to_mol("C[C@H]1CCC[C@@H](C)[C@@H]1Cl")
     mol_no_stereo = dm.remove_stereochemistry(mol)
     assert dm.to_smiles(mol_no_stereo) == "CC1CCCC(C)C1Cl"
+
+
+def test_atom_list_to_bond():
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+    bond_indices = dm.atom_list_to_bond(mol, atom_indices=[3, 4, 5, 6, 10, 11], bond_as_idx=True)
+    assert bond_indices == [3, 4, 5, 10]
+
+    bonds = dm.atom_list_to_bond(mol, atom_indices=[3, 4, 5, 6, 10, 11], bond_as_idx=False)
+    assert [b.GetIdx() for b in bonds] == [3, 4, 5, 10]
