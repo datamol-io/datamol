@@ -24,7 +24,7 @@ def test_to_image():
 
     # With multiple molecules
     legends = [dm.to_smiles(mol) for mol in mols]
-    image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200))
+    image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200), use_svg=False)
     # image = _convert_ipython_to_array(image)
     image = np.array(image)
 
@@ -35,7 +35,7 @@ def test_to_image():
     # With a single molecule
     mol = mols[0]
     legends = dm.to_smiles(mol)
-    image = dm.viz.to_image(mol, legends=legends, mol_size=(200, 200))
+    image = dm.viz.to_image(mol, legends=legends, mol_size=(200, 200), use_svg=False)
     # image = _convert_ipython_to_array(image)
     image = np.array(image)
 
