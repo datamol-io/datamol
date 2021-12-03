@@ -16,8 +16,6 @@
 ::: datamol.descriptors:n_aliphatic_rings
 ::: datamol.descriptors:n_aromatic_rings
 ::: datamol.descriptors:n_saturated_rings
-::: datamol.descriptors:n_H_acceptors
-::: datamol.descriptors:n_H_donors
 ::: datamol.descriptors:n_radical_electrons
 ::: datamol.descriptors:tpsa
 ::: datamol.descriptors:qed
