@@ -170,6 +170,7 @@ def test_glob(tmp_path):
 
     assert len(dm.utils.fs.glob(tmp_path / "*.txt")) == 5
 
+
 def test_copy_file(tmp_path):
     tmp_file = tmp_path / "test.txt"
 
