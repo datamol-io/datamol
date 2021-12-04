@@ -218,14 +218,14 @@ def copy_file(
         source: path or file-like object to copy from.
         destination: path or file-like object to copy to.
         chunk_size: the chunk size to use. If progress is enabled the chunk
-            size is `None`, it is set to 2048.
+            size is `None`, it is set to 1MB (1024 * 1024).
         force: whether to overwrite the destination file if it exists.
         progress: whether to display a progress bar.
         leave_progress: whether to hide the progress bar once the copy is done.
     """
 
     if progress and chunk_size is None:
-        chunk_size = 2048
+        chunk_size = 1024 * 1024
 
     if isinstance(source, (str, pathlib.Path)):
         source_file = fsspec.open(str(source), "rb")
@@ -302,14 +302,16 @@ def copy_file(
                     pbar.close()
 
 
-def mkdir(dir_path: Union[str, os.PathLike]):
+def mkdir(dir_path: Union[str, os.PathLike], exist_ok: bool = False):
     """Create a directory.
 
     Args:
         dir_path: The path of the directory to create.
+        exist_ok: Whether to ignore the error if the directory
+            already exists.
     """
     fs = get_mapper(str(dir_path)).fs
-    fs.mkdir(str(dir_path))
+    fs.mkdirs(str(dir_path), exist_ok=exist_ok)
 
 
 def md5(filepath: Union[str, os.PathLike]):

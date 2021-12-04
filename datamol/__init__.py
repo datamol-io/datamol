@@ -8,6 +8,7 @@ from . import utils
 
 from .utils import parallelized
 from .utils import JobRunner
+from .utils import fs
 
 from .data import freesolv
 
