@@ -111,38 +111,3 @@ def test_circle_grid(tmp_path):
     )
 
     im.save(tmp_path / "image.png")
-
-
-def test_match_substructure():
-    mol1 = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
-    mol2 = dm.to_mol("CCN(CC)CC(=O)CC(C)NC1=C2C=CC(=CC2=NC=C1)Cl")
-
-    pattern1 = dm.from_smarts("[C;H0](=O)")
-    pattern2 = dm.to_mol("CN(C)")
-
-    # Test multiple scenarios
-
-    dm.viz.match_substructure(
-        mols=[mol1, mol2],
-        patterns=[pattern1, pattern2],
-        highlight_bonds=True,
-        use_svg=True,
-    )
-    dm.viz.match_substructure(
-        mols=mol1,
-        patterns=[pattern1, pattern2],
-        highlight_bonds=True,
-        use_svg=True,
-    )
-    dm.viz.match_substructure(
-        mols=[mol1, mol2],
-        patterns=pattern1,
-        highlight_bonds=False,
-        use_svg=False,
-    )
-    dm.viz.match_substructure(
-        mols=mol1,
-        patterns=pattern2,
-        highlight_bonds=True,
-        use_svg=False,
-    )

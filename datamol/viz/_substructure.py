@@ -10,8 +10,9 @@ from ._viz import to_image
 
 def match_substructure(
     mols: Union[List[dm.Mol], dm.Mol],
-    patterns: Union[List[dm.Mol], dm.Mol],
+    queries: Union[List[dm.Mol], dm.Mol],
     highlight_bonds: bool = True,
+    copy: bool = True,
     **kwargs,
 ):
     """Generate an image of molecule(s) with substructure matches for a given
@@ -19,8 +20,9 @@ def match_substructure(
 
     Args:
         mols: One or more molecules.
-        patterns: One or more patterns.
+        queries: One or more queries.
         highlight_bonds: Whether to also highlight the bonds matching the patterns.
+        copy: Whether to copy the molecules and the queries.
         kwargs: Other kwargs passed to `dm.viz.to_image`.
     """
 
@@ -34,12 +36,13 @@ def match_substructure(
     if isinstance(mols, dm.Mol):
         mols = [mols]
 
-    if isinstance(patterns, dm.Mol):
-        patterns = [patterns]
+    if isinstance(queries, dm.Mol):
+        queries = [queries]
 
-    # Always copy mols and patterns
-    mols = [dm.copy_mol(mol) for mol in mols]
-    patterns = [dm.copy_mol(mol) for mol in patterns]
+    # Copy mols and patterns
+    if copy:
+        mols = [dm.copy_mol(mol) for mol in mols]
+        queries = [dm.copy_mol(mol) for mol in queries]
 
     all_atom_indices = []
     all_bond_indices = []
@@ -49,18 +52,14 @@ def match_substructure(
         atom_indices = []
         bond_indices = []
 
-        for pattern in patterns:
-
-            matches = list(mol.GetSubstructMatches(pattern, uniquify=True))
-
+        for query in queries:
             if highlight_bonds:
-                bond_indices += [
-                    dm.atom_list_to_bond(mol, match, bond_as_idx=True) for match in matches
-                ]
+                atom_matches, bond_matches = dm.substructure_matching_bonds(mol, query)
+                atom_indices += atom_matches
+                bond_indices += bond_matches
             else:
+                atom_indices += list(mol.GetSubstructMatches(query, uniquify=True))  # type: ignore
                 bond_indices += []
-
-            atom_indices += matches
 
         # NOTE(hadim): we must flatten the atom/bond indices, since `MolsToGridImage`
         # don't accept multiple list of indices for every single molecule.
@@ -74,8 +73,6 @@ def match_substructure(
         mols,
         highlight_atom=all_atom_indices,
         highlight_bond=all_bond_indices,
-        # highlightAtomColors=atom_colors,
-        # highlightBondColors=bond_colors,
         **kwargs,
     )
 

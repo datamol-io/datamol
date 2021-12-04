@@ -797,7 +797,7 @@ def atom_list_to_bond(
 
     # Build an atom map
     atom_map = {}
-    submol = Chem.PathToSubmol(mol, atom_indices, atomMap=atom_map)  # type: ignore
+    submol = Chem.PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)  # type: ignore
     atom_map_reversed = {v: k for k, v in atom_map.items()}
 
     bonds = []
@@ -815,3 +815,53 @@ def atom_list_to_bond(
                 bonds.append(ori_bond)
 
     return bonds
+
+
+def substructure_matching_bonds(mol: dm.Mol, query: dm.Mol, **kwargs):
+    """Perform a substructure match using `GetSubstructMatches` but instead
+    of returning only the atom indices also return the bond indices.
+
+    Args:
+        mol: A molecule.
+        query: A molecule used as a query to match against.
+        kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
+
+    Returns:
+        atom_matches: A list of lists of atom indices.
+        bond_matches: A list of lists of bond indices.
+    """
+
+    # NOTE(hadim): If more substructure functions are added here, consider moving it to
+    # a dedicated `substructure` module.
+
+    # Set default arguments
+    kwargs.setdefault("uniquify", True)
+
+    # Get the matching atom indices
+    atom_matches = list(mol.GetSubstructMatches(query, **kwargs))
+
+    # Get the bond to highligh from the query
+    query_bond_indices = [
+        (bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()) for bond in query.GetBonds()
+    ]
+
+    # Retrieve the atom indices
+    query_atom_indices = [atom.GetIdx() for i, atom in enumerate(query.GetAtoms())]
+
+    bond_matches = []
+
+    for match in atom_matches:
+
+        # Map the atom of the query to the atom of the mol matching the query
+        atom_map = dict(zip(query_atom_indices, match))
+
+        # For this match atoms we now, we use the map to retrieve the matching bonds
+        # in the mol.
+        mol_bond_indices = [(atom_map[a1], atom_map[a2]) for a1, a2 in query_bond_indices]
+
+        # Convert the bond atom indices to bond indices
+        mol_bond_indices = [mol.GetBondBetweenAtoms(a1, a2).GetIdx() for a1, a2 in mol_bond_indices]
+
+        bond_matches.append(mol_bond_indices)
+
+    return atom_matches, bond_matches

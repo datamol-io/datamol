@@ -13,6 +13,7 @@
 * Add `enable` flag to `dm.without_rdkit_log()`
 * Add a tutorial about the filesystem module.
 * Add a tutorial about the viz module (still incomplete).
+* Add `dm.substructure_matching_bonds` to perform a standard substructure match but also return the matching bonds instead of only the matching atoms.
 
 **Changed:**
 
