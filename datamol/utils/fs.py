@@ -366,7 +366,7 @@ def copy_dir(
     """
 
     source = str(source)
-    destination = str(destination)z
+    destination = str(destination)
 
     source_fs = get_mapper(source).fs
     destination_fs = get_mapper(destination).fs
