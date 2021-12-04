@@ -46,6 +46,7 @@ theme:
 extra_css:
   - assets/css/custom.css
   - assets/css/custom-datamol.css
+  - assets/css/tweak-width.css
 
 extra_javascript:
   - assets/js/google-analytics.js
