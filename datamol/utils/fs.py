@@ -152,7 +152,7 @@ def get_protocol(path: Union[str, os.PathLike], fs: fsspec.AbstractFileSystem = 
     if fs is None:
         fs = get_mapper(path).fs
 
-    protocol = fs.protocol
+    protocol = fs.protocol  # type: ignore
 
     if "s3" in protocol:
         return "s3"
@@ -366,7 +366,7 @@ def copy_dir(
     """
 
     source = str(source)
-    destination = str(destination)
+    destination = str(destination)z
 
     source_fs = get_mapper(source).fs
     destination_fs = get_mapper(destination).fs
