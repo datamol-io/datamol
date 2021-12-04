@@ -1,10 +1,9 @@
-import fsspec
-
 from typing import Union
 from typing import List
 from typing import Tuple
 
-from rdkit import Chem
+import fsspec
+
 from rdkit.Chem import Draw
 
 import PIL
@@ -12,39 +11,65 @@ import PIL
 import datamol as dm
 
 
+from .utils import prepare_mol_for_drawing
+
+
 def to_image(
-    mols: Union[List[Chem.rdchem.Mol], Chem.rdchem.Mol],
+    mols: Union[List[dm.Mol], dm.Mol],
     legends: Union[List[Union[str, None]], str, None] = None,
     n_cols: int = 4,
-    use_svg: bool = False,
-    mol_size: Union[Tuple[int, int], int] = (200, 200),
+    use_svg: bool = True,
+    mol_size: Union[Tuple[int, int], int] = (300, 300),
     highlight_atom: List[List[int]] = None,
     highlight_bond: List[List[int]] = None,
     outfile: str = None,
     max_mols: int = 32,
-    copy: bool = False,
+    copy: bool = True,
     indices: bool = False,
+    bond_indices: bool = False,
+    bond_line_width: int = 2,
+    stereo_annotations: bool = True,
+    legend_fontsize: int = 16,
+    kekulize: bool = True,
+    align: Union[bool, dm.Mol, str] = False,
+    **kwargs,
 ):
-    """Generate an image out of a molecule or a list of molecule.
+    """Generate an image out of a molecule or a list of molecules.
 
     Args:
-        mols: one or a list of molecules.
-        legends: a string or a list of string as legend for every molecules.
-        n_cols: number of molecules per column.
-        use_svg: whether to ouput an SVG (or a PNG).
-        mol_size: a int or a tuple of int defining the size per molecule.
-        highlight_atom: atom to highlight.
-        highlight_bond: bonds to highlight.
-        outfile: path where to save the image (local or remote path).
-        max_mols: the maximum number of molecules to display.
-        copy: whether to copy the molecules or not.
+        mols: One or a list of molecules.
+        legends: A string or a list of string as legend for every molecules.
+        n_cols: Number of molecules per column.
+        use_svg: Whether to ouput an SVG (or a PNG).
+        mol_size: A int or a tuple of int defining the size per molecule.
+        highlight_atom: the atoms to highlight.
+        highlight_bond: The bonds to highlight.
+        outfile: Path where to save the image (local or remote path).
+        max_mols: The maximum number of molecules to display.
+        copy: Whether to copy the molecules or not.
         indices: Whether to draw the atom indices.
+        bond_indices: Whether to draw the bond indices.
+        bond_line_width: The width of the bond lines.
+        legend_fontsize: Font size for the legend.
+        kekulize: Run kekulization routine on molecules. Skipped if fails.
+        align: Whether to align the 2D coordinates of the molecules. If True
+            or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.
+            If `align` is set to a molecule object or a string, this molecule will be used as a
+            pattern for the alignment. If `align` is set to True, the MCS will be computed.
+            **Warning**:
+                - This will slow down the process. You can pre-compute the alignment by calling
+                `dm.viz.utils.align_2d_coordinates`.
+                - In some cases, the alignment will fail. So you should always check it visually.
+                Please report any list of molecules failing to align.
+        kwargs: Additional arguments to pass to the drawing function. See RDKit
+            documentation related to `MolDrawOptions` for more details at
+            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
     if isinstance(mol_size, int):
         mol_size = (mol_size, mol_size)
 
-    if isinstance(mols, Chem.rdchem.Mol):
+    if isinstance(mols, dm.Mol):
         mols = [mols]
 
     if isinstance(legends, str):
@@ -59,8 +84,16 @@ def to_image(
         if legends is not None:
             legends = legends[:max_mols]
 
-    if indices is True:
-        [dm.atom_indices_to_mol(mol) for mol in mols]
+    # Whether to align the molecules
+    if align is True:
+        mols = dm.viz.utils.align_2d_coordinates(mols, copy=False)
+    elif isinstance(align, dm.Mol):
+        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=align, copy=False)
+    elif isinstance(align, str):
+        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=dm.from_smarts(align), copy=False)
+
+    # Prepare molecules before drawing
+    mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
 
     _highlight_atom = highlight_atom
     if highlight_atom is not None and isinstance(highlight_atom[0], int):
@@ -74,6 +107,21 @@ def to_image(
     if len(mols) < n_cols:
         n_cols = len(mols)
 
+    draw_options = Draw.rdMolDraw2D.MolDrawOptions()
+    draw_options.legendFontSize = legend_fontsize
+    draw_options.addAtomIndices = indices
+    draw_options.addBondIndices = bond_indices
+    draw_options.addStereoAnnotation = stereo_annotations
+    draw_options.bondLineWidth = bond_line_width
+
+    # Add the custom drawing options.
+    _kwargs = {}
+    for k, v in kwargs.items():
+        if hasattr(draw_options, k):
+            setattr(draw_options, k, v)
+        else:
+            _kwargs[k] = v
+
     image = Draw.MolsToGridImage(
         mols,
         legends=legends,
@@ -82,6 +130,8 @@ def to_image(
         subImgSize=mol_size,
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
+        drawOptions=draw_options,
+        **_kwargs,
     )
 
     if outfile is not None:

@@ -341,7 +341,7 @@ def standardize_mol(
         mol = uncharger.uncharge(mol)
 
     if stereo:
-        Chem.AssignStereochemistry(mol, force=False, cleanIt=True)
+        Chem.AssignStereochemistry(mol, force=False, cleanIt=True)  # type: ignore
 
     return mol
 
@@ -682,13 +682,20 @@ def enumerate_tautomers(mol: Chem.rdchem.Mol, n_variants: int = 20):
         mol: The molecule whose state we should enumerate.
         n_variants: The maximum amount of molecules that should be returned.
     """
-    # safety first
-    mol = copy_mol(mol)
-
     enumerator = rdMolStandardize.TautomerEnumerator()
     enumerator.SetMaxTautomers(n_variants)
     tautomers = enumerator.Enumerate(mol)
     return list(tautomers)
+
+
+def canonical_tautomer(mol: dm.Mol):
+    """Get the canonical tautomer of the current molecule.
+
+    Args:
+        mol: A molecule.
+    """
+    enumerator = rdMolStandardize.TautomerEnumerator()
+    return enumerator.Canonicalize(mol)
 
 
 def enumerate_stereoisomers(
@@ -759,3 +766,102 @@ def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
     for atom in mol.GetAtoms():
         atom.SetProp("molAtomMapNumber", str(atom.GetIdx()))
     return mol
+
+
+def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
+    """Removes all stereochemistry info from the molecule.
+
+    Args:
+        mol: a molecule
+        copy: Whether to copy the molecule.
+    """
+
+    if copy is True:
+        mol = copy_mol(mol)
+    rdmolops.RemoveStereochemistry(mol)
+    return mol
+
+
+def atom_list_to_bond(
+    mol: dm.Mol,
+    atom_indices: List[int],
+    bond_as_idx: bool = False,
+):
+    """Return a list of existing bond indices between a list of
+    atom indices.
+
+    Args:
+        mol: A molecule.
+        atom_indices: A list of atom indices.
+    """
+
+    # Build an atom map
+    atom_map = {}
+    submol = Chem.PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)  # type: ignore
+    atom_map_reversed = {v: k for k, v in atom_map.items()}
+
+    bonds = []
+
+    for bond in submol.GetBonds():
+        a1, a2 = bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()
+        ori_a1 = atom_map_reversed[a1]
+        ori_a2 = atom_map_reversed[a2]
+
+        if ori_a1 in atom_indices and ori_a2 in atom_indices:
+            ori_bond = mol.GetBondBetweenAtoms(ori_a1, ori_a2)
+            if bond_as_idx:
+                bonds.append(ori_bond.GetIdx())
+            else:
+                bonds.append(ori_bond)
+
+    return bonds
+
+
+def substructure_matching_bonds(mol: dm.Mol, query: dm.Mol, **kwargs):
+    """Perform a substructure match using `GetSubstructMatches` but instead
+    of returning only the atom indices also return the bond indices.
+
+    Args:
+        mol: A molecule.
+        query: A molecule used as a query to match against.
+        kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
+
+    Returns:
+        atom_matches: A list of lists of atom indices.
+        bond_matches: A list of lists of bond indices.
+    """
+
+    # NOTE(hadim): If more substructure functions are added here, consider moving it to
+    # a dedicated `substructure` module.
+
+    # Set default arguments
+    kwargs.setdefault("uniquify", True)
+
+    # Get the matching atom indices
+    atom_matches = list(mol.GetSubstructMatches(query, **kwargs))
+
+    # Get the bond to highligh from the query
+    query_bond_indices = [
+        (bond.GetBeginAtomIdx(), bond.GetEndAtomIdx()) for bond in query.GetBonds()
+    ]
+
+    # Retrieve the atom indices
+    query_atom_indices = [atom.GetIdx() for i, atom in enumerate(query.GetAtoms())]
+
+    bond_matches = []
+
+    for match in atom_matches:
+
+        # Map the atom of the query to the atom of the mol matching the query
+        atom_map = dict(zip(query_atom_indices, match))
+
+        # For this match atoms we now, we use the map to retrieve the matching bonds
+        # in the mol.
+        mol_bond_indices = [(atom_map[a1], atom_map[a2]) for a1, a2 in query_bond_indices]
+
+        # Convert the bond atom indices to bond indices
+        mol_bond_indices = [mol.GetBondBetweenAtoms(a1, a2).GetIdx() for a1, a2 in mol_bond_indices]
+
+        bond_matches.append(mol_bond_indices)
+
+    return atom_matches, bond_matches

@@ -18,6 +18,56 @@ def test_copy_files(tmp_path):
         f.read() == content
 
 
+def test_copy_dir(tmp_path):
+    source_path = tmp_path / "source_dir"
+    source_path_subdir = source_path / "a_subdir"
+    destination_path = tmp_path / "destination_dir"
+    destination_path_subdir = destination_path / "a_subdir"
+
+    dm.utils.fs.mkdir(source_path)
+    dm.utils.fs.mkdir(source_path_subdir)
+
+    content = "hello this is a content"
+    file1_path = source_path / "hello.txt"
+    with open(file1_path, "w") as f:
+        f.write(content)
+
+    file2_path = source_path_subdir / "hello.txt"
+    with open(file2_path, "w") as f:
+        f.write(content)
+
+    assert not dm.utils.fs.is_dir(destination_path_subdir)
+    assert not dm.utils.fs.is_dir(destination_path)
+
+    dm.utils.fs.copy_dir(source_path, destination_path)
+
+    assert dm.utils.fs.is_dir(destination_path_subdir)
+    assert dm.utils.fs.is_dir(destination_path)
+    assert dm.utils.fs.is_file(file1_path)
+    assert dm.utils.fs.is_file(file2_path)
+
+    with open(file1_path) as f:
+        f.read() == content
+
+    with open(file2_path) as f:
+        f.read() == content
+
+
+def test_mkdir(tmp_path):
+    source_path = tmp_path / "source_dir"
+    source_path_subdir = source_path / "a_subdir"
+
+    dm.utils.fs.mkdir(source_path)
+
+    assert dm.utils.fs.is_dir(source_path)
+    assert not dm.utils.fs.is_dir(source_path_subdir)
+
+    dm.utils.fs.mkdir(source_path_subdir)
+
+    assert dm.utils.fs.is_dir(source_path)
+    assert dm.utils.fs.is_dir(source_path_subdir)
+
+
 @pytest.mark.skip_platform("win")
 def test_cache_dir():
     cache_dir = dm.utils.fs.get_cache_dir("my_app")
@@ -119,13 +169,6 @@ def test_glob(tmp_path):
             f.write("hello")
 
     assert len(dm.utils.fs.glob(tmp_path / "*.txt")) == 5
-    assert set(dm.utils.fs.glob(tmp_path / "*.txt")) == {
-        str(tmp_path / "test_0.txt"),
-        str(tmp_path / "test_1.txt"),
-        str(tmp_path / "test_2.txt"),
-        str(tmp_path / "test_3.txt"),
-        str(tmp_path / "test_4.txt"),
-    }
 
 
 def test_copy_file(tmp_path):

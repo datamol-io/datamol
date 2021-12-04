@@ -17,8 +17,11 @@ nav:
       - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
       - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
       - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
+      - Visualization: tutorials/Visualization.ipynb
+      - Working with local and remote data: tutorials/Filesystem.ipynb
   - API:
       - datamol: api/datamol.md
+      - datamol.descriptors: api/datamol.descriptors.md
       - datamol.conformers: api/datamol.conformers.md
       - datamol.viz: api/datamol.viz.md
       - datamol.fragment: api/datamol.fragment.md
@@ -43,6 +46,7 @@ theme:
 extra_css:
   - assets/css/custom.css
   - assets/css/custom-datamol.css
+  - assets/css/tweak-width.css
 
 extra_javascript:
   - assets/js/google-analytics.js

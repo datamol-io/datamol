@@ -11,6 +11,9 @@ import hashlib
 import pathlib
 
 import fsspec
+import fsspec.utils
+
+from .jobs import parallelized
 
 
 def _import_tqdm():
@@ -139,15 +142,17 @@ def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return False
 
 
-def get_protocol(path: Union[str, os.PathLike]):
+def get_protocol(path: Union[str, os.PathLike], fs: fsspec.AbstractFileSystem = None):
     """Return the name of the path protocol.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
 
-    mapper = get_mapper(path)
-    protocol = mapper.fs.protocol
+    if fs is None:
+        fs = get_mapper(path).fs
+
+    protocol = fs.protocol  # type: ignore
 
     if "s3" in protocol:
         return "s3"
@@ -213,14 +218,14 @@ def copy_file(
         source: path or file-like object to copy from.
         destination: path or file-like object to copy to.
         chunk_size: the chunk size to use. If progress is enabled the chunk
-            size is `None`, it is set to 2048.
-        force: whether to overwrite the destination file it it exists.
+            size is `None`, it is set to 1MB (1024 * 1024).
+        force: whether to overwrite the destination file if it exists.
         progress: whether to display a progress bar.
         leave_progress: whether to hide the progress bar once the copy is done.
     """
 
     if progress and chunk_size is None:
-        chunk_size = 2048
+        chunk_size = 1024 * 1024
 
     if isinstance(source, (str, pathlib.Path)):
         source_file = fsspec.open(str(source), "rb")
@@ -243,7 +248,7 @@ def copy_file(
         destination_file = destination
 
     if not is_file(source_file):
-        raise ValueError(f"The file being copied does not exist: {source}")
+        raise ValueError(f"The file being copied does not exist or is not a file: {source}")
 
     if not force and is_file(destination_file):
         raise ValueError(f"The destination file to copy already exists: {destination}")
@@ -297,10 +302,20 @@ def copy_file(
                     pbar.close()
 
 
+def mkdir(dir_path: Union[str, os.PathLike], exist_ok: bool = False):
+    """Create a directory.
+
+    Args:
+        dir_path: The path of the directory to create.
+        exist_ok: Whether to ignore the error if the directory
+            already exists.
+    """
+    fs = get_mapper(str(dir_path)).fs
+    fs.mkdirs(str(dir_path), exist_ok=exist_ok)
+
+
 def md5(filepath: Union[str, os.PathLike]):
     """Return the md5 hash of a file.
-
-    NOTE(hadim): Use fsspec caching here maybe.
 
     Args:
         filepath: The path to the file to compute the MD5 hash on.
@@ -312,7 +327,7 @@ def md5(filepath: Union[str, os.PathLike]):
     return file_hash
 
 
-def glob(path: str, **kwargs) -> List[str]:
+def glob(path: str, detail: bool = False, **kwargs) -> List[str]:
     """Find files by glob-matching.
 
     Args:
@@ -320,10 +335,89 @@ def glob(path: str, **kwargs) -> List[str]:
     """
     # Get the list of paths
     fs = get_mapper(path).fs
-    data_paths = fs.glob(path, **kwargs)
-    protocol = get_protocol(path)
-    # Append path prefix if needed
-    if protocol not in ["file", "https", "http"]:
-        data_paths = [f"{protocol}://{d}" for d in data_paths]
+    paths = fs.glob(path, detail=detail, **kwargs)
+    paths = [fsspec.utils._unstrip_protocol(d, fs) for d in paths]
+    return paths
 
-    return data_paths
+
+def copy_dir(
+    source: Union[str, pathlib.Path],
+    destination: Union[str, pathlib.Path],
+    force: bool = False,
+    progress: bool = False,
+    leave_progress: bool = True,
+    file_progress: bool = False,
+    file_leave_progress: bool = False,
+    chunk_size: int = None,
+):
+    """Copy one directory to another location across different filesystem (local, S3, GCS, etc).
+
+    Args:
+        source: Path to the source directory.
+        destination: Path to the destination directory.
+        chunk_size: the chunk size to use. If progress is enabled the chunk
+            size is `None`, it is set to 2048.
+        force: whether to overwrite the destination directory if it exists.
+        progress: Whether to display a progress bar.
+        leave_progress: Whether to hide the progress bar once the copy is done.
+        file_progress: Whether to display a progress bar for each file.
+        file_leave_progress: Whether to hide the progress bar once a file copy is done.
+        chunk_size: See `dm.utils.fs.copy_file`.
+    """
+
+    source = str(source)
+    destination = str(destination)
+
+    source_fs = get_mapper(source).fs
+    destination_fs = get_mapper(destination).fs
+
+    # Sanity check
+    if not is_dir(source):
+        raise ValueError(
+            f"The directory being copied does not exist or is not a directory: {source}"
+        )
+
+    if not force and is_dir(destination):
+        raise ValueError(f"The destination folder to copy already exists: {destination}")
+
+    # Get all input paths with details
+    # NOTE(hadim): we could have use `.glob(..., detail=True)` here but that API is inconsistent
+    # between the backends resulting in different object types being returned (dict, list, etc).
+    detailed_paths = source_fs.find(source, withdirs=True, detail=True)
+    detailed_paths = list(detailed_paths.values())
+
+    # Get list of input types
+    input_types = [d["type"] for d in detailed_paths]
+
+    # Get list of input path + add protocol if needed
+    input_paths = [d["name"] for d in detailed_paths]
+    input_paths = [fsspec.utils._unstrip_protocol(p, source_fs) for p in input_paths]
+
+    # Build all the output paths
+    output_paths: List[str] = fsspec.utils.other_paths(input_paths, destination)  # type: ignore
+
+    def _copy_source_to_destination(input_path, input_type, output_path):
+        # A directory
+        if input_type == "directory":
+            destination_fs.mkdir(output_path)
+
+        # A file
+        else:
+            copy_file(
+                input_path,
+                output_path,
+                force=force,
+                progress=file_progress,
+                leave_progress=file_leave_progress,
+                chunk_size=chunk_size,
+            )
+
+    # Copy source files/directories to destination in parallel
+    parallelized(
+        _copy_source_to_destination,
+        inputs_list=list(zip(input_paths, input_types, output_paths)),
+        arg_type="args",
+        progress=progress,
+        tqdm_kwargs=dict(leave=leave_progress),
+        scheduler="threads",
+    )

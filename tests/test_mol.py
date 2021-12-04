@@ -420,3 +420,29 @@ def test_same_mol():
     assert dm.same_mol(None, mol2) is False
     assert dm.same_mol(mol1, None) is False
     assert dm.same_mol(None, None) is False
+
+
+def test_canonical_tautomer():
+    smiles = "Oc1c(cccc3)c3nc2ccncc12"
+    mol = dm.to_mol(smiles)
+
+    canonical_mol = dm.canonical_tautomer(mol)
+
+    assert dm.to_smiles(canonical_mol) == "O=c1c2ccccc2[nH]c2ccncc12"
+    assert dm.to_inchikey(canonical_mol) == dm.to_inchikey(mol)
+
+
+def test_remove_stereochemistry():
+    mol = dm.to_mol("C[C@H]1CCC[C@@H](C)[C@@H]1Cl")
+    mol_no_stereo = dm.remove_stereochemistry(mol)
+    assert dm.to_smiles(mol_no_stereo) == "CC1CCCC(C)C1Cl"
+
+
+def test_atom_list_to_bond():
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+
+    bond_indices = dm.atom_list_to_bond(mol, atom_indices=[3, 4, 5, 6, 10, 11], bond_as_idx=True)
+    assert bond_indices == [3, 4, 5, 10]
+
+    bonds = dm.atom_list_to_bond(mol, atom_indices=[3, 4, 5, 6, 10, 11], bond_as_idx=False)
+    assert [b.GetIdx() for b in bonds] == [3, 4, 5, 10]

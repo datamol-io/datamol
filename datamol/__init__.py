@@ -8,6 +8,7 @@ from . import utils
 
 from .utils import parallelized
 from .utils import JobRunner
+from .utils import fs
 
 from .data import freesolv
 
@@ -48,6 +49,10 @@ from .mol import copy_mol_props
 from .mol import enumerate_stereoisomers
 from .mol import enumerate_tautomers
 from .mol import atom_indices_to_mol
+from .mol import canonical_tautomer
+from .mol import remove_stereochemistry
+from .mol import atom_list_to_bond
+from .mol import substructure_matching_bonds
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
@@ -59,6 +64,7 @@ from . import scaffold
 from . import reactions
 from . import actions
 from . import molar
+from . import descriptors
 
 from .convert import to_smiles
 from .convert import to_selfies
@@ -71,6 +77,7 @@ from .convert import to_inchikey
 from .convert import from_inchi
 from .convert import to_df
 from .convert import from_df
+from .convert import render_mol_df
 
 from .fp import to_fp
 from .fp import fp_to_array
@@ -94,3 +101,5 @@ from . import conformers
 from . import viz
 
 from .viz import to_image
+
+from .mcs import find_mcs

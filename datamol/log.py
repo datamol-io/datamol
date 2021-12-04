@@ -21,7 +21,15 @@ class without_rdkit_log:
         mute_warning: bool = True,
         mute_info: bool = True,
         mute_debug: bool = True,
+        enable: bool = True,
     ):
+
+        if enable is False:
+            mute_errors = False
+            mute_warning = False
+            mute_info = False
+            mute_debug = False
+
         # Get current log state
         self.previous_status = self._get_log_status()
 
