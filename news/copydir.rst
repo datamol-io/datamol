@@ -11,6 +11,8 @@
 * Add a `bond_line_width` arg to `to_image`.
 * Add `dm.atom_list_to_bond()`
 * Add `enable` flag to `dm.without_rdkit_log()`
+* Add a tutorial about the filesystem module.
+* Add a tutorial about the viz module (still incomplete).
 
 **Changed:**
 

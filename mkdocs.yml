@@ -17,6 +17,7 @@ nav:
       - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
       - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
       - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
+      - Visualization: tutorials/Visualization.ipynb
       - Working with local and remote data: tutorials/Filesystem.ipynb
   - API:
       - datamol: api/datamol.md

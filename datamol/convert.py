@@ -190,7 +190,7 @@ def to_smarts(mol: Chem.rdchem.Mol) -> Optional[str]:
     if mol is None:
         return None
 
-    return Chem.MolToSmarts(mol)
+    return Chem.MolToSmarts(mol)  # type: ignore
 
 
 def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
@@ -241,7 +241,7 @@ def from_smarts(
 
     if smarts is None:
         return None
-    return Chem.MolFromSmarts(smarts)
+    return Chem.MolFromSmarts(smarts)  # type: ignore
 
 
 def to_df(
@@ -302,9 +302,8 @@ def to_df(
 
     # Render mol column to images
     if render_df_mol is True and mol_column is not None:
-        # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
-        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
-        _ChangeMoleculeRendering(df)
+
+        render_mol_df(df)
 
         if render_all_df_mol:
             PandasTools.RenderImagesInAllDataFrames()
@@ -371,6 +370,18 @@ def from_df(
         return mol
 
     return df.apply(_row_to_mol, axis=1).tolist()
+
+
+def render_mol_df(df: pd.DataFrame):
+    """Render the molecules column in a dataframe. The rendering is performed
+    in-place only. So nothing is returned.
+
+    Args:
+        df: a dataframe.
+    """
+    # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
+    # https://github.com/rdkit/rdkit/issues/3563 is fixed.
+    _ChangeMoleculeRendering(df)
 
 
 def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
