@@ -813,3 +813,67 @@ def protect_atoms(
         mol_copy.GetAtomWithIdx(a).SetProp("_protected", "1")
 
     return mol_copy
+
+
+def add_hs(
+    mol: dm.Mol,
+    explicit_only: bool = False,
+    add_coords: bool = False,
+    only_on_atoms: List[int] = None,
+    add_residue_info: bool = False,
+    copy: bool = True,
+):
+    """Adds hydrogens to the molecule.
+
+    Args:
+        mol: a molecule.
+        explicit_only: whether to only add explicit hydrogens.
+        add_coords: whether to add 3D coordinates to the hydrogens.
+        onlyOnAtoms: a list of atoms to add hydrogens only on.
+        add_residue_info: whether to add residue information to the hydrogens.
+            Useful for PDB files.
+        copy: whether to copy the input molecule.
+    """
+
+    if copy:
+        mol = dm.copy_mol(mol)
+
+    mol = Chem.AddHs(  # type: ignore
+        mol,
+        explicitOnly=explicit_only,
+        addCoords=add_coords,
+        onlyOnAtoms=only_on_atoms,
+        addResidueInfo=add_residue_info,
+    )
+
+    return mol
+
+
+def remove_hs(
+    mol: dm.Mol,
+    implicit_only: bool = False,
+    update_explicit_count: bool = False,
+    sanitize: bool = True,
+    copy: bool = True,
+):
+    """Removes hydrogens from a molecule.
+
+    Args:
+        mol: a molecule.
+        implicit_only: whether to only remove implicit hydrogens.
+        update_explicit_count: whether to update the explicit hydrogen count.
+        sanitize: whether to sanitize the molecule after the hydrogens are removed.
+        copy: whether to copy the input molecule.
+    """
+
+    if copy:
+        mol = dm.copy_mol(mol)
+
+    mol = Chem.RemoveHs(  # type: ignore
+        mol,
+        implicitOnly=implicit_only,
+        updateExplicitCount=update_explicit_count,
+        sanitize=sanitize,
+    )
+
+    return mol

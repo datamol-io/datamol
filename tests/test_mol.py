@@ -432,3 +432,19 @@ def test_protect_atoms():
         ]
     )
     assert protected_atoms == computed_protect_atoms
+
+
+def test_add_remove_hs():
+
+    smiles = "OC1=CC2CCCCC2[N:1]=C1"
+
+    mol = dm.to_mol(smiles)
+
+    mol2 = dm.add_hs(mol)
+    assert (
+        dm.to_smiles(mol2)
+        == "[H]OC1=C([H])C2([H])C([H])([H])C([H])([H])C([H])([H])C([H])([H])C2([H])[N:1]=C1[H]"
+    )
+
+    mol3 = dm.remove_hs(mol)
+    assert dm.to_smiles(mol3) == smiles

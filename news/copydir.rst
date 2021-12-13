@@ -15,6 +15,7 @@
 * Add a tutorial about the viz module (still incomplete).
 * Add `dm.substructure_matching_bonds` to perform a standard substructure match but also return the matching bonds instead of only the matching atoms.
 * Add new `dm.isomers` module + move relevant functions from `dm.mol` to `dm.isomers`
+* Add `dm.add_hs` and `dm.remove` to add and remove hydrogens from molecules.
 
 **Changed:**
 
