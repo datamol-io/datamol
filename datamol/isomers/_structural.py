@@ -290,8 +290,9 @@ class IsomerEnumerator:
             mol.UpdatePropertyCache()
             clean_smiles = dm.to_smiles(mol)
             clean_mol = dm.to_mol(clean_smiles)
-        except Exception as e:
-            raise e
+        except Exception:
+            pass
+
         return clean_mol, clean_smiles
 
     def _is_valid(self, new_mol, new_smiles, need_substruct: Optional[dm.Mol] = None):
@@ -330,39 +331,50 @@ class IsomerEnumerator:
             protect_substruct (Chem.rdchem.Mol, optional): Optional substruct to protect
             max_mols (int, optional): maximum number of molecule to sample
         """
+
         mol = dm.to_mol(mol)
+
         if protect_substruct is not None:
-            mol = dm.protect_atoms(mol, substruct=protect_substruct, in_place=False, as_smarts=True)
+            mol = dm.protect_atoms(mol, substruct=protect_substruct, in_place=False)
+
         smiles = dm.to_smiles(mol, isomeric=True, canonical=True)
         mol_size = mol.GetNumHeavyAtoms()
         source_mols = [(mol, 0)]
         seen = set([smiles])
         seen_inchi_key = set([dm.to_inchikey(smiles)])
-        depth = depth or float("inf")
-        max_mols = max_mols or float("inf")
+
         if include_input:
             yield smiles
-        while len(source_mols) > 0 and max_mols > 0:
+
+        while len(source_mols) > 0 and (max_mols is None or max_mols > 0):
+
             curmol, curdepth = source_mols.pop(0)
+
             try:
                 # we first try to kekulize the molecule
                 Chem.Kekulize(curmol)
                 curmol = Chem.AddHs(curmol, explicitOnly=False)
-            except Exception as e:
+            except Exception:
                 pass
-            if curdepth >= depth:
+
+            if depth is not None and curdepth >= depth:
                 return
+
             with dm.without_rdkit_log():
                 for k, rxn in self.rxn_cache.items():
-                    if max_mols < 1:
+                    if max_mols is not None and max_mols < 1:
                         break
+
                     for new_mols in rxn.RunReactants((curmol,)):
-                        if max_mols < 1:
+                        if max_mols is not None and max_mols < 1:
                             break
+
                         new_mol = new_mols[0]
+
                         # sanitize mol
                         tmp_sm = dm.to_smiles(new_mol)
                         new_mol, new_smiles = self._clean(new_mol)
+
                         # need to clean twice, not sure why
                         _, new_smiles = self._clean(new_mol)
                         new_smiles_inchikey = dm.to_inchikey(new_mol)
@@ -373,6 +385,7 @@ class IsomerEnumerator:
                             or not self._has_correct_size(new_mol, mol_size)
                         ):
                             continue
+
                         if protect_substruct is not None:
                             new_mol = dm.protect_atoms(
                                 new_mol,
@@ -382,6 +395,9 @@ class IsomerEnumerator:
                         seen.add(new_smiles)
                         seen_inchi_key.add(new_smiles_inchikey)
                         source_mols.append((new_mol, curdepth + 1))
+
                         if self._is_valid(new_mol, new_smiles, protect_substruct):
                             yield new_smiles
-                            max_mols -= 1
+
+                            if max_mols is not None:
+                                max_mols -= 1

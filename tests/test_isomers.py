@@ -1,3 +1,5 @@
+import time
+
 from rdkit import Chem
 
 import datamol as dm
@@ -24,6 +26,19 @@ def test_enumerate_stereo():
     }
 
 
+def test_enumerate_stereo_timeout():
+    mol = dm.to_mol(
+        "CC1=C2C(C(=O)C3(C(CC4C(C3C(C(C2(C)C)(CC1OC(=O)C(C(C5=CC=CC=C5)NC(=O)C6=CC=CC=C6)O)O)OC(=O)C7=CC=CC=C7)(CO4)OC(=O)C)O)C)OC(=O)C"
+    )
+
+    # NOTE(hadim): it's impossible to predict anything given a timeout for different
+    # machines so we here we just check the code can run without errors
+    start = time.time()
+    dm.enumerate_stereoisomers(mol, n_variants=10, timeout_seconds=1)
+    duration = time.time() - start
+    assert duration < 1
+
+
 def test_enumerate_structural():
     mol = dm.to_mol("CCCCC")  # pentane has only three structural isomers
     mols_iso = dm.enumerate_structisomers(
@@ -45,6 +60,17 @@ def test_enumerate_structural():
     # )
     # should have mol with double link
     # assert sum(["=" in dm.to_smiles(x) for x in mols_cyclo_iso_double]) > 0
+
+
+def test_enumerate_structural_timeout():
+    mol = dm.to_mol("CCCCC")
+
+    # NOTE(hadim): it's impossible to predict anything given a timeout for different
+    # machines so we here we just check the code can run without errors
+    start = time.time()
+    dm.enumerate_structisomers(mol, n_variants=10, timeout_seconds=1)
+    duration = time.time() - start
+    assert duration < 1
 
 
 def test_canonical_tautomer():

@@ -1,4 +1,7 @@
+from typing import Optional
+
 import time
+import signal
 
 from loguru import logger
 
@@ -77,3 +80,34 @@ class watch_duration:
                 logger.info(f"Duration {human_duration(self.duration)}.")
             else:
                 logger.info(f"Duration {self.duration_minutes:.2f} minutes")
+
+
+class Timeout:
+    """A Python context manager that raise a `TimeoutError`
+    after a specified time in seconds.
+
+    Args:
+        seconds: The number of seconds to wait before raising a `TimeoutError`.
+            A value of None or 0 will disable the timeout.
+        error_message: The error message to raise.
+    """
+
+    def __init__(self, seconds: Optional[int] = 1, error_message: str = None):
+
+        if seconds == 0:
+            seconds = None
+
+        self.seconds = seconds
+        self.error_message = error_message
+
+    def handle_timeout(self, signum, frame):
+        raise TimeoutError(self.error_message)
+
+    def __enter__(self):
+        if self.seconds is not None:
+            signal.signal(signal.SIGALRM, self.handle_timeout)
+            signal.alarm(self.seconds)
+
+    def __exit__(self, type, value, traceback):
+        if self.seconds is not None:
+            signal.alarm(0)

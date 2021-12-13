@@ -10,24 +10,49 @@ import datamol as dm
 from ._structural import IsomerEnumerator
 
 
-def enumerate_tautomers(mol: Chem.rdchem.Mol, n_variants: int = 20):
+def enumerate_tautomers(
+    mol: dm.Mol,
+    n_variants: int = 20,
+    max_transforms: int = 1000,
+    reassign_stereo: bool = True,
+    remove_bond_stereo: bool = True,
+    remove_sp3_stereo: bool = True,
+):
     """Enumerate the possible tautomers of the current molecule.
 
     Args:
         mol: The molecule whose state we should enumerate.
         n_variants: The maximum amount of molecules that should be returned.
+        max_transforms: Set the maximum number of transformations to be applied. This limit is usually
+            hit earlier than the n_variants limit and leads to a more linear scaling
+            of CPU time with increasing number of tautomeric centers (see Sitzmann et al.).
+        reassign_stereo: Whether to reassign stereo centers.
+        remove_bond_stereo: Whether stereochemistry information is removed from double bonds involved in tautomerism.
+            This means that enols will lose their E/Z stereochemistry after going through tautomer enumeration because
+            of the keto-enolic tautomerism.
+        remove_sp3_stereo: Whether stereochemistry information is removed from sp3 atoms involved in tautomerism. This
+            means that S-aminoacids will lose their stereochemistry after going through tautomer enumeration because
+            of the amido-imidol tautomerism.
     """
     enumerator = rdMolStandardize.TautomerEnumerator()
+
+    # Configure the enumeration
     enumerator.SetMaxTautomers(n_variants)
+    enumerator.SetMaxTransforms(max_transforms)
+    enumerator.SetReassignStereo(reassign_stereo)
+    enumerator.SetRemoveBondStereo(remove_bond_stereo)
+    enumerator.SetRemoveSp3Stereo(remove_sp3_stereo)
+
     tautomers = enumerator.Enumerate(mol)
     return list(tautomers)
 
 
 def enumerate_stereoisomers(
-    mol,
+    mol: dm.Mol,
     n_variants: int = 20,
     undefined_only: bool = False,
     rationalise: bool = True,
+    timeout_seconds: int = None,
 ):
     """Enumerate the stereocenters and bonds of the current molecule.
 
@@ -42,6 +67,8 @@ def enumerate_stereoisomers(
             with undefined stereochemistry.
         rationalise: If we should try to build and rationalise the molecule to ensure it
             can exist.
+        timeout_seconds: The maximum amount of time to spend on enumeration. A value of 0 or None
+            will disable the timeout.
     """
 
     # safety first
@@ -58,12 +85,20 @@ def enumerate_stereoisomers(
         maxIsomers=n_variants,
     )
 
-    try:
-        isomers = tuple(EnumerateStereoisomers(mol, options=stereo_opts))
-    except:
-        # NOTE(hadim): often got "Stereo atoms should be specified before specifying CIS/TRANS bond stereochemistry"
-        # for the ligand of reference (coming from the PDB). Not sure how to handle that.
-        isomers = []
+    isomers_iterator = EnumerateStereoisomers(mol, options=stereo_opts)
+
+    isomers = []
+    with dm.utils.perf.Timeout(seconds=timeout_seconds):
+        try:
+            for isomer in isomers_iterator:
+                isomers.append(isomer)
+        except TimeoutError:
+            # Nothing to do
+            pass
+        except:
+            # NOTE(hadim): often got "Stereo atoms should be specified before specifying CIS/TRANS bond stereochemistry"
+            # for the ligand of reference (coming from the PDB). Not sure how to handle that.
+            isomers = []
 
     variants = []
     for isomer in isomers:
@@ -76,12 +111,13 @@ def enumerate_stereoisomers(
 
 
 def enumerate_structisomers(
-    mol,
+    mol: dm.Mol,
     n_variants: int = 20,
     allow_cycle: bool = False,
     allow_double_bond: bool = False,
     allow_triple_bond: bool = False,
     depth: int = None,
+    timeout_seconds: int = None,
 ):
     """Enumerate the structural isomers of the input molecule
 
@@ -90,10 +126,12 @@ def enumerate_structisomers(
     Args:
         mol: The molecule whose state we should enumerate.
         n_variants: The maximum amount of molecules that should be returned.
-        allow_cycle: whether to allow transformation involving cycle creation
-        allow_double_bond: whether to allow transformation involving at least one double bond
-        allow_triple_bond: whether to allow transformation involving at least one triple bond
-        depth: depth of the search, use a sensible value to decrease search time. Will fall back to number of atoms
+        allow_cycle: whether to allow transformation involving cycle creation.
+        allow_double_bond: whether to allow transformation involving at least one double bond.
+        allow_triple_bond: whether to allow transformation involving at least one triple bond.
+        depth: depth of the search, use a sensible value to decrease search time. Will fall back to number of atoms.
+        timeout_seconds: The maximum amount of time to spend on enumeration. A value of 0 or None
+            will disable the timeout.
     """
     mol = dm.copy_mol(mol)
 
@@ -102,10 +140,22 @@ def enumerate_structisomers(
         allow_double_bond=allow_double_bond,
         allow_triple_bond=allow_triple_bond,
     )
+
     if depth is None:
         depth = mol.GetNumAtoms()
-    variants = enumerator(mol, max_mols=n_variants, include_input=False, depth=depth)
-    return [dm.to_mol(x) for x in variants]
+
+    isomers_iterator = enumerator(mol, max_mols=n_variants, include_input=False, depth=depth)
+
+    isomers = []
+    with dm.utils.perf.Timeout(seconds=timeout_seconds):
+        try:
+            for isomer in isomers_iterator:
+                isomers.append(isomer)
+        except TimeoutError:
+            # Nothing to do
+            pass
+
+    return [dm.to_mol(x) for x in isomers]
 
 
 def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
