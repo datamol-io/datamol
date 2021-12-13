@@ -1,5 +1,7 @@
 import pytest
 
+import itertools
+
 from rdkit import Chem
 
 import datamol as dm
@@ -239,27 +241,6 @@ def test_copy_mol_props():
     assert destination.GetPropsAsDict() == source.GetPropsAsDict()
 
 
-def test_enumerate_tautomers():
-    mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
-
-    mols = dm.enumerate_tautomers(mol, n_variants=10)
-
-    assert {dm.to_smiles(m) for m in mols} == {"O=C1C=[N:1]C2CCCCC2C1", "OC1=CC2CCCCC2[N:1]=C1"}
-
-
-def test_enumerate_stereo():
-    mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
-
-    mols = dm.enumerate_stereoisomers(mol, n_variants=10)
-
-    assert {dm.to_smiles(m) for m in mols} == {
-        "OC1=C[C@@H]2CCCC[C@@H]2[N:1]=C1",
-        "OC1=C[C@@H]2CCCC[C@H]2[N:1]=C1",
-        "OC1=C[C@H]2CCCC[C@@H]2[N:1]=C1",
-        "OC1=C[C@H]2CCCC[C@H]2[N:1]=C1",
-    }
-
-
 def test_atom_indices_to_mol():
     mol: dm.Mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
 
@@ -422,22 +403,6 @@ def test_same_mol():
     assert dm.same_mol(None, None) is False
 
 
-def test_canonical_tautomer():
-    smiles = "Oc1c(cccc3)c3nc2ccncc12"
-    mol = dm.to_mol(smiles)
-
-    canonical_mol = dm.canonical_tautomer(mol)
-
-    assert dm.to_smiles(canonical_mol) == "O=c1c2ccccc2[nH]c2ccncc12"
-    assert dm.to_inchikey(canonical_mol) == dm.to_inchikey(mol)
-
-
-def test_remove_stereochemistry():
-    mol = dm.to_mol("C[C@H]1CCC[C@@H](C)[C@@H]1Cl")
-    mol_no_stereo = dm.remove_stereochemistry(mol)
-    assert dm.to_smiles(mol_no_stereo) == "CC1CCCC(C)C1Cl"
-
-
 def test_atom_list_to_bond():
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
 
@@ -446,3 +411,24 @@ def test_atom_list_to_bond():
 
     bonds = dm.atom_list_to_bond(mol, atom_indices=[3, 4, 5, 6, 10, 11], bond_as_idx=False)
     assert [b.GetIdx() for b in bonds] == [3, 4, 5, 10]
+
+
+def test_protect_atoms():
+    mol = dm.to_mol("CC(=O)Oc1cnccc1C(O)=O")
+
+    # carbonyl group
+    query = dm.from_smarts("[$([CX3]=[OX1]),$([CX3+]-[OX1-])]")
+
+    # find id of single nitrogen
+    atom_ids = [at.GetIdx() for at in mol.GetAtoms() if at.GetSymbol() == "N"]  # type: ignore
+    protected_atoms = itertools.chain(*mol.GetSubstructMatches(query))  # type: ignore
+    protected_atoms = set(list(protected_atoms) + atom_ids)
+    new_mol = dm.protect_atoms(mol, substruct=query, atoms=atom_ids)
+    computed_protect_atoms = set(
+        [
+            at.GetIdx()
+            for at in new_mol.GetAtoms()
+            if int(at.GetPropsAsDict().get("_protected", 0)) == 1
+        ]
+    )
+    assert protected_atoms == computed_protect_atoms

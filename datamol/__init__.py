@@ -46,11 +46,8 @@ from .mol import is_transition_metal
 from .mol import set_dative_bonds
 from .mol import set_mol_props
 from .mol import copy_mol_props
-from .mol import enumerate_stereoisomers
-from .mol import enumerate_tautomers
 from .mol import atom_indices_to_mol
-from .mol import canonical_tautomer
-from .mol import remove_stereochemistry
+from .mol import protect_atoms
 from .mol import atom_list_to_bond
 from .mol import substructure_matching_bonds
 
@@ -96,6 +93,12 @@ from .io import read_sdf
 from .io import to_sdf
 from .io import to_smi
 from .io import read_smi
+
+from .isomers import enumerate_stereoisomers
+from .isomers import enumerate_tautomers
+from .isomers import enumerate_structisomers
+from .isomers import canonical_tautomer
+from .isomers import remove_stereochemistry
 
 from . import conformers
 from . import viz
