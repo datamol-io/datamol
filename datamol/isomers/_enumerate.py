@@ -160,6 +160,7 @@ def enumerate_structisomers(
 
             for isomer in isomers_iterator:
                 isomers.append(isomer)
+
         except TimeoutError:
             # Nothing to do
             pass

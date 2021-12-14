@@ -33,10 +33,7 @@ def test_enumerate_stereo_timeout():
 
     # NOTE(hadim): it's impossible to predict anything given a timeout for different
     # machines so we here we just check the code can run without errors
-    start = time.time()
     dm.enumerate_stereoisomers(mol, n_variants=10, timeout_seconds=1)
-    duration = time.time() - start
-    assert duration < 1.2
 
 
 def test_enumerate_structural():
@@ -67,10 +64,7 @@ def test_enumerate_structural_timeout():
 
     # NOTE(hadim): it's impossible to predict anything given a timeout for different
     # machines so we here we just check the code can run without errors
-    start = time.time()
     dm.enumerate_structisomers(mol, n_variants=10, timeout_seconds=1)
-    duration = time.time() - start
-    assert duration < 1.2
 
 
 def test_canonical_tautomer():
