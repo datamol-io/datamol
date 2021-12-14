@@ -14,6 +14,7 @@ install_requires = [
     "pillow",
     "selfies",
     "appdirs",
+    "scikit-learn",
 ]
 
 setup(
