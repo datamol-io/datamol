@@ -77,39 +77,6 @@ def test_all_fps():
     }
 
 
-def test_fp_deprecated_args_warnings():
-    smiles = "CC(=O)Oc1ccccc1C(=O)O"
-    mol = dm.to_mol(smiles)
-
-    args = {}
-    args["mol"] = mol
-    args["radius"] = 3
-    args["fp_size"] = 2048
-    args["useFeatures"] = True
-    args["as_array"] = True
-    args["fp_type"] = "ecfp"
-
-    with warnings.catch_warnings(record=True) as w:
-        dm.to_fp(**args)
-
-        assert len(w) == 1
-        assert issubclass(w[-1].category, DeprecationWarning)
-        assert "will be removed in datamol 0.5.0" in str(w[-1].message)
-
-    args = {}
-    args["mol"] = mol
-    args["use_features"] = True
-    args["as_array"] = True
-    args["fp_type"] = "ecfp"
-
-    with warnings.catch_warnings(record=True) as w:
-        dm.to_fp(**args)
-
-        assert len(w) == 1
-        assert issubclass(w[-1].category, DeprecationWarning)
-        assert "will be removed in datamol 0.5.0" in str(w[-1].message)
-
-
 def test_fp_invalid_input():
 
     args = {}
