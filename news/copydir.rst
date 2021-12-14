@@ -26,6 +26,7 @@
 * Change the default `mol_size` from 200 to 300 in `to_image`.
 * Link `datamol.utils.fs` to `datamol.fs`.
 * Change default `chunk_size` in `copy_file` from 2048 to 1024 * 1024 (1MB).
+* Support parallel chunked distances computation in `dm.similarity.cdist`
 
 **Deprecated:**
 

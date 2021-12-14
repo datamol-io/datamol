@@ -1,4 +1,4 @@
-import time
+import pytest
 
 from rdkit import Chem
 
@@ -26,6 +26,7 @@ def test_enumerate_stereo():
     }
 
 
+@pytest.mark.skip_platform("win")
 def test_enumerate_stereo_timeout():
     mol = dm.to_mol(
         "CC1=C2C(C(=O)C3(C(CC4C(C3C(C(C2(C)C)(CC1OC(=O)C(C(C5=CC=CC=C5)NC(=O)C6=CC=CC=C6)O)O)OC(=O)C7=CC=CC=C7)(CO4)OC(=O)C)O)C)OC(=O)C"
@@ -59,6 +60,7 @@ def test_enumerate_structural():
     # assert sum(["=" in dm.to_smiles(x) for x in mols_cyclo_iso_double]) > 0
 
 
+@pytest.mark.skip_platform("win")
 def test_enumerate_structural_timeout():
     mol = dm.to_mol("CCCCC")
 

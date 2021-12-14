@@ -86,6 +86,8 @@ class Timeout:
     """A Python context manager that raise a `TimeoutError`
     after a specified time in seconds.
 
+    Warning: Does not work on Windows systems.
+
     Args:
         seconds: The number of seconds to wait before raising a `TimeoutError`.
             A value of None or 0 will disable the timeout.

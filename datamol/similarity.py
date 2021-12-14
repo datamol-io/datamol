@@ -7,13 +7,14 @@ import functools
 from rdkit import Chem
 
 import numpy as np
+from sklearn.metrics import pairwise_distances_chunked
 from scipy.spatial import distance
 
 import datamol as dm
 
 
 def pdist(
-    mols: List[Union[str, Chem.rdchem.Mol]],
+    mols: List[Union[str, dm.Mol]],
     n_jobs: Optional[int] = 1,
     squareform: bool = True,
     **fp_args,
@@ -50,9 +51,12 @@ def pdist(
 
 
 def cdist(
-    mols1: List[Union[str, Chem.rdchem.Mol]],
-    mols2: List[Union[str, Chem.rdchem.Mol]],
+    mols1: List[Union[str, dm.Mol]],
+    mols2: List[Union[str, dm.Mol]],
     n_jobs: Optional[int] = 1,
+    distances_chunk: bool = False,
+    distances_chunk_memory: int = 1024,
+    distances_n_jobs: int = -1,
     **fp_args,
 ) -> np.ndarray:
     """Compute the tanimoto distance between the fingerprints of each pair of
@@ -61,8 +65,11 @@ def cdist(
     Args:
         mols1: list of molecules.
         mols2: list of molecules.
-        n_jobs: Number of jobs for parallelization. Let to 1 for no
-            parallelization. Set to None to use all available cores.
+        n_jobs: Number of jobs for fingerprint computation. Let to 1 for no
+            parallelization. Set to None or -1 to use all available cores.
+        distances_chunk: Whether to use chunked computation.
+        distances_chunk_memory: Memory size in MB to use for chunked computation.
+        distances_n_jobs: Number of jobs for parallelization.
         **fp_args: list of args to pass to `to_fp()`.
 
     Returns:
@@ -81,9 +88,20 @@ def cdist(
         n_jobs=n_jobs,
     )
 
-    fps1 = np.array(fps1)
-    fps2 = np.array(fps2)
+    fps1 = np.array(fps1).astype(bool)
+    fps2 = np.array(fps2).astype(bool)
 
-    dist_mat = distance.cdist(fps1, fps2, metric="jaccard")
+    if distances_chunk:
+        distances = pairwise_distances_chunked(
+            fps1,
+            fps2,
+            metric="jaccard",
+            n_jobs=distances_n_jobs,
+            working_memory=distances_chunk_memory,
+        )
+        distances = [i for i in distances]
+        distances = np.vstack(distances)
+    else:
+        distances = distance.cdist(fps1, fps2, metric="jaccard")
 
-    return dist_mat
+    return distances
