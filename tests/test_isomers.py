@@ -36,7 +36,7 @@ def test_enumerate_stereo_timeout():
     start = time.time()
     dm.enumerate_stereoisomers(mol, n_variants=10, timeout_seconds=1)
     duration = time.time() - start
-    assert duration < 1
+    assert duration < 1.2
 
 
 def test_enumerate_structural():
@@ -70,7 +70,7 @@ def test_enumerate_structural_timeout():
     start = time.time()
     dm.enumerate_structisomers(mol, n_variants=10, timeout_seconds=1)
     duration = time.time() - start
-    assert duration < 1
+    assert duration < 1.2
 
 
 def test_canonical_tautomer():
