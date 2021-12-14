@@ -59,6 +59,8 @@ jobs:
           # Create conda env
           mamba create -n datamol
 
+          cat env-patched.yml
+
       - name: Install Dependencies
         run: |
           conda activate datamol
