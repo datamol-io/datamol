@@ -52,8 +52,8 @@ jobs:
           mamba install --yes pyyaml
 
           python .github/patch_conda_env.py --env env.yml -d \
-            python=${{ matrix.python-version }} \
-            rdkit=${{ matrix.rdkit-version }} \
+            python="${{ matrix.python-version }}" \
+            rdkit="${{ matrix.rdkit-version }}" \
             > env-patched.yml
 
           # Create conda env
