@@ -74,24 +74,24 @@ def enumerate_stereoisomers(
     isomers = []
     with dm.utils.perf.Timeout(seconds=timeout_seconds):
 
-        # safety first
-        mol = dm.copy_mol(mol)
-
-        # in case any bonds/centers are missing stereo chem flag it here
-        Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
-        Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
-
-        # set up the options
-        stereo_opts = StereoEnumerationOptions(
-            tryEmbedding=rationalise,
-            onlyUnassigned=undefined_only,
-            maxIsomers=n_variants,
-            unique=True,
-        )
-
-        isomers_iterator = EnumerateStereoisomers(mol, options=stereo_opts)
-
         try:
+            # safety first
+            mol = dm.copy_mol(mol)
+
+            # in case any bonds/centers are missing stereo chem flag it here
+            Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
+            Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
+
+            # set up the options
+            stereo_opts = StereoEnumerationOptions(
+                tryEmbedding=rationalise,
+                onlyUnassigned=undefined_only,
+                maxIsomers=n_variants,
+                unique=True,
+            )
+
+            isomers_iterator = EnumerateStereoisomers(mol, options=stereo_opts)
+
             for isomer in isomers_iterator:
                 isomers.append(isomer)
         except TimeoutError:
@@ -139,20 +139,25 @@ def enumerate_structisomers(
     isomers = []
     with dm.utils.perf.Timeout(seconds=timeout_seconds):
 
-        mol = dm.copy_mol(mol)
-
-        enumerator = IsomerEnumerator(
-            allow_cycle=allow_cycle,
-            allow_double_bond=allow_double_bond,
-            allow_triple_bond=allow_triple_bond,
-        )
-
-        if depth is None:
-            depth = mol.GetNumAtoms()
-
-        isomers_iterator = enumerator(mol, max_mols=n_variants, include_input=False, depth=depth)
-
         try:
+            mol = dm.copy_mol(mol)
+
+            enumerator = IsomerEnumerator(
+                allow_cycle=allow_cycle,
+                allow_double_bond=allow_double_bond,
+                allow_triple_bond=allow_triple_bond,
+            )
+
+            if depth is None:
+                depth = mol.GetNumAtoms()
+
+            isomers_iterator = enumerator(
+                mol,
+                max_mols=n_variants,
+                include_input=False,
+                depth=depth,
+            )
+
             for isomer in isomers_iterator:
                 isomers.append(isomer)
         except TimeoutError:
