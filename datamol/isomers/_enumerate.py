@@ -1,3 +1,5 @@
+import time
+
 from rdkit import Chem
 from rdkit.Chem import rdmolops
 
@@ -67,40 +69,41 @@ def enumerate_stereoisomers(
             with undefined stereochemistry.
         rationalise: If we should try to build and rationalise the molecule to ensure it
             can exist.
-        timeout_seconds: The maximum amount of time to spend on enumeration. A value of 0 or None
-            will disable the timeout.
+        timeout_seconds: The maximum amount of time to spend on enumeration. None
+            will disable the timeout. Note that the timeout might be inaccurate as a running single variant
+            computation is not stopped when the duration is reached.
     """
 
+    # safety first
+    mol = dm.copy_mol(mol)
+
+    # in case any bonds/centers are missing stereo chem flag it here
+    Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
+    Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
+
+    # set up the options
+    stereo_opts = StereoEnumerationOptions(
+        tryEmbedding=rationalise,
+        onlyUnassigned=undefined_only,
+        maxIsomers=n_variants,
+        unique=True,
+    )
+
+    isomers_iterator = EnumerateStereoisomers(mol, options=stereo_opts)
+
+    start = time.time()
+    duration = 0
+
     isomers = []
-    with dm.utils.perf.Timeout(seconds=timeout_seconds):
+    while timeout_seconds is None or duration < timeout_seconds:
 
         try:
-            # safety first
-            mol = dm.copy_mol(mol)
+            isomer = next(isomers_iterator)
+            isomers.append(isomer)
+        except StopIteration:
+            break
 
-            # in case any bonds/centers are missing stereo chem flag it here
-            Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
-            Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
-
-            # set up the options
-            stereo_opts = StereoEnumerationOptions(
-                tryEmbedding=rationalise,
-                onlyUnassigned=undefined_only,
-                maxIsomers=n_variants,
-                unique=True,
-            )
-
-            isomers_iterator = EnumerateStereoisomers(mol, options=stereo_opts)
-
-            for isomer in isomers_iterator:
-                isomers.append(isomer)
-        except TimeoutError:
-            # Nothing to do
-            pass
-        except:
-            # NOTE(hadim): often got "Stereo atoms should be specified before specifying CIS/TRANS bond stereochemistry"
-            # for the ligand of reference (coming from the PDB). Not sure how to handle that.
-            isomers = []
+        duration = time.time() - start
 
     variants = []
     for isomer in isomers:
@@ -132,40 +135,44 @@ def enumerate_structisomers(
         allow_double_bond: whether to allow transformation involving at least one double bond.
         allow_triple_bond: whether to allow transformation involving at least one triple bond.
         depth: depth of the search, use a sensible value to decrease search time. Will fall back to number of atoms.
-        timeout_seconds: The maximum amount of time to spend on enumeration. A value of 0 or None
-            will disable the timeout.
+        timeout_seconds: The maximum amount of time to spend on enumeration. None
+            will disable the timeout. Note that the timeout might be inaccurate as a running single variant
+            computation is not stopped when the duration is reached.
     """
 
+    mol = dm.copy_mol(mol)
+
+    enumerator = IsomerEnumerator(
+        allow_cycle=allow_cycle,
+        allow_double_bond=allow_double_bond,
+        allow_triple_bond=allow_triple_bond,
+    )
+
+    if depth is None:
+        depth = mol.GetNumAtoms()
+
+    isomers_iterator = enumerator(
+        mol,
+        max_mols=n_variants,
+        include_input=False,
+        depth=depth,
+    )
+
+    start = time.time()
+    duration = 0
+
     isomers = []
-    with dm.utils.perf.Timeout(seconds=timeout_seconds):
+    while timeout_seconds is None or duration < timeout_seconds:
 
         try:
-            mol = dm.copy_mol(mol)
+            isomer = next(isomers_iterator)
+            isomers.append(dm.to_mol(isomer))
+        except StopIteration:
+            break
 
-            enumerator = IsomerEnumerator(
-                allow_cycle=allow_cycle,
-                allow_double_bond=allow_double_bond,
-                allow_triple_bond=allow_triple_bond,
-            )
+        duration = time.time() - start
 
-            if depth is None:
-                depth = mol.GetNumAtoms()
-
-            isomers_iterator = enumerator(
-                mol,
-                max_mols=n_variants,
-                include_input=False,
-                depth=depth,
-            )
-
-            for isomer in isomers_iterator:
-                isomers.append(isomer)
-
-        except TimeoutError:
-            # Nothing to do
-            pass
-
-    return [dm.to_mol(x) for x in isomers]
+    return isomers
 
 
 def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
