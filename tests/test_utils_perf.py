@@ -1,3 +1,5 @@
+import pytest
+
 import time
 
 import datamol as dm
@@ -14,6 +16,7 @@ def test_watch_duration():
     assert isinstance(w.duration, float)
 
 
+@pytest.mark.skip_platform("win")
 def test_timeout():
     with dm.utils.perf.Timeout(seconds=2):
         value = None
@@ -27,6 +30,7 @@ def test_timeout():
     assert value == 1
 
 
+@pytest.mark.skip_platform("win")
 def test_timeout_none():
     with dm.utils.perf.Timeout(seconds=None):
         value = None
