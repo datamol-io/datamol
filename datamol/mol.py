@@ -7,6 +7,7 @@ from typing import Any
 
 import copy
 import random
+import itertools
 
 from loguru import logger
 
@@ -65,7 +66,7 @@ def to_mol(
         raise ValueError(f"Input should be a Chem.rdchem.Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
-        _mol = Chem.MolFromSmiles(mol, sanitize=sanitize)
+        _mol = Chem.MolFromSmiles(mol, sanitize=sanitize)  # type: ignore
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
@@ -74,14 +75,14 @@ def to_mol(
 
     # Add hydrogens
     if _mol is not None and add_hs:
-        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
+        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)  # type: ignore
 
     # Reorder atoms
     if _mol is not None and ordered:
         _mol = reorder_atoms(_mol)
 
     if _mol is not None and kekulize:
-        Chem.Kekulize(_mol, clearAromaticFlags=False)
+        Chem.Kekulize(_mol, clearAromaticFlags=False)  # type: ignore
     return _mol
 
 
@@ -122,14 +123,14 @@ def reorder_atoms(
     if mol.GetNumAtoms() == 0:
         return mol
 
-    new_order = Chem.CanonicalRankAtoms(
+    new_order = Chem.CanonicalRankAtoms(  # type: ignore
         mol,
         breakTies=break_ties,
         includeChirality=include_chirality,
         includeIsotopes=include_isotopes,
     )
     new_order = sorted([(y, x) for x, y in enumerate(new_order)])
-    return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])
+    return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])  # type: ignore
 
 
 def randomize_atoms(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
@@ -146,7 +147,7 @@ def randomize_atoms(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
 
     atom_indices = list(range(mol.GetNumAtoms()))
     random.shuffle(atom_indices)
-    return Chem.RenumberAtoms(mol, atom_indices)
+    return Chem.RenumberAtoms(mol, atom_indices)  # type: ignore
 
 
 def to_neutral(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
@@ -439,7 +440,7 @@ def fix_valence(
         return mol
 
     try:
-        m = Chem.RemoveHs(
+        m = Chem.RemoveHs(  # type: ignore
             mol,
             implicitOnly=False,
             updateExplicitCount=True,
@@ -456,7 +457,7 @@ def fix_valence(
                 # atom.SetNumRadicalElectrons(0)
             atom.UpdatePropertyCache(False)
 
-        em = Chem.RWMol(m)
+        em = Chem.RWMol(m)  # type: ignore
         bonds = em.GetBonds()
         bonds = [
             bond
@@ -496,7 +497,7 @@ def adjust_singleton(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
         mol: a molecule.
     """
     to_rem = []
-    em = Chem.RWMol(mol)
+    em = Chem.RWMol(mol)  # type: ignore
     for atom in mol.GetAtoms():
         if atom.GetExplicitValence() == 0:
             to_rem.append(atom.GetIdx())
@@ -511,10 +512,10 @@ def remove_dummies(mol: Chem.rdchem.Mol, dummy: str = "*") -> Optional[Chem.rdch
     du = dm.to_mol(dummy)
     out = mol
     try:
-        out = Chem.ReplaceSubstructs(mol, du, dm.to_mol("[H]"), True)[0]
-        out = Chem.RemoveHs(out)
+        out = Chem.ReplaceSubstructs(mol, du, dm.to_mol("[H]"), True)[0]  # type: ignore
+        out = Chem.RemoveHs(out)  # type: ignore
     except Exception as e:
-        out = Chem.DeleteSubstructs(mol, du)
+        out = Chem.DeleteSubstructs(mol, du)  # type: ignore
     return out
 
 
@@ -575,9 +576,9 @@ def replace_dummies_atoms(
     Returns:
         mol: Molecule with dummy replaced
     """
-    du = Chem.MolFromSmiles(dummy)
-    replacement = Chem.MolFromSmiles(atom)
-    out = Chem.ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]
+    du = Chem.MolFromSmiles(dummy)  # type: ignore
+    replacement = Chem.MolFromSmiles(atom)  # type: ignore
+    out = Chem.ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]  # type: ignore
     return out
 
 
@@ -614,7 +615,7 @@ def set_dative_bonds(
     Returns:
         The modified molecule.
     """
-    rwmol = Chem.RWMol(mol)
+    rwmol = Chem.RWMol(mol)  # type: ignore
     rwmol.UpdatePropertyCache(strict=False)
 
     metals = [at for at in rwmol.GetAtoms() if is_transition_metal(at)]
@@ -673,85 +674,6 @@ def copy_mol_props(source: Chem.rdchem.Mol, destination: Chem.rdchem.Mol):
     dm.set_mol_props(destination, props)
 
 
-def enumerate_tautomers(mol: Chem.rdchem.Mol, n_variants: int = 20):
-    """Enumerate the possible tautomers of the current molecule.
-
-    Original source: the `openff-toolkit` lib.
-
-    Args:
-        mol: The molecule whose state we should enumerate.
-        n_variants: The maximum amount of molecules that should be returned.
-    """
-    enumerator = rdMolStandardize.TautomerEnumerator()
-    enumerator.SetMaxTautomers(n_variants)
-    tautomers = enumerator.Enumerate(mol)
-    return list(tautomers)
-
-
-def canonical_tautomer(mol: dm.Mol):
-    """Get the canonical tautomer of the current molecule.
-
-    Args:
-        mol: A molecule.
-    """
-    enumerator = rdMolStandardize.TautomerEnumerator()
-    return enumerator.Canonicalize(mol)
-
-
-def enumerate_stereoisomers(
-    mol,
-    n_variants: int = 20,
-    undefined_only: bool = False,
-    rationalise: bool = True,
-):
-    """Enumerate the stereocenters and bonds of the current molecule.
-
-    Original source: the `openff-toolkit` lib.
-
-    Warning: this function can be computationnaly intensive.
-
-    Args:
-        mol: The molecule whose state we should enumerate.
-        n_variants: The maximum amount of molecules that should be returned.
-        undefined_only: If we should enumerate all stereocenters and bonds or only those
-            with undefined stereochemistry.
-        rationalise: If we should try to build and rationalise the molecule to ensure it
-            can exist.
-    """
-    from rdkit.Chem.EnumerateStereoisomers import EnumerateStereoisomers
-    from rdkit.Chem.EnumerateStereoisomers import StereoEnumerationOptions
-
-    # safety first
-    mol = copy_mol(mol)
-
-    # in case any bonds/centers are missing stereo chem flag it here
-    Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
-    Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
-
-    # set up the options
-    stereo_opts = StereoEnumerationOptions(
-        tryEmbedding=rationalise,
-        onlyUnassigned=undefined_only,
-        maxIsomers=n_variants,
-    )
-
-    try:
-        isomers = tuple(EnumerateStereoisomers(mol, options=stereo_opts))
-    except:
-        # NOTE(hadim): often got "Stereo atoms should be specified before specifying CIS/TRANS bond stereochemistry"
-        # for the ligand of reference (coming from the PDB). Not sure how to handle that.
-        isomers = []
-
-    variants = []
-    for isomer in isomers:
-        # isomer has CIS/TRANS tags so convert back to E/Z
-        Chem.SetDoubleBondNeighborDirections(isomer)  # type: ignore
-        Chem.AssignStereochemistry(isomer, force=True, cleanIt=True)  # type: ignore
-        variants.append(isomer)
-
-    return variants
-
-
 def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
     """Add the `molAtomMapNumber` property to each atoms.
 
@@ -765,20 +687,6 @@ def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
 
     for atom in mol.GetAtoms():
         atom.SetProp("molAtomMapNumber", str(atom.GetIdx()))
-    return mol
-
-
-def remove_stereochemistry(mol: dm.Mol, copy: bool = True):
-    """Removes all stereochemistry info from the molecule.
-
-    Args:
-        mol: a molecule
-        copy: Whether to copy the molecule.
-    """
-
-    if copy is True:
-        mol = copy_mol(mol)
-    rdmolops.RemoveStereochemistry(mol)
     return mol
 
 
@@ -865,3 +773,107 @@ def substructure_matching_bonds(mol: dm.Mol, query: dm.Mol, **kwargs):
         bond_matches.append(mol_bond_indices)
 
     return atom_matches, bond_matches
+
+
+def protect_atoms(
+    mol: Chem.rdchem.Mol,
+    substruct: Optional[Chem.rdchem.Mol] = None,
+    atoms: Union[List[int], int] = None,
+    in_place: bool = False,
+) -> Chem.rdchem.Mol:
+    """Protect a list of atoms or substruct in a molecule.
+
+    The _protected attributes of a molecule is used by RDKit in several functions, especially for reactions
+    where "protected" atoms are disallowed from taking part in reactions.
+
+    Args:
+        mol: input molecule to protect
+        substruct: optional substructure query to identify atoms to protect
+        atoms: optional list of atom indices to protect
+        in_place: whether to perform the protection in place or return a copy of the molecule
+    """
+    if atoms is None:
+        atoms = []
+    elif not isinstance(atoms, (tuple, list)):
+        atoms = [atoms]
+
+    # do not perform protection in place
+    if in_place:
+        mol_copy = mol
+    else:
+        mol_copy = copy_mol(mol)
+
+    if substruct is not None:
+        matches = mol_copy.GetSubstructMatches(substruct)
+        atoms.extend(itertools.chain(*matches))
+
+    for a in atoms:
+        if a is None:
+            continue
+        mol_copy.GetAtomWithIdx(a).SetProp("_protected", "1")
+
+    return mol_copy
+
+
+def add_hs(
+    mol: dm.Mol,
+    explicit_only: bool = False,
+    add_coords: bool = False,
+    only_on_atoms: List[int] = None,
+    add_residue_info: bool = False,
+    copy: bool = True,
+):
+    """Adds hydrogens to the molecule.
+
+    Args:
+        mol: a molecule.
+        explicit_only: whether to only add explicit hydrogens.
+        add_coords: whether to add 3D coordinates to the hydrogens.
+        onlyOnAtoms: a list of atoms to add hydrogens only on.
+        add_residue_info: whether to add residue information to the hydrogens.
+            Useful for PDB files.
+        copy: whether to copy the input molecule.
+    """
+
+    if copy:
+        mol = dm.copy_mol(mol)
+
+    mol = Chem.AddHs(  # type: ignore
+        mol,
+        explicitOnly=explicit_only,
+        addCoords=add_coords,
+        onlyOnAtoms=only_on_atoms,
+        addResidueInfo=add_residue_info,
+    )
+
+    return mol
+
+
+def remove_hs(
+    mol: dm.Mol,
+    implicit_only: bool = False,
+    update_explicit_count: bool = False,
+    sanitize: bool = True,
+    copy: bool = True,
+):
+    """Removes hydrogens from a molecule.
+
+    Args:
+        mol: a molecule.
+        implicit_only: whether to only remove implicit hydrogens.
+        update_explicit_count: whether to update the explicit hydrogen count.
+        sanitize: whether to sanitize the molecule after the hydrogens are removed.
+        copy: whether to copy the input molecule.
+    """
+
+    if copy:
+        mol = dm.copy_mol(mol)
+
+    mol = Chem.RemoveHs(  # type: ignore
+        mol,
+        implicitOnly=implicit_only,
+        updateExplicitCount=update_explicit_count,
+        sanitize=sanitize,
+    )
+
+    return mol

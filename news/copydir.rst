@@ -14,6 +14,8 @@
 * Add a tutorial about the filesystem module.
 * Add a tutorial about the viz module (still incomplete).
 * Add `dm.substructure_matching_bonds` to perform a standard substructure match but also return the matching bonds instead of only the matching atoms.
+* Add new `dm.isomers` module + move relevant functions from `dm.mol` to `dm.isomers`
+* Add `dm.add_hs` and `dm.remove` to add and remove hydrogens from molecules.
 
 **Changed:**
 
@@ -24,6 +26,7 @@
 * Change the default `mol_size` from 200 to 300 in `to_image`.
 * Link `datamol.utils.fs` to `datamol.fs`.
 * Change default `chunk_size` in `copy_file` from 2048 to 1024 * 1024 (1MB).
+* Support parallel chunked distances computation in `dm.similarity.cdist`
 
 **Deprecated:**
 
