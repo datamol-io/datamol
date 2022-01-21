@@ -77,6 +77,8 @@ from .convert import from_inchi
 from .convert import to_df
 from .convert import from_df
 from .convert import render_mol_df
+from .convert import to_inchi_non_standard
+from .convert import to_inchikey_non_standard
 
 from .fp import to_fp
 from .fp import fp_to_array

@@ -165,7 +165,7 @@ def smiles_as_smarts(mol: Union[str, dm.Mol], keep_hs: bool = True) -> Optional[
 
 
 def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
-    """Convert a mol to Inchi.
+    """Convert a mol to a standard Inchi.
 
     Args:
         mol: a molecule.
@@ -178,6 +178,39 @@ def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
         mol = dm.to_mol(mol)
 
     return Chem.MolToInchi(mol)
+
+
+def to_inchi_non_standard(
+    mol: Union[str, dm.Mol],
+    fixed_hydrogen_layer: bool = True,
+    undefined_stereocenter: bool = True,
+) -> Optional[str]:
+    """Convert a mol toa non standard Inchi.
+
+    **Warning**: this function will return a **non-standard** Inchi. See
+    https://www.inchi-trust.org/technical-faq-2 for details.
+
+    Args:
+        mol: a molecule.
+        fixed_hydrogen_layer: whether to include a fixed hydrogen layer (`/FixedH`).
+        undefined_stereocenter: whether to include an undefined stereocenter layer (`/SUU`).
+    """
+
+    if mol is None:
+        return None
+
+    if isinstance(mol, str):
+        mol = dm.to_mol(mol)
+
+    options = ""
+
+    if fixed_hydrogen_layer:
+        options += "/FixedH"
+
+    if undefined_stereocenter:
+        options += " /SUU"
+
+    return Chem.MolToInchi(mol, options=options)
 
 
 def to_smarts(mol: dm.Mol) -> Optional[str]:
@@ -194,7 +227,7 @@ def to_smarts(mol: dm.Mol) -> Optional[str]:
 
 
 def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
-    """Convert a mol to Inchi key.
+    """Convert a mol to a standard InchiKey.
 
     Args:
         mol: a molecule
@@ -207,6 +240,39 @@ def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
         mol = dm.to_mol(mol)
 
     return Chem.MolToInchiKey(mol)
+
+
+def to_inchikey_non_standard(
+    mol: Union[str, dm.Mol],
+    fixed_hydrogen_layer: bool = True,
+    undefined_stereocenter: bool = True,
+) -> Optional[str]:
+    """Convert a mol to a non standard InchiKey.
+
+    **Warning**: this function will return a **non-standard** InchiKey. See
+    https://www.inchi-trust.org/technical-faq-2 for details.
+
+    Args:
+        mol: a molecule
+        fixed_hydrogen_layer: whether to include a fixed hydrogen layer (`/FixedH`).
+        undefined_stereocenter: whether to include an undefined stereocenter layer (`/SUU`).
+    """
+
+    if mol is None:
+        return None
+
+    if isinstance(mol, str):
+        mol = dm.to_mol(mol)
+
+    options = ""
+
+    if fixed_hydrogen_layer:
+        options += "/FixedH"
+
+    if undefined_stereocenter:
+        options += " /SUU"
+
+    return Chem.MolToInchiKey(mol, options=options)
 
 
 def from_inchi(
