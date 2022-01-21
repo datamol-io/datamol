@@ -251,3 +251,11 @@ def test_non_standard_inchi():
     assert dm.to_inchi(mol3) == "InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H"
     assert dm.to_inchikey_non_standard(mol3) == "UHOVQNZJYSORNB-UHFFFAOYNA-N"
     assert dm.to_inchikey(mol3) == "UHOVQNZJYSORNB-UHFFFAOYSA-N"
+
+    # let's check we can reload the correct molecule from the non standard inchi
+    # The SMILES is unlikely to change with a simple molecule like that
+    mol1_reloaded = dm.from_inchi(dm.to_inchi_non_standard(mol1))
+    mol2_reloaded = dm.from_inchi(dm.to_inchi_non_standard(mol2))
+
+    assert dm.to_smiles(mol1_reloaded) == "N=C(N)O"
+    assert dm.to_smiles(mol2_reloaded) == "NC(N)=O"

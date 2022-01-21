@@ -185,10 +185,14 @@ def to_inchi_non_standard(
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
 ) -> Optional[str]:
-    """Convert a mol toa non standard Inchi.
+    """Convert a mol to a non-standard Inchi.
 
     **Warning**: this function will return a **non-standard** Inchi. See
     https://www.inchi-trust.org/technical-faq-2 for details.
+
+    It's important to not mix standard and non-standard InChi. If you don't know
+    much about non-standard InChi, we highly recommend you to use the
+    standard InChi with `dm.to_inchi()`.
 
     Args:
         mol: a molecule.
@@ -247,10 +251,14 @@ def to_inchikey_non_standard(
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
 ) -> Optional[str]:
-    """Convert a mol to a non standard InchiKey.
+    """Convert a mol to a non-standard InchiKey.
 
     **Warning**: this function will return a **non-standard** InchiKey. See
     https://www.inchi-trust.org/technical-faq-2 for details.
+
+    It's important to not mix standard and non-standard InChiKey. If you don't know
+    much about non-standard InchiKey, we highly recommend you to use the
+    standard InchiKey with `dm.to_inchikey()`.
 
     Args:
         mol: a molecule
