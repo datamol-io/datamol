@@ -17,7 +17,7 @@ import datamol as dm
 
 
 def to_smiles(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     canonical: bool = True,
     isomeric: bool = True,
     kekulize: bool = False,
@@ -82,7 +82,7 @@ def to_smiles(
     return smiles
 
 
-def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
+def to_selfies(mol: Union[str, dm.Mol]) -> Optional[str]:
     """Convert a mol to SELFIES.
 
     Args:
@@ -94,7 +94,7 @@ def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     if mol is None:
         return None
 
-    if isinstance(mol, Chem.rdchem.Mol):
+    if isinstance(mol, dm.Mol):
         mol = to_smiles(mol)
 
     selfies = sf.encoder(mol)  # type: ignore
@@ -105,7 +105,7 @@ def to_selfies(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     return selfies
 
 
-def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem.rdchem.Mol]]:
+def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, dm.Mol]]:
     """Convert a SEFLIES to a smiles or a mol.
 
     Args:
@@ -126,7 +126,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Chem
     return smiles
 
 
-def smiles_as_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> Optional[str]:
+def smiles_as_smarts(mol: Union[str, dm.Mol], keep_hs: bool = True) -> Optional[str]:
     """Convert a smiles to a smarts if possible
 
     Args:
@@ -164,7 +164,7 @@ def smiles_as_smarts(mol: Union[str, Chem.rdchem.Mol], keep_hs: bool = True) -> 
     return smarts
 
 
-def to_inchi(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
+def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
     """Convert a mol to Inchi.
 
     Args:
@@ -180,7 +180,7 @@ def to_inchi(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
     return Chem.MolToInchi(mol)
 
 
-def to_smarts(mol: Chem.rdchem.Mol) -> Optional[str]:
+def to_smarts(mol: dm.Mol) -> Optional[str]:
     """Convert a mol to SMARTS format
 
     Args:
@@ -193,7 +193,7 @@ def to_smarts(mol: Chem.rdchem.Mol) -> Optional[str]:
     return Chem.MolToSmarts(mol)  # type: ignore
 
 
-def to_inchikey(mol: Union[str, Chem.rdchem.Mol]) -> Optional[str]:
+def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
     """Convert a mol to Inchi key.
 
     Args:
@@ -213,7 +213,7 @@ def from_inchi(
     inchi: Optional[str],
     sanitize: bool = True,
     remove_hs: bool = True,
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """Convert an InChi to a mol.
 
     Args:
@@ -232,7 +232,7 @@ def from_inchi(
 
 def from_smarts(
     smarts: Optional[str],
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """Convert a SMARTS string to a molecule
 
     Args:
@@ -245,7 +245,7 @@ def from_smarts(
 
 
 def to_df(
-    mols: List[Chem.rdchem.Mol],
+    mols: List[dm.Mol],
     smiles_column: Optional[str] = "smiles",
     mol_column: str = None,
     include_private: bool = False,
@@ -317,7 +317,7 @@ def from_df(
     mol_column: str = None,
     conserve_smiles: bool = False,
     sanitize: bool = True,
-) -> List[Chem.rdchem.Mol]:
+) -> List[dm.Mol]:
     """Convert a dataframe to a list of mols.
 
     Note:
@@ -343,7 +343,7 @@ def from_df(
     # Try to detect the mol column if `mol_column` is None.
     if mol_column is None:
         for col in df.columns:
-            if isinstance(df[col].iloc[0], Chem.rdchem.Mol):
+            if isinstance(df[col].iloc[0], dm.Mol):
                 mol_column = col
 
     def _row_to_mol(row):
