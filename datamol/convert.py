@@ -330,6 +330,8 @@ def to_df(
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
+    For the reverse operation, you might to check `dm.from_df()`.
+
     Args:
         mols: a molecule.
         smiles_column: name of the SMILES column.
@@ -393,6 +395,8 @@ def from_df(
     sanitize: bool = True,
 ) -> List[dm.Mol]:
     """Convert a dataframe to a list of mols.
+
+    For the reverse operation, you might to check `dm.to_df()`.
 
     Note:
         If `smiles_column` is used to build the molecules, this property
