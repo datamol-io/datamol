@@ -184,7 +184,7 @@ def to_inchi_non_standard(
     mol: Union[str, dm.Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
-    reconnected_metal_layer:bool = True,
+    reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
 ) -> Optional[str]:
@@ -267,7 +267,7 @@ def to_inchikey_non_standard(
     mol: Union[str, dm.Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
-    reconnected_metal_layer:bool = True,
+    reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
 ) -> Optional[str]:
