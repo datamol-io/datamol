@@ -187,6 +187,8 @@ def to_inchi_non_standard(
 ) -> Optional[str]:
     """Convert a mol to a non-standard Inchi.
 
+    Note that turning all the flags to `False` will result in the standard Inchi.
+
     **Warning**: this function will return a **non-standard** Inchi. See
     https://www.inchi-trust.org/technical-faq-2 for details.
 
@@ -252,6 +254,8 @@ def to_inchikey_non_standard(
     undefined_stereocenter: bool = True,
 ) -> Optional[str]:
     """Convert a mol to a non-standard InchiKey.
+
+    Note that turning all the flags to `False` will result in the standard InchiKey.
 
     **Warning**: this function will return a **non-standard** InchiKey. See
     https://www.inchi-trust.org/technical-faq-2 for details.
