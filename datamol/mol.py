@@ -43,8 +43,8 @@ def to_mol(
     ordered: bool = False,
     kekulize: bool = False,
     sanitize: bool = True,
-) -> Optional[Chem.rdchem.Mol]:
-    """Convert an input molecule (smiles representation) into a `Chem.rdchem.Mol`.
+) -> Optional[dm.Mol]:
+    """Convert an input molecule (smiles representation) into a `dm.Mol`.
 
     Args:
         mol: A SMILES or a molecule.
@@ -62,8 +62,8 @@ def to_mol(
         None is returned so make sure that you handle this case on your own.
     """
 
-    if not isinstance(mol, (str, Chem.rdchem.Mol)):
-        raise ValueError(f"Input should be a Chem.rdchem.Mol or a string instead of '{type(mol)}'")
+    if not isinstance(mol, (str, dm.Mol)):
+        raise ValueError(f"Input should be a dm.Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
         _mol = Chem.MolFromSmiles(mol, sanitize=sanitize)  # type: ignore
@@ -86,7 +86,11 @@ def to_mol(
     return _mol
 
 
-def same_mol(mol1: Optional[Chem.rdchem.Mol], mol2: Optional[Chem.rdchem.Mol]):
+def same_mol(
+    mol1: Optional[dm.Mol],
+    mol2: Optional[dm.Mol],
+    use_non_standard_inchikey: bool = False,
+) -> bool:
     """Check two molecules are the same by comparing their InChiKey.
 
     Invalid molecules (None) are always considered as not the same.
@@ -94,20 +98,28 @@ def same_mol(mol1: Optional[Chem.rdchem.Mol], mol2: Optional[Chem.rdchem.Mol]):
     Args:
         mol1: A molecule.
         mol2: A molecule.
+        use_non_standard_inchikey: Whether to use the standard or non-standard InChiKey.
     """
 
     if mol1 is None or mol2 is None:
         return False
 
-    return dm.to_inchikey(mol1) == dm.to_inchikey(mol2)
+    if use_non_standard_inchikey:
+        return dm.to_inchikey_non_standard(mol1) == dm.to_inchikey_non_standard(mol2)
+    else:
+        return dm.to_inchikey(mol1) == dm.to_inchikey(mol2)
+
+
+def unique_id(mol: dm.Mol):
+    pass
 
 
 def reorder_atoms(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     break_ties: bool = True,
     include_chirality: bool = True,
     include_isotopes: bool = True,
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """Reorder the atoms in a mol. It ensures a single atom order for the same molecule,
     regardless of its original representation.
 
@@ -133,7 +145,7 @@ def reorder_atoms(
     return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])  # type: ignore
 
 
-def randomize_atoms(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
+def randomize_atoms(mol: dm.Mol) -> Optional[dm.Mol]:
     """Randomize the position of the atoms in a mol.
 
     Args:
@@ -150,7 +162,7 @@ def randomize_atoms(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
     return Chem.RenumberAtoms(mol, atom_indices)  # type: ignore
 
 
-def to_neutral(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
+def to_neutral(mol: dm.Mol) -> Optional[dm.Mol]:
     """Neutralize the charge of a molecule.
 
     Args:
@@ -173,12 +185,12 @@ def to_neutral(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
 
 
 def sanitize_mol(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     charge_neutral: bool = False,
     sanifix: bool = True,
     verbose: bool = True,
     add_hs: bool = False,
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """An augmented version of RDKit `sanitize=True`. It uses a
     mol-SMILES-mol conversion to catch potential aromaticity errors
     and try to fix aromatic nitrogen (using the popular sanifix4 script).
@@ -263,7 +275,7 @@ def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
     return smiles
 
 
-def sanitize_first(mols: List[Chem.rdchem.Mol], charge_neutral: bool = False, sanifix: bool = True):
+def sanitize_first(mols: List[dm.Mol], charge_neutral: bool = False, sanifix: bool = True):
     """Sanitize a list of molecules and return the first valid molecule seen in the list.
 
     Args:
@@ -302,7 +314,7 @@ def standardize_smiles(smiles: str, tautomer: bool = False):
 
 
 def standardize_mol(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     disconnect_metals: bool = False,
     normalize: bool = True,
     reionize: bool = True,
@@ -347,7 +359,7 @@ def standardize_mol(
     return mol
 
 
-def fix_valence_charge(mol: Chem.rdchem.Mol, inplace: bool = False) -> Optional[Chem.rdchem.Mol]:
+def fix_valence_charge(mol: dm.Mol, inplace: bool = False) -> Optional[dm.Mol]:
     """Fix valence issues that are due to incorrect charges.
 
     Args:
@@ -378,7 +390,7 @@ def fix_valence_charge(mol: Chem.rdchem.Mol, inplace: bool = False) -> Optional[
     return mol
 
 
-def incorrect_valence(a: Union[Chem.rdchem.Mol, Chem.rdchem.Atom], update: bool = False) -> bool:
+def incorrect_valence(a: Union[dm.Mol, Chem.rdchem.Atom], update: bool = False) -> bool:
     """Check if an atom connection is not valid or all the atom of a molecule.
 
     Args:
@@ -388,7 +400,7 @@ def incorrect_valence(a: Union[Chem.rdchem.Mol, Chem.rdchem.Atom], update: bool 
     Returns:
         Whether the input atom valence is correct.
     """
-    if isinstance(a, Chem.rdchem.Mol):
+    if isinstance(a, dm.Mol):
         a.UpdatePropertyCache(False)
         vm = rdMolStandardize.RDKitValidation()
         return len(vm.validate(a)) > 0
@@ -417,9 +429,7 @@ def decrease_bond(bond: Chem.rdchem.Bond) -> Optional[Union[list, Chem.rdchem.Bo
     return bond
 
 
-def fix_valence(
-    mol, inplace: bool = False, allow_ring_break: bool = False
-) -> Optional[Chem.rdchem.Mol]:
+def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[dm.Mol]:
     """Identify and try to fix valence issues by removing any supplemental bond
     that should not be in the graph.
 
@@ -488,7 +498,7 @@ def fix_valence(
     return m
 
 
-def adjust_singleton(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
+def adjust_singleton(mol: dm.Mol) -> Optional[dm.Mol]:
     """Remove all atoms that are essentially disconnected singleton nodes in the molecular graph.
     For example, the chlorine atom and methane fragment will be removed in Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C",
     but not the ethane fragment.
@@ -507,7 +517,7 @@ def adjust_singleton(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
     return em.GetMol()
 
 
-def remove_dummies(mol: Chem.rdchem.Mol, dummy: str = "*") -> Optional[Chem.rdchem.Mol]:
+def remove_dummies(mol: dm.Mol, dummy: str = "*") -> Optional[dm.Mol]:
     """Remove dummy atoms from molecules."""
     du = dm.to_mol(dummy)
     out = mol
@@ -520,12 +530,12 @@ def remove_dummies(mol: Chem.rdchem.Mol, dummy: str = "*") -> Optional[Chem.rdch
 
 
 def fix_mol(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     n_iter: int = 1,
     remove_singleton: bool = False,
     largest_only: bool = False,
     inplace: bool = False,
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """Fix error in molecule using a greedy approach.
 
     Args:
@@ -560,11 +570,11 @@ def fix_mol(
 
 
 def replace_dummies_atoms(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     atom: str = "C",
     dummy: str = "*",
     replace_all: bool = True,
-) -> Optional[Chem.rdchem.Mol]:
+) -> Optional[dm.Mol]:
     """Remove dummy atoms from molecules.
 
     Args:
@@ -582,7 +592,7 @@ def replace_dummies_atoms(
     return out
 
 
-def keep_largest_fragment(mol: Chem.rdchem.Mol) -> Optional[Chem.rdchem.Mol]:
+def keep_largest_fragment(mol: dm.Mol) -> Optional[dm.Mol]:
     """Only keep largest fragment of each molecule."""
     return max(
         rdmolops.GetMolFrags(mol, asMols=True),
@@ -601,9 +611,7 @@ def is_transition_metal(at: Chem.rdchem.Atom) -> bool:
     return (n >= 22 and n <= 29) or (n >= 40 and n <= 47) or (n >= 72 and n <= 79)
 
 
-def set_dative_bonds(
-    mol: Chem.rdchem.Mol, from_atoms: Tuple[int, int] = (7, 8)
-) -> Optional[Chem.rdchem.Mol]:
+def set_dative_bonds(mol: dm.Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional[dm.Mol]:
     """Replaces some single bonds between metals and atoms with atomic numbers in fromAtoms
     with dative bonds. The replacement is only done if the atom has "too many" bonds.
 
@@ -632,10 +640,10 @@ def set_dative_bonds(
 
 
 def set_mol_props(
-    mol: Chem.rdchem.Mol,
+    mol: dm.Mol,
     props: Dict[str, Any],
     copy: bool = False,
-) -> Chem.rdchem.Mol:
+) -> dm.Mol:
     """Set properties to a mol from a dict.
 
     Args:
@@ -661,7 +669,7 @@ def set_mol_props(
     return mol
 
 
-def copy_mol_props(source: Chem.rdchem.Mol, destination: Chem.rdchem.Mol):
+def copy_mol_props(source: dm.Mol, destination: dm.Mol):
     """Copy properties from one source molecule to another destination
     molecule.
 
@@ -674,7 +682,7 @@ def copy_mol_props(source: Chem.rdchem.Mol, destination: Chem.rdchem.Mol):
     dm.set_mol_props(destination, props)
 
 
-def atom_indices_to_mol(mol: Chem.rdchem.Mol, copy: bool = False):
+def atom_indices_to_mol(mol: dm.Mol, copy: bool = False):
     """Add the `molAtomMapNumber` property to each atoms.
 
     Args:
@@ -776,11 +784,11 @@ def substructure_matching_bonds(mol: dm.Mol, query: dm.Mol, **kwargs):
 
 
 def protect_atoms(
-    mol: Chem.rdchem.Mol,
-    substruct: Optional[Chem.rdchem.Mol] = None,
+    mol: dm.Mol,
+    substruct: Optional[dm.Mol] = None,
     atoms: Union[List[int], int] = None,
     in_place: bool = False,
-) -> Chem.rdchem.Mol:
+) -> dm.Mol:
     """Protect a list of atoms or substruct in a molecule.
 
     The _protected attributes of a molecule is used by RDKit in several functions, especially for reactions
