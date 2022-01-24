@@ -402,6 +402,12 @@ def test_same_mol():
     assert dm.same_mol(mol1, None) is False
     assert dm.same_mol(None, None) is False
 
+    mol1 = dm.to_mol("N=C(N)O")
+    mol2 = dm.to_mol("NC(N)=O")
+
+    assert dm.same_mol(mol1, mol2) is True
+    assert dm.same_mol(mol1, mol2, use_non_standard_inchikey=True) is False
+
 
 def test_atom_list_to_bond():
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
@@ -448,3 +454,48 @@ def test_add_remove_hs():
 
     mol3 = dm.remove_hs(mol)
     assert dm.to_smiles(mol3) == smiles
+
+
+def test_unique_id():
+    smiles_list = [
+        "c1ccc2c(c1)Cc3ccccc3C2",
+        "CCCC/C=C/C",
+        "Cc1c[nH]cn1",
+        "Cc1ccc(nc1)C",
+        "Cc1cccs1",
+        "C(CO[N+](=O)[O-])CO[N+](=O)[O-]",
+        "C(=C(F)F)(C(F)(F)F)F",
+        "CCOP(=S)(OCC)SCSP(=S)(OCC)OCC",
+        "CC1=CC(=O)[C@@H](CC1)C(C)C",
+        "Cc1cc(ccc1Cl)O",
+        "CC(C)O",
+        "C",
+        "CCCC(=O)C",
+        "CCCCCCCC=O",
+        "CCc1cccc2c1cccc2",
+        "N=C(N)O",
+        "NC(N)=O",
+    ]
+
+    mols = [dm.to_mol(s) for s in smiles_list]
+    ids = [dm.unique_id(m) for m in mols]
+
+    assert ids == [
+        "2f0a84f817a369e79a2b44085ebe3a27",
+        "3dc94b495eba316c2df4563457c77842",
+        "df2c2dcbe7262f02f371d5523248e3d6",
+        "1d0bc775e2b6ab0a077548a26ce9586f",
+        "6cb8a819d03a38a6ed4771d1bbfd899c",
+        "ae2683fabd3b5c31ac0554c213e1f37a",
+        "c77fd251ff9b35379e8b08f1cf870391",
+        "1a239153353f30ec3067af0461a5bff3",
+        "f5bcdce1e7726f01abdc8f30f627ebcf",
+        "4121e41877275378c2ae501815ab2876",
+        "a6e46ea133142499b60f73a6d3e94248",
+        "cbaaa6452f9cc0649cc9920a698c6f5d",
+        "70572a2d32cf4707138a6ef81cfd7253",
+        "180d723f0fbcc955a975d740fbc91adf",
+        "11e555af02fa8342860752227c0ddc9e",
+        "3a04e3e47b86287b035b4affe84dff91",
+        "943d4548ef05069b79e929ed140ce905",
+    ]

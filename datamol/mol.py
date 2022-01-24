@@ -8,6 +8,7 @@ from typing import Any
 import copy
 import random
 import itertools
+import hashlib
 
 from loguru import logger
 
@@ -110,8 +111,22 @@ def same_mol(
         return dm.to_inchikey(mol1) == dm.to_inchikey(mol2)
 
 
-def unique_id(mol: dm.Mol):
-    pass
+def unique_id(mol: dm.Mol) -> Optional[str]:
+    """A datamol unique molecule ID.
+
+    The ID is an MD5 hash of the non-standard InChiKey provided
+    by `dm.to_inchikey_non_standard()`. It guarantees uniqueness for
+    different tautomeric forms of the same molecule.
+
+    Args:
+        mol: A molecule.
+    """
+    ik = dm.to_inchikey_non_standard(mol)
+
+    if ik is None:
+        return None
+
+    return hashlib.md5(ik.encode("utf-8")).hexdigest()
 
 
 def reorder_atoms(

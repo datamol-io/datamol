@@ -52,6 +52,7 @@ from .mol import atom_list_to_bond
 from .mol import substructure_matching_bonds
 from .mol import add_hs
 from .mol import remove_hs
+from .mol import unique_id
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
