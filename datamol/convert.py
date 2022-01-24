@@ -184,6 +184,9 @@ def to_inchi_non_standard(
     mol: Union[str, dm.Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
+    reconnected_metal_layer:bool = True,
+    tautomerism_keto_enol: bool = True,
+    tautomerism_15: bool = True,
 ) -> Optional[str]:
     """Convert a mol to a non-standard Inchi.
 
@@ -200,6 +203,9 @@ def to_inchi_non_standard(
         mol: a molecule.
         fixed_hydrogen_layer: whether to include a fixed hydrogen layer (`/FixedH`).
         undefined_stereocenter: whether to include an undefined stereocenter layer (`/SUU`).
+        reconnected_metal_layer: whether to include reconnected metals (`/RecMet`).
+        tautomerism_keto_enol: whether to account tautomerism keto-enol (`/KET`).
+        tautomerism_15: whether to account 1,5-tautomerism (`/15T`).
     """
 
     if mol is None:
@@ -215,6 +221,15 @@ def to_inchi_non_standard(
 
     if undefined_stereocenter:
         options += " /SUU"
+
+    if reconnected_metal_layer:
+        options += " /RecMet"
+
+    if tautomerism_keto_enol:
+        options += " /KET"
+
+    if tautomerism_15:
+        options += " /15T"
 
     return Chem.MolToInchi(mol, options=options)
 
@@ -252,6 +267,9 @@ def to_inchikey_non_standard(
     mol: Union[str, dm.Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
+    reconnected_metal_layer:bool = True,
+    tautomerism_keto_enol: bool = True,
+    tautomerism_15: bool = True,
 ) -> Optional[str]:
     """Convert a mol to a non-standard InchiKey.
 
@@ -268,6 +286,9 @@ def to_inchikey_non_standard(
         mol: a molecule
         fixed_hydrogen_layer: whether to include a fixed hydrogen layer (`/FixedH`).
         undefined_stereocenter: whether to include an undefined stereocenter layer (`/SUU`).
+        reconnected_metal_layer: whether to include reconnected metals (`/RecMet`).
+        tautomerism_keto_enol: whether to account tautomerism keto-enol (`/KET`).
+        tautomerism_15: whether to account 1,5-tautomerism (`/15T`).
     """
 
     if mol is None:
@@ -283,6 +304,15 @@ def to_inchikey_non_standard(
 
     if undefined_stereocenter:
         options += " /SUU"
+
+    if reconnected_metal_layer:
+        options += " /RecMet"
+
+    if tautomerism_keto_enol:
+        options += " /KET"
+
+    if tautomerism_15:
+        options += " /15T"
 
     return Chem.MolToInchiKey(mol, options=options)
 
