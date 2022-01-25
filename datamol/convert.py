@@ -187,6 +187,7 @@ def to_inchi_non_standard(
     reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
+    options: List[str] = None,
 ) -> Optional[str]:
     """Convert a mol to a non-standard Inchi.
 
@@ -206,6 +207,8 @@ def to_inchi_non_standard(
         reconnected_metal_layer: whether to include reconnected metals (`/RecMet`).
         tautomerism_keto_enol: whether to account tautomerism keto-enol (`/KET`).
         tautomerism_15: whether to account 1,5-tautomerism (`/15T`).
+        options: More InchI options in a form of a list of string. Example:
+            `["/SRel", "/AuxNone"]`.
     """
 
     if mol is None:
@@ -214,24 +217,16 @@ def to_inchi_non_standard(
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
 
-    options = ""
+    inchi_options = _process_inchi_options(
+        fixed_hydrogen_layer=fixed_hydrogen_layer,
+        undefined_stereocenter=undefined_stereocenter,
+        reconnected_metal_layer=reconnected_metal_layer,
+        tautomerism_keto_enol=tautomerism_keto_enol,
+        tautomerism_15=tautomerism_15,
+        options=options,
+    )
 
-    if fixed_hydrogen_layer:
-        options += "/FixedH"
-
-    if undefined_stereocenter:
-        options += " /SUU"
-
-    if reconnected_metal_layer:
-        options += " /RecMet"
-
-    if tautomerism_keto_enol:
-        options += " /KET"
-
-    if tautomerism_15:
-        options += " /15T"
-
-    return Chem.MolToInchi(mol, options=options)
+    return Chem.MolToInchi(mol, options=inchi_options)
 
 
 def to_smarts(mol: dm.Mol) -> Optional[str]:
@@ -270,6 +265,7 @@ def to_inchikey_non_standard(
     reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
+    options: List[str] = None,
 ) -> Optional[str]:
     """Convert a mol to a non-standard InchiKey.
 
@@ -289,6 +285,8 @@ def to_inchikey_non_standard(
         reconnected_metal_layer: whether to include reconnected metals (`/RecMet`).
         tautomerism_keto_enol: whether to account tautomerism keto-enol (`/KET`).
         tautomerism_15: whether to account 1,5-tautomerism (`/15T`).
+        options: More InchI options in a form of a list of string. Example:
+            `["/SRel", "/AuxNone"]`.
     """
 
     if mol is None:
@@ -297,24 +295,16 @@ def to_inchikey_non_standard(
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
 
-    options = ""
+    inchi_options = _process_inchi_options(
+        fixed_hydrogen_layer=fixed_hydrogen_layer,
+        undefined_stereocenter=undefined_stereocenter,
+        reconnected_metal_layer=reconnected_metal_layer,
+        tautomerism_keto_enol=tautomerism_keto_enol,
+        tautomerism_15=tautomerism_15,
+        options=options,
+    )
 
-    if fixed_hydrogen_layer:
-        options += "/FixedH"
-
-    if undefined_stereocenter:
-        options += " /SUU"
-
-    if reconnected_metal_layer:
-        options += " /RecMet"
-
-    if tautomerism_keto_enol:
-        options += " /KET"
-
-    if tautomerism_15:
-        options += " /15T"
-
-    return Chem.MolToInchiKey(mol, options=options)
+    return Chem.MolToInchiKey(mol, options=inchi_options)
 
 
 def from_inchi(
@@ -520,3 +510,36 @@ def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
         frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)
     else:
         frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)
+
+
+def _process_inchi_options(
+    fixed_hydrogen_layer: bool = True,
+    undefined_stereocenter: bool = True,
+    reconnected_metal_layer: bool = True,
+    tautomerism_keto_enol: bool = True,
+    tautomerism_15: bool = True,
+    options: List[str] = None,
+):
+
+    inchi_options = []
+
+    if fixed_hydrogen_layer:
+        inchi_options.append("/FixedH")
+
+    if undefined_stereocenter:
+        inchi_options.append("/SUU")
+
+    if reconnected_metal_layer:
+        inchi_options.append("/RecMet")
+
+    if tautomerism_keto_enol:
+        inchi_options.append("/KET")
+
+    if tautomerism_15:
+        inchi_options.append("/15T")
+
+    if options is not None:
+        inchi_options.extend(options)
+
+    inchi_options = " ".join(inchi_options)
+    return inchi_options

@@ -259,3 +259,16 @@ def test_non_standard_inchi():
 
     assert dm.to_smiles(mol1_reloaded) == "N=C(N)O"
     assert dm.to_smiles(mol2_reloaded) == "NC(N)=O"
+
+
+def test_non_standard_inchi_with_options():
+    mol1 = dm.to_mol("C[C@@H]1CCCC[C@@H]1O")
+    mol2 = dm.to_mol("C[C@H]1CCCC[C@@H]1O")
+
+    assert dm.to_inchikey(mol1) == "NDVWOBYBJYUSMF-RQJHMYQMSA-N"
+    assert dm.to_inchikey_non_standard(mol1) == "NDVWOBYBJYUSMF-RQJHMYQMNA-N"
+    assert dm.to_inchikey_non_standard(mol1, options=["/SRel"]) == "NDVWOBYBJYUSMF-JHPDDGAFNA-N"
+
+    assert dm.to_inchikey(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWSA-N"
+    assert dm.to_inchikey_non_standard(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWNA-N"
+    assert dm.to_inchikey_non_standard(mol2, options=["/SRel"]) == "NDVWOBYBJYUSMF-WZTWBHKBNA-N"
