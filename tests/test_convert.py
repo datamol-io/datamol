@@ -226,3 +226,57 @@ def test_from_df_pop_mol_column():
     # test with automatic mol column detection
     mols = dm.from_df(df.copy())
     assert set(mols[0].GetPropsAsDict().keys()) == {"smiles", "dummy"}
+
+
+def test_non_standard_inchi():
+    mol1 = dm.to_mol("N=C(N)O")
+    mol2 = dm.to_mol("NC(N)=O")
+    mol3 = dm.to_mol("c1ccccc1")
+
+    # with a standard inchi, both molecules should be identical
+    assert dm.to_inchi(mol1) == "InChI=1S/CH4N2O/c2-1(3)4/h(H4,2,3,4)"
+    assert dm.to_inchi(mol2) == "InChI=1S/CH4N2O/c2-1(3)4/h(H4,2,3,4)"
+    assert dm.to_inchikey(mol1) == "XSQUKJJJFZCRTK-UHFFFAOYSA-N"
+    assert dm.to_inchikey(mol2) == "XSQUKJJJFZCRTK-UHFFFAOYSA-N"
+
+    # with additional layers, inchi values should be different
+    assert dm.to_inchi_non_standard(mol1) == "InChI=1/CH4N2O/c2-1(3)4/h(H4,2,3,4)/f/h2,4H,3H2/b2-1?"
+    assert dm.to_inchi_non_standard(mol2) == "InChI=1/CH4N2O/c2-1(3)4/h(H4,2,3,4)/f/h2-3H2"
+    assert dm.to_inchikey_non_standard(mol1) == "XSQUKJJJFZCRTK-ZIALIONUNA-N"
+    assert dm.to_inchikey_non_standard(mol2) == "XSQUKJJJFZCRTK-UBUOBULFNA-N"
+
+    # for molecule without movile hydrogens the inchi and inchikey will still be different
+    # because of the absence of the letter `S` in the prefix
+    assert dm.to_inchi_non_standard(mol3) == "InChI=1/C6H6/c1-2-4-6-5-3-1/h1-6H"
+    assert dm.to_inchi(mol3) == "InChI=1S/C6H6/c1-2-4-6-5-3-1/h1-6H"
+    assert dm.to_inchikey_non_standard(mol3) == "UHOVQNZJYSORNB-UHFFFAOYNA-N"
+    assert dm.to_inchikey(mol3) == "UHOVQNZJYSORNB-UHFFFAOYSA-N"
+
+    # let's check we can reload the correct molecule from the non standard inchi
+    # The SMILES is unlikely to change with a simple molecule like that
+    mol1_reloaded = dm.from_inchi(dm.to_inchi_non_standard(mol1))
+    mol2_reloaded = dm.from_inchi(dm.to_inchi_non_standard(mol2))
+
+    assert dm.to_smiles(mol1_reloaded) == "N=C(N)O"
+    assert dm.to_smiles(mol2_reloaded) == "NC(N)=O"
+
+
+def test_non_standard_inchi_with_options():
+    mol1 = dm.to_mol("C[C@@H]1CCCC[C@@H]1O")
+    mol2 = dm.to_mol("C[C@H]1CCCC[C@@H]1O")
+
+    assert dm.to_inchikey(mol1) == "NDVWOBYBJYUSMF-RQJHMYQMSA-N"
+    assert dm.to_inchikey_non_standard(mol1) == "NDVWOBYBJYUSMF-RQJHMYQMNA-N"
+    assert dm.to_inchikey_non_standard(mol1, options=["/SRel"]) == "NDVWOBYBJYUSMF-JHPDDGAFNA-N"
+
+    assert dm.to_inchikey(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWSA-N"
+    assert dm.to_inchikey_non_standard(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWNA-N"
+    assert dm.to_inchikey_non_standard(mol2, options=["/SRel"]) == "NDVWOBYBJYUSMF-WZTWBHKBNA-N"
+
+
+def test_non_standard_inchi_edge_cases():
+    assert dm.to_inchi_non_standard(None) is None
+    assert dm.to_inchikey_non_standard(None) is None
+
+    assert dm.to_inchi_non_standard("NC(N)=O") == "InChI=1/CH4N2O/c2-1(3)4/h(H4,2,3,4)/f/h2-3H2"
+    assert dm.to_inchikey_non_standard("N=C(N)O") == "XSQUKJJJFZCRTK-ZIALIONUNA-N"
