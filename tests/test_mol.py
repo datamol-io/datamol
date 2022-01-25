@@ -458,6 +458,7 @@ def test_add_remove_hs():
 
 def test_unique_id():
     smiles_list = [
+        # mols coming from FreeSolv
         "c1ccc2c(c1)Cc3ccccc3C2",
         "CCCC/C=C/C",
         "Cc1c[nH]cn1",
@@ -473,6 +474,8 @@ def test_unique_id():
         "CCCC(=O)C",
         "CCCCCCCC=O",
         "CCc1cccc2c1cccc2",
+        # Two cherry picked tautomeric forms
+        # of the same molecule.
         "N=C(N)O",
         "NC(N)=O",
     ]
@@ -496,6 +499,7 @@ def test_unique_id():
         "70572a2d32cf4707138a6ef81cfd7253",
         "180d723f0fbcc955a975d740fbc91adf",
         "11e555af02fa8342860752227c0ddc9e",
+        # The two IDS of the tautomers are indeed different.
         "3a04e3e47b86287b035b4affe84dff91",
         "943d4548ef05069b79e929ed140ce905",
     ]
