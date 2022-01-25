@@ -272,3 +272,11 @@ def test_non_standard_inchi_with_options():
     assert dm.to_inchikey(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWSA-N"
     assert dm.to_inchikey_non_standard(mol2) == "NDVWOBYBJYUSMF-BQBZGAKWNA-N"
     assert dm.to_inchikey_non_standard(mol2, options=["/SRel"]) == "NDVWOBYBJYUSMF-WZTWBHKBNA-N"
+
+
+def test_non_standard_inchi_edge_cases():
+    assert dm.to_inchi_non_standard(None) is None
+    assert dm.to_inchikey_non_standard(None) is None
+
+    assert dm.to_inchi_non_standard("NC(N)=O") == "InChI=1/CH4N2O/c2-1(3)4/h(H4,2,3,4)/f/h2-3H2"
+    assert dm.to_inchikey_non_standard("N=C(N)O") == "XSQUKJJJFZCRTK-ZIALIONUNA-N"
