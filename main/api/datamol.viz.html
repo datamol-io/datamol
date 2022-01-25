@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.8">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.f7951f6f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6e60f8b8.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1220,6 +1220,157 @@ MolsCircleGrid        </code>
     <div class="doc doc-contents first">
 
 
+        <details class="quote">
+          <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MolsCircleGrid</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">center_mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+        <span class="n">circle_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
+        <span class="n">legend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">mol_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span>
+        <span class="n">circle_margin</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
+        <span class="n">act_mapper</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            center_mol: Molecule at center</span>
+<span class="sd">            circle_mols: List of molecule for each concentric circle around the center mol</span>
+<span class="sd">            mol_size: Tuple of width and height for each molecule</span>
+<span class="sd">            circle_margin: Margin between the circle layers</span>
+<span class="sd">            act_mapper: Map each molecule to a dictionary of activity</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_mols</span> <span class="o">=</span> <span class="n">circle_mols</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_mols</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">legend</span> <span class="o">=</span> <span class="n">legend</span> <span class="ow">or</span> <span class="s2">&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">=</span> <span class="n">circle_margin</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span> <span class="o">=</span> <span class="n">center_mol</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">mol_size</span> <span class="o">=</span> <span class="n">mol_size</span>
+        <span class="n">size</span> <span class="o">=</span> <span class="p">(</span><span class="nb">max</span><span class="p">(</span><span class="n">mol_size</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">)</span> <span class="o">*</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">=</span> <span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span> <span class="o">=</span> <span class="n">Image</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">mode</span><span class="o">=</span><span class="s2">&quot;RGBA&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="p">(</span><span class="n">size</span><span class="p">,</span> <span class="n">size</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="p">(</span><span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">=</span> <span class="n">size</span> <span class="o">//</span> <span class="mi">2</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">act_mapper</span> <span class="o">=</span> <span class="n">act_mapper</span> <span class="ow">or</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">show</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">crop</span><span class="o">=</span><span class="kc">False</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">crop</span><span class="p">:</span>
+            <span class="n">crop_img</span> <span class="o">=</span> <span class="n">ImageOps</span><span class="o">.</span><span class="n">crop</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">,</span> <span class="n">border</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">crop_img</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">image</span>
+        <span class="k">return</span> <span class="n">crop_img</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">filename</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">filename</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Create circles and slices in-memory&quot;&quot;&quot;</span>
+        <span class="n">draw</span> <span class="o">=</span> <span class="n">ImageDraw</span><span class="o">.</span><span class="n">Draw</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="o">=</span> <span class="n">draw</span>
+        <span class="n">all_radius</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_circles</span><span class="p">(</span><span class="n">draw</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_center_mol</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_ring_mols</span><span class="p">(</span><span class="n">all_radius</span><span class="p">)</span>
+        <span class="n">font</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">draw</span><span class="o">.</span><span class="n">textsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">fn</span> <span class="o">=</span> <span class="n">FontManager</span><span class="p">()</span>
+            <span class="n">fontpath</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">findfont</span><span class="p">(</span><span class="s2">&quot;Droid sans&quot;</span><span class="p">)</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">fontpath</span><span class="p">,</span> <span class="mi">12</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">800</span><span class="p">)</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="n">font</span><span class="o">.</span><span class="n">getsize</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">)</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">pass</span>
+        <span class="n">draw</span><span class="o">.</span><span class="n">text</span><span class="p">(</span>
+            <span class="p">((</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span> <span class="o">-</span> <span class="n">w</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">h</span><span class="p">),</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">legend</span><span class="p">,</span>
+            <span class="n">fill</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+            <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="k">del</span> <span class="n">draw</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="k">def</span> <span class="nf">_repr_png_</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">bio</span> <span class="o">=</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">save</span><span class="p">(</span><span class="n">bio</span><span class="p">,</span> <span class="nb">format</span><span class="o">=</span><span class="s2">&quot;PNG&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">bio</span><span class="o">.</span><span class="n">getvalue</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">_draw_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">draw</span><span class="p">):</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">[]</span>
+        <span class="n">radius_step</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">/</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_count</span> <span class="o">+</span> <span class="mi">1</span><span class="p">))</span>
+        <span class="n">radius_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="n">full_range</span> <span class="o">=</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">size</span> <span class="o">//</span> <span class="mi">2</span><span class="p">,</span> <span class="n">radius_step</span><span class="p">)</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">radius</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">full_range</span><span class="p">):</span>
+            <span class="n">radius</span> <span class="o">+=</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="o">//</span> <span class="mi">2</span>
+            <span class="n">bounding_box</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">-</span> <span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">-</span> <span class="n">radius</span><span class="p">),</span>
+                <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">+</span> <span class="n">radius</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span> <span class="o">+</span> <span class="n">radius</span><span class="p">),</span>
+            <span class="p">]</span>
+            <span class="k">if</span> <span class="n">radius</span> <span class="o">&gt;</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span><span class="p">:</span>
+                <span class="n">transp</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="mi">255</span> <span class="o">-</span> <span class="p">(</span><span class="mi">200</span> <span class="o">*</span> <span class="p">(</span><span class="n">i</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">full_range</span><span class="p">)))</span>
+                <span class="n">draw</span><span class="o">.</span><span class="n">arc</span><span class="p">(</span><span class="n">bounding_box</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">360</span><span class="p">,</span> <span class="n">fill</span><span class="o">=</span><span class="p">(</span><span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="mi">190</span><span class="p">,</span> <span class="n">transp</span><span class="p">))</span>
+            <span class="n">radius_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">radius</span> <span class="o">+</span> <span class="n">radius_step</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">radius_list</span>
+
+    <span class="k">def</span> <span class="nf">_draw_mol_at</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">mol</span><span class="p">,</span>
+        <span class="n">center_x</span><span class="p">,</span>
+        <span class="n">center_y</span><span class="p">,</span>
+        <span class="n">mol_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+        <span class="n">act_dict</span><span class="o">=</span><span class="p">{},</span>
+        <span class="n">center</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="n">img</span> <span class="o">=</span> <span class="n">mol</span>
+        <span class="k">if</span> <span class="n">mol_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">mol_size</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_size</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+            <span class="n">img</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolToImage</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">mol_size</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fitImage</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="n">img</span><span class="o">.</span><span class="n">size</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">image</span><span class="o">.</span><span class="n">paste</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">center_x</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">center_y</span> <span class="o">-</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)))</span>
+        <span class="n">txt</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">propval</span> <span class="ow">in</span> <span class="n">act_dict</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">propval</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">propval</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">propval</span><span class="p">)</span>
+            <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prop</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">propval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">txt</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+            <span class="n">font</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">multiline_textsize</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">fn</span> <span class="o">=</span> <span class="n">FontManager</span><span class="p">()</span>
+                <span class="n">fontpath</span> <span class="o">=</span> <span class="n">fn</span><span class="o">.</span><span class="n">findfont</span><span class="p">(</span><span class="s2">&quot;Droid sans&quot;</span><span class="p">)</span>
+                <span class="n">font</span> <span class="o">=</span> <span class="n">ImageFont</span><span class="o">.</span><span class="n">truetype</span><span class="p">(</span><span class="n">fontpath</span><span class="p">,</span> <span class="mi">18</span> <span class="o">+</span> <span class="n">center</span> <span class="o">*</span> <span class="mi">8</span><span class="p">)</span>
+                <span class="n">w</span><span class="p">,</span> <span class="n">h</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="o">.</span><span class="n">multiline_textsize</span><span class="p">(</span><span class="n">txt</span><span class="p">,</span> <span class="n">font</span><span class="o">=</span><span class="n">font</span><span class="p">)</span>
+            <span class="k">except</span><span class="p">:</span>
+                <span class="n">passcircle_mols</span>
+
+    <span class="k">def</span> <span class="nf">_draw_center_mol</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">_draw_mol_at</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span><span class="p">,</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span><span class="p">,</span>
+            <span class="n">mol_size</span><span class="o">=</span><span class="p">[</span><span class="n">x</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">margin</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">mol_size</span><span class="p">],</span>
+            <span class="n">act_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">act_mapper</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span><span class="p">,</span> <span class="p">{}),</span>
+            <span class="n">center</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">_draw_ring_mols</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">radius_list</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mols</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">circle_mols</span><span class="p">):</span>
+            <span class="n">radius</span> <span class="o">=</span> <span class="n">radius_list</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+            <span class="n">ni</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
+            <span class="n">rand_unit</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">random</span><span class="p">()</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span>
+            <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mols</span><span class="p">):</span>
+                <span class="n">center_x</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">ni</span> <span class="o">+</span> <span class="n">rand_unit</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span>
+                <span class="n">center_y</span> <span class="o">=</span> <span class="n">radius</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">k</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">pi</span> <span class="o">/</span> <span class="n">ni</span> <span class="o">+</span> <span class="n">rand_unit</span><span class="p">)</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">midpoint</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">_draw_mol_at</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">center_x</span><span class="p">,</span> <span class="n">center_y</span><span class="p">,</span> <span class="n">act_dict</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">act_mapper</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">{}))</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -1497,10 +1648,10 @@ MolsCircleGrid        </code>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.649a939e.min.js"></script>
+      <script src="../assets/javascripts/bundle.960e086b.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

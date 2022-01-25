@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.2">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.8">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.f7951f6f.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.6e60f8b8.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -1120,6 +1120,159 @@ JobRunner        </code>
     <div class="doc doc-contents first">
 
 
+        <details class="quote">
+          <summary>Source code in <code>datamol/utils/jobs.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">JobRunner</span><span class="p">:</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which</span>
+<span class="sd">        allows taking advantage of its features, while the progress bar use tqdm</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            n_jobs: Number of process. Use 0 or None to force sequential.</span>
+<span class="sd">                Use -1 to use all the available processors. For details see</span>
+<span class="sd">                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</span>
+<span class="sd">            batch_size: Whether to  batch `inputs_list`. You can specify batch_size when the length</span>
+<span class="sd">                of `inputs_list` is very large (&gt;100k elements). By default, the auto batching of joblib is used.</span>
+<span class="sd">            prefer: Choose from [&#39;processes&#39;, &#39;threads&#39;] or None. Default to None.</span>
+<span class="sd">                Soft hint to choose the default backend if no specific backend</span>
+<span class="sd">                was selected with the parallel_backend context manager. The</span>
+<span class="sd">                default process-based backend is &#39;loky&#39; and the default</span>
+<span class="sd">                thread-based backend is &#39;threading&#39;. Ignored if the ``backend``</span>
+<span class="sd">                parameter is specified.</span>
+<span class="sd">            progress: whether to display progress bar</span>
+<span class="sd">            tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
+<span class="sd">            job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
+
+<span class="sd">        Example:</span>
+
+<span class="sd">        ```python</span>
+<span class="sd">        import datamol as dm</span>
+<span class="sd">        runner = dm.JobRunner(n_jobs=4, progress=True, prefer=&quot;threads&quot;)</span>
+<span class="sd">        results = runner(lambda x: x**2, [1, 2, 3, 4])</span>
+<span class="sd">        ```</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="o">=</span> <span class="n">n_jobs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span> <span class="o">=</span> <span class="n">batch_size</span> <span class="ow">or</span> <span class="s2">&quot;auto&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">prefer</span> <span class="o">=</span> <span class="n">prefer</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span> <span class="o">=</span> <span class="n">job_kwargs</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">progress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span> <span class="o">=</span> <span class="n">tqdm_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
+
+    <span class="nd">@property</span>
+    <span class="k">def</span> <span class="nf">is_sequential</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Check whether the job is sequential or parallel&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">wrap_fn</span><span class="p">(</span><span class="n">fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Small wrapper around a callable to properly format it&#39;s argument&quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">_run</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">Any</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">arg_type</span> <span class="o">==</span> <span class="s2">&quot;kwargs&quot;</span><span class="p">:</span>
+                <span class="n">fn_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="o">**</span><span class="n">args</span><span class="p">)</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
+            <span class="k">elif</span> <span class="n">arg_type</span> <span class="o">==</span> <span class="s2">&quot;args&quot;</span><span class="p">:</span>
+                <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
+            <span class="k">return</span> <span class="n">fn</span><span class="p">(</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">_run</span>
+
+    <span class="k">def</span> <span class="nf">sequential</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">callable_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run job in sequential version</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            callable_fn (callable): function to call</span>
+<span class="sd">            data (iterable): input data</span>
+<span class="sd">            arg_type (str, optional): function argument type (&#39;arg&#39;/None or &#39;args&#39; or &#39;kwargs&#39;)</span>
+<span class="sd">            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)(</span><span class="n">dt</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
+        <span class="p">]</span>
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span> <span class="nf">parallel</span><span class="p">(</span>
+        <span class="bp">self</span><span class="p">,</span>
+        <span class="n">callable_fn</span><span class="p">:</span> <span class="n">Callable</span><span class="p">,</span>
+        <span class="n">data</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
+        <span class="n">arg_type</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">,</span>
+    <span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run job in parallel</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            callable_fn (callable): function to call</span>
+<span class="sd">            data (iterable): input data</span>
+<span class="sd">            arg_type (str, optional): function argument type (&#39;arg&#39;/None or &#39;args&#39; or &#39;kwargs&#39;)</span>
+<span class="sd">            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+
+        <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">_parallel_helper</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="p">)</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)(</span>
+            <span class="n">delayed</span><span class="p">(</span><span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">))(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">data</span>
+        <span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">results</span>
+
+    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Run job using the n_jobs attribute to determine regime</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">is_sequential</span><span class="p">:</span>
+            <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sequential</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">_parallel_helper</span><span class="p">(</span><span class="o">**</span><span class="n">joblib_args</span><span class="p">):</span>
+        <span class="sa">r</span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Parallel helper function for joblib with tqdm support</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="o">**</span><span class="n">tq_args</span><span class="p">):</span>
+            <span class="k">def</span> <span class="nf">tmp</span><span class="p">(</span><span class="n">op_iter</span><span class="p">):</span>
+                <span class="k">with</span> <span class="n">_tqdm_callback</span><span class="p">(</span><span class="n">tqdm</span><span class="p">(</span><span class="o">**</span><span class="n">tq_args</span><span class="p">)):</span>
+                    <span class="k">return</span> <span class="n">Parallel</span><span class="p">(</span><span class="o">**</span><span class="n">joblib_args</span><span class="p">)(</span><span class="n">op_iter</span><span class="p">)</span>
+
+            <span class="k">return</span> <span class="n">tmp</span>
+
+        <span class="k">return</span> <span class="n">run</span>
+
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Attempt to get the length of an iterator&quot;&quot;&quot;</span>
+        <span class="n">total_length</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">total_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+        <span class="k">except</span> <span class="ne">TypeError</span><span class="p">:</span>
+            <span class="c1"># most likely a generator, ignore</span>
+            <span class="k">pass</span>
+        <span class="k">return</span> <span class="n">total_length</span>
+</code></pre></div>
+        </details>
 
 
 
@@ -2765,10 +2918,10 @@ already exists.</p></td>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.0bbba5b5.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.22074ed6.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.649a939e.min.js"></script>
+      <script src="../assets/javascripts/bundle.960e086b.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
