@@ -18,6 +18,18 @@ def test_generate():
     assert mol.GetNumConformers() == 50
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(
+        mol, rms_cutoff=None, minimize_energy=False, custom_embed_params={"useRandomCoords": True}
+    )
+    assert mol.GetNumConformers() == 50
+    assert mol.GetConformer(0).GetPositions().shape == (4, 3)
+
+    # This mol should fail
+    smiles = "C=CC1=C(N)Oc2cc1c(-c1cc(C(C)O)cc(=O)cc1C1NCC(=O)N1)c(OC)c2OC"
+    mol = dm.to_mol(smiles)
+    assert dm.conformers.generate(mol, n_confs=1, verbose=True, ignore_failure=True) is None
+
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
