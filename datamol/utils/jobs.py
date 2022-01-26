@@ -20,6 +20,7 @@ class JobRunner:
         batch_size: int = None,
         prefer: str = None,
         progress: bool = False,
+        total: int = None,
         tqdm_kwargs: dict = None,
         **job_kwargs,
     ):
@@ -40,6 +41,7 @@ class JobRunner:
                 thread-based backend is 'threading'. Ignored if the ``backend``
                 parameter is specified.
             progress: whether to display progress bar
+            total: The number of elements in the iterator. Only used when `progress` is True.
             tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
             job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
@@ -58,6 +60,7 @@ class JobRunner:
         self.job_kwargs = job_kwargs
         self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer, batch_size=self.batch_size)
         self.no_progress = not progress
+        self.total = total
         self.tqdm_kwargs = tqdm_kwargs or {}
 
     @property
@@ -97,9 +100,17 @@ class JobRunner:
         """
         total_length = JobRunner.get_iterator_length(data)
 
+        if self.total is not None:
+            self.tqdm_kwargs["total"] = self.total
+        elif "total" not in self.tqdm_kwargs:
+            self.tqdm_kwargs["total"] = total_length
+
+        if "disable" not in self.tqdm_kwargs:
+            self.tqdm_kwargs["disable"] = self.no_progress
+
         results = [
             JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs)(dt)
-            for dt in tqdm(data, total=total_length, disable=self.no_progress, **self.tqdm_kwargs)
+            for dt in tqdm(data, **self.tqdm_kwargs)
         ]
         return results
 
@@ -122,8 +133,16 @@ class JobRunner:
 
         total_length = JobRunner.get_iterator_length(data)
 
+        if self.total is not None:
+            self.tqdm_kwargs["total"] = self.total
+        elif "total" not in self.tqdm_kwargs:
+            self.tqdm_kwargs["total"] = total_length
+
+        if "disable" not in self.tqdm_kwargs:
+            self.tqdm_kwargs["disable"] = self.no_progress
+
         runner = JobRunner._parallel_helper(**self.job_kwargs)
-        results = runner(total=total_length, disable=self.no_progress, **self.tqdm_kwargs)(
+        results = runner(**self.tqdm_kwargs)(
             delayed(JobRunner.wrap_fn(callable_fn, arg_type, **fn_kwargs))(dt) for dt in data
         )
 
@@ -193,6 +212,7 @@ def parallelized(
     batch_size: int = None,
     progress: bool = False,
     arg_type: str = "arg",
+    total: int = None,
     tqdm_kwargs: dict = None,
     **job_kwargs,
 ) -> Sequence[Optional[Any]]:
@@ -214,6 +234,7 @@ def parallelized(
             - "arg": the input is passed as an argument: `fn(arg)` (default).
             - "args": the input is passed as a list: `fn(*args)`.
             - "kwargs": the input is passed as a map: `fn(**kwargs)`.
+        total: The number of elements in the iterator. Only used when `progress` is True.
         tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
         job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
@@ -226,6 +247,7 @@ def parallelized(
         batch_size=batch_size,
         progress=progress,
         prefer=scheduler,
+        total=total,
         tqdm_kwargs=tqdm_kwargs,
         **job_kwargs,
     )

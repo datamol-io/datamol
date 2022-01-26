@@ -2,7 +2,10 @@ import math
 import numbers
 import operator
 import unittest
+
 import numpy as np
+import pandas as pd
+
 from functools import reduce
 
 import datamol as dm
@@ -169,3 +172,56 @@ class TestJobs(unittest.TestCase):
             batch_size=10,
         )
         assert len(results) == 997
+
+    def test_with_total(self):
+        def _fn_process_fn(_, row):
+            datum = {}
+            datum["smiles"] = row["smiles"]
+            return pd.Series(datum)
+
+        data = dm.freesolv()
+        data = data.iloc[:50]
+
+        # parallel mode
+
+        ## check the `total` arg is ok
+        dm.parallelized(
+            _fn_process_fn,
+            data.iterrows(),
+            n_jobs=-1,
+            progress=True,
+            arg_type="args",
+            total=50,
+        )
+
+        ## check collision between guessed total and provided one
+        dm.parallelized(
+            _fn_process_fn,
+            list(data.iterrows()),
+            n_jobs=-1,
+            progress=True,
+            arg_type="args",
+            total=50,
+        )
+
+        # sequential mode
+
+        ## check the `total` arg is ok
+        dm.parallelized(
+            _fn_process_fn,
+            data.iterrows(),
+            n_jobs=1,
+            progress=True,
+            arg_type="args",
+            total=50,
+        )
+
+        ## check collision between guessed total and provided one
+        dm.parallelized(
+            _fn_process_fn,
+            list(data.iterrows()),
+            n_jobs=1,
+            progress=True,
+            arg_type="args",
+            total=50,
+        )
