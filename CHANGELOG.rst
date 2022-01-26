@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.2
+====================
+
+**Added:**
+
+* Add a new `total` arg in `dm.parallelized()` (only useful when the `progress` is set to `True`)
+
+**Changed:**
+
+* Prevent `tqdm_kwargs`` collision in `dm.parallelized()`.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.6.1
 ====================
 
