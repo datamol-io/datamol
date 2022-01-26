@@ -951,7 +951,7 @@
 
 
 <h4 id="datamol.utils.jobs.parallelized" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">parallelized</span><span class="p">(</span><span class="n">fn</span><span class="p">,</span> <span class="n">inputs_list</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s1">&#39;processes&#39;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">arg_type</span><span class="o">=</span><span class="s1">&#39;arg&#39;</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
 
 
 <a href="#datamol.utils.jobs.parallelized" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -1022,6 +1022,12 @@ defined.</p></td>
         <td><code>&#39;arg&#39;</code></td>
       </tr>
       <tr>
+        <td><code>total</code></td>
+        <td><code>int</code></td>
+        <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>tqdm_kwargs</code></td>
         <td><code>dict</code></td>
         <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
@@ -1060,6 +1066,7 @@ defined.</p></td>
     <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
+    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
@@ -1081,6 +1088,7 @@ defined.</p></td>
 <span class="sd">            - &quot;arg&quot;: the input is passed as an argument: `fn(arg)` (default).</span>
 <span class="sd">            - &quot;args&quot;: the input is passed as a list: `fn(*args)`.</span>
 <span class="sd">            - &quot;kwargs&quot;: the input is passed as a map: `fn(**kwargs)`.</span>
+<span class="sd">        total: The number of elements in the iterator. Only used when `progress` is True.</span>
 <span class="sd">        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
 <span class="sd">        job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
 
@@ -1093,6 +1101,7 @@ defined.</p></td>
         <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
         <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span>
         <span class="n">prefer</span><span class="o">=</span><span class="n">scheduler</span><span class="p">,</span>
+        <span class="n">total</span><span class="o">=</span><span class="n">total</span><span class="p">,</span>
         <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="n">tqdm_kwargs</span><span class="p">,</span>
         <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
     <span class="p">)</span>
@@ -1129,6 +1138,7 @@ JobRunner        </code>
         <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
     <span class="p">):</span>
@@ -1149,6 +1159,7 @@ JobRunner        </code>
 <span class="sd">                thread-based backend is &#39;threading&#39;. Ignored if the ``backend``</span>
 <span class="sd">                parameter is specified.</span>
 <span class="sd">            progress: whether to display progress bar</span>
+<span class="sd">            total: The number of elements in the iterator. Only used when `progress` is True.</span>
 <span class="sd">            tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
 <span class="sd">            job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
 
@@ -1167,6 +1178,7 @@ JobRunner        </code>
         <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span> <span class="o">=</span> <span class="n">job_kwargs</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">progress</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">total</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span> <span class="o">=</span> <span class="n">tqdm_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 
     <span class="nd">@property</span>
@@ -1206,9 +1218,17 @@ JobRunner        </code>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span>
+        <span class="k">elif</span> <span class="s2">&quot;total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
+
+        <span class="k">if</span> <span class="s2">&quot;disable&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;disable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span>
+
         <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)(</span><span class="n">dt</span><span class="p">)</span>
-            <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
         <span class="p">]</span>
         <span class="k">return</span> <span class="n">results</span>
 
@@ -1231,8 +1251,16 @@ JobRunner        </code>
 
         <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
+        <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span>
+        <span class="k">elif</span> <span class="s2">&quot;total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
+
+        <span class="k">if</span> <span class="s2">&quot;disable&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;disable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span>
+
         <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">_parallel_helper</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="p">)</span>
-        <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)(</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)(</span>
             <span class="n">delayed</span><span class="p">(</span><span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">))(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">data</span>
         <span class="p">)</span>
 
@@ -1348,7 +1376,7 @@ JobRunner        </code>
 
 
 <h5 id="datamol.utils.jobs.JobRunner.__init__" class="doc doc-heading">
-<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">job_kwargs</span><span class="p">)</span></code>
 
   <span class="doc doc-properties">
       <small class="doc doc-property doc-property-special"><code>special</code></small>
@@ -1405,6 +1433,12 @@ parameter is specified.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
+        <td><code>total</code></td>
+        <td><code>int</code></td>
+        <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>tqdm_kwargs</code></td>
         <td><code>dict</code></td>
         <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
@@ -1433,6 +1467,7 @@ parameter is specified.</p></td>
     <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">):</span>
@@ -1453,6 +1488,7 @@ parameter is specified.</p></td>
 <span class="sd">            thread-based backend is &#39;threading&#39;. Ignored if the ``backend``</span>
 <span class="sd">            parameter is specified.</span>
 <span class="sd">        progress: whether to display progress bar</span>
+<span class="sd">        total: The number of elements in the iterator. Only used when `progress` is True.</span>
 <span class="sd">        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.</span>
 <span class="sd">        job_kwargs: Any additional arguments supported by `joblib.Parallel`.</span>
 
@@ -1471,6 +1507,7 @@ parameter is specified.</p></td>
     <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span> <span class="o">=</span> <span class="n">job_kwargs</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">prefer</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">prefer</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">batch_size</span><span class="p">)</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span> <span class="o">=</span> <span class="ow">not</span> <span class="n">progress</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="o">=</span> <span class="n">total</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span> <span class="o">=</span> <span class="n">tqdm_kwargs</span> <span class="ow">or</span> <span class="p">{}</span>
 </code></pre></div>
         </details>
@@ -1589,8 +1626,16 @@ parameter is specified.</p></td>
 
     <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span>
+    <span class="k">elif</span> <span class="s2">&quot;total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
+
+    <span class="k">if</span> <span class="s2">&quot;disable&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;disable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span>
+
     <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">_parallel_helper</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">job_kwargs</span><span class="p">)</span>
-    <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)(</span>
+    <span class="n">results</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)(</span>
         <span class="n">delayed</span><span class="p">(</span><span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">))(</span><span class="n">dt</span><span class="p">)</span> <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">data</span>
     <span class="p">)</span>
 
@@ -1674,9 +1719,17 @@ parameter is specified.</p></td>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">total_length</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="o">.</span><span class="n">get_iterator_length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">total</span>
+    <span class="k">elif</span> <span class="s2">&quot;total&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;total&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">total_length</span>
+
+    <span class="k">if</span> <span class="s2">&quot;disable&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">[</span><span class="s2">&quot;disable&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span>
+
     <span class="n">results</span> <span class="o">=</span> <span class="p">[</span>
         <span class="n">JobRunner</span><span class="o">.</span><span class="n">wrap_fn</span><span class="p">(</span><span class="n">callable_fn</span><span class="p">,</span> <span class="n">arg_type</span><span class="p">,</span> <span class="o">**</span><span class="n">fn_kwargs</span><span class="p">)(</span><span class="n">dt</span><span class="p">)</span>
-        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">total</span><span class="o">=</span><span class="n">total_length</span><span class="p">,</span> <span class="n">disable</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">no_progress</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">dt</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="o">**</span><span class="bp">self</span><span class="o">.</span><span class="n">tqdm_kwargs</span><span class="p">)</span>
     <span class="p">]</span>
     <span class="k">return</span> <span class="n">results</span>
 </code></pre></div>
