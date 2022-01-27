@@ -1,7 +1,5 @@
 from typing import Union
 from typing import List
-from typing import Dict
-from typing import Any
 from typing import Sequence
 from typing import Optional
 
@@ -140,14 +138,12 @@ def generate(
     confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
 
     # Sometime embedding fails. Here we try again by disabling `enforceChirality`.
-    if len(confs) == 0:
+    if len(confs) == 0 and fallback_to_random_coords:
         if verbose:
             logger.warning(
-                f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying without enforcing chirality and with random coordinates (if set)."
+                f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying with random coordinates."
             )
-        params = getattr(AllChem, method)()
-        params.randomSeed = random_seed
-        params.enforceChirality = False
+
         if fallback_to_random_coords:
             params.useRandomCoords = True
         confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
