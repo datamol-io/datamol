@@ -144,8 +144,7 @@ def generate(
                 f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying with random coordinates."
             )
 
-        if fallback_to_random_coords:
-            params.useRandomCoords = True
+        params.useRandomCoords = True
         confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
 
     if len(confs) == 0:
