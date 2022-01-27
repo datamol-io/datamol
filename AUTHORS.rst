@@ -6,6 +6,7 @@ Authors are sorted alphabetically.
 * Hadrien Mary
 * Honoré Hounwanou
 * Ishan Kumar
+* Julien Horwood
 * Therence1
 * deepsource-autofix[bot]
 * michelml
