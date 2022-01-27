@@ -20,7 +20,7 @@ def test_generate():
 
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(
-        mol, rms_cutoff=None, minimize_energy=False, custom_embed_params={"useRandomCoords": True}
+        mol, rms_cutoff=None, minimize_energy=False, embed_params={"useRandomCoords": True}
     )
     assert mol.GetNumConformers() == 50
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)

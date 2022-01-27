@@ -35,7 +35,7 @@ def generate(
     add_hs: bool = True,
     fallback_to_random_coords: bool = True,
     ignore_failure: bool = False,
-    custom_embed_params: dict = None,
+    embed_params: dict = None,
     verbose: bool = False,
 ) -> Chem.rdchem.Mol:
     """Compute conformers of a molecule.
@@ -87,7 +87,7 @@ def generate(
         fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial
             embedding fails.
         ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.
-        custom_embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit
+        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit
             docs for reference. This will override any other default settings.
         verbose: Wether to enable logs during the process.
 
@@ -133,8 +133,8 @@ def generate(
     params = getattr(AllChem, method)()
     params.randomSeed = random_seed
     params.enforceChirality = True
-    if custom_embed_params is not None:
-        for k, v in custom_embed_params.items():
+    if embed_params is not None:
+        for k, v in embed_params.items():
             setattr(params, k, v)
 
     confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
@@ -154,6 +154,10 @@ def generate(
 
     if len(confs) == 0:
         if ignore_failure:
+            if verbose:
+                logger.warning(
+                    f"Conformers embedding failed for {dm.to_smiles(mol)}. Returning None because ignore_failure is set."
+                )
             return None
         raise ValueError(f"Conformers embedding failed for {dm.to_smiles(mol)}")
 
