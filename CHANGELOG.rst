@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.3
+====================
+
+**Added:**
+
+* Parameters allowing to customize or ignore failures when running the conformer generation.
+
+**Changed:**
+
+* When the conformer embedding fails, it will now optionally fall back to using random coordinates.
+
+**Authors:**
+
+* Hadrien Mary
+* Julien Horwood
+
+
+
 v0.6.2
 ====================
 
