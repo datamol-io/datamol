@@ -1,7 +1,5 @@
 from typing import Union
 from typing import List
-from typing import Dict
-from typing import Any
 from typing import Sequence
 from typing import Optional
 
@@ -33,6 +31,9 @@ def generate(
     warning_not_converged: int = 10,
     random_seed: int = 19,
     add_hs: bool = True,
+    fallback_to_random_coords: bool = True,
+    ignore_failure: bool = False,
+    embed_params: dict = None,
     verbose: bool = False,
 ) -> Chem.rdchem.Mol:
     """Compute conformers of a molecule.
@@ -81,6 +82,11 @@ def generate(
             are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
             recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
             it’s almost always a good idea to add hydrogens to the molecule first."
+        fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial
+            embedding fails.
+        ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.
+        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit
+            docs for reference. This will override any other default settings.
         verbose: Wether to enable logs during the process.
 
     Returns:
@@ -125,20 +131,29 @@ def generate(
     params = getattr(AllChem, method)()
     params.randomSeed = random_seed
     params.enforceChirality = True
+    if embed_params is not None:
+        for k, v in embed_params.items():
+            setattr(params, k, v)
+
     confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
 
     # Sometime embedding fails. Here we try again by disabling `enforceChirality`.
-    if len(confs) == 0:
+    if len(confs) == 0 and fallback_to_random_coords:
         if verbose:
             logger.warning(
-                f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying without enforcing chirality."
+                f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying with random coordinates."
             )
-        params = getattr(AllChem, method)()
-        params.randomSeed = random_seed
-        params.enforceChirality = False
+
+        params.useRandomCoords = True
         confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
 
     if len(confs) == 0:
+        if ignore_failure:
+            if verbose:
+                logger.warning(
+                    f"Conformers embedding failed for {dm.to_smiles(mol)}. Returning None because ignore_failure is set."
+                )
+            return None
         raise ValueError(f"Conformers embedding failed for {dm.to_smiles(mol)}")
 
     # Minimize energy
