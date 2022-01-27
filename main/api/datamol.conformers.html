@@ -811,7 +811,7 @@
 
 
 <h4 id="datamol.conformers._conformers.generate" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">align_conformers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">minimize_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">warning_not_converged</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">align_conformers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">minimize_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_iterations</span><span class="o">=</span><span class="mi">500</span><span class="p">,</span> <span class="n">warning_not_converged</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fallback_to_random_coords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ignore_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">embed_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.conformers._conformers.generate" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -929,6 +929,26 @@ it’s almost always a good idea to add hydrogens to the molecule first."</p></t
         <td><code>True</code></td>
       </tr>
       <tr>
+        <td><code>fallback_to_random_coords</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use random coordinate initializations as a fallback if the initial
+embedding fails.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>ignore_failure</code></td>
+        <td><code>bool</code></td>
+        <td><p>It set to True, this will avoid raising an error when the embedding fails and return None instead.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>embed_params</code></td>
+        <td><code>dict</code></td>
+        <td><p>Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit
+docs for reference. This will override any other default settings.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
         <td><code>verbose</code></td>
         <td><code>bool</code></td>
         <td><p>Wether to enable logs during the process.</p></td>
@@ -965,6 +985,9 @@ it’s almost always a good idea to add hydrogens to the molecule first."</p></t
     <span class="n">warning_not_converged</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
     <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
     <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fallback_to_random_coords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">ignore_failure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">embed_params</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute conformers of a molecule.</span>
@@ -1013,6 +1036,11 @@ it’s almost always a good idea to add hydrogens to the molecule first."</p></t
 <span class="sd">            are removed in the returned molecule. Warning: explicit hydrogens won&#39;t be conserved. It is strongly</span>
 <span class="sd">            recommended to let the default value to True. The RDKit documentation says: &quot;To get good 3D conformations,</span>
 <span class="sd">            it’s almost always a good idea to add hydrogens to the molecule first.&quot;</span>
+<span class="sd">        fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial</span>
+<span class="sd">            embedding fails.</span>
+<span class="sd">        ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.</span>
+<span class="sd">        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit</span>
+<span class="sd">            docs for reference. This will override any other default settings.</span>
 <span class="sd">        verbose: Wether to enable logs during the process.</span>
 
 <span class="sd">    Returns:</span>
@@ -1057,20 +1085,29 @@ it’s almost always a good idea to add hydrogens to the molecule first."</p></t
     <span class="n">params</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">AllChem</span><span class="p">,</span> <span class="n">method</span><span class="p">)()</span>
     <span class="n">params</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">random_seed</span>
     <span class="n">params</span><span class="o">.</span><span class="n">enforceChirality</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">embed_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">embed_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
     <span class="n">confs</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="c1"># Sometime embedding fails. Here we try again by disabling `enforceChirality`.</span>
-    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">confs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">confs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">fallback_to_random_coords</span><span class="p">:</span>
         <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">. Trying without enforcing chirality.&quot;</span>
+                <span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">. Trying with random coordinates.&quot;</span>
             <span class="p">)</span>
-        <span class="n">params</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">AllChem</span><span class="p">,</span> <span class="n">method</span><span class="p">)()</span>
-        <span class="n">params</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">random_seed</span>
-        <span class="n">params</span><span class="o">.</span><span class="n">enforceChirality</span> <span class="o">=</span> <span class="kc">False</span>
+
+        <span class="n">params</span><span class="o">.</span><span class="n">useRandomCoords</span> <span class="o">=</span> <span class="kc">True</span>
         <span class="n">confs</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">confs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ignore_failure</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">. Returning None because ignore_failure is set.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="c1"># Minimize energy</span>
