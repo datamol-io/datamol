@@ -113,7 +113,7 @@ def enumerate_stereoisomers(
     for isomer in isomers:
         # isomer has CIS/TRANS tags so convert back to E/Z
         Chem.SetDoubleBondNeighborDirections(isomer)  # type: ignore
-        Chem.AssignStereochemistry(isomer, force=True, cleanIt=True)  # type: ignore
+        Chem.AssignStereochemistry(isomer, force=True, cleanIt=clean_it)  # type: ignore
         variants.append(isomer)
 
     return variants

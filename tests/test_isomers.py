@@ -27,6 +27,17 @@ def test_enumerate_stereo():
     }
 
 
+def test_enumerate_stereo_undefined_failure():
+    mol = dm.to_mol(
+        "N=1C(NC2CC2)=C3C(=NC1)N(/C=C/C=4C=C(C=CC4C)C(=O)NC=5C=C(C=C(C5)N6CCN(CC6)C)C(F)(F)F)C=N3"
+    )
+    with pytest.raises(RuntimeError):
+        dm.enumerate_stereoisomers(mol, clean_it=True)
+
+    mols = dm.enumerate_stereoisomers(mol, clean_it=False)
+    assert len(mols) == 2  # only one double bond
+
+
 def test_enumerate_stereo_timeout():
     mol = dm.to_mol(
         "CC1=C2C(C(=O)C3(C(CC4C(C3C(C(C2(C)C)(CC1OC(=O)C(C(C5=CC=CC=C5)NC(=O)C6=CC=CC=C6)O)O)OC(=O)C7=CC=CC=C7)(CO4)OC(=O)C)O)C)OC(=O)C"
