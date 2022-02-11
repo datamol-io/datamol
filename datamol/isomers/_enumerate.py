@@ -55,6 +55,7 @@ def enumerate_stereoisomers(
     undefined_only: bool = False,
     rationalise: bool = True,
     timeout_seconds: int = None,
+    clean_it: bool = True,
 ):
     """Enumerate the stereocenters and bonds of the current molecule.
 
@@ -72,14 +73,17 @@ def enumerate_stereoisomers(
         timeout_seconds: The maximum amount of time to spend on enumeration. None
             will disable the timeout. Note that the timeout might be inaccurate as a running single variant
             computation is not stopped when the duration is reached.
+        clean_it: rdkit flag for assigning stereochemistry. If True, will remove previous stereochemistry
+         markings on the bonds.
+
     """
 
     # safety first
     mol = dm.copy_mol(mol)
 
     # in case any bonds/centers are missing stereo chem flag it here
-    Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=True)  # type: ignore
-    Chem.FindPotentialStereoBonds(mol, cleanIt=True)  # type: ignore
+    Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
+    Chem.FindPotentialStereoBonds(mol, cleanIt=clean_it)  # type: ignore
 
     # set up the options
     stereo_opts = StereoEnumerationOptions(
