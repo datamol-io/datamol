@@ -87,7 +87,7 @@ class TestJobs(unittest.TestCase):
 
     def test_parallelized(self):
         def fn(x):
-            return x ** 2
+            return x**2
 
         results = dm.parallelized(
             fn,
@@ -120,7 +120,7 @@ class TestJobs(unittest.TestCase):
 
     def test_job_kwargs(self):
         def fn(x):
-            return x ** 2
+            return x**2
 
         results = dm.parallelized(
             fn,
@@ -135,7 +135,7 @@ class TestJobs(unittest.TestCase):
 
     def test_tqdm_kwargs(self):
         def fn(x):
-            return x ** 2
+            return x**2
 
         results = dm.parallelized(
             fn,

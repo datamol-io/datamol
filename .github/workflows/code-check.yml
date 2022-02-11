@@ -24,7 +24,7 @@ jobs:
 
       - name: Install black
         run: |
-          pip install black==20.8b1
+          pip install black
 
       - name: Lint
         run: black --check .
@@ -43,7 +43,7 @@ jobs:
 
       - name: Install mypy
         run: |
-          pip install mypy==0.812 numpy pandas loguru pytest pillow scipy
+          pip install mypy numpy pandas loguru pytest pillow scipy
 
       - name: Run code check
         run: |
