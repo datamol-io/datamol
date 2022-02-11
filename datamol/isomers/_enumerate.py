@@ -73,9 +73,8 @@ def enumerate_stereoisomers(
         timeout_seconds: The maximum amount of time to spend on enumeration. None
             will disable the timeout. Note that the timeout might be inaccurate as a running single variant
             computation is not stopped when the duration is reached.
-        clean_it: rdkit flag for assigning stereochemistry. If True, will remove previous stereochemistry
-         markings on the bonds.
-
+        clean_it: A flag for assigning stereochemistry. If True, it will remove previous stereochemistry
+            markings on the bonds.
     """
 
     # safety first
