@@ -35,7 +35,7 @@ jobs:
 
       - name: Install Dependencies
         run: |
-          mamba create -n datamol
+          conda create -n datamol
           conda activate datamol
           mamba env update -f env.yml
 
