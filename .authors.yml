@@ -10,7 +10,7 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 25
+  num_commits: 29
   first_commit: 2020-10-24 11:46:22
 - name: michelml
   email: michmoreau.l@gmail.com
@@ -42,5 +42,5 @@
   first_commit: 2021-07-14 17:41:40
 - name: Julien Horwood
   email: julien@invivoai.com
-  num_commits: 5
+  num_commits: 7
   first_commit: 2022-01-26 17:14:26
