@@ -4,6 +4,20 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.4
+====================
+
+**Changed:**
+
+* Expose the clean_it flag when enumerating stereoisomers.
+
+**Authors:**
+
+* Hadrien Mary
+* Julien Horwood
+
+
+
 v0.6.3
 ====================
 
