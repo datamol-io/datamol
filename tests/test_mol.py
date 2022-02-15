@@ -227,6 +227,7 @@ def test_set_mol_props_overflow():
 
     mol = dm.to_mol("CCC")
     dm.set_mol_props(mol, dict(hello=661440088496))
+    assert mol.GetPropsAsDict() == {'hello': 661440088496}
 
 
 def test_copy_mol_props():
