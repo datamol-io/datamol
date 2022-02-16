@@ -675,7 +675,13 @@ def set_mol_props(
         if isinstance(v, bool):
             mol.SetBoolProp(k, v)
         elif isinstance(v, int):
-            mol.SetIntProp(k, v)
+            # NOTE(hadim): A Python integer is 32 bits and RDKit seems
+            # to overflow before that. Here we catch the error
+            # and instead uses silently `SetDoubleProp` instead.
+            try:
+                mol.SetIntProp(k, v)
+            except OverflowError:
+                mol.SetDoubleProp(k, v)
         elif isinstance(v, float):
             mol.SetDoubleProp(k, v)
         else:
