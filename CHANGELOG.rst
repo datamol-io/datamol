@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.5
+====================
+
+**Fixed:**
+
+* Catch too long integer values in `set_mol_props` and switch to `SetDoubleProp` instead of `SetIntProp`
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.6.4
 ====================
 
