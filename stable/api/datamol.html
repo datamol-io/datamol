@@ -2408,7 +2408,13 @@ regardless of its original representation.</p>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
             <span class="n">mol</span><span class="o">.</span><span class="n">SetBoolProp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
-            <span class="n">mol</span><span class="o">.</span><span class="n">SetIntProp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="c1"># NOTE(hadim): A Python integer is 32 bits and RDKit seems</span>
+            <span class="c1"># to overflow before that. Here we catch the error</span>
+            <span class="c1"># and instead uses silently `SetDoubleProp` instead.</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">SetIntProp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">OverflowError</span><span class="p">:</span>
+                <span class="n">mol</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">float</span><span class="p">):</span>
             <span class="n">mol</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
