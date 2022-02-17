@@ -25,10 +25,18 @@ def test_generate():
     assert mol.GetNumConformers() == 50
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
+
+# We disable this test as it takes too long due to the size of the SMILES
+@pytest.mark.skip
+def test_generate_fail():
+
     # This mol should fail
     smiles = "C=CC1=C(N)Oc2cc1c(-c1cc(C(C)O)cc(=O)cc1C1NCC(=O)N1)c(OC)c2OC"
     mol = dm.to_mol(smiles)
     assert dm.conformers.generate(mol, n_confs=1, verbose=True, ignore_failure=True) is None
+
+
+def test_generate_2():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
