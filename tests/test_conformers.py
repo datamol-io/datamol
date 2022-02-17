@@ -25,10 +25,18 @@ def test_generate():
     assert mol.GetNumConformers() == 50
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
+
+# We disable this test as it takes too long due to the size of the SMILES
+@pytest.mark.skip
+def test_generate_fail():
+
     # This mol should fail
     smiles = "C=CC1=C(N)Oc2cc1c(-c1cc(C(C)O)cc(=O)cc1C1NCC(=O)N1)c(OC)c2OC"
     mol = dm.to_mol(smiles)
     assert dm.conformers.generate(mol, n_confs=1, verbose=True, ignore_failure=True) is None
+
+
+def test_generate_2():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
@@ -145,3 +153,88 @@ def test_translate():
     print(new_coords - 10)
 
     np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=1)
+
+
+def test_align_conformers():
+
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+    mols = [dm.conformers.generate(mol, n_confs=1) for mol in mols]
+
+    # Align
+    aligned_mols, scores = dm.conformers.align_conformers(mols)
+
+    # Check
+    assert len(scores) == len(mols)
+    assert len(aligned_mols) == len(mols)
+
+    for i, (mol, aligned_mol) in enumerate(zip(mols, aligned_mols)):
+        p1 = mol.GetConformer().GetPositions()
+        p2 = aligned_mol.GetConformer().GetPositions()
+
+        if i == 0:
+            # The first molecule is the reference so the positions should remain the same.
+            assert np.allclose(p1, p2)
+        else:
+            assert not np.allclose(p1, p2)
+
+
+def test_align_conformers_O3A():
+
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+    mols = [dm.conformers.generate(mol, n_confs=1) for mol in mols]
+
+    # Align
+    aligned_mols, scores = dm.conformers.align_conformers(mols, backend="O3A")
+
+    # Check
+    assert len(scores) == len(mols)
+    assert len(aligned_mols) == len(mols)
+
+    for i, (mol, aligned_mol) in enumerate(zip(mols, aligned_mols)):
+        p1 = mol.GetConformer().GetPositions()
+        p2 = aligned_mol.GetConformer().GetPositions()
+
+        if i == 0:
+            # The first molecule is the reference so the positions should remain the same.
+            assert np.allclose(p1, p2)
+        else:
+            assert not np.allclose(p1, p2)
+
+
+def test_align_conformers_without_conformer():
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+
+    with pytest.raises(ValueError):
+        dm.conformers.align_conformers(mols)
+
+
+def test_align_conformers_wrong_backend():
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+    mols = [dm.conformers.generate(mol, n_confs=1) for mol in mols]
+
+    with pytest.raises(ValueError):
+        dm.conformers.align_conformers(mols, backend="not_supported")
