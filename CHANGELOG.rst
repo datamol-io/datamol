@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.6
+====================
+
+**Added:**
+
+* Add `dm.conformers.align_conformers()` to align the conformers of a list of molecules.
+
+**Changed:**
+
+* New lower bound rdkit version to `>=2021.09`. See #81 for details.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.6.5
 ====================
 
