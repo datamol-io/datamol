@@ -15,6 +15,7 @@ from rdkit.Chem import rdMolAlign
 from rdkit.Chem import rdMolDescriptors
 from rdkit.Chem import Descriptors
 from rdkit.Chem import rdMolTransforms
+from rdkit.Chem import rdForceFieldHelpers
 from rdkit.ML.Cluster import Butina
 
 import datamol as dm
@@ -327,6 +328,7 @@ def align_conformers(
     ref_id: int = 0,
     copy: bool = True,
     conformer_id: int = -1,
+    backend: str = "crippenOA3",
 ):
     """Align a list of molecules to a reference molecule.
 
@@ -336,11 +338,18 @@ def align_conformers(
             will be used as reference.
         copy: Whether to copy the molecules before performing the alignement.
         conformer_id: Conformer id to use.
+        backend: Backend to use to compute the alignment from `crippenOA3`, `O3A`.
 
     Returns:
         mols: The aligned molecules.
         scores: The score of the alignement.
     """
+
+    allowed_backends = ["crippenOA3", "O3A"]
+    if backend not in allowed_backends:
+        raise ValueError(
+            f"The backend '{backend}' is not supported. Choose from: {allowed_backends}"
+        )
 
     # Check all input molecules has a conformer
     if not all([mol.GetNumConformers() >= 1 for mol in mols]):
@@ -350,33 +359,74 @@ def align_conformers(
     if copy:
         mols = [dm.copy_mol(mol) for mol in mols]
 
-    # Compute Crippen contributions for every atoms and molecules
-    crippen_contribs = [rdMolDescriptors._CalcCrippenContribs(mol) for mol in mols]
-
-    # Split reference and probe molecules
-    crippen_contrib_ref = crippen_contribs[ref_id]
-    crippen_contrib_probes = crippen_contribs
+    # Split ref and probe mols
     mol_ref = mols[ref_id]
     mol_probes = mols
 
-    # Loop and align
-    # NOTE(hadim): we could eventually parallelize this if that's needed.
+    if backend == "crippenOA3":
 
-    scores = []
-    for i, mol in enumerate(mol_probes):
-        crippenO3A = rdMolAlign.GetCrippenO3A(
-            prbMol=mol,
-            refMol=mol_ref,
-            prbCrippenContribs=crippen_contrib_probes[i],
-            refCrippenContribs=crippen_contrib_ref,
-            prbCid=conformer_id,
-            refCid=conformer_id,
-            maxIters=50,
-        )
-        crippenO3A.Align()
+        # Compute Crippen contributions for every atoms and molecules
+        crippen_contribs = [rdMolDescriptors._CalcCrippenContribs(mol) for mol in mol_probes]
+        crippen_contrib_ref = crippen_contribs[ref_id]
+        crippen_contrib_probes = crippen_contribs
 
-        scores.append(crippenO3A.Score())
+        # Loop and align
+        # NOTE(hadim): we could eventually parallelize this if that's needed.
+
+        scores = []
+        for i, mol in enumerate(mol_probes):
+
+            crippenO3A = rdMolAlign.GetCrippenO3A(
+                prbMol=mol,
+                refMol=mol_ref,
+                prbCrippenContribs=crippen_contrib_probes[i],
+                refCrippenContribs=crippen_contrib_ref,
+                prbCid=conformer_id,
+                refCid=conformer_id,
+                maxIters=50,
+            )
+            crippenO3A.Align()
+
+            scores.append(crippenO3A.Score())
+
+    elif backend == "O3A":
+
+        # Add hydrogens first
+        mol_probes = [dm.add_hs(mol, add_coords=True) for mol in mol_probes]
+        mol_ref = dm.add_hs(mol_ref, add_coords=True)
+
+        # Compute MMFF params for every molecules
+        mmff_params = [rdForceFieldHelpers.MMFFGetMoleculeProperties(mol) for mol in mol_probes]
+
+        # Split reference and probe molecules
+        mmff_params_ref = mmff_params[ref_id]
+        mmff_params_probes = mmff_params
+
+        # Loop and align
+        # NOTE(hadim): we could eventually parallelize this if that's needed.
+
+        scores = []
+        for i, mol in enumerate(mol_probes):
+
+            pyO3A = rdMolAlign.GetO3A(
+                prbMol=mol,
+                refMol=mol_ref,
+                prbPyMMFFMolProperties=mmff_params_probes[i],
+                refPyMMFFMolProperties=mmff_params_ref,
+                prbCid=conformer_id,
+                refCid=conformer_id,
+                maxIters=50,
+            )
+            pyO3A.Align()
+
+            scores.append(pyO3A.Score())
+
+        # Remove the hydrogens
+        mol_probes = [dm.remove_hs(mol) for mol in mol_probes]
+
+    else:
+        raise ValueError(f"Backend {backend} not supported.")
 
     scores = np.array(scores)
 
-    return mols, scores
+    return mol_probes, scores

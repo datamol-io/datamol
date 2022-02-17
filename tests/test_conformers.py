@@ -156,6 +156,7 @@ def test_translate():
 
 
 def test_align_conformers():
+
     smiles_list = [
         "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
         "Cc1ccn(-c2ccccc2)c(=O)c1F",
@@ -169,7 +170,37 @@ def test_align_conformers():
     aligned_mols, scores = dm.conformers.align_conformers(mols)
 
     # Check
-    assert scores.shape == (4,)
+    assert len(scores) == len(mols)
+    assert len(aligned_mols) == len(mols)
+
+    for i, (mol, aligned_mol) in enumerate(zip(mols, aligned_mols)):
+        p1 = mol.GetConformer().GetPositions()
+        p2 = aligned_mol.GetConformer().GetPositions()
+
+        if i == 0:
+            # The first molecule is the reference so the positions should remain the same.
+            assert np.allclose(p1, p2)
+        else:
+            assert not np.allclose(p1, p2)
+
+
+def test_align_conformers_O3A():
+
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+    mols = [dm.conformers.generate(mol, n_confs=1) for mol in mols]
+
+    # Align
+    aligned_mols, scores = dm.conformers.align_conformers(mols, backend="O3A")
+
+    # Check
+    assert len(scores) == len(mols)
+    assert len(aligned_mols) == len(mols)
 
     for i, (mol, aligned_mol) in enumerate(zip(mols, aligned_mols)):
         p1 = mol.GetConformer().GetPositions()
@@ -193,3 +224,17 @@ def test_align_conformers_without_conformer():
 
     with pytest.raises(ValueError):
         dm.conformers.align_conformers(mols)
+
+
+def test_align_conformers_wrong_backend():
+    smiles_list = [
+        "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1ccn(-c2ccccc2)c(=O)c1F",
+        "Cc1cnn(-c2ccccc2)c(=O)c1Cl",
+        "Cc1cnn(-c2ccccc2)c(=O)c1",
+    ]
+    mols = [dm.to_mol(smiles) for smiles in smiles_list]
+    mols = [dm.conformers.generate(mol, n_confs=1) for mol in mols]
+
+    with pytest.raises(ValueError):
+        dm.conformers.align_conformers(mols, backend="not_supported")
