@@ -12,6 +12,7 @@ import numpy as np
 from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import rdMolAlign
+from rdkit.Chem import rdMolDescriptors
 from rdkit.Chem import Descriptors
 from rdkit.Chem import rdMolTransforms
 from rdkit.ML.Cluster import Butina
@@ -319,3 +320,63 @@ def translate(mol: Chem.rdchem.Mol, new_centroid: Union[np.ndarray, List[int]], 
 
     # Transform
     rdMolTransforms.TransformConformer(conf, T)
+
+
+def align_conformers(
+    mols: List[dm.Mol],
+    ref_id: int = 0,
+    copy: bool = True,
+    conformer_id: int = -1,
+):
+    """Align a list of molecules to a reference molecule.
+
+    Args:
+        mols: List of molecules to align. All the molecules must have a conformer.
+        ref_id: Index of the reference molecule. By default, the first molecule in the list
+            will be used as reference.
+        copy: Whether to copy the molecules before performing the alignement.
+        conformer_id: Conformer id to use.
+
+    Returns:
+        mols: The aligned molecules.
+        scores: The score of the alignement.
+    """
+
+    # Check all input molecules has a conformer
+    if not all([mol.GetNumConformers() >= 1 for mol in mols]):
+        raise ValueError("One or more input molecules is missing a conformer.")
+
+    # Make a copy of the molecules since they are going to be modified
+    if copy:
+        mols = [dm.copy_mol(mol) for mol in mols]
+
+    # Compute Crippen contributions for every atoms and molecules
+    crippen_contribs = [rdMolDescriptors._CalcCrippenContribs(mol) for mol in mols]
+
+    # Split reference and probe molecules
+    crippen_contrib_ref = crippen_contribs[ref_id]
+    crippen_contrib_probes = crippen_contribs
+    mol_ref = mols[ref_id]
+    mol_probes = mols
+
+    # Loop and align
+    # NOTE(hadim): we could eventually parallelize this if that's needed.
+
+    scores = []
+    for i, mol in enumerate(mol_probes):
+        crippenO3A = rdMolAlign.GetCrippenO3A(
+            prbMol=mol,
+            refMol=mol_ref,
+            prbCrippenContribs=crippen_contrib_probes[i],
+            refCrippenContribs=crippen_contrib_ref,
+            prbCid=conformer_id,
+            refCid=conformer_id,
+            maxIters=50,
+        )
+        crippenO3A.Align()
+
+        scores.append(crippenO3A.Score())
+
+    scores = np.array(scores)
+
+    return mols, scores
