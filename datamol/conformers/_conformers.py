@@ -332,6 +332,9 @@ def align_conformers(
 ):
     """Align a list of molecules to a reference molecule.
 
+    Note that using the `O3A` backend, hydrogens will be added at the beginning of the procedure
+    and removed at the end of the procedure.
+
     Args:
         mols: List of molecules to align. All the molecules must have a conformer.
         ref_id: Index of the reference molecule. By default, the first molecule in the list
