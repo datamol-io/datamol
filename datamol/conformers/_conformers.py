@@ -328,7 +328,7 @@ def align_conformers(
     ref_id: int = 0,
     copy: bool = True,
     conformer_id: int = -1,
-    backend: str = "crippenOA3",
+    backend: str = "crippenO3A",
 ):
     """Align a list of molecules to a reference molecule.
 
@@ -338,14 +338,14 @@ def align_conformers(
             will be used as reference.
         copy: Whether to copy the molecules before performing the alignement.
         conformer_id: Conformer id to use.
-        backend: Backend to use to compute the alignment from `crippenOA3`, `O3A`.
+        backend: Backend to use to compute the alignment from `crippenO3A`, `O3A`.
 
     Returns:
         mols: The aligned molecules.
         scores: The score of the alignement.
     """
 
-    allowed_backends = ["crippenOA3", "O3A"]
+    allowed_backends = ["crippenO3A", "O3A"]
     if backend not in allowed_backends:
         raise ValueError(
             f"The backend '{backend}' is not supported. Choose from: {allowed_backends}"
@@ -363,7 +363,7 @@ def align_conformers(
     mol_ref = mols[ref_id]
     mol_probes = mols
 
-    if backend == "crippenOA3":
+    if backend == "crippenO3A":
 
         # Compute Crippen contributions for every atoms and molecules
         crippen_contribs = [rdMolDescriptors._CalcCrippenContribs(mol) for mol in mol_probes]
