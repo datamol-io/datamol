@@ -2,6 +2,7 @@ import pytest
 
 import pandas as pd
 import datamol as dm
+import numpy as np
 
 
 def test_descriptors():
@@ -138,14 +139,23 @@ def test_batch_compute_many_descriptors():
     assert props.shape == (642, 22)
 
 
-def test_any_descriptor():
+def test_any_rdkit_descriptor():
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
 
-    value = dm.descriptors.any_descriptor("MaxPartialCharge")(mol)
+    value = dm.descriptors.any_rdkit_descriptor("MaxPartialCharge")(mol)
     assert pytest.approx(value) == 0.33900378687731025
 
-    value = dm.descriptors.any_descriptor("CalcFractionCSP3")(mol)
+    value = dm.descriptors.any_rdkit_descriptor("CalcFractionCSP3")(mol)
     assert pytest.approx(value) == 0.1111111111111111
 
     with pytest.raises(ValueError):
-        dm.descriptors.any_descriptor("DOES NOT EXIST")
+        dm.descriptors.any_rdkit_descriptor("DOES NOT EXIST")
+
+
+def test_n_aromatic_atoms():
+
+    smiles = "Nc1cnn(-c2ccccc2)c(=O)c1Cl"
+    mol = dm.to_mol(smiles)
+
+    assert dm.descriptors.n_aromatic_atoms(mol) == 12
+    assert dm.descriptors.n_aromatic_atoms_proportion(mol) == 0.8

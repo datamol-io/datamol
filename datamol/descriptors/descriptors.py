@@ -17,8 +17,12 @@ from rdkit.Chem import Lipinski
 sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
 import sascorer  # type:ignore
 
-from . import Mol
-from .utils.jobs import parallelized
+from .. import Mol
+from ..convert import from_smarts
+from ..utils.jobs import parallelized
+
+_AROMATIC_QUERY = from_smarts("a")
+
 
 mw = rdMolDescriptors.CalcExactMolWt
 fsp3 = rdMolDescriptors.CalcFractionCSP3
@@ -51,7 +55,21 @@ n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
 n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
 
 
-def any_descriptor(name: str) -> Callable:
+def n_aromatic_atoms(mol: Mol):
+    """Calculate the number of aromatic atoms."""
+    matches = mol.GetSubstructMatches(_AROMATIC_QUERY)
+    return len(matches)
+
+
+def n_aromatic_atoms_proportion(mol: Mol):
+    """Calculate the aromatic proportion: # aromatic atoms/#atoms total.
+
+    Only heavy atoms are considered.
+    """
+    return n_aromatic_atoms(mol) / mol.GetNumHeavyAtoms()
+
+
+def any_rdkit_descriptor(name: str) -> Callable:
     """Return a descriptor function by name either from
     `rdkit.Chem import Descriptors` or `rdkit.Chem.rdMolDescriptors`.
 
@@ -123,7 +141,7 @@ def compute_many_descriptors(
     for k, v in properties_fn.items():
 
         if isinstance(v, str):
-            v = any_descriptor(v)
+            v = any_rdkit_descriptor(v)
 
         props[k] = v(mol)
 
