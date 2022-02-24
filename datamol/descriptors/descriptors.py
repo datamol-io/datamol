@@ -18,7 +18,11 @@ sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
 import sascorer  # type:ignore
 
 from .. import Mol
+from ..convert import from_smarts
 from ..utils.jobs import parallelized
+
+_AROMATIC_QUERY = from_smarts("a")
+
 
 mw = rdMolDescriptors.CalcExactMolWt
 fsp3 = rdMolDescriptors.CalcFractionCSP3
@@ -49,6 +53,20 @@ n_aromatic_rings = Lipinski.NumAromaticRings  # type: ignore
 n_saturated_carbocycles = Lipinski.NumSaturatedCarbocycles  # type: ignore
 n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
 n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
+
+
+def n_aromatic_atoms(mol: Mol):
+    """Calculate the number of aromatic atoms."""
+    matches = mol.GetSubstructMatches(_AROMATIC_QUERY)
+    return len(matches)
+
+
+def n_aromatic_atoms_proportion(mol: Mol):
+    """Calculate the aromatic proportion: # aromatic atoms/#atoms total.
+
+    Only heavy atoms are considered.
+    """
+    return n_aromatic_atoms(mol) / mol.GetNumHeavyAtoms()
 
 
 def any_rdkit_descriptor(name: str) -> Callable:

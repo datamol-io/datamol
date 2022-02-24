@@ -2,8 +2,8 @@
 
 * Add `dm.descriptors.n_aromatic_atoms`
 * Add `dm.descriptors.n_aromatic_atoms_proportion`
-* Add `dm.descriptors.esol`
-* Add `dm.descriptors.esol_from_data`
+* Add `dm.predictors.esol`
+* Add `dm.predictors.esol_from_data`
 
 **Changed:**
 

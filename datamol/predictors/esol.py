@@ -4,13 +4,12 @@ import pandas as pd
 
 
 from .. import Mol
-from ..convert import from_smarts
 
-from .descriptors import clogp
-from .descriptors import mw
-from .descriptors import n_rotatable_bonds
+from ..descriptors.descriptors import clogp
+from ..descriptors.descriptors import mw
+from ..descriptors.descriptors import n_rotatable_bonds
+from ..descriptors.descriptors import n_aromatic_atoms_proportion
 
-_AROMATIC_QUEERY = from_smarts("a")
 
 _ESOL_INTERCEPT = 0.26121066137801696
 _ESOL_COEF = {
@@ -19,17 +18,6 @@ _ESOL_COEF = {
     "n_rotatable_bonds": 0.003451545565957996,
     "n_aromatic_atoms_proportion": -0.42624840441316975,
 }
-
-
-def n_aromatic_atoms(mol: Mol):
-    """Calculate the number of aromatic atoms."""
-    matches = mol.GetSubstructMatches(_AROMATIC_QUEERY)
-    return len(matches)
-
-
-def n_aromatic_atoms_proportion(mol: Mol):
-    """Calculate the aromatic proportion: # aromatic atoms/#atoms total."""
-    return n_aromatic_atoms(mol) / mol.GetNumAtoms()
 
 
 def esol(mol: Mol):

@@ -65,6 +65,7 @@ from . import reactions
 from . import actions
 from . import molar
 from . import descriptors
+from . import predictors
 
 from .convert import to_smiles
 from .convert import to_selfies

@@ -24,12 +24,8 @@ from .descriptors import n_aromatic_rings
 from .descriptors import n_saturated_carbocycles
 from .descriptors import n_saturated_heterocyles
 from .descriptors import n_saturated_rings
-
-from .esol import n_aromatic_atoms
-from .esol import n_aromatic_atoms_proportion
-from .esol import esol
-from .esol import esol_from_data
-
+from .descriptors import n_aromatic_atoms
+from .descriptors import n_aromatic_atoms_proportion
 
 from .descriptors import any_rdkit_descriptor
 from .descriptors import compute_many_descriptors
