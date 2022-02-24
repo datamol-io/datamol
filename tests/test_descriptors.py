@@ -2,6 +2,7 @@ import pytest
 
 import pandas as pd
 import datamol as dm
+import numpy as np
 
 
 def test_descriptors():
@@ -138,14 +139,62 @@ def test_batch_compute_many_descriptors():
     assert props.shape == (642, 22)
 
 
-def test_any_descriptor():
+def test_any_rdkit_descriptor():
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
 
-    value = dm.descriptors.any_descriptor("MaxPartialCharge")(mol)
+    value = dm.descriptors.any_rdkit_descriptor("MaxPartialCharge")(mol)
     assert pytest.approx(value) == 0.33900378687731025
 
-    value = dm.descriptors.any_descriptor("CalcFractionCSP3")(mol)
+    value = dm.descriptors.any_rdkit_descriptor("CalcFractionCSP3")(mol)
     assert pytest.approx(value) == 0.1111111111111111
 
     with pytest.raises(ValueError):
-        dm.descriptors.any_descriptor("DOES NOT EXIST")
+        dm.descriptors.any_rdkit_descriptor("DOES NOT EXIST")
+
+
+def test_n_aromatic_atoms():
+
+    smiles = "Nc1cnn(-c2ccccc2)c(=O)c1Cl"
+    mol = dm.to_mol(smiles)
+
+    assert dm.descriptors.n_aromatic_atoms(mol) == 12
+    assert dm.descriptors.n_aromatic_atoms_proportion(mol) == 0.8
+
+
+def test_esol():
+
+    smiles = "Nc1cnn(-c2ccccc2)c(=O)c1Cl"
+    mol = dm.to_mol(smiles)
+
+    assert np.allclose(dm.descriptors.esol(mol), -2.627091966265316)
+
+
+def test_esol_from_data():
+    data = dm.freesolv()
+    data = data.iloc[:20]
+
+    with pytest.raises(KeyError):
+        dm.descriptors.esol_from_data(data)
+
+    data["mol"] = data["smiles"].apply(dm.to_mol)
+    data["clogp"] = data["mol"].apply(dm.descriptors.clogp)
+    data["mw"] = data["mol"].apply(dm.descriptors.mw)
+    data["n_rotatable_bonds"] = data["mol"].apply(dm.descriptors.n_rotatable_bonds)
+    data["n_aromatic_atoms_proportion"] = data["mol"].apply(
+        dm.descriptors.n_aromatic_atoms_proportion
+    )
+
+    # dataframe
+    esol_values = dm.descriptors.esol_from_data(data)
+    assert esol_values.dtype == float
+    assert esol_values.shape == (20,)
+
+    # series
+    v = dm.descriptors.esol_from_data(data.iloc[0])
+    v = float(v)
+    assert type(v) == float
+
+    # dict
+    v = dm.descriptors.esol_from_data(data.iloc[0].to_dict())
+    v = float(v)
+    assert type(v) == float

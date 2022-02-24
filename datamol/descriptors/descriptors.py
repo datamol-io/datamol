@@ -17,8 +17,8 @@ from rdkit.Chem import Lipinski
 sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
 import sascorer  # type:ignore
 
-from . import Mol
-from .utils.jobs import parallelized
+from .. import Mol
+from ..utils.jobs import parallelized
 
 mw = rdMolDescriptors.CalcExactMolWt
 fsp3 = rdMolDescriptors.CalcFractionCSP3
@@ -51,7 +51,7 @@ n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
 n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
 
 
-def any_descriptor(name: str) -> Callable:
+def any_rdkit_descriptor(name: str) -> Callable:
     """Return a descriptor function by name either from
     `rdkit.Chem import Descriptors` or `rdkit.Chem.rdMolDescriptors`.
 
@@ -123,7 +123,7 @@ def compute_many_descriptors(
     for k, v in properties_fn.items():
 
         if isinstance(v, str):
-            v = any_descriptor(v)
+            v = any_rdkit_descriptor(v)
 
         props[k] = v(mol)
 
