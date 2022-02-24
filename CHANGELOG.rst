@@ -4,6 +4,27 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.7
+====================
+
+**Added:**
+
+* Add `dm.descriptors.n_aromatic_atoms`
+* Add `dm.descriptors.n_aromatic_atoms_proportion`
+* Add `dm.predictors.esol`
+* Add `dm.predictors.esol_from_data`
+
+**Changed:**
+
+* Make `descriptors` a folder (backward compatible).
+* Rename `any_descriptor` to `any_rdkit_descriptor` to be more explicit.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.6.6
 ====================
 
