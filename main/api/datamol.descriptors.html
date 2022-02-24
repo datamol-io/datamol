@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.1.11">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.50e68009.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.e8d9bf0c.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
@@ -447,14 +447,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamol.descriptors.compute_many_descriptors" class="md-nav__link">
+  <a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="md-nav__link">
     compute_many_descriptors()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.descriptors.batch_compute_many_descriptors" class="md-nav__link">
+  <a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="md-nav__link">
     batch_compute_many_descriptors()
   </a>
   
@@ -769,14 +769,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#datamol.descriptors.compute_many_descriptors" class="md-nav__link">
+  <a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="md-nav__link">
     compute_many_descriptors()
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#datamol.descriptors.batch_compute_many_descriptors" class="md-nav__link">
+  <a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="md-nav__link">
     batch_compute_many_descriptors()
   </a>
   
@@ -916,6 +916,7 @@
 </a>
 
 
+
 <h1 id="datamoldescriptors"><code>datamol.descriptors</code><a class="headerlink" href="#datamoldescriptors" title="Permanent link">&para;</a></h1>
 <h2 id="various-molecular-descriptors">Various molecular descriptors<a class="headerlink" href="#various-molecular-descriptors" title="Permanent link">&para;</a></h2>
 
@@ -924,11 +925,11 @@
 
 
 
-<h4 id="datamol.descriptors.compute_many_descriptors" class="doc doc-heading">
+<h4 id="datamol.descriptors.descriptors.compute_many_descriptors" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">compute_many_descriptors</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">properties_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">add_properties</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-<a href="#datamol.descriptors.compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -984,7 +985,7 @@ function.</p></td>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>datamol/descriptors.py</code></summary>
+          <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_many_descriptors</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1013,7 +1014,7 @@ function.</p></td>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">properties_fn</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-            <span class="n">v</span> <span class="o">=</span> <span class="n">any_descriptor</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">any_rdkit_descriptor</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
 
         <span class="n">props</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
@@ -1030,11 +1031,11 @@ function.</p></td>
 
 
 
-<h4 id="datamol.descriptors.batch_compute_many_descriptors" class="doc doc-heading">
+<h4 id="datamol.descriptors.descriptors.batch_compute_many_descriptors" class="doc doc-heading">
 <code class="highlight language-python"><span class="n">batch_compute_many_descriptors</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">properties_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">add_properties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">progress_leave</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
-<a href="#datamol.descriptors.batch_compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
+<a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
 
     <div class="doc doc-contents first">
 
@@ -1090,7 +1091,7 @@ function.</p></td>
   </tbody>
 </table>
         <details class="quote">
-          <summary>Source code in <code>datamol/descriptors.py</code></summary>
+          <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">batch_compute_many_descriptors</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1366,7 +1367,7 @@ function.</p></td>
 
 
 <h4 id="rdkit.Chem.Lipinski.n_aliphatic_rings" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">n_aliphatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x5610edecd2e0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">n_aliphatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x56280b2efa30</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 <a href="#rdkit.Chem.Lipinski.n_aliphatic_rings" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -1395,7 +1396,7 @@ function.</p></td>
 
 
 <h4 id="rdkit.Chem.Lipinski.n_aromatic_rings" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">n_aromatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x5610edf3f9f0</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">n_aromatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x56280b2ef720</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 <a href="#rdkit.Chem.Lipinski.n_aromatic_rings" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -1424,7 +1425,7 @@ function.</p></td>
 
 
 <h4 id="rdkit.Chem.Lipinski.n_saturated_rings" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">n_saturated_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x5610edf3fa60</span><span class="o">&gt;</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">n_saturated_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x56280b2ef790</span><span class="o">&gt;</span><span class="p">)</span></code>
 
 
 <a href="#rdkit.Chem.Lipinski.n_saturated_rings" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -1772,10 +1773,10 @@ qed(m)
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.092fa1f6.min.js", "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.5a9542cf.min.js"></script>
+      <script src="../assets/javascripts/bundle.8aa65030.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
