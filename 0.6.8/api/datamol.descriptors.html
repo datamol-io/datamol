@@ -1,0 +1,1785 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.2">
+    
+    
+      
+        <title>datamol.descriptors - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.e8d9bf0c.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.e6a45f82.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+      <link rel="stylesheet" href="../assets/css/tweak-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamoldescriptors" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.descriptors
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/datamol-org/datamol/" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.0.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
+        Preprocessing Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
+        Cluster Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
+        Fragment and Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.html" class="md-nav__link">
+        Visualization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Filesystem.html" class="md-nav__link">
+        Working with local and remote data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.html" class="md-nav__link">
+        datamol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.descriptors
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.descriptors.html" class="md-nav__link md-nav__link--active">
+        datamol.descriptors
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#various-molecular-descriptors" class="md-nav__link">
+    Various molecular descriptors
+  </a>
+  
+    <nav class="md-nav" aria-label="Various molecular descriptors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="md-nav__link">
+    compute_many_descriptors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="md-nav__link">
+    batch_compute_many_descriptors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.mw" class="md-nav__link">
+    mw()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.fsp3" class="md-nav__link">
+    fsp3()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hba" class="md-nav__link">
+    n_hba()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hbd" class="md-nav__link">
+    n_hbd()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_rings" class="md-nav__link">
+    n_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hetero_atoms" class="md-nav__link">
+    n_hetero_atoms()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_heavy_atoms" class="md-nav__link">
+    n_heavy_atoms()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_rotatable_bonds" class="md-nav__link">
+    n_rotatable_bonds()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_aliphatic_rings" class="md-nav__link">
+    n_aliphatic_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_aromatic_rings" class="md-nav__link">
+    n_aromatic_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_saturated_rings" class="md-nav__link">
+    n_saturated_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Descriptors.n_radical_electrons" class="md-nav__link">
+    n_radical_electrons()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.tpsa" class="md-nav__link">
+    tpsa()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.QED.qed" class="md-nav__link">
+    qed()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Crippen.clogp" class="md-nav__link">
+    clogp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sascorer.sas" class="md-nav__link">
+    sas()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#various-molecular-descriptors" class="md-nav__link">
+    Various molecular descriptors
+  </a>
+  
+    <nav class="md-nav" aria-label="Various molecular descriptors">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="md-nav__link">
+    compute_many_descriptors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="md-nav__link">
+    batch_compute_many_descriptors()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.mw" class="md-nav__link">
+    mw()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.fsp3" class="md-nav__link">
+    fsp3()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hba" class="md-nav__link">
+    n_hba()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hbd" class="md-nav__link">
+    n_hbd()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_rings" class="md-nav__link">
+    n_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_hetero_atoms" class="md-nav__link">
+    n_hetero_atoms()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_heavy_atoms" class="md-nav__link">
+    n_heavy_atoms()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.n_rotatable_bonds" class="md-nav__link">
+    n_rotatable_bonds()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_aliphatic_rings" class="md-nav__link">
+    n_aliphatic_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_aromatic_rings" class="md-nav__link">
+    n_aromatic_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Lipinski.n_saturated_rings" class="md-nav__link">
+    n_saturated_rings()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Descriptors.n_radical_electrons" class="md-nav__link">
+    n_radical_electrons()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.rdMolDescriptors.tpsa" class="md-nav__link">
+    tpsa()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.QED.qed" class="md-nav__link">
+    qed()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#rdkit.Chem.Crippen.clogp" class="md-nav__link">
+    clogp()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sascorer.sas" class="md-nav__link">
+    sas()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+<a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.descriptors.md" title="Edit this page" class="md-content__button md-icon">
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25z"/></svg>
+</a>
+
+
+
+<h1 id="datamoldescriptors"><code>datamol.descriptors</code><a class="headerlink" href="#datamoldescriptors" title="Permanent link">&para;</a></h1>
+<h2 id="various-molecular-descriptors">Various molecular descriptors<a class="headerlink" href="#various-molecular-descriptors" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.descriptors.descriptors.compute_many_descriptors" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">compute_many_descriptors</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">properties_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">add_properties</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.descriptors.descriptors.compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Compute a list of opiniated molecular properties.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>A molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>properties_fn</code></td>
+        <td><code>Dict[str, Union[Callable, str]]</code></td>
+        <td><p>A list of functions that compute properties. If None,
+a default list of properties is used. If the function is a string,
+<code>dm.descriptors.any_descriptor()</code> is used to retrieve the descriptor
+function.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>add_properties</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to add the computed properties to the default list.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>dict</code></td>
+      <td><p>Computed properties as a dict.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_many_descriptors</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">add_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute a list of opiniated molecular properties.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        properties_fn: A list of functions that compute properties. If None,</span>
+<span class="sd">            a default list of properties is used. If the function is a string,</span>
+<span class="sd">            `dm.descriptors.any_descriptor()` is used to retrieve the descriptor</span>
+<span class="sd">            function.</span>
+<span class="sd">        add_properties: Whether to add the computed properties to the default list.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Computed properties as a dict.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">properties_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">properties_fn</span> <span class="o">=</span> <span class="n">_DEFAULT_PROPERTIES_FN</span>
+    <span class="k">elif</span> <span class="n">add_properties</span><span class="p">:</span>
+        <span class="p">[</span><span class="n">properties_fn</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_DEFAULT_PROPERTIES_FN</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+
+    <span class="n">props</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">properties_fn</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">v</span> <span class="o">=</span> <span class="n">any_rdkit_descriptor</span><span class="p">(</span><span class="n">v</span><span class="p">)</span>
+
+        <span class="n">props</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">props</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.descriptors.descriptors.batch_compute_many_descriptors" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">batch_compute_many_descriptors</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">properties_fn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">add_properties</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">batch_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">progress</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">progress_leave</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+
+<a href="#datamol.descriptors.descriptors.batch_compute_many_descriptors" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Compute a list of opiniated molecular properties on a list of molecules.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mols</code></td>
+        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>A list of molecules.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>properties_fn</code></td>
+        <td><code>Dict[str, Union[Callable, str]]</code></td>
+        <td><p>A list of functions that compute properties. If None,
+a default list of properties is used. If the function is a string,
+<code>dm.descriptors.any_descriptor()</code> is used to retrieve the descriptor
+function.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>add_properties</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to add the computed properties to the default list.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>DataFrame</code></td>
+      <td><p>A dataframe of computed properties with one row per input molecules.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">batch_compute_many_descriptors</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">add_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">progress_leave</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute a list of opiniated molecular properties on a list of molecules.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: A list of molecules.</span>
+<span class="sd">        properties_fn: A list of functions that compute properties. If None,</span>
+<span class="sd">            a default list of properties is used. If the function is a string,</span>
+<span class="sd">            `dm.descriptors.any_descriptor()` is used to retrieve the descriptor</span>
+<span class="sd">            function.</span>
+<span class="sd">        add_properties: Whether to add the computed properties to the default list.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dataframe of computed properties with one row per input molecules.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">compute_fn</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
+        <span class="n">compute_many_descriptors</span><span class="p">,</span>
+        <span class="n">properties_fn</span><span class="o">=</span><span class="n">properties_fn</span><span class="p">,</span>
+        <span class="n">add_properties</span><span class="o">=</span><span class="n">add_properties</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="n">props</span> <span class="o">=</span> <span class="n">parallelized</span><span class="p">(</span>
+        <span class="n">compute_fn</span><span class="p">,</span>
+        <span class="n">mols</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="o">=</span><span class="n">batch_size</span><span class="p">,</span>
+        <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span>
+        <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+        <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">leave</span><span class="o">=</span><span class="n">progress_leave</span><span class="p">),</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.mw" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">mw</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.mw" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcExactMolWt( (Mol)mol [, (bool)onlyHeavy=False]) -&gt; float :
+    returns the molecule's exact molecular weight</p>
+<pre><code>C++ signature :
+    double CalcExactMolWt(RDKit::ROMol [,bool=False])
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.fsp3" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">fsp3</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.fsp3" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcFractionCSP3( (Mol)mol) -&gt; float :
+    returns the fraction of C atoms that are SP3 hybridized</p>
+<pre><code>C++ signature :
+    double CalcFractionCSP3(RDKit::ROMol)
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.n_hba" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_hba</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.n_hba" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumHBA( (Mol)mol) -&gt; int :
+    returns the number of H-bond acceptors for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumHBA(RDKit::ROMol)
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.n_hbd" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_hbd</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.n_hbd" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumHBD( (Mol)mol) -&gt; int :
+    returns the number of H-bond donors for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumHBD(RDKit::ROMol)
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.n_rings" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_rings</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.n_rings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumRings( (Mol)mol) -&gt; int :
+    returns the number of rings for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumRings(RDKit::ROMol)
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.n_hetero_atoms" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_hetero_atoms</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.n_hetero_atoms" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumHeteroatoms( (Mol)mol) -&gt; int :
+    returns the number of heteroatoms for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumHeteroatoms(RDKit::ROMol)
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Lipinski.n_heavy_atoms" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_heavy_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Lipinski.n_heavy_atoms" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Number of heavy atoms a molecule.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Lipinski.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">HeavyAtomCount</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+  <span class="s2">&quot; Number of heavy atoms a molecule.&quot;</span>
+  <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumHeavyAtoms</span><span class="p">()</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.n_rotatable_bonds" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_rotatable_bonds</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.n_rotatable_bonds" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumRotatableBonds( (Mol)mol, (bool)strict) -&gt; int :
+    returns the number of rotatable bonds for a molecule.
+       strict = NumRotatableBondsOptions.NonStrict - Simple rotatable bond definition.
+       strict = NumRotatableBondsOptions.Strict - (default) does not count things like
+                amide or ester bonds
+       strict = NumRotatableBondsOptions.StrictLinkages - handles linkages between ring
+          systems.
+          - Single bonds between aliphatic ring Cs are always rotatable. This
+            means that the central bond in CC1CCCC(C)C1-C1C(C)CCCC1C is now 
+            considered rotatable; it was not before
+          - Heteroatoms in the linked rings no longer affect whether or not
+            the linking bond is rotatable
+          - the linking bond in systems like Cc1cccc(C)c1-c1c(C)cccc1 is now
+             considered non-rotatable</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumRotatableBonds(RDKit::ROMol,bool)
+</code></pre>
+<p>CalcNumRotatableBonds( (Mol)mol [, (NumRotatableBondsOptions)strict=rdkit.Chem.rdMolDescriptors.NumRotatableBondsOptions.Default]) -&gt; int :
+    returns the number of rotatable bonds for a molecule.
+       strict = NumRotatableBondsOptions.NonStrict - Simple rotatable bond definition.
+       strict = NumRotatableBondsOptions.Strict - (default) does not count things like
+                amide or ester bonds
+       strict = NumRotatableBondsOptions.StrictLinkages - handles linkages between ring
+          systems.
+          - Single bonds between aliphatic ring Cs are always rotatable. This
+            means that the central bond in CC1CCCC(C)C1-C1C(C)CCCC1C is now 
+            considered rotatable; it was not before
+          - Heteroatoms in the linked rings no longer affect whether or not
+            the linking bond is rotatable
+          - the linking bond in systems like Cc1cccc(C)c1-c1c(C)cccc1 is now
+             considered non-rotatable</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumRotatableBonds(RDKit::ROMol [,RDKit::Descriptors::NumRotatableBondsOptions=rdkit.Chem.rdMolDescriptors.NumRotatableBondsOptions.Default])
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Lipinski.n_aliphatic_rings" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_aliphatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x564c5afee650</span><span class="o">&gt;</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Lipinski.n_aliphatic_rings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumAliphaticRings( (Mol)mol) -&gt; int :
+    returns the number of aliphatic (containing at least one non-aromatic bond) rings for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumAliphaticRings(RDKit::ROMol)
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Lipinski.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="n">_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">_cfn</span><span class="p">:</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Lipinski.n_aromatic_rings" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_aromatic_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x564c5af32770</span><span class="o">&gt;</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Lipinski.n_aromatic_rings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumAromaticRings( (Mol)mol) -&gt; int :
+    returns the number of aromatic rings for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumAromaticRings(RDKit::ROMol)
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Lipinski.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="n">_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">_cfn</span><span class="p">:</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Lipinski.n_saturated_rings" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_saturated_rings</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=&lt;</span><span class="n">Boost</span><span class="o">.</span><span class="n">Python</span><span class="o">.</span><span class="n">function</span> <span class="nb">object</span> <span class="n">at</span> <span class="mh">0x564c5af327e0</span><span class="o">&gt;</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Lipinski.n_saturated_rings" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcNumSaturatedRings( (Mol)mol) -&gt; int :
+    returns the number of saturated rings for a molecule</p>
+<pre><code>C++ signature :
+    unsigned int CalcNumSaturatedRings(RDKit::ROMol)
+</code></pre>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Lipinski.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="n">_fn</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="n">_cfn</span><span class="p">:</span> <span class="n">y</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Descriptors.n_radical_electrons" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">n_radical_electrons</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Descriptors.n_radical_electrons" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>The number of radical electrons the molecule has
+  (says nothing about spin state)</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>NumRadicalElectrons(Chem.MolFromSmiles('CC'))
+0
+NumRadicalElectrons(Chem.MolFromSmiles('C[CH3]'))
+0
+NumRadicalElectrons(Chem.MolFromSmiles('C[CH2]'))
+1
+NumRadicalElectrons(Chem.MolFromSmiles('C[CH]'))
+2
+NumRadicalElectrons(Chem.MolFromSmiles('C[C]'))
+3</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Descriptors.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">NumRadicalElectrons</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; The number of radical electrons the molecule has</span>
+<span class="sd">      (says nothing about spin state)</span>
+
+<span class="sd">    &gt;&gt;&gt; NumRadicalElectrons(Chem.MolFromSmiles(&#39;CC&#39;))</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; NumRadicalElectrons(Chem.MolFromSmiles(&#39;C[CH3]&#39;))</span>
+<span class="sd">    0</span>
+<span class="sd">    &gt;&gt;&gt; NumRadicalElectrons(Chem.MolFromSmiles(&#39;C[CH2]&#39;))</span>
+<span class="sd">    1</span>
+<span class="sd">    &gt;&gt;&gt; NumRadicalElectrons(Chem.MolFromSmiles(&#39;C[CH]&#39;))</span>
+<span class="sd">    2</span>
+<span class="sd">    &gt;&gt;&gt; NumRadicalElectrons(Chem.MolFromSmiles(&#39;C[C]&#39;))</span>
+<span class="sd">    3</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+  <span class="k">return</span> <span class="nb">sum</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetNumRadicalElectrons</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">())</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-method">
+
+
+
+<h4 id="rdkit.Chem.rdMolDescriptors.tpsa" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">tpsa</span></code>
+
+
+<a href="#rdkit.Chem.rdMolDescriptors.tpsa" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>CalcTPSA( (Mol)mol [, (bool)force=False [, (bool)includeSandP=False]]) -&gt; float :
+    returns the TPSA value for a molecule</p>
+<pre><code>C++ signature :
+    double CalcTPSA(RDKit::ROMol [,bool=False [,bool=False]])
+</code></pre>
+
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.QED.qed" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">qed</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">QEDproperties</span><span class="p">(</span><span class="n">MW</span><span class="o">=</span><span class="mf">0.66</span><span class="p">,</span> <span class="n">ALOGP</span><span class="o">=</span><span class="mf">0.46</span><span class="p">,</span> <span class="n">HBA</span><span class="o">=</span><span class="mf">0.05</span><span class="p">,</span> <span class="n">HBD</span><span class="o">=</span><span class="mf">0.61</span><span class="p">,</span> <span class="n">PSA</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">ROTB</span><span class="o">=</span><span class="mf">0.65</span><span class="p">,</span> <span class="n">AROM</span><span class="o">=</span><span class="mf">0.48</span><span class="p">,</span> <span class="n">ALERTS</span><span class="o">=</span><span class="mf">0.95</span><span class="p">),</span> <span class="n">qedProperties</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.QED.qed" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Calculate the weighted sum of ADS mapped properties</p>
+<p>some examples from the QED paper, reference values from Peter G's original implementation</p>
+<blockquote>
+<blockquote>
+<blockquote>
+<p>m = Chem.MolFromSmiles('N=C(CCSCc1csc(N=C(N)N)n1)NS(N)(=O)=O')
+qed(m)
+0.253...
+m = Chem.MolFromSmiles('CNC(=NCCSCc1nc[nH]c1C)NC#N')
+qed(m)
+0.234...
+m = Chem.MolFromSmiles('CCCCCNC(=N)NN=Cc1c[nH]c2ccc(CO)cc12')
+qed(m)
+0.234...</p>
+</blockquote>
+</blockquote>
+</blockquote>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/QED.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="nd">@setDescriptorVersion</span><span class="p">(</span><span class="n">version</span><span class="o">=</span><span class="s1">&#39;1.1.0&#39;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">qed</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">w</span><span class="o">=</span><span class="n">WEIGHT_MEAN</span><span class="p">,</span> <span class="n">qedProperties</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+  <span class="sd">&quot;&quot;&quot; Calculate the weighted sum of ADS mapped properties</span>
+
+<span class="sd">  some examples from the QED paper, reference values from Peter G&#39;s original implementation</span>
+<span class="sd">  &gt;&gt;&gt; m = Chem.MolFromSmiles(&#39;N=C(CCSCc1csc(N=C(N)N)n1)NS(N)(=O)=O&#39;)</span>
+<span class="sd">  &gt;&gt;&gt; qed(m)</span>
+<span class="sd">  0.253...</span>
+<span class="sd">  &gt;&gt;&gt; m = Chem.MolFromSmiles(&#39;CNC(=NCCSCc1nc[nH]c1C)NC#N&#39;)</span>
+<span class="sd">  &gt;&gt;&gt; qed(m)</span>
+<span class="sd">  0.234...</span>
+<span class="sd">  &gt;&gt;&gt; m = Chem.MolFromSmiles(&#39;CCCCCNC(=N)NN=Cc1c[nH]c2ccc(CO)cc12&#39;)</span>
+<span class="sd">  &gt;&gt;&gt; qed(m)</span>
+<span class="sd">  0.234...</span>
+<span class="sd">  &quot;&quot;&quot;</span>
+  <span class="k">if</span> <span class="n">qedProperties</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+      <span class="n">qedProperties</span> <span class="o">=</span> <span class="n">properties</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+  <span class="n">d</span> <span class="o">=</span> <span class="p">[</span><span class="n">ads</span><span class="p">(</span><span class="n">pi</span><span class="p">,</span> <span class="n">adsParameters</span><span class="p">[</span><span class="n">name</span><span class="p">])</span> <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">pi</span> <span class="ow">in</span> <span class="n">qedProperties</span><span class="o">.</span><span class="n">_asdict</span><span class="p">()</span><span class="o">.</span><span class="n">items</span><span class="p">()]</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">wi</span> <span class="o">*</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">di</span><span class="p">)</span> <span class="k">for</span> <span class="n">wi</span><span class="p">,</span> <span class="n">di</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">w</span><span class="p">,</span> <span class="n">d</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">t</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">w</span><span class="p">))</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="rdkit.Chem.Crippen.clogp" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">clogp</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">y</span><span class="p">)</span></code>
+
+
+<a href="#rdkit.Chem.Crippen.clogp" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Wildman-Crippen LogP value</p>
+<p>Uses an atom-based scheme based on the values in the paper:
+   S. A. Wildman and G. M. Crippen JCICS 39 868-873 (1999)</p>
+<p><strong>Arguments</strong></p>
+<p>- inMol: a molecule</p>
+<p>- addHs: (optional) toggles adding of Hs to the molecule for the calculation.
+    If true, hydrogens will be added to the molecule and used in the calculation.</p>
+
+        <details class="quote">
+          <summary>Source code in <code>rdkit/Chem/Crippen.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="n">MolLogP</span> <span class="o">=</span> <span class="k">lambda</span> <span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">y</span><span class="p">:</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">CalcCrippenDescriptors</span><span class="p">(</span><span class="o">*</span><span class="n">x</span><span class="p">,</span> <span class="o">**</span><span class="n">y</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="sascorer.sas" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">sas</span><span class="p">(</span><span class="n">m</span><span class="p">)</span></code>
+
+
+<a href="#sascorer.sas" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+
+        <details class="quote">
+          <summary>Source code in <code>SA_Score/sascorer.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">calculateScore</span><span class="p">(</span><span class="n">m</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">_fscores</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">readFragmentScores</span><span class="p">()</span>
+
+    <span class="c1"># fragment score</span>
+    <span class="n">fp</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">GetMorganFingerprint</span><span class="p">(</span><span class="n">m</span><span class="p">,</span>
+                                               <span class="mi">2</span><span class="p">)</span>  <span class="c1"># &lt;- 2 is the *radius* of the circular fingerprint</span>
+    <span class="n">fps</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">GetNonzeroElements</span><span class="p">()</span>
+    <span class="n">score1</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="n">nf</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">bitId</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">fps</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">nf</span> <span class="o">+=</span> <span class="n">v</span>
+        <span class="n">sfp</span> <span class="o">=</span> <span class="n">bitId</span>
+        <span class="n">score1</span> <span class="o">+=</span> <span class="n">_fscores</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">sfp</span><span class="p">,</span> <span class="o">-</span><span class="mi">4</span><span class="p">)</span> <span class="o">*</span> <span class="n">v</span>
+    <span class="n">score1</span> <span class="o">/=</span> <span class="n">nf</span>
+
+    <span class="c1"># features score</span>
+    <span class="n">nAtoms</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span>
+    <span class="n">nChiralCenters</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">Chem</span><span class="o">.</span><span class="n">FindMolChiralCenters</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">includeUnassigned</span><span class="o">=</span><span class="kc">True</span><span class="p">))</span>
+    <span class="n">ri</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">GetRingInfo</span><span class="p">()</span>
+    <span class="n">nBridgeheads</span><span class="p">,</span> <span class="n">nSpiro</span> <span class="o">=</span> <span class="n">numBridgeheadsAndSpiro</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">ri</span><span class="p">)</span>
+    <span class="n">nMacrocycles</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">ri</span><span class="o">.</span><span class="n">AtomRings</span><span class="p">():</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">nMacrocycles</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="n">sizePenalty</span> <span class="o">=</span> <span class="n">nAtoms</span><span class="o">**</span><span class="mf">1.005</span> <span class="o">-</span> <span class="n">nAtoms</span>
+    <span class="n">stereoPenalty</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">nChiralCenters</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">spiroPenalty</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">nSpiro</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">bridgePenalty</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="n">nBridgeheads</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">macrocyclePenalty</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="c1"># ---------------------------------------</span>
+    <span class="c1"># This differs from the paper, which defines:</span>
+    <span class="c1">#  macrocyclePenalty = math.log10(nMacrocycles+1)</span>
+    <span class="c1"># This form generates better results when 2 or more macrocycles are present</span>
+    <span class="k">if</span> <span class="n">nMacrocycles</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">macrocyclePenalty</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log10</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+    <span class="n">score2</span> <span class="o">=</span> <span class="mf">0.</span> <span class="o">-</span> <span class="n">sizePenalty</span> <span class="o">-</span> <span class="n">stereoPenalty</span> <span class="o">-</span> <span class="n">spiroPenalty</span> <span class="o">-</span> <span class="n">bridgePenalty</span> <span class="o">-</span> <span class="n">macrocyclePenalty</span>
+
+    <span class="c1"># correction for the fingerprint density</span>
+    <span class="c1"># not in the original publication, added in version 1.1</span>
+    <span class="c1"># to make highly symmetrical molecules easier to synthetise</span>
+    <span class="n">score3</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">if</span> <span class="n">nAtoms</span> <span class="o">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">fps</span><span class="p">):</span>
+        <span class="n">score3</span> <span class="o">=</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="nb">float</span><span class="p">(</span><span class="n">nAtoms</span><span class="p">)</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">fps</span><span class="p">))</span> <span class="o">*</span> <span class="mf">.5</span>
+
+    <span class="n">sascore</span> <span class="o">=</span> <span class="n">score1</span> <span class="o">+</span> <span class="n">score2</span> <span class="o">+</span> <span class="n">score3</span>
+
+    <span class="c1"># need to transform &quot;raw&quot; value into scale between 1 and 10</span>
+    <span class="nb">min</span> <span class="o">=</span> <span class="o">-</span><span class="mf">4.0</span>
+    <span class="nb">max</span> <span class="o">=</span> <span class="mf">2.5</span>
+    <span class="n">sascore</span> <span class="o">=</span> <span class="mf">11.</span> <span class="o">-</span> <span class="p">(</span><span class="n">sascore</span> <span class="o">-</span> <span class="nb">min</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">max</span> <span class="o">-</span> <span class="nb">min</span><span class="p">)</span> <span class="o">*</span> <span class="mf">9.</span>
+    <span class="c1"># smooth the 10-end</span>
+    <span class="k">if</span> <span class="n">sascore</span> <span class="o">&gt;</span> <span class="mf">8.</span><span class="p">:</span>
+        <span class="n">sascore</span> <span class="o">=</span> <span class="mf">8.</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">log</span><span class="p">(</span><span class="n">sascore</span> <span class="o">+</span> <span class="mf">1.</span> <span class="o">-</span> <span class="mf">9.</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">sascore</span> <span class="o">&gt;</span> <span class="mf">10.</span><span class="p">:</span>
+        <span class="n">sascore</span> <span class="o">=</span> <span class="mf">10.0</span>
+    <span class="k">elif</span> <span class="n">sascore</span> <span class="o">&lt;</span> <span class="mf">1.</span><span class="p">:</span>
+        <span class="n">sascore</span> <span class="o">=</span> <span class="mf">1.0</span>
+
+    <span class="k">return</span> <span class="n">sascore</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="datamol.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              datamol
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="datamol.conformers.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.conformers" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              datamol.conformers
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2020 - 2021 Valence
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js", "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.9f3ca3d1.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
