@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.1">
+      <meta name="generator" content="mkdocs-1.2.3, mkdocs-material-8.2.2">
     
     
       
@@ -31,7 +31,7 @@
       
         
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -5545,7 +5545,7 @@ Avoid when loading a very large file.</p></td>
 
 
 <h4 id="datamol.io.read_sdf" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 
 <a href="#datamol.io.read_sdf" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -5617,6 +5617,12 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
         <td><p>If set to false, the parser is more lax about correctness of the contents.</p></td>
         <td><code>True</code></td>
       </tr>
+      <tr>
+        <td><code>remove_hs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to remove the existing hydrogens in the SDF files.</p></td>
+        <td><code>True</code></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
@@ -5630,6 +5636,7 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
     <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Read an SDF file.</span>
 
@@ -5647,14 +5654,16 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
 <span class="sd">        include_computed: Include computed properties in the columns.  Only relevant if</span>
 <span class="sd">            `as_df` is True.</span>
 <span class="sd">        strict_parsing: If set to false, the parser is more lax about correctness of the contents.</span>
+<span class="sd">        remove_hs: Whether to remove the existing hydrogens in the SDF files.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># File-like object</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
-        <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+        <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
             <span class="n">urlpath</span><span class="p">,</span>
             <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
             <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+            <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">supplier</span><span class="p">)</span>
 
@@ -5666,10 +5675,11 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
             <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gzip&quot;</span><span class="p">):</span>
                 <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
-            <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+            <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
                 <span class="n">f</span><span class="p">,</span>
                 <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
                 <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+                <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
             <span class="p">)</span>
             <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">supplier</span><span class="p">)</span>
 
@@ -5776,7 +5786,7 @@ precedence over <code>smiles_column</code>.</p></td>
 
     <span class="c1"># File-like object</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
-        <span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -5784,7 +5794,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="c1"># Regular local or remote paths</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
                 <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -5864,7 +5874,7 @@ precedence over <code>smiles_column</code>.</p></td>
 
     <span class="c1"># File-like object</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
-        <span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
         <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
         <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -5872,7 +5882,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="c1"># Regular local or remote paths</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-            <span class="n">writer</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
             <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
                 <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
@@ -5942,7 +5952,7 @@ Note: file-like object are not supported yet.</p></td>
         <span class="n">dm</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copy_file</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">active_path</span><span class="p">)</span>
 
     <span class="c1"># Read the molecules</span>
-    <span class="n">supplier</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">SmilesMolSupplier</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">active_path</span><span class="p">),</span> <span class="n">titleLine</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesMolSupplier</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">active_path</span><span class="p">),</span> <span class="n">titleLine</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
     <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
 
     <span class="c1"># Delete the local temporary path</span>
@@ -7785,7 +7795,7 @@ model training.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "search": "../assets/javascripts/workers/search.bd0b6b67.min.js", "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.8aa65030.min.js"></script>
+      <script src="../assets/javascripts/bundle.9f3ca3d1.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
