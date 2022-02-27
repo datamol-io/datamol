@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.6.8
+====================
+
+**Changed:**
+
+* Add `remove_hs` flag in `dm.read_sdf()`.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.6.7
 ====================
 
