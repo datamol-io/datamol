@@ -11,6 +11,7 @@ import pathlib
 import gzip
 
 from rdkit.Chem import PandasTools
+from rdkit.Chem import rdmolfiles
 from rdkit import Chem
 
 import pandas as pd
@@ -85,6 +86,7 @@ def read_sdf(
     include_private: bool = False,
     include_computed: bool = False,
     strict_parsing: bool = True,
+    remove_hs: bool = True,
 ) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
     """Read an SDF file.
 
@@ -102,14 +104,16 @@ def read_sdf(
         include_computed: Include computed properties in the columns.  Only relevant if
             `as_df` is True.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
+        remove_hs: Whether to remove the existing hydrogens in the SDF files.
     """
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        supplier = Chem.ForwardSDMolSupplier(
+        supplier = rdmolfiles.ForwardSDMolSupplier(
             urlpath,
             sanitize=sanitize,
             strictParsing=strict_parsing,
+            removeHs=remove_hs,
         )
         mols = list(supplier)
 
@@ -121,10 +125,11 @@ def read_sdf(
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
                 f = gzip.open(f)
 
-            supplier = Chem.ForwardSDMolSupplier(
+            supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
                 sanitize=sanitize,
                 strictParsing=strict_parsing,
+                removeHs=remove_hs,
             )
             mols = list(supplier)
 
@@ -171,7 +176,7 @@ def to_sdf(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        writer = Chem.SDWriter(urlpath)
+        writer = rdmolfiles.SDWriter(urlpath)
         for mol in mols:
             writer.write(mol)
         writer.close()
@@ -179,7 +184,7 @@ def to_sdf(
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath, mode="w") as f:
-            writer = Chem.SDWriter(f)
+            writer = rdmolfiles.SDWriter(f)
             for mol in mols:
                 writer.write(mol)
             writer.close()
@@ -206,7 +211,7 @@ def to_smi(
 
     # File-like object
     if isinstance(urlpath, io.IOBase):
-        writer = Chem.SmilesWriter(urlpath, includeHeader=False, nameHeader="")
+        writer = rdmolfiles.SmilesWriter(urlpath, includeHeader=False, nameHeader="")
         for mol in mols:
             writer.write(mol)
         writer.close()
@@ -214,7 +219,7 @@ def to_smi(
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath, "w") as f:
-            writer = Chem.SmilesWriter(f, includeHeader=False, nameHeader="")
+            writer = rdmolfiles.SmilesWriter(f, includeHeader=False, nameHeader="")
             for mol in mols:
                 writer.write(mol)
             writer.close()
@@ -242,7 +247,7 @@ def read_smi(
         dm.utils.fs.copy_file(urlpath, active_path)
 
     # Read the molecules
-    supplier = Chem.SmilesMolSupplier(str(active_path), titleLine=0)
+    supplier = rdmolfiles.SmilesMolSupplier(str(active_path), titleLine=0)
     mols = [mol for mol in supplier if mol is not None]
 
     # Delete the local temporary path
