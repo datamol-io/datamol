@@ -179,7 +179,6 @@ def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
 
     inchi_val = Chem.MolToInchi(mol)
     if not inchi_val:
-        logger.warning("Inchi computation failed, setting output to None")
         return None
     return inchi_val
 
@@ -232,7 +231,6 @@ def to_inchi_non_standard(
 
     inchi_val = Chem.MolToInchi(mol, options=inchi_options)
     if not inchi_val:
-        logger.warning("Inchi computation failed, setting output to None")
         return None
     return inchi_val
 
@@ -264,7 +262,6 @@ def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
 
     inchikey = Chem.MolToInchiKey(mol)
     if not inchikey:
-        logger.warning("Inchikey computation failed, setting output to None")
         return None
     return inchikey
 
@@ -317,7 +314,6 @@ def to_inchikey_non_standard(
 
     inchikey = Chem.MolToInchiKey(mol, options=inchi_options)
     if not inchikey:
-        logger.warning("Non standard inchikey computation failed, setting output to None")
         return None
     return inchikey
 
