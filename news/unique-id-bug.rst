@@ -5,6 +5,7 @@
 **Changed:**
 
 * Behaviour of all *inchi* functions to return None with a warning instead of silently returning an empty string
+* Order of str evaluation on convertion function. `isinstance(str)` is now evaluated before `is None`
 
 **Deprecated:**
 
