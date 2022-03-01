@@ -2,6 +2,7 @@ import pytest
 
 import pandas as pd
 from rdkit import Chem
+from selfies import __version__ as selfies_version
 
 import datamol as dm
 
@@ -59,6 +60,8 @@ def test_to_selfies():
     true_sf = (
         "[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]"
     )
+    if selfies_version < "2.0.0":
+        true_sf = "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
 
     selfies = dm.to_selfies(smiles)
     assert selfies == true_sf
@@ -68,9 +71,12 @@ def test_to_selfies():
 
 
 def test_from_selfies():
+    # work with both selfies version
     selfies = (
         "[C][C][=Branch1][C][=O][O][C][=C][C][=C][C][=C][Ring1][=Branch1][C][=Branch1][C][=O][O]"
     )
+    if selfies_version < "2.0.0":
+        selfies = "[C][C][Branch1_2][C][=O][O][C][=C][C][=C][C][=C][Ring1][Branch1_2][C][Branch1_2][C][=O][O]"
 
     smiles = dm.from_selfies(selfies, as_mol=False)
     assert smiles == "CC(=O)OC1=CC=CC=C1C(=O)O"
@@ -121,7 +127,11 @@ def test_inchi():
     assert dm.to_smiles(new_mol) == smiles
 
     assert dm.to_inchi(None) is None
+    assert dm.to_inchi("") is None
+    assert dm.to_inchi("C(C)(C)(C)(C)(C)") is None
     assert dm.to_inchikey(None) is None
+    assert dm.to_inchikey("") is None
+    assert dm.to_inchikey("C(C)(C)(C)(C)(C)") is None
     assert dm.from_inchi(None) is None
 
 
@@ -232,7 +242,7 @@ def test_non_standard_inchi():
     mol1 = dm.to_mol("N=C(N)O")
     mol2 = dm.to_mol("NC(N)=O")
     mol3 = dm.to_mol("c1ccccc1")
-
+    mol4 = dm.to_mol("c1cccc([*])c1")
     # with a standard inchi, both molecules should be identical
     assert dm.to_inchi(mol1) == "InChI=1S/CH4N2O/c2-1(3)4/h(H4,2,3,4)"
     assert dm.to_inchi(mol2) == "InChI=1S/CH4N2O/c2-1(3)4/h(H4,2,3,4)"
@@ -260,6 +270,9 @@ def test_non_standard_inchi():
     assert dm.to_smiles(mol1_reloaded) == "N=C(N)O"
     assert dm.to_smiles(mol2_reloaded) == "NC(N)=O"
 
+    # inchikey computation should return None on query
+    assert dm.to_inchikey(mol4) is None
+
 
 def test_non_standard_inchi_with_options():
     mol1 = dm.to_mol("C[C@@H]1CCCC[C@@H]1O")
@@ -277,6 +290,18 @@ def test_non_standard_inchi_with_options():
 def test_non_standard_inchi_edge_cases():
     assert dm.to_inchi_non_standard(None) is None
     assert dm.to_inchikey_non_standard(None) is None
+
+    # test with wrong query molecules
+    assert dm.to_inchi_non_standard("NC([*])C(N)=O") is None
+    assert dm.to_inchikey_non_standard("NC([*])C(N)=O") is None
+
+    # test with empty molecule
+    assert dm.to_inchi_non_standard("CCC(C)(C)(C)(C)(C)") is None
+    assert dm.to_inchikey_non_standard("CCC(C)(C)(C)(C)(C)") is None
+
+    # test with invalid molecule
+    assert dm.to_inchi_non_standard("") is None
+    assert dm.to_inchikey_non_standard("") is None
 
     assert dm.to_inchi_non_standard("NC(N)=O") == "InChI=1/CH4N2O/c2-1(3)4/h(H4,2,3,4)/f/h2-3H2"
     assert dm.to_inchikey_non_standard("N=C(N)O") == "XSQUKJJJFZCRTK-ZIALIONUNA-N"
