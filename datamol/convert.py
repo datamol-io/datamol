@@ -91,12 +91,12 @@ def to_selfies(mol: Union[str, dm.Mol]) -> Optional[str]:
     Returns:
         selfies: SELFIES string.
     """
-    if mol is None:
-        return None
 
     if isinstance(mol, dm.Mol):
         mol = to_smiles(mol)
 
+    if mol is None:
+        return None
     selfies = sf.encoder(mol)  # type: ignore
 
     if selfies == -1:
@@ -139,11 +139,11 @@ def smiles_as_smarts(mol: Union[str, dm.Mol], keep_hs: bool = True) -> Optional[
         smarts of the molecule
     """
 
-    if mol is None:
-        return None
-
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
+
+    if mol is None:
+        return None
 
     # Change the isotope to 99
     for atom in mol.GetAtoms():  # type: ignore
@@ -171,13 +171,16 @@ def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
         mol: a molecule.
     """
 
-    if mol is None:
-        return None
-
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
 
-    return Chem.MolToInchi(mol)
+    if mol is None:
+        return None
+
+    inchi_val = Chem.MolToInchi(mol)
+    if not inchi_val:
+        return None
+    return inchi_val
 
 
 def to_inchi_non_standard(
@@ -211,11 +214,11 @@ def to_inchi_non_standard(
             `["/SRel", "/AuxNone"]`.
     """
 
-    if mol is None:
-        return None
-
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
+
+    if mol is None:
+        return None
 
     inchi_options = _process_inchi_options(
         fixed_hydrogen_layer=fixed_hydrogen_layer,
@@ -226,7 +229,10 @@ def to_inchi_non_standard(
         options=options,
     )
 
-    return Chem.MolToInchi(mol, options=inchi_options)
+    inchi_val = Chem.MolToInchi(mol, options=inchi_options)
+    if not inchi_val:
+        return None
+    return inchi_val
 
 
 def to_smarts(mol: dm.Mol) -> Optional[str]:
@@ -248,14 +254,16 @@ def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
     Args:
         mol: a molecule
     """
+    if isinstance(mol, str):
+        mol = dm.to_mol(mol)
 
     if mol is None:
         return None
 
-    if isinstance(mol, str):
-        mol = dm.to_mol(mol)
-
-    return Chem.MolToInchiKey(mol)
+    inchikey = Chem.MolToInchiKey(mol)
+    if not inchikey:
+        return None
+    return inchikey
 
 
 def to_inchikey_non_standard(
@@ -289,11 +297,11 @@ def to_inchikey_non_standard(
             `["/SRel", "/AuxNone"]`.
     """
 
-    if mol is None:
-        return None
-
     if isinstance(mol, str):
         mol = dm.to_mol(mol)
+
+    if mol is None:
+        return None
 
     inchi_options = _process_inchi_options(
         fixed_hydrogen_layer=fixed_hydrogen_layer,
@@ -304,7 +312,10 @@ def to_inchikey_non_standard(
         options=options,
     )
 
-    return Chem.MolToInchiKey(mol, options=inchi_options)
+    inchikey = Chem.MolToInchiKey(mol, options=inchi_options)
+    if not inchikey:
+        return None
+    return inchikey
 
 
 def from_inchi(

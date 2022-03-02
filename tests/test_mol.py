@@ -485,11 +485,14 @@ def test_unique_id():
         # of the same molecule.
         "N=C(N)O",
         "NC(N)=O",
+        # an invalid molecule
+        "C(C)(C)(C)(C)(C)",
+        # a molecule with a dummy atom
+        "CCCC*",
     ]
 
     mols = [dm.to_mol(s) for s in smiles_list]
     ids = [dm.unique_id(m) for m in mols]
-
     assert ids == [
         "2f0a84f817a369e79a2b44085ebe3a27",
         "3dc94b495eba316c2df4563457c77842",
@@ -509,4 +512,9 @@ def test_unique_id():
         # The two IDS of the tautomers are indeed different.
         "3a04e3e47b86287b035b4affe84dff91",
         "943d4548ef05069b79e929ed140ce905",
+        # unsupported syntax should return None
+        None,
+        None,
     ]
+
+    assert dm.unique_id(None) is None
