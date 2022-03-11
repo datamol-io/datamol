@@ -10,11 +10,12 @@ from ..types import Mol
 from ..utils.jobs import JobRunner
 from ..utils import decorators
 from ..mol import PERIODIC_TABLE
+from ..mol import copy_mol
 
 
 @decorators.disable_on_os("win")
 def sasa(
-    mol: Chem.rdchem.Mol,
+    mol: Mol,
     conf_id: Optional[Union[int, List[int]]] = None,
     n_jobs: int = 1,
 ) -> np.ndarray:
@@ -82,7 +83,7 @@ def sasa(
     return np.array(sasa_values)
 
 
-def get_coords(mol: Chem.rdchem.Mol, conf_id: int = -1):
+def get_coords(mol: Mol, conf_id: int = -1):
     """Get the coordinate of a conformer of a molecule.
 
     Args:
@@ -98,7 +99,7 @@ def get_coords(mol: Chem.rdchem.Mol, conf_id: int = -1):
 
 
 def center_of_mass(
-    mol: Chem.rdchem.Mol,
+    mol: Mol,
     use_atoms: bool = True,
     digits: Optional[int] = None,
     conf_id: int = -1,
@@ -130,6 +131,38 @@ def center_of_mass(
     return center
 
 
-def keep_conformers(mol: Mol, conf_indices: Union[int, List[int]] = -1):
-    """Keep on the"""
-    pass
+def keep_conformers(
+    mol: Mol,
+    indices_to_keep: Union[int, List[int]] = -1,
+    assign_id: bool = True,
+    copy: bool = True,
+):
+    """Keep on the specified conformer(s) in `indices_to_keep`.
+
+    Args:
+        mol: A molecule.
+        indices_to_keep: A indice or a least of indices of conformers to keep.
+        assign_id: Whether to assign the kept conformers an id or keep the original one.
+        copy: Whether to copy the molecule or not.
+    """
+
+    if copy:
+        mol = copy_mol(mol)
+
+    if not isinstance(indices_to_keep, list):
+        indices_to_keep = [indices_to_keep]
+
+    # Extract conformers to keep
+    confs_to_keep = [mol.GetConformer(conf_id) for conf_id in indices_to_keep]
+
+    # Copy current mol and remove all conformers
+    mol2 = copy_mol(mol)
+    mol2.RemoveAllConformers()
+
+    # Add conformers
+    _ = [mol2.AddConformer(conf, assignId=assign_id) for conf in confs_to_keep]
+
+    # Cleanup
+    mol = mol2
+
+    return mol

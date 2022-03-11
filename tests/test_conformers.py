@@ -266,3 +266,47 @@ def test_conformers_non_minimized_sorted():
     energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
 
     assert np.all(np.diff(energies) >= 0)
+
+
+def test_keep_conformers_from_indice():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, 5)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 1
+    assert conf_ids == [0]
+
+
+def test_keep_conformers_from_indice_default_conf():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 1
+    assert conf_ids == [0]
+
+
+def test_keep_conformers_from_indices():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, [0, 4, 6])
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 3
+    assert conf_ids == [0, 1, 2]
+
+
+def test_keep_conformers_from_indices_keep_ids():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, [0, 4, 6], assign_id=False)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 3
+    assert conf_ids == [0, 4, 6]
