@@ -50,7 +50,7 @@ def test_generate_3():
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
-    assert mol.GetNumConformers() == 19
+    assert mol.GetNumConformers() == 22
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
 
 
