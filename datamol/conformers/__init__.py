@@ -8,3 +8,4 @@ from ._conformers import align_conformers
 from ._features import sasa
 from ._features import get_coords
 from ._features import center_of_mass
+from ._features import keep_conformers

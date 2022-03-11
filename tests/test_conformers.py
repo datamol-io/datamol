@@ -44,16 +44,22 @@ def test_generate_2():
     assert mol.GetNumConformers() == 50
     assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
 
+
+def test_generate_3():
+
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
-    assert mol.GetNumConformers() == 23
+    assert mol.GetNumConformers() == 22
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
+
+
+def test_generate_4():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=True)
-    assert mol.GetNumConformers() == 25
+    assert mol.GetNumConformers() == 21
     assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
 
 
@@ -152,7 +158,7 @@ def test_translate():
     new_coords = dm.conformers.get_coords(mol)
     print(new_coords - 10)
 
-    np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=1)
+    np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=0)
 
 
 def test_align_conformers():
@@ -238,3 +244,69 @@ def test_align_conformers_wrong_backend():
 
     with pytest.raises(ValueError):
         dm.conformers.align_conformers(mols, backend="not_supported")
+
+
+def test_conformers_minimized_sorted():
+    smiles = "CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=True)
+
+    confs = list(mol.GetConformers())
+    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+
+    assert np.all(np.diff(energies) >= 0)
+
+
+def test_conformers_non_minimized_sorted():
+    smiles = "CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=False)
+
+    confs = list(mol.GetConformers())
+    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+
+    assert np.all(np.diff(energies) >= 0)
+
+
+def test_keep_conformers_from_indice():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, 5)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 1
+    assert conf_ids == [0]
+
+
+def test_keep_conformers_from_indice_default_conf():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 1
+    assert conf_ids == [0]
+
+
+def test_keep_conformers_from_indices():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, [0, 4, 6])
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 3
+    assert conf_ids == [0, 1, 2]
+
+
+def test_keep_conformers_from_indices_keep_ids():
+    mol = dm.to_mol("CC")
+    mol = dm.conformers.generate(mol, n_confs=10)
+
+    mol2 = dm.conformers.keep_conformers(mol, [0, 4, 6], assign_id=False)
+    conf_ids = [conf.GetId() for conf in mol2.GetConformers()]
+
+    assert mol2.GetNumConformers() == 3
+    assert conf_ids == [0, 4, 6]

@@ -1,17 +1,22 @@
-from typing import Union
+from typing import Optional, Union
 from typing import List
+from typing import Optional
 
 import numpy as np
 
 from rdkit import Chem
 
-import datamol as dm
+from ..types import Mol
+from ..utils.jobs import JobRunner
+from ..utils import decorators
+from ..mol import PERIODIC_TABLE
+from ..mol import copy_mol
 
 
-@dm.utils.decorators.disable_on_os("win")
+@decorators.disable_on_os("win")
 def sasa(
-    mol: Chem.rdchem.Mol,
-    conf_id: Union[int, List[int]] = None,
+    mol: Mol,
+    conf_id: Optional[Union[int, List[int]]] = None,
     n_jobs: int = 1,
 ) -> np.ndarray:
     """Compute Solvent Accessible Surface Area of all the conformers
@@ -54,7 +59,7 @@ def sasa(
         )
 
     # Get Van der Waals radii (angstrom)
-    radii = [dm.PERIODIC_TABLE.GetRvdw(atom.GetAtomicNum()) for atom in mol.GetAtoms()]
+    radii = [PERIODIC_TABLE.GetRvdw(atom.GetAtomicNum()) for atom in mol.GetAtoms()]
 
     # Which conformers to compute
     conf_ids = []
@@ -73,12 +78,12 @@ def sasa(
         conf.SetDoubleProp("rdkit_free_sasa", sasa)
         return sasa
 
-    runner = dm.JobRunner(n_jobs=n_jobs)
+    runner = JobRunner(n_jobs=n_jobs)
     sasa_values = runner(_get_sasa, conf_ids)
     return np.array(sasa_values)
 
 
-def get_coords(mol: Chem.rdchem.Mol, conf_id: int = -1):
+def get_coords(mol: Mol, conf_id: int = -1):
     """Get the coordinate of a conformer of a molecule.
 
     Args:
@@ -94,9 +99,9 @@ def get_coords(mol: Chem.rdchem.Mol, conf_id: int = -1):
 
 
 def center_of_mass(
-    mol: Chem.rdchem.Mol,
+    mol: Mol,
     use_atoms: bool = True,
-    digits: int = None,
+    digits: Optional[int] = None,
     conf_id: int = -1,
 ) -> np.ndarray:
     """Compute the center of mass of a conformer of a molecule.
@@ -110,7 +115,7 @@ def center_of_mass(
     Returns
         cm: Center of mass or geometrical center
     """
-    coords = get_coords(mol)
+    coords = get_coords(mol, conf_id=conf_id)
     atom_weight = np.ones((coords.shape[0]))
 
     if use_atoms:
@@ -124,3 +129,40 @@ def center_of_mass(
         center = center.round(digits)
 
     return center
+
+
+def keep_conformers(
+    mol: Mol,
+    indices_to_keep: Union[int, List[int]] = -1,
+    assign_id: bool = True,
+    copy: bool = True,
+):
+    """Keep on the specified conformer(s) in `indices_to_keep`.
+
+    Args:
+        mol: A molecule.
+        indices_to_keep: A indice or a least of indices of conformers to keep.
+        assign_id: Whether to assign the kept conformers an id or keep the original one.
+        copy: Whether to copy the molecule or not.
+    """
+
+    if copy:
+        mol = copy_mol(mol)
+
+    if not isinstance(indices_to_keep, list):
+        indices_to_keep = [indices_to_keep]
+
+    # Extract conformers to keep
+    confs_to_keep = [mol.GetConformer(conf_id) for conf_id in indices_to_keep]
+
+    # Copy current mol and remove all conformers
+    mol2 = copy_mol(mol)
+    mol2.RemoveAllConformers()
+
+    # Add conformers
+    _ = [mol2.AddConformer(conf, assignId=assign_id) for conf in confs_to_keep]
+
+    # Cleanup
+    mol = mol2
+
+    return mol
