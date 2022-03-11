@@ -158,7 +158,7 @@ def test_translate():
     new_coords = dm.conformers.get_coords(mol)
     print(new_coords - 10)
 
-    np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=1)
+    np.testing.assert_array_almost_equal(coords, new_coords - 10, decimal=0)
 
 
 def test_align_conformers():
@@ -244,3 +244,25 @@ def test_align_conformers_wrong_backend():
 
     with pytest.raises(ValueError):
         dm.conformers.align_conformers(mols, backend="not_supported")
+
+
+def test_conformers_minimized_sorted():
+    smiles = "CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=True)
+
+    confs = list(mol.GetConformers())
+    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+
+    assert np.all(np.diff(energies) >= 0)
+
+
+def test_conformers_non_minimized_sorted():
+    smiles = "CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC"
+    mol = dm.to_mol(smiles)
+    mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=False)
+
+    confs = list(mol.GetConformers())
+    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+
+    assert np.all(np.diff(energies) >= 0)

@@ -7,6 +7,7 @@
 * Change the conformer generation arguments to use `useRandomCoords=True` by default.
 * Start using explicit `Optional` instead of implicit `Optional` for typing.
 * Start using relative imports instead of absolute ones.
+* When conformers are not minimized, sort them by energy (can be turned to False).
 
 **Deprecated:**
 

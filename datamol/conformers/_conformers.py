@@ -34,6 +34,7 @@ def generate(
     clear_existing: bool = True,
     align_conformers: bool = True,
     minimize_energy: bool = False,
+    sort_by_energy: bool = True,
     method: Optional[str] = None,
     energy_iterations: int = 200,
     warning_not_converged: int = 0,
@@ -82,6 +83,7 @@ def generate(
         align_conformers: Whether to align the conformers.
         minimize_energy: Wether to minimize conformer's energies using UFF.
             Disable to generate conformers much faster.
+        sort_by_energies: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
@@ -93,7 +95,7 @@ def generate(
         add_hs: Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
             are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
             recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
-            it’s almost always a good idea to add hydrogens to the molecule first."
+            it's almost always a good idea to add hydrogens to the molecule first."
         fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial
             embedding fails.
         ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.
@@ -163,6 +165,8 @@ def generate(
             return None
         raise ValueError(f"Conformers embedding failed for {convert.to_smiles(mol)}")
 
+    energies = None
+
     # Minimize energy
     if minimize_energy:
 
@@ -176,6 +180,15 @@ def generate(
             logger.warning(
                 f"{not_converged}/{len(results)} conformers have not converged for {convert.to_smiles(mol)}"
             )
+
+    elif sort_by_energy:
+        energies = []
+        for conf in mol.GetConformers():
+            ff = rdForceFieldHelpers.UFFGetMoleculeForceField(mol, confId=conf.GetId())
+            energies.append(ff.CalcEnergy())
+        energies = np.array(energies)
+
+    if energies is not None:
 
         # Add the energy as a property to each conformers
         [
@@ -323,8 +336,6 @@ def translate(mol: Mol, new_centroid: Union[np.ndarray, List[int]], conf_id: int
     # Make the transformation matrix
     T = np.eye(4)
     T[:3, 3] = new_centroid - mol_center
-    print(T)
-    print(mol_center)
 
     # Transform
     rdMolTransforms.TransformConformer(conf, T)
