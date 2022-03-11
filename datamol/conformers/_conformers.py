@@ -11,33 +11,38 @@ import numpy as np
 
 from rdkit import Chem
 from rdkit.Chem import AllChem
+from rdkit.Chem import rdDistGeom
 from rdkit.Chem import rdMolAlign
 from rdkit.Chem import rdMolDescriptors
-from rdkit.Chem import Descriptors
 from rdkit.Chem import rdMolTransforms
 from rdkit.Chem import rdForceFieldHelpers
 from rdkit.ML.Cluster import Butina
 
-import datamol as dm
+from .. import Mol
+from .. import mol as dm_mol
+from .. import convert
+from .. import descriptors
 
 
 def generate(
-    mol: Chem.rdchem.Mol,
-    n_confs: int = None,
+    mol: Mol,
+    n_confs: Optional[int] = None,
+    use_random_coords: bool = True,
+    enforce_chirality: bool = True,
+    num_threads: int = 1,
     rms_cutoff: Optional[float] = None,
     clear_existing: bool = True,
     align_conformers: bool = True,
     minimize_energy: bool = False,
-    method: str = None,
-    energy_iterations: int = 500,
-    warning_not_converged: int = 10,
+    method: Optional[str] = None,
+    energy_iterations: int = 200,
+    warning_not_converged: int = 0,
     random_seed: int = 19,
     add_hs: bool = True,
-    fallback_to_random_coords: bool = True,
     ignore_failure: bool = False,
-    embed_params: dict = None,
+    embed_params: Optional[dict] = None,
     verbose: bool = False,
-) -> Chem.rdchem.Mol:
+) -> Mol:
     """Compute conformers of a molecule.
 
     Example:
@@ -64,13 +69,17 @@ def generate(
 
     Args:
         mol: a molecule
-        n_confs: Number of conformers to generate. Depends on the
-            number of rotatable bonds by default.
+        n_confs: Number of conformers to generate. Depends on the number of rotatable bonds
+            by default: 50 for <8, 200 for <12 and 300 for >12.
+        use_random_coords: Start the embedding from random coordinates instead of using eigenvalues
+            of the distance matrix.
+        enforce_chirality: Enforce correct chirilaty if chiral centers are present.
+        num_threads: Number of threads to use when embedding multiple conformations.
         rms_cutoff: The minimum RMS value in Angstrom at which two conformers
             are considered redundant and one is deleted. If None, all conformers
             are kept. This step is done after an eventual minimization step.
         clear_existing: Whether to overwrite existing conformers for the molecule.
-        align_conformers: Wehther to align conformer.
+        align_conformers: Whether to align the conformers.
         minimize_energy: Wether to minimize conformer's energies using UFF.
             Disable to generate conformers much faster.
         method: RDKit method to use for embedding. Choose among
@@ -78,7 +87,8 @@ def generate(
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
             It corresponds to the `maxIters` argument in RDKit.
         warning_not_converged: Wether to log a warning when the number of not converged conformers
-            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True. Disable with 0. Defaults to 10.
+            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True.
+            Disable with 0. Defaults to 10.
         random_seed: Set to None or -1 to disable.
         add_hs: Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
             are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
@@ -87,8 +97,9 @@ def generate(
         fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial
             embedding fails.
         ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.
-        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. See the Rdkit
-            docs for reference. This will override any other default settings.
+        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. This will override any
+            other default settings. See https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters
+            for more details.
         verbose: Wether to enable logs during the process.
 
     Returns:
@@ -116,12 +127,12 @@ def generate(
 
     # Add hydrogens
     if add_hs:
-        mol = Chem.AddHs(mol)
+        mol = dm_mol.add_hs(mol)
 
     if not n_confs:
         # Set the number of conformers depends on
         # the number of rotatable bonds.
-        rotatable_bonds = Descriptors.NumRotatableBonds(mol)
+        rotatable_bonds = descriptors.n_rotatable_bonds(mol)
         if rotatable_bonds < 8:
             n_confs = 50
         elif rotatable_bonds < 12:
@@ -129,47 +140,41 @@ def generate(
         else:
             n_confs = 300
 
-    # Embed conformers
-    params = getattr(AllChem, method)()
+    # Setup the parameters for the embedding
+    params = getattr(rdDistGeom, method)()
     params.randomSeed = random_seed
-    params.enforceChirality = True
+    params.enforceChirality = enforce_chirality
+    params.useRandomCoords = use_random_coords
+    params.numThreads = num_threads
+
     if embed_params is not None:
         for k, v in embed_params.items():
             setattr(params, k, v)
 
-    confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
-
-    # Sometime embedding fails. Here we try again by disabling `enforceChirality`.
-    if len(confs) == 0 and fallback_to_random_coords:
-        if verbose:
-            logger.warning(
-                f"Conformers embedding failed for {dm.to_smiles(mol)}. Trying with random coordinates."
-            )
-
-        params.useRandomCoords = True
-        confs = AllChem.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
+    # Embed conformers
+    confs = rdDistGeom.EmbedMultipleConfs(mol, numConfs=n_confs, params=params)
 
     if len(confs) == 0:
         if ignore_failure:
             if verbose:
                 logger.warning(
-                    f"Conformers embedding failed for {dm.to_smiles(mol)}. Returning None because ignore_failure is set."
+                    f"Conformers embedding failed for {convert.to_smiles(mol)}. Returning None because ignore_failure is set."
                 )
             return None
-        raise ValueError(f"Conformers embedding failed for {dm.to_smiles(mol)}")
+        raise ValueError(f"Conformers embedding failed for {convert.to_smiles(mol)}")
 
     # Minimize energy
     if minimize_energy:
 
         # Minimize conformer's energy using UFF
-        results = AllChem.UFFOptimizeMoleculeConfs(mol, maxIters=energy_iterations)
+        results = rdForceFieldHelpers.UFFOptimizeMoleculeConfs(mol, maxIters=energy_iterations)
         energies = [energy for _, energy in results]
 
         # Some conformers might not have converged during minimization.
         not_converged = sum([not_converged for not_converged, _ in results if not_converged])
         if warning_not_converged != 0 and not_converged > warning_not_converged and verbose:
             logger.warning(
-                f"{not_converged}/{len(results)} conformers have not converged for {dm.to_smiles(mol)}"
+                f"{not_converged}/{len(results)} conformers have not converged for {convert.to_smiles(mol)}"
             )
 
         # Add the energy as a property to each conformers
@@ -198,13 +203,13 @@ def generate(
         )  # type: ignore
 
     if add_hs:
-        mol = Chem.RemoveHs(mol)
+        mol = dm_mol.remove_hs(mol)
 
     return mol
 
 
 def cluster(
-    mol: Chem.rdchem.Mol,
+    mol: Mol,
     rms_cutoff: float = 1,
     already_aligned: bool = False,
     centroids: bool = True,
@@ -239,7 +244,7 @@ def cluster(
     return return_centroids(mol, conf_clusters, centroids=centroids)
 
 
-def rmsd(mol: Chem.rdchem.Mol) -> np.ndarray:
+def rmsd(mol: Mol) -> np.ndarray:
     """Compute the RMSD between all the conformers of a molecule.
 
     Args:
@@ -261,10 +266,10 @@ def rmsd(mol: Chem.rdchem.Mol) -> np.ndarray:
 
 
 def return_centroids(
-    mol: Chem.rdchem.Mol,
+    mol: Mol,
     conf_clusters: Sequence[Sequence[int]],
     centroids: bool = True,
-) -> Union[List[Chem.rdchem.Mol], Chem.rdchem.Mol]:
+) -> Union[List[Mol], Mol]:
     """Given a list of cluster indices, return one single molecule
     with only the centroid of the clusters of a list of molecules per cluster.
 
@@ -298,7 +303,7 @@ def return_centroids(
         return mols
 
 
-def translate(mol: Chem.rdchem.Mol, new_centroid: Union[np.ndarray, List[int]], conf_id: int = -1):
+def translate(mol: Mol, new_centroid: Union[np.ndarray, List[int]], conf_id: int = -1):
     """Move a given conformer of a molecule to a new position. The transformation is performed
     in place.
 
@@ -318,13 +323,15 @@ def translate(mol: Chem.rdchem.Mol, new_centroid: Union[np.ndarray, List[int]], 
     # Make the transformation matrix
     T = np.eye(4)
     T[:3, 3] = new_centroid - mol_center
+    print(T)
+    print(mol_center)
 
     # Transform
     rdMolTransforms.TransformConformer(conf, T)
 
 
 def align_conformers(
-    mols: List[dm.Mol],
+    mols: List[Mol],
     ref_id: int = 0,
     copy: bool = True,
     conformer_id: int = -1,
@@ -360,7 +367,7 @@ def align_conformers(
 
     # Make a copy of the molecules since they are going to be modified
     if copy:
-        mols = [dm.copy_mol(mol) for mol in mols]
+        mols = [dm_mol.copy_mol(mol) for mol in mols]
 
     # Split ref and probe mols
     mol_ref = mols[ref_id]
@@ -395,8 +402,8 @@ def align_conformers(
     elif backend == "O3A":
 
         # Add hydrogens first
-        mol_probes = [dm.add_hs(mol, add_coords=True) for mol in mol_probes]
-        mol_ref = dm.add_hs(mol_ref, add_coords=True)
+        mol_probes = [dm_mol.add_hs(mol, add_coords=True) for mol in mol_probes]
+        mol_ref = dm_mol.add_hs(mol_ref, add_coords=True)
 
         # Compute MMFF params for every molecules
         mmff_params = [rdForceFieldHelpers.MMFFGetMoleculeProperties(mol) for mol in mol_probes]
@@ -425,7 +432,7 @@ def align_conformers(
             scores.append(pyO3A.Score())
 
         # Remove the hydrogens
-        mol_probes = [dm.remove_hs(mol) for mol in mol_probes]
+        mol_probes = [dm_mol.remove_hs(mol) for mol in mol_probes]
 
     else:
         raise ValueError(f"Backend {backend} not supported.")

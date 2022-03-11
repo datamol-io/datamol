@@ -44,16 +44,22 @@ def test_generate_2():
     assert mol.GetNumConformers() == 50
     assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
 
+
+def test_generate_3():
+
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
-    assert mol.GetNumConformers() == 23
+    assert mol.GetNumConformers() == 19
     assert mol.GetConformer(0).GetPositions().shape == (4, 3)
+
+
+def test_generate_4():
 
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=True)
-    assert mol.GetNumConformers() == 25
+    assert mol.GetNumConformers() == 21
     assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
 
 

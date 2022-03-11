@@ -1,17 +1,21 @@
-from typing import Union
+from typing import Optional, Union
 from typing import List
+from typing import Optional
 
 import numpy as np
 
 from rdkit import Chem
 
-import datamol as dm
+from ..types import Mol
+from ..utils.jobs import JobRunner
+from ..utils import decorators
+from ..mol import PERIODIC_TABLE
 
 
-@dm.utils.decorators.disable_on_os("win")
+@decorators.disable_on_os("win")
 def sasa(
     mol: Chem.rdchem.Mol,
-    conf_id: Union[int, List[int]] = None,
+    conf_id: Optional[Union[int, List[int]]] = None,
     n_jobs: int = 1,
 ) -> np.ndarray:
     """Compute Solvent Accessible Surface Area of all the conformers
@@ -54,7 +58,7 @@ def sasa(
         )
 
     # Get Van der Waals radii (angstrom)
-    radii = [dm.PERIODIC_TABLE.GetRvdw(atom.GetAtomicNum()) for atom in mol.GetAtoms()]
+    radii = [PERIODIC_TABLE.GetRvdw(atom.GetAtomicNum()) for atom in mol.GetAtoms()]
 
     # Which conformers to compute
     conf_ids = []
@@ -73,7 +77,7 @@ def sasa(
         conf.SetDoubleProp("rdkit_free_sasa", sasa)
         return sasa
 
-    runner = dm.JobRunner(n_jobs=n_jobs)
+    runner = JobRunner(n_jobs=n_jobs)
     sasa_values = runner(_get_sasa, conf_ids)
     return np.array(sasa_values)
 
@@ -96,7 +100,7 @@ def get_coords(mol: Chem.rdchem.Mol, conf_id: int = -1):
 def center_of_mass(
     mol: Chem.rdchem.Mol,
     use_atoms: bool = True,
-    digits: int = None,
+    digits: Optional[int] = None,
     conf_id: int = -1,
 ) -> np.ndarray:
     """Compute the center of mass of a conformer of a molecule.
@@ -110,7 +114,7 @@ def center_of_mass(
     Returns
         cm: Center of mass or geometrical center
     """
-    coords = get_coords(mol)
+    coords = get_coords(mol, conf_id=conf_id)
     atom_weight = np.ones((coords.shape[0]))
 
     if use_atoms:
@@ -124,3 +128,8 @@ def center_of_mass(
         center = center.round(digits)
 
     return center
+
+
+def keep_conformers(mol: Mol, conf_indices: Union[int, List[int]] = -1):
+    """Keep on the"""
+    pass
