@@ -1907,7 +1907,7 @@
 
     <div class="doc doc-contents first">
 
-      <p>Convert an input molecule (smiles representation) into a <code>dm.Mol</code>.</p>
+      <p>Convert an input molecule (smiles representation) into a <code>Mol</code>.</p>
 
 <p><strong>Parameters:</strong></p>
 <table>
@@ -1980,14 +1980,14 @@ None is returned so make sure that you handle this case on your own.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">],</span>
     <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">explicit_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">ordered</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">kekulize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Convert an input molecule (smiles representation) into a `dm.Mol`.</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Convert an input molecule (smiles representation) into a `Mol`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A SMILES or a molecule.</span>
@@ -2005,11 +2005,11 @@ None is returned so make sure that you handle this case on your own.</p></td>
 <span class="sd">        None is returned so make sure that you handle this case on your own.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input should be a dm.Mol or a string instead of &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">)):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Input should be a Mol or a string instead of &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39;&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="ow">not</span> <span class="n">sanitize</span> <span class="ow">and</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">_mol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -2018,14 +2018,14 @@ None is returned so make sure that you handle this case on your own.</p></td>
 
     <span class="c1"># Add hydrogens</span>
     <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">add_hs</span><span class="p">:</span>
-        <span class="n">_mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">explicitOnly</span><span class="o">=</span><span class="n">explicit_only</span><span class="p">,</span> <span class="n">addCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">AddHs</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">explicitOnly</span><span class="o">=</span><span class="n">explicit_only</span><span class="p">,</span> <span class="n">addCoords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="c1"># Reorder atoms</span>
     <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">ordered</span><span class="p">:</span>
         <span class="n">_mol</span> <span class="o">=</span> <span class="n">reorder_atoms</span><span class="p">(</span><span class="n">_mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">kekulize</span><span class="p">:</span>
-        <span class="n">Chem</span><span class="o">.</span><span class="n">Kekulize</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">clearAromaticFlags</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">Kekulize</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">clearAromaticFlags</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">_mol</span>
 </code></pre></div>
         </details>
@@ -2070,7 +2070,7 @@ None is returned so make sure that you handle this case on your own.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Copy a molecule and return a new one.</span>
 
 <span class="sd">    Args:</span>
@@ -2155,11 +2155,11 @@ regardless of its original representation.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_atoms</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">break_ties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">include_chirality</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">include_isotopes</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Reorder the atoms in a mol. It ensures a single atom order for the same molecule,</span>
 <span class="sd">    regardless of its original representation.</span>
 
@@ -2175,14 +2175,14 @@ regardless of its original representation.</p>
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">mol</span>
 
-    <span class="n">new_order</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">CanonicalRankAtoms</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+    <span class="n">new_order</span> <span class="o">=</span> <span class="n">CanonicalRankAtoms</span><span class="p">(</span>
         <span class="n">mol</span><span class="p">,</span>
         <span class="n">breakTies</span><span class="o">=</span><span class="n">break_ties</span><span class="p">,</span>
         <span class="n">includeChirality</span><span class="o">=</span><span class="n">include_chirality</span><span class="p">,</span>
         <span class="n">includeIsotopes</span><span class="o">=</span><span class="n">include_isotopes</span><span class="p">,</span>
     <span class="p">)</span>
     <span class="n">new_order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_order</span><span class="p">)])</span>
-    <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">new_order</span><span class="p">])</span>  <span class="c1"># type: ignore</span>
+    <span class="k">return</span> <span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">new_order</span><span class="p">])</span>
 </code></pre></div>
         </details>
     </div>
@@ -2241,7 +2241,7 @@ regardless of its original representation.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">randomize_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">randomize_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Randomize the position of the atoms in a mol.</span>
 
 <span class="sd">    Args:</span>
@@ -2255,7 +2255,7 @@ regardless of its original representation.</p>
 
     <span class="n">atom_indices</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()))</span>
     <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">atom_indices</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_indices</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="k">return</span> <span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_indices</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -2291,7 +2291,7 @@ regardless of its original representation.</p>
   <tbody>
       <tr>
         <td><code>mol</code></td>
-        <td><code>Mol</code></td>
+        <td><code>Optional[rdkit.Chem.rdchem.Mol]</code></td>
         <td><p>a molecule.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2314,7 +2314,7 @@ regardless of its original representation.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_neutral</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_neutral</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Neutralize the charge of a molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -2390,10 +2390,10 @@ regardless of its original representation.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_mol_props</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">props</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Any</span><span class="p">],</span>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Set properties to a mol from a dict.</span>
 
 <span class="sd">    Args:</span>
@@ -2404,7 +2404,7 @@ regardless of its original representation.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">copy</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">props</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">v</span><span class="p">,</span> <span class="nb">bool</span><span class="p">):</span>
@@ -2436,7 +2436,7 @@ regardless of its original representation.</p>
 
 
 <h4 id="datamol.mol.copy_mol_props" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">copy_mol_props</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">copy_mol_props</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
 
 
 <a href="#datamol.mol.copy_mol_props" class="headerlink" title="Permanent link">&para;</a></h4>
@@ -2469,21 +2469,40 @@ molecule.</p>
         <td><p>a molecule to copy to.</p></td>
         <td><em>required</em></td>
       </tr>
+      <tr>
+        <td><code>include_private</code></td>
+        <td><code>bool</code></td>
+        <td><p>Include private properties.</p></td>
+        <td><code>False</code></td>
+      </tr>
+      <tr>
+        <td><code>include_computed</code></td>
+        <td><code>bool</code></td>
+        <td><p>Include computed properties.</p></td>
+        <td><code>False</code></td>
+      </tr>
   </tbody>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol_props</span><span class="p">(</span><span class="n">source</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">destination</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_mol_props</span><span class="p">(</span>
+    <span class="n">source</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">destination</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Copy properties from one source molecule to another destination</span>
 <span class="sd">    molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        source: a molecule to copy from.</span>
 <span class="sd">        destination: a molecule to copy to.</span>
+<span class="sd">        include_private: Include private properties.</span>
+<span class="sd">        include_computed: Include computed properties.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="n">props</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span>
-    <span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
+    <span class="n">props</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">(</span><span class="n">includePrivate</span><span class="o">=</span><span class="n">include_private</span><span class="p">,</span> <span class="n">includeComputed</span><span class="o">=</span><span class="n">include_computed</span><span class="p">)</span>
+    <span class="n">set_mol_props</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -2533,7 +2552,7 @@ molecule.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">atom_indices_to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">atom_indices_to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Add the `molAtomMapNumber` property to each atoms.</span>
 
 <span class="sd">    Args:</span>
@@ -2604,8 +2623,8 @@ molecule.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">same_mol</span><span class="p">(</span>
-    <span class="n">mol1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">mol2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mol1</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mol2</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">use_non_standard_inchikey</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check two molecules are the same by comparing their InChiKey.</span>
@@ -2622,9 +2641,9 @@ molecule.</p>
         <span class="k">return</span> <span class="kc">False</span>
 
     <span class="k">if</span> <span class="n">use_non_standard_inchikey</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey_non_standard</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey_non_standard</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">to_inchikey_non_standard</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">to_inchikey_non_standard</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
 </code></pre></div>
         </details>
     </div>
@@ -2718,12 +2737,12 @@ molecule already contains hydrogens.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">charge_neutral</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanifix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;An augmented version of RDKit `sanitize=True`. It uses a</span>
 <span class="sd">    mol-SMILES-mol conversion to catch potential aromaticity errors</span>
 <span class="sd">    and try to fix aromatic nitrogen (using the popular sanifix4 script).</span>
@@ -2771,13 +2790,13 @@ molecule already contains hydrogens.</p></td>
         <span class="c1"># Try catch to avoid occasional aromaticity errors</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="c1"># `cxsmiles` is used here to preserve the first conformer.</span>
-            <span class="n">mol</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cxsmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="n">add_hs</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cxsmiles</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="n">add_hs</span><span class="p">)</span>
         <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
 
     <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="c1"># Insert back properties.</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">properties</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div>
@@ -2851,7 +2870,7 @@ molecule already contains hydrogens.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_first</span><span class="p">(</span><span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">charge_neutral</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sanifix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_first</span><span class="p">(</span><span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">charge_neutral</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">sanifix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Sanitize a list of molecules and return the first valid molecule seen in the list.</span>
 
 <span class="sd">    Args:</span>
@@ -2903,7 +2922,7 @@ molecule already contains hydrogens.</p></td>
   <tbody>
       <tr>
         <td><code>smiles</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>smiles to be sanitized.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -2932,7 +2951,7 @@ molecule already contains hydrogens.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">isomeric</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">sanitize_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">isomeric</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Takes SMILES string and returns its sanitized version.</span>
 
 <span class="sd">    Args:</span>
@@ -2942,9 +2961,12 @@ molecule already contains hydrogens.</p></td>
 <span class="sd">    Returns:</span>
 <span class="sd">        sanitized smiles.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="kc">None</span>
+
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="kc">False</span><span class="p">)</span>
     <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
@@ -2952,9 +2974,10 @@ molecule already contains hydrogens.</p></td>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">smiles</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">smiles</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>
     <span class="k">except</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
+
     <span class="k">return</span> <span class="n">smiles</span>
 </code></pre></div>
         </details>
@@ -3128,7 +3151,7 @@ The process is apply in the order of the argument.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">standardize_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">disconnect_metals</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">normalize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">reionize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -3168,7 +3191,7 @@ The process is apply in the order of the argument.</p>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">uncharger</span><span class="o">.</span><span class="n">uncharge</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">stereo</span><span class="p">:</span>
-        <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div>
@@ -3235,7 +3258,7 @@ The process is apply in the order of the argument.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fix_valence_charge</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">inplace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fix_valence_charge</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">inplace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Fix valence issues that are due to incorrect charges.</span>
 
 <span class="sd">    Args:</span>
@@ -3259,7 +3282,7 @@ The process is apply in the order of the argument.</p>
             <span class="n">n_electron</span> <span class="o">=</span> <span class="p">(</span>
                 <span class="n">a</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">()</span>
                 <span class="o">+</span> <span class="n">a</span><span class="o">.</span><span class="n">GetExplicitValence</span><span class="p">()</span>
-                <span class="o">-</span> <span class="n">dm</span><span class="o">.</span><span class="n">PERIODIC_TABLE</span><span class="o">.</span><span class="n">GetDefaultValence</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">())</span>
+                <span class="o">-</span> <span class="n">PERIODIC_TABLE</span><span class="o">.</span><span class="n">GetDefaultValence</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">())</span>
             <span class="p">)</span>
             <span class="n">a</span><span class="o">.</span><span class="n">SetFormalCharge</span><span class="p">(</span><span class="n">n_electron</span><span class="p">)</span>
 
@@ -3328,7 +3351,7 @@ The process is apply in the order of the argument.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">incorrect_valence</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">],</span> <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">incorrect_valence</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Atom</span><span class="p">],</span> <span class="n">update</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Check if an atom connection is not valid or all the atom of a molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -3338,7 +3361,7 @@ The process is apply in the order of the argument.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        Whether the input atom valence is correct.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="n">Mol</span><span class="p">):</span>
         <span class="n">a</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">vm</span> <span class="o">=</span> <span class="n">rdMolStandardize</span><span class="o">.</span><span class="n">RDKitValidation</span><span class="p">()</span>
         <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">vm</span><span class="o">.</span><span class="n">validate</span><span class="p">(</span><span class="n">a</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span>
@@ -3479,7 +3502,7 @@ of if failed.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fix_valence</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">inplace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">allow_ring_break</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fix_valence</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">inplace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="n">allow_ring_break</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Identify and try to fix valence issues by removing any supplemental bond</span>
 <span class="sd">    that should not be in the graph.</span>
 
@@ -3500,10 +3523,10 @@ of if failed.</p></td>
         <span class="k">return</span> <span class="n">mol</span>
 
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">m</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+        <span class="n">m</span> <span class="o">=</span> <span class="n">remove_hs</span><span class="p">(</span>
             <span class="n">mol</span><span class="p">,</span>
-            <span class="n">implicitOnly</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
-            <span class="n">updateExplicitCount</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="n">implicit_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+            <span class="n">update_explicit_count</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
             <span class="n">sanitize</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">m</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
@@ -3517,7 +3540,7 @@ of if failed.</p></td>
                 <span class="c1"># atom.SetNumRadicalElectrons(0)</span>
             <span class="n">atom</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-        <span class="n">em</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">em</span> <span class="o">=</span> <span class="n">RWMol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
         <span class="n">bonds</span> <span class="o">=</span> <span class="n">em</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">()</span>
         <span class="n">bonds</span> <span class="o">=</span> <span class="p">[</span>
             <span class="n">bond</span>
@@ -3591,7 +3614,7 @@ but not the ethane fragment.</p>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">adjust_singleton</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">adjust_singleton</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Remove all atoms that are essentially disconnected singleton nodes in the molecular graph.</span>
 <span class="sd">    For example, the chlorine atom and methane fragment will be removed in Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C&quot;,</span>
 <span class="sd">    but not the ethane fragment.</span>
@@ -3600,7 +3623,7 @@ but not the ethane fragment.</p>
 <span class="sd">        mol: a molecule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">to_rem</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="n">em</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="n">em</span> <span class="o">=</span> <span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
         <span class="k">if</span> <span class="n">atom</span><span class="o">.</span><span class="n">GetExplicitValence</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">to_rem</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">())</span>
@@ -3632,15 +3655,17 @@ but not the ethane fragment.</p>
 
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">remove_dummies</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">dummy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">remove_dummies</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">dummy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Remove dummy atoms from molecules.&quot;&quot;&quot;</span>
-    <span class="n">du</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
+
+    <span class="n">du</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
     <span class="n">out</span> <span class="o">=</span> <span class="n">mol</span>
+
     <span class="k">try</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;[H]&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-        <span class="n">out</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">DeleteSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;[H]&quot;</span><span class="p">),</span> <span class="kc">True</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">remove_hs</span><span class="p">(</span><span class="n">out</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
+        <span class="n">out</span> <span class="o">=</span> <span class="n">DeleteSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
         </details>
@@ -3725,12 +3750,12 @@ but not the ethane fragment.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">fix_mol</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">n_iter</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">remove_singleton</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">largest_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">inplace</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Fix error in molecule using a greedy approach.</span>
 
 <span class="sd">    Args:</span>
@@ -3839,11 +3864,11 @@ but not the ethane fragment.</p>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">replace_dummies_atoms</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">atom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span><span class="p">,</span>
     <span class="n">dummy</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span>
     <span class="n">replace_all</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Remove dummy atoms from molecules.</span>
 
 <span class="sd">    Args:</span>
@@ -3855,9 +3880,9 @@ but not the ethane fragment.</p>
 <span class="sd">    Returns:</span>
 <span class="sd">        mol: Molecule with dummy replaced</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">du</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="n">replacement</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmiles</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="n">out</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">replaceAll</span><span class="o">=</span><span class="n">replace_all</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>  <span class="c1"># type: ignore</span>
+    <span class="n">du</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">dummy</span><span class="p">)</span>
+    <span class="n">replacement</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">atom</span><span class="p">)</span>
+    <span class="n">out</span> <span class="o">=</span> <span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">replaceAll</span><span class="o">=</span><span class="n">replace_all</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">out</span>
 </code></pre></div>
         </details>
@@ -3883,10 +3908,10 @@ but not the ethane fragment.</p>
 
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Only keep largest fragment of each molecule.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">max</span><span class="p">(</span>
-        <span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
+        <span class="n">GetMolFrags</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">True</span><span class="p">),</span>
         <span class="n">default</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
         <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span>
     <span class="p">)</span>
@@ -4007,7 +4032,7 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/mol.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_dative_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">from_atoms</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">set_dative_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">from_atoms</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Replaces some single bonds between metals and atoms with atomic numbers in fromAtoms</span>
 <span class="sd">    with dative bonds. The replacement is only done if the atom has &quot;too many&quot; bonds.</span>
 
@@ -4019,7 +4044,7 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p></td>
 <span class="sd">    Returns:</span>
 <span class="sd">        The modified molecule.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">rwmol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="n">rwmol</span> <span class="o">=</span> <span class="n">RWMol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="n">rwmol</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="n">strict</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
     <span class="n">metals</span> <span class="o">=</span> <span class="p">[</span><span class="n">at</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">rwmol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()</span> <span class="k">if</span> <span class="n">is_transition_metal</span><span class="p">(</span><span class="n">at</span><span class="p">)]</span>
@@ -4394,7 +4419,7 @@ of the amido-imidol tautomerism.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smiles</span><span class="p">(</span>
-    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">canonical</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">isomeric</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">kekulize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -4419,6 +4444,7 @@ of the amido-imidol tautomerism.</p></td>
 <span class="sd">        cxsmiles: Whether to return a CXSMILES instead of a SMILES.</span>
 <span class="sd">        allow_to_fail: Raise an error if the conversion to SMILES fails. Return None otherwise.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
     <span class="k">if</span> <span class="n">ordered</span> <span class="ow">and</span> <span class="n">canonical</span> <span class="ow">is</span> <span class="kc">False</span><span class="p">:</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reorder_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
@@ -4430,7 +4456,7 @@ of the amido-imidol tautomerism.</p></td>
     <span class="k">try</span><span class="p">:</span>
 
         <span class="k">if</span> <span class="n">cxsmiles</span><span class="p">:</span>
-            <span class="n">smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToCXSmiles</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+            <span class="n">smiles</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolToCXSmiles</span><span class="p">(</span>
                 <span class="n">mol</span><span class="p">,</span>
                 <span class="n">isomericSmiles</span><span class="o">=</span><span class="n">isomeric</span><span class="p">,</span>
                 <span class="n">canonical</span><span class="o">=</span><span class="n">canonical</span><span class="p">,</span>
@@ -4440,7 +4466,7 @@ of the amido-imidol tautomerism.</p></td>
             <span class="p">)</span>
 
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">smiles</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span>  <span class="c1"># type: ignore</span>
+            <span class="n">smiles</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolToSmiles</span><span class="p">(</span>
                 <span class="n">mol</span><span class="p">,</span>
                 <span class="n">isomericSmiles</span><span class="o">=</span><span class="n">isomeric</span><span class="p">,</span>
                 <span class="n">canonical</span><span class="o">=</span><span class="n">canonical</span><span class="p">,</span>
@@ -4523,7 +4549,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">smiles_as_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">keep_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">smiles_as_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">],</span> <span class="n">keep_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a smiles to a smarts if possible</span>
 
 <span class="sd">    Args:</span>
@@ -4617,7 +4643,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_selfies</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_selfies</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a mol to SELFIES.</span>
 
 <span class="sd">    Args:</span>
@@ -4627,12 +4653,12 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 <span class="sd">        selfies: SELFIES string.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">Mol</span><span class="p">):</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
-    <span class="n">selfies</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="n">selfies</span> <span class="o">=</span> <span class="n">sf</span><span class="o">.</span><span class="n">encoder</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">selfies</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
@@ -4702,7 +4728,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_selfies</span><span class="p">(</span><span class="n">selfies</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">as_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_selfies</span><span class="p">(</span><span class="n">selfies</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">as_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a SEFLIES to a smiles or a mol.</span>
 
 <span class="sd">    Args:</span>
@@ -4764,7 +4790,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smarts</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a mol to SMARTS format</span>
 
 <span class="sd">    Args:</span>
@@ -4818,9 +4844,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_smarts</span><span class="p">(</span>
-    <span class="n">smarts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_smarts</span><span class="p">(</span><span class="n">smarts</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a SMARTS string to a molecule</span>
 
 <span class="sd">    Args:</span>
@@ -4873,7 +4897,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a mol to a standard Inchi.</span>
 
 <span class="sd">    Args:</span>
@@ -4933,7 +4957,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_inchikey</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_inchikey</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a mol to a standard InchiKey.</span>
 
 <span class="sd">    Args:</span>
@@ -5023,7 +5047,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
     <span class="n">inchi</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert an InChi to a mol.</span>
 
 <span class="sd">    Args:</span>
@@ -5087,7 +5111,7 @@ as a column.</p>
       </tr>
       <tr>
         <td><code>mol_column</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Name of the column. If not None, rdkit.Chem.PandaTools
 is used to add a molecule column.</p></td>
         <td><code>None</code></td>
@@ -5123,9 +5147,9 @@ mol in it.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/convert.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
-    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">render_df_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -5154,7 +5178,7 @@ mol in it.</p></td>
 
     <span class="c1"># Feed it with smiles</span>
     <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">smiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="n">smiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
         <span class="n">df</span><span class="p">[</span><span class="n">smiles_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">smiles</span>
 
     <span class="c1"># Add a mol column</span>
@@ -5243,7 +5267,7 @@ the SMILES column by setting <code>conserve_smiles</code> to True.</p>
       </tr>
       <tr>
         <td><code>mol_column</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Column name to extract the molecule. It takes
 precedence over <code>smiles_column</code>.</p></td>
         <td><code>None</code></td>
@@ -5267,10 +5291,10 @@ precedence over <code>smiles_column</code>.</p></td>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">from_df</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
-    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">conserve_smiles</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a dataframe to a list of mols.</span>
 
 <span class="sd">    For the reverse operation, you might to check `dm.to_df()`.</span>
@@ -5298,7 +5322,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="c1"># Try to detect the mol column if `mol_column` is None.</span>
     <span class="k">if</span> <span class="n">mol_column</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">Mol</span><span class="p">):</span>
                 <span class="n">mol_column</span> <span class="o">=</span> <span class="n">col</span>
 
     <span class="k">def</span> <span class="nf">_row_to_mol</span><span class="p">(</span><span class="n">row</span><span class="p">):</span>
@@ -5367,7 +5391,7 @@ precedence over <code>smiles_column</code>.</p></td>
       </tr>
       <tr>
         <td><code>smiles_column</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Use this column to build a mol column.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -5405,7 +5429,7 @@ Avoid when loading a very large file.</p></td>
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
-    <span class="n">smiles_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -5514,7 +5538,7 @@ Avoid when loading a very large file.</p></td>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_excel</span><span class="p">(</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
     <span class="n">sheet_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">smiles_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
@@ -5599,7 +5623,7 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
       </tr>
       <tr>
         <td><code>mol_column</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Name of the mol column. Only relevant if <code>as_df</code> is True.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -5638,12 +5662,12 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
-    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Read an SDF file.</span>
 
 <span class="sd">    Note: This function is meant to be used with dataset that fit _in-memory_.</span>
@@ -5679,7 +5703,7 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
 
             <span class="c1"># Handle gzip file if needed</span>
             <span class="k">if</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gz&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;.gzip&quot;</span><span class="p">):</span>
-                <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+                <span class="n">f</span> <span class="o">=</span> <span class="n">gzip</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
             <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
                 <span class="n">f</span><span class="p">,</span>
@@ -5756,7 +5780,7 @@ For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMol
       </tr>
       <tr>
         <td><code>mol_column</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Column name to extract the molecule. It takes
 precedence over <code>smiles_column</code>.</p></td>
         <td><code>None</code></td>
@@ -5766,10 +5790,10 @@ precedence over <code>smiles_column</code>.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_sdf</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
-    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Write molecules to a file.</span>
 
@@ -5784,7 +5808,7 @@ precedence over <code>smiles_column</code>.</p></td>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="n">mol_column</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Mol</span><span class="p">):</span>
         <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
 
     <span class="c1"># Filter out None values</span>
@@ -5860,7 +5884,7 @@ precedence over <code>smiles_column</code>.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">to_smi</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">TextIO</span><span class="p">],</span>
     <span class="n">error_if_empty</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
@@ -5927,7 +5951,7 @@ precedence over <code>smiles_column</code>.</p></td>
   <tbody>
       <tr>
         <td><code>urlpath</code></td>
-        <td><code>Union[str, os.PathLike]</code></td>
+        <td><code>Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile]</code></td>
         <td><p>Path to a file or a file-like object. Path can be remote or local.
 Note: file-like object are not supported yet.</p></td>
         <td><em>required</em></td>
@@ -5937,8 +5961,8 @@ Note: file-like object are not supported yet.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/io.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">read_smi</span><span class="p">(</span>
-    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Read a list of smiles from am `.smi` file.</span>
 
 <span class="sd">    Args:</span>
@@ -5963,7 +5987,7 @@ Note: file-like object are not supported yet.</p></td>
 
     <span class="c1"># Delete the local temporary path</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">can_be_local</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)):</span>
-        <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">active_path</span><span class="p">)</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+        <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">active_path</span><span class="p">))</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
 
     <span class="k">return</span> <span class="n">mols</span>
 </code></pre></div>
@@ -6287,7 +6311,7 @@ complete list.</p></td>
       </tr>
       <tr>
         <td><code>fold_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>If set, fold the fingerprint to the <code>fold_size</code>. If set, returned array is
 always a numpy array.</p></td>
         <td><code>None</code></td>
@@ -6321,7 +6345,7 @@ always a numpy array.</p></td>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">as_array</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fp_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ecfp&quot;</span><span class="p">,</span>
-    <span class="n">fold_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">fold_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">fp_args</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Compute the molecular fingerprint given a molecule or a SMILES.</span>
@@ -6651,7 +6675,7 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
   <tbody>
       <tr>
         <td><code>mols</code></td>
-        <td><code>List[rdkit.Chem.rdchem.Mol]</code></td>
+        <td><code>Union[Sequence[rdkit.Chem.rdchem.Mol], pandas.core.series.Series]</code></td>
         <td><p>a list of molecules.</p></td>
         <td><em>required</em></td>
       </tr>
@@ -6663,8 +6687,8 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
       </tr>
       <tr>
         <td><code>feature_fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>A feature function that takes a Chem.rdchem.Mol object
+        <td><code>Optional[Callable]</code></td>
+        <td><p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
 Default to None.</p></td>
         <td><code>None</code></td>
@@ -6681,9 +6705,9 @@ parallelization. Set to None to use all available cores.</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/cluster.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">cluster_mols</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
     <span class="n">cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
-    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Cluster a set of molecules using the butina clustering algorithm and a given threshold.</span>
@@ -6691,7 +6715,7 @@ parallelization. Set to None to use all available cores.</p></td>
 <span class="sd">    Args:</span>
 <span class="sd">        mols: a list of molecules.</span>
 <span class="sd">        cutoff: Cuttoff for the clustering. Default to 0.2.</span>
-<span class="sd">        feature_fn: A feature function that takes a Chem.rdchem.Mol object</span>
+<span class="sd">        feature_fn: A feature function that takes a Mol object</span>
 <span class="sd">            and return molecular features. By default, the `dm.to_fp()` is used.</span>
 <span class="sd">            Default to None.</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
@@ -6707,7 +6731,9 @@ parallelization. Set to None to use all available cores.</p></td>
     <span class="n">n_mols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
 
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">n_mols</span><span class="p">):</span>
-        <span class="n">dist</span> <span class="o">=</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">BulkTanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">returnDistance</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="n">dist</span> <span class="o">=</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">cDataStructs</span><span class="o">.</span><span class="n">BulkTanimotoSimilarity</span><span class="p">(</span>
+            <span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[:</span><span class="n">i</span><span class="p">],</span> <span class="n">returnDistance</span><span class="o">=</span><span class="kc">True</span>
+        <span class="p">)</span>
         <span class="n">dists</span><span class="o">.</span><span class="n">extend</span><span class="p">([</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">dist</span><span class="p">])</span>
 
     <span class="c1"># now cluster the data</span>
@@ -6715,7 +6741,7 @@ parallelization. Set to None to use all available cores.</p></td>
     <span class="n">cluster_mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">operator</span><span class="o">.</span><span class="n">itemgetter</span><span class="p">(</span><span class="o">*</span><span class="n">cluster</span><span class="p">)(</span><span class="n">mols</span><span class="p">)</span> <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">cluster_indices</span><span class="p">]</span>
 
     <span class="c1"># Make single mol cluster a list</span>
-    <span class="n">cluster_mols</span> <span class="o">=</span> <span class="p">[[</span><span class="n">c</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="k">else</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cluster_mols</span><span class="p">]</span>
+    <span class="n">cluster_mols</span> <span class="o">=</span> <span class="p">[[</span><span class="n">c</span><span class="p">]</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">Mol</span><span class="p">)</span> <span class="k">else</span> <span class="n">c</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cluster_mols</span><span class="p">]</span>
 
     <span class="k">return</span> <span class="n">cluster_indices</span><span class="p">,</span> <span class="n">cluster_mols</span>
 </code></pre></div>
@@ -6765,22 +6791,22 @@ parallelization. Set to None to use all available cores.</p></td>
       </tr>
       <tr>
         <td><code>initial_picks</code></td>
-        <td><code>List[int]</code></td>
+        <td><code>Optional[List[int]]</code></td>
         <td><p>Starting list of index for molecules that should be in the
 set of picked molecules. Default to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>feature_fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>A feature function that takes a Chem.rdchem.Mol object
+        <td><code>Optional[Callable]</code></td>
+        <td><p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
 Default to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>dist_fn</code></td>
-        <td><code>Callable</code></td>
+        <td><code>Optional[Callable]</code></td>
         <td><p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
 By default, the Tanimoto similarity will be used. Default to None.</p></td>
@@ -6820,11 +6846,11 @@ mols: molecules that have been picked</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/cluster.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pick_diverse</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">npick</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-    <span class="n">initial_picks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">initial_picks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
@@ -6835,7 +6861,7 @@ mols: molecules that have been picked</p></td>
 <span class="sd">        npick: Number of element to pick from mols, including the preselection.</span>
 <span class="sd">        initial_picks: Starting list of index for molecules that should be in the</span>
 <span class="sd">            set of picked molecules. Default to None.</span>
-<span class="sd">        feature_fn: A feature function that takes a Chem.rdchem.Mol object</span>
+<span class="sd">        feature_fn: A feature function that takes a Mol object</span>
 <span class="sd">            and return molecular features. By default, the `dm.to_fp()` is used.</span>
 <span class="sd">            Default to None.</span>
 <span class="sd">        dist_fn: A function that takes two indexes (i,j) and return the</span>
@@ -6856,7 +6882,7 @@ mols: molecules that have been picked</p></td>
     <span class="n">features</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">feature_fn</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">distij</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">cDataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">dist_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">dist_fn</span> <span class="o">=</span> <span class="n">distij</span>
@@ -6921,7 +6947,7 @@ mols: molecules that have been picked</p></td>
       </tr>
       <tr>
         <td><code>initial_picks</code></td>
-        <td><code>List[int]</code></td>
+        <td><code>Optional[List[int]]</code></td>
         <td><p>Starting list of index for molecules that should be in the
 set of picked molecules. Default to None.</p></td>
         <td><code>None</code></td>
@@ -6929,14 +6955,14 @@ set of picked molecules. Default to None.</p></td>
       <tr>
         <td><code>feature_fn</code></td>
         <td><code>callable</code></td>
-        <td><p>A feature function that takes a Chem.rdchem.Mol object
+        <td><p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
 Default to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>dist_fn</code></td>
-        <td><code>Callable</code></td>
+        <td><code>Optional[Callable]</code></td>
         <td><p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
 By default, the Tanimoto similarity will be used. Default to None.</p></td>
@@ -6983,12 +7009,12 @@ mols: molecules that have been picked</p></td>
         <details class="quote">
           <summary>Source code in <code>datamol/cluster.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">pick_centroids</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">npick</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-    <span class="n">initial_picks</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">initial_picks</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">threshold</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">,</span>
-    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">42</span><span class="p">,</span>
     <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;sphere&quot;</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -7001,7 +7027,7 @@ mols: molecules that have been picked</p></td>
 <span class="sd">        threshold: Minimum distance between centroids for `maxmin` and sphere exclusion (`sphere`) methods.</span>
 <span class="sd">        initial_picks: Starting list of index for molecules that should be in the</span>
 <span class="sd">            set of picked molecules. Default to None.</span>
-<span class="sd">        feature_fn (callable, optional): A feature function that takes a Chem.rdchem.Mol object</span>
+<span class="sd">        feature_fn (callable, optional): A feature function that takes a Mol object</span>
 <span class="sd">            and return molecular features. By default, the `dm.to_fp()` is used.</span>
 <span class="sd">            Default to None.</span>
 <span class="sd">        dist_fn: A function that takes two indexes (i,j) and return the</span>
@@ -7025,7 +7051,7 @@ mols: molecules that have been picked</p></td>
     <span class="n">features</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">feature_fn</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">distij</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">cDataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">features</span><span class="p">[</span><span class="n">j</span><span class="p">])</span>
 
     <span class="k">if</span> <span class="n">dist_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">dist_fn</span> <span class="o">=</span> <span class="n">distij</span>
@@ -7114,15 +7140,15 @@ mols: molecules that have been picked</p></td>
       </tr>
       <tr>
         <td><code>feature_fn</code></td>
-        <td><code>Callable</code></td>
-        <td><p>A feature function that takes a Chem.rdchem.Mol object
+        <td><code>Optional[Callable]</code></td>
+        <td><p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
 Default to None.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>dist_fn</code></td>
-        <td><code>Callable</code></td>
+        <td><code>Optional[Callable]</code></td>
         <td><p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
 By default, the Tanimoto similarity will be used. Default to None.</p></td>
@@ -7157,10 +7183,10 @@ clusters_list: list of all molecules in each cluster. The cluster index follows 
         <details class="quote">
           <summary>Source code in <code>datamol/cluster.py</code></summary>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">assign_to_centroids</span><span class="p">(</span>
-    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Callable</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">feature_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">dist_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Callable</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sa">r</span><span class="sd">&quot;&quot;&quot;Assign molecules to centroids. Each molecule will be assigned to the closest centroid.</span>
@@ -7168,7 +7194,7 @@ clusters_list: list of all molecules in each cluster. The cluster index follows 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: a list of molecules to assign to centroids</span>
 <span class="sd">        centroids: list of molecules to use as centroid</span>
-<span class="sd">        feature_fn: A feature function that takes a Chem.rdchem.Mol object</span>
+<span class="sd">        feature_fn: A feature function that takes a Mol object</span>
 <span class="sd">            and return molecular features. By default, the `dm.to_fp()` is used.</span>
 <span class="sd">            Default to None.</span>
 <span class="sd">        dist_fn: A function that takes two indexes (i,j) and return the</span>
@@ -7190,7 +7216,7 @@ clusters_list: list of all molecules in each cluster. The cluster index follows 
     <span class="n">features</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">feature_fn</span><span class="p">,</span> <span class="n">all_mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">distij</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">,</span> <span class="n">features</span><span class="o">=</span><span class="n">features</span><span class="p">):</span>
-        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span> <span class="n">features</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)])</span>
+        <span class="k">return</span> <span class="mf">1.0</span> <span class="o">-</span> <span class="n">DataStructs</span><span class="o">.</span><span class="n">cDataStructs</span><span class="o">.</span><span class="n">TanimotoSimilarity</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">i</span><span class="p">)],</span> <span class="n">features</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">j</span><span class="p">)])</span>
 
     <span class="k">if</span> <span class="n">dist_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">dist_fn</span> <span class="o">=</span> <span class="n">distij</span>
@@ -7722,7 +7748,7 @@ model training.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">with</span> <span class="n">pkg_resources</span><span class="o">.</span><span class="n">resource_stream</span><span class="p">(</span><span class="s2">&quot;datamol&quot;</span><span class="p">,</span> <span class="s2">&quot;data/freesolv.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
     <span class="k">return</span> <span class="n">data</span>
 </code></pre></div>
         </details>
