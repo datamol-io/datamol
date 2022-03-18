@@ -1002,7 +1002,7 @@ to None which uses the default joblib "loky" scheduler.</p></td>
       </tr>
       <tr>
         <td><code>batch_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>Whether to automatically batch <code>inputs_list</code>. You should only use it when the length
 of <code>inputs_list</code> is very large (&gt;100k elements). The length of <code>inputs_list</code> must also be
 defined.</p></td>
@@ -1025,13 +1025,13 @@ defined.</p></td>
       </tr>
       <tr>
         <td><code>total</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>tqdm_kwargs</code></td>
-        <td><code>dict</code></td>
+        <td><code>Optional[dict]</code></td>
         <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -1065,11 +1065,11 @@ defined.</p></td>
     <span class="n">inputs_list</span><span class="p">:</span> <span class="n">Iterable</span><span class="p">[</span><span class="n">Any</span><span class="p">],</span>
     <span class="n">scheduler</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;processes&quot;</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">arg_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;arg&quot;</span><span class="p">,</span>
-    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">total</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Optional</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Run a function in parallel.</span>
@@ -1137,11 +1137,11 @@ JobRunner        </code>
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-        <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">prefer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-        <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">total</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+        <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
     <span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;</span>
@@ -1412,14 +1412,14 @@ Use -1 to use all the available processors. For details see
       </tr>
       <tr>
         <td><code>batch_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>Whether to  batch <code>inputs_list</code>. You can specify batch_size when the length
 of <code>inputs_list</code> is very large (&gt;100k elements). By default, the auto batching of joblib is used.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>prefer</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Choose from ['processes', 'threads'] or None. Default to None.
 Soft hint to choose the default backend if no specific backend
 was selected with the parallel_backend context manager. The
@@ -1436,13 +1436,13 @@ parameter is specified.</p></td>
       </tr>
       <tr>
         <td><code>total</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>tqdm_kwargs</code></td>
-        <td><code>dict</code></td>
+        <td><code>Optional[dict]</code></td>
         <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -1466,11 +1466,11 @@ parameter is specified.</p></td>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">batch_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">prefer</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">batch_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">prefer</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">total</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="nb">dict</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">total</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">tqdm_kwargs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">job_kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -2056,7 +2056,7 @@ parameter is specified.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">fs</span><span class="p">:</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">AbstractFileSystem</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fsspec</span><span class="o">.</span><span class="n">AbstractFileSystem</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return the name of the path protocol.</span>
 
 <span class="sd">    Args:</span>
@@ -2250,7 +2250,7 @@ size can't be retrieved.</p>
       </tr>
       <tr>
         <td><code>chunk_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>the chunk size to use. If progress is enabled the chunk
 size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
         <td><code>None</code></td>
@@ -2280,7 +2280,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
     <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
-    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">leave_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -2320,10 +2320,10 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">destination_file</span> <span class="o">=</span> <span class="n">destination</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_file</span><span class="p">(</span><span class="n">source_file</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">is_file</span><span class="p">(</span><span class="n">source_file</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file being copied does not exist or is not a file: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">is_file</span><span class="p">(</span><span class="n">destination_file</span><span class="p">):</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">is_file</span><span class="p">(</span><span class="n">destination_file</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The destination file to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="n">source_file</span> <span class="k">as</span> <span class="n">source_stream</span><span class="p">:</span>
@@ -2331,7 +2331,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
 
             <span class="k">if</span> <span class="n">chunk_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="c1"># copy without chunks</span>
-                <span class="n">destination_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source_stream</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+                <span class="n">destination_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">source_stream</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
 
             <span class="k">else</span><span class="p">:</span>
                 <span class="c1"># copy with chunks</span>
@@ -2363,10 +2363,10 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
 
                 <span class="c1"># start the loop</span>
                 <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
-                    <span class="n">data</span> <span class="o">=</span> <span class="n">source_stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
+                    <span class="n">data</span> <span class="o">=</span> <span class="n">source_stream</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
                     <span class="k">if</span> <span class="ow">not</span> <span class="n">data</span><span class="p">:</span>
                         <span class="k">break</span>
-                    <span class="n">destination_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+                    <span class="n">destination_stream</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
                     <span class="k">if</span> <span class="n">pbar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="n">pbar</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">)</span>
@@ -2424,7 +2424,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
-        <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>
+        <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
         <span class="n">file_hash</span> <span class="o">=</span> <span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">file_hash</span>
 </code></pre></div>
@@ -2522,7 +2522,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
       </tr>
       <tr>
         <td><code>suffix</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>A subdirectory appended to the cache dir.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -2537,7 +2537,7 @@ already exist.</p></td>
 </table>
         <details class="quote">
           <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_dir</span><span class="p">(</span><span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_dir</span><span class="p">(</span><span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Get a local cache directory for a given application name.</span>
 
 <span class="sd">    Args:</span>
@@ -2713,7 +2713,7 @@ already exist.</p></td>
       </tr>
       <tr>
         <td><code>chunk_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>the chunk size to use. If progress is enabled the chunk
 size is <code>None</code>, it is set to 2048.</p></td>
         <td><code>None</code></td>
@@ -2750,7 +2750,7 @@ size is <code>None</code>, it is set to 2048.</p></td>
       </tr>
       <tr>
         <td><code>chunk_size</code></td>
-        <td><code>int</code></td>
+        <td><code>Optional[int]</code></td>
         <td><p>See <code>dm.utils.fs.copy_file</code>.</p></td>
         <td><code>None</code></td>
       </tr>
@@ -2766,7 +2766,7 @@ size is <code>None</code>, it is set to 2048.</p></td>
     <span class="n">leave_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">file_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">file_leave_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">chunk_size</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Copy one directory to another location across different filesystem (local, S3, GCS, etc).</span>
 

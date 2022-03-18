@@ -809,19 +809,19 @@
       </tr>
       <tr>
         <td><code>highlight_atom</code></td>
-        <td><code>List[List[int]]</code></td>
+        <td><code>Optional[List[List[int]]]</code></td>
         <td><p>the atoms to highlight.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>highlight_bond</code></td>
-        <td><code>List[List[int]]</code></td>
+        <td><code>Optional[List[List[int]]]</code></td>
         <td><p>The bonds to highlight.</p></td>
         <td><code>None</code></td>
       </tr>
       <tr>
         <td><code>outfile</code></td>
-        <td><code>str</code></td>
+        <td><code>Optional[str]</code></td>
         <td><p>Path where to save the image (local or remote path).</p></td>
         <td><code>None</code></td>
       </tr>
@@ -869,16 +869,12 @@
       </tr>
       <tr>
         <td><code>align</code></td>
-        <td><code>Union[bool, rdkit.Chem.rdchem.Mol, str]</code></td>
-        <td><p>Whether to align the 2D coordinates of the molecules. If True
-or set to a valid molecule object <code>dm.viz.utils.align_2d_coordinates</code> is used.
-If <code>align</code> is set to a molecule object or a string, this molecule will be used as a
-pattern for the alignment. If <code>align</code> is set to True, the MCS will be computed.
-<strong>Warning</strong>:
-    - This will slow down the process. You can pre-compute the alignment by calling
-    <code>dm.viz.utils.align_2d_coordinates</code>.
-    - In some cases, the alignment will fail. So you should always check it visually.
-    Please report any list of molecules failing to align.</p></td>
+        <td><code>Union[rdkit.Chem.rdchem.Mol, str, bool]</code></td>
+        <td><p>Whether to align the 2D coordinates of the molecules.
+- If set to True, align all molecules with <code>dm.align.auto_align_many()</code>.
+- If set to a molecule, it is used as a template for alignment with <code>dm.align.template_align()</code>.
+- If set to False, no alignment is performed.
+For a more custom alignment, we suggest using directly the module <code>dm.align</code> instead.</p></td>
         <td><code>False</code></td>
       </tr>
       <tr>
@@ -899,9 +895,9 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
     <span class="n">use_svg</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">mol_size</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">],</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
-    <span class="n">highlight_atom</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">highlight_bond</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-    <span class="n">outfile</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">highlight_atom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">highlight_bond</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">max_mols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -910,7 +906,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">stereo_annotations</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">legend_fontsize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">16</span><span class="p">,</span>
     <span class="n">kekulize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">align</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">align</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Generate an image out of a molecule or a list of molecules.</span>
@@ -931,15 +927,11 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">        bond_line_width: The width of the bond lines.</span>
 <span class="sd">        legend_fontsize: Font size for the legend.</span>
 <span class="sd">        kekulize: Run kekulization routine on molecules. Skipped if fails.</span>
-<span class="sd">        align: Whether to align the 2D coordinates of the molecules. If True</span>
-<span class="sd">            or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.</span>
-<span class="sd">            If `align` is set to a molecule object or a string, this molecule will be used as a</span>
-<span class="sd">            pattern for the alignment. If `align` is set to True, the MCS will be computed.</span>
-<span class="sd">            **Warning**:</span>
-<span class="sd">                - This will slow down the process. You can pre-compute the alignment by calling</span>
-<span class="sd">                `dm.viz.utils.align_2d_coordinates`.</span>
-<span class="sd">                - In some cases, the alignment will fail. So you should always check it visually.</span>
-<span class="sd">                Please report any list of molecules failing to align.</span>
+<span class="sd">        align: Whether to align the 2D coordinates of the molecules.</span>
+<span class="sd">            - If set to True, align all molecules with `dm.align.auto_align_many()`.</span>
+<span class="sd">            - If set to a molecule, it is used as a template for alignment with `dm.align.template_align()`.</span>
+<span class="sd">            - If set to False, no alignment is performed.</span>
+<span class="sd">            For a more custom alignment, we suggest using directly the module `dm.align` instead.</span>
 <span class="sd">        kwargs: Additional arguments to pass to the drawing function. See RDKit</span>
 <span class="sd">            documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
@@ -964,12 +956,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="n">legends</span> <span class="o">=</span> <span class="n">legends</span><span class="p">[:</span><span class="n">max_mols</span><span class="p">]</span>
 
     <span class="c1"># Whether to align the molecules</span>
-    <span class="k">if</span> <span class="n">align</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">align_2d_coordinates</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">align</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">align_2d_coordinates</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="n">align</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">align</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">align_2d_coordinates</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">pattern</span><span class="o">=</span><span class="n">dm</span><span class="o">.</span><span class="n">from_smarts</span><span class="p">(</span><span class="n">align</span><span class="p">),</span> <span class="n">copy</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">align</span><span class="p">,</span> <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">)):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">template_align</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="n">align</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="n">align</span> <span class="ow">is</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">align</span><span class="o">.</span><span class="n">auto_align_many</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
 
     <span class="c1"># Prepare molecules before drawing</span>
     <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">prepare_mol_for_drawing</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="n">kekulize</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
@@ -1018,7 +1008,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="k">if</span> <span class="n">use_svg</span><span class="p">:</span>
                 <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
                     <span class="c1"># in a terminal process</span>
-                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>
+                    <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
                 <span class="k">else</span><span class="p">:</span>
                     <span class="c1"># in a jupyter kernel process</span>
                     <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">image</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
