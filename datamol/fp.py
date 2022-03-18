@@ -236,7 +236,7 @@ def to_fp(
     mol: Union[str, Chem.rdchem.Mol],
     as_array: bool = True,
     fp_type: str = "ecfp",
-    fold_size: int = None,
+    fold_size: Optional[int] = None,
     **fp_args,
 ) -> Optional[Union[np.ndarray, SparseBitVect, ExplicitBitVect]]:
     """Compute the molecular fingerprint given a molecule or a SMILES.

@@ -15,3 +15,7 @@ omit = ["setup.py", "tests/*", "SA_Score/*"]
 
 [tool.coverage.xml]
 output = "coverage.xml"
+
+[tool.mypy]
+exclude = []
+ignore_missing_imports = true
