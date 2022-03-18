@@ -88,8 +88,8 @@ def test_auto_align_many():
 
         assert "dm.auto_align_many.cluster_id" in props.columns
         assert "dm.auto_align_many.core" in props.columns
-        assert props["dm.auto_align_many.cluster_id"].dtype == int
-        assert props["dm.auto_align_many.core"].dtype == object
+        assert props["dm.auto_align_many.cluster_id"].dtype.name == "int64"
+        assert props["dm.auto_align_many.core"].dtype.name == "object"
 
         assert props["dm.auto_align_many.cluster_id"].unique().shape[0] == excepted_cluster_size[i]
 
