@@ -1,6 +1,8 @@
 from typing import List
 from typing import Callable
 from typing import Optional
+from typing import Sequence
+from typing import Union
 
 import operator
 import functools
@@ -8,10 +10,10 @@ from collections import defaultdict as ddict
 
 from loguru import logger
 
+import pandas as pd
 import numpy as np
 from scipy.spatial import distance
 
-from rdkit import Chem
 from rdkit.Chem import DataStructs
 from rdkit.ML.Cluster import Butina
 
@@ -22,11 +24,13 @@ from rdkit.SimDivFilters.rdSimDivPickers import LeaderPicker
 
 import datamol as dm
 
+from .types import Mol
+
 
 def cluster_mols(
-    mols: List[Chem.rdchem.Mol],
+    mols: Union[Sequence[Mol], pd.Series],
     cutoff: float = 0.2,
-    feature_fn: Callable = None,
+    feature_fn: Optional[Callable] = None,
     n_jobs: Optional[int] = 1,
 ):
     """Cluster a set of molecules using the butina clustering algorithm and a given threshold.
@@ -34,7 +38,7 @@ def cluster_mols(
     Args:
         mols: a list of molecules.
         cutoff: Cuttoff for the clustering. Default to 0.2.
-        feature_fn: A feature function that takes a Chem.rdchem.Mol object
+        feature_fn: A feature function that takes a Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
         n_jobs: Number of jobs for parallelization. Let to 1 for no
@@ -50,7 +54,9 @@ def cluster_mols(
     n_mols = len(mols)
 
     for i in range(1, n_mols):
-        dist = DataStructs.BulkTanimotoSimilarity(features[i], features[:i], returnDistance=True)
+        dist = DataStructs.cDataStructs.BulkTanimotoSimilarity(
+            features[i], features[:i], returnDistance=True
+        )
         dists.extend([x for x in dist])
 
     # now cluster the data
@@ -58,17 +64,17 @@ def cluster_mols(
     cluster_mols = [operator.itemgetter(*cluster)(mols) for cluster in cluster_indices]
 
     # Make single mol cluster a list
-    cluster_mols = [[c] if isinstance(c, Chem.rdchem.Mol) else c for c in cluster_mols]
+    cluster_mols = [[c] if isinstance(c, Mol) else c for c in cluster_mols]
 
     return cluster_indices, cluster_mols
 
 
 def pick_diverse(
-    mols: List[Chem.rdchem.Mol],
+    mols: List[Mol],
     npick: int,
-    initial_picks: List[int] = None,
-    feature_fn: Callable = None,
-    dist_fn: Callable = None,
+    initial_picks: Optional[List[int]] = None,
+    feature_fn: Optional[Callable] = None,
+    dist_fn: Optional[Callable] = None,
     seed: int = 42,
     n_jobs: Optional[int] = 1,
 ):
@@ -79,7 +85,7 @@ def pick_diverse(
         npick: Number of element to pick from mols, including the preselection.
         initial_picks: Starting list of index for molecules that should be in the
             set of picked molecules. Default to None.
-        feature_fn: A feature function that takes a Chem.rdchem.Mol object
+        feature_fn: A feature function that takes a Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
         dist_fn: A function that takes two indexes (i,j) and return the
@@ -100,7 +106,7 @@ def pick_diverse(
     features = dm.parallelized(feature_fn, mols, n_jobs=n_jobs)
 
     def distij(i, j, features=features):
-        return 1.0 - DataStructs.TanimotoSimilarity(features[i], features[j])
+        return 1.0 - DataStructs.cDataStructs.TanimotoSimilarity(features[i], features[j])
 
     if dist_fn is None:
         dist_fn = distij
@@ -115,12 +121,12 @@ def pick_diverse(
 
 
 def pick_centroids(
-    mols: List[Chem.rdchem.Mol],
+    mols: List[Mol],
     npick: int = 0,
-    initial_picks: List[int] = None,
+    initial_picks: Optional[List[int]] = None,
     threshold: float = 0.5,
-    feature_fn: Callable = None,
-    dist_fn: Callable = None,
+    feature_fn: Optional[Callable] = None,
+    dist_fn: Optional[Callable] = None,
     seed: int = 42,
     method: str = "sphere",
     n_jobs: Optional[int] = 1,
@@ -133,7 +139,7 @@ def pick_centroids(
         threshold: Minimum distance between centroids for `maxmin` and sphere exclusion (`sphere`) methods.
         initial_picks: Starting list of index for molecules that should be in the
             set of picked molecules. Default to None.
-        feature_fn (callable, optional): A feature function that takes a Chem.rdchem.Mol object
+        feature_fn (callable, optional): A feature function that takes a Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
         dist_fn: A function that takes two indexes (i,j) and return the
@@ -157,7 +163,7 @@ def pick_centroids(
     features = dm.parallelized(feature_fn, mols, n_jobs=n_jobs)
 
     def distij(i, j, features=features):
-        return 1.0 - DataStructs.TanimotoSimilarity(features[i], features[j])
+        return 1.0 - DataStructs.cDataStructs.TanimotoSimilarity(features[i], features[j])
 
     if dist_fn is None:
         dist_fn = distij
@@ -202,10 +208,10 @@ def pick_centroids(
 
 
 def assign_to_centroids(
-    mols: List[Chem.rdchem.Mol],
-    centroids: List[Chem.rdchem.Mol],
-    feature_fn: Callable = None,
-    dist_fn: Callable = None,
+    mols: List[Mol],
+    centroids: List[Mol],
+    feature_fn: Optional[Callable] = None,
+    dist_fn: Optional[Callable] = None,
     n_jobs: Optional[int] = 1,
 ):
     r"""Assign molecules to centroids. Each molecule will be assigned to the closest centroid.
@@ -213,7 +219,7 @@ def assign_to_centroids(
     Args:
         mols: a list of molecules to assign to centroids
         centroids: list of molecules to use as centroid
-        feature_fn: A feature function that takes a Chem.rdchem.Mol object
+        feature_fn: A feature function that takes a Mol object
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
         dist_fn: A function that takes two indexes (i,j) and return the
@@ -235,7 +241,7 @@ def assign_to_centroids(
     features = dm.parallelized(feature_fn, all_mols, n_jobs=n_jobs)
 
     def distij(i, j, features=features):
-        return 1.0 - DataStructs.TanimotoSimilarity(features[int(i)], features[int(j)])
+        return 1.0 - DataStructs.cDataStructs.TanimotoSimilarity(features[int(i)], features[int(j)])
 
     if dist_fn is None:
         dist_fn = distij

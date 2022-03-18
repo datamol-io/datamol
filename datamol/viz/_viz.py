@@ -1,6 +1,7 @@
 from typing import Union
 from typing import List
 from typing import Tuple
+from typing import Optional
 
 import fsspec
 
@@ -20,9 +21,9 @@ def to_image(
     n_cols: int = 4,
     use_svg: bool = True,
     mol_size: Union[Tuple[int, int], int] = (300, 300),
-    highlight_atom: List[List[int]] = None,
-    highlight_bond: List[List[int]] = None,
-    outfile: str = None,
+    highlight_atom: Optional[List[List[int]]] = None,
+    highlight_bond: Optional[List[List[int]]] = None,
+    outfile: Optional[str] = None,
     max_mols: int = 32,
     copy: bool = True,
     indices: bool = False,
@@ -31,7 +32,7 @@ def to_image(
     stereo_annotations: bool = True,
     legend_fontsize: int = 16,
     kekulize: bool = True,
-    align: Union[bool, dm.Mol, str] = False,
+    align: Optional[Union[dm.Mol, str]] = None,
     **kwargs,
 ):
     """Generate an image out of a molecule or a list of molecules.
@@ -85,12 +86,12 @@ def to_image(
             legends = legends[:max_mols]
 
     # Whether to align the molecules
-    if align is True:
-        mols = dm.viz.utils.align_2d_coordinates(mols, copy=False)
-    elif isinstance(align, dm.Mol):
-        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=align, copy=False)
+    if isinstance(align, dm.Mol):
+        mols = [dm.align.template_align(mol, template=align, copy=False) for mol in mols]
     elif isinstance(align, str):
-        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=dm.from_smarts(align), copy=False)
+        mols = [
+            dm.align.template_align(mol, template=dm.from_smarts(align), copy=False) for mol in mols
+        ]
 
     # Prepare molecules before drawing
     mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
@@ -139,7 +140,7 @@ def to_image(
             if use_svg:
                 if isinstance(image, str):
                     # in a terminal process
-                    f.write(image.encode())
+                    f.write(image.encode())  # type: ignore
                 else:
                     # in a jupyter kernel process
                     f.write(image.data.encode())  # type: ignore

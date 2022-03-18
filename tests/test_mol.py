@@ -528,3 +528,38 @@ def test_clear_mol_props():
 
     mols = [dm.clear_mol_props(mol) for mol in mols]
     assert all([list(mol.GetPropsAsDict().keys()) == [] for mol in mols])
+
+
+def test_strip_mol_to_core():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.strip_mol_to_core(mol)
+
+    assert dm.to_inchikey(mol2) == "XSMDDAFPLXKNOA-UHFFFAOYSA-N"
+
+
+def test_make_scaffold_generic():
+
+    # NOTE(hadim): pretty sure doing assert on SMARTS string is fragile and might change
+    # in the future RDKit versions. So... hold and wait for it to break xD
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.make_scaffold_generic(mol)
+    assert dm.to_smarts(mol2) == "***1:*:*2:*(:*(**):*:1**)*1:*:*:*(**):*(=*):*:*:1*(**(*)=*)**2"
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.make_scaffold_generic(mol, include_bonds=True)
+    assert (
+        dm.to_smarts(mol2)
+        == "*~*~*1~*~*~*2~*(~*~*~1~*)~*(~*~*(~*)~*)~*~*~*1~*~*(~*~*)~*(~*~*)~*(~*~*)~*~2~1"
+    )
+
+
+def test_to_scaffold():
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.to_scaffold_murcko(mol)
+    assert dm.to_inchikey(mol2) == "XSMDDAFPLXKNOA-UHFFFAOYSA-N"
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.to_scaffold_murcko(mol, make_generic=True)
+    assert dm.to_smarts(mol2) == "*=*1:*:*:*:*2:*(:*:1)****1:*:*:*:*:*:12"

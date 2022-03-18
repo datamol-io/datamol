@@ -1,5 +1,6 @@
 **Added:**
 
+* A new `dm.align` module with various functions to align a list of molecules. Use `dm.align.template_align` to align a molecule to a template and `dm.align.auto_align_many` to automatically partition and align a list of molecules.
 * New descriptors: `formal_charge`
 * New descriptors: `compute_ring_system`
 * New descriptors: `refractivity`
@@ -7,11 +8,15 @@
 * New descriptors: `n_stereo_centers`
 * New descriptors: `n_charged_atoms`
 * Add `dm.clear_props` to clear all the properties of a mol.
-
+* Add a new dataset in addition to freesolv based on RDKit CDK2 at `dm.cdk2()`.
+* Add `dm.strip_mol_to_core` to remove all R groups from a molecule.
+* Add `dm.UNSPECIFIED_BOND`
+*
 **Changed:**
 
 * Improve typing.
 * Improve relative imports coverage.
+* Adapt `dm.to_image` to use the `align` module.
 
 **Deprecated:**
 

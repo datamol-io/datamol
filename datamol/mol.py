@@ -27,6 +27,11 @@ from rdkit.Chem.AllChem import DeleteSubstructs  # type: ignore
 from rdkit.Chem import GetMolFrags  # type: ignore
 from rdkit.Chem import PathToSubmol  # type: ignore
 
+from rdkit.Chem import rdmolops
+from rdkit.Chem import rdchem
+
+from rdkit.Chem.Scaffolds import MurckoScaffold
+
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 
@@ -35,6 +40,8 @@ from .types import Mol
 from .convert import to_inchikey_non_standard
 from .convert import to_inchikey
 from .convert import to_smiles
+from .convert import from_smarts
+from .log import without_rdkit_log
 
 
 PERIODIC_TABLE = Chem.rdchem.GetPeriodicTable()
@@ -43,6 +50,7 @@ DOUBLE_BOND = Chem.rdchem.BondType.DOUBLE
 SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
+UNSPECIFIED_BOND = Chem.rdchem.BondType.UNSPECIFIED
 
 
 def copy_mol(mol: Mol) -> Mol:
@@ -960,3 +968,69 @@ def remove_hs(
     )
 
     return mol
+
+
+def strip_mol_to_core(mol: Mol, bond_cutter: Mol = None):
+    """Strip a molecule to its core, i.e. remove all atoms not in the core.
+    This method 'guess' the molecular core, by finding the ring system.
+
+    Args:
+        mol: A molecule.
+        bond_cutter: A molecule used to cut the bonds.
+    """
+
+    if bond_cutter is None:
+        bond_cutter = from_smarts("[R;!$(*=,#[!#6])]!@!=!#[*;$([A;!R][A;!R])]")
+
+    with without_rdkit_log():
+
+        scaffold = MurckoScaffold.GetScaffoldForMol(mol)
+        out = mol.GetSubstructMatches(bond_cutter)
+        bond_inds = [mol.GetBondBetweenAtoms(i, j).GetIdx() for i, j in out]
+
+        if len(bond_inds) > 0:
+            fragmented = rdmolops.FragmentOnBonds(mol, bond_inds)
+            fragmented = remove_dummies(fragmented)
+            fragmented = to_scaffold_murcko(fragmented)
+            scaffold = keep_largest_fragment(fragmented)
+
+    return scaffold
+
+
+def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
+    """Extract the Murcko scaffold from a molecule.
+
+    Args:
+        mol: A molecule.
+        make_generic: Whether to make the scaffold generic.
+    """
+    scf = MurckoScaffold.GetScaffoldForMol(mol)
+
+    if make_generic:
+        scf = make_scaffold_generic(scf)
+
+    return scf
+
+
+def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
+    """Make the atom in a scaffold or molecule generic.
+
+    Args:
+        mol: A molecule or a scaffold.
+        include_bonds: Whether we should also update bond order or keep as is.
+    """
+
+    for atom in mol.GetAtoms():
+        if atom.GetAtomicNum() != 1:
+            atom.SetAtomicNum(0)
+
+        atom.SetFormalCharge(0)
+        atom.SetChiralTag(rdchem.ChiralType.CHI_UNSPECIFIED)
+        atom.SetNoImplicit(0)
+        atom.SetNumExplicitHs(0)
+
+    if include_bonds:
+        for bond in mol.GetBonds():
+            bond.SetBondType(UNSPECIFIED_BOND)
+
+    return from_smarts(to_smiles(mol))

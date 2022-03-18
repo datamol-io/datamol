@@ -20,6 +20,8 @@ import fsspec.utils
 
 import datamol as dm
 
+from .types import Mol
+
 
 def read_csv(
     urlpath: Union[str, os.PathLike, TextIO],
@@ -87,7 +89,7 @@ def read_sdf(
     include_computed: bool = False,
     strict_parsing: bool = True,
     remove_hs: bool = True,
-) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
+) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
 
     Note: This function is meant to be used with dataset that fit _in-memory_.
@@ -150,7 +152,7 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[Chem.rdchem.Mol, Sequence[Chem.rdchem.Mol], pd.DataFrame],
+    mols: Union[Mol, Sequence[Mol], pd.DataFrame],
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = "smiles",
     mol_column: Optional[str] = None,
@@ -168,7 +170,7 @@ def to_sdf(
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column, mol_column=mol_column)
 
-    elif isinstance(mols, Chem.rdchem.Mol):
+    elif isinstance(mols, Mol):
         mols = [mols]
 
     # Filter out None values
@@ -191,7 +193,7 @@ def to_sdf(
 
 
 def to_smi(
-    mols: Sequence[Chem.rdchem.Mol],
+    mols: Sequence[Mol],
     urlpath: Union[str, os.PathLike, TextIO],
     error_if_empty: bool = False,
 ):
@@ -227,7 +229,7 @@ def to_smi(
 
 def read_smi(
     urlpath: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
-) -> Sequence[Chem.rdchem.Mol]:
+) -> Sequence[Mol]:
     """Read a list of smiles from am `.smi` file.
 
     Args:

@@ -9,6 +9,7 @@ from .utils import JobRunner
 from .utils import fs
 
 from .data import freesolv
+from .data import cdk2
 
 from .log import enable_rdkit_log
 from .log import disable_rdkit_log
@@ -19,6 +20,7 @@ from .mol import TRIPLE_BOND
 from .mol import DOUBLE_BOND
 from .mol import SINGLE_BOND
 from .mol import AROMATIC_BOND
+from .mol import UNSPECIFIED_BOND
 
 from .mol import copy_mol
 from .mol import to_mol
@@ -52,6 +54,9 @@ from .mol import add_hs
 from .mol import remove_hs
 from .mol import unique_id
 from .mol import clear_mol_props
+from .mol import strip_mol_to_core
+from .mol import make_scaffold_generic
+from .mol import to_scaffold_murcko
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
@@ -105,6 +110,7 @@ from .isomers import enumerate_structisomers
 from .isomers import canonical_tautomer
 from .isomers import remove_stereochemistry
 
+from . import align
 from . import conformers
 from . import viz
 
