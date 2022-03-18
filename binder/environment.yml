@@ -7,25 +7,27 @@ dependencies:
   - tqdm
   - loguru
   - joblib
-  - fsspec >=0.8.0
+  - fsspec >=2021.9
+  - s3fs
+  - gcsfs
+  - appdirs
 
   # Scientific
   - pandas
   - numpy
   - scipy
   - pillow
+  - matplotlib
+  - scikit-learn
 
   # Chemistry
-  - rdkit >=2020.09
+  - rdkit >=2021.09
   - selfies
 
   # Optional deps
-  - s3fs
-  - gcsfs
   - openpyxl
   - networkx
   - nglview
-  - matplotlib
   - ipywidgets
 
   # Dev
@@ -34,12 +36,13 @@ dependencies:
   - black >=20.8b1
   - jupyterlab
   - mypy
+  - codecov
 
   # Doc
   - mkdocs
   - mkdocs-material >=7.1.1
   - mkdocs-material-extensions
-  - mkdocstrings
+  - mkdocstrings =0.17
   - mkdocs-jupyter
   - markdown-include
   - mdx_truly_sane_lists
