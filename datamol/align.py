@@ -159,7 +159,7 @@ def auto_align_many(
                 in the core.
             - 'anon-scaffold': Cluster molecules by Murcko scaffold, but making it
                 generic including the bonds.
-            - 'anongraph-scaffold': luster molecules by Murcko scaffold, but making it
+            - 'anongraph-scaffold': Cluster molecules by Murcko scaffold, but making it
                 generic but keeping the bond order informations.
             - 'cluster': Cluster the molecules using Butina frm RDKit with `dm.cluster_mols`.
             Cautious as the method 'cluster' is very sensitive to the cutoff.

@@ -1009,7 +1009,7 @@ def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
 
     if make_generic:
         scf = make_scaffold_generic(scf)
-        scf = from_smarts(scf)
+        scf = to_mol(scf)
 
     return scf
 

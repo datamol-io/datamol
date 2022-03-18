@@ -562,7 +562,7 @@ def test_to_scaffold():
 
     mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
     mol2 = dm.to_scaffold_murcko(mol, make_generic=True)
-    assert dm.to_smarts(mol2) == "*=*1:*:*:*:*2:*(:*:1)****1:*:*:*:*:*:12"
+    assert dm.to_smarts(mol2) == "[#0]=[#0]1:[#0]:[#0]:[#0]:[#0]2:[#0](:[#0]:1)-[#0]-[#0]-[#0]-[#0]1:[#0]:[#0]:[#0]:[#0]:[#0]:1-2"
 
 
 def test_compute_ring_systems():
