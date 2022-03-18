@@ -181,7 +181,7 @@ def auto_align_many(
 
         if partition_method.startswith("strip-"):
             scaffolds = [dm.strip_mol_to_core(x) for x in scaffolds]
-            scaffolds_ids = [dm.from_smarts(x) for x in scaffolds]
+            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
         elif partition_method.startswith("anongraph-"):
             scaffolds_ids = [dm.make_scaffold_generic(s, include_bonds=True) for s in scaffolds]
