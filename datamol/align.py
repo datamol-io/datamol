@@ -184,12 +184,12 @@ def auto_align_many(
             scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
         elif partition_method.startswith("anongraph-"):
-            scaffolds_ids = [dm.make_scaffold_generic(s, include_bonds=True) for s in scaffolds]
-            scaffolds = [dm.from_smarts(x) for x in scaffolds_ids]
+            scaffolds = [dm.make_scaffold_generic(s, include_bonds=True) for s in scaffolds]
+            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
         elif partition_method.startswith("anon-"):
-            scaffolds_ids = [dm.make_scaffold_generic(s, include_bonds=False) for s in scaffolds]
-            scaffolds = [dm.from_smarts(x) for x in scaffolds_ids]
+            scaffolds = [dm.make_scaffold_generic(s, include_bonds=False) for s in scaffolds]
+            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
         for i, s in enumerate(scaffolds_ids):
             mol_groups[s].append(i)

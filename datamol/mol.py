@@ -1014,7 +1014,7 @@ def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
     return scf
 
 
-def make_scaffold_generic(mol: Mol, include_bonds: bool = False) -> str:
+def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
     """Make the atom in a scaffold or molecule generic.
 
     Args:
@@ -1035,7 +1035,7 @@ def make_scaffold_generic(mol: Mol, include_bonds: bool = False) -> str:
         for bond in mol.GetBonds():
             bond.SetBondType(UNSPECIFIED_BOND)
 
-    return to_smiles(mol)  # type: ignore
+    return mol
 
 
 def compute_ring_system(mol: Mol, include_spiro: bool = True) -> List[Set[int]]:
