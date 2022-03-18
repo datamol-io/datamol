@@ -62,10 +62,10 @@ def test_template_align():
 
 
 def test_auto_align_many():
-    data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
+    data: pd.DataFrame = dm.solubility(as_df=True)  # type: ignore
     data = data.iloc[:32].copy()  # type: ignore
 
-    excepted_cluster_size = [13, 25, 20, 21, 20]
+    excepted_cluster_size = [4, 9, 5, 9, 9]
 
     for i, partition_method in enumerate(
         [
@@ -73,9 +73,7 @@ def test_auto_align_many():
             "scaffold",
             "anongraph-scaffold",
             "anon-scaffold",
-            # disable `strip-scaffold` as it raises a segmentation fault error
-            # in `compute_2d_coords()`
-            # "strip-scaffold",
+            "strip-scaffold",
         ]
     ):
 
