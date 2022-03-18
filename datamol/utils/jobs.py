@@ -5,7 +5,6 @@ from typing import Optional
 from typing import Any
 
 import contextlib
-import itertools
 
 import joblib
 from joblib import Parallel, delayed
@@ -17,11 +16,11 @@ class JobRunner:
     def __init__(
         self,
         n_jobs: Optional[int] = -1,
-        batch_size: int = None,
-        prefer: str = None,
+        batch_size: Optional[int] = None,
+        prefer: Optional[str] = None,
         progress: bool = False,
-        total: int = None,
-        tqdm_kwargs: dict = None,
+        total: Optional[int] = None,
+        tqdm_kwargs: Optional[dict] = None,
         **job_kwargs,
     ):
         """
@@ -209,11 +208,11 @@ def parallelized(
     inputs_list: Iterable[Any],
     scheduler: str = "processes",
     n_jobs: Optional[int] = -1,
-    batch_size: int = None,
+    batch_size: Optional[int] = None,
     progress: bool = False,
     arg_type: str = "arg",
-    total: int = None,
-    tqdm_kwargs: dict = None,
+    total: Optional[int] = None,
+    tqdm_kwargs: Optional[dict] = None,
     **job_kwargs,
 ) -> Sequence[Optional[Any]]:
     """Run a function in parallel.

@@ -2,7 +2,6 @@ import pytest
 
 import pandas as pd
 import datamol as dm
-import numpy as np
 
 
 def test_descriptors():
@@ -159,3 +158,59 @@ def test_n_aromatic_atoms():
 
     assert dm.descriptors.n_aromatic_atoms(mol) == 12
     assert dm.descriptors.n_aromatic_atoms_proportion(mol) == 0.8
+
+
+def test_formal_charge():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    assert dm.descriptors.formal_charge(mol) == 0
+
+    mol = dm.to_mol("C(CC(=O)[O-])C(C(=O)[O-])[NH3+]")
+    assert dm.descriptors.formal_charge(mol) == -1
+
+
+def test_compute_ring_systems():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+
+    systems = dm.descriptors.compute_ring_system(mol)
+    assert len(systems) == 1
+    assert len(systems[0]) == 16
+    assert isinstance(systems, list)
+    assert isinstance(systems[0], set)
+
+    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
+
+    systems = dm.descriptors.compute_ring_system(mol)
+    assert len(systems) == 2
+    assert len(systems[0]) == 11
+    assert len(systems[1]) == 6
+    assert isinstance(systems, list)
+    assert isinstance(systems[0], set)
+
+
+def test_refractivity():
+    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
+
+    value = dm.descriptors.refractivity(mol)
+    assert pytest.approx(value, rel=2) == 81.10
+
+
+def test_n_rigid_bonds():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    assert dm.descriptors.n_rigid_bonds(mol) == 20
+
+    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
+    assert dm.descriptors.n_rigid_bonds(mol) == 19
+
+
+def test_n_stereocenters():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+
+    assert dm.descriptors.n_stereo_centers(mol) == 1
+
+    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
+    assert dm.descriptors.n_stereo_centers(mol) == 0
+
+
+def test_n_charged_atoms():
+    mol = dm.to_mol("C(CC(=O)[O-])C(C(=O)[O-])[NH3+]")
+    assert dm.descriptors.n_charged_atoms(mol) == 3
