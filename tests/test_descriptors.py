@@ -168,25 +168,6 @@ def test_formal_charge():
     assert dm.descriptors.formal_charge(mol) == -1
 
 
-def test_compute_ring_systems():
-    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
-
-    systems = dm.descriptors.compute_ring_system(mol)
-    assert len(systems) == 1
-    assert len(systems[0]) == 16
-    assert isinstance(systems, list)
-    assert isinstance(systems[0], set)
-
-    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
-
-    systems = dm.descriptors.compute_ring_system(mol)
-    assert len(systems) == 2
-    assert len(systems[0]) == 11
-    assert len(systems[1]) == 6
-    assert isinstance(systems, list)
-    assert isinstance(systems[0], set)
-
-
 def test_refractivity():
     mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
 

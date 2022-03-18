@@ -4,6 +4,7 @@ from typing import Tuple
 from typing import Optional
 from typing import Dict
 from typing import Any
+from typing import Set
 
 import copy
 import random
@@ -1008,11 +1009,12 @@ def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
 
     if make_generic:
         scf = make_scaffold_generic(scf)
+        scf = from_smarts(scf)
 
     return scf
 
 
-def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
+def make_scaffold_generic(mol: Mol, include_bonds: bool = False) -> str:
     """Make the atom in a scaffold or molecule generic.
 
     Args:
@@ -1033,4 +1035,31 @@ def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
         for bond in mol.GetBonds():
             bond.SetBondType(UNSPECIFIED_BOND)
 
-    return from_smarts(to_smiles(mol))
+    return to_smiles(mol)  # type: ignore
+
+
+def compute_ring_system(mol: Mol, include_spiro: bool = True) -> List[Set[int]]:
+    """Compute the list of ring system in a molecule. This is based on RDKit's cookbook:
+    https://www.rdkit.org/docs/Cookbook.html#rings-aromaticity-and-kekulization
+
+    Args:
+        mol: input molecule
+        include_spiro: whether to include spiro rings.
+
+    Returns:
+        ring_system: list of ring system (atom indices).
+    """
+    ri = mol.GetRingInfo()
+    systems = []
+    for ring in ri.AtomRings():
+        ringAts = set(ring)
+        nSystems = []
+        for system in systems:
+            nInCommon = len(ringAts.intersection(system))
+            if nInCommon and (include_spiro or nInCommon > 1):
+                ringAts = ringAts.union(system)
+            else:
+                nSystems.append(system)
+        nSystems.append(ringAts)
+        systems = nSystems
+    return systems

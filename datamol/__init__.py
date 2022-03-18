@@ -8,8 +8,10 @@ from .utils import parallelized
 from .utils import JobRunner
 from .utils import fs
 
+from . import data
 from .data import freesolv
 from .data import cdk2
+from .data import solubility
 
 from .log import enable_rdkit_log
 from .log import disable_rdkit_log
@@ -57,6 +59,7 @@ from .mol import clear_mol_props
 from .mol import strip_mol_to_core
 from .mol import make_scaffold_generic
 from .mol import to_scaffold_murcko
+from .mol import compute_ring_system
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse

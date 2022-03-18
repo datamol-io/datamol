@@ -16,7 +16,6 @@ import sascorer  # type:ignore
 
 from .. import Mol
 from ..convert import from_smarts
-from ..utils.jobs import parallelized
 
 _AROMATIC_QUERY = from_smarts("a")
 
@@ -115,30 +114,3 @@ def n_charged_atoms(mol: Mol):
         n_charged_atoms: number of charged atoms in the molecule
     """
     return sum([at.GetFormalCharge() != 0 for at in mol.GetAtoms()])
-
-
-def compute_ring_system(mol: Mol, include_spiro: bool = True) -> List[Set[int]]:
-    """Compute the list of ring system in a molecule. This is based on RDKit's cookbook:
-    https://www.rdkit.org/docs/Cookbook.html#rings-aromaticity-and-kekulization
-
-    Args:
-        mol: input molecule
-        include_spiro: whether to include spiro rings.
-
-    Returns:
-        ring_system: list of ring system (atom indices).
-    """
-    ri = mol.GetRingInfo()
-    systems = []
-    for ring in ri.AtomRings():
-        ringAts = set(ring)
-        nSystems = []
-        for system in systems:
-            nInCommon = len(ringAts.intersection(system))
-            if nInCommon and (include_spiro or nInCommon > 1):
-                ringAts = ringAts.union(system)
-            else:
-                nSystems.append(system)
-        nSystems.append(ringAts)
-        systems = nSystems
-    return systems

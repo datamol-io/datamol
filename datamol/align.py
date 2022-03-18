@@ -67,11 +67,6 @@ def template_align(
         mol: aligned molecule.
     """
 
-    # _mol: Mol
-
-    # EN: this is for lines: 132-144 in lambda_handler_svg
-    # this assumes that whenever template is None, we should not align
-    # the reason being that this needs to be requested by the user
     if isinstance(mol, str):
         _mol = dm.to_mol(mol)
     elif copy:
@@ -158,8 +153,15 @@ def auto_align_many(
 
     Args:
         mols: A list of molecules to auto align.
-        partition_method: Partition method to use.
-            One of ['scaffold', 'strip-scaffold', 'anongraph-scaffold', 'cluster' and 'anon-scaffold'].
+        partition_method: Partition method to use:
+            - 'scaffold': Cluster molecules by Murcko scaffold.
+            - 'strip-scaffold': Cluster molecules by Murcko scaffold, but remove all atoms not
+                in the core.
+            - 'anon-scaffold': Cluster molecules by Murcko scaffold, but making it
+                generic including the bonds.
+            - 'anongraph-scaffold': luster molecules by Murcko scaffold, but making it
+                generic but keeping the bond order informations.
+            - 'cluster': Cluster the molecules using Butina frm RDKit with `dm.cluster_mols`.
             Cautious as the method 'cluster' is very sensitive to the cutoff.
         copy: Whether to copy the molecules before aligning them.
         cluster_cutoff: Optional cluster cutoff.
@@ -178,18 +180,16 @@ def auto_align_many(
         scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
         if partition_method.startswith("strip-"):
-            # with brics scaffold we compute brics bonds, then re-infer and select the biggest
-            # fragment as candidate for core
             scaffolds = [dm.strip_mol_to_core(x) for x in scaffolds]
-            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
+            scaffolds_ids = [dm.from_smarts(x) for x in scaffolds]
 
         elif partition_method.startswith("anongraph-"):
-            scaffolds = [dm.make_scaffold_generic(s, include_bonds=True) for s in scaffolds]
-            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
+            scaffolds_ids = [dm.make_scaffold_generic(s, include_bonds=True) for s in scaffolds]
+            scaffolds = [dm.from_smarts(x) for x in scaffolds_ids]
 
         elif partition_method.startswith("anon-"):
-            scaffolds = [dm.make_scaffold_generic(s, include_bonds=False) for s in scaffolds]
-            scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
+            scaffolds_ids = [dm.make_scaffold_generic(s, include_bonds=False) for s in scaffolds]
+            scaffolds = [dm.from_smarts(x) for x in scaffolds_ids]
 
         for i, s in enumerate(scaffolds_ids):
             mol_groups[s].append(i)

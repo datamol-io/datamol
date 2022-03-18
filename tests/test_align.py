@@ -65,7 +65,7 @@ def test_auto_align_many():
     data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
     data = data.iloc[:32].copy()  # type: ignore
 
-    excepted_cluster_size = [13, 25, 19, 21, 20]
+    excepted_cluster_size = [13, 25, 20, 21, 20]
 
     for i, partition_method in enumerate(
         [
@@ -78,6 +78,8 @@ def test_auto_align_many():
             # "strip-scaffold",
         ]
     ):
+
+        print(partition_method)
 
         data["aligned_mol"] = dm.align.auto_align_many(
             data["mol"],

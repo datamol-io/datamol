@@ -31,7 +31,6 @@ from .descriptors import refractivity
 from .descriptors import n_rigid_bonds
 from .descriptors import n_stereo_centers
 from .descriptors import n_charged_atoms
-from .descriptors import compute_ring_system
 
 from .compute import any_rdkit_descriptor
 from .compute import compute_many_descriptors

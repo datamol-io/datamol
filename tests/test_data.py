@@ -26,3 +26,18 @@ def test_cdk2():
         "s_st_Chirality_2",
         "s_st_Chirality_3",
     ]
+
+
+def test_solubility():
+
+    data = dm.data.solubility()
+    assert data.shape == (1282, 7)
+    assert list(data.columns) == [
+        "mol",
+        "ID",
+        "NAME",
+        "SOL",
+        "SOL_classification",
+        "smiles",
+        "split",
+    ]
