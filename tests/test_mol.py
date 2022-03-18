@@ -543,14 +543,17 @@ def test_make_scaffold_generic():
     # in the future RDKit versions. So... hold and wait for it to break xD
 
     mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
-    smarts_scf = dm.make_scaffold_generic(mol)
-    assert smarts_scf == "***1:*:*2:*(:*(**):*:1**)*1:*:*:*(**):*(=*):*:*:1*(**(*)=*)**2"
+    mol2 = dm.make_scaffold_generic(mol)
+    assert (
+        dm.to_smarts(mol2)
+        == "[#0]-[#0](=[#0])-[#0]-[#0]1-[#0]-[#0]-[#0]2:[#0]:[#0](:[#0](:[#0](:[#0]:2-[#0]2:[#0]:[#0]:[#0](:[#0](=[#0]):[#0]:[#0]:2-1)-[#0]-[#0])-[#0]-[#0])-[#0]-[#0])-[#0]-[#0]"
+    )
 
     mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
-    smarts_scf = dm.make_scaffold_generic(mol, include_bonds=True)
+    mol2 = dm.make_scaffold_generic(mol, include_bonds=True)
     assert (
-        smarts_scf
-        == "*~*~*1~*~*~*2~*(~*~*~1~*)~*(~*~*(~*)~*)~*~*~*1~*~*(~*~*)~*(~*~*)~*(~*~*)~*~1~2"
+        dm.to_smarts(mol2)
+        == "[#0][#0]([#0])[#0][#0]1[#0][#0][#0]2:[#0]:[#0](:[#0](:[#0](:[#0]:2[#0]2:[#0]:[#0]:[#0](:[#0]([#0]):[#0]:[#0]1:2)[#0][#0])[#0][#0])[#0][#0])[#0][#0]"
     )
 
 
@@ -564,7 +567,7 @@ def test_to_scaffold():
     mol2 = dm.to_scaffold_murcko(mol, make_generic=True)
     assert (
         dm.to_smarts(mol2)
-        == "[#0]=[#0]1:[#0]:[#0]:[#0]:[#0]2:[#0](:[#0]:1)-[#0]-[#0]-[#0]-[#0]1:[#0]:[#0]:[#0]:[#0]:[#0]:1-2"
+        == "[#0]1-[#0]-[#0]-[#0]2:[#0]:[#0]:[#0]:[#0]:[#0]:2-[#0]2:[#0]:[#0]:[#0]:[#0](=[#0]):[#0]:[#0]:2-1"
     )
 
 
