@@ -1,6 +1,7 @@
 from typing import Union
 from typing import List
 from typing import Tuple
+from typing import Optional
 
 import fsspec
 
@@ -20,9 +21,9 @@ def to_image(
     n_cols: int = 4,
     use_svg: bool = True,
     mol_size: Union[Tuple[int, int], int] = (300, 300),
-    highlight_atom: List[List[int]] = None,
-    highlight_bond: List[List[int]] = None,
-    outfile: str = None,
+    highlight_atom: Optional[List[List[int]]] = None,
+    highlight_bond: Optional[List[List[int]]] = None,
+    outfile: Optional[str] = None,
     max_mols: int = 32,
     copy: bool = True,
     indices: bool = False,
@@ -31,7 +32,7 @@ def to_image(
     stereo_annotations: bool = True,
     legend_fontsize: int = 16,
     kekulize: bool = True,
-    align: Union[bool, dm.Mol, str] = False,
+    align: Union[dm.Mol, str, bool] = False,
     **kwargs,
 ):
     """Generate an image out of a molecule or a list of molecules.
@@ -52,15 +53,11 @@ def to_image(
         bond_line_width: The width of the bond lines.
         legend_fontsize: Font size for the legend.
         kekulize: Run kekulization routine on molecules. Skipped if fails.
-        align: Whether to align the 2D coordinates of the molecules. If True
-            or set to a valid molecule object `dm.viz.utils.align_2d_coordinates` is used.
-            If `align` is set to a molecule object or a string, this molecule will be used as a
-            pattern for the alignment. If `align` is set to True, the MCS will be computed.
-            **Warning**:
-                - This will slow down the process. You can pre-compute the alignment by calling
-                `dm.viz.utils.align_2d_coordinates`.
-                - In some cases, the alignment will fail. So you should always check it visually.
-                Please report any list of molecules failing to align.
+        align: Whether to align the 2D coordinates of the molecules.
+            - If set to True, align all molecules with `dm.align.auto_align_many()`.
+            - If set to a molecule, it is used as a template for alignment with `dm.align.template_align()`.
+            - If set to False, no alignment is performed.
+            For a more custom alignment, we suggest using directly the module `dm.align` instead.
         kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
@@ -85,12 +82,10 @@ def to_image(
             legends = legends[:max_mols]
 
     # Whether to align the molecules
-    if align is True:
-        mols = dm.viz.utils.align_2d_coordinates(mols, copy=False)
-    elif isinstance(align, dm.Mol):
-        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=align, copy=False)
-    elif isinstance(align, str):
-        mols = dm.viz.utils.align_2d_coordinates(mols, pattern=dm.from_smarts(align), copy=False)
+    if isinstance(align, (dm.Mol, str)):
+        mols = [dm.align.template_align(mol, template=align) for mol in mols]
+    elif align is True:
+        mols = dm.align.auto_align_many(mols)
 
     # Prepare molecules before drawing
     mols = [prepare_mol_for_drawing(mol, kekulize=kekulize) for mol in mols]
@@ -139,7 +134,7 @@ def to_image(
             if use_svg:
                 if isinstance(image, str):
                     # in a terminal process
-                    f.write(image.encode())
+                    f.write(image.encode())  # type: ignore
                 else:
                     # in a jupyter kernel process
                     f.write(image.data.encode())  # type: ignore

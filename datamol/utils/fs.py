@@ -34,7 +34,7 @@ def _import_appdirs():
         return None
 
 
-def get_cache_dir(app_name: str, suffix: str = None, create: bool = True):
+def get_cache_dir(app_name: str, suffix: Optional[str] = None, create: bool = True):
     """Get a local cache directory for a given application name.
 
     Args:
@@ -142,7 +142,7 @@ def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return False
 
 
-def get_protocol(path: Union[str, os.PathLike], fs: fsspec.AbstractFileSystem = None):
+def get_protocol(path: Union[str, os.PathLike], fs: Optional[fsspec.AbstractFileSystem] = None):
     """Return the name of the path protocol.
 
     Args:
@@ -207,7 +207,7 @@ def get_size(file: Union[str, os.PathLike, io.IOBase, fsspec.core.OpenFile]) -> 
 def copy_file(
     source: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
     destination: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
-    chunk_size: int = None,
+    chunk_size: Optional[int] = None,
     force: bool = False,
     progress: bool = False,
     leave_progress: bool = True,
@@ -247,10 +247,10 @@ def copy_file(
     else:
         destination_file = destination
 
-    if not is_file(source_file):
+    if not is_file(source_file):  # type: ignore
         raise ValueError(f"The file being copied does not exist or is not a file: {source}")
 
-    if not force and is_file(destination_file):
+    if not force and is_file(destination_file):  # type: ignore
         raise ValueError(f"The destination file to copy already exists: {destination}")
 
     with source_file as source_stream:
@@ -258,7 +258,7 @@ def copy_file(
 
             if chunk_size is None:
                 # copy without chunks
-                destination_stream.write(source_stream.read())
+                destination_stream.write(source_stream.read())  # type: ignore
 
             else:
                 # copy with chunks
@@ -290,10 +290,10 @@ def copy_file(
 
                 # start the loop
                 while True:
-                    data = source_stream.read(chunk_size)
+                    data = source_stream.read(chunk_size)  # type: ignore
                     if not data:
                         break
-                    destination_stream.write(data)
+                    destination_stream.write(data)  # type: ignore
 
                     if pbar is not None:
                         pbar.update(chunk_size)
@@ -322,7 +322,7 @@ def md5(filepath: Union[str, os.PathLike]):
     """
     with fsspec.open(filepath) as f:
         file_hash = hashlib.md5()
-        file_hash.update(f.read())
+        file_hash.update(f.read())  # type: ignore
         file_hash = file_hash.hexdigest()
     return file_hash
 
@@ -348,7 +348,7 @@ def copy_dir(
     leave_progress: bool = True,
     file_progress: bool = False,
     file_leave_progress: bool = False,
-    chunk_size: int = None,
+    chunk_size: Optional[int] = None,
 ):
     """Copy one directory to another location across different filesystem (local, S3, GCS, etc).
 

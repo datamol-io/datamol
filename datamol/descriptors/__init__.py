@@ -15,6 +15,7 @@ from .descriptors import clogp
 from .descriptors import sas
 from .descriptors import n_NHOH
 from .descriptors import n_NO
+from .descriptors import formal_charge
 from .descriptors import n_aliphatic_carbocycles
 from .descriptors import n_aliphatic_heterocyles
 from .descriptors import n_aliphatic_rings
@@ -26,7 +27,11 @@ from .descriptors import n_saturated_heterocyles
 from .descriptors import n_saturated_rings
 from .descriptors import n_aromatic_atoms
 from .descriptors import n_aromatic_atoms_proportion
+from .descriptors import refractivity
+from .descriptors import n_rigid_bonds
+from .descriptors import n_stereo_centers
+from .descriptors import n_charged_atoms
 
-from .descriptors import any_rdkit_descriptor
-from .descriptors import compute_many_descriptors
-from .descriptors import batch_compute_many_descriptors
+from .compute import any_rdkit_descriptor
+from .compute import compute_many_descriptors
+from .compute import batch_compute_many_descriptors

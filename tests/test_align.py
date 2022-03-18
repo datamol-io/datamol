@@ -1,0 +1,97 @@
+import pytest
+
+import pandas as pd
+import datamol as dm
+
+
+def test_should_align():
+
+    data = dm.freesolv()
+    data["mol"] = data["smiles"].apply(dm.to_mol)
+    data = data.iloc[:10].copy()  # type: ignore
+    assert dm.align.should_align(data["mol"]) == True
+
+    data = dm.freesolv()
+    data["mol"] = data["smiles"].apply(dm.to_mol)
+    data = data.iloc[:10].copy()  # type: ignore
+    data.loc[5, "mol"] = dm.align.compute_2d_coords(data.loc[5, "mol"])
+    assert dm.align.should_align(data["mol"]) == False
+
+    data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
+    data = data.iloc[:10].copy()  # type: ignore
+    assert dm.align.should_align(data["mol"]) == False
+
+
+def test_template_align():
+    data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
+    data = data.iloc[:6].copy()  # type: ignore
+
+    template = data.iloc[0]["mol"]
+    data["aligned_mol"] = data["mol"].apply(lambda x: dm.align.template_align(x, template=template))
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    template = data.iloc[0]["smiles"]
+    data["aligned_mol"] = data["smiles"].apply(
+        lambda x: dm.align.template_align(x, template=template)
+    )
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    template = data.iloc[0]["mol"]
+    data["aligned_mol"] = data["mol"].apply(
+        lambda x: dm.align.template_align(x, template=template, auto_select_coord_gen=True)
+    )
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    template = data.iloc[0]["mol"]
+    data["aligned_mol"] = data["mol"].apply(
+        lambda x: dm.align.template_align(x, template=template, use_depiction=False)
+    )
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    template = None
+    data["aligned_mol"] = data["mol"].apply(lambda x: dm.align.template_align(x, template=template))
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    template = None
+    data["aligned_mol"] = data["mol"].apply(
+        lambda x: dm.align.template_align(x, template=template, copy=False)
+    )
+    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() == True
+
+    assert dm.align.template_align(None) is None
+
+
+def test_auto_align_many():
+    data: pd.DataFrame = dm.solubility(as_df=True)  # type: ignore
+    data = data.iloc[:32].copy()  # type: ignore
+
+    excepted_cluster_size = [4, 9, 5, 9, 9]
+
+    for i, partition_method in enumerate(
+        [
+            "cluster",
+            "scaffold",
+            "anongraph-scaffold",
+            "anon-scaffold",
+            "strip-scaffold",
+        ]
+    ):
+
+        print(partition_method)
+
+        data["aligned_mol"] = dm.align.auto_align_many(
+            data["mol"],
+            partition_method=partition_method,
+        )
+
+        props = data["aligned_mol"].apply(lambda x: pd.Series(x.GetPropsAsDict()))
+
+        assert "dm.auto_align_many.cluster_id" in props.columns
+        assert "dm.auto_align_many.core" in props.columns
+        assert props["dm.auto_align_many.cluster_id"].dtype.name == "int64"
+        assert props["dm.auto_align_many.core"].dtype.name == "object"
+
+        assert props["dm.auto_align_many.cluster_id"].unique().shape[0] == excepted_cluster_size[i]
+
+    with pytest.raises(ValueError):
+        dm.align.auto_align_many(data["mol"], partition_method="invalid")

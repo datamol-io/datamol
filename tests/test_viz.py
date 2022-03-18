@@ -111,3 +111,24 @@ def test_circle_grid(tmp_path):
     )
 
     im.save(tmp_path / "image.png")
+
+
+def test_to_image_align():
+
+    # Get a list of molecules
+    data = dm.data.freesolv()
+    mols = dm.from_df(data)  # type: ignore
+    mols = mols[:8]
+
+    # With multiple molecules
+    dm.viz.to_image(mols, align=True)
+
+
+def test_to_image_align_template():
+
+    # Get a list of molecules
+    data = dm.data.freesolv()
+    mols = dm.from_df(data)  # type: ignore
+    mols = mols[:8]
+
+    dm.viz.to_image(mols, align=mols[0])

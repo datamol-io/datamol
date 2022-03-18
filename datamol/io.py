@@ -20,10 +20,12 @@ import fsspec.utils
 
 import datamol as dm
 
+from .types import Mol
+
 
 def read_csv(
     urlpath: Union[str, os.PathLike, TextIO],
-    smiles_column: str = None,
+    smiles_column: Optional[str] = None,
     mol_column: str = "mol",
     **kwargs,
 ) -> pd.DataFrame:
@@ -51,7 +53,7 @@ def read_csv(
 def read_excel(
     urlpath: Union[str, os.PathLike, TextIO],
     sheet_name: Optional[Union[str, int, list]] = 0,
-    smiles_column: str = None,
+    smiles_column: Optional[str] = None,
     mol_column: str = "mol",
     **kwargs,
 ) -> pd.DataFrame:
@@ -82,12 +84,12 @@ def read_sdf(
     sanitize: bool = True,
     as_df: bool = False,
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
     include_private: bool = False,
     include_computed: bool = False,
     strict_parsing: bool = True,
     remove_hs: bool = True,
-) -> Union[List[Chem.rdchem.Mol], pd.DataFrame]:
+) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
 
     Note: This function is meant to be used with dataset that fit _in-memory_.
@@ -123,7 +125,7 @@ def read_sdf(
 
             # Handle gzip file if needed
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
-                f = gzip.open(f)
+                f = gzip.open(f)  # type: ignore
 
             supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
@@ -150,10 +152,10 @@ def read_sdf(
 
 
 def to_sdf(
-    mols: Union[Chem.rdchem.Mol, Sequence[Chem.rdchem.Mol], pd.DataFrame],
+    mols: Union[Mol, Sequence[Mol], pd.DataFrame],
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
 ):
     """Write molecules to a file.
 
@@ -168,7 +170,7 @@ def to_sdf(
     if isinstance(mols, pd.DataFrame):
         mols = dm.from_df(mols, smiles_column=smiles_column, mol_column=mol_column)
 
-    elif isinstance(mols, Chem.rdchem.Mol):
+    elif isinstance(mols, Mol):
         mols = [mols]
 
     # Filter out None values
@@ -191,7 +193,7 @@ def to_sdf(
 
 
 def to_smi(
-    mols: Sequence[Chem.rdchem.Mol],
+    mols: Sequence[Mol],
     urlpath: Union[str, os.PathLike, TextIO],
     error_if_empty: bool = False,
 ):
@@ -226,8 +228,8 @@ def to_smi(
 
 
 def read_smi(
-    urlpath: Union[str, os.PathLike],
-) -> Sequence[Chem.rdchem.Mol]:
+    urlpath: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
+) -> Sequence[Mol]:
     """Read a list of smiles from am `.smi` file.
 
     Args:
@@ -252,6 +254,6 @@ def read_smi(
 
     # Delete the local temporary path
     if not fsspec.utils.can_be_local(str(urlpath)):
-        pathlib.Path(active_path).unlink()
+        pathlib.Path(str(active_path)).unlink()
 
     return mols

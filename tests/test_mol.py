@@ -518,3 +518,73 @@ def test_unique_id():
     ]
 
     assert dm.unique_id(None) is None
+
+
+def test_clear_mol_props():
+    data = dm.freesolv().iloc[:10]
+    mols = dm.from_df(data)
+
+    assert all([list(mol.GetPropsAsDict().keys()) == ["iupac", "expt", "calc"] for mol in mols])
+
+    mols = [dm.clear_mol_props(mol) for mol in mols]
+    assert all([list(mol.GetPropsAsDict().keys()) == [] for mol in mols])
+
+
+def test_strip_mol_to_core():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.strip_mol_to_core(mol)
+
+    assert dm.to_inchikey(mol2) == "XSMDDAFPLXKNOA-UHFFFAOYSA-N"
+
+
+def test_make_scaffold_generic():
+
+    # NOTE(hadim): pretty sure doing assert on SMARTS string is fragile and might change
+    # in the future RDKit versions. So... hold and wait for it to break xD
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.make_scaffold_generic(mol)
+    assert (
+        dm.to_smarts(mol2)
+        == "[#0]-[#0](=[#0])-[#0]-[#0]1-[#0]-[#0]-[#0]2:[#0]:[#0](:[#0](:[#0](:[#0]:2-[#0]2:[#0]:[#0]:[#0](:[#0](=[#0]):[#0]:[#0]:2-1)-[#0]-[#0])-[#0]-[#0])-[#0]-[#0])-[#0]-[#0]"
+    )
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.make_scaffold_generic(mol, include_bonds=True)
+    assert (
+        dm.to_smarts(mol2)
+        == "[#0][#0]([#0])[#0][#0]1[#0][#0][#0]2:[#0]:[#0](:[#0](:[#0](:[#0]:2[#0]2:[#0]:[#0]:[#0](:[#0]([#0]):[#0]:[#0]1:2)[#0][#0])[#0][#0])[#0][#0])[#0][#0]"
+    )
+
+
+def test_to_scaffold():
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.to_scaffold_murcko(mol)
+    assert dm.to_inchikey(mol2) == "XSMDDAFPLXKNOA-UHFFFAOYSA-N"
+
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+    mol2 = dm.to_scaffold_murcko(mol, make_generic=True)
+    assert (
+        dm.to_smarts(mol2)
+        == "[#0]1-[#0]-[#0]-[#0]2:[#0]:[#0]:[#0]:[#0]:[#0]:2-[#0]2:[#0]:[#0]:[#0]:[#0](=[#0]):[#0]:[#0]:2-1"
+    )
+
+
+def test_compute_ring_systems():
+    mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
+
+    systems = dm.compute_ring_system(mol)
+    assert len(systems) == 1
+    assert len(systems[0]) == 16
+    assert isinstance(systems, list)
+    assert isinstance(systems[0], set)
+
+    mol = dm.to_mol("CN1C(=O)CN=C(C2=C1C=CC(=C2)Cl)C3=CC=CC=C3")
+
+    systems = dm.compute_ring_system(mol)
+    assert len(systems) == 2
+    assert len(systems[0]) == 11
+    assert len(systems[1]) == 6
+    assert isinstance(systems, list)
+    assert isinstance(systems[0], set)
