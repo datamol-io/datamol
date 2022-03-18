@@ -518,3 +518,13 @@ def test_unique_id():
     ]
 
     assert dm.unique_id(None) is None
+
+
+def test_clear_mol_props():
+    data = dm.freesolv().iloc[:10]
+    mols = dm.from_df(data)
+
+    assert all([list(mol.GetPropsAsDict().keys()) == ["iupac", "expt", "calc"] for mol in mols])
+
+    mols = [dm.clear_mol_props(mol) for mol in mols]
+    assert all([list(mol.GetPropsAsDict().keys()) == [] for mol in mols])

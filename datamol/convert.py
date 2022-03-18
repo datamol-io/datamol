@@ -9,15 +9,19 @@ from loguru import logger
 import pandas as pd
 
 from rdkit import Chem
+from rdkit.Chem import rdmolfiles
 from rdkit.Chem import PandasTools
 
 import selfies as sf
 
+from .types import Mol
+
+# NOTE(hadim): it's not possible to use `from .mol import ...` because of circular imports
 import datamol as dm
 
 
 def to_smiles(
-    mol: dm.Mol,
+    mol: Mol,
     canonical: bool = True,
     isomeric: bool = True,
     kekulize: bool = False,
@@ -42,6 +46,7 @@ def to_smiles(
         cxsmiles: Whether to return a CXSMILES instead of a SMILES.
         allow_to_fail: Raise an error if the conversion to SMILES fails. Return None otherwise.
     """
+
     if ordered and canonical is False:
         mol = dm.reorder_atoms(mol)
 
@@ -53,7 +58,7 @@ def to_smiles(
     try:
 
         if cxsmiles:
-            smiles = Chem.MolToCXSmiles(  # type: ignore
+            smiles = rdmolfiles.MolToCXSmiles(
                 mol,
                 isomericSmiles=isomeric,
                 canonical=canonical,
@@ -63,7 +68,7 @@ def to_smiles(
             )
 
         else:
-            smiles = Chem.MolToSmiles(  # type: ignore
+            smiles = rdmolfiles.MolToSmiles(
                 mol,
                 isomericSmiles=isomeric,
                 canonical=canonical,
@@ -82,7 +87,7 @@ def to_smiles(
     return smiles
 
 
-def to_selfies(mol: Union[str, dm.Mol]) -> Optional[str]:
+def to_selfies(mol: Union[str, Mol]) -> Optional[str]:
     """Convert a mol to SELFIES.
 
     Args:
@@ -92,12 +97,12 @@ def to_selfies(mol: Union[str, dm.Mol]) -> Optional[str]:
         selfies: SELFIES string.
     """
 
-    if isinstance(mol, dm.Mol):
+    if isinstance(mol, Mol):
         mol = to_smiles(mol)
 
     if mol is None:
         return None
-    selfies = sf.encoder(mol)  # type: ignore
+    selfies = sf.encoder(mol)
 
     if selfies == -1:
         return None
@@ -105,7 +110,7 @@ def to_selfies(mol: Union[str, dm.Mol]) -> Optional[str]:
     return selfies
 
 
-def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, dm.Mol]]:
+def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Mol]]:
     """Convert a SEFLIES to a smiles or a mol.
 
     Args:
@@ -126,7 +131,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, dm.M
     return smiles
 
 
-def smiles_as_smarts(mol: Union[str, dm.Mol], keep_hs: bool = True) -> Optional[str]:
+def smiles_as_smarts(mol: Union[str, Mol], keep_hs: bool = True) -> Optional[str]:
     """Convert a smiles to a smarts if possible
 
     Args:
@@ -164,7 +169,7 @@ def smiles_as_smarts(mol: Union[str, dm.Mol], keep_hs: bool = True) -> Optional[
     return smarts
 
 
-def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
+def to_inchi(mol: Union[str, Mol]) -> Optional[str]:
     """Convert a mol to a standard Inchi.
 
     Args:
@@ -184,13 +189,13 @@ def to_inchi(mol: Union[str, dm.Mol]) -> Optional[str]:
 
 
 def to_inchi_non_standard(
-    mol: Union[str, dm.Mol],
+    mol: Union[str, Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
     reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
-    options: List[str] = None,
+    options: Optional[List[str]] = None,
 ) -> Optional[str]:
     """Convert a mol to a non-standard Inchi.
 
@@ -235,7 +240,7 @@ def to_inchi_non_standard(
     return inchi_val
 
 
-def to_smarts(mol: dm.Mol) -> Optional[str]:
+def to_smarts(mol: Mol) -> Optional[str]:
     """Convert a mol to SMARTS format
 
     Args:
@@ -248,7 +253,7 @@ def to_smarts(mol: dm.Mol) -> Optional[str]:
     return Chem.MolToSmarts(mol)  # type: ignore
 
 
-def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
+def to_inchikey(mol: Union[str, Mol]) -> Optional[str]:
     """Convert a mol to a standard InchiKey.
 
     Args:
@@ -267,13 +272,13 @@ def to_inchikey(mol: Union[str, dm.Mol]) -> Optional[str]:
 
 
 def to_inchikey_non_standard(
-    mol: Union[str, dm.Mol],
+    mol: Union[str, Mol],
     fixed_hydrogen_layer: bool = True,
     undefined_stereocenter: bool = True,
     reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
-    options: List[str] = None,
+    options: Optional[List[str]] = None,
 ) -> Optional[str]:
     """Convert a mol to a non-standard InchiKey.
 
@@ -322,7 +327,7 @@ def from_inchi(
     inchi: Optional[str],
     sanitize: bool = True,
     remove_hs: bool = True,
-) -> Optional[dm.Mol]:
+) -> Optional[Mol]:
     """Convert an InChi to a mol.
 
     Args:
@@ -339,9 +344,7 @@ def from_inchi(
     return Chem.MolFromInchi(inchi, sanitize=sanitize, removeHs=remove_hs)
 
 
-def from_smarts(
-    smarts: Optional[str],
-) -> Optional[dm.Mol]:
+def from_smarts(smarts: Optional[str]) -> Optional[Mol]:
     """Convert a SMARTS string to a molecule
 
     Args:
@@ -354,9 +357,9 @@ def from_smarts(
 
 
 def to_df(
-    mols: List[dm.Mol],
+    mols: List[Mol],
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
     include_private: bool = False,
     include_computed: bool = False,
     render_df_mol: bool = True,
@@ -385,7 +388,7 @@ def to_df(
 
     # Feed it with smiles
     if smiles_column is not None:
-        smiles = [dm.to_smiles(mol) for mol in mols]
+        smiles = [to_smiles(mol) for mol in mols]
         df[smiles_column] = smiles
 
     # Add a mol column
@@ -425,10 +428,10 @@ def to_df(
 def from_df(
     df: pd.DataFrame,
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
     conserve_smiles: bool = False,
     sanitize: bool = True,
-) -> List[dm.Mol]:
+) -> List[Mol]:
     """Convert a dataframe to a list of mols.
 
     For the reverse operation, you might to check `dm.to_df()`.
@@ -456,7 +459,7 @@ def from_df(
     # Try to detect the mol column if `mol_column` is None.
     if mol_column is None:
         for col in df.columns:
-            if isinstance(df[col].iloc[0], dm.Mol):
+            if isinstance(df[col].iloc[0], Mol):
                 mol_column = col
 
     def _row_to_mol(row):
@@ -518,9 +521,9 @@ def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
         frame.to_html = types.MethodType(PandasTools.patchPandasHTMLrepr, frame)
 
     if PandasTools.defPandasRepr is not None and renderer == "String":
-        frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)
+        frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)  # type: ignore
     else:
-        frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)
+        frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)  # type: ignore
 
 
 def _process_inchi_options(
@@ -529,7 +532,7 @@ def _process_inchi_options(
     reconnected_metal_layer: bool = True,
     tautomerism_keto_enol: bool = True,
     tautomerism_15: bool = True,
-    options: List[str] = None,
+    options: Optional[List[str]] = None,
 ):
 
     inchi_options = []

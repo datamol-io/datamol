@@ -13,7 +13,20 @@ import hashlib
 from loguru import logger
 
 from rdkit import Chem
-from rdkit.Chem import rdmolops
+
+from rdkit.Chem import CanonicalRankAtoms  # type: ignore
+from rdkit.Chem import MolFromSmiles  # type: ignore
+from rdkit.Chem import AddHs  # type: ignore
+from rdkit.Chem import RemoveHs  # type: ignore
+from rdkit.Chem import Kekulize  # type: ignore
+from rdkit.Chem import RenumberAtoms  # type: ignore
+from rdkit.Chem import RWMol  # type: ignore
+from rdkit.Chem import AssignStereochemistry  # type: ignore
+from rdkit.Chem.AllChem import ReplaceSubstructs  # type: ignore
+from rdkit.Chem.AllChem import DeleteSubstructs  # type: ignore
+from rdkit.Chem import GetMolFrags  # type: ignore
+from rdkit.Chem import PathToSubmol  # type: ignore
+
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 
@@ -21,6 +34,7 @@ from . import _sanifix4
 from .types import Mol
 from .convert import to_inchikey_non_standard
 from .convert import to_inchikey
+from .convert import to_smiles
 
 
 PERIODIC_TABLE = Chem.rdchem.GetPeriodicTable()
@@ -70,7 +84,7 @@ def to_mol(
         raise ValueError(f"Input should be a Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
-        _mol = Chem.MolFromSmiles(mol, sanitize=sanitize)  # type: ignore
+        _mol = MolFromSmiles(mol, sanitize=sanitize)
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
@@ -79,14 +93,14 @@ def to_mol(
 
     # Add hydrogens
     if _mol is not None and add_hs:
-        _mol = Chem.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)  # type: ignore
+        _mol = AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
 
     # Reorder atoms
     if _mol is not None and ordered:
         _mol = reorder_atoms(_mol)
 
     if _mol is not None and kekulize:
-        Chem.Kekulize(_mol, clearAromaticFlags=False)  # type: ignore
+        Kekulize(_mol, clearAromaticFlags=False)
     return _mol
 
 
@@ -153,14 +167,14 @@ def reorder_atoms(
     if mol.GetNumAtoms() == 0:
         return mol
 
-    new_order = Chem.CanonicalRankAtoms(  # type: ignore
+    new_order = CanonicalRankAtoms(
         mol,
         breakTies=break_ties,
         includeChirality=include_chirality,
         includeIsotopes=include_isotopes,
     )
     new_order = sorted([(y, x) for x, y in enumerate(new_order)])
-    return Chem.RenumberAtoms(mol, [y for (x, y) in new_order])  # type: ignore
+    return RenumberAtoms(mol, [y for (x, y) in new_order])
 
 
 def randomize_atoms(mol: Mol) -> Optional[Mol]:
@@ -177,10 +191,10 @@ def randomize_atoms(mol: Mol) -> Optional[Mol]:
 
     atom_indices = list(range(mol.GetNumAtoms()))
     random.shuffle(atom_indices)
-    return Chem.RenumberAtoms(mol, atom_indices)  # type: ignore
+    return RenumberAtoms(mol, atom_indices)
 
 
-def to_neutral(mol: Mol) -> Optional[Mol]:
+def to_neutral(mol: Optional[Mol]) -> Optional[Mol]:
     """Neutralize the charge of a molecule.
 
     Args:
@@ -256,7 +270,7 @@ def sanitize_mol(
         # Try catch to avoid occasional aromaticity errors
         try:
             # `cxsmiles` is used here to preserve the first conformer.
-            mol = to_mol(dm.to_smiles(mol, cxsmiles=True), sanitize=True, add_hs=add_hs)  # type: ignore
+            mol = to_mol(to_smiles(mol, cxsmiles=True), sanitize=True, add_hs=add_hs)
         except Exception:
             mol = None
 
@@ -267,7 +281,7 @@ def sanitize_mol(
     return mol
 
 
-def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
+def sanitize_smiles(smiles: Optional[str], isomeric: bool = True) -> Optional[str]:
     """Takes SMILES string and returns its sanitized version.
 
     Args:
@@ -277,6 +291,9 @@ def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
     Returns:
         sanitized smiles.
     """
+
+    mol = None
+
     try:
         mol = to_mol(smiles, sanitize=False)
         mol = sanitize_mol(mol, False)
@@ -287,9 +304,10 @@ def sanitize_smiles(smiles: str, isomeric: bool = True) -> Optional[str]:
         return None
 
     try:
-        smiles = dm.to_smiles(mol, isomeric=isomeric)  # type: ignore
+        smiles = to_smiles(mol, isomeric=isomeric)
     except:
         return None
+
     return smiles
 
 
@@ -372,7 +390,7 @@ def standardize_mol(
         mol = uncharger.uncharge(mol)
 
     if stereo:
-        Chem.AssignStereochemistry(mol, force=False, cleanIt=True)  # type: ignore
+        AssignStereochemistry(mol, force=False, cleanIt=True)
 
     return mol
 
@@ -468,10 +486,10 @@ def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> O
         return mol
 
     try:
-        m = Chem.RemoveHs(  # type: ignore
+        m = remove_hs(
             mol,
-            implicitOnly=False,
-            updateExplicitCount=True,
+            implicit_only=False,
+            update_explicit_count=True,
             sanitize=False,
         )
         m.UpdatePropertyCache(False)
@@ -485,7 +503,7 @@ def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> O
                 # atom.SetNumRadicalElectrons(0)
             atom.UpdatePropertyCache(False)
 
-        em = Chem.RWMol(m)  # type: ignore
+        em = RWMol(m)
         bonds = em.GetBonds()
         bonds = [
             bond
@@ -525,7 +543,7 @@ def adjust_singleton(mol: Mol) -> Optional[Mol]:
         mol: a molecule.
     """
     to_rem = []
-    em = Chem.RWMol(mol)  # type: ignore
+    em = RWMol(mol)
     for atom in mol.GetAtoms():
         if atom.GetExplicitValence() == 0:
             to_rem.append(atom.GetIdx())
@@ -537,13 +555,15 @@ def adjust_singleton(mol: Mol) -> Optional[Mol]:
 
 def remove_dummies(mol: Mol, dummy: str = "*") -> Optional[Mol]:
     """Remove dummy atoms from molecules."""
+
     du = to_mol(dummy)
     out = mol
+
     try:
-        out = Chem.ReplaceSubstructs(mol, du, dm.to_mol("[H]"), True)[0]  # type: ignore
-        out = Chem.RemoveHs(out)  # type: ignore
-    except Exception as e:
-        out = Chem.DeleteSubstructs(mol, du)  # type: ignore
+        out = ReplaceSubstructs(mol, du, to_mol("[H]"), True)[0]
+        out = remove_hs(out)
+    except Exception:
+        out = DeleteSubstructs(mol, du)
     return out
 
 
@@ -604,16 +624,16 @@ def replace_dummies_atoms(
     Returns:
         mol: Molecule with dummy replaced
     """
-    du = Chem.MolFromSmiles(dummy)  # type: ignore
-    replacement = Chem.MolFromSmiles(atom)  # type: ignore
-    out = Chem.ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]  # type: ignore
+    du = to_mol(dummy)
+    replacement = to_mol(atom)
+    out = ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]
     return out
 
 
 def keep_largest_fragment(mol: Mol) -> Optional[Mol]:
     """Only keep largest fragment of each molecule."""
     return max(
-        rdmolops.GetMolFrags(mol, asMols=True),
+        GetMolFrags(mol, asMols=True),
         default=mol,
         key=lambda m: m.GetNumAtoms(),
     )
@@ -641,7 +661,7 @@ def set_dative_bonds(mol: Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional
     Returns:
         The modified molecule.
     """
-    rwmol = Chem.RWMol(mol)  # type: ignore
+    rwmol = RWMol(mol)
     rwmol.UpdatePropertyCache(strict=False)
 
     metals = [at for at in rwmol.GetAtoms() if is_transition_metal(at)]
@@ -693,17 +713,48 @@ def set_mol_props(
     return mol
 
 
-def copy_mol_props(source: Mol, destination: Mol):
+def copy_mol_props(
+    source: Mol,
+    destination: Mol,
+    include_private: bool = False,
+    include_computed: bool = False,
+):
     """Copy properties from one source molecule to another destination
     molecule.
 
     Args:
         source: a molecule to copy from.
         destination: a molecule to copy to.
+        include_private: Include private properties.
+        include_computed: Include computed properties.
     """
 
-    props = source.GetPropsAsDict()
+    props = source.GetPropsAsDict(includePrivate=include_private, includeComputed=include_computed)
     set_mol_props(destination, props)
+
+
+def clear_mol_props(
+    mol: Mol,
+    copy: bool = True,
+    include_private: bool = False,
+    include_computed: bool = False,
+):
+    """Clear all properties from a molecule.
+
+    Args:
+        mol: A molecule.
+        copy: Whether to copy the molecule.
+    """
+
+    if copy:
+        mol = copy_mol(mol)
+
+    props = mol.GetPropsAsDict(includePrivate=include_private, includeComputed=include_computed)
+
+    for key in props.keys():
+        mol.ClearProp(key)
+
+    return mol
 
 
 def atom_indices_to_mol(mol: Mol, copy: bool = False):
@@ -737,7 +788,7 @@ def atom_list_to_bond(
 
     # Build an atom map
     atom_map = {}
-    submol = Chem.PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)  # type: ignore
+    submol = PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)
     atom_map_reversed = {v: k for k, v in atom_map.items()}
 
     bonds = []
@@ -870,7 +921,7 @@ def add_hs(
     if copy:
         mol = copy_mol(mol)
 
-    mol = Chem.AddHs(  # type: ignore
+    mol = AddHs(
         mol,
         explicitOnly=explicit_only,
         addCoords=add_coords,
@@ -901,7 +952,7 @@ def remove_hs(
     if copy:
         mol = copy_mol(mol)
 
-    mol = Chem.RemoveHs(  # type: ignore
+    mol = RemoveHs(
         mol,
         implicitOnly=implicit_only,
         updateExplicitCount=update_explicit_count,

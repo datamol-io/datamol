@@ -19,7 +19,7 @@
 
 **Removed:**
 
-* <news item>
+* Remove a lot of `# type: ignore` as those can be error prone (hopefully the tests are here!)
 
 **Fixed:**
 

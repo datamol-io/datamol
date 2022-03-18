@@ -23,7 +23,7 @@ import datamol as dm
 
 def read_csv(
     urlpath: Union[str, os.PathLike, TextIO],
-    smiles_column: str = None,
+    smiles_column: Optional[str] = None,
     mol_column: str = "mol",
     **kwargs,
 ) -> pd.DataFrame:
@@ -51,7 +51,7 @@ def read_csv(
 def read_excel(
     urlpath: Union[str, os.PathLike, TextIO],
     sheet_name: Optional[Union[str, int, list]] = 0,
-    smiles_column: str = None,
+    smiles_column: Optional[str] = None,
     mol_column: str = "mol",
     **kwargs,
 ) -> pd.DataFrame:
@@ -82,7 +82,7 @@ def read_sdf(
     sanitize: bool = True,
     as_df: bool = False,
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
     include_private: bool = False,
     include_computed: bool = False,
     strict_parsing: bool = True,
@@ -123,7 +123,7 @@ def read_sdf(
 
             # Handle gzip file if needed
             if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
-                f = gzip.open(f)
+                f = gzip.open(f)  # type: ignore
 
             supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
@@ -153,7 +153,7 @@ def to_sdf(
     mols: Union[Chem.rdchem.Mol, Sequence[Chem.rdchem.Mol], pd.DataFrame],
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = "smiles",
-    mol_column: str = None,
+    mol_column: Optional[str] = None,
 ):
     """Write molecules to a file.
 
@@ -226,7 +226,7 @@ def to_smi(
 
 
 def read_smi(
-    urlpath: Union[str, os.PathLike],
+    urlpath: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
 ) -> Sequence[Chem.rdchem.Mol]:
     """Read a list of smiles from am `.smi` file.
 
@@ -252,6 +252,6 @@ def read_smi(
 
     # Delete the local temporary path
     if not fsspec.utils.can_be_local(str(urlpath)):
-        pathlib.Path(active_path).unlink()
+        pathlib.Path(str(active_path)).unlink()
 
     return mols
