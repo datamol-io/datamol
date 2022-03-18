@@ -142,7 +142,7 @@ def template_align(
 
 def auto_align_many(
     mols: Union[Sequence[Mol], pd.Series],
-    partition_method: str = "anongraph-scaffold",
+    partition_method: str = "anon-scaffold",
     copy: bool = True,
     cluster_cutoff: float = 0.7,
     **kwargs,

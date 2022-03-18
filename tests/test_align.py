@@ -1,3 +1,5 @@
+import pytest
+
 import pandas as pd
 import datamol as dm
 
@@ -90,3 +92,6 @@ def test_auto_align_many():
         assert props["dm.auto_align_many.core"].dtype == object
 
         assert props["dm.auto_align_many.cluster_id"].unique().shape[0] == excepted_cluster_size[i]
+
+    with pytest.raises(ValueError):
+        dm.align.auto_align_many(data["mol"], partition_method="invalid")
