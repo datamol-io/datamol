@@ -15,16 +15,6 @@ import datamol as dm
 from .types import Mol
 
 
-def should_align(mols: Iterable[Mol]) -> bool:
-    """Check whether a list of molecules should be aligned by checking
-    if at least one of them has computed coordinates.
-
-    Args:
-        mols: List of molecules.
-    """
-    return not any(mol.GetNumConformers() > 0 for mol in mols)
-
-
 def compute_2d_coords(mol: Mol, copy: bool = True, verbose: bool = False) -> Mol:
     """Compute 2D coordinates for a molecule.
 
@@ -140,6 +130,7 @@ def auto_align_many(
     partition_method: str = "anon-scaffold",
     copy: bool = True,
     cluster_cutoff: float = 0.7,
+    allow_r_groups: bool = True
     **kwargs,
 ):
     """Partition a list of molecules into clusters sharing common scaffold of common core,
@@ -165,6 +156,8 @@ def auto_align_many(
             Cautious as the method 'cluster' is very sensitive to the cutoff.
         copy: Whether to copy the molecules before aligning them.
         cluster_cutoff: Optional cluster cutoff.
+        allow_r_groups: Optional, a mirror of allowRGroups option in
+                        rdkit's GenerateDepictionMatching2DStructure method.
         kwargs: Additional arguments to pass to clustering method
     """
 
@@ -230,11 +223,15 @@ def auto_align_many(
             mol = mols[mol_id]
 
             if core_mol is not None:
+                # Only pass allowRGroups if set to True
+                # in order to support rdkit versions < 2021_03_1
+                # ref https://github.com/rdkit/rdkit/pull/3811
+                allowRGroups = {"allowRGroups": True} if allow_r_groups else {}
                 rdDepictor.GenerateDepictionMatching2DStructure(
                     mol,
                     reference=core_mol,
                     acceptFailure=True,
-                    allowRGroups=True,
+                    **allowRGroups,
                 )
 
             # Add some props to the mol so the user can retrieve the groups from
