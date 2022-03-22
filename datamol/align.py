@@ -3,8 +3,10 @@ from typing import Union
 from typing import Iterable
 from typing import Sequence
 
+from packaging import version
 from collections import defaultdict as ddict
 
+import rdkit
 from rdkit.Chem import rdDepictor
 from rdkit.Chem import rdMolAlign
 
@@ -13,16 +15,6 @@ import datamol as dm
 
 
 from .types import Mol
-
-
-def should_align(mols: Iterable[Mol]) -> bool:
-    """Check whether a list of molecules should be aligned by checking
-    if at least one of them has computed coordinates.
-
-    Args:
-        mols: List of molecules.
-    """
-    return not any(mol.GetNumConformers() > 0 for mol in mols)
 
 
 def compute_2d_coords(mol: Mol, copy: bool = True, verbose: bool = False) -> Mol:
@@ -140,6 +132,7 @@ def auto_align_many(
     partition_method: str = "anon-scaffold",
     copy: bool = True,
     cluster_cutoff: float = 0.7,
+    allow_r_groups: bool = True,
     **kwargs,
 ):
     """Partition a list of molecules into clusters sharing common scaffold of common core,
@@ -165,6 +158,9 @@ def auto_align_many(
             Cautious as the method 'cluster' is very sensitive to the cutoff.
         copy: Whether to copy the molecules before aligning them.
         cluster_cutoff: Optional cluster cutoff.
+        allow_r_groups: Optional, if True, terminal dummy atoms in the
+                        reference are ignored if they match an implicit hydrogen in the
+                        molecule, and a constrained depiction is still attempted
         kwargs: Additional arguments to pass to clustering method
     """
 
@@ -230,11 +226,19 @@ def auto_align_many(
             mol = mols[mol_id]
 
             if core_mol is not None:
+                # Only pass allowRGroups if current
+                # rdkit version is >= 2021_03_1
+                # ref https://github.com/rdkit/rdkit/pull/3811
+                allowRGroups = (
+                    {"allowRGroups": allow_r_groups}
+                    if version.parse(rdkit.__version__) >= version.parse("2021.03.1")
+                    else {}
+                )
                 rdDepictor.GenerateDepictionMatching2DStructure(
                     mol,
                     reference=core_mol,
                     acceptFailure=True,
-                    allowRGroups=True,
+                    **allowRGroups,
                 )
 
             # Add some props to the mol so the user can retrieve the groups from

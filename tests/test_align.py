@@ -4,24 +4,6 @@ import pandas as pd
 import datamol as dm
 
 
-def test_should_align():
-
-    data = dm.freesolv()
-    data["mol"] = data["smiles"].apply(dm.to_mol)
-    data = data.iloc[:10].copy()  # type: ignore
-    assert dm.align.should_align(data["mol"]) == True
-
-    data = dm.freesolv()
-    data["mol"] = data["smiles"].apply(dm.to_mol)
-    data = data.iloc[:10].copy()  # type: ignore
-    data.loc[5, "mol"] = dm.align.compute_2d_coords(data.loc[5, "mol"])
-    assert dm.align.should_align(data["mol"]) == False
-
-    data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
-    data = data.iloc[:10].copy()  # type: ignore
-    assert dm.align.should_align(data["mol"]) == False
-
-
 def test_template_align():
     data: pd.DataFrame = dm.cdk2(as_df=True)  # type: ignore
     data = data.iloc[:6].copy()  # type: ignore
