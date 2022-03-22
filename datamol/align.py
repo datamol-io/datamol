@@ -55,7 +55,7 @@ def template_align(
         auto_select_coord_gen: Whether to automatically select the coordinate generation method.
 
     Returns:
-        mol: aligned molecule. None if initial mol argument is undefined.
+        mol: aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.
     """
 
     if isinstance(mol, str):
