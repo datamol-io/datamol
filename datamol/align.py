@@ -158,8 +158,9 @@ def auto_align_many(
             Cautious as the method 'cluster' is very sensitive to the cutoff.
         copy: Whether to copy the molecules before aligning them.
         cluster_cutoff: Optional cluster cutoff.
-        allow_r_groups: Optional, a mirror of allowRGroups option in
-                        rdkit's GenerateDepictionMatching2DStructure method.
+        allow_r_groups: Optional, if True, terminal dummy atoms in the
+                        reference are ignored if they match an implicit hydrogen in the
+                        molecule, and a constrained depiction is still attempted
         kwargs: Additional arguments to pass to clustering method
     """
 
