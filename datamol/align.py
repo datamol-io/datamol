@@ -3,8 +3,10 @@ from typing import Union
 from typing import Iterable
 from typing import Sequence
 
+from packaging import version
 from collections import defaultdict as ddict
 
+import rdkit
 from rdkit.Chem import rdDepictor
 from rdkit.Chem import rdMolAlign
 
@@ -223,10 +225,14 @@ def auto_align_many(
             mol = mols[mol_id]
 
             if core_mol is not None:
-                # Only pass allowRGroups if set to True
-                # in order to support rdkit versions < 2021_03_1
+                # Only pass allowRGroups if current
+                # rdkit version is >= 2021_03_1
                 # ref https://github.com/rdkit/rdkit/pull/3811
-                allowRGroups = {"allowRGroups": True} if allow_r_groups else {}
+                allowRGroups = (
+                    {"allowRGroups": allow_r_groups}
+                    if version.parse(rdkit.__version__) >= version.parse("2021.03.1")
+                    else {}
+                )
                 rdDepictor.GenerateDepictionMatching2DStructure(
                     mol,
                     reference=core_mol,
