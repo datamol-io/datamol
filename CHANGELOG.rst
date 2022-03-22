@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.2
+====================
+
+**Changed:**
+
+* allow_r_groups option in dm.align.auto_align_many
+
+**Removed:**
+
+* should_align
+
+**Authors:**
+
+* Hadrien Mary
+* michelml
+
+
+
 v0.7.1
 ====================
 
