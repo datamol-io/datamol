@@ -130,8 +130,7 @@ def auto_align_many(
     partition_method: str = "anon-scaffold",
     copy: bool = True,
     cluster_cutoff: float = 0.7,
-    allow_r_groups: bool = True
-    **kwargs,
+    allow_r_groups: bool = True ** kwargs,
 ):
     """Partition a list of molecules into clusters sharing common scaffold of common core,
     then align the molecules to that common core. This function will compute the list of
