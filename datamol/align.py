@@ -1,6 +1,5 @@
 from typing import Optional
 from typing import Union
-from typing import Iterable
 from typing import Sequence
 
 from packaging import version
@@ -40,7 +39,7 @@ def template_align(
     use_depiction: bool = True,
     remove_confs: bool = True,
     auto_select_coord_gen: bool = False,
-):
+) -> Union[None, Mol]:
     """Align an input molecule to a template. If the template is not provided then the input molecule is
     returned.
 
@@ -56,7 +55,7 @@ def template_align(
         auto_select_coord_gen: Whether to automatically select the coordinate generation method.
 
     Returns:
-        mol: aligned molecule.
+        mol: aligned molecule. None if initial mol argument is undefined.
     """
 
     if isinstance(mol, str):
