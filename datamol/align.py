@@ -39,7 +39,7 @@ def template_align(
     use_depiction: bool = True,
     remove_confs: bool = True,
     auto_select_coord_gen: bool = False,
-) -> Union[Mol, None]:
+) -> Optional[Mol]:
     """Align an input molecule to a template. If the template is not provided then the input molecule is
     returned.
 
