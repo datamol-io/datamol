@@ -867,7 +867,7 @@ You can set this to true when not using depiction</p></td>
   <tbody>
     <tr>
       <td><code>mol</code></td>
-      <td><p>aligned molecule.</p></td>
+      <td><p>aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</p></td>
     </tr>
   </tbody>
 </table>
@@ -880,7 +880,7 @@ You can set this to true when not using depiction</p></td>
     <span class="n">use_depiction</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_confs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">auto_select_coord_gen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-<span class="p">):</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Align an input molecule to a template. If the template is not provided then the input molecule is</span>
 <span class="sd">    returned.</span>
 
@@ -896,7 +896,7 @@ You can set this to true when not using depiction</p></td>
 <span class="sd">        auto_select_coord_gen: Whether to automatically select the coordinate generation method.</span>
 
 <span class="sd">    Returns:</span>
-<span class="sd">        mol: aligned molecule.</span>
+<span class="sd">        mol: aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
