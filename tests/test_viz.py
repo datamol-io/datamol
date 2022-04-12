@@ -1,5 +1,8 @@
 import pytest
 
+import base64
+import io
+
 import numpy as np
 import ipywidgets as widgets
 
@@ -15,6 +18,16 @@ import datamol as dm
 # Jupyter notebook.
 
 
+def _convert_ipython_to_array(image):
+    """convert ipython image to numpy array"""
+    image_obj = base64.b64decode(str(image._repr_png_()))
+    try:
+        image_obj = Image.open(io.BytesIO(image_obj))
+        return np.array(image_obj)
+    except:
+        return np.array(image)
+
+
 def test_to_image():
 
     # Get a list of molecules
@@ -25,7 +38,10 @@ def test_to_image():
     # With multiple molecules
     legends = [dm.to_smiles(mol) for mol in mols]
     image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200), use_svg=False)
-    # image = _convert_ipython_to_array(image)
+    image = _convert_ipython_to_array(image)
+
+    print(type(image))
+
     image = np.array(image)
 
     assert image.dtype == np.uint8
@@ -36,7 +52,7 @@ def test_to_image():
     mol = mols[0]
     legends = dm.to_smiles(mol)
     image = dm.viz.to_image(mol, legends=legends, mol_size=(200, 200), use_svg=False)
-    # image = _convert_ipython_to_array(image)
+    image = _convert_ipython_to_array(image)
     image = np.array(image)
 
     assert image.dtype == np.uint8
@@ -78,7 +94,7 @@ def test_to_image_save_file(tmpdir):
     # check whether the svg looks valid
     with open(image_path) as f:
         content = f.read().strip()
-    assert content.startswith("<?xml ")
+    assert content.startswith("<?xml ") or content.startswith("<svg")
     assert content.endswith("</svg>")
 
 
