@@ -4,6 +4,26 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.3
+====================
+
+**Changed:**
+
+* Use micromamba during CI.
+* Add CI tests for RDKit=2022.03.
+* Adapt a test to new rdkit version.
+
+**Fixed:**
+
+* typing for what is returned by dm.align.template_align
+
+**Authors:**
+
+* Hadrien Mary
+* michelml
+
+
+
 v0.7.2
 ====================
 
