@@ -16,37 +16,25 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Cache conda
-        uses: actions/cache@v2
-        env:
-          CACHE_NUMBER: 3
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}
-
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: mamba-org/provision-with-micromamba@main
         with:
-          miniforge-variant: Mambaforge
-          use-mamba: true
-          use-only-tar-bz2: true
-          auto-activate-base: true
-          activate-environment: ""
+          environment-file: false
+          cache-downloads: true
 
       - name: Install Dependencies
         run: |
-          conda create -n datamol
-          conda activate datamol
-          mamba env update -f env.yml
+          micromamba activate
+          micromamba create -n datamol -f env.yml
 
       - name: Install library
         run: |
-          conda activate datamol
+          micromamba activate datamol
           python -m pip install .
 
       - name: Deploy the doc
         run: |
-          conda activate datamol
+          micromamba activate datamol
 
           echo "Configure git"
           git config --global user.name 'hadim'

@@ -16,7 +16,7 @@ jobs:
       matrix:
         python-version: ["3.8", "3.9"]
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        rdkit-version: ["2021.09"]
+        rdkit-version: ["2021.09", "2022.03"]
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
@@ -29,49 +29,37 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v2
 
-      - name: Cache conda
-        uses: actions/cache@v2
-        env:
-          CACHE_NUMBER: 5
-        with:
-          path: ~/conda_pkgs_dir
-          key: conda-${{ runner.os }}-${{ env.CACHE_NUMBER }}-${{ hashFiles('env.yml') }}-${{ matrix.python-version }}-${{ matrix.rdkit-version }}
-
       - name: Setup conda
-        uses: conda-incubator/setup-miniconda@v2
+        uses: mamba-org/provision-with-micromamba@main
         with:
-          miniforge-variant: Mambaforge
-          use-mamba: true
-          use-only-tar-bz2: true
-          auto-activate-base: true
-          activate-environment: ""
+          environment-file: false
+          cache-downloads: true
 
       - name: Setup conda env
         run: |
+          micromamba activate
+
           # Patch the conda env file to specify the Python and RDKit version
-          mamba install --yes pyyaml
+          micromamba install --yes pyyaml
 
           python .github/patch_conda_env.py --env env.yml -d \
             python="${{ matrix.python-version }}" \
             rdkit="${{ matrix.rdkit-version }}" \
             > env-patched.yml
 
-          # Create conda env
-          conda create -n datamol
-
       - name: Install Dependencies
         run: |
-          conda activate datamol
-          mamba env update -f env-patched.yml
+          micromamba activate
+          micromamba create -n datamol -f env-patched.yml
 
       - name: Install library
         run: |
-          conda activate datamol
+          micromamba activate datamol
           python -m pip install -e .  # `-e` required for correct `coverage` run.
 
       - name: Run tests
         run: |
-          conda activate datamol
+          micromamba activate datamol
           pytest
 
       - name: Codecov Upload
@@ -86,7 +74,7 @@ jobs:
 
       - name: Test building the doc
         run: |
-          conda activate datamol
+          micromamba activate datamol
 
           # Build and serve the doc
           mkdocs build
