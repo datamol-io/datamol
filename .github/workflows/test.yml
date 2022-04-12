@@ -40,7 +40,7 @@ jobs:
           micromamba activate
 
           # Patch the conda env file to specify the Python and RDKit version
-          micromamba install --yes pyyaml
+          micromamba install -c conda-forge --yes pyyaml
 
           python .github/patch_conda_env.py --env env.yml -d \
             python="${{ matrix.python-version }}" \
