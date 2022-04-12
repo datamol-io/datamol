@@ -4,7 +4,9 @@
 
 **Changed:**
 
-* Use micromamba during CI
+* Use micromamba during CI.
+* Add CI tests for RDKit=2022.03.
+* Adapt a test to new rdkit version.
 
 **Deprecated:**
 
