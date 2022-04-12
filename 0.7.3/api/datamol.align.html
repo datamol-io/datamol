@@ -1,0 +1,1269 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.2.9">
+    
+    
+      
+        <title>datamol.align - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.120efc48.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.9647289d.min.css">
+        
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+      <link rel="stylesheet" href="../assets/css/tweak-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamolalign" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.align
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" data-md-state="indeterminate" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
+        Preprocessing Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
+        Cluster Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
+        Fragment and Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.html" class="md-nav__link">
+        Visualization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Filesystem.html" class="md-nav__link">
+        Working with local and remote data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.html" class="md-nav__link">
+        datamol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.descriptors.html" class="md-nav__link">
+        datamol.descriptors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.align
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.align.html" class="md-nav__link md-nav__link--active">
+        datamol.align
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perform-alignment-actions-on-molecules" class="md-nav__link">
+    Perform alignment actions on molecules
+  </a>
+  
+    <nav class="md-nav" aria-label="Perform alignment actions on molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.compute_2d_coords" class="md-nav__link">
+    compute_2d_coords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.template_align" class="md-nav__link">
+    template_align()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.auto_align_many" class="md-nav__link">
+    auto_align_many()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#perform-alignment-actions-on-molecules" class="md-nav__link">
+    Perform alignment actions on molecules
+  </a>
+  
+    <nav class="md-nav" aria-label="Perform alignment actions on molecules">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.compute_2d_coords" class="md-nav__link">
+    compute_2d_coords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.template_align" class="md-nav__link">
+    template_align()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.align.auto_align_many" class="md-nav__link">
+    auto_align_many()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.align.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="datamolalign"><code>datamol.align</code><a class="headerlink" href="#datamolalign" title="Permanent link">&para;</a></h1>
+<h2 id="perform-alignment-actions-on-molecules">Perform alignment actions on molecules<a class="headerlink" href="#perform-alignment-actions-on-molecules" title="Permanent link">&para;</a></h2>
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.align.compute_2d_coords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">compute_2d_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#datamol.align.compute_2d_coords" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Compute 2D coordinates for a molecule.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Mol</code></td>
+        <td><p>A molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>copy</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to copy the molecule.</p></td>
+        <td><code>True</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/align.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">compute_2d_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute 2D coordinates for a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        copy: Whether to copy the molecule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">(</span><span class="n">enable</span><span class="o">=</span><span class="ow">not</span> <span class="n">verbose</span><span class="p">):</span>
+        <span class="n">rdDepictor</span><span class="o">.</span><span class="n">Compute2DCoords</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.align.template_align" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">template_align</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">template</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">use_depiction</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_confs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">auto_select_coord_gen</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+
+<a href="#datamol.align.template_align" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Align an input molecule to a template. If the template is not provided then the input molecule is
+returned.</p>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mol</code></td>
+        <td><code>Union[str, rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>A molecule.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>template</code></td>
+        <td><code>Union[str, rdkit.Chem.rdchem.Mol]</code></td>
+        <td><p>Template to align to.</p></td>
+        <td><code>None</code></td>
+      </tr>
+      <tr>
+        <td><code>copy</code></td>
+        <td><code>bool</code></td>
+        <td><p>whether to copy the molecule before aligning it.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>use_depiction</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to use the depiction API or use MolAlign
+The main difference is around how 3D information is handled, but also, because the depiction API
+will emphasize the atoms that do not match, whereas AlignMol will not.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>remove_confs</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to remove all conformation in the input molecule first.
+You can set this to true when not using depiction</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>auto_select_coord_gen</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to automatically select the coordinate generation method.</p></td>
+        <td><code>False</code></td>
+      </tr>
+  </tbody>
+</table>
+<p><strong>Returns:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Type</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>mol</code></td>
+      <td><p>aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</p></td>
+    </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/align.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">template_align</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">],</span>
+    <span class="n">template</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">use_depiction</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_confs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">auto_select_coord_gen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Align an input molecule to a template. If the template is not provided then the input molecule is</span>
+<span class="sd">    returned.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        template: Template to align to.</span>
+<span class="sd">        copy: whether to copy the molecule before aligning it.</span>
+<span class="sd">        use_depiction: Whether to use the depiction API or use MolAlign</span>
+<span class="sd">            The main difference is around how 3D information is handled, but also, because the depiction API</span>
+<span class="sd">            will emphasize the atoms that do not match, whereas AlignMol will not.</span>
+<span class="sd">        remove_confs: Whether to remove all conformation in the input molecule first.</span>
+<span class="sd">            You can set this to true when not using depiction</span>
+<span class="sd">        auto_select_coord_gen: Whether to automatically select the coordinate generation method.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mol: aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_mol</span> <span class="o">=</span> <span class="n">mol</span>
+
+    <span class="k">if</span> <span class="n">_mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">template</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">_template</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">_template</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">template</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">_template</span> <span class="o">=</span> <span class="n">template</span>
+
+    <span class="k">if</span> <span class="n">_template</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">_mol</span>
+
+    <span class="k">if</span> <span class="n">remove_confs</span><span class="p">:</span>
+        <span class="n">_mol</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+
+    <span class="c1"># EN: to make this more general and robust, we need to first check whether the template</span>
+    <span class="c1"># has 2D coordinates or not. If it does not, we need to compute them.</span>
+    <span class="c1"># This is a very rare edge case if requests are comming from the UI, but better to check than not xD</span>
+    <span class="k">if</span> <span class="n">_template</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">_template</span> <span class="o">=</span> <span class="n">compute_2d_coords</span><span class="p">(</span><span class="n">_template</span><span class="p">)</span>
+
+    <span class="c1"># EN: now we can align the molecule to the template</span>
+    <span class="c1"># but first, we should avoid MCS as much as possible, because it&#39;s expensive</span>
+    <span class="c1"># so if the template is a subgraph of the molecule, no need to perform any MCS</span>
+    <span class="c1"># Another reason for this, is to avoid inconsistency in alignment between molecules that are</span>
+    <span class="c1"># supergraph of the template vs molecules that are subgraph of the template.</span>
+    <span class="n">pattern</span> <span class="o">=</span> <span class="n">_template</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">_mol</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">_template</span><span class="p">):</span>
+
+        <span class="n">pattern</span> <span class="o">=</span> <span class="kc">None</span>
+        <span class="n">mcs_smarts</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">find_mcs</span><span class="p">([</span><span class="n">_mol</span><span class="p">,</span> <span class="n">_template</span><span class="p">])</span>
+
+        <span class="k">if</span> <span class="n">mcs_smarts</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">pattern</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_smarts</span><span class="p">(</span><span class="n">mcs_smarts</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">pattern</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="k">if</span> <span class="n">auto_select_coord_gen</span><span class="p">:</span>
+            <span class="n">rdDepictor</span><span class="o">.</span><span class="n">SetPreferCoordGen</span><span class="p">(</span><span class="n">use_depiction</span><span class="p">)</span>
+
+        <span class="c1"># we would need to compute 2d coordinates for the molecules if it doesn&#39;t have any</span>
+        <span class="k">if</span> <span class="n">_mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">_mol</span> <span class="o">=</span> <span class="n">compute_2d_coords</span><span class="p">(</span><span class="n">_mol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">use_depiction</span><span class="p">:</span>
+            <span class="n">rdDepictor</span><span class="o">.</span><span class="n">GenerateDepictionMatching2DStructure</span><span class="p">(</span>
+                <span class="n">_mol</span><span class="p">,</span>
+                <span class="n">reference</span><span class="o">=</span><span class="n">_template</span><span class="p">,</span>
+                <span class="n">refPatt</span><span class="o">=</span><span class="n">pattern</span><span class="p">,</span>
+                <span class="n">acceptFailure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                <span class="n">allowRGroups</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">query_match</span> <span class="o">=</span> <span class="n">_mol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+            <span class="n">template_match</span> <span class="o">=</span> <span class="n">_template</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">pattern</span><span class="p">)</span>
+            <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMol</span><span class="p">(</span><span class="n">_mol</span><span class="p">,</span> <span class="n">_template</span><span class="p">,</span> <span class="n">atomMap</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">query_match</span><span class="p">,</span> <span class="n">template_match</span><span class="p">)))</span>
+
+    <span class="k">return</span> <span class="n">_mol</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+
+
+  <div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.align.auto_align_many" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">auto_align_many</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">partition_method</span><span class="o">=</span><span class="s1">&#39;anon-scaffold&#39;</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cluster_cutoff</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">allow_r_groups</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+
+<a href="#datamol.align.auto_align_many" class="headerlink" title="Permanent link">&para;</a></h4>
+
+    <div class="doc doc-contents first">
+
+      <p>Partition a list of molecules into clusters sharing common scaffold of common core,
+then align the molecules to that common core. This function will compute the list of
+smiles/smarts representative of each cluster first.</p>
+<p>The returned molecules will have two properties associated to them:</p>
+<ul>
+<li><code>dm.auto_align_many.cluster_id</code>: the cluster id of the molecule.</li>
+<li><code>dm.auto_align_many.core</code>: the smiles/smarts of the core of the cluster.</li>
+</ul>
+
+<p><strong>Parameters:</strong></p>
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Type</th>
+      <th>Description</th>
+      <th>Default</th>
+    </tr>
+  </thead>
+  <tbody>
+      <tr>
+        <td><code>mols</code></td>
+        <td><code>Union[Sequence[rdkit.Chem.rdchem.Mol], pandas.core.series.Series]</code></td>
+        <td><p>A list of molecules to auto align.</p></td>
+        <td><em>required</em></td>
+      </tr>
+      <tr>
+        <td><code>partition_method</code></td>
+        <td><code>str</code></td>
+        <td><p>Partition method to use:
+- 'scaffold': Cluster molecules by Murcko scaffold.
+- 'strip-scaffold': Cluster molecules by Murcko scaffold, but remove all atoms not
+    in the core.
+- 'anon-scaffold': Cluster molecules by Murcko scaffold, but making it
+    generic including the bonds.
+- 'anongraph-scaffold': Cluster molecules by Murcko scaffold, but making it
+    generic but keeping the bond order informations.
+- 'cluster': Cluster the molecules using Butina frm RDKit with <code>dm.cluster_mols</code>.
+Cautious as the method 'cluster' is very sensitive to the cutoff.</p></td>
+        <td><code>&#39;anon-scaffold&#39;</code></td>
+      </tr>
+      <tr>
+        <td><code>copy</code></td>
+        <td><code>bool</code></td>
+        <td><p>Whether to copy the molecules before aligning them.</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>cluster_cutoff</code></td>
+        <td><code>float</code></td>
+        <td><p>Optional cluster cutoff.</p></td>
+        <td><code>0.7</code></td>
+      </tr>
+      <tr>
+        <td><code>allow_r_groups</code></td>
+        <td><code>bool</code></td>
+        <td><p>Optional, if True, terminal dummy atoms in the
+            reference are ignored if they match an implicit hydrogen in the
+            molecule, and a constrained depiction is still attempted</p></td>
+        <td><code>True</code></td>
+      </tr>
+      <tr>
+        <td><code>kwargs</code></td>
+        <td></td>
+        <td><p>Additional arguments to pass to clustering method</p></td>
+        <td><code>{}</code></td>
+      </tr>
+  </tbody>
+</table>
+        <details class="quote">
+          <summary>Source code in <code>datamol/align.py</code></summary>
+          <div class="highlight"><pre><span></span><code><span class="k">def</span> <span class="nf">auto_align_many</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
+    <span class="n">partition_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;anon-scaffold&quot;</span><span class="p">,</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">cluster_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.7</span><span class="p">,</span>
+    <span class="n">allow_r_groups</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Partition a list of molecules into clusters sharing common scaffold of common core,</span>
+<span class="sd">    then align the molecules to that common core. This function will compute the list of</span>
+<span class="sd">    smiles/smarts representative of each cluster first.</span>
+
+<span class="sd">    The returned molecules will have two properties associated to them:</span>
+
+<span class="sd">    - `dm.auto_align_many.cluster_id`: the cluster id of the molecule.</span>
+<span class="sd">    - `dm.auto_align_many.core`: the smiles/smarts of the core of the cluster.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: A list of molecules to auto align.</span>
+<span class="sd">        partition_method: Partition method to use:</span>
+<span class="sd">            - &#39;scaffold&#39;: Cluster molecules by Murcko scaffold.</span>
+<span class="sd">            - &#39;strip-scaffold&#39;: Cluster molecules by Murcko scaffold, but remove all atoms not</span>
+<span class="sd">                in the core.</span>
+<span class="sd">            - &#39;anon-scaffold&#39;: Cluster molecules by Murcko scaffold, but making it</span>
+<span class="sd">                generic including the bonds.</span>
+<span class="sd">            - &#39;anongraph-scaffold&#39;: Cluster molecules by Murcko scaffold, but making it</span>
+<span class="sd">                generic but keeping the bond order informations.</span>
+<span class="sd">            - &#39;cluster&#39;: Cluster the molecules using Butina frm RDKit with `dm.cluster_mols`.</span>
+<span class="sd">            Cautious as the method &#39;cluster&#39; is very sensitive to the cutoff.</span>
+<span class="sd">        copy: Whether to copy the molecules before aligning them.</span>
+<span class="sd">        cluster_cutoff: Optional cluster cutoff.</span>
+<span class="sd">        allow_r_groups: Optional, if True, terminal dummy atoms in the</span>
+<span class="sd">                        reference are ignored if they match an implicit hydrogen in the</span>
+<span class="sd">                        molecule, and a constrained depiction is still attempted</span>
+<span class="sd">        kwargs: Additional arguments to pass to clustering method</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+
+    <span class="n">mol_groups</span> <span class="o">=</span> <span class="n">ddict</span><span class="p">(</span><span class="nb">list</span><span class="p">)</span>  <span class="c1"># map scaffold index to list of unique molecules</span>
+    <span class="n">scaffold_mols</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="k">if</span> <span class="n">partition_method</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;scaffold&quot;</span><span class="p">):</span>
+
+        <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_scaffold_murcko</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">partition_method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;strip-&quot;</span><span class="p">):</span>
+            <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">strip_mol_to_core</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+            <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">partition_method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;anongraph-&quot;</span><span class="p">):</span>
+            <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">make_scaffold_generic</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">include_bonds</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+            <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">partition_method</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s2">&quot;anon-&quot;</span><span class="p">):</span>
+            <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">make_scaffold_generic</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">include_bonds</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+            <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaffolds_ids</span><span class="p">):</span>
+            <span class="n">mol_groups</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+            <span class="n">scaffolds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">compute_2d_coords</span><span class="p">(</span><span class="n">scaffolds</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+            <span class="n">scaffold_mols</span><span class="p">[</span><span class="n">s</span><span class="p">]</span> <span class="o">=</span> <span class="n">scaffolds</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+
+    <span class="k">elif</span> <span class="n">partition_method</span> <span class="o">==</span> <span class="s2">&quot;cluster&quot;</span><span class="p">:</span>
+        <span class="c1"># partition is cluster, first compute molecule clusters</span>
+        <span class="n">clusters</span><span class="p">,</span> <span class="n">mol_clusters</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">cluster_mols</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="n">cluster_cutoff</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+
+        <span class="c1"># now compute the mcs for each clusters</span>
+        <span class="n">cluster_mcs</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">find_mcs</span><span class="p">(</span><span class="n">mol_cluster</span><span class="p">)</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol_cluster</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span> <span class="k">else</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol_cluster</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+            <span class="k">for</span> <span class="n">mol_cluster</span> <span class="ow">in</span> <span class="n">mol_clusters</span>
+        <span class="p">]</span>
+        <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">cluster_mcs</span><span class="p">[</span><span class="n">cluster_id</span><span class="p">]</span> <span class="k">for</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">clusters</span><span class="p">)]</span>
+
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">scaffolds_ids</span><span class="p">):</span>
+            <span class="n">mol_groups</span><span class="p">[</span><span class="n">s</span><span class="p">]</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">clusters</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+
+        <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds_ids</span><span class="p">:</span>
+            <span class="n">core</span> <span class="o">=</span> <span class="kc">None</span>
+            <span class="k">if</span> <span class="n">x</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="n">core</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_smarts</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+                <span class="n">core</span> <span class="o">=</span> <span class="n">compute_2d_coords</span><span class="p">(</span><span class="n">core</span><span class="p">)</span>
+            <span class="n">scaffold_mols</span><span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">core</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown partition method: </span><span class="si">{</span><span class="n">partition_method</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># now we match each molecule to the scaffold and align them</span>
+    <span class="c1"># note that the molecule object will be modified in place in the list</span>
+    <span class="k">for</span> <span class="n">cluster_id</span><span class="p">,</span> <span class="p">(</span><span class="n">core</span><span class="p">,</span> <span class="n">mols_ids</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol_groups</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+        <span class="n">core_mol</span> <span class="o">=</span> <span class="n">scaffold_mols</span><span class="p">[</span><span class="n">core</span><span class="p">]</span>
+
+        <span class="k">for</span> <span class="n">mol_id</span> <span class="ow">in</span> <span class="n">mols_ids</span><span class="p">:</span>
+
+            <span class="n">mol</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[</span><span class="n">mol_id</span><span class="p">]</span>
+
+            <span class="k">if</span> <span class="n">core_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+                <span class="c1"># Only pass allowRGroups if current</span>
+                <span class="c1"># rdkit version is &gt;= 2021_03_1</span>
+                <span class="c1"># ref https://github.com/rdkit/rdkit/pull/3811</span>
+                <span class="n">allowRGroups</span> <span class="o">=</span> <span class="p">(</span>
+                    <span class="p">{</span><span class="s2">&quot;allowRGroups&quot;</span><span class="p">:</span> <span class="n">allow_r_groups</span><span class="p">}</span>
+                    <span class="k">if</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="n">rdkit</span><span class="o">.</span><span class="n">__version__</span><span class="p">)</span> <span class="o">&gt;=</span> <span class="n">version</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="s2">&quot;2021.03.1&quot;</span><span class="p">)</span>
+                    <span class="k">else</span> <span class="p">{}</span>
+                <span class="p">)</span>
+                <span class="n">rdDepictor</span><span class="o">.</span><span class="n">GenerateDepictionMatching2DStructure</span><span class="p">(</span>
+                    <span class="n">mol</span><span class="p">,</span>
+                    <span class="n">reference</span><span class="o">=</span><span class="n">core_mol</span><span class="p">,</span>
+                    <span class="n">acceptFailure</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                    <span class="o">**</span><span class="n">allowRGroups</span><span class="p">,</span>
+                <span class="p">)</span>
+
+            <span class="c1"># Add some props to the mol so the user can retrieve the groups from</span>
+            <span class="c1"># it later.</span>
+            <span class="n">props</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="n">props</span><span class="p">[</span><span class="s2">&quot;dm.auto_align_many.cluster_id&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">cluster_id</span>
+            <span class="n">props</span><span class="p">[</span><span class="s2">&quot;dm.auto_align_many.core&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">core</span>
+            <span class="n">dm</span><span class="o">.</span><span class="n">set_mol_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
+
+    <span class="c1"># EN: you can discard the mol_groups (or keep it and match the values</span>
+    <span class="c1"># to molecular line notation, so you will not have to reocompute the above)</span>
+    <span class="c1"># and convert the mols into cxsmiles if you want</span>
+    <span class="c1"># return mols, mol_groups</span>
+
+    <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div>
+        </details>
+    </div>
+
+  </div>
+
+              
+            </article>
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        
+        <a href="datamol.molar.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.molar" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              datamol.molar
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="datamol.utils.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.utils" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              datamol.utils
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2020 - 2022 Valence
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.2a1c317c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.6e54b5cd.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
