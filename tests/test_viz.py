@@ -20,9 +20,12 @@ import datamol as dm
 
 def _convert_ipython_to_array(image):
     """convert ipython image to numpy array"""
-    image = base64.b64decode(str(image._repr_png_()))
-    image = Image.open(io.BytesIO(image))
-    return np.array(image)
+    image_obj = base64.b64decode(str(image._repr_png_()))
+    try:
+        image_obj = Image.open(io.BytesIO(image_obj))
+        return np.array(image_obj)
+    except:
+        return np.array(image)
 
 
 def test_to_image():
