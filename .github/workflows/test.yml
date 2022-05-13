@@ -31,7 +31,7 @@ jobs:
 
       - name: Setup conda
         # see https://github.com/mamba-org/provision-with-micromamba/issues/54
-        uses: mamba-org/provision-with-micromamba@0262775830d4abaedede06025aece997d53eb862
+        uses: mamba-org/provision-with-micromamba@755a9542150cc9dedd1c1dd95b963460ec320939
         with:
           environment-file: false
           cache-downloads: true
