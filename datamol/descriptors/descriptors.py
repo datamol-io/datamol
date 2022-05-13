@@ -11,11 +11,23 @@ from rdkit.Chem import Lipinski
 from rdkit.Chem import rdmolops
 from rdkit.Chem import Crippen
 
-sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
-import sascorer  # type:ignore
 
 from .. import Mol
 from ..convert import from_smarts
+
+
+def _sasscorer(mol: Mol):
+
+    sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
+    try:
+        import sascorer  # type:ignore
+    except ImportError:
+        raise ImportError(
+            "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it and reinstall rdkit with `conda` or `mamba`."
+        )
+
+    return sascorer.calculateScore(mol)
+
 
 _AROMATIC_QUERY = from_smarts("a")
 
@@ -24,7 +36,7 @@ fsp3 = rdMolDescriptors.CalcFractionCSP3
 tpsa = rdMolDescriptors.CalcTPSA
 qed = Descriptors.qed
 clogp = Descriptors.MolLogP  # type: ignore
-sas = sascorer.calculateScore
+sas = _sasscorer
 formal_charge = rdmolops.GetFormalCharge
 refractivity = Crippen.MolMR
 
