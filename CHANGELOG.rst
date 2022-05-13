@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.4
+====================
+
+**Changed:**
+
+* Don't import `sasscorer` by default but only during the call to `dm.descriptors.sas(mol)`
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.3
 ====================
 
