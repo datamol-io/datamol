@@ -17,7 +17,8 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup conda
-        uses: mamba-org/provision-with-micromamba@main
+        # see https://github.com/mamba-org/provision-with-micromamba/issues/54
+        uses: mamba-org/provision-with-micromamba@268cc19728703111bda67eb6e7328258ff6eb8b6
         with:
           environment-file: false
           cache-downloads: true
