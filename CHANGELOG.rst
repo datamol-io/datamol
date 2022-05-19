@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.5
+====================
+
+**Added:**
+
+* Add `dm.parallelized_with_batches()` to parallelize workload with a function that take a batch of inputs.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.4
 ====================
 
