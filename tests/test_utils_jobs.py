@@ -225,3 +225,31 @@ class TestJobs(unittest.TestCase):
             arg_type="args",
             total=50,
         )
+
+
+def test_parallelized_with_batches():
+    data = dm.freesolv()
+    data = data.iloc[:10]
+
+    def _fn1(smiles):
+        return len(smiles)
+
+    results1 = dm.parallelized(
+        _fn1,
+        data["smiles"],
+        progress=False,
+        n_jobs=-1,
+    )
+
+    def _fn2(smiles_list):
+        return [len(s) for s in smiles_list]
+
+    results2 = dm.parallelized_with_batches(
+        _fn2,
+        data["smiles"],
+        batch_size=2,
+        progress=False,
+        n_jobs=-1,
+    )
+
+    assert results1 == results2
