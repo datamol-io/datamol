@@ -270,7 +270,7 @@ def parallelized_with_batches(
     flatten_results: bool = True,
     **job_kwargs,
 ) -> Sequence[Optional[Any]]:
-    """Run a function in parallel with using batches.
+    """Run a function in parallel using batches.
 
     Args:
         fn: The function to run in parallel. It must accept a batch of `inputs_list`.
