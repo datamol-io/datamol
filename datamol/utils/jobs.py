@@ -4,12 +4,16 @@ from typing import Callable
 from typing import Optional
 from typing import Any
 
+import collections.abc
+import itertools
 import contextlib
 
 import joblib
 from joblib import Parallel, delayed
 
 from tqdm.auto import tqdm
+
+import numpy as np
 
 
 class JobRunner:
@@ -251,3 +255,82 @@ def parallelized(
         **job_kwargs,
     )
     return runner(fn, inputs_list, arg_type=arg_type)
+
+
+def parallelized_with_batches(
+    fn: Callable,
+    inputs_list: Iterable[Any],
+    batch_size: int,
+    scheduler: str = "processes",
+    n_jobs: Optional[int] = -1,
+    progress: bool = False,
+    arg_type: str = "arg",
+    total: Optional[int] = None,
+    tqdm_kwargs: Optional[dict] = None,
+    flatten_results: bool = True,
+    **job_kwargs,
+) -> Sequence[Optional[Any]]:
+    """Run a function in parallel using batches.
+
+    Args:
+        fn: The function to run in parallel. It must accept a batch of `inputs_list`.
+        inputs_list: List of inputs to pass to `fn`.
+        batch_size: Batch size on which to run `fn`.
+        scheduler: Choose between ["processes", "threads"]. Defaults
+            to None which uses the default joblib "loky" scheduler.
+        n_jobs: Number of process. Use 0 or None to force sequential.
+                Use -1 to use all the available processors. For details see
+                https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation
+        progress: Display a progress bar. Defaults to False.
+        arg_type: One of ["arg", "args", "kwargs]:
+            - "arg": the input is passed as an argument: `fn(arg)` (default).
+            - "args": the input is passed as a list: `fn(*args)`.
+            - "kwargs": the input is passed as a map: `fn(**kwargs)`.
+        total: The number of elements in the iterator. Only used when `progress` is True.
+        tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
+        job_kwargs: Any additional arguments supported by `joblib.Parallel`.
+        flatten_results: Whether to flatten the results.
+
+    Returns:
+        The results of the execution as a list.
+    """
+
+    def _batch_iterator(n: int, iterable: Iterable):
+        it = iter(iterable)
+        while True:
+            chunk_it = itertools.islice(it, n)
+            try:
+                first_el = next(chunk_it)
+            except StopIteration:
+                return
+            yield list(itertools.chain((first_el,), chunk_it))
+
+    # Compute the total number of batches of possible
+    if total is not None:
+        n_batches = total // batch_size
+        n_batches = max(n_batches, 1)
+    elif isinstance(inputs_list, collections.abc.Sized):
+        n_batches = len(inputs_list) // batch_size
+        n_batches = max(n_batches, 1)
+    else:
+        n_batches = None
+
+    # Make an iterator over batches so it works even with Iterator without a defined length
+    input_chunks = _batch_iterator(batch_size, inputs_list)
+
+    runner = JobRunner(
+        n_jobs=n_jobs,
+        batch_size=None,
+        progress=progress,
+        prefer=scheduler,
+        total=n_batches,
+        tqdm_kwargs=tqdm_kwargs,
+        **job_kwargs,
+    )
+    results = runner(fn, input_chunks, arg_type=arg_type)
+
+    # Flatten the results
+    if flatten_results:
+        results = [item for sublist in results for item in sublist]
+
+    return results

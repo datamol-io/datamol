@@ -5,6 +5,7 @@ from .types import Mol
 from . import utils
 
 from .utils import parallelized
+from .utils import parallelized_with_batches
 from .utils import JobRunner
 from .utils import fs
 
