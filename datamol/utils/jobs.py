@@ -3,6 +3,7 @@ from typing import Sequence
 from typing import Callable
 from typing import Optional
 from typing import Any
+from typing import Union
 
 import collections.abc
 import itertools
@@ -13,14 +14,12 @@ from joblib import Parallel, delayed
 
 from tqdm.auto import tqdm
 
-import numpy as np
-
 
 class JobRunner:
     def __init__(
         self,
         n_jobs: Optional[int] = -1,
-        batch_size: Optional[int] = None,
+        batch_size: Union[int, str] = "auto",
         prefer: Optional[str] = None,
         progress: bool = False,
         total: Optional[int] = None,
@@ -58,7 +57,6 @@ class JobRunner:
         """
 
         self.n_jobs = n_jobs
-        self.batch_size = batch_size or "auto"
         self.prefer = prefer
         self.job_kwargs = job_kwargs
         self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer, batch_size=self.batch_size)
@@ -212,7 +210,7 @@ def parallelized(
     inputs_list: Iterable[Any],
     scheduler: str = "processes",
     n_jobs: Optional[int] = -1,
-    batch_size: Optional[int] = None,
+    batch_size: Union[int, str] = "auto",
     progress: bool = False,
     arg_type: str = "arg",
     total: Optional[int] = None,
@@ -268,7 +266,7 @@ def parallelized_with_batches(
     total: Optional[int] = None,
     tqdm_kwargs: Optional[dict] = None,
     flatten_results: bool = True,
-    joblib_batch_size: Optional[int] = None,
+    joblib_batch_size: Union[int, str] = "auto",
     **job_kwargs,
 ) -> Sequence[Optional[Any]]:
     """Run a function in parallel using batches.
