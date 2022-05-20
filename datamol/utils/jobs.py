@@ -57,6 +57,7 @@ class JobRunner:
         """
 
         self.n_jobs = n_jobs
+        self.batch_size = batch_size
         self.prefer = prefer
         self.job_kwargs = job_kwargs
         self.job_kwargs.update(n_jobs=self.n_jobs, prefer=self.prefer, batch_size=self.batch_size)
