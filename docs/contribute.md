@@ -5,7 +5,7 @@ The below documents the development lifecycle of Datamol.
 ## Setup a dev environment
 
 ```bash
-mamba create -n datamol -f env.yml
+mamba env create -n datamol -f env.yml
 conda activate datamol
 pip install -e .
 ```
