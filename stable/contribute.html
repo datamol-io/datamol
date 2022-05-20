@@ -751,12 +751,8 @@
 <h1 id="contribute">Contribute<a class="headerlink" href="#contribute" title="Permanent link">&para;</a></h1>
 <p>The below documents the development lifecycle of Datamol.</p>
 <h2 id="setup-a-dev-environment">Setup a dev environment<a class="headerlink" href="#setup-a-dev-environment" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code>conda create -n datamol
+<div class="highlight"><pre><span></span><code>mamba env create -n datamol -f env.yml
 conda activate datamol
-
-mamba env update -f env.yml
-
-conda deactivate <span class="o">&amp;&amp;</span> conda activate datamol
 pip install -e .
 </code></pre></div>
 <h2 id="continuous-integration">Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permanent link">&para;</a></h2>
