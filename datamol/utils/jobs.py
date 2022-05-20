@@ -268,6 +268,7 @@ def parallelized_with_batches(
     total: Optional[int] = None,
     tqdm_kwargs: Optional[dict] = None,
     flatten_results: bool = True,
+    joblib_batch_size: Optional[int] = None,
     **job_kwargs,
 ) -> Sequence[Optional[Any]]:
     """Run a function in parallel using batches.
@@ -290,6 +291,8 @@ def parallelized_with_batches(
         tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
         job_kwargs: Any additional arguments supported by `joblib.Parallel`.
         flatten_results: Whether to flatten the results.
+        joblib_batch_size: It corresponds to the `batch_size` argument of `dm.parallelized` that
+            is forwarded to `joblib.Parallel` under the hood..
 
     Returns:
         The results of the execution as a list.
@@ -320,7 +323,7 @@ def parallelized_with_batches(
 
     runner = JobRunner(
         n_jobs=n_jobs,
-        batch_size=None,
+        batch_size=joblib_batch_size,
         progress=progress,
         prefer=scheduler,
         total=n_batches,
