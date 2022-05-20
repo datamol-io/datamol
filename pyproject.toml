@@ -12,6 +12,7 @@ filterwarnings = ["ignore::DeprecationWarning:rdkit.*:"]
 
 [tool.coverage.run]
 omit = ["setup.py", "tests/*", "SA_Score/*"]
+disable_warnings = ["no-data-collected"]
 
 [tool.coverage.xml]
 output = "coverage.xml"
