@@ -4,6 +4,20 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.6
+====================
+
+**Changed:**
+
+* Add `joblib_batch_size` in `dm.parallelized_with_batches()` to be able to control the joblib batch size (which is different than the `dm.parallelized_with_batches` batch size.
+* Various small improvements for unit tests.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.5
 ====================
 
