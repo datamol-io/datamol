@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.7
+====================
+
+**Added:**
+
+* Add `dm.read_molblock()` and `dm.to_molblock()` functions.
+* Add `dm.to_xlsx()` function.
+
+**Fixed:**
+
+* Fix the API doc.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.6
 ====================
 
