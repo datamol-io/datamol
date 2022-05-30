@@ -1,6 +1,7 @@
 **Added:**
 
 * Add `dm.read_molblock()` and `dm.to_molblock()` functions.
+* Add `dm.to_xlsx()` function.
 
 **Changed:**
 

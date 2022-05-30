@@ -228,3 +228,27 @@ def test_read_molblock_invalid():
 
     with pytest.raises(ValueError):
         dm.read_molblock("hello", fail_if_invalid=True)
+
+
+def test_to_xlsx(tmp_path):
+    excel_path1 = tmp_path / "test1.xlsx"
+    excel_path2 = tmp_path / "test2.xlsx"
+
+    data = dm.freesolv()
+    data = data.iloc[:10]
+    data["mol"] = data["smiles"].apply(dm.to_mol)
+
+    # write from df
+    dm.to_xlsx(data, excel_path1)
+    assert excel_path1.exists()
+
+    # write from list of molecules
+    mols = dm.from_df(data)
+    dm.to_xlsx(mols, excel_path2)
+    assert excel_path2.exists()
+
+
+def test_to_xlsx_empty():
+    mols = [None]
+    with pytest.raises(ValueError):
+        dm.to_xlsx(mols, "/dev/null")  # type: ignore

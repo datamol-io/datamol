@@ -109,6 +109,7 @@ from .io import to_smi
 from .io import read_smi
 from .io import read_molblock
 from .io import to_molblock
+from .io import to_xlsx
 
 from .isomers import enumerate_stereoisomers
 from .isomers import enumerate_tautomers

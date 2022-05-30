@@ -321,3 +321,37 @@ def read_smi(
         pathlib.Path(str(active_path)).unlink()
 
     return mols
+
+
+def to_xlsx(
+    mols: Union[Mol, Sequence[Mol], pd.DataFrame],
+    urlpath: Union[str, os.PathLike],
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = "mol",
+    mol_size: List[int] = [300, 300],
+):
+    """Write molecules to an Excel file with a molecule column as an RDKit rendered
+    image.
+
+    Args:
+        mols: a dataframe, a molecule or a list of molecule.
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
+        smiles_column: Column name to extract the molecule.
+        mol_column: Column name to extract the molecule. It takes
+            precedence over `smiles_column`.
+            Column name to write the RDKit rendered image. If none,
+            the molecule images are not written.
+    """
+
+    if isinstance(mols, Mol):
+        mols = [mols]
+
+    if isinstance(mols, list):
+        mols = [mol for mol in mols if mol is not None]
+        mols = dm.to_df(mols, smiles_column=smiles_column, mol_column=mol_column)
+
+    if mols is None or mols.empty:  # type: ignore
+        raise ValueError("No molecules to write")
+
+    with fsspec.open(urlpath, mode="wb") as f:
+        PandasTools.SaveXlsxFromFrame(mols, f, molCol=mol_column, size=mol_size)
