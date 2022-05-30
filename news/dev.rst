@@ -17,7 +17,7 @@
 
 **Fixed:**
 
-* <news item>
+* Fix the API doc.
 
 **Security:**
 
