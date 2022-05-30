@@ -203,3 +203,52 @@ def test_sdf_props_and_conformer_preserved(tmp_path):
     assert mol.GetNumConformers() == 1
     assert conf.Is3D()
     np.testing.assert_almost_equal(conf.GetPositions(), pos, decimal=4)
+
+
+def test_read_save_molblock():
+    mol = dm.to_mol("Cn1c(=O)c2c(ncn2C)n(C)c1=O")
+
+    # to molblock
+    molblock = dm.to_molblock(mol)
+
+    assert isinstance(molblock, str)
+    assert "END" in molblock
+    assert "V2000" in molblock
+    assert "RDKit" in molblock
+
+    # read molblock
+    mol2 = dm.read_molblock(molblock)
+    assert dm.same_mol(mol, mol2)
+
+
+def test_read_molblock_invalid():
+
+    mol = dm.read_molblock("hello")
+    assert mol is None
+
+    with pytest.raises(ValueError):
+        dm.read_molblock("hello", fail_if_invalid=True)
+
+
+def test_to_xlsx(tmp_path):
+    excel_path1 = tmp_path / "test1.xlsx"
+    excel_path2 = tmp_path / "test2.xlsx"
+
+    data = dm.freesolv()
+    data = data.iloc[:10]
+    data["mol"] = data["smiles"].apply(dm.to_mol)
+
+    # write from df
+    dm.to_xlsx(data, excel_path1)
+    assert excel_path1.exists()
+
+    # write from list of molecules
+    mols = dm.from_df(data)
+    dm.to_xlsx(mols, excel_path2)
+    assert excel_path2.exists()
+
+
+def test_to_xlsx_empty():
+    mols = [None]
+    with pytest.raises(ValueError):
+        dm.to_xlsx(mols, "/dev/null")  # type: ignore

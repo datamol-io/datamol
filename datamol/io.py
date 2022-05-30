@@ -12,7 +12,6 @@ import gzip
 
 from rdkit.Chem import PandasTools
 from rdkit.Chem import rdmolfiles
-from rdkit import Chem
 
 import pandas as pd
 import fsspec
@@ -192,6 +191,71 @@ def to_sdf(
             writer.close()
 
 
+def read_molblock(
+    molblock: str,
+    sanitize: bool = True,
+    strict_parsing: bool = True,
+    remove_hs: bool = True,
+    fail_if_invalid: bool = False,
+) -> Optional[dm.Mol]:
+    """Read a Mol block.
+
+    Note that potential molecule properties are **not** read.
+
+    Args:
+        mol_block: String containing the Mol block.
+        sanitize: Whether to sanitize the molecules.
+        strict_parsing: If set to false, the parser is more lax about correctness of the contents.
+        remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        fail_if_invalid: If set to true, the parser will raise an exception if the molecule is invalid
+            instead of returning None.
+    """
+
+    mol = rdmolfiles.MolFromMolBlock(
+        molblock,
+        sanitize=sanitize,
+        removeHs=remove_hs,
+        strictParsing=strict_parsing,
+    )
+
+    if mol is None and fail_if_invalid:
+        raise ValueError(f"Invalid molecule: {molblock}")
+
+    return mol
+
+
+def to_molblock(
+    mol: Mol,
+    include_stereo: bool = True,
+    conf_id: int = -1,
+    kekulize: bool = True,
+    force_V3000: bool = False,
+):
+    """Convert a molecule to a mol block string.
+
+    Note that any molecule properties are lost.
+
+    Args:
+        mol: A molecule.
+        include_stereo: Toggles inclusion of stereochemical information in the output.
+        conf_id: Selects which conformation to output.
+        kekulize: Triggers kekulization of the molecule before it's written,
+            as suggested by the MDL spec.
+        force_V3000: Force generation a V3000 mol block (happens automatically
+            with more than 999 atoms or bonds).
+    """
+
+    molblock = rdmolfiles.MolToMolBlock(
+        mol,
+        includeStereo=include_stereo,
+        confId=conf_id,
+        kekulize=kekulize,
+        forceV3000=force_V3000,
+    )
+
+    return molblock
+
+
 def to_smi(
     mols: Sequence[Mol],
     urlpath: Union[str, os.PathLike, TextIO],
@@ -257,3 +321,37 @@ def read_smi(
         pathlib.Path(str(active_path)).unlink()
 
     return mols
+
+
+def to_xlsx(
+    mols: Union[Mol, Sequence[Mol], pd.DataFrame],
+    urlpath: Union[str, os.PathLike],
+    smiles_column: Optional[str] = "smiles",
+    mol_column: str = "mol",
+    mol_size: List[int] = [300, 300],
+):
+    """Write molecules to an Excel file with a molecule column as an RDKit rendered
+    image.
+
+    Args:
+        mols: a dataframe, a molecule or a list of molecule.
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
+        smiles_column: Column name to extract the molecule.
+        mol_column: Column name to extract the molecule. It takes
+            precedence over `smiles_column`.
+            Column name to write the RDKit rendered image. If none,
+            the molecule images are not written.
+    """
+
+    if isinstance(mols, Mol):
+        mols = [mols]
+
+    if isinstance(mols, Sequence):
+        mols = [mol for mol in mols if mol is not None]
+        mols = dm.to_df(mols, smiles_column=smiles_column, mol_column=mol_column)
+
+    if mols is None or mols.empty:  # type: ignore
+        raise ValueError("No molecules to write")
+
+    with fsspec.open(urlpath, mode="wb") as f:
+        PandasTools.SaveXlsxFromFrame(mols, f, molCol=mol_column, size=mol_size)
