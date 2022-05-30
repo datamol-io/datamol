@@ -203,3 +203,28 @@ def test_sdf_props_and_conformer_preserved(tmp_path):
     assert mol.GetNumConformers() == 1
     assert conf.Is3D()
     np.testing.assert_almost_equal(conf.GetPositions(), pos, decimal=4)
+
+
+def test_read_save_molblock():
+    mol = dm.to_mol("Cn1c(=O)c2c(ncn2C)n(C)c1=O")
+
+    # to molblock
+    molblock = dm.to_molblock(mol)
+
+    assert isinstance(molblock, str)
+    assert "END" in molblock
+    assert "V2000" in molblock
+    assert "RDKit" in molblock
+
+    # read molblock
+    mol2 = dm.read_molblock(molblock)
+    assert dm.same_mol(mol, mol2)
+
+
+def test_read_molblock_invalid():
+
+    mol = dm.read_molblock("hello")
+    assert mol is None
+
+    with pytest.raises(ValueError):
+        dm.read_molblock("hello", fail_if_invalid=True)
