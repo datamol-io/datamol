@@ -346,7 +346,7 @@ def to_xlsx(
     if isinstance(mols, Mol):
         mols = [mols]
 
-    if isinstance(mols, list):
+    if isinstance(mols, Sequence):
         mols = [mol for mol in mols if mol is not None]
         mols = dm.to_df(mols, smiles_column=smiles_column, mol_column=mol_column)
 
