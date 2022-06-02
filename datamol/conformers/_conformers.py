@@ -199,7 +199,9 @@ def generate(
         # Now we reorder conformers according to their energies,
         # so the lowest energies conformers are first.
         mol_clone = copy.deepcopy(mol)
-        ordered_conformers = [conf for _, conf in sorted(zip(energies, mol_clone.GetConformers()))]
+        ordered_conformers = [
+            conf for _, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
+        ]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
