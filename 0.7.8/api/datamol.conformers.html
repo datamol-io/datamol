@@ -1,0 +1,3079 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.0">
+    
+    
+      
+        <title>datamol.conformers - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.fd896c8a.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        
+      
+      
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+      <link rel="stylesheet" href="../assets/css/tweak-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamolconformers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        <aside class="md-banner md-banner--warning">
+          
+        </aside>
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.conformers
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.1.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
+        Preprocessing Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
+        Cluster Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
+        Fragment and Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.html" class="md-nav__link">
+        Visualization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Filesystem.html" class="md-nav__link">
+        Working with local and remote data
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" aria-label="API" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.html" class="md-nav__link">
+        datamol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.descriptors.html" class="md-nav__link">
+        datamol.descriptors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.conformers
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.conformers.html" class="md-nav__link md-nav__link--active">
+        datamol.conformers
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers" class="md-nav__link">
+    _conformers
+  </a>
+  
+    <nav class="md-nav" aria-label="_conformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.align_conformers" class="md-nav__link">
+    align_conformers()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.cluster" class="md-nav__link">
+    cluster()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.generate" class="md-nav__link">
+    generate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.return_centroids" class="md-nav__link">
+    return_centroids()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.rmsd" class="md-nav__link">
+    rmsd()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.translate" class="md-nav__link">
+    translate()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._features" class="md-nav__link">
+    _features
+  </a>
+  
+    <nav class="md-nav" aria-label="_features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.center_of_mass" class="md-nav__link">
+    center_of_mass()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.get_coords" class="md-nav__link">
+    get_coords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.keep_conformers" class="md-nav__link">
+    keep_conformers()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.sasa" class="md-nav__link">
+    sasa()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.actions.html" class="md-nav__link">
+        datamol.actions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.align.html" class="md-nav__link">
+        datamol.align
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers" class="md-nav__link">
+    _conformers
+  </a>
+  
+    <nav class="md-nav" aria-label="_conformers">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.align_conformers" class="md-nav__link">
+    align_conformers()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.cluster" class="md-nav__link">
+    cluster()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.generate" class="md-nav__link">
+    generate()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.return_centroids" class="md-nav__link">
+    return_centroids()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.rmsd" class="md-nav__link">
+    rmsd()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._conformers.translate" class="md-nav__link">
+    translate()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.conformers._features" class="md-nav__link">
+    _features
+  </a>
+  
+    <nav class="md-nav" aria-label="_features">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.center_of_mass" class="md-nav__link">
+    center_of_mass()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.get_coords" class="md-nav__link">
+    get_coords()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.keep_conformers" class="md-nav__link">
+    keep_conformers()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.conformers._features.sasa" class="md-nav__link">
+    sasa()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.conformers.md" title="Edit this page" class="md-content__button md-icon">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
+  </a>
+
+
+
+<h1 id="datamolconformers"><code>datamol.conformers</code><a class="headerlink" href="#datamolconformers" title="Permanent link">&para;</a></h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="datamol.conformers._conformers" class="doc doc-heading">
+          <code>_conformers</code>
+
+
+<a href="#datamol.conformers._conformers" class="headerlink" title="Permanent link">&para;</a></h3>
+
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.align_conformers" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">align_conformers</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">ref_id</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">conformer_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">backend</span><span class="o">=</span><span class="s1">&#39;crippenO3A&#39;</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.align_conformers" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Align a list of molecules to a reference molecule.</p>
+<p>Note that using the <code>O3A</code> backend, hydrogens will be added at the beginning of the procedure
+and removed at the end of the procedure.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mols</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="datamol.Mol">Mol</span>]</code>
+          </td>
+          <td><p>List of molecules to align. All the molecules must have a conformer.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ref_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Index of the reference molecule. By default, the first molecule in the list
+will be used as reference.</p></td>
+          <td>
+                <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>copy</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to copy the molecules before performing the alignement.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conformer_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Conformer id to use.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>backend</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Backend to use to compute the alignment from <code>crippenO3A</code>, <code>O3A</code>.</p></td>
+          <td>
+                <code>&#39;crippenO3A&#39;</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>mols</code></td>          <td>
+          </td>
+          <td><p>The aligned molecules.</p></td>
+        </tr>
+        <tr>
+<td><code>scores</code></td>          <td>
+          </td>
+          <td><p>The score of the alignement.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span>
+<span class="normal">368</span>
+<span class="normal">369</span>
+<span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span>
+<span class="normal">379</span>
+<span class="normal">380</span>
+<span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span>
+<span class="normal">411</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">align_conformers</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">ref_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">conformer_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">backend</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;crippenO3A&quot;</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Align a list of molecules to a reference molecule.</span>
+
+<span class="sd">    Note that using the `O3A` backend, hydrogens will be added at the beginning of the procedure</span>
+<span class="sd">    and removed at the end of the procedure.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: List of molecules to align. All the molecules must have a conformer.</span>
+<span class="sd">        ref_id: Index of the reference molecule. By default, the first molecule in the list</span>
+<span class="sd">            will be used as reference.</span>
+<span class="sd">        copy: Whether to copy the molecules before performing the alignement.</span>
+<span class="sd">        conformer_id: Conformer id to use.</span>
+<span class="sd">        backend: Backend to use to compute the alignment from `crippenO3A`, `O3A`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mols: The aligned molecules.</span>
+<span class="sd">        scores: The score of the alignement.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">allowed_backends</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;crippenO3A&quot;</span><span class="p">,</span> <span class="s2">&quot;O3A&quot;</span><span class="p">]</span>
+    <span class="k">if</span> <span class="n">backend</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">allowed_backends</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="sa">f</span><span class="s2">&quot;The backend &#39;</span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s2">&#39; is not supported. Choose from: </span><span class="si">{</span><span class="n">allowed_backends</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Check all input molecules has a conformer</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">all</span><span class="p">([</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]):</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;One or more input molecules is missing a conformer.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Make a copy of the molecules since they are going to be modified</span>
+    <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm_mol</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+
+    <span class="c1"># Split ref and probe mols</span>
+    <span class="n">mol_ref</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[</span><span class="n">ref_id</span><span class="p">]</span>
+    <span class="n">mol_probes</span> <span class="o">=</span> <span class="n">mols</span>
+
+    <span class="k">if</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;crippenO3A&quot;</span><span class="p">:</span>
+
+        <span class="c1"># Compute Crippen contributions for every atoms and molecules</span>
+        <span class="n">crippen_contribs</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">_CalcCrippenContribs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_probes</span><span class="p">]</span>
+        <span class="n">crippen_contrib_ref</span> <span class="o">=</span> <span class="n">crippen_contribs</span><span class="p">[</span><span class="n">ref_id</span><span class="p">]</span>
+        <span class="n">crippen_contrib_probes</span> <span class="o">=</span> <span class="n">crippen_contribs</span>
+
+        <span class="c1"># Loop and align</span>
+        <span class="c1"># NOTE(hadim): we could eventually parallelize this if that&#39;s needed.</span>
+
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol_probes</span><span class="p">):</span>
+
+            <span class="n">crippenO3A</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">GetCrippenO3A</span><span class="p">(</span>
+                <span class="n">prbMol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+                <span class="n">refMol</span><span class="o">=</span><span class="n">mol_ref</span><span class="p">,</span>
+                <span class="n">prbCrippenContribs</span><span class="o">=</span><span class="n">crippen_contrib_probes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">refCrippenContribs</span><span class="o">=</span><span class="n">crippen_contrib_ref</span><span class="p">,</span>
+                <span class="n">prbCid</span><span class="o">=</span><span class="n">conformer_id</span><span class="p">,</span>
+                <span class="n">refCid</span><span class="o">=</span><span class="n">conformer_id</span><span class="p">,</span>
+                <span class="n">maxIters</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">crippenO3A</span><span class="o">.</span><span class="n">Align</span><span class="p">()</span>
+
+            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">crippenO3A</span><span class="o">.</span><span class="n">Score</span><span class="p">())</span>
+
+    <span class="k">elif</span> <span class="n">backend</span> <span class="o">==</span> <span class="s2">&quot;O3A&quot;</span><span class="p">:</span>
+
+        <span class="c1"># Add hydrogens first</span>
+        <span class="n">mol_probes</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm_mol</span><span class="o">.</span><span class="n">add_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">add_coords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_probes</span><span class="p">]</span>
+        <span class="n">mol_ref</span> <span class="o">=</span> <span class="n">dm_mol</span><span class="o">.</span><span class="n">add_hs</span><span class="p">(</span><span class="n">mol_ref</span><span class="p">,</span> <span class="n">add_coords</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+        <span class="c1"># Compute MMFF params for every molecules</span>
+        <span class="n">mmff_params</span> <span class="o">=</span> <span class="p">[</span><span class="n">rdForceFieldHelpers</span><span class="o">.</span><span class="n">MMFFGetMoleculeProperties</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_probes</span><span class="p">]</span>
+
+        <span class="c1"># Split reference and probe molecules</span>
+        <span class="n">mmff_params_ref</span> <span class="o">=</span> <span class="n">mmff_params</span><span class="p">[</span><span class="n">ref_id</span><span class="p">]</span>
+        <span class="n">mmff_params_probes</span> <span class="o">=</span> <span class="n">mmff_params</span>
+
+        <span class="c1"># Loop and align</span>
+        <span class="c1"># NOTE(hadim): we could eventually parallelize this if that&#39;s needed.</span>
+
+        <span class="n">scores</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">mol</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">mol_probes</span><span class="p">):</span>
+
+            <span class="n">pyO3A</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">GetO3A</span><span class="p">(</span>
+                <span class="n">prbMol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+                <span class="n">refMol</span><span class="o">=</span><span class="n">mol_ref</span><span class="p">,</span>
+                <span class="n">prbPyMMFFMolProperties</span><span class="o">=</span><span class="n">mmff_params_probes</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                <span class="n">refPyMMFFMolProperties</span><span class="o">=</span><span class="n">mmff_params_ref</span><span class="p">,</span>
+                <span class="n">prbCid</span><span class="o">=</span><span class="n">conformer_id</span><span class="p">,</span>
+                <span class="n">refCid</span><span class="o">=</span><span class="n">conformer_id</span><span class="p">,</span>
+                <span class="n">maxIters</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">pyO3A</span><span class="o">.</span><span class="n">Align</span><span class="p">()</span>
+
+            <span class="n">scores</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">pyO3A</span><span class="o">.</span><span class="n">Score</span><span class="p">())</span>
+
+        <span class="c1"># Remove the hydrogens</span>
+        <span class="n">mol_probes</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm_mol</span><span class="o">.</span><span class="n">remove_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_probes</span><span class="p">]</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Backend </span><span class="si">{</span><span class="n">backend</span><span class="si">}</span><span class="s2"> not supported.&quot;</span><span class="p">)</span>
+
+    <span class="n">scores</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">scores</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mol_probes</span><span class="p">,</span> <span class="n">scores</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.cluster" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">cluster</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">already_aligned</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.cluster" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Cluster the conformers of a molecule according to an RMS threshold in Angstrom.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>rms_cutoff</code></td>
+          <td>
+                <code>float</code>
+          </td>
+          <td><p>The RMS cutoff in Angstrom.</p></td>
+          <td>
+                <code>1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>already_aligned</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether or not the conformers are aligned. If False,
+they will be aligmned furing the RMS computation.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>centroids</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If True, return one molecule with centroid conformers
+only. If False return a list of molecules per cluster with all
+the conformers of the cluster. Defaults to True.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cluster</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">rms_cutoff</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">already_aligned</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Cluster the conformers of a molecule according to an RMS threshold in Angstrom.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">        rms_cutoff: The RMS cutoff in Angstrom.</span>
+<span class="sd">        already_aligned: Whether or not the conformers are aligned. If False,</span>
+<span class="sd">            they will be aligmned furing the RMS computation.</span>
+<span class="sd">        centroids: If True, return one molecule with centroid conformers</span>
+<span class="sd">            only. If False return a list of molecules per cluster with all</span>
+<span class="sd">            the conformers of the cluster. Defaults to True.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Clone molecule</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="c1"># Compute RMS</span>
+    <span class="n">dmat</span> <span class="o">=</span> <span class="n">AllChem</span><span class="o">.</span><span class="n">GetConformerRMSMatrix</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">prealigned</span><span class="o">=</span><span class="n">already_aligned</span><span class="p">)</span>
+
+    <span class="c1"># Cluster</span>
+    <span class="n">conf_clusters</span> <span class="o">=</span> <span class="n">Butina</span><span class="o">.</span><span class="n">ClusterData</span><span class="p">(</span>
+        <span class="n">dmat</span><span class="p">,</span>
+        <span class="n">nPts</span><span class="o">=</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">(),</span>
+        <span class="n">distThresh</span><span class="o">=</span><span class="n">rms_cutoff</span><span class="p">,</span>
+        <span class="n">isDistData</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">reordering</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">return_centroids</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_clusters</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="n">centroids</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.generate" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">use_random_coords</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">enforce_chirality</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">num_threads</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">rms_cutoff</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clear_existing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">align_conformers</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">minimize_energy</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">sort_by_energy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">energy_iterations</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">warning_not_converged</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">random_seed</span><span class="o">=</span><span class="mi">19</span><span class="p">,</span> <span class="n">add_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">ignore_failure</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">embed_params</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.generate" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute conformers of a molecule.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">datamol</span> <span class="k">as</span> <span class="nn">dm</span>
+<span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># Get all conformers as a list</span>
+<span class="n">conformers</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">()</span>
+
+<span class="c1"># Get the 3D atom positions of the first conformer</span>
+<span class="n">positions</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">GetPositions</span><span class="p">()</span>
+
+<span class="c1"># If minimization has been enabled (default to True)</span>
+<span class="c1"># you can access the computed energy.</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">props</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+<span class="c1"># {&#39;rdkit_uff_energy&#39;: 1.7649408317784008}</span>
+</code></pre></div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_confs</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Number of conformers to generate. Depends on the number of rotatable bonds
+by default: 50 for &lt;8, 200 for &lt;12 and 300 for &gt;12.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_random_coords</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Start the embedding from random coordinates instead of using eigenvalues
+of the distance matrix.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>enforce_chirality</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Enforce correct chirilaty if chiral centers are present.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>num_threads</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Number of threads to use when embedding multiple conformations.</p></td>
+          <td>
+                <code>1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>rms_cutoff</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[float]</code>
+          </td>
+          <td><p>The minimum RMS value in Angstrom at which two conformers
+are considered redundant and one is deleted. If None, all conformers
+are kept. This step is done after an eventual minimization step.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>clear_existing</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to overwrite existing conformers for the molecule.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>align_conformers</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to align the conformers.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>minimize_energy</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Wether to minimize conformer's energies using UFF.
+Disable to generate conformers much faster.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sort_by_energies</code></td>
+          <td>
+          </td>
+          <td><p>Sort conformers by energy when minimizing is turned to False.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>method</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>RDKit method to use for embedding. Choose among
+["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>energy_iterations</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Maximum number of iterations during the energy minimization procedure.
+It corresponds to the <code>maxIters</code> argument in RDKit.</p></td>
+          <td>
+                <code>200</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>warning_not_converged</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Wether to log a warning when the number of not converged conformers
+during the minimization is higher than <code>warning_not_converged</code>. Only works when <code>verbose</code> is set to True.
+Disable with 0. Defaults to 10.</p></td>
+          <td>
+                <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>random_seed</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Set to None or -1 to disable.</p></td>
+          <td>
+                <code>19</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>add_hs</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
+are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
+recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
+it's almost always a good idea to add hydrogens to the molecule first."</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>fallback_to_random_coords</code></td>
+          <td>
+          </td>
+          <td><p>Whether to use random coordinate initializations as a fallback if the initial
+embedding fails.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ignore_failure</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>It set to True, this will avoid raising an error when the embedding fails and return None instead.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>embed_params</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[dict]</code>
+          </td>
+          <td><p>Allows the user to specify arbitrary embedding parameters for the conformers. This will override any
+other default settings. See <a href="https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters">https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters</a>
+for more details.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>verbose</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Wether to enable logs during the process.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>mol</code></td>          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>the molecule with the conformers.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 27</span>
+<span class="normal"> 28</span>
+<span class="normal"> 29</span>
+<span class="normal"> 30</span>
+<span class="normal"> 31</span>
+<span class="normal"> 32</span>
+<span class="normal"> 33</span>
+<span class="normal"> 34</span>
+<span class="normal"> 35</span>
+<span class="normal"> 36</span>
+<span class="normal"> 37</span>
+<span class="normal"> 38</span>
+<span class="normal"> 39</span>
+<span class="normal"> 40</span>
+<span class="normal"> 41</span>
+<span class="normal"> 42</span>
+<span class="normal"> 43</span>
+<span class="normal"> 44</span>
+<span class="normal"> 45</span>
+<span class="normal"> 46</span>
+<span class="normal"> 47</span>
+<span class="normal"> 48</span>
+<span class="normal"> 49</span>
+<span class="normal"> 50</span>
+<span class="normal"> 51</span>
+<span class="normal"> 52</span>
+<span class="normal"> 53</span>
+<span class="normal"> 54</span>
+<span class="normal"> 55</span>
+<span class="normal"> 56</span>
+<span class="normal"> 57</span>
+<span class="normal"> 58</span>
+<span class="normal"> 59</span>
+<span class="normal"> 60</span>
+<span class="normal"> 61</span>
+<span class="normal"> 62</span>
+<span class="normal"> 63</span>
+<span class="normal"> 64</span>
+<span class="normal"> 65</span>
+<span class="normal"> 66</span>
+<span class="normal"> 67</span>
+<span class="normal"> 68</span>
+<span class="normal"> 69</span>
+<span class="normal"> 70</span>
+<span class="normal"> 71</span>
+<span class="normal"> 72</span>
+<span class="normal"> 73</span>
+<span class="normal"> 74</span>
+<span class="normal"> 75</span>
+<span class="normal"> 76</span>
+<span class="normal"> 77</span>
+<span class="normal"> 78</span>
+<span class="normal"> 79</span>
+<span class="normal"> 80</span>
+<span class="normal"> 81</span>
+<span class="normal"> 82</span>
+<span class="normal"> 83</span>
+<span class="normal"> 84</span>
+<span class="normal"> 85</span>
+<span class="normal"> 86</span>
+<span class="normal"> 87</span>
+<span class="normal"> 88</span>
+<span class="normal"> 89</span>
+<span class="normal"> 90</span>
+<span class="normal"> 91</span>
+<span class="normal"> 92</span>
+<span class="normal"> 93</span>
+<span class="normal"> 94</span>
+<span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">generate</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">n_confs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">use_random_coords</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">enforce_chirality</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">num_threads</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+    <span class="n">rms_cutoff</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">clear_existing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">align_conformers</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">minimize_energy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">sort_by_energy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">energy_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">200</span><span class="p">,</span>
+    <span class="n">warning_not_converged</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">random_seed</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
+    <span class="n">add_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">ignore_failure</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">embed_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute conformers of a molecule.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    ```python</span>
+<span class="sd">    import datamol as dm</span>
+<span class="sd">    smiles = &quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
+<span class="sd">    mol = dm.to_mol(smiles)</span>
+<span class="sd">    mol = dm.conformers.generate(mol)</span>
+
+<span class="sd">    # Get all conformers as a list</span>
+<span class="sd">    conformers = mol.GetConformers()</span>
+
+<span class="sd">    # Get the 3D atom positions of the first conformer</span>
+<span class="sd">    positions = mol.GetConformer(0).GetPositions()</span>
+
+<span class="sd">    # If minimization has been enabled (default to True)</span>
+<span class="sd">    # you can access the computed energy.</span>
+<span class="sd">    conf = mol.GetConformer(0)</span>
+<span class="sd">    props = conf.GetPropsAsDict()</span>
+<span class="sd">    print(props)</span>
+<span class="sd">    # {&#39;rdkit_uff_energy&#39;: 1.7649408317784008}</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">        n_confs: Number of conformers to generate. Depends on the number of rotatable bonds</span>
+<span class="sd">            by default: 50 for &lt;8, 200 for &lt;12 and 300 for &gt;12.</span>
+<span class="sd">        use_random_coords: Start the embedding from random coordinates instead of using eigenvalues</span>
+<span class="sd">            of the distance matrix.</span>
+<span class="sd">        enforce_chirality: Enforce correct chirilaty if chiral centers are present.</span>
+<span class="sd">        num_threads: Number of threads to use when embedding multiple conformations.</span>
+<span class="sd">        rms_cutoff: The minimum RMS value in Angstrom at which two conformers</span>
+<span class="sd">            are considered redundant and one is deleted. If None, all conformers</span>
+<span class="sd">            are kept. This step is done after an eventual minimization step.</span>
+<span class="sd">        clear_existing: Whether to overwrite existing conformers for the molecule.</span>
+<span class="sd">        align_conformers: Whether to align the conformers.</span>
+<span class="sd">        minimize_energy: Wether to minimize conformer&#39;s energies using UFF.</span>
+<span class="sd">            Disable to generate conformers much faster.</span>
+<span class="sd">        sort_by_energies: Sort conformers by energy when minimizing is turned to False.</span>
+<span class="sd">        method: RDKit method to use for embedding. Choose among</span>
+<span class="sd">            [&quot;ETDG&quot;, &quot;ETKDG&quot;, &quot;ETKDGv2&quot;, &quot;ETKDGv3&quot;]. If None, &quot;ETKDGv3&quot; is used.</span>
+<span class="sd">        energy_iterations: Maximum number of iterations during the energy minimization procedure.</span>
+<span class="sd">            It corresponds to the `maxIters` argument in RDKit.</span>
+<span class="sd">        warning_not_converged: Wether to log a warning when the number of not converged conformers</span>
+<span class="sd">            during the minimization is higher than `warning_not_converged`. Only works when `verbose` is set to True.</span>
+<span class="sd">            Disable with 0. Defaults to 10.</span>
+<span class="sd">        random_seed: Set to None or -1 to disable.</span>
+<span class="sd">        add_hs: Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens</span>
+<span class="sd">            are removed in the returned molecule. Warning: explicit hydrogens won&#39;t be conserved. It is strongly</span>
+<span class="sd">            recommended to let the default value to True. The RDKit documentation says: &quot;To get good 3D conformations,</span>
+<span class="sd">            it&#39;s almost always a good idea to add hydrogens to the molecule first.&quot;</span>
+<span class="sd">        fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial</span>
+<span class="sd">            embedding fails.</span>
+<span class="sd">        ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.</span>
+<span class="sd">        embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. This will override any</span>
+<span class="sd">            other default settings. See https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters</span>
+<span class="sd">            for more details.</span>
+<span class="sd">        verbose: Wether to enable logs during the process.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mol: the molecule with the conformers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">AVAILABLE_METHODS</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;ETDG&quot;</span><span class="p">,</span> <span class="s2">&quot;ETKDG&quot;</span><span class="p">,</span> <span class="s2">&quot;ETKDGv2&quot;</span><span class="p">,</span> <span class="s2">&quot;ETKDGv3&quot;</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">method</span> <span class="o">=</span> <span class="s2">&quot;ETKDGv3&quot;</span>
+
+    <span class="k">if</span> <span class="n">method</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">AVAILABLE_METHODS</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The method </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2"> is not supported. Use from </span><span class="si">{</span><span class="n">AVAILABLE_METHODS</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Random seed</span>
+    <span class="k">if</span> <span class="n">random_seed</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">random_seed</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+
+    <span class="c1"># Clone molecule</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="c1"># Remove existing conformers</span>
+    <span class="k">if</span> <span class="n">clear_existing</span><span class="p">:</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+
+    <span class="c1"># Add hydrogens</span>
+    <span class="k">if</span> <span class="n">add_hs</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm_mol</span><span class="o">.</span><span class="n">add_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">n_confs</span><span class="p">:</span>
+        <span class="c1"># Set the number of conformers depends on</span>
+        <span class="c1"># the number of rotatable bonds.</span>
+        <span class="n">rotatable_bonds</span> <span class="o">=</span> <span class="n">descriptors</span><span class="o">.</span><span class="n">n_rotatable_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">rotatable_bonds</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">:</span>
+            <span class="n">n_confs</span> <span class="o">=</span> <span class="mi">50</span>
+        <span class="k">elif</span> <span class="n">rotatable_bonds</span> <span class="o">&lt;</span> <span class="mi">12</span><span class="p">:</span>
+            <span class="n">n_confs</span> <span class="o">=</span> <span class="mi">200</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">n_confs</span> <span class="o">=</span> <span class="mi">300</span>
+
+    <span class="c1"># Setup the parameters for the embedding</span>
+    <span class="n">params</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rdDistGeom</span><span class="p">,</span> <span class="n">method</span><span class="p">)()</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">randomSeed</span> <span class="o">=</span> <span class="n">random_seed</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">enforceChirality</span> <span class="o">=</span> <span class="n">enforce_chirality</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">useRandomCoords</span> <span class="o">=</span> <span class="n">use_random_coords</span>
+    <span class="n">params</span><span class="o">.</span><span class="n">numThreads</span> <span class="o">=</span> <span class="n">num_threads</span>
+
+    <span class="k">if</span> <span class="n">embed_params</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">embed_params</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="n">params</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+
+    <span class="c1"># Embed conformers</span>
+    <span class="n">confs</span> <span class="o">=</span> <span class="n">rdDistGeom</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">confs</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">ignore_failure</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">convert</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">. Returning None because ignore_failure is set.&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Conformers embedding failed for </span><span class="si">{</span><span class="n">convert</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">energies</span> <span class="o">=</span> <span class="kc">None</span>
+
+    <span class="c1"># Minimize energy</span>
+    <span class="k">if</span> <span class="n">minimize_energy</span><span class="p">:</span>
+
+        <span class="c1"># Minimize conformer&#39;s energy using UFF</span>
+        <span class="n">results</span> <span class="o">=</span> <span class="n">rdForceFieldHelpers</span><span class="o">.</span><span class="n">UFFOptimizeMoleculeConfs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">maxIters</span><span class="o">=</span><span class="n">energy_iterations</span><span class="p">)</span>
+        <span class="n">energies</span> <span class="o">=</span> <span class="p">[</span><span class="n">energy</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">energy</span> <span class="ow">in</span> <span class="n">results</span><span class="p">]</span>
+
+        <span class="c1"># Some conformers might not have converged during minimization.</span>
+        <span class="n">not_converged</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">([</span><span class="n">not_converged</span> <span class="k">for</span> <span class="n">not_converged</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">results</span> <span class="k">if</span> <span class="n">not_converged</span><span class="p">])</span>
+        <span class="k">if</span> <span class="n">warning_not_converged</span> <span class="o">!=</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">not_converged</span> <span class="o">&gt;</span> <span class="n">warning_not_converged</span> <span class="ow">and</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">not_converged</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">}</span><span class="s2"> conformers have not converged for </span><span class="si">{</span><span class="n">convert</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="p">)</span>
+
+    <span class="k">elif</span> <span class="n">sort_by_energy</span><span class="p">:</span>
+        <span class="n">energies</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">():</span>
+            <span class="n">ff</span> <span class="o">=</span> <span class="n">rdForceFieldHelpers</span><span class="o">.</span><span class="n">UFFGetMoleculeForceField</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">GetId</span><span class="p">())</span>
+            <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">CalcEnergy</span><span class="p">())</span>
+        <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">energies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+
+        <span class="c1"># Add the energy as a property to each conformers</span>
+        <span class="p">[</span>
+            <span class="n">conf</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="s2">&quot;rdkit_uff_energy&quot;</span><span class="p">,</span> <span class="n">energy</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conf</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">())</span>
+        <span class="p">]</span>
+
+        <span class="c1"># Now we reorder conformers according to their energies,</span>
+        <span class="c1"># so the lowest energies conformers are first.</span>
+        <span class="n">mol_clone</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">ordered_conformers</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="n">conf</span> <span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">conf</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">mol_clone</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">()),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+        <span class="p">]</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+        <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">assignId</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="n">ordered_conformers</span><span class="p">]</span>
+
+    <span class="c1"># Align conformers to each others</span>
+    <span class="k">if</span> <span class="n">align_conformers</span><span class="p">:</span>
+        <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMolConformers</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">rms_cutoff</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">cluster</span><span class="p">(</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">rms_cutoff</span><span class="o">=</span><span class="n">rms_cutoff</span><span class="p">,</span>
+            <span class="n">already_aligned</span><span class="o">=</span><span class="n">align_conformers</span><span class="p">,</span>
+            <span class="n">centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">if</span> <span class="n">add_hs</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm_mol</span><span class="o">.</span><span class="n">remove_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.return_centroids" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">return_centroids</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_clusters</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.return_centroids" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Given a list of cluster indices, return one single molecule
+with only the centroid of the clusters of a list of molecules per cluster.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_clusters</code></td>
+          <td>
+                <code><span title="typing.Sequence">Sequence</span>[<span title="typing.Sequence">Sequence</span>[int]]</code>
+          </td>
+          <td><p>list of cluster indices.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>centroids</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If True, return one molecule with centroid conformers
+only. If False return a list of molecules per cluster with all
+the conformers of the cluster.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">return_centroids</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">conf_clusters</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span>
+    <span class="n">centroids</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">Mol</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;Given a list of cluster indices, return one single molecule</span>
+<span class="sd">    with only the centroid of the clusters of a list of molecules per cluster.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        conf_clusters: list of cluster indices.</span>
+<span class="sd">        centroids: If True, return one molecule with centroid conformers</span>
+<span class="sd">            only. If False return a list of molecules per cluster with all</span>
+<span class="sd">            the conformers of the cluster.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">centroids</span><span class="p">:</span>
+        <span class="c1"># Collect centroid of each cluster (first element of the list)</span>
+        <span class="n">centroid_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">indices</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">indices</span> <span class="ow">in</span> <span class="n">conf_clusters</span><span class="p">]</span>
+
+        <span class="c1"># Keep only centroid conformers</span>
+        <span class="n">mol_clone</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">confs</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol_clone</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">()[</span><span class="n">i</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">centroid_list</span><span class="p">]</span>
+        <span class="n">mol</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+        <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">assignId</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="n">confs</span><span class="p">]</span>
+        <span class="k">return</span> <span class="n">mol</span>
+
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># Create a new molecule for each cluster and add conformers to it.</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">cluster</span> <span class="ow">in</span> <span class="n">conf_clusters</span><span class="p">:</span>
+            <span class="n">m</span> <span class="o">=</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">m</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+            <span class="p">[</span><span class="n">m</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="n">c</span><span class="p">),</span> <span class="n">assignId</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">cluster</span><span class="p">]</span>
+            <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.rmsd" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">rmsd</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.rmsd" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute the RMSD between all the conformers of a molecule.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rmsd</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute the RMSD between all the conformers of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">&lt;=</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;The molecule has 0 or 1 conformer. You can generate conformers with `dm.conformers.generate(mol)`.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="n">n_confs</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span>
+    <span class="n">rmsds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_confs</span><span class="p">):</span>
+        <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_confs</span><span class="p">):</span>
+            <span class="n">rmsd</span> <span class="o">=</span> <span class="n">rdMolAlign</span><span class="o">.</span><span class="n">AlignMol</span><span class="p">(</span><span class="n">prbMol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">refMol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span> <span class="n">prbCid</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">refCid</span><span class="o">=</span><span class="n">j</span><span class="p">)</span>
+            <span class="n">rmsds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmsd</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rmsds</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">n_confs</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._conformers.translate" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">translate</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">new_centroid</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._conformers.translate" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Move a given conformer of a molecule to a new position. The transformation is performed
+in place.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>the molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>new_centroid</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[int]]</code>
+          </td>
+          <td><p>the new position to move to of shape [x, y, z]</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>id of the conformer.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">translate</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">new_centroid</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]],</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Move a given conformer of a molecule to a new position. The transformation is performed</span>
+<span class="sd">    in place.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: the molecule.</span>
+<span class="sd">        new_centroid: the new position to move to of shape [x, y, z]</span>
+<span class="sd">        conf_id: id of the conformer.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Get conformer</span>
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="n">conf_id</span><span class="p">)</span>
+
+    <span class="c1"># Compute the vector for translation</span>
+    <span class="n">mol_center</span> <span class="o">=</span> <span class="n">rdMolTransforms</span><span class="o">.</span><span class="n">ComputeCentroid</span><span class="p">(</span><span class="n">conf</span><span class="p">)</span>
+    <span class="n">mol_center</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">mol_center</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">mol_center</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">mol_center</span><span class="o">.</span><span class="n">z</span><span class="p">])</span>
+
+    <span class="c1"># Make the transformation matrix</span>
+    <span class="n">T</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">)</span>
+    <span class="n">T</span><span class="p">[:</span><span class="mi">3</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="n">new_centroid</span> <span class="o">-</span> <span class="n">mol_center</span>
+
+    <span class="c1"># Transform</span>
+    <span class="n">rdMolTransforms</span><span class="o">.</span><span class="n">TransformConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="datamol.conformers._features" class="doc doc-heading">
+          <code>_features</code>
+
+
+<a href="#datamol.conformers._features" class="headerlink" title="Permanent link">&para;</a></h3>
+
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._features.center_of_mass" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">center_of_mass</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">use_atoms</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">digits</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._features.center_of_mass" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute the center of mass of a conformer of a molecule.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>use_atoms</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to compute the true center of mass or the geometrical center.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>digits</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Number of digits to round to.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>the conformer id.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+      <p>Returns
+    cm: Center of mass or geometrical center</p>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">use_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">digits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute the center of mass of a conformer of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">        use_atoms: Whether to compute the true center of mass or the geometrical center.</span>
+<span class="sd">        digits: Number of digits to round to.</span>
+<span class="sd">        conf_id: the conformer id.</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">        cm: Center of mass or geometrical center</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">coords</span> <span class="o">=</span> <span class="n">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
+    <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">((</span><span class="n">coords</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+
+    <span class="k">if</span> <span class="n">use_atoms</span><span class="p">:</span>
+        <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">atom</span><span class="o">.</span><span class="n">GetMass</span><span class="p">()</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()])</span>
+
+    <span class="n">atom_weight</span> <span class="o">=</span> <span class="n">atom_weight</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">]</span>
+    <span class="n">atom_weight</span> <span class="o">/=</span> <span class="n">atom_weight</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">center</span> <span class="o">=</span> <span class="p">(</span><span class="n">coords</span> <span class="o">*</span> <span class="n">atom_weight</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">digits</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">center</span> <span class="o">=</span> <span class="n">center</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">digits</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">center</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._features.get_coords" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._features.get_coords" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the coordinate of a conformer of a molecule.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>a conformer id.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span>
+<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get the coordinate of a conformer of a molecule.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule.</span>
+<span class="sd">        conf_id: a conformer id.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Molecule does not have any conformers.&quot;</span><span class="p">)</span>
+
+    <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">conf</span><span class="o">.</span><span class="n">GetPositions</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._features.keep_conformers" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">keep_conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">indices_to_keep</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">assign_id</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._features.keep_conformers" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Keep on the specified conformer(s) in <code>indices_to_keep</code>.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>A molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>indices_to_keep</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]</code>
+          </td>
+          <td><p>A indice or a least of indices of conformers to keep.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>assign_id</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to assign the kept conformers an id or keep the original one.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>copy</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to copy the molecule or not.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">keep_conformers</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">indices_to_keep</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">assign_id</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Keep on the specified conformer(s) in `indices_to_keep`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        indices_to_keep: A indice or a least of indices of conformers to keep.</span>
+<span class="sd">        assign_id: Whether to assign the kept conformers an id or keep the original one.</span>
+<span class="sd">        copy: Whether to copy the molecule or not.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="n">copy</span><span class="p">:</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indices_to_keep</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">indices_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="n">indices_to_keep</span><span class="p">]</span>
+
+    <span class="c1"># Extract conformers to keep</span>
+    <span class="n">confs_to_keep</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="n">conf_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">conf_id</span> <span class="ow">in</span> <span class="n">indices_to_keep</span><span class="p">]</span>
+
+    <span class="c1"># Copy current mol and remove all conformers</span>
+    <span class="n">mol2</span> <span class="o">=</span> <span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">mol2</span><span class="o">.</span><span class="n">RemoveAllConformers</span><span class="p">()</span>
+
+    <span class="c1"># Add conformers</span>
+    <span class="n">_</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol2</span><span class="o">.</span><span class="n">AddConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">assignId</span><span class="o">=</span><span class="n">assign_id</span><span class="p">)</span> <span class="k">for</span> <span class="n">conf</span> <span class="ow">in</span> <span class="n">confs_to_keep</span><span class="p">]</span>
+
+    <span class="c1"># Cleanup</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">mol2</span>
+
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.conformers._features.sasa" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">sasa</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.conformers._features.sasa" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Compute Solvent Accessible Surface Area of all the conformers
+using FreeSASA (<a href="https://freesasa.github.io/">https://freesasa.github.io/</a>). Values are returned
+as an array and also stored within each conformer as a property
+called <code>rdkit_free_sasa</code>.</p>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code><span class="n">smiles</span> <span class="o">=</span> <span class="s2">&quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
+<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+<span class="c1"># Compute SASA for all the conformers without parallelization</span>
+<span class="n">sasa_values</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+<span class="c1"># If minimization has been enabled (default to True)</span>
+<span class="c1"># you can access the computed energy.</span>
+<span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">props</span> <span class="o">=</span> <span class="n">conf</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
+<span class="c1"># {&#39;rdkit_uff_energy&#39;: 1.7649408317784008}</span>
+</code></pre></div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]]</code>
+          </td>
+          <td><p>Id of the conformers to compute. If None, compute all.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_jobs</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Number of jobs for parallelization. Set to 1 to disable
+and -1 to use all cores.</p></td>
+          <td>
+                <code>1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>mol</code></td>          <td>
+                <code><span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span></code>
+          </td>
+          <td><p>the molecule with the conformers.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+<span class="normal">17</span>
+<span class="normal">18</span>
+<span class="normal">19</span>
+<span class="normal">20</span>
+<span class="normal">21</span>
+<span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
+<span class="k">def</span> <span class="nf">sasa</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">conf_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;Compute Solvent Accessible Surface Area of all the conformers</span>
+<span class="sd">    using FreeSASA (https://freesasa.github.io/). Values are returned</span>
+<span class="sd">    as an array and also stored within each conformer as a property</span>
+<span class="sd">    called `rdkit_free_sasa`.</span>
+
+<span class="sd">    Example:</span>
+
+<span class="sd">    ```python</span>
+<span class="sd">    smiles = &quot;O=C(C)Oc1ccccc1C(=O)O&quot;</span>
+<span class="sd">    mol = dm.to_mol(smiles)</span>
+<span class="sd">    mol = dm.conformers.generate(mol)</span>
+
+<span class="sd">    # Compute SASA for all the conformers without parallelization</span>
+<span class="sd">    sasa_values = dm.conformers.sasa(mol, conf_id=None, n_jobs=1)</span>
+
+<span class="sd">    # If minimization has been enabled (default to True)</span>
+<span class="sd">    # you can access the computed energy.</span>
+<span class="sd">    conf = mol.GetConformer(0)</span>
+<span class="sd">    props = conf.GetPropsAsDict()</span>
+<span class="sd">    print(props)</span>
+<span class="sd">    # {&#39;rdkit_uff_energy&#39;: 1.7649408317784008}</span>
+<span class="sd">    ```</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">        conf_id: Id of the conformers to compute. If None, compute all.</span>
+<span class="sd">        n_jobs: Number of jobs for parallelization. Set to 1 to disable</span>
+<span class="sd">            and -1 to use all cores.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mol: the molecule with the conformers.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="kn">from</span> <span class="nn">rdkit.Chem</span> <span class="kn">import</span> <span class="n">rdFreeSASA</span>
+
+    <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
+            <span class="s2">&quot;The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`.&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># Get Van der Waals radii (angstrom)</span>
+    <span class="n">radii</span> <span class="o">=</span> <span class="p">[</span><span class="n">PERIODIC_TABLE</span><span class="o">.</span><span class="n">GetRvdw</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">())</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
+
+    <span class="c1"># Which conformers to compute</span>
+    <span class="n">conf_ids</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">if</span> <span class="n">conf_id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="c1"># If None compute for all the conformers</span>
+        <span class="n">conf_ids</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()))</span>  <span class="c1"># type: ignore</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">conf_id</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">conf_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">conf_id</span><span class="p">]</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">conf_ids</span> <span class="o">=</span> <span class="n">conf_id</span>
+
+    <span class="c1"># Compute solvent accessible surface area</span>
+    <span class="k">def</span> <span class="nf">_get_sasa</span><span class="p">(</span><span class="n">i</span><span class="p">):</span>
+        <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+        <span class="n">sasa</span> <span class="o">=</span> <span class="n">rdFreeSASA</span><span class="o">.</span><span class="n">CalcSASA</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">radii</span><span class="p">,</span> <span class="n">confIdx</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">GetId</span><span class="p">())</span>
+        <span class="n">conf</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="s2">&quot;rdkit_free_sasa&quot;</span><span class="p">,</span> <span class="n">sasa</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">sasa</span>
+
+    <span class="n">runner</span> <span class="o">=</span> <span class="n">JobRunner</span><span class="p">(</span><span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
+    <span class="n">sasa_values</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">_get_sasa</span><span class="p">,</span> <span class="n">conf_ids</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sasa_values</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+              
+            </article>
+            
+          </div>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+    <nav class="md-footer__inner md-grid" aria-label="Footer" >
+      
+        
+        <a href="datamol.descriptors.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.descriptors" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              datamol.descriptors
+            </div>
+          </div>
+        </a>
+      
+      
+        
+        <a href="datamol.viz.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.viz" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              datamol.viz
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2020 - 2022 Valence
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.0f659f14.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
