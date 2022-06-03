@@ -9,6 +9,7 @@
 # This file is up-to-date if the command git log --format="%aN <%aE>" | sort -u
 # gives no duplicates.
 
+Cas <caswognum@hotmail.com> cwognum <caswognum@hotmail.com>
 DeepSource Bot <bot@deepsource.io>
 Emmanuel Noutahi <emmanuel.noutahi@hotmail.ca> maclandrol <emmanuel.noutahi@hotmail.ca>
 Hadrien Mary <hadrien.mary@gmail.com> hadim <hadim@users.noreply.github.com>

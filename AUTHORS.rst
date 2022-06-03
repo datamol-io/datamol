@@ -1,6 +1,7 @@
 All of the people who have made at least one contribution to datamol.
 Authors are sorted alphabetically.
 
+* Cas
 * DeepSource Bot
 * Emmanuel Noutahi
 * Hadrien Mary
