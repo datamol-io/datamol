@@ -921,7 +921,7 @@ def add_hs(
         mol: a molecule.
         explicit_only: whether to only add explicit hydrogens.
         add_coords: whether to add 3D coordinates to the hydrogens.
-        onlyOnAtoms: a list of atoms to add hydrogens only on.
+        only_on_atoms: a list of atoms to add hydrogens only on.
         add_residue_info: whether to add residue information to the hydrogens.
             Useful for PDB files.
         copy: whether to copy the input molecule.

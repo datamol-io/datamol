@@ -74,7 +74,7 @@ plugins:
       watch:
         - datamol/
       handlers:
-        python-legacy:
+        python:
           setup_commands:
             - import sys
             - sys.path.append("docs")
@@ -83,7 +83,7 @@ plugins:
             new_path_syntax: true
           rendering:
             show_root_heading: true
-            heading_level: 4
+            heading_level: 3
             show_root_full_path: false
 
   - mkdocs-jupyter:
