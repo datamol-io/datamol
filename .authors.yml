@@ -44,3 +44,9 @@
   email: julien@invivoai.com
   num_commits: 7
   first_commit: 2022-01-26 17:14:26
+- name: Cas
+  email: caswognum@hotmail.com
+  num_commits: 2
+  first_commit: 2022-06-02 16:20:56
+  aliases:
+  - cwognum
