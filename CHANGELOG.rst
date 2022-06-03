@@ -4,6 +4,21 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.8
+====================
+
+**Fixed:**
+
+* Bug in `dm.conformer.generate()` when multiple conformers had equal energies
+* Fix the documentation.
+
+**Authors:**
+
+* Cas
+* Hadrien Mary
+
+
+
 v0.7.7
 ====================
 
