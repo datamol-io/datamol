@@ -1,6 +1,7 @@
 import datamol as dm
 import unittest as ut
 
+
 def test_to_mol():
 
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
@@ -35,8 +36,8 @@ def test_get_all_path_between():
     all_paths = dm.get_all_path_between(mol, 8, 4, ignore_cycle_basis=True)
     assert all_paths == [[8, 2, 3, 4], [8, 7, 6, 5, 4]]
 
-class Test_match_molecular_graphs(ut.TestCase):
 
+class Test_match_molecular_graphs(ut.TestCase):
     def test_ring(self):
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
         mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)
@@ -46,53 +47,76 @@ class Test_match_molecular_graphs(ut.TestCase):
         mol6 = dm.to_mol("C1CCCCC1", ordered=True, add_hs=True)
 
         # 12 matches on rings (6 rotations * 2 reflections)
-        matches = dm.match_molecular_graphs(mol1, mol1, match_atoms_on="atomic_num", match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol1, match_atoms_on="atomic_num", match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 12)
 
         # 12 matches on rings (6 rotations * 2 reflections)
-        matches = dm.match_molecular_graphs(mol1, mol2, match_atoms_on="atomic_num", match_bonds_on=[])
+        matches = dm.match_molecular_graphs(
+            mol1, mol2, match_atoms_on="atomic_num", match_bonds_on=[]
+        )
         self.assertEqual(len(matches), 12)
 
         # 12 matches on rings (6 rotations * 2 reflections)
-        matches = dm.match_molecular_graphs(mol2, mol2, match_atoms_on=[], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol2, mol2, match_atoms_on=[], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 12)
 
         # 0 matches on rings of different bond types
-        matches = dm.match_molecular_graphs(mol1, mol2, match_atoms_on=[], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol2, match_atoms_on=[], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 0)
 
         # Matches with Oxygen atom
-        matches = dm.match_molecular_graphs(mol1, mol3, match_atoms_on=[], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol3, match_atoms_on=[], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 12)
 
         # No matching due to atom type
-        matches = dm.match_molecular_graphs(mol1, mol3, match_atoms_on=["atomic_num"], match_bonds_on=[])
+        matches = dm.match_molecular_graphs(
+            mol1, mol3, match_atoms_on=["atomic_num"], match_bonds_on=[]
+        )
         self.assertEqual(len(matches), 0)
 
         # 2 reflections can match
-        matches = dm.match_molecular_graphs(mol3, mol4, match_atoms_on=["atomic_num"], match_bonds_on=[])
+        matches = dm.match_molecular_graphs(
+            mol3, mol4, match_atoms_on=["atomic_num"], match_bonds_on=[]
+        )
         self.assertEqual(len(matches), 2)
 
         # No matching due to different bonds
-        matches = dm.match_molecular_graphs(mol3, mol4, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol3, mol4, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 0)
 
         # 2 reflections can match
-        matches = dm.match_molecular_graphs(mol4, mol5, match_atoms_on=[], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol4, mol5, match_atoms_on=[], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 2)
 
         # 0 matches with hydrogens
-        matches = dm.match_molecular_graphs(mol1, mol6, match_atoms_on=[], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol6, match_atoms_on=[], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 0)
 
         # 768 matches with hydrogens when specifying explicit_hs.
         # 768 = 6 rotations * 2 reflections * (2 reflection per carbon with Hs = 2^6)
-        matches = dm.match_molecular_graphs(mol1, mol6, match_atoms_on=[], match_bonds_on=["bond_type"], explicit_hs=True)
+        matches = dm.match_molecular_graphs(
+            mol1, mol6, match_atoms_on=[], match_bonds_on=["bond_type"], explicit_hs=True
+        )
         self.assertEqual(len(matches), 768)
 
-
     def test_mol(self):
-        smiles1 = "O=C(CC[C@@H]1NC(=O)N(CCc2c[nH]c3ccccc23)C1=O)N1C[C@@H]2C[C@H](C1)[C]1C=C[CH]C(=O)N1C2"
+        smiles1 = (
+            "O=C(CC[C@@H]1NC(=O)N(CCc2c[nH]c3ccccc23)C1=O)N1C[C@@H]2C[C@H](C1)[C]1C=C[CH]C(=O)N1C2"
+        )
         mol1 = dm.to_mol(smiles1, ordered=False)
         mol1_ordered = dm.to_mol(smiles1, ordered=True)
 
@@ -101,7 +125,9 @@ class Test_match_molecular_graphs(ut.TestCase):
         mol2_ordered = dm.to_mol(smiles2, ordered=True)
 
         # Single match. Check if re-ordered atomic number match
-        matches = dm.match_molecular_graphs(mol1, mol1_ordered, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol1_ordered, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 1)
         match = matches[0]
         atoms1 = [atom.GetAtomicNum() for atom in mol1.GetAtoms()]
@@ -110,7 +136,9 @@ class Test_match_molecular_graphs(ut.TestCase):
         self.assertListEqual(atoms1, atoms1_re_ordered)
 
         # Single match. Check if re-ordered atomic number match
-        matches = dm.match_molecular_graphs(mol2, mol2_ordered, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol2, mol2_ordered, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 1)
         match = matches[0]
         atoms2 = [atom.GetAtomicNum() for atom in mol2.GetAtoms()]
@@ -119,7 +147,9 @@ class Test_match_molecular_graphs(ut.TestCase):
         self.assertListEqual(atoms2, atoms2_re_ordered)
 
         # Molecules don't match
-        matches = dm.match_molecular_graphs(mol1, mol2, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"])
+        matches = dm.match_molecular_graphs(
+            mol1, mol2, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"]
+        )
         self.assertEqual(len(matches), 0)
 
 
@@ -145,7 +175,9 @@ class Test_reorder_mol_from_template(ut.TestCase):
         mol3_variation = dm.to_mol(smiles3_variation, ordered=True)
 
         # Check re-ordering of molecules without enforcing
-        mol3_reordered = dm.reorder_mol_from_template(mol3, mol3_ordered, enforce_atomic_num=True, enforce_bond_type=False)
+        mol3_reordered = dm.reorder_mol_from_template(
+            mol3, mol3_ordered, enforce_atomic_num=True, enforce_bond_type=False
+        )
         atoms3 = [atom.GetAtomicNum() for atom in mol3.GetAtoms()]
         atoms3_ordered = [atom.GetAtomicNum() for atom in mol3_ordered.GetAtoms()]
         atoms3_reordered = [atom.GetAtomicNum() for atom in mol3_reordered.GetAtoms()]
@@ -153,7 +185,9 @@ class Test_reorder_mol_from_template(ut.TestCase):
         self.assertFalse(all([atoms3[ii] == atoms3_ordered[ii] for ii in range(len(atoms3))]))
 
         # Check re-ordering of molecules without enforcing
-        mol3_reordered = dm.reorder_mol_from_template(mol3, mol3_variation, enforce_atomic_num=False, enforce_bond_type=False)
+        mol3_reordered = dm.reorder_mol_from_template(
+            mol3, mol3_variation, enforce_atomic_num=False, enforce_bond_type=False
+        )
         atoms3 = [atom.GetAtomicNum() for atom in mol3.GetAtoms()]
         atoms3_ordered = [atom.GetAtomicNum() for atom in mol3_variation.GetAtoms()]
         atoms3_reordered = [atom.GetAtomicNum() for atom in mol3_reordered.GetAtoms()]
@@ -163,10 +197,15 @@ class Test_reorder_mol_from_template(ut.TestCase):
         self.assertGreater(len(atoms3) - sum(equal_atoms3_wrong), 1)
 
         # Check re-ordering of molecules with enforcing
-        mol3_reordered = dm.reorder_mol_from_template(mol3, mol3_variation, enforce_atomic_num=True, enforce_bond_type=False)
+        mol3_reordered = dm.reorder_mol_from_template(
+            mol3, mol3_variation, enforce_atomic_num=True, enforce_bond_type=False
+        )
         self.assertIsNone(mol3_reordered)
-        mol3_reordered = dm.reorder_mol_from_template(mol3, mol3_variation, enforce_atomic_num=False, enforce_bond_type=True)
+        mol3_reordered = dm.reorder_mol_from_template(
+            mol3, mol3_variation, enforce_atomic_num=False, enforce_bond_type=True
+        )
         self.assertIsNone(mol3_reordered)
+
 
 if __name__ == "__main__":
     ut.main()

@@ -5,6 +5,7 @@ from datamol.graph import to_graph, _get_networkx
 from datamol.mol import add_hs
 import datamol as dm
 
+
 def match_molecular_graphs(
     mol1: dm.Mol,
     mol2: dm.Mol,
@@ -122,24 +123,38 @@ def reorder_mol_from_template(
 
     # Match the ordering of the graphs
     matches = match_molecular_graphs(
-        mol_template, mol, match_atoms_on=["atomic_num"], match_bonds_on=["bond_type"], explicit_hs=explicit_hs
+        mol_template,
+        mol,
+        match_atoms_on=["atomic_num"],
+        match_bonds_on=["bond_type"],
+        explicit_hs=explicit_hs,
     )
 
     # If no matches were found, retry without bond types
     if (len(matches) == 0) and (not enforce_bond_type):
         matches = match_molecular_graphs(
-            mol_template, mol, match_atoms_on=["atomic_num"], match_bonds_on=[], explicit_hs=explicit_hs
+            mol_template,
+            mol,
+            match_atoms_on=["atomic_num"],
+            match_bonds_on=[],
+            explicit_hs=explicit_hs,
         )
 
     # If no matches were found, retry without atom types
     if (len(matches) == 0) and (not enforce_atomic_num):
         matches = match_molecular_graphs(
-            mol_template, mol, match_atoms_on=[], match_bonds_on=["bond_type"], explicit_hs=explicit_hs
+            mol_template,
+            mol,
+            match_atoms_on=[],
+            match_bonds_on=["bond_type"],
+            explicit_hs=explicit_hs,
         )
 
     # If no matches were found, retry without bond and atom types
     if (len(matches) == 0) and (not enforce_bond_type) and (not enforce_atomic_num):
-        matches = match_molecular_graphs(mol_template, mol, match_atoms_on=[], match_bonds_on=[], explicit_hs=explicit_hs)
+        matches = match_molecular_graphs(
+            mol_template, mol, match_atoms_on=[], match_bonds_on=[], explicit_hs=explicit_hs
+        )
 
     # If no match were found, exit the function and return None
     if len(matches) == 0:
