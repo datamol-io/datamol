@@ -1,9 +1,11 @@
-from rdkit.Chem.rdchem import Mol
+from rdkit.Chem import AllChem
 from typing import Dict, List, Union
-from networkx import Graph
+import networkx as nx
+from networkx.algorithms.isomorphism.vf2userfunc import GraphMatcher
+from loguru import logger
 
 
-def mol_to_nx_graph(mol: Mol) -> Graph:
+def mol_to_nx_graph(mol: AllChem.rdchem.Mol) -> nx.Graph:
     """
     Convert a molecule to a networkx graph.
 
@@ -24,7 +26,10 @@ def mol_to_nx_graph(mol: Mol) -> Graph:
 
 
 def match_molecular_graphs(
-    mol1: Mol, mol2: Mol, match_atomic_num: bool = True, match_bond_type: bool = True
+    mol1: AllChem.rdchem.Mol,
+    mol2: AllChem.rdchem.Mol,
+    match_atomic_num: bool = True,
+    match_bond_type: bool = True,
 ) -> List[Dict[int, int]]:
     """
     Match the node indices of 2 molecular graphs, with optional usage of atomic number and edge type.
@@ -63,8 +68,11 @@ def match_molecular_graphs(
 
 
 def reorder_mol_from_template(
-    mol: Mol, mol_template: Mol, enforce_bond_type: bool = False
-) -> Union[Mol, type(None)]:
+    mol: AllChem.rdchem.Mol,
+    mol_template: AllChem.rdchem.Mol,
+    enforce_atomic_num: bool = False,
+    enforce_bond_type: bool = False,
+) -> Union[AllChem.rdchem.Mol, type(None)]:
     """
     Re-order the nodes of a molecular graph from the nodes of a template molecule.
     Molecular graphs and atom types need to be identical, but edge types and charges
@@ -76,6 +84,9 @@ def reorder_mol_from_template(
     Parameters:
         mol: The molecule to re-order
         mol_template: The molecule containing the right node order.
+        enforce_atomic_num: Whether to enforce atomic number. Atomic numbers are always enforced
+            for a first try. If no match are found and this parameter is `False`,
+            the matching is tried again.
         enforce_bond_type: Whether to enforce bond types. Bond types are always enforced
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
@@ -91,20 +102,32 @@ def reorder_mol_from_template(
     # Match the ordering of the graphs
     matches = match_molecular_graphs(mol_template, mol, match_atomic_num=True, match_edge_type=True)
 
-    # If no matches were found, retry without edge types
+    # If no matches were found, retry without bond types
     if (len(matches) == 0) and (not enforce_bond_type):
         matches = match_molecular_graphs(
             mol_template, mol, match_atomic_num=True, match_edge_type=False
         )
 
+    # If no matches were found, retry without atom types
+    if (len(matches) == 0) and (not enforce_atomic_num):
+        matches = match_molecular_graphs(
+            mol_template, mol, match_atomic_num=False, match_edge_type=True
+        )
+
+    # If no matches were found, retry without bond and atom types
+    if (len(matches) == 0) and (not enforce_bond_type) and (not enforce_atomic_num):
+        matches = match_molecular_graphs(
+            mol_template, mol, match_atomic_num=False, match_edge_type=False
+        )
+
     # If no match were found, exit the function and return None
     if len(matches) == 0:
-        warnings.warn("No match was found")
+        logger.warning("No match was found")
         return None
 
     # If many matches were found, exit the function and return None
     if len(matches) > 1:
-        warnings.warn(f"{len(matches)} matches were found, ordering is ambiguous")
+        logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
         print(matches)
         return None
 
