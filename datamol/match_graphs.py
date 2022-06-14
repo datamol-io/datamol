@@ -1,13 +1,13 @@
-from rdkit.Chem import AllChem
+from rdkit.Chem.AllChem import RenumberAtoms
 from typing import Dict, List, Union
 from loguru import logger
 from datamol.graph import to_graph, _get_networkx
 from datamol.mol import add_hs
-
+import datamol as dm
 
 def match_molecular_graphs(
-    mol1: AllChem.rdchem.Mol,
-    mol2: AllChem.rdchem.Mol,
+    mol1: dm.Mol,
+    mol2: dm.Mol,
     match_atoms_on: List[str] = ["atomic_num"],
     match_bonds_on: List[str] = ["bond_type"],
     explicit_hs: bool = False,
@@ -82,13 +82,13 @@ def match_molecular_graphs(
 
 
 def reorder_mol_from_template(
-    mol: AllChem.rdchem.Mol,
-    mol_template: AllChem.rdchem.Mol,
+    mol: dm.Mol,
+    mol_template: dm.Mol,
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
     explicit_hs: bool = False,
     verbose: bool = True,
-) -> Union[AllChem.rdchem.Mol, type(None)]:
+) -> Union[dm.Mol, type(None)]:
     """
     Re-order the nodes of a molecular graph from the nodes of a template molecule.
     Molecular graphs and atom types need to be identical, but edge types and charges
@@ -156,6 +156,6 @@ def reorder_mol_from_template(
     # Re-order the molecule from the matching indices of the template
     match = matches[0]
     match = [match[ii] for ii in range(mol.GetNumAtoms())]
-    reordered_mol = AllChem.RenumberAtoms(mol, match)
+    reordered_mol = RenumberAtoms(mol, match)
 
     return reordered_mol
