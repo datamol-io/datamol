@@ -69,6 +69,7 @@ def reorder_mol_from_template(
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
     explicit_hs: bool = False,
+    verbose: bool = True,
 ) -> Union[AllChem.rdchem.Mol, type(None)]:
     """
     Re-order the nodes of a molecular graph from the nodes of a template molecule.
@@ -91,6 +92,7 @@ def reorder_mol_from_template(
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
         explicit_hs: Whether to consider the hydrogens explicitly when matching.
+        verbose: Whether to warn when the matching does not work
 
     Returns:
         - `None` if the molecular graphs do not match (both the graph and atom types).
@@ -123,13 +125,14 @@ def reorder_mol_from_template(
 
     # If no match were found, exit the function and return None
     if len(matches) == 0:
-        logger.warning("No match was found")
+        if verbose:
+            logger.warning("No match was found")
         return None
 
     # If many matches were found, exit the function and return None
     if len(matches) > 1:
-        logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
-        print(matches)
+        if verbose:
+            logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
         return None
 
     # Re-order the molecule from the matching indices of the template
