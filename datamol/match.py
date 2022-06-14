@@ -1,7 +1,7 @@
-
-from rdkit.Chem.rdchem  import Mol
+from rdkit.Chem.rdchem import Mol
 from typing import Dict, List, Union
 from networkx import Graph
+
 
 def mol_to_nx_graph(mol: Mol) -> Graph:
     """
@@ -14,14 +14,18 @@ def mol_to_nx_graph(mol: Mol) -> Graph:
         and a `weight` attribute on the edges, corresponding to
         single=1, double=2, triple=3, quadruple=4, quintuple=5, aromatic=1.5.
     """
-    atomic_numx_property = {ii: {"atomic_num": atom.GetAtomicNum()} for ii, atom in enumerate(mol.GetAtoms())}
+    atomic_numx_property = {
+        ii: {"atomic_num": atom.GetAtomicNum()} for ii, atom in enumerate(mol.GetAtoms())
+    }
     adj = AllChem.GetAdjacencyMatrix(mol, useBO=True)
     g = nx.from_numpy_matrix(adj)
     nx.set_node_attributes(g, atomic_numx_property)
     return g
 
 
-def match_molecular_graphs(mol1: Mol, mol2: Mol, match_atomic_num: bool=True, match_bond_type: bool=True) -> List[Dict[int, int]]:
+def match_molecular_graphs(
+    mol1: Mol, mol2: Mol, match_atomic_num: bool = True, match_bond_type: bool = True
+) -> List[Dict[int, int]]:
     """
     Match the node indices of 2 molecular graphs, with optional usage of atomic number and edge type.
 
@@ -57,7 +61,10 @@ def match_molecular_graphs(mol1: Mol, mol2: Mol, match_atomic_num: bool=True, ma
 
     return matches
 
-def reorder_mol_from_template(mol: Mol, mol_template: Mol, enforce_bond_type: bool=False) -> Union[Mol, type(None)]:
+
+def reorder_mol_from_template(
+    mol: Mol, mol_template: Mol, enforce_bond_type: bool = False
+) -> Union[Mol, type(None)]:
     """
     Re-order the nodes of a molecular graph from the nodes of a template molecule.
     Molecular graphs and atom types need to be identical, but edge types and charges
@@ -86,10 +93,12 @@ def reorder_mol_from_template(mol: Mol, mol_template: Mol, enforce_bond_type: bo
 
     # If no matches were found, retry without edge types
     if (len(matches) == 0) and (not enforce_bond_type):
-        matches = match_molecular_graphs(mol_template, mol, match_atomic_num=True, match_edge_type=False)
+        matches = match_molecular_graphs(
+            mol_template, mol, match_atomic_num=True, match_edge_type=False
+        )
 
     # If no match were found, exit the function and return None
-    if (len(matches) == 0):
+    if len(matches) == 0:
         warnings.warn("No match was found")
         return None
 
