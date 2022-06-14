@@ -17,9 +17,27 @@ def match_molecular_graphs(
 
     Args:
         mol1, mol2: The molecules to match their indices.
-        match_atomic_num: Whether the atomic number should be used when matching the graphs.
-        match_bond_type: Whether the bond type should be used when matching the graphs.
-            Bond-type is limited to single, double, triple, quadruple, quituple, and aromatic bonds.
+        match_atoms_on: Properties on which to match the atom types.
+            By default, it matches on the `'atomic_num'` property.
+            Empty list means that it does not consider atom features during matching.
+
+            Other properties are defined by the `datamol.graph.to_graph` function and include:
+            - atomic_num
+            - formal_charge
+            - chiral_tag
+            - hybridization
+            - num_explicit_hs
+            - implicit_valence
+            - degree
+            - symbol
+            - ring_atom
+            - is_aromatic
+
+        match_bonds_on: Properties on which to match the bond types.
+            Empty list means that it does not consider bond features during matching.
+            By default, it matches on the `'bond_type'` property.
+            No other properties are defined by the `datamol.graph.to_graph` function.
+
         explicit_hs: Whether to consider the hydrogens explicitly when matching.
 
     Returns:
