@@ -108,8 +108,9 @@ class Test_match_molecular_graphs(ut.TestCase):
 
         # 768 matches with hydrogens when specifying explicit_hs.
         # 768 = 6 rotations * 2 reflections * (2 reflection per carbon with Hs = 2^6)
+
         matches = dm.match_molecular_graphs(
-            mol1, mol6, match_atoms_on=[], match_bonds_on=["bond_type"], explicit_hs=True
+            dm.add_hs(mol1), mol6, match_atoms_on=[], match_bonds_on=["bond_type"]
         )
         self.assertEqual(len(matches), 768)
 
@@ -162,6 +163,12 @@ class Test_reorder_mol_from_template(ut.TestCase):
         mol_reordered = dm.reorder_mol_from_template(mol1, mol2)
         self.assertIsNone(mol_reordered)
 
+        # Re-ordering with option allow_ambiguous_match
+        mol1 = dm.to_mol("C1CCCCC1", ordered=False)
+        mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match=True)
+        self.assertIsInstance(mol_reordered, dm.Mol)
+
         # No-reordering because no matches
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
         mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)
@@ -178,6 +185,7 @@ class Test_reorder_mol_from_template(ut.TestCase):
         mol3_reordered = dm.reorder_mol_from_template(
             mol3, mol3_ordered, enforce_atomic_num=True, enforce_bond_type=False
         )
+        self.assertIsInstance(mol3_reordered, dm.Mol)
         atoms3 = [atom.GetAtomicNum() for atom in mol3.GetAtoms()]
         atoms3_ordered = [atom.GetAtomicNum() for atom in mol3_ordered.GetAtoms()]
         atoms3_reordered = [atom.GetAtomicNum() for atom in mol3_reordered.GetAtoms()]
@@ -188,6 +196,7 @@ class Test_reorder_mol_from_template(ut.TestCase):
         mol3_reordered = dm.reorder_mol_from_template(
             mol3, mol3_variation, enforce_atomic_num=False, enforce_bond_type=False
         )
+        self.assertIsInstance(mol3_reordered, dm.Mol)
         atoms3 = [atom.GetAtomicNum() for atom in mol3.GetAtoms()]
         atoms3_ordered = [atom.GetAtomicNum() for atom in mol3_variation.GetAtoms()]
         atoms3_reordered = [atom.GetAtomicNum() for atom in mol3_reordered.GetAtoms()]
@@ -196,7 +205,7 @@ class Test_reorder_mol_from_template(ut.TestCase):
         self.assertEqual(len(atoms3) - sum(equal_atoms3), 1)
         self.assertGreater(len(atoms3) - sum(equal_atoms3_wrong), 1)
 
-        # Check re-ordering of molecules with enforcing
+        # Check re-ordering of molecules that fail due to enforcing
         mol3_reordered = dm.reorder_mol_from_template(
             mol3, mol3_variation, enforce_atomic_num=True, enforce_bond_type=False
         )
