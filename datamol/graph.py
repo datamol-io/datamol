@@ -2,7 +2,7 @@ from rdkit.Chem.rdmolops import GetAdjacencyMatrix
 from rdkit.Chem.AllChem import RenumberAtoms
 from typing import Dict, List, Union
 from loguru import logger
-from datamol.mol import add_hs
+from datamol.mol import remove_hs
 from datamol import Mol
 
 
@@ -98,7 +98,6 @@ def match_molecular_graphs(
     mol2: Mol,
     match_atoms_on: List[str] = ["atomic_num"],
     match_bonds_on: List[str] = ["bond_type"],
-    explicit_hs: bool = False,
 ) -> List[Dict[int, int]]:
     """
     Match the node indices of 2 molecular graphs,
@@ -107,6 +106,10 @@ def match_molecular_graphs(
     Note:
         The matching fails if the hydrogens are implicit in one molecule,
         but explicit in the other.
+
+    Note:
+        Explicit hydrogens might lead to too many matches, since for an atom with 2
+        hydrogens, they can be re-ordered in any way.
 
     Args:
         mol1, mol2: The molecules to match their indices.
@@ -131,11 +134,6 @@ def match_molecular_graphs(
             By default, it matches on the `'bond_type'` property.
             No other properties are defined by the `datamol.graph.to_graph` function.
 
-        explicit_hs: Whether to add hydrogens explicitly when matching.
-            This parameter only adds them to both graphs if `True`.
-            If `False`, it doesn't modify the molecular graphs, so matching will fail
-            if one molecule has explicit hydrogens, but not the other.
-
     Returns:
         A list of all matches dictionaries. In case of a single match, the list has len==1.
         Each dictionary contains as key the indices of `mol1` and as value the corresponding
@@ -157,11 +155,6 @@ def match_molecular_graphs(
         """Function that matches the bond type"""
         return all([edge1[prop] == edge2[prop] for prop in match_bonds_on])
 
-    # Add explicit hydrogens
-    if explicit_hs:
-        mol1 = add_hs(mol1)
-        mol2 = add_hs(mol2)
-
     # Convert to networkx graph
     g1 = to_graph(mol1)
     g2 = to_graph(mol2)
@@ -182,7 +175,7 @@ def reorder_mol_from_template(
     mol_template: Mol,
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
-    explicit_hs: bool = False,
+    allow_ambiguous_match: bool = False,
     verbose: bool = True,
 ) -> Union[Mol, type(None)]:
     """
@@ -201,6 +194,10 @@ def reorder_mol_from_template(
         The matching fails if the hydrogens are implicit in one molecule,
         but explicit in the other.
 
+    Note:
+        Explicit hydrogens might lead to too many matches, since for an atom with 2
+        hydrogens, they can be re-ordered in any way.
+
     Args:
         mol: The molecule to re-order
         mol_template: The molecule containing the right node order.
@@ -210,11 +207,12 @@ def reorder_mol_from_template(
         enforce_bond_type: Whether to enforce bond types. Bond types are always enforced
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
-        explicit_hs: Whether to add hydrogens explicitly when matching.
-            This parameter only adds them to both graphs if `True`.
-            If `False`, it doesn't modify the molecular graphs, so matching will fail
-            if one molecule has explicit hydrogens, but not the other.
-        verbose: Whether to warn when the matching does not work.
+        allow_ambiguous_match: Whether to allow ambiguous matching. This means that,
+            if there are many matches to the molecule, the first one is selected and
+            applied to the re-ordering.
+        verbose: Whether to warn when the matching does not work or is ambiguous.
+            In case of ambiguous, a warning is only raised if `allow_ambiguous_match`
+            is `False`.
 
     Returns:
         - `None` if the molecular graphs do not match (both the graph and atom types).
@@ -230,7 +228,6 @@ def reorder_mol_from_template(
         mol,
         match_atoms_on=["atomic_num"],
         match_bonds_on=["bond_type"],
-        explicit_hs=explicit_hs,
     )
 
     # If no matches were found, retry without bond types
@@ -240,7 +237,6 @@ def reorder_mol_from_template(
             mol,
             match_atoms_on=["atomic_num"],
             match_bonds_on=[],
-            explicit_hs=explicit_hs,
         )
 
     # If no matches were found, retry without atom types
@@ -250,14 +246,11 @@ def reorder_mol_from_template(
             mol,
             match_atoms_on=[],
             match_bonds_on=["bond_type"],
-            explicit_hs=explicit_hs,
         )
 
     # If no matches were found, retry without bond and atom types
     if (len(matches) == 0) and (not enforce_bond_type) and (not enforce_atomic_num):
-        matches = match_molecular_graphs(
-            mol_template, mol, match_atoms_on=[], match_bonds_on=[], explicit_hs=explicit_hs
-        )
+        matches = match_molecular_graphs(mol_template, mol, match_atoms_on=[], match_bonds_on=[])
 
     # If no match were found, exit the function and return None
     if len(matches) == 0:
@@ -266,7 +259,7 @@ def reorder_mol_from_template(
         return None
 
     # If many matches were found, exit the function and return None
-    if len(matches) > 1:
+    if (len(matches) > 1) and (not allow_ambiguous_match):
         if verbose:
             logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
         return None
