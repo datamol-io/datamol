@@ -176,6 +176,7 @@ def reorder_mol_from_template(
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
     allow_ambiguous_match: bool = False,
+    allow_ambiguous_hs_only: bool = False,
     verbose: bool = True,
 ) -> Union[Mol, type(None)]:
     """
@@ -210,6 +211,10 @@ def reorder_mol_from_template(
         allow_ambiguous_match: Whether to allow ambiguous matching. This means that,
             if there are many matches to the molecule, the first one is selected and
             applied to the re-ordering.
+        allow_ambiguous_hs_only: Whether to allow ambiguous matching, only considering
+            hydrogens. If `allow_ambiguous_match is True`, then this parameter is
+            meaningless.
+            This will still not work if the number of hydrogens is different!
         verbose: Whether to warn when the matching does not work or is ambiguous.
             In case of ambiguous, a warning is only raised if `allow_ambiguous_match`
             is `False`.
@@ -257,6 +262,29 @@ def reorder_mol_from_template(
         if verbose:
             logger.warning("No match was found")
         return None
+
+    # In case we want to allow ambiguous match of hydrogens
+    if (len(matches) > 1) and allow_ambiguous_hs_only and (not allow_ambiguous_match):
+        first_keys = list(matches[0].keys())
+        all_hs_mismatch = True
+        for this_match in matches:
+            this_keys = list(this_match.keys())
+            keys_mismatch = [
+                ii for ii in range(len(this_keys)) if (first_keys[ii] != this_keys[ii])
+            ]
+            atoms_mismatch = [mol.GetAtomWithIdx(key).GetAtomicNum() for key in keys_mismatch]
+            all_hs = all([atom == 1 for atom in atoms_mismatch])
+            if not all_hs:
+                all_hs_mismatch = False
+                break
+        if all_hs_mismatch:
+            matches = matches[0:1]
+        else:
+            if verbose:
+                logger.warning(
+                    f"{len(matches)} matches were found, ordering is ambiguous, even when ignoring hydrogens"
+                )
+            return None
 
     # If many matches were found, exit the function and return None
     if (len(matches) > 1) and (not allow_ambiguous_match):
