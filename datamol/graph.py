@@ -101,7 +101,12 @@ def match_molecular_graphs(
     explicit_hs: bool = False,
 ) -> List[Dict[int, int]]:
     """
-    Match the node indices of 2 molecular graphs, with optional usage of atomic number and edge type.
+    Match the node indices of 2 molecular graphs,
+    with optional usage of atomic number and edge type.
+
+    Note:
+        The matching fails if the hydrogens are implicit in one molecule,
+        but explicit in the other.
 
     Args:
         mol1, mol2: The molecules to match their indices.
@@ -126,7 +131,10 @@ def match_molecular_graphs(
             By default, it matches on the `'bond_type'` property.
             No other properties are defined by the `datamol.graph.to_graph` function.
 
-        explicit_hs: Whether to consider the hydrogens explicitly when matching.
+        explicit_hs: Whether to add hydrogens explicitly when matching.
+            This parameter only adds them to both graphs if `True`.
+            If `False`, it doesn't modify the molecular graphs, so matching will fail
+            if one molecule has explicit hydrogens, but not the other.
 
     Returns:
         A list of all matches dictionaries. In case of a single match, the list has len==1.
@@ -185,8 +193,13 @@ def reorder_mol_from_template(
     This is particularily useful when dealing with XYZ files containing node ordering,
     but with missing information regarding charges and edge types.
 
-    If you only need to match bond orders, you can check the function
-    `rdkit.Chem.AllChem.AssignBondOrdersFromTemplate`.
+    Note:
+        If you only need to match bond orders, you can check the function
+        `rdkit.Chem.AllChem.AssignBondOrdersFromTemplate`.
+
+    Note:
+        The matching fails if the hydrogens are implicit in one molecule,
+        but explicit in the other.
 
     Args:
         mol: The molecule to re-order
@@ -197,8 +210,11 @@ def reorder_mol_from_template(
         enforce_bond_type: Whether to enforce bond types. Bond types are always enforced
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
-        explicit_hs: Whether to consider the hydrogens explicitly when matching.
-        verbose: Whether to warn when the matching does not work
+        explicit_hs: Whether to add hydrogens explicitly when matching.
+            This parameter only adds them to both graphs if `True`.
+            If `False`, it doesn't modify the molecular graphs, so matching will fail
+            if one molecule has explicit hydrogens, but not the other.
+        verbose: Whether to warn when the matching does not work.
 
     Returns:
         - `None` if the molecular graphs do not match (both the graph and atom types).
