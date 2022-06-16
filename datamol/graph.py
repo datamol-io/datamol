@@ -1,9 +1,13 @@
+from typing import Dict
+from typing import List
+from typing import Union
+from typing import Optional
+
 from rdkit.Chem.rdmolops import GetAdjacencyMatrix
-from rdkit.Chem.AllChem import RenumberAtoms
-from typing import Dict, List, Union
+from rdkit.Chem.AllChem import RenumberAtoms  # type: ignore
 from loguru import logger
-from datamol.mol import remove_hs
-from datamol import Mol
+
+import datamol as dm
 
 
 def _get_networkx():
@@ -15,7 +19,7 @@ def _get_networkx():
         raise ImportError("You must install networkx from https://networkx.org/.")
 
 
-def to_graph(mol: Mol):
+def to_graph(mol: dm.Mol):
     """Convert a molecule to a network x graph. A list of properties are added
     to every nodes and edges.
 
@@ -53,7 +57,7 @@ def to_graph(mol: Mol):
 
 
 def get_all_path_between(
-    mol: Mol,
+    mol: dm.Mol,
     atom_idx_1: int,
     atom_idx_2: int,
     ignore_cycle_basis: bool = False,
@@ -68,7 +72,7 @@ def get_all_path_between(
             Defaults to False.
 
     Returns:
-        [type]: [description]
+        list of path between two atoms.
     """
 
     nx = _get_networkx()
@@ -94,8 +98,8 @@ def get_all_path_between(
 
 
 def match_molecular_graphs(
-    mol1: Mol,
-    mol2: Mol,
+    mol1: dm.Mol,
+    mol2: dm.Mol,
     match_atoms_on: List[str] = ["atomic_num"],
     match_bonds_on: List[str] = ["bond_type"],
 ) -> List[Dict[int, int]]:
@@ -171,14 +175,14 @@ def match_molecular_graphs(
 
 
 def reorder_mol_from_template(
-    mol: Mol,
-    mol_template: Mol,
+    mol: dm.Mol,
+    mol_template: dm.Mol,
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
     allow_ambiguous_match: bool = False,
     allow_ambiguous_hs_only: bool = False,
     verbose: bool = True,
-) -> Union[Mol, type(None)]:
+) -> Optional[dm.Mol]:
     """
     Re-order the nodes of a molecular graph from the nodes of a template molecule.
     Molecular graphs and atom types need to be identical, but edge types and charges
@@ -187,16 +191,13 @@ def reorder_mol_from_template(
     This is particularily useful when dealing with XYZ files containing node ordering,
     but with missing information regarding charges and edge types.
 
-    Note:
-        If you only need to match bond orders, you can check the function
+    !!! note
+
+        * If you only need to match bond orders, you can check the function
         `rdkit.Chem.AllChem.AssignBondOrdersFromTemplate`.
-
-    Note:
-        The matching fails if the hydrogens are implicit in one molecule,
+        * The matching fails if the hydrogens are implicit in one molecule,
         but explicit in the other.
-
-    Note:
-        Explicit hydrogens might lead to too many matches, since for an atom with 2
+        * Explicit hydrogens might lead to too many matches, since for an atom with 2
         hydrogens, they can be re-ordered in any way.
 
     Args:
