@@ -35,3 +35,7 @@
 ## Module `log`
 
 ::: datamol.log
+
+## Module `graph`
+
+::: datamol.graph

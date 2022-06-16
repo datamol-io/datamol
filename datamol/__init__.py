@@ -124,3 +124,8 @@ from . import viz
 from .viz import to_image
 
 from .mcs import find_mcs
+
+from .graph import to_graph
+from .graph import get_all_path_between
+from .graph import match_molecular_graphs
+from .graph import reorder_mol_from_template
