@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.0">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.6">
     
     
       
@@ -19,7 +19,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.fd896c8a.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.4a0965b7.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
@@ -1179,6 +1179,60 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#module-graph" class="md-nav__link">
+    Module graph
+  </a>
+  
+    <nav class="md-nav" aria-label="Module graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph" class="md-nav__link">
+    graph
+  </a>
+  
+    <nav class="md-nav" aria-label="graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.get_all_path_between" class="md-nav__link">
+    get_all_path_between()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.match_molecular_graphs" class="md-nav__link">
+    match_molecular_graphs()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.reorder_mol_from_template" class="md-nav__link">
+    reorder_mol_from_template()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.to_graph" class="md-nav__link">
+    to_graph()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -2129,6 +2183,60 @@
           <li class="md-nav__item">
   <a href="#datamol.log.enable_rdkit_log" class="md-nav__link">
     enable_rdkit_log()
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#module-graph" class="md-nav__link">
+    Module graph
+  </a>
+  
+    <nav class="md-nav" aria-label="Module graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph" class="md-nav__link">
+    graph
+  </a>
+  
+    <nav class="md-nav" aria-label="graph">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.get_all_path_between" class="md-nav__link">
+    get_all_path_between()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.match_molecular_graphs" class="md-nav__link">
+    match_molecular_graphs()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.reorder_mol_from_template" class="md-nav__link">
+    reorder_mol_from_template()
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#datamol.graph.to_graph" class="md-nav__link">
+    to_graph()
   </a>
   
 </li>
@@ -12642,6 +12750,1035 @@ model training.</p>
 
   </div>
 
+</div><h2 id="module-graph">Module <code>graph</code><a class="headerlink" href="#module-graph" title="Permanent link">&para;</a></h2>
+
+
+<div class="doc doc-object doc-module">
+
+
+
+<h3 id="datamol.graph" class="doc doc-heading">
+          <code>graph</code>
+
+
+<a href="#datamol.graph" class="headerlink" title="Permanent link">&para;</a></h3>
+
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.graph.get_all_path_between" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">get_all_path_between</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_idx_1</span><span class="p">,</span> <span class="n">atom_idx_2</span><span class="p">,</span> <span class="n">ignore_cycle_basis</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.graph.get_all_path_between" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get all simple path between two atoms of a molecule</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>atom_idx_1</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Atom index 1.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>atom_idx_2</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Atom index 2.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>ignore_cycle_basis</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to ignore cycle basis.
+Defaults to False.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+          </td>
+          <td><p>list of path between two atoms.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/graph.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span>
+<span class="normal">93</span>
+<span class="normal">94</span>
+<span class="normal">95</span>
+<span class="normal">96</span>
+<span class="normal">97</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_all_path_between</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">atom_idx_1</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">atom_idx_2</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+    <span class="n">ignore_cycle_basis</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Get all simple path between two atoms of a molecule</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol (dm.Mol): a molecule</span>
+<span class="sd">        atom_idx_1 (int): Atom index 1.</span>
+<span class="sd">        atom_idx_2 (int): Atom index 2.</span>
+<span class="sd">        ignore_cycle_basis: Whether to ignore cycle basis.</span>
+<span class="sd">            Defaults to False.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        list of path between two atoms.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">_get_networkx</span><span class="p">()</span>
+
+    <span class="n">adj</span> <span class="o">=</span> <span class="n">GetAdjacencyMatrix</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">G</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">(</span><span class="n">adj</span><span class="p">)</span>
+    <span class="n">path</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">all_simple_paths</span><span class="p">(</span><span class="n">G</span><span class="p">,</span> <span class="n">source</span><span class="o">=</span><span class="n">atom_idx_1</span><span class="p">,</span> <span class="n">target</span><span class="o">=</span><span class="n">atom_idx_2</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">ignore_cycle_basis</span><span class="p">:</span>
+        <span class="n">rings</span> <span class="o">=</span> <span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetRingInfo</span><span class="p">()</span><span class="o">.</span><span class="n">AtomRings</span><span class="p">()]</span>
+        <span class="n">final_path</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">path</span><span class="p">:</span>
+            <span class="n">reject_path</span> <span class="o">=</span> <span class="kc">False</span>
+            <span class="k">for</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">rings</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">r</span><span class="o">.</span><span class="n">issubset</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">p</span><span class="p">)):</span>
+                    <span class="n">reject_path</span> <span class="o">=</span> <span class="kc">True</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">reject_path</span><span class="p">:</span>
+                <span class="n">final_path</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+        <span class="n">path</span> <span class="o">=</span> <span class="n">final_path</span>
+
+    <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.graph.match_molecular_graphs" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">match_molecular_graphs</span><span class="p">(</span><span class="n">mol1</span><span class="p">,</span> <span class="n">mol2</span><span class="p">,</span> <span class="n">match_atoms_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;atomic_num&#39;</span><span class="p">],</span> <span class="n">match_bonds_on</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;bond_type&#39;</span><span class="p">])</span></code>
+
+<a href="#datamol.graph.match_molecular_graphs" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Match the node indices of 2 molecular graphs,
+with optional usage of atomic number and edge type.</p>
+
+<details class="note">
+  <summary>Note</summary>
+  <p>The matching fails if the hydrogens are implicit in one molecule,
+but explicit in the other.</p>
+</details>
+<details class="note">
+  <summary>Note</summary>
+  <p>Explicit hydrogens might lead to too many matches, since for an atom with 2
+hydrogens, they can be re-ordered in any way.</p>
+</details>
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol1,</code></td>
+          <td>
+                <code>mol2</code>
+          </td>
+          <td><p>The molecules to match their indices.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>match_atoms_on</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>Properties on which to match the atom types.
+By default, it matches on the <code>'atomic_num'</code> property.
+Empty list means that it does not consider atom features during matching.</p>
+<p>Other properties are defined by the <code>datamol.graph.to_graph</code> function and include:
+- atomic_num
+- formal_charge
+- chiral_tag
+- hybridization
+- num_explicit_hs
+- implicit_valence
+- degree
+- symbol
+- ring_atom
+- is_aromatic</p></td>
+          <td>
+                <code>[&#39;atomic_num&#39;]</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>match_bonds_on</code></td>
+          <td>
+                <code><span title="typing.List">List</span>[str]</code>
+          </td>
+          <td><p>Properties on which to match the bond types.
+Empty list means that it does not consider bond features during matching.
+By default, it matches on the <code>'bond_type'</code> property.
+No other properties are defined by the <code>datamol.graph.to_graph</code> function.</p></td>
+          <td>
+                <code>[&#39;bond_type&#39;]</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
+          </td>
+          <td><p>A list of all matches dictionaries. In case of a single match, the list has len==1.</p></td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
+          </td>
+          <td><p>Each dictionary contains as key the indices of <code>mol1</code> and as value the corresponding</p></td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
+          </td>
+          <td><p>indices of <code>mol2</code>.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/graph.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span>
+<span class="normal">103</span>
+<span class="normal">104</span>
+<span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
+<span class="normal">120</span>
+<span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">match_molecular_graphs</span><span class="p">(</span>
+    <span class="n">mol1</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol2</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">match_atoms_on</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;atomic_num&quot;</span><span class="p">],</span>
+    <span class="n">match_bonds_on</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;bond_type&quot;</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Match the node indices of 2 molecular graphs,</span>
+<span class="sd">    with optional usage of atomic number and edge type.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        The matching fails if the hydrogens are implicit in one molecule,</span>
+<span class="sd">        but explicit in the other.</span>
+
+<span class="sd">    Note:</span>
+<span class="sd">        Explicit hydrogens might lead to too many matches, since for an atom with 2</span>
+<span class="sd">        hydrogens, they can be re-ordered in any way.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol1, mol2: The molecules to match their indices.</span>
+<span class="sd">        match_atoms_on: Properties on which to match the atom types.</span>
+<span class="sd">            By default, it matches on the `&#39;atomic_num&#39;` property.</span>
+<span class="sd">            Empty list means that it does not consider atom features during matching.</span>
+
+<span class="sd">            Other properties are defined by the `datamol.graph.to_graph` function and include:</span>
+<span class="sd">            - atomic_num</span>
+<span class="sd">            - formal_charge</span>
+<span class="sd">            - chiral_tag</span>
+<span class="sd">            - hybridization</span>
+<span class="sd">            - num_explicit_hs</span>
+<span class="sd">            - implicit_valence</span>
+<span class="sd">            - degree</span>
+<span class="sd">            - symbol</span>
+<span class="sd">            - ring_atom</span>
+<span class="sd">            - is_aromatic</span>
+
+<span class="sd">        match_bonds_on: Properties on which to match the bond types.</span>
+<span class="sd">            Empty list means that it does not consider bond features during matching.</span>
+<span class="sd">            By default, it matches on the `&#39;bond_type&#39;` property.</span>
+<span class="sd">            No other properties are defined by the `datamol.graph.to_graph` function.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of all matches dictionaries. In case of a single match, the list has len==1.</span>
+<span class="sd">        Each dictionary contains as key the indices of `mol1` and as value the corresponding</span>
+<span class="sd">        indices of `mol2`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">_get_networkx</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_atoms_on</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">match_atoms_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">match_atoms_on</span><span class="p">]</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">match_bonds_on</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+        <span class="n">match_bonds_on</span> <span class="o">=</span> <span class="p">[</span><span class="n">match_bonds_on</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">node_match_fn</span><span class="p">(</span><span class="n">node1</span><span class="p">,</span> <span class="n">node2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function that matches the atomic number&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">node1</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="o">==</span> <span class="n">node2</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">match_atoms_on</span><span class="p">])</span>
+
+    <span class="k">def</span> <span class="nf">edge_match_fn</span><span class="p">(</span><span class="n">edge1</span><span class="p">,</span> <span class="n">edge2</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Function that matches the bond type&quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="nb">all</span><span class="p">([</span><span class="n">edge1</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="o">==</span> <span class="n">edge2</span><span class="p">[</span><span class="n">prop</span><span class="p">]</span> <span class="k">for</span> <span class="n">prop</span> <span class="ow">in</span> <span class="n">match_bonds_on</span><span class="p">])</span>
+
+    <span class="c1"># Convert to networkx graph</span>
+    <span class="n">g1</span> <span class="o">=</span> <span class="n">to_graph</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span>
+    <span class="n">g2</span> <span class="o">=</span> <span class="n">to_graph</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
+
+    <span class="c1"># Use the `match` function to find the matching indices</span>
+    <span class="n">node_match</span> <span class="o">=</span> <span class="n">node_match_fn</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">match_atoms_on</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">edge_match</span> <span class="o">=</span> <span class="n">edge_match_fn</span> <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">match_bonds_on</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span> <span class="k">else</span> <span class="kc">None</span>
+    <span class="n">graph_matcher</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">algorithms</span><span class="o">.</span><span class="n">isomorphism</span><span class="o">.</span><span class="n">vf2userfunc</span><span class="o">.</span><span class="n">GraphMatcher</span><span class="p">(</span>
+        <span class="n">g1</span><span class="p">,</span> <span class="n">g2</span><span class="p">,</span> <span class="n">node_match</span><span class="o">=</span><span class="n">node_match</span><span class="p">,</span> <span class="n">edge_match</span><span class="o">=</span><span class="n">edge_match</span>
+    <span class="p">)</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">graph_matcher</span><span class="o">.</span><span class="n">match</span><span class="p">())</span>
+
+    <span class="k">return</span> <span class="n">matches</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.graph.reorder_mol_from_template" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">reorder_mol_from_template</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">mol_template</span><span class="p">,</span> <span class="n">enforce_atomic_num</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">enforce_bond_type</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_ambiguous_match</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_ambiguous_hs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.graph.reorder_mol_from_template" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Re-order the nodes of a molecular graph from the nodes of a template molecule.
+Molecular graphs and atom types need to be identical, but edge types and charges
+are not enforced.</p>
+<p>This is particularily useful when dealing with XYZ files containing node ordering,
+but with missing information regarding charges and edge types.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<ul>
+<li>If you only need to match bond orders, you can check the function
+<code>rdkit.Chem.AllChem.AssignBondOrdersFromTemplate</code>.</li>
+<li>The matching fails if the hydrogens are implicit in one molecule,
+but explicit in the other.</li>
+<li>Explicit hydrogens might lead to too many matches, since for an atom with 2
+hydrogens, they can be re-ordered in any way.</li>
+</ul>
+</div>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>The molecule to re-order</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_template</code></td>
+          <td>
+                <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>The molecule containing the right node order.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>enforce_atomic_num</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to enforce atomic number. Atomic numbers are always enforced
+for a first try. If no match are found and this parameter is <code>False</code>,
+the matching is tried again.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>enforce_bond_type</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to enforce bond types. Bond types are always enforced
+for a first try. If no match are found and this parameter is <code>False</code>,
+the matching is tried again.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>allow_ambiguous_match</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to allow ambiguous matching. This means that,
+if there are many matches to the molecule, the first one is selected and
+applied to the re-ordering.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>allow_ambiguous_hs_only</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to allow ambiguous matching, only considering
+hydrogens. If <code>allow_ambiguous_match is True</code>, then this parameter is
+meaningless.
+This will still not work if the number of hydrogens is different!</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>verbose</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to warn when the matching does not work or is ambiguous.
+In case of ambiguous, a warning is only raised if <code>allow_ambiguous_match</code>
+is <code>False</code>.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
+          </td>
+          <td><ul>
+<li><code>None</code> if the molecular graphs do not match (both the graph and atom types).
+Pring a warning.</li>
+</ul></td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
+          </td>
+          <td><ul>
+<li><code>None</code> if multiple matche are found, which can happen for symmetric molecules such as benzene
+Pring a warning.</li>
+</ul></td>
+        </tr>
+        <tr>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
+          </td>
+          <td><ul>
+<li><code>Mol</code> The re-ordered molecule when a single match is found.</li>
+</ul></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/graph.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span>
+<span class="normal">276</span>
+<span class="normal">277</span>
+<span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_mol_from_template</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">mol_template</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">enforce_atomic_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">enforce_bond_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">allow_ambiguous_match</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">allow_ambiguous_hs_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Re-order the nodes of a molecular graph from the nodes of a template molecule.</span>
+<span class="sd">    Molecular graphs and atom types need to be identical, but edge types and charges</span>
+<span class="sd">    are not enforced.</span>
+
+<span class="sd">    This is particularily useful when dealing with XYZ files containing node ordering,</span>
+<span class="sd">    but with missing information regarding charges and edge types.</span>
+
+<span class="sd">    !!! note</span>
+
+<span class="sd">        * If you only need to match bond orders, you can check the function</span>
+<span class="sd">        `rdkit.Chem.AllChem.AssignBondOrdersFromTemplate`.</span>
+<span class="sd">        * The matching fails if the hydrogens are implicit in one molecule,</span>
+<span class="sd">        but explicit in the other.</span>
+<span class="sd">        * Explicit hydrogens might lead to too many matches, since for an atom with 2</span>
+<span class="sd">        hydrogens, they can be re-ordered in any way.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: The molecule to re-order</span>
+<span class="sd">        mol_template: The molecule containing the right node order.</span>
+<span class="sd">        enforce_atomic_num: Whether to enforce atomic number. Atomic numbers are always enforced</span>
+<span class="sd">            for a first try. If no match are found and this parameter is `False`,</span>
+<span class="sd">            the matching is tried again.</span>
+<span class="sd">        enforce_bond_type: Whether to enforce bond types. Bond types are always enforced</span>
+<span class="sd">            for a first try. If no match are found and this parameter is `False`,</span>
+<span class="sd">            the matching is tried again.</span>
+<span class="sd">        allow_ambiguous_match: Whether to allow ambiguous matching. This means that,</span>
+<span class="sd">            if there are many matches to the molecule, the first one is selected and</span>
+<span class="sd">            applied to the re-ordering.</span>
+<span class="sd">        allow_ambiguous_hs_only: Whether to allow ambiguous matching, only considering</span>
+<span class="sd">            hydrogens. If `allow_ambiguous_match is True`, then this parameter is</span>
+<span class="sd">            meaningless.</span>
+<span class="sd">            This will still not work if the number of hydrogens is different!</span>
+<span class="sd">        verbose: Whether to warn when the matching does not work or is ambiguous.</span>
+<span class="sd">            In case of ambiguous, a warning is only raised if `allow_ambiguous_match`</span>
+<span class="sd">            is `False`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        - `None` if the molecular graphs do not match (both the graph and atom types).</span>
+<span class="sd">            Pring a warning.</span>
+<span class="sd">        - `None` if multiple matche are found, which can happen for symmetric molecules such as benzene</span>
+<span class="sd">            Pring a warning.</span>
+<span class="sd">        - `Mol` The re-ordered molecule when a single match is found.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># Match the ordering of the graphs</span>
+    <span class="n">matches</span> <span class="o">=</span> <span class="n">match_molecular_graphs</span><span class="p">(</span>
+        <span class="n">mol_template</span><span class="p">,</span>
+        <span class="n">mol</span><span class="p">,</span>
+        <span class="n">match_atoms_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;atomic_num&quot;</span><span class="p">],</span>
+        <span class="n">match_bonds_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bond_type&quot;</span><span class="p">],</span>
+    <span class="p">)</span>
+
+    <span class="c1"># If no matches were found, retry without bond types</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">enforce_bond_type</span><span class="p">):</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">match_molecular_graphs</span><span class="p">(</span>
+            <span class="n">mol_template</span><span class="p">,</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">match_atoms_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;atomic_num&quot;</span><span class="p">],</span>
+            <span class="n">match_bonds_on</span><span class="o">=</span><span class="p">[],</span>
+        <span class="p">)</span>
+
+    <span class="c1"># If no matches were found, retry without atom types</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">enforce_atomic_num</span><span class="p">):</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">match_molecular_graphs</span><span class="p">(</span>
+            <span class="n">mol_template</span><span class="p">,</span>
+            <span class="n">mol</span><span class="p">,</span>
+            <span class="n">match_atoms_on</span><span class="o">=</span><span class="p">[],</span>
+            <span class="n">match_bonds_on</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bond_type&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+    <span class="c1"># If no matches were found, retry without bond and atom types</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">enforce_bond_type</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">enforce_atomic_num</span><span class="p">):</span>
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">match_molecular_graphs</span><span class="p">(</span><span class="n">mol_template</span><span class="p">,</span> <span class="n">mol</span><span class="p">,</span> <span class="n">match_atoms_on</span><span class="o">=</span><span class="p">[],</span> <span class="n">match_bonds_on</span><span class="o">=</span><span class="p">[])</span>
+
+    <span class="c1"># If no match were found, exit the function and return None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No match was found&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># In case we want to allow ambiguous match of hydrogens</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">allow_ambiguous_hs_only</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">allow_ambiguous_match</span><span class="p">):</span>
+        <span class="n">first_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+        <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">True</span>
+        <span class="k">for</span> <span class="n">this_match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+            <span class="n">this_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">this_match</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">keys_mismatch</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">this_keys</span><span class="p">))</span> <span class="k">if</span> <span class="p">(</span><span class="n">first_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">!=</span> <span class="n">this_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+            <span class="p">]</span>
+            <span class="n">atoms_mismatch</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_mismatch</span><span class="p">]</span>
+            <span class="n">all_hs</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">atom</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms_mismatch</span><span class="p">])</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">all_hs</span><span class="p">:</span>
+                <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">False</span>
+                <span class="k">break</span>
+        <span class="k">if</span> <span class="n">all_hs_mismatch</span><span class="p">:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous, even when ignoring hydrogens&quot;</span>
+                <span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># If many matches were found, exit the function and return None</span>
+    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">allow_ambiguous_match</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous&quot;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="kc">None</span>
+
+    <span class="c1"># Re-order the molecule from the matching indices of the template</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">match</span> <span class="o">=</span> <span class="p">[</span><span class="n">match</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">())]</span>
+    <span class="n">reordered_mol</span> <span class="o">=</span> <span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">match</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">reordered_mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h4 id="datamol.graph.to_graph" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_graph</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+<a href="#datamol.graph.to_graph" class="headerlink" title="Permanent link">&para;</a></h4>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert a molecule to a network x graph. A list of properties are added
+to every nodes and edges.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>mol_graph</code></td>          <td>
+                <code>networkx.<span title="networkx.Graph">Graph</span></code>
+          </td>
+          <td><p>a graph representing the molecule.</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/graph.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+<span class="normal">23</span>
+<span class="normal">24</span>
+<span class="normal">25</span>
+<span class="normal">26</span>
+<span class="normal">27</span>
+<span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span>
+<span class="normal">54</span>
+<span class="normal">55</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_graph</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+    <span class="sd">&quot;&quot;&quot;Convert a molecule to a network x graph. A list of properties are added</span>
+<span class="sd">    to every nodes and edges.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol (dm.Mol): a molecule.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mol_graph (networkx.Graph): a graph representing the molecule.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">nx</span> <span class="o">=</span> <span class="n">_get_networkx</span><span class="p">()</span>
+
+    <span class="n">mol_graph</span> <span class="o">=</span> <span class="n">nx</span><span class="o">.</span><span class="n">Graph</span><span class="p">()</span>
+    <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">():</span>
+        <span class="n">mol_graph</span><span class="o">.</span><span class="n">add_node</span><span class="p">(</span>
+            <span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span>
+            <span class="n">atomic_num</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">(),</span>
+            <span class="n">formal_charge</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">(),</span>
+            <span class="n">chiral_tag</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetChiralTag</span><span class="p">(),</span>
+            <span class="n">hybridization</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetHybridization</span><span class="p">(),</span>
+            <span class="n">num_explicit_hs</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetNumExplicitHs</span><span class="p">(),</span>
+            <span class="n">implicit_valence</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetImplicitValence</span><span class="p">(),</span>
+            <span class="n">degree</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetDegree</span><span class="p">(),</span>
+            <span class="n">symbol</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">(),</span>
+            <span class="n">ring_atom</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">IsInRing</span><span class="p">(),</span>
+            <span class="n">is_aromatic</span><span class="o">=</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIsAromatic</span><span class="p">(),</span>
+        <span class="p">)</span>
+    <span class="k">for</span> <span class="n">bond</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
+        <span class="n">mol_graph</span><span class="o">.</span><span class="n">add_edge</span><span class="p">(</span>
+            <span class="n">bond</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">(),</span>
+            <span class="n">bond</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">(),</span>
+            <span class="n">bond_type</span><span class="o">=</span><span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">(),</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol_graph</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
 </div>
 
               
@@ -12714,10 +13851,10 @@ model training.</p>
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.b028fd86.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.85cb4492.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0f659f14.min.js"></script>
+      <script src="../assets/javascripts/bundle.a877e258.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
