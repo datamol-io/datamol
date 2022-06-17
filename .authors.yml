@@ -2,7 +2,7 @@
   email: emmanuel.noutahi@hotmail.ca
   aliases:
   - maclandrol
-  num_commits: 24
+  num_commits: 25
   first_commit: 2020-10-25 10:15:22
 - name: Hadrien Mary
   email: hadrien.mary@gmail.com
@@ -51,3 +51,8 @@
   aliases:
   - cwognum
   github: cwognum
+- name: DomInvivo
+  email: dominique@invivoai.com
+  num_commits: 17
+  first_commit: 2022-06-14 09:40:04
+  github: DomInvivo

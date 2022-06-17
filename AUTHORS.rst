@@ -3,6 +3,7 @@ Authors are sorted alphabetically.
 
 * Cas
 * DeepSource Bot
+* DomInvivo
 * Emmanuel Noutahi
 * Hadrien Mary
 * Honoré Hounwanou
