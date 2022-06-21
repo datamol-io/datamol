@@ -166,28 +166,47 @@ class Test_reorder_mol_from_template(ut.TestCase):
         # Re-ordering with option allow_ambiguous_match
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
         mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match="first")
         self.assertIsInstance(mol_reordered, dm.Mol)
         self.assertTrue(dm.same_mol(mol_reordered, mol1))
 
         # Re-ordering with option allow_ambiguous_hs_only should work since only hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C[N]1C=NC2=C1C(=O)N(C(=O)N2C)C", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C[N]1C=NC2=C1C(=O)N(C(=O)N2C)C", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match="hs-only")
         self.assertIsInstance(mol_reordered, dm.Mol)
         self.assertTrue(dm.same_mol(mol_reordered, mol1))
 
         # Re-ordering with option allow_ambiguous_hs_only should not work since number of hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match="hs-only")
         self.assertIsNone(mol_reordered)
 
         # Re-ordering with option allow_ambiguous_hs_only should not work since some non-hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C1=CC=CC=C1", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match="hs-only")
         self.assertIsNone(mol_reordered)
+
+        # Re-ordering with option allow_ambiguous_match=="best" should work
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best")
+        self.assertIsInstance(mol_reordered, dm.Mol)
+
+        # Re-ordering with option allow_ambiguous_match=="best" should not work due to hydrogens
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol1, mol2 = dm.add_hs(mol1), dm.add_hs(mol2)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best")
+        self.assertIsNone(mol_reordered)
+
+        # Re-ordering works with best, followed by first
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best-first")
+        self.assertIsInstance(mol_reordered, dm.Mol)
 
         # No-reordering because no matches
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
