@@ -192,20 +192,38 @@ class Test_reorder_mol_from_template(ut.TestCase):
         # Re-ordering with option allow_ambiguous_match=="best" should work
         mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
         mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best")
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            allow_ambiguous_match="best",
+        )
         self.assertIsInstance(mol_reordered, dm.Mol)
 
         # Re-ordering with option allow_ambiguous_match=="best" should not work due to hydrogens
         mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
         mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
         mol1, mol2 = dm.add_hs(mol1), dm.add_hs(mol2)
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best")
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            allow_ambiguous_match="best",
+        )
         self.assertIsNone(mol_reordered)
 
         # Re-ordering works with best, followed by first
         mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
         mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, enforce_atomic_num=True, enforce_bond_type=False, allow_ambiguous_match="best-first")
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            allow_ambiguous_match="best-first",
+        )
         self.assertIsInstance(mol_reordered, dm.Mol)
 
         # No-reordering because no matches
