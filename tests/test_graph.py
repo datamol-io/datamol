@@ -225,8 +225,24 @@ class Test_reorder_mol_from_template(ut.TestCase):
             allow_ambiguous_match="best-first",
         )
         self.assertIsInstance(mol_reordered, dm.Mol)
-        self.assertEqual(sum([bond1.GetBondType() != bond2.GetBondType() for bond1, bond2 in zip(mol_reordered.GetBonds(), mol2.GetBonds)]), 1)
-        self.assertEqual(sum([atom1.GetAtomicNum() != atom2.GetAtomicNum() for atom1, atom2 in zip(mol_reordered.GetAtoms(), mol2.GetAtoms)]), 0)
+        self.assertEqual(
+            sum(
+                [
+                    bond1.GetBondType() != bond2.GetBondType()
+                    for bond1, bond2 in zip(mol_reordered.GetBonds(), mol2.GetBonds())
+                ]
+            ),
+            1,
+        )
+        self.assertEqual(
+            sum(
+                [
+                    atom1.GetAtomicNum() != atom2.GetAtomicNum()
+                    for atom1, atom2 in zip(mol_reordered.GetAtoms(), mol2.GetAtoms())
+                ]
+            ),
+            0,
+        )
 
         # No-reordering because no matches
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
