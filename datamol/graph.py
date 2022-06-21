@@ -215,7 +215,7 @@ def reorder_mol_from_template(
             - "hs-only": Allow matching of ambiguous hydrogens. Does not work if trying
               to match implicit with explicit hydrogens.
             - "first": Return the first match.
-            - "best": Return the match with the least errors on nodes and edges.
+            - "best": Return the match with the least errors on atom type, edges type, and edge stereo.
             - "best-first": "best", followed by "first".
         verbose: Whether to warn when the matching does not work or is ambiguous.
             In case of ambiguous, a warning is only raised if `allow_ambiguous_match`
@@ -297,26 +297,25 @@ def reorder_mol_from_template(
         ):
             num_mismatches = []
             for this_match in matches:
-                atoms_mol = [mol.GetAtomWithIdx(val).GetAtomicNum() for val in this_match.values()]
-                atoms_template = [
-                    mol_template.GetAtomWithIdx(key).GetAtomicNum() for key in this_match.keys()
-                ]
-                bonds_template_idx = [
-                    (bond.GetBeginAtomIdx(), bond.GetEndAtomIdx())
-                    for bond in mol_template.GetBonds()
-                ]
-                bonds_template = [bond.GetBondType() for bond in mol_template.GetBonds()]
-                bonds_mol = [
-                    mol.GetBondBetweenAtoms(this_match[idx[0]], this_match[idx[1]]).GetBondType()
-                    for idx in bonds_template_idx
-                ]
-                num_atoms_mismatch = sum(
-                    atom != atoms_mol[ii] for ii, atom in enumerate(atoms_template)
+                num_atoms_mismatch = 0
+
+                # Get the number of atomic mismatch
+                for key, val in this_match.items():
+                    atom1 = mol.GetAtomWithIdx(val).GetAtomicNum()
+                    atom2 = mol_template.GetAtomWithIdx(key).GetAtomicNum()
+                    num_atoms_mismatch += atom1 != atom2
+
+                # Get the number of bond mismatch
+                num_bonds_type_mismatch, num_bonds_stereo_mismatch = 0, 0
+                for bond1 in mol_template.GetBonds():
+                    begin_idx, end_idx = bond1.GetBeginAtomIdx(), bond1.GetEndAtomIdx()
+                    bond2 = mol.GetBondBetweenAtoms(this_match[begin_idx], this_match[end_idx])
+                    num_bonds_type_mismatch += bond1.GetBondType() != bond2.GetBondType()
+                    num_bonds_stereo_mismatch += bond1.GetStereo() != bond2.GetStereo()
+
+                num_mismatches.append(
+                    num_atoms_mismatch + num_bonds_type_mismatch + num_bonds_stereo_mismatch
                 )
-                num_bonds_mismatch = sum(
-                    bond != bonds_mol[ii] for ii, bond in enumerate(bonds_template)
-                )
-                num_mismatches.append(num_atoms_mismatch + num_bonds_mismatch)
             min_mismatch_idx = [
                 ii for ii in range(len(num_mismatches)) if num_mismatches[ii] == min(num_mismatches)
             ]
