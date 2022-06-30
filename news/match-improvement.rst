@@ -4,13 +4,13 @@
 
 **Changed:**
 
-* Replaced `allow_ambiguous_hs_only` by the option `"hs_only"` for the `allow_ambiguous_match` parameter
-* `allow_ambiguous_match` is now a String, no longer a bool.
+* Replaced `allow_ambiguous_hs_only` by the option `"hs_only"` for the `ambiguous_match_mode` parameter
+* `ambiguous_match_mode` is now a String, no longer a bool.
 
 **Deprecated:**
 
 * `allow_ambiguous_hs_only` is no longer deprecated, but without warning since the feature is brand new.
-* Same for `allow_ambiguous_match` being a bool.
+* Same for `ambiguous_match_mode` being a bool.
 
 **Removed:**
 

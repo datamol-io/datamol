@@ -179,7 +179,7 @@ def reorder_mol_from_template(
     mol_template: dm.Mol,
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
-    allow_ambiguous_match: str = "No",
+    ambiguous_match_mode: str = "No",
     verbose: bool = True,
 ) -> Optional[dm.Mol]:
     """
@@ -208,7 +208,7 @@ def reorder_mol_from_template(
         enforce_bond_type: Whether to enforce bond types. Bond types are always enforced
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
-        allow_ambiguous_match: Whether to allow ambiguous matching. This means that,
+        ambiguous_match_mode: Whether to allow ambiguous matching. This means that,
             if there are many matches to the molecule, it will still re-order
             the molecule according to specific rules. Options are:
             - "no": Does not allow ambiguous matching.
@@ -216,10 +216,13 @@ def reorder_mol_from_template(
               to match implicit with explicit hydrogens.
             - "first": Return the first match.
             - "best": Return the match with the least errors on atom type, edges type, and edge stereo.
+              Errors on the atoms are counted with 1 point, on the edges with 0.25 points,
+              and on the Stereo with 0.05 points.
+              If the option `enforce_atomic_num` is used, then no errors on the atoms are allowed.
+              If the option `enforce_bond_type` is used, then no errors on the edges are allowed.
             - "best-first": "best", followed by "first".
         verbose: Whether to warn when the matching does not work or is ambiguous.
-            In case of ambiguous, a warning is only raised if `allow_ambiguous_match`
-            is `False`.
+            Different warnings are raised depending on the value of `ambiguous_match_mode`.
 
     Returns:
         - `None` if the molecular graphs do not match (both the graph and atom types).
@@ -229,7 +232,7 @@ def reorder_mol_from_template(
         - `Mol` The re-ordered molecule when a single match is found.
     """
 
-    allow_ambiguous_match = allow_ambiguous_match.lower()
+    ambiguous_match_mode = ambiguous_match_mode.lower()
 
     # Match the ordering of the graphs
     matches = match_molecular_graphs(
@@ -269,7 +272,7 @@ def reorder_mol_from_template(
 
     if len(matches) > 1:
         # In case we want to allow ambiguous match of hydrogens
-        if allow_ambiguous_match == "hs-only":
+        if ambiguous_match_mode == "hs-only":
             first_keys = list(matches[0].keys())
             all_hs_mismatch = True
             for this_match in matches:
@@ -292,7 +295,7 @@ def reorder_mol_from_template(
                 return None
 
         # Compute the number of atoms and bonds mismatch, and select the one with the least mismatch
-        if (allow_ambiguous_match in ["best", "best-first"]) and not (
+        if (ambiguous_match_mode in ["best", "best-first"]) and not (
             enforce_atomic_num and enforce_bond_type
         ):
             num_mismatches = []
@@ -314,7 +317,9 @@ def reorder_mol_from_template(
                     num_bonds_stereo_mismatch += bond1.GetStereo() != bond2.GetStereo()
 
                 num_mismatches.append(
-                    num_atoms_mismatch + num_bonds_type_mismatch + num_bonds_stereo_mismatch
+                    num_atoms_mismatch
+                    + (0.25 * num_bonds_type_mismatch)
+                    + (0.05 * num_bonds_stereo_mismatch)
                 )
             min_mismatch_idx = [
                 ii for ii in range(len(num_mismatches)) if num_mismatches[ii] == min(num_mismatches)
@@ -322,12 +327,12 @@ def reorder_mol_from_template(
             matches = [matches[idx] for idx in min_mismatch_idx]
 
         # Select the first matching element
-        if allow_ambiguous_match in ["first", "best-first"]:
+        if ambiguous_match_mode in ["first", "best-first"]:
             matches = [matches[0]]
 
     if len(matches) > 1:
         # If many matches were found, exit the function and return None
-        if allow_ambiguous_match == "no":
+        if ambiguous_match_mode == "no":
             if verbose:
                 logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
             return None
