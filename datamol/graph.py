@@ -216,8 +216,8 @@ def reorder_mol_from_template(
               to match implicit with explicit hydrogens.
             - "first": Return the first match.
             - "best": Return the match with the least errors on atom type, edges type, and edge stereo.
-              Errors on the atoms are counted with 1 point, on the edges with 0.25 points,
-              and on the Stereo with 0.05 points.
+              Errors on the atoms are counted with 1 point, on the charge with 0.25 points,
+              on the edges with 0.25 points, and on the Stereo with 0.05 points.
               If the option `enforce_atomic_num` is used, then no errors on the atoms are allowed.
               If the option `enforce_bond_type` is used, then no errors on the edges are allowed.
             - "best-first": "best", followed by "first".
@@ -300,13 +300,14 @@ def reorder_mol_from_template(
         ):
             num_mismatches = []
             for this_match in matches:
-                num_atoms_mismatch = 0
+                num_atoms_mismatch, num_charge_mismatch = 0, 0
 
                 # Get the number of atomic mismatch
                 for key, val in this_match.items():
-                    atom1 = mol.GetAtomWithIdx(val).GetAtomicNum()
-                    atom2 = mol_template.GetAtomWithIdx(key).GetAtomicNum()
-                    num_atoms_mismatch += atom1 != atom2
+                    atom1 = mol.GetAtomWithIdx(val)
+                    atom2 = mol_template.GetAtomWithIdx(key)
+                    num_atoms_mismatch += atom1.GetAtomicNum() != atom2.GetAtomicNum()
+                    num_charge_mismatch += atom1.GetFormalCharge() != atom2.GetFormalCharge()
 
                 # Get the number of bond mismatch
                 num_bonds_type_mismatch, num_bonds_stereo_mismatch = 0, 0
@@ -319,7 +320,8 @@ def reorder_mol_from_template(
                     )
 
                 num_mismatches.append(
-                    num_atoms_mismatch
+                    (1 * num_atoms_mismatch)
+                    + (0.25 * num_charge_mismatch)
                     + (0.25 * num_bonds_type_mismatch)
                     + (0.05 * num_bonds_stereo_mismatch)
                 )
