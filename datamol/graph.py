@@ -314,7 +314,9 @@ def reorder_mol_from_template(
                     begin_idx, end_idx = bond1.GetBeginAtomIdx(), bond1.GetEndAtomIdx()
                     bond2 = mol.GetBondBetweenAtoms(this_match[begin_idx], this_match[end_idx])
                     num_bonds_type_mismatch += bond1.GetBondType() != bond2.GetBondType()
-                    num_bonds_stereo_mismatch += bond1.GetStereo() != bond2.GetStereo()
+                    num_bonds_stereo_mismatch += (bond1.GetStereo() != bond2.GetStereo()) or (
+                        bond1.GetBondDir() != bond2.GetBondDir()
+                    )
 
                 num_mismatches.append(
                     num_atoms_mismatch
