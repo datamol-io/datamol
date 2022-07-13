@@ -179,8 +179,7 @@ def reorder_mol_from_template(
     mol_template: dm.Mol,
     enforce_atomic_num: bool = False,
     enforce_bond_type: bool = False,
-    allow_ambiguous_match: bool = False,
-    allow_ambiguous_hs_only: bool = False,
+    ambiguous_match_mode: str = "No",
     verbose: bool = True,
 ) -> Optional[dm.Mol]:
     """
@@ -209,16 +208,21 @@ def reorder_mol_from_template(
         enforce_bond_type: Whether to enforce bond types. Bond types are always enforced
             for a first try. If no match are found and this parameter is `False`,
             the matching is tried again.
-        allow_ambiguous_match: Whether to allow ambiguous matching. This means that,
-            if there are many matches to the molecule, the first one is selected and
-            applied to the re-ordering.
-        allow_ambiguous_hs_only: Whether to allow ambiguous matching, only considering
-            hydrogens. If `allow_ambiguous_match is True`, then this parameter is
-            meaningless.
-            This will still not work if the number of hydrogens is different!
+        ambiguous_match_mode: Whether to allow ambiguous matching. This means that,
+            if there are many matches to the molecule, it will still re-order
+            the molecule according to specific rules. Options are:
+            - "no": Does not allow ambiguous matching.
+            - "hs-only": Allow matching of ambiguous hydrogens. Does not work if trying
+              to match implicit with explicit hydrogens.
+            - "first": Return the first match.
+            - "best": Return the match with the least errors on atom type, edges type, and edge stereo.
+              Errors on the atoms are counted with 1 point, on the charge with 0.25 points,
+              on the edges with 0.25 points, and on the Stereo with 0.05 points.
+              If the option `enforce_atomic_num` is used, then no errors on the atoms are allowed.
+              If the option `enforce_bond_type` is used, then no errors on the edges are allowed.
+            - "best-first": "best", followed by "first".
         verbose: Whether to warn when the matching does not work or is ambiguous.
-            In case of ambiguous, a warning is only raised if `allow_ambiguous_match`
-            is `False`.
+            Different warnings are raised depending on the value of `ambiguous_match_mode`.
 
     Returns:
         - `None` if the molecular graphs do not match (both the graph and atom types).
@@ -227,6 +231,8 @@ def reorder_mol_from_template(
             Pring a warning.
         - `Mol` The re-ordered molecule when a single match is found.
     """
+
+    ambiguous_match_mode = ambiguous_match_mode.lower()
 
     # Match the ordering of the graphs
     matches = match_molecular_graphs(
@@ -264,34 +270,76 @@ def reorder_mol_from_template(
             logger.warning("No match was found")
         return None
 
-    # In case we want to allow ambiguous match of hydrogens
-    if (len(matches) > 1) and allow_ambiguous_hs_only and (not allow_ambiguous_match):
-        first_keys = list(matches[0].keys())
-        all_hs_mismatch = True
-        for this_match in matches:
-            this_keys = list(this_match.keys())
-            keys_mismatch = [
-                ii for ii in range(len(this_keys)) if (first_keys[ii] != this_keys[ii])
-            ]
-            atoms_mismatch = [mol.GetAtomWithIdx(key).GetAtomicNum() for key in keys_mismatch]
-            all_hs = all([atom == 1 for atom in atoms_mismatch])
-            if not all_hs:
-                all_hs_mismatch = False
-                break
-        if all_hs_mismatch:
-            matches = matches[0:1]
-        else:
-            if verbose:
-                logger.warning(
-                    f"{len(matches)} matches were found, ordering is ambiguous, even when ignoring hydrogens"
-                )
-            return None
+    if len(matches) > 1:
+        # In case we want to allow ambiguous match of hydrogens
+        if ambiguous_match_mode == "hs-only":
+            first_keys = list(matches[0].keys())
+            all_hs_mismatch = True
+            for this_match in matches:
+                this_keys = list(this_match.keys())
+                keys_mismatch = [
+                    ii for ii in range(len(this_keys)) if (first_keys[ii] != this_keys[ii])
+                ]
+                atoms_mismatch = [mol.GetAtomWithIdx(key).GetAtomicNum() for key in keys_mismatch]
+                all_hs = all([atom == 1 for atom in atoms_mismatch])
+                if not all_hs:
+                    all_hs_mismatch = False
+                    break
+            if all_hs_mismatch:
+                matches = matches[0:1]
+            else:
+                if verbose:
+                    logger.warning(
+                        f"{len(matches)} matches were found, ordering is ambiguous, even when ignoring hydrogens"
+                    )
+                return None
 
-    # If many matches were found, exit the function and return None
-    if (len(matches) > 1) and (not allow_ambiguous_match):
-        if verbose:
-            logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
-        return None
+        # Compute the number of atoms and bonds mismatch, and select the one with the least mismatch
+        if (ambiguous_match_mode in ["best", "best-first"]) and not (
+            enforce_atomic_num and enforce_bond_type
+        ):
+            num_mismatches = []
+            for this_match in matches:
+                num_atoms_mismatch, num_charge_mismatch = 0, 0
+
+                # Get the number of atomic mismatch
+                for key, val in this_match.items():
+                    atom1 = mol.GetAtomWithIdx(val)
+                    atom2 = mol_template.GetAtomWithIdx(key)
+                    num_atoms_mismatch += atom1.GetAtomicNum() != atom2.GetAtomicNum()
+                    num_charge_mismatch += atom1.GetFormalCharge() != atom2.GetFormalCharge()
+
+                # Get the number of bond mismatch
+                num_bonds_type_mismatch, num_bonds_stereo_mismatch = 0, 0
+                for bond1 in mol_template.GetBonds():
+                    begin_idx, end_idx = bond1.GetBeginAtomIdx(), bond1.GetEndAtomIdx()
+                    bond2 = mol.GetBondBetweenAtoms(this_match[begin_idx], this_match[end_idx])
+                    num_bonds_type_mismatch += bond1.GetBondType() != bond2.GetBondType()
+                    num_bonds_stereo_mismatch += (bond1.GetStereo() != bond2.GetStereo()) or (
+                        bond1.GetBondDir() != bond2.GetBondDir()
+                    )
+
+                num_mismatches.append(
+                    (1 * num_atoms_mismatch)
+                    + (0.25 * num_charge_mismatch)
+                    + (0.25 * num_bonds_type_mismatch)
+                    + (0.05 * num_bonds_stereo_mismatch)
+                )
+            min_mismatch_idx = [
+                ii for ii in range(len(num_mismatches)) if num_mismatches[ii] == min(num_mismatches)
+            ]
+            matches = [matches[idx] for idx in min_mismatch_idx]
+
+        # Select the first matching element
+        if ambiguous_match_mode in ["first", "best-first"]:
+            matches = [matches[0]]
+
+    if len(matches) > 1:
+        # If many matches were found, exit the function and return None
+        if ambiguous_match_mode == "no":
+            if verbose:
+                logger.warning(f"{len(matches)} matches were found, ordering is ambiguous")
+            return None
 
     # Re-order the molecule from the matching indices of the template
     match = matches[0]

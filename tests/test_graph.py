@@ -163,31 +163,86 @@ class Test_reorder_mol_from_template(ut.TestCase):
         mol_reordered = dm.reorder_mol_from_template(mol1, mol2)
         self.assertIsNone(mol_reordered)
 
-        # Re-ordering with option allow_ambiguous_match
+        # Re-ordering with option ambiguous_match_mode
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
         mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_match=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, ambiguous_match_mode="first")
         self.assertIsInstance(mol_reordered, dm.Mol)
         self.assertTrue(dm.same_mol(mol_reordered, mol1))
 
         # Re-ordering with option allow_ambiguous_hs_only should work since only hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C[N]1C=NC2=C1C(=O)N(C(=O)N2C)C", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C[N]1C=NC2=C1C(=O)N(C(=O)N2C)C", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, ambiguous_match_mode="hs-only")
         self.assertIsInstance(mol_reordered, dm.Mol)
         self.assertTrue(dm.same_mol(mol_reordered, mol1))
 
         # Re-ordering with option allow_ambiguous_hs_only should not work since number of hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, ambiguous_match_mode="hs-only")
         self.assertIsNone(mol_reordered)
 
         # Re-ordering with option allow_ambiguous_hs_only should not work since some non-hydrogens are ambiguous
         mol1 = dm.add_hs(dm.to_mol("C1CCCCC1", ordered=False))
         mol2 = dm.add_hs(dm.to_mol("C1=CC=CC=C1", ordered=True))
-        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, allow_ambiguous_hs_only=True)
+        mol_reordered = dm.reorder_mol_from_template(mol1, mol2, ambiguous_match_mode="hs-only")
         self.assertIsNone(mol_reordered)
+
+        # Re-ordering with option ambiguous_match_mode=="best" should work
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            ambiguous_match_mode="best",
+        )
+        self.assertIsInstance(mol_reordered, dm.Mol)
+
+        # Re-ordering with option ambiguous_match_mode=="best" should not work due to hydrogens
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol1, mol2 = dm.add_hs(mol1), dm.add_hs(mol2)
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            ambiguous_match_mode="best",
+        )
+        self.assertIsNone(mol_reordered)
+
+        # Re-ordering works with best, followed by first should work
+        mol1 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)CC)C(=O)O", ordered=False)
+        mol2 = dm.to_mol("O=C(C)OC1=C(C=C(C=C1)C=C)C(=O)O", ordered=True)
+        mol_reordered = dm.reorder_mol_from_template(
+            mol1,
+            mol2,
+            enforce_atomic_num=True,
+            enforce_bond_type=False,
+            ambiguous_match_mode="best-first",
+        )
+        self.assertIsInstance(mol_reordered, dm.Mol)
+        self.assertEqual(
+            sum(
+                [
+                    bond1.GetBondType() != bond2.GetBondType()
+                    for bond1, bond2 in zip(mol_reordered.GetBonds(), mol2.GetBonds())
+                ]
+            ),
+            1,
+        )
+        self.assertEqual(
+            sum(
+                [
+                    atom1.GetAtomicNum() != atom2.GetAtomicNum()
+                    for atom1, atom2 in zip(mol_reordered.GetAtoms(), mol2.GetAtoms())
+                ]
+            ),
+            0,
+        )
 
         # No-reordering because no matches
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
