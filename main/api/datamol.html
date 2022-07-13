@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.8">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.3.9">
     
     
       
@@ -13225,7 +13225,7 @@ No other properties are defined by the <code>datamol.graph.to_graph</code> funct
 
 
 <h4 id="datamol.graph.reorder_mol_from_template" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">reorder_mol_from_template</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">mol_template</span><span class="p">,</span> <span class="n">enforce_atomic_num</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">enforce_bond_type</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_ambiguous_match</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">allow_ambiguous_hs_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">reorder_mol_from_template</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">mol_template</span><span class="p">,</span> <span class="n">enforce_atomic_num</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">enforce_bond_type</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ambiguous_match_mode</span><span class="o">=</span><span class="s1">&#39;No&#39;</span><span class="p">,</span> <span class="n">verbose</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
 
 <a href="#datamol.graph.reorder_mol_from_template" class="headerlink" title="Permanent link">&para;</a></h4>
 
@@ -13305,28 +13305,25 @@ the matching is tried again.</p></td>
           </td>
         </tr>
         <tr>
-          <td><code>allow_ambiguous_match</code></td>
+          <td><code>ambiguous_match_mode</code></td>
           <td>
-                <code>bool</code>
+                <code>str</code>
           </td>
           <td><p>Whether to allow ambiguous matching. This means that,
-if there are many matches to the molecule, the first one is selected and
-applied to the re-ordering.</p></td>
+if there are many matches to the molecule, it will still re-order
+the molecule according to specific rules. Options are:
+- "no": Does not allow ambiguous matching.
+- "hs-only": Allow matching of ambiguous hydrogens. Does not work if trying
+  to match implicit with explicit hydrogens.
+- "first": Return the first match.
+- "best": Return the match with the least errors on atom type, edges type, and edge stereo.
+  Errors on the atoms are counted with 1 point, on the charge with 0.25 points,
+  on the edges with 0.25 points, and on the Stereo with 0.05 points.
+  If the option <code>enforce_atomic_num</code> is used, then no errors on the atoms are allowed.
+  If the option <code>enforce_bond_type</code> is used, then no errors on the edges are allowed.
+- "best-first": "best", followed by "first".</p></td>
           <td>
-                <code>False</code>
-          </td>
-        </tr>
-        <tr>
-          <td><code>allow_ambiguous_hs_only</code></td>
-          <td>
-                <code>bool</code>
-          </td>
-          <td><p>Whether to allow ambiguous matching, only considering
-hydrogens. If <code>allow_ambiguous_match is True</code>, then this parameter is
-meaningless.
-This will still not work if the number of hydrogens is different!</p></td>
-          <td>
-                <code>False</code>
+                <code>&#39;No&#39;</code>
           </td>
         </tr>
         <tr>
@@ -13335,8 +13332,7 @@ This will still not work if the number of hydrogens is different!</p></td>
                 <code>bool</code>
           </td>
           <td><p>Whether to warn when the matching does not work or is ambiguous.
-In case of ambiguous, a warning is only raised if <code>allow_ambiguous_match</code>
-is <code>False</code>.</p></td>
+Different warnings are raised depending on the value of <code>ambiguous_match_mode</code>.</p></td>
           <td>
                 <code>True</code>
           </td>
@@ -13508,13 +13504,60 @@ Pring a warning.</li>
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
-<span class="normal">301</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_mol_from_template</span><span class="p">(</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span>
+<span class="normal">309</span>
+<span class="normal">310</span>
+<span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span>
+<span class="normal">341</span>
+<span class="normal">342</span>
+<span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">reorder_mol_from_template</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">mol_template</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">enforce_atomic_num</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">enforce_bond_type</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">allow_ambiguous_match</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">allow_ambiguous_hs_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">ambiguous_match_mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;No&quot;</span><span class="p">,</span>
     <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;</span>
@@ -13543,16 +13586,21 @@ Pring a warning.</li>
 <span class="sd">        enforce_bond_type: Whether to enforce bond types. Bond types are always enforced</span>
 <span class="sd">            for a first try. If no match are found and this parameter is `False`,</span>
 <span class="sd">            the matching is tried again.</span>
-<span class="sd">        allow_ambiguous_match: Whether to allow ambiguous matching. This means that,</span>
-<span class="sd">            if there are many matches to the molecule, the first one is selected and</span>
-<span class="sd">            applied to the re-ordering.</span>
-<span class="sd">        allow_ambiguous_hs_only: Whether to allow ambiguous matching, only considering</span>
-<span class="sd">            hydrogens. If `allow_ambiguous_match is True`, then this parameter is</span>
-<span class="sd">            meaningless.</span>
-<span class="sd">            This will still not work if the number of hydrogens is different!</span>
+<span class="sd">        ambiguous_match_mode: Whether to allow ambiguous matching. This means that,</span>
+<span class="sd">            if there are many matches to the molecule, it will still re-order</span>
+<span class="sd">            the molecule according to specific rules. Options are:</span>
+<span class="sd">            - &quot;no&quot;: Does not allow ambiguous matching.</span>
+<span class="sd">            - &quot;hs-only&quot;: Allow matching of ambiguous hydrogens. Does not work if trying</span>
+<span class="sd">              to match implicit with explicit hydrogens.</span>
+<span class="sd">            - &quot;first&quot;: Return the first match.</span>
+<span class="sd">            - &quot;best&quot;: Return the match with the least errors on atom type, edges type, and edge stereo.</span>
+<span class="sd">              Errors on the atoms are counted with 1 point, on the charge with 0.25 points,</span>
+<span class="sd">              on the edges with 0.25 points, and on the Stereo with 0.05 points.</span>
+<span class="sd">              If the option `enforce_atomic_num` is used, then no errors on the atoms are allowed.</span>
+<span class="sd">              If the option `enforce_bond_type` is used, then no errors on the edges are allowed.</span>
+<span class="sd">            - &quot;best-first&quot;: &quot;best&quot;, followed by &quot;first&quot;.</span>
 <span class="sd">        verbose: Whether to warn when the matching does not work or is ambiguous.</span>
-<span class="sd">            In case of ambiguous, a warning is only raised if `allow_ambiguous_match`</span>
-<span class="sd">            is `False`.</span>
+<span class="sd">            Different warnings are raised depending on the value of `ambiguous_match_mode`.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        - `None` if the molecular graphs do not match (both the graph and atom types).</span>
@@ -13561,6 +13609,8 @@ Pring a warning.</li>
 <span class="sd">            Pring a warning.</span>
 <span class="sd">        - `Mol` The re-ordered molecule when a single match is found.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">ambiguous_match_mode</span> <span class="o">=</span> <span class="n">ambiguous_match_mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
 
     <span class="c1"># Match the ordering of the graphs</span>
     <span class="n">matches</span> <span class="o">=</span> <span class="n">match_molecular_graphs</span><span class="p">(</span>
@@ -13598,34 +13648,76 @@ Pring a warning.</li>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No match was found&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="c1"># In case we want to allow ambiguous match of hydrogens</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="n">allow_ambiguous_hs_only</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">allow_ambiguous_match</span><span class="p">):</span>
-        <span class="n">first_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-        <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">True</span>
-        <span class="k">for</span> <span class="n">this_match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
-            <span class="n">this_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">this_match</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
-            <span class="n">keys_mismatch</span> <span class="o">=</span> <span class="p">[</span>
-                <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">this_keys</span><span class="p">))</span> <span class="k">if</span> <span class="p">(</span><span class="n">first_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">!=</span> <span class="n">this_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
-            <span class="p">]</span>
-            <span class="n">atoms_mismatch</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_mismatch</span><span class="p">]</span>
-            <span class="n">all_hs</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">atom</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms_mismatch</span><span class="p">])</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">all_hs</span><span class="p">:</span>
-                <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">False</span>
-                <span class="k">break</span>
-        <span class="k">if</span> <span class="n">all_hs_mismatch</span><span class="p">:</span>
-            <span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                    <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous, even when ignoring hydrogens&quot;</span>
-                <span class="p">)</span>
-            <span class="k">return</span> <span class="kc">None</span>
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># In case we want to allow ambiguous match of hydrogens</span>
+        <span class="k">if</span> <span class="n">ambiguous_match_mode</span> <span class="o">==</span> <span class="s2">&quot;hs-only&quot;</span><span class="p">:</span>
+            <span class="n">first_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">True</span>
+            <span class="k">for</span> <span class="n">this_match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">this_keys</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">this_match</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+                <span class="n">keys_mismatch</span> <span class="o">=</span> <span class="p">[</span>
+                    <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">this_keys</span><span class="p">))</span> <span class="k">if</span> <span class="p">(</span><span class="n">first_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">!=</span> <span class="n">this_keys</span><span class="p">[</span><span class="n">ii</span><span class="p">])</span>
+                <span class="p">]</span>
+                <span class="n">atoms_mismatch</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">key</span><span class="p">)</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="k">for</span> <span class="n">key</span> <span class="ow">in</span> <span class="n">keys_mismatch</span><span class="p">]</span>
+                <span class="n">all_hs</span> <span class="o">=</span> <span class="nb">all</span><span class="p">([</span><span class="n">atom</span> <span class="o">==</span> <span class="mi">1</span> <span class="k">for</span> <span class="n">atom</span> <span class="ow">in</span> <span class="n">atoms_mismatch</span><span class="p">])</span>
+                <span class="k">if</span> <span class="ow">not</span> <span class="n">all_hs</span><span class="p">:</span>
+                    <span class="n">all_hs_mismatch</span> <span class="o">=</span> <span class="kc">False</span>
+                    <span class="k">break</span>
+            <span class="k">if</span> <span class="n">all_hs_mismatch</span><span class="p">:</span>
+                <span class="n">matches</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">1</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                    <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                        <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous, even when ignoring hydrogens&quot;</span>
+                    <span class="p">)</span>
+                <span class="k">return</span> <span class="kc">None</span>
 
-    <span class="c1"># If many matches were found, exit the function and return None</span>
-    <span class="k">if</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">)</span> <span class="ow">and</span> <span class="p">(</span><span class="ow">not</span> <span class="n">allow_ambiguous_match</span><span class="p">):</span>
-        <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous&quot;</span><span class="p">)</span>
-        <span class="k">return</span> <span class="kc">None</span>
+        <span class="c1"># Compute the number of atoms and bonds mismatch, and select the one with the least mismatch</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">ambiguous_match_mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;best&quot;</span><span class="p">,</span> <span class="s2">&quot;best-first&quot;</span><span class="p">])</span> <span class="ow">and</span> <span class="ow">not</span> <span class="p">(</span>
+            <span class="n">enforce_atomic_num</span> <span class="ow">and</span> <span class="n">enforce_bond_type</span>
+        <span class="p">):</span>
+            <span class="n">num_mismatches</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">this_match</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">:</span>
+                <span class="n">num_atoms_mismatch</span><span class="p">,</span> <span class="n">num_charge_mismatch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+
+                <span class="c1"># Get the number of atomic mismatch</span>
+                <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">val</span> <span class="ow">in</span> <span class="n">this_match</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                    <span class="n">atom1</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">val</span><span class="p">)</span>
+                    <span class="n">atom2</span> <span class="o">=</span> <span class="n">mol_template</span><span class="o">.</span><span class="n">GetAtomWithIdx</span><span class="p">(</span><span class="n">key</span><span class="p">)</span>
+                    <span class="n">num_atoms_mismatch</span> <span class="o">+=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span> <span class="o">!=</span> <span class="n">atom2</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span>
+                    <span class="n">num_charge_mismatch</span> <span class="o">+=</span> <span class="n">atom1</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span> <span class="o">!=</span> <span class="n">atom2</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span>
+
+                <span class="c1"># Get the number of bond mismatch</span>
+                <span class="n">num_bonds_type_mismatch</span><span class="p">,</span> <span class="n">num_bonds_stereo_mismatch</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span>
+                <span class="k">for</span> <span class="n">bond1</span> <span class="ow">in</span> <span class="n">mol_template</span><span class="o">.</span><span class="n">GetBonds</span><span class="p">():</span>
+                    <span class="n">begin_idx</span><span class="p">,</span> <span class="n">end_idx</span> <span class="o">=</span> <span class="n">bond1</span><span class="o">.</span><span class="n">GetBeginAtomIdx</span><span class="p">(),</span> <span class="n">bond1</span><span class="o">.</span><span class="n">GetEndAtomIdx</span><span class="p">()</span>
+                    <span class="n">bond2</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetBondBetweenAtoms</span><span class="p">(</span><span class="n">this_match</span><span class="p">[</span><span class="n">begin_idx</span><span class="p">],</span> <span class="n">this_match</span><span class="p">[</span><span class="n">end_idx</span><span class="p">])</span>
+                    <span class="n">num_bonds_type_mismatch</span> <span class="o">+=</span> <span class="n">bond1</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">()</span> <span class="o">!=</span> <span class="n">bond2</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">()</span>
+                    <span class="n">num_bonds_stereo_mismatch</span> <span class="o">+=</span> <span class="p">(</span><span class="n">bond1</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">()</span> <span class="o">!=</span> <span class="n">bond2</span><span class="o">.</span><span class="n">GetStereo</span><span class="p">())</span> <span class="ow">or</span> <span class="p">(</span>
+                        <span class="n">bond1</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">()</span> <span class="o">!=</span> <span class="n">bond2</span><span class="o">.</span><span class="n">GetBondDir</span><span class="p">()</span>
+                    <span class="p">)</span>
+
+                <span class="n">num_mismatches</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="p">(</span><span class="mi">1</span> <span class="o">*</span> <span class="n">num_atoms_mismatch</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">num_charge_mismatch</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="mf">0.25</span> <span class="o">*</span> <span class="n">num_bonds_type_mismatch</span><span class="p">)</span>
+                    <span class="o">+</span> <span class="p">(</span><span class="mf">0.05</span> <span class="o">*</span> <span class="n">num_bonds_stereo_mismatch</span><span class="p">)</span>
+                <span class="p">)</span>
+            <span class="n">min_mismatch_idx</span> <span class="o">=</span> <span class="p">[</span>
+                <span class="n">ii</span> <span class="k">for</span> <span class="n">ii</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">num_mismatches</span><span class="p">))</span> <span class="k">if</span> <span class="n">num_mismatches</span><span class="p">[</span><span class="n">ii</span><span class="p">]</span> <span class="o">==</span> <span class="nb">min</span><span class="p">(</span><span class="n">num_mismatches</span><span class="p">)</span>
+            <span class="p">]</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matches</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="n">min_mismatch_idx</span><span class="p">]</span>
+
+        <span class="c1"># Select the first matching element</span>
+        <span class="k">if</span> <span class="n">ambiguous_match_mode</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">&quot;first&quot;</span><span class="p">,</span> <span class="s2">&quot;best-first&quot;</span><span class="p">]:</span>
+            <span class="n">matches</span> <span class="o">=</span> <span class="p">[</span><span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
+        <span class="c1"># If many matches were found, exit the function and return None</span>
+        <span class="k">if</span> <span class="n">ambiguous_match_mode</span> <span class="o">==</span> <span class="s2">&quot;no&quot;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">verbose</span><span class="p">:</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span><span class="si">}</span><span class="s2"> matches were found, ordering is ambiguous&quot;</span><span class="p">)</span>
+            <span class="k">return</span> <span class="kc">None</span>
 
     <span class="c1"># Re-order the molecule from the matching indices of the template</span>
     <span class="n">match</span> <span class="o">=</span> <span class="n">matches</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
@@ -13854,7 +13946,7 @@ to every nodes and edges.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.b97dbffb.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.0238f547.min.js"></script>
+      <script src="../assets/javascripts/bundle.6c7ad80a.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
