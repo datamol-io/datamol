@@ -759,15 +759,11 @@ pip install -e .
 <h2 id="continuous-integration">Continuous Integration<a class="headerlink" href="#continuous-integration" title="Permanent link">&para;</a></h2>
 <p>Datamol uses Github Actions to:</p>
 <ul>
-<li><strong>Build and test</strong> <code>datamol</code>.<ul>
+<li><strong>Build and test</strong> <code>datamol</code>.</li>
 <li>Multiple combinations of OS, Python and RDKit versions are tested.</li>
-</ul>
-</li>
-<li><strong>Check</strong> the code:<ul>
+<li><strong>Check</strong> the code:</li>
 <li>Formatting with <code>black</code>.</li>
 <li>Static type check with <code>mypy</code>.</li>
-</ul>
-</li>
 <li><strong>Documentation</strong>: build and deploy the documentation on <code>main</code> and for every new git tag.</li>
 </ul>
 <h2 id="run-tests">Run tests<a class="headerlink" href="#run-tests" title="Permanent link">&para;</a></h2>
@@ -784,15 +780,13 @@ mike serve
 <ul>
 <li>Run check: <code>rever check</code>.</li>
 <li>Bump and release new version: <code>rever VERSION_NUMBER</code>.</li>
-<li>Releasing a new version will do the following things in that order:<ul>
+<li>Releasing a new version will do the following things in that order:</li>
 <li>Update <code>AUTHORS.rst</code>.</li>
 <li>Update <code>CHANGELOG.rst</code>.</li>
 <li>Bump the version number in <code>setup.py</code> and <code>_version.py</code>.</li>
 <li>Add a git tag.</li>
 <li>Push the git tag.</li>
 <li>Add a new release on the GH repo associated with the git tag.</li>
-</ul>
-</li>
 </ul>
 
               
