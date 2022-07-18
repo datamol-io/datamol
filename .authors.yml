@@ -4,13 +4,14 @@
   - maclandrol
   num_commits: 25
   first_commit: 2020-10-25 10:15:22
+  github: DomInvivo
 - name: Hadrien Mary
   email: hadrien.mary@gmail.com
   aliases:
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 32
+  num_commits: 33
   first_commit: 2020-10-24 11:46:22
 - name: michelml
   email: michmoreau.l@gmail.com
@@ -53,6 +54,6 @@
   github: cwognum
 - name: DomInvivo
   email: dominique@invivoai.com
-  num_commits: 17
+  num_commits: 27
   first_commit: 2022-06-14 09:40:04
   github: DomInvivo
