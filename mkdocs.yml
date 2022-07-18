@@ -54,7 +54,7 @@ extra_javascript:
 
 markdown_extensions:
   - admonition
-  - markdown_include.include
+  # - markdown_include.include  # see https://github.com/radude/mdx_truly_sane_lists/issues/9
   - pymdownx.emoji
   - pymdownx.magiclink
   - pymdownx.superfences
@@ -62,7 +62,7 @@ markdown_extensions:
   - pymdownx.tasklist
   # For `tab_length=2` in the markdown extension
   # See https://github.com/mkdocs/mkdocs/issues/545
-  - mdx_truly_sane_lists
+  # - mdx_truly_sane_lists  # see https://github.com/radude/mdx_truly_sane_lists/issues/9
   - toc:
       permalink: true
       toc_depth: 4
