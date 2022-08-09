@@ -23,9 +23,6 @@ from .. import mol as dm_mol
 from .. import convert
 from .. import descriptors
 
-'''adapted from https://github.com/datamol-org/datamol/blob/main/datamol/conformers/_conformers.py
- code: replaced UFF with MMFF94s_noEstat per OE Omega'''
-
 def generate(
     mol: Mol,
     n_confs: Optional[int] = None,
