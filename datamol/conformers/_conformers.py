@@ -23,6 +23,8 @@ from .. import mol as dm_mol
 from .. import convert
 from .. import descriptors
 
+'''adapted from https://github.com/datamol-org/datamol/blob/main/datamol/conformers/_conformers.py
+ code: replaced UFF with MMFF94s_noEstat per OE Omega'''
 
 def generate(
     mol: Mol,
@@ -36,6 +38,9 @@ def generate(
     minimize_energy: bool = False,
     sort_by_energy: bool = True,
     method: Optional[str] = None,
+    estat: bool = False,
+    ewindow: float = np.inf,
+    eratio: float = np.inf,
     energy_iterations: int = 200,
     warning_not_converged: int = 0,
     random_seed: int = 19,
@@ -65,7 +70,7 @@ def generate(
     conf = mol.GetConformer(0)
     props = conf.GetPropsAsDict()
     print(props)
-    # {'rdkit_uff_energy': 1.7649408317784008}
+    # {'rdkit_mmff_energy': 54.05967663082844, 'rdkit_mmff_delta_energy': 0.0}
     ```
 
     Args:
@@ -81,11 +86,14 @@ def generate(
             are kept. This step is done after an eventual minimization step.
         clear_existing: Whether to overwrite existing conformers for the molecule.
         align_conformers: Whether to align the conformers.
-        minimize_energy: Wether to minimize conformer's energies using UFF.
+        minimize_energy: Wether to minimize conformer's energies using MMFF94s.
             Disable to generate conformers much faster.
         sort_by_energies: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
+        estat: use electorstatic term in MMFF?  default False.
+        ewindow: maximum energy above minimum energy conformer to output
+        eratio: max delta-energy divided by rotatable bonds for conformers
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
             It corresponds to the `maxIters` argument in RDKit.
         warning_not_converged: Wether to log a warning when the number of not converged conformers
@@ -131,10 +139,10 @@ def generate(
     if add_hs:
         mol = dm_mol.add_hs(mol)
 
+    rotatable_bonds = descriptors.n_rotatable_bonds(mol)
     if not n_confs:
         # Set the number of conformers depends on
         # the number of rotatable bonds.
-        rotatable_bonds = descriptors.n_rotatable_bonds(mol)
         if rotatable_bonds < 8:
             n_confs = 50
         elif rotatable_bonds < 12:
@@ -170,8 +178,11 @@ def generate(
     # Minimize energy
     if minimize_energy:
 
-        # Minimize conformer's energy using UFF
-        results = rdForceFieldHelpers.UFFOptimizeMoleculeConfs(mol, maxIters=energy_iterations)
+        # Minimize conformer's energy using MMFF
+        mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
+        mp.SetMMFFEleTerm(estat)
+        ff = rdForceFieldHelpers.MMFFGetMoleculeForceField(mol,mp)
+        results = rdForceFieldHelpers.OptimizeMoleculeConfs(mol, ff, maxIters=energy_iterations, numThreads=num_threads)
         energies = [energy for _, energy in results]
 
         # Some conformers might not have converged during minimization.
@@ -183,24 +194,28 @@ def generate(
 
     elif sort_by_energy:
         energies = []
+        mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
+        mp.SetMMFFEleTerm(estat)
         for conf in mol.GetConformers():
-            ff = rdForceFieldHelpers.UFFGetMoleculeForceField(mol, confId=conf.GetId())
+            ff = rdForceFieldHelpers.MMFFGetMoleculeForceField(mol, mp, confId=conf.GetId())
             energies.append(ff.CalcEnergy())
         energies = np.array(energies)
 
     if energies is not None:
-
+        minE=np.min(energies)
         # Add the energy as a property to each conformers
         [
-            conf.SetDoubleProp("rdkit_uff_energy", energy)
+            (conf.SetDoubleProp("rdkit_mmff_energy", energy),
+            conf.SetDoubleProp("rdkit_mmff_delta_energy", energy-minE))
             for energy, conf in zip(energies, mol.GetConformers())
         ]
 
         # Now we reorder conformers according to their energies,
-        # so the lowest energies conformers are first.
+        # so the lowest energies conformers are first.  eliminate conformers that exceed ewindow, eratio
         mol_clone = copy.deepcopy(mol)
         ordered_conformers = [
-            conf for _, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
+            conf for E, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
+            if E-minE <= ewindow and (E-minE)/rotatable_bonds <= eratio
         ]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
