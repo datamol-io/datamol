@@ -35,7 +35,7 @@ def generate(
     minimize_energy: bool = False,
     sort_by_energy: bool = True,
     method: Optional[str] = None,
-    estat: bool = False,
+    forcefield: str = 'UFF',
     ewindow: float = np.inf,
     eratio: float = np.inf,
     energy_iterations: int = 200,
@@ -64,10 +64,10 @@ def generate(
 
     # If minimization has been enabled (default to True)
     # you can access the computed energy.
-    conf = mol.GetConformer(0)
+    conf = mol.GetConformer(1)
     props = conf.GetPropsAsDict()
     print(props)
-    # {'rdkit_mmff_energy': 54.05967663082844, 'rdkit_mmff_delta_energy': 0.0}
+    # {'rdkit_UFF_energy': 35.64074017773132,'rdkit_UFF_delta_energy': 0.24682258222552633}
     ```
 
     Args:
@@ -83,12 +83,12 @@ def generate(
             are kept. This step is done after an eventual minimization step.
         clear_existing: Whether to overwrite existing conformers for the molecule.
         align_conformers: Whether to align the conformers.
-        minimize_energy: Wether to minimize conformer's energies using MMFF94s.
+        minimize_energy: Whether to minimize conformer's energies using MMFF94s.
             Disable to generate conformers much faster.
         sort_by_energies: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
-        estat: use electorstatic term in MMFF?  default False.
+        forcfield: one of 'UFF','MMFF94S','MMFF94s_noEstat'
         ewindow: maximum energy above minimum energy conformer to output
         eratio: max delta-energy divided by rotatable bonds for conformers
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
@@ -176,9 +176,7 @@ def generate(
     if minimize_energy:
 
         # Minimize conformer's energy using MMFF
-        mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
-        mp.SetMMFFEleTerm(estat)
-        ff = rdForceFieldHelpers.MMFFGetMoleculeForceField(mol,mp)
+        ff=_get_ff(mol,forcefield)
         results = rdForceFieldHelpers.OptimizeMoleculeConfs(mol, ff, maxIters=energy_iterations, numThreads=num_threads)
         energies = [energy for _, energy in results]
 
@@ -191,10 +189,8 @@ def generate(
 
     elif sort_by_energy:
         energies = []
-        mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
-        mp.SetMMFFEleTerm(estat)
         for conf in mol.GetConformers():
-            ff = rdForceFieldHelpers.MMFFGetMoleculeForceField(mol, mp, confId=conf.GetId())
+            ff = _get_ff(mol, forcefield, conf_id=conf.GetId())
             energies.append(ff.CalcEnergy())
         energies = np.array(energies)
 
@@ -202,8 +198,8 @@ def generate(
         minE=np.min(energies)
         # Add the energy as a property to each conformers
         [
-            (conf.SetDoubleProp("rdkit_mmff_energy", energy),
-            conf.SetDoubleProp("rdkit_mmff_delta_energy", energy-minE))
+            (conf.SetDoubleProp(f"rdkit_{forcefield}_energy", energy),
+            conf.SetDoubleProp(f"rdkit_{forcefield}_delta_energy", energy-minE))
             for energy, conf in zip(energies, mol.GetConformers())
         ]
 
@@ -234,6 +230,16 @@ def generate(
 
     return mol
 
+def _get_ff(mol,forcefield,conf_id=-1):
+    '''gets molecualr forcefield of molecule mol according to configuration string forcefield '''
+    assert forcefield in ['UFF','MMFF94s','MMFF94s_noEstat']
+    if forcefield=='UFF':
+        return rdForceFieldHelpers.UFFGetMoleculeForceField(mol,confId=conf_id)
+
+    mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
+    if forcefield=='MMFF94s_noEstat':
+        mp.SetMMFFEleTerm(False)
+    return rdForceFieldHelpers.MMFFGetMoleculeForceField(mol,mp,confId=conf_id)
 
 def cluster(
     mol: Mol,
