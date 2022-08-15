@@ -23,6 +23,7 @@ from .. import mol as dm_mol
 from .. import convert
 from .. import descriptors
 
+
 def generate(
     mol: Mol,
     n_confs: Optional[int] = None,
@@ -35,7 +36,7 @@ def generate(
     minimize_energy: bool = False,
     sort_by_energy: bool = True,
     method: Optional[str] = None,
-    forcefield: str = 'UFF',
+    forcefield: str = "UFF",
     ewindow: float = np.inf,
     eratio: float = np.inf,
     energy_iterations: int = 200,
@@ -88,7 +89,7 @@ def generate(
         sort_by_energies: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
-        forcfield: one of 'UFF','MMFF94S','MMFF94s_noEstat'
+        forcfield: molecular forcefield to use, one of ['UFF','MMFF94S','MMFF94s_noEstat']
         ewindow: maximum energy above minimum energy conformer to output
         eratio: max delta-energy divided by rotatable bonds for conformers
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
@@ -176,8 +177,10 @@ def generate(
     if minimize_energy:
 
         # Minimize conformer's energy using MMFF
-        ff=_get_ff(mol,forcefield)
-        results = rdForceFieldHelpers.OptimizeMoleculeConfs(mol, ff, maxIters=energy_iterations, numThreads=num_threads)
+        ff = _get_ff(mol, forcefield)
+        results = rdForceFieldHelpers.OptimizeMoleculeConfs(
+            mol, ff, maxIters=energy_iterations, numThreads=num_threads
+        )
         energies = [energy for _, energy in results]
 
         # Some conformers might not have converged during minimization.
@@ -195,11 +198,13 @@ def generate(
         energies = np.array(energies)
 
     if energies is not None:
-        minE=np.min(energies)
+        minE = np.min(energies)
         # Add the energy as a property to each conformers
         [
-            (conf.SetDoubleProp(f"rdkit_{forcefield}_energy", energy),
-            conf.SetDoubleProp(f"rdkit_{forcefield}_delta_energy", energy-minE))
+            (
+                conf.SetDoubleProp(f"rdkit_{forcefield}_energy", energy),
+                conf.SetDoubleProp(f"rdkit_{forcefield}_delta_energy", energy - minE),
+            )
             for energy, conf in zip(energies, mol.GetConformers())
         ]
 
@@ -207,8 +212,9 @@ def generate(
         # so the lowest energies conformers are first.  eliminate conformers that exceed ewindow, eratio
         mol_clone = copy.deepcopy(mol)
         ordered_conformers = [
-            conf for E, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
-            if E-minE <= ewindow and (E-minE)/rotatable_bonds <= eratio
+            conf
+            for E, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
+            if E - minE <= ewindow and (E - minE) / rotatable_bonds <= eratio
         ]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
@@ -230,16 +236,27 @@ def generate(
 
     return mol
 
-def _get_ff(mol,forcefield,conf_id=-1):
-    '''gets molecualr forcefield of molecule mol according to configuration string forcefield '''
-    assert forcefield in ['UFF','MMFF94s','MMFF94s_noEstat']
-    if forcefield=='UFF':
-        return rdForceFieldHelpers.UFFGetMoleculeForceField(mol,confId=conf_id)
 
-    mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol,'MMFF94s')
-    if forcefield=='MMFF94s_noEstat':
+def _get_ff(mol: Mol, forcefield: str, conf_id: int = -1):
+    """Gets molecular forcefield for input mol according to name
+    Args:
+        mol: input molecule
+        forcefield: forcefield name. One of "UFF", "MMFF94s", "MMFF94s_noEstat"]
+        conf_id: conformer id. -1 is used by default
+    """
+    assert forcefield in [
+        "UFF",
+        "MMFF94s",
+        "MMFF94s_noEstat",
+    ], f"Forcefield {forcefield} is not supported"
+    if forcefield == "UFF":
+        return rdForceFieldHelpers.UFFGetMoleculeForceField(mol, confId=conf_id)
+
+    mp = rdForceFieldHelpers.MMFFGetMoleculeProperties(mol, "MMFF94s")
+    if forcefield == "MMFF94s_noEstat":
         mp.SetMMFFEleTerm(False)
-    return rdForceFieldHelpers.MMFFGetMoleculeForceField(mol,mp,confId=conf_id)
+    return rdForceFieldHelpers.MMFFGetMoleculeForceField(mol, mp, confId=conf_id)
+
 
 def cluster(
     mol: Mol,
