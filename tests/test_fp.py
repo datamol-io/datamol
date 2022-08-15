@@ -11,7 +11,7 @@ def test_to_fp():
     mol = dm.to_mol(smiles)
 
     assert dm.to_fp(mol).shape[0] == 2048
-    assert dm.to_fp(mol).sum() == 29
+    assert dm.to_fp(mol).sum() == 31
 
 
 def test_list_fp():
@@ -60,7 +60,7 @@ def test_all_fps():
 
     assert fp_infos == {
         "maccs": {"size": 167, "bits_sum": 21},
-        "ecfp": {"size": 2048, "bits_sum": 29},
+        "ecfp": {"size": 2048, "bits_sum": 31},
         "topological": {"size": 2048, "bits_sum": 18},
         "atompair": {"size": 2048, "bits_sum": 68},
         "rdkit": {"size": 2048, "bits_sum": 354},

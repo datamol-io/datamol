@@ -13,7 +13,7 @@ def test_cluster_mols():
     mols = [dm.to_mol(s) for s in smiles]
 
     _, mol_clusters = dm.cluster_mols(mols, cutoff=0.7)
-    cluster_sizes = [15, 12, 3, 6, 9, 9, 4, 1, 4, 3, 3, 2, 3]
+    cluster_sizes = [11, 7, 5, 3, 3, 3, 2, 3, 2, 1, 2, 2, 1]
     assert [len(c) for c in mol_clusters[:13]] == cluster_sizes
 
 
@@ -27,7 +27,7 @@ def test_pick_diverse():
     indices, _ = dm.pick_diverse(mols, npick=18, seed=19)
 
     excepted_indices = np.array(
-        [9, 43, 32, 89, 74, 96, 42, 91, 17, 67, 56, 94, 98, 16, 66, 58, 93, 3]
+        [9, 14, 47, 50, 56, 61, 67, 89, 83, 90, 94, 10, 0, 96, 15, 58, 71, 21]
     )
 
     assert np.all(indices == excepted_indices)
@@ -40,7 +40,7 @@ def test_pick_centroids():
     indices, centroids = dm.pick_centroids(
         mols, npick=18, threshold=0.7, method="sphere", n_jobs=-1
     )
-    excepted_indices = np.array([0, 1, 2, 3, 4, 5, 8, 11, 13, 15, 16, 17, 18, 19, 21, 23, 25, 32])
+    excepted_indices = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 13, 14, 15, 16, 17, 18, 20])
 
     assert np.all(indices == excepted_indices)
 
