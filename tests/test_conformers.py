@@ -317,16 +317,16 @@ def test_conformer_energy():
     mol1 = dm.conformers.generate(mol, ewindow=7)
     assert mol1.GetNumConformers() == 40
     e1 = mol1.GetConformer(1).GetPropsAsDict()
-    assert np.isclose(e1['rdkit_UFF_energy'], 35.640740)
-    assert np.isclose(e1['rdkit_UFF_delta_energy'], 0.246822)
+    assert np.isclose(e1['rdkit_UFF_energy'], 35.640740, rtol=1e-2)
+    assert np.isclose(e1['rdkit_UFF_delta_energy'], 0.246822, rtol=1e-2)
 
     mol2 = dm.conformers.generate(mol, forcefield='MMFF94s', eratio=3)
     assert mol2.GetNumConformers() == 23
     e2 = mol2.GetConformer(2).GetPropsAsDict()
-    assert np.isclose(e2['rdkit_MMFF94s_energy'], 38.715689)
-    assert np.isclose(e2['rdkit_MMFF94s_delta_energy'],  2.220522)
+    assert np.isclose(e2['rdkit_MMFF94s_energy'], 38.715689, rtol=1e-2)
+    assert np.isclose(e2['rdkit_MMFF94s_delta_energy'],  2.220522, rtol=1e-2)
 
     mol3 = dm.conformers.generate(mol, forcefield='MMFF94s_noEstat', minimize_energy=True)
     e3 = mol3.GetConformer(3).GetPropsAsDict()
-    assert np.isclose(e3['rdkit_MMFF94s_noEstat_energy'], 38.217380)
-    assert np.isclose(e3['rdkit_MMFF94s_noEstat_delta_energy'],  0.)
+    assert np.isclose(e3['rdkit_MMFF94s_noEstat_energy'], 38.217380, rtol=1e-2)
+    assert np.isclose(e3['rdkit_MMFF94s_noEstat_delta_energy'],  0., rtol=1e-2)
