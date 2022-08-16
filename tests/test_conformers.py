@@ -42,7 +42,7 @@ def test_generate_2():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     assert mol.GetNumConformers() == 50
-    assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
+    assert "rdkit_UFF_energy" in mol.GetConformer(0).GetPropsAsDict()
 
 
 def test_generate_3():
@@ -60,7 +60,7 @@ def test_generate_4():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=True)
     assert mol.GetNumConformers() == 21
-    assert "rdkit_uff_energy" in mol.GetConformer(0).GetPropsAsDict()
+    assert "rdkit_UFF_energy" in mol.GetConformer(0).GetPropsAsDict()
 
 
 @pytest.mark.skip_platform("win")
@@ -252,7 +252,7 @@ def test_conformers_minimized_sorted():
     mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=True)
 
     confs = list(mol.GetConformers())
-    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+    energies = np.array([conf.GetPropsAsDict()["rdkit_UFF_energy"] for conf in confs])
 
     assert np.all(np.diff(energies) >= 0)
 
@@ -263,7 +263,7 @@ def test_conformers_non_minimized_sorted():
     mol = dm.conformers.generate(mol, n_confs=10, minimize_energy=False)
 
     confs = list(mol.GetConformers())
-    energies = np.array([conf.GetPropsAsDict()["rdkit_uff_energy"] for conf in confs])
+    energies = np.array([conf.GetPropsAsDict()["rdkit_UFF_energy"] for conf in confs])
 
     assert np.all(np.diff(energies) >= 0)
 
@@ -313,23 +313,20 @@ def test_keep_conformers_from_indices_keep_ids():
 
 def test_conformer_energy():
     mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O")
-    
+
     mol1 = dm.conformers.generate(mol, ewindow=7)
     assert mol1.GetNumConformers() == 40
-    
     e1 = mol1.GetConformer(1).GetPropsAsDict()
     assert np.isclose(e1['rdkit_UFF_energy'], 35.640740)
     assert np.isclose(e1['rdkit_UFF_delta_energy'], 0.246822)
 
     mol2 = dm.conformers.generate(mol, forcefield='MMFF94s', eratio=3)
     assert mol2.GetNumConformers() == 23
-       
     e2 = mol2.GetConformer(2).GetPropsAsDict()
     assert np.isclose(e2['rdkit_MMFF94s_energy'], 38.715689)
-    assert np.isclose(e2['rdkit_MMFF94s_delta_energy'],  2.2205223)
+    assert np.isclose(e2['rdkit_MMFF94s_delta_energy'],  2.220522)
 
-    mol3 = dm.conformers.generate(mol,forcefield='MMFF94s_noEstat', minimize_energy=True)
-       
+    mol3 = dm.conformers.generate(mol, forcefield='MMFF94s_noEstat', minimize_energy=True)
     e3 = mol3.GetConformer(3).GetPropsAsDict()
     assert np.isclose(e3['rdkit_MMFF94s_noEstat_energy'], 38.217380)
-    assert np.isclose(e3['rdkit_MMFF94s_noEstat_delta_energy'],  0)
+    assert np.isclose(e3['rdkit_MMFF94s_noEstat_delta_energy'],  0.)
