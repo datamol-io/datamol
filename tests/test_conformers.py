@@ -3,6 +3,7 @@ import pytest
 
 import numpy as np
 import datamol as dm
+import random
 
 
 def test_generate():
@@ -315,14 +316,16 @@ def test_keep_conformers_from_indices_keep_ids():
 def test_conformer_energy():
     mol = dm.to_mol("O=C(C)Oc1ccccc1C(=O)O")
 
+    random.seed(42)
+    np.random.seed(42)
     mol1 = dm.conformers.generate(mol, ewindow=7)
-    assert np.isclose(mol1.GetNumConformers(), 40, atol=20)
+    assert np.isclose(mol1.GetNumConformers(), 40, atol=5)
     e1 = mol1.GetConformer(1).GetPropsAsDict()
     assert np.isclose(e1["rdkit_UFF_energy"], 35.640740, atol=1)
     assert np.isclose(e1["rdkit_UFF_delta_energy"], 0.246822, atol=0.1)
 
     mol2 = dm.conformers.generate(mol, forcefield="MMFF94s", eratio=3)
-    assert np.isclose(mol2.GetNumConformers(), 23, atol=10)
+    assert np.isclose(mol2.GetNumConformers(), 23, atol=5)
     e2 = mol2.GetConformer(2).GetPropsAsDict()
     assert np.isclose(e2["rdkit_MMFF94s_energy"], 38.715689, atol=1)
     assert np.isclose(e2["rdkit_MMFF94s_delta_energy"], 2.220522, atol=1)
