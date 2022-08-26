@@ -56,7 +56,7 @@ _FP_DEFAULT_ARGS = {
         "fromAtoms": [],
         "useChirality": False,
         "useBondTypes": True,
-        "useFeatures": True,
+        "useFeatures": False,
     },
     "fcfp": {
         "radius": 2,  # FCFP4

@@ -13,12 +13,12 @@ def test_pdist():
     dist_mat = dm.pdist(mols)
 
     assert dist_mat.shape == (3, 3)
-    assert dist_mat.sum() == 5.661904761904761
+    assert dist_mat.sum() == 5.6757105943152455
 
     dist_mat = dm.pdist(mols, n_jobs=None)
 
     assert dist_mat.shape == (3, 3)
-    assert dist_mat.sum() == 5.661904761904761
+    assert dist_mat.sum() == 5.6757105943152455
 
 
 def test_pdist_condensed():
@@ -28,7 +28,7 @@ def test_pdist_condensed():
     dist_mat = dm.pdist(mols, squareform=False)
 
     assert dist_mat.shape == (3,)
-    assert dist_mat.sum() == 2.8309523809523807
+    assert dist_mat.sum() == 2.8378552971576227
 
 
 def test_cdist():
@@ -46,7 +46,7 @@ def test_cdist():
     dist_mat = dm.cdist(mols1, mols2)
 
     assert dist_mat.shape == (3, 3)
-    assert np.isclose(dist_mat.mean(), 0.9416646866643121)
+    assert np.isclose(dist_mat.mean(), 0.9416270180919872)
 
 
 def test_cdist_chunked():
