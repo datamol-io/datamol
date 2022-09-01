@@ -5,7 +5,7 @@ FROM mambaorg/micromamba:focal
 USER root
 ARG DEBIAN_FRONTEND=noninteractive
 RUN apt update --fix-missing && \
-    apt install --no-install-recommends -y wget git && \
+    apt install --no-install-recommends -y wget git openssh-client && \
     apt clean
 USER $MAMBA_USER
 
