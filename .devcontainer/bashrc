@@ -1,0 +1,11 @@
+source /usr/lib/git-core/git-sh-prompt
+
+# Bash prompt
+GIT_PS1_SHOWUNTRACKEDFILES=1
+GIT_PS1_SHOWDIRTYSTATE=1
+if [ $(whoami) = root ]; then
+    SYMBOL="#"
+else
+    SYMBOL="$"
+fi
+PS1='\[\033[01;32m\]\u\[\033[0m\] \[\033[1;34m\]\h \[\033[1;35m\]\W\[\033[1;31m\]$(__git_ps1 " (%s)") \[\033[0m\]$SYMBOL '

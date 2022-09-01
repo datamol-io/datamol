@@ -10,6 +10,12 @@ conda activate datamol
 pip install -e .
 ```
 
+## Setup a dev environment with dev container
+
+This repository is setup to use [dev container](https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/introduction-to-dev-containers). You can use it locally with VSCode or any editor supporting dev containers as well as on GitHub Codespaces.
+
+The env is based on the Micromamba Docker image.
+
 ## Continuous Integration
 
 Datamol uses Github Actions to:
