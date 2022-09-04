@@ -8,6 +8,7 @@
 * Improve documentation for `dm.standardize_mol()`
 * Multiple various docstring and typing improvments.
 * Embed the cdk2.sdf and solubility_*.sdf files within the datamol package to prevent issue with the RDKit config dir.
+* Enable strict mode on the documentation to prevent any issues and inconsistency with the types and docstrings of datamol.
 
 **Deprecated:**
 
