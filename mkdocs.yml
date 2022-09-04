@@ -26,8 +26,6 @@ nav:
       - datamol.viz: api/datamol.viz.md
       - datamol.fragment: api/datamol.fragment.md
       - datamol.scaffold: api/datamol.scaffold.md
-      - datamol.reactions: api/datamol.reactions.md
-      - datamol.actions: api/datamol.actions.md
       - datamol.molar: api/datamol.molar.md
       - datamol.align: api/datamol.align.md
       - datamol.utils: api/datamol.utils.md
@@ -89,6 +87,7 @@ plugins:
   - mkdocs-jupyter:
       execute: false
       # kernel_name: python3
+      ignore: ["tutorials/new/*.ipynb"]
 
   - mike:
       version_selector: true

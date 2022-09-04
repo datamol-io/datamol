@@ -367,19 +367,53 @@ def standardize_mol(
     stereo: bool = True,
 ):
     r"""
-    This function returns a standardized version the given molecule, with or without disconnect the metals.
-    The process is apply in the order of the argument.
+    This function returns a standardized version the given molecule. It relies on the
+    RDKit [`rdMolStandardize` module](https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html)
+    which is largely inspired from [MolVS](https://github.com/mcs07/MolVS).
 
     Arguments:
-        mol: The molecule to standardize.
-        disconnect_metals: Whether to disconnect the metallic atoms from non-metals
-        normalize: Whether to apply normalization (correct functional groups and recombine charges).
-        reionize: Whether to apply molecule reionization
-        uncharge: Whether to remove all charge from molecule
-        stereo: Whether to attempt to assign stereochemistry
+        mol: A molecule to standardize.
+
+        disconnect_metals: Disconnect metals that are defined as covalently bonded to non-metal.
+            Depending on the source of the database, some compounds may be reported in salt form
+            or associated to metallic ions (e.g. the sodium salt of a carboxylic compound).
+            In most cases, these counter-ions are not relevant so the use of this function is required
+            before further utilization of the dataset. In summary the process is the following:
+
+            - Break covalent bonds between metals and organic atoms under certain conditions.
+            - First, disconnect N, O, F from any metal. Then disconnect other non-metals from transition metals (with exceptions).
+            - For every bond broken, adjust the charges of the begin and end atoms accordingly.
+
+        normalize: Applies a series of standard transformations to correct functional groups and recombine charges.
+            It corrects drawing errors and standardizes functional groups in the molecule as well as ensuring the
+            overall proper charge of the compound. It includes:
+
+            - Uncharge-separate sulfones
+            - Charge-separate nitro groups
+            - Charge-separate pyridine oxide
+            - Charge-separate azide
+            - Charge-separate diazo and azo groups
+            - Charge-separate sulfoxides
+            - Hydrazine-diazonium system
+
+        reionize: If one or more acidic functionalities are present in the molecule, this option ensures the correct
+            neutral/ionized state for such functional groups. Molecules are uncharged by adding and/or removing hydrogens.
+            For zwitterions, hydrogens are moved to eliminate charges where possible. However, in cases where there is a
+            positive charge that is not neutralizable, an attempt is made to also preserve the corresponding negative charge
+            The algorithm works as follows:
+
+            - Use SMARTS to find the strongest protonated acid and the weakest ionized acid.
+            - If the ionized acid is weaker than the protonated acid, swap proton and repeat.
+
+        uncharge: This option neutralize the molecule by reversing the protonation state of protonated and deprotonated groups,
+            if present (e.g. a carboxylate is re-protonated to the corresponding carboxylic acid).
+            In cases where there is a positive charge that is not neutralizable, an attempt is made to also preserve the
+            corresponding negative charge to ensure a net zero charge.
+
+        stereo: Stereochemical information is corrected and/or added if missing using built-in RDKit functionality to force a clean recalculation of stereochemistry (`AssignStereochemistry`).
 
     Returns:
-        mol: The standardized molecule.
+        mol: A standardized molecule.
     """
     mol = copy_mol(mol)
 

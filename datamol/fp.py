@@ -248,7 +248,7 @@ def to_fp(
             complete list.
         fold_size: If set, fold the fingerprint to the `fold_size`. If set, returned array is
             always a numpy array.
-        fp_args: Arguments to build the fingerprint. Refer to the official RDKit documentation.
+        **fp_args: Arguments to build the fingerprint. Refer to the official RDKit documentation.
 
     Returns:
         A fingerprint vector or None
