@@ -40,11 +40,9 @@ jobs:
             rdkit=${{ matrix.rdkit-version }}
 
       - name: Install library
-        shell: bash -l {0}
         run: python -m pip install -e . # `-e` required for correct `coverage` run.
 
       - name: Run tests
-        shell: bash -l {0}
         run: pytest
 
       - name: Codecov Upload
@@ -58,5 +56,4 @@ jobs:
           env_vars: ${{ matrix.os }},${{ matrix.python-version }},${{ matrix.rdkit-version }}
 
       - name: Test building the doc
-        shell: bash -l {0}
         run: mkdocs build
