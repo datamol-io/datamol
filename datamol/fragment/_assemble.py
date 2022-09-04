@@ -301,7 +301,7 @@ def break_mol(
         all_reactions_type = [all_reactions_type[ind] for ind in p]
 
     nx = dm.graph._get_networkx()
-    mSmi = dm.to_smiles(mol, isomericSmiles=True)
+    mSmi = dm.to_smiles(mol, isomeric=True)
     G = nx.DiGraph()
     node_num = 0
     G.add_node(node_num, smiles=mSmi, mol=mol)
@@ -343,7 +343,7 @@ def break_mol(
                             seqOk = False
                             break
                         continue
-                    pSmi = dm.to_smiles(prod, isomericSmiles=True)
+                    pSmi = dm.to_smiles(prod, isomeric=True)
                     seqOk = seqOk and (dm.to_mol(pSmi) is not None)
 
                     notDummies = sum([atm.GetSymbol() != "*" for atm in prod.GetAtoms()])
@@ -360,7 +360,7 @@ def break_mol(
                             continue
                         pSmi = prod.pSmi
                         node_num += 1
-                        usmi = dm.to_smiles(dm.fix_mol(prod), isomericSmiles=True)
+                        usmi = dm.to_smiles(dm.fix_mol(prod), isomeric=True)
                         G.add_node(node_num, smiles=usmi, mol=prod)
                         G.add_edge(parent, node_num)
                         if usmi not in allNodes:
