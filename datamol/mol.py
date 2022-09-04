@@ -1041,6 +1041,11 @@ def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
     """
     scf = MurckoScaffold.GetScaffoldForMol(mol)
 
+    # NOTE(hadim): this is already done in `GetScaffoldForMol`
+    # Note sure we need it here.
+    scf.UpdatePropertyCache()
+    Chem.GetSymmSSSR(scf)  # type: ignore
+
     if make_generic:
         scf = make_scaffold_generic(scf)
         scf = to_mol(scf)
@@ -1068,6 +1073,9 @@ def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
     if include_bonds:
         for bond in mol.GetBonds():
             bond.SetBondType(UNSPECIFIED_BOND)
+
+    mol.UpdatePropertyCache()
+    Chem.GetSymmSSSR(mol)  # type: ignore
 
     return mol
 
