@@ -6,7 +6,7 @@
 
 * Revamped all the datamol tutorials and add new tutorials. Huge thanks to @Valence-jonnyhsu for leading the refactoring of the datamol tutorials.
 * Improve documentation for `dm.standardize_mol()`
-* Multiple various docstring improvments.
+* Multiple various docstring and typing improvments.
 
 **Deprecated:**
 

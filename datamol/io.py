@@ -3,6 +3,7 @@ from typing import Optional
 from typing import List
 from typing import Sequence
 from typing import TextIO
+from typing import Any
 
 import os
 import io
@@ -26,7 +27,7 @@ def read_csv(
     urlpath: Union[str, os.PathLike, TextIO],
     smiles_column: Optional[str] = None,
     mol_column: str = "mol",
-    **kwargs,
+    **kwargs: Any,
 ) -> pd.DataFrame:
     """Read a CSV file.
 
@@ -35,7 +36,7 @@ def read_csv(
         smiles_column: Use this column to build a mol column.
         mol_column: Name to give to the mol column. If not None a mol column will be build.
             Avoid when loading a very large file.
-        kwargs: Arguments to pass to `pd.read_csv()`.
+        **kwargs: Arguments to pass to `pd.read_csv()`.
 
     Returns:
         df: a `pandas.DataFrame`
@@ -54,7 +55,7 @@ def read_excel(
     sheet_name: Optional[Union[str, int, list]] = 0,
     smiles_column: Optional[str] = None,
     mol_column: str = "mol",
-    **kwargs,
+    **kwargs: Any,
 ) -> pd.DataFrame:
     """Read an excel file.
 
@@ -64,7 +65,7 @@ def read_excel(
         mol_column: Name to give to the mol column. If not None a mol column will be build.
             Avoid when loading a very large file.
         mol_column: name to give to the mol column.
-        kwargs: Arguments to pass to `pd.read_excel()`.
+        **kwargs: Arguments to pass to `pd.read_excel()`.
 
     Returns:
         df: a `pandas.DataFrame`
@@ -203,7 +204,7 @@ def read_molblock(
     Note that potential molecule properties are **not** read.
 
     Args:
-        mol_block: String containing the Mol block.
+        molblock: String containing the Mol block.
         sanitize: Whether to sanitize the molecules.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.

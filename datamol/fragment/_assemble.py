@@ -434,8 +434,8 @@ def assemble_fragment_order(
 ):
     """Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm
 
-    ..note ::
-        We are of course assuming:
+    We are of course assuming:
+
         1. that the order in the fragmentlist matter :D !
         2. that none of the fragment has explicitly defined hydrogen atoms.
         3. only a list of unique molecule is internally maintained
@@ -444,7 +444,6 @@ def assemble_fragment_order(
         fragmentlist: list of original fragments to grow
         seen: original molecules used as base. If none, the first element of fragment list will be poped out
         allow_incomplete: Whether to accept assembled molecules with missing fragment
-
     """
 
     if RXNS is None:

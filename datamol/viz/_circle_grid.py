@@ -1,5 +1,7 @@
 from typing import List
 from typing import Tuple
+from typing import Any
+from typing import Optional
 
 import io
 import math
@@ -15,10 +17,10 @@ from PIL import Image, ImageDraw, ImageFont, ImageOps
 def circle_grid(
     center_mol: Chem.rdchem.Mol,
     circle_mols: List[List[Chem.rdchem.Mol]],
-    legend: str = None,
+    legend: Optional[str] = None,
     mol_size: Tuple[int, int] = (200, 200),
     circle_margin: int = 50,
-    act_mapper: dict = None,
+    act_mapper: Optional[dict] = None,
 ):
     """Show molecules in concentric rings, with one molecule at the center
 
@@ -37,10 +39,10 @@ class MolsCircleGrid:
         self,
         center_mol: Chem.rdchem.Mol,
         circle_mols: List[List[Chem.rdchem.Mol]],
-        legend: str = None,
+        legend: Optional[str] = None,
         mol_size: Tuple[int, int] = (200, 200),
         circle_margin: int = 50,
-        act_mapper: dict = None,
+        act_mapper: Optional[dict] = None,
     ):
         """Show molecules in concentric rings, with one molecule at the center
 
@@ -132,7 +134,7 @@ class MolsCircleGrid:
         mol_size=None,
         act_dict={},
         center=False,
-        **kwargs,
+        **kwargs: Any,
     ):
         img = mol
         if mol_size is None:
@@ -158,7 +160,7 @@ class MolsCircleGrid:
                 font = ImageFont.truetype(fontpath, 18 + center * 8)
                 w, h = self.draw.multiline_textsize(txt, font=font)
             except:
-                passcircle_mols
+                pass
 
     def _draw_center_mol(self):
         self._draw_mol_at(

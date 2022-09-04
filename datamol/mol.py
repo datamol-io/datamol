@@ -320,7 +320,7 @@ def sanitize_smiles(smiles: Optional[str], isomeric: bool = True) -> Optional[st
     return smiles
 
 
-def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool = True):
+def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool = True) -> Mol:
     """Sanitize a list of molecules and return the first valid molecule seen in the list.
 
     Args:
@@ -339,7 +339,7 @@ def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool 
     return None
 
 
-def standardize_smiles(smiles: str, tautomer: bool = False):
+def standardize_smiles(smiles: str, tautomer: bool = False) -> str:
     r"""
     Apply smile standardization procedure. This is a convenient function wrapped arrounf RDKit
     smiles standardizer and tautomeric canonicalization.
@@ -365,7 +365,7 @@ def standardize_mol(
     reionize: bool = True,
     uncharge: bool = False,
     stereo: bool = True,
-):
+) -> Mol:
     r"""
     This function returns a standardized version the given molecule. It relies on the
     RDKit [`rdMolStandardize` module](https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html)
@@ -508,7 +508,7 @@ def decrease_bond(bond: Chem.rdchem.Bond) -> Optional[Union[list, Chem.rdchem.Bo
     return bond
 
 
-def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[Mol]:
+def fix_valence(mol: Mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[Mol]:
     """Identify and try to fix valence issues by removing any supplemental bond
     that should not be in the graph.
 
@@ -851,14 +851,14 @@ def atom_list_to_bond(
     return bonds
 
 
-def substructure_matching_bonds(mol: Mol, query: Mol, **kwargs):
+def substructure_matching_bonds(mol: Mol, query: Mol, **kwargs: Any) -> Tuple[list, list]:
     """Perform a substructure match using `GetSubstructMatches` but instead
     of returning only the atom indices also return the bond indices.
 
     Args:
         mol: A molecule.
         query: A molecule used as a query to match against.
-        kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
+        **kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
 
     Returns:
         atom_matches: A list of lists of atom indices.

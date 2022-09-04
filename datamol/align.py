@@ -1,6 +1,7 @@
 from typing import Optional
 from typing import Union
 from typing import Sequence
+from typing import Any
 
 from packaging import version
 from collections import defaultdict as ddict
@@ -132,7 +133,7 @@ def auto_align_many(
     copy: bool = True,
     cluster_cutoff: float = 0.7,
     allow_r_groups: bool = True,
-    **kwargs,
+    **kwargs: Any,
 ):
     """Partition a list of molecules into clusters sharing common scaffold of common core,
     then align the molecules to that common core. This function will compute the list of
@@ -162,7 +163,7 @@ def auto_align_many(
         allow_r_groups: Optional, if True, terminal dummy atoms in the
                         reference are ignored if they match an implicit hydrogen in the
                         molecule, and a constrained depiction is still attempted
-        kwargs: Additional arguments to pass to clustering method
+        **kwargs: Additional arguments to pass to clustering method
     """
 
     if copy:

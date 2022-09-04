@@ -61,7 +61,7 @@ def get_all_path_between(
     atom_idx_1: int,
     atom_idx_2: int,
     ignore_cycle_basis: bool = False,
-):
+) -> list:
     """Get all simple path between two atoms of a molecule
 
     Args:
@@ -116,7 +116,8 @@ def match_molecular_graphs(
         hydrogens, they can be re-ordered in any way.
 
     Args:
-        mol1, mol2: The molecules to match their indices.
+        mol1: A molecule.
+        mol2: A molecule.
         match_atoms_on: Properties on which to match the atom types.
             By default, it matches on the `'atomic_num'` property.
             Empty list means that it does not consider atom features during matching.

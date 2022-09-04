@@ -88,9 +88,9 @@ plugins:
             heading_level: 3
             show_root_full_path: false
 
-  - mkdocs-jupyter:
-      execute: false
-      # kernel_name: python3
+  # - mkdocs-jupyter:
+  #     execute: false
+  #     # kernel_name: python3
 
   - mike:
       version_selector: true

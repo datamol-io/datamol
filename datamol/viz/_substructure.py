@@ -1,5 +1,4 @@
-import itertools
-
+from typing import Any
 from typing import Union
 from typing import List
 
@@ -13,7 +12,7 @@ def match_substructure(
     queries: Union[List[dm.Mol], dm.Mol],
     highlight_bonds: bool = True,
     copy: bool = True,
-    **kwargs,
+    **kwargs: Any,
 ):
     """Generate an image of molecule(s) with substructure matches for a given
     pattern or substructure.

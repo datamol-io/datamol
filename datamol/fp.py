@@ -1,7 +1,6 @@
 from typing import Union
 from typing import Optional
-
-import warnings
+from typing import Any
 
 import numpy as np
 
@@ -237,7 +236,7 @@ def to_fp(
     as_array: bool = True,
     fp_type: str = "ecfp",
     fold_size: Optional[int] = None,
-    **fp_args,
+    **fp_args: Any,
 ) -> Optional[Union[np.ndarray, SparseBitVect, ExplicitBitVect]]:
     """Compute the molecular fingerprint given a molecule or a SMILES.
 
@@ -302,7 +301,7 @@ def fold_count_fp(
     fp: Union[np.ndarray, SparseBitVect, ExplicitBitVect],
     dim: int = 1024,
     binary: bool = False,
-):
+) -> np.ndarray:
     """Fast folding of a count fingerprint to the specified dimension.
 
     Args:

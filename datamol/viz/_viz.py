@@ -2,6 +2,7 @@ from typing import Union
 from typing import List
 from typing import Tuple
 from typing import Optional
+from typing import Any
 
 import fsspec
 
@@ -33,7 +34,7 @@ def to_image(
     legend_fontsize: int = 16,
     kekulize: bool = True,
     align: Union[dm.Mol, str, bool] = False,
-    **kwargs,
+    **kwargs: Any,
 ):
     """Generate an image out of a molecule or a list of molecules.
 

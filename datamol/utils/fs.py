@@ -173,7 +173,7 @@ def join(*paths):
     filesystem to use (and so the separator.
 
     Args:
-        paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.
+        *paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.
     """
     paths = [str(path).rstrip("/") for path in paths]
     source_path = paths[0]
