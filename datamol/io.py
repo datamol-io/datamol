@@ -2,8 +2,9 @@ from typing import Union
 from typing import Optional
 from typing import List
 from typing import Sequence
-from typing import TextIO
+from typing import IO
 from typing import Any
+from typing import cast
 
 import os
 import io
@@ -24,7 +25,7 @@ from .types import Mol
 
 
 def read_csv(
-    urlpath: Union[str, os.PathLike, TextIO],
+    urlpath: Union[str, os.PathLike, IO],
     smiles_column: Optional[str] = None,
     mol_column: str = "mol",
     **kwargs: Any,
@@ -51,7 +52,7 @@ def read_csv(
 
 
 def read_excel(
-    urlpath: Union[str, os.PathLike, TextIO],
+    urlpath: Union[str, os.PathLike, IO],
     sheet_name: Optional[Union[str, int, list]] = 0,
     smiles_column: Optional[str] = None,
     mol_column: str = "mol",
@@ -71,7 +72,8 @@ def read_excel(
         df: a `pandas.DataFrame`
     """
 
-    df = pd.read_excel(urlpath, sheet_name=sheet_name, **kwargs)  # type: ignore
+    df = pd.read_excel(urlpath, sheet_name=sheet_name, **kwargs)
+    df = cast(pd.DataFrame, df)
 
     if smiles_column is not None:
         PandasTools.AddMoleculeColumnToFrame(df, smiles_column, mol_column)
@@ -80,7 +82,7 @@ def read_excel(
 
 
 def read_sdf(
-    urlpath: Union[str, os.PathLike, TextIO],
+    urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
     as_df: bool = False,
     smiles_column: Optional[str] = "smiles",
@@ -153,7 +155,7 @@ def read_sdf(
 
 def to_sdf(
     mols: Union[Mol, Sequence[Mol], pd.DataFrame],
-    urlpath: Union[str, os.PathLike, TextIO],
+    urlpath: Union[str, os.PathLike, IO],
     smiles_column: Optional[str] = "smiles",
     mol_column: Optional[str] = None,
 ):
@@ -259,7 +261,7 @@ def to_molblock(
 
 def to_smi(
     mols: Sequence[Mol],
-    urlpath: Union[str, os.PathLike, TextIO],
+    urlpath: Union[str, os.PathLike, IO],
     error_if_empty: bool = False,
 ):
     """Save a list of molecules in an `.smi` file.

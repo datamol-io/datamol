@@ -7,6 +7,7 @@
 * Revamped all the datamol tutorials and add new tutorials. Huge thanks to @Valence-jonnyhsu for leading the refactoring of the datamol tutorials.
 * Improve documentation for `dm.standardize_mol()`
 * Multiple various docstring and typing improvments.
+* Embed the cdk2.sdf and solubility_*.sdf files within the datamol package to prevent issue with the RDKit config dir.
 
 **Deprecated:**
 
