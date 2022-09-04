@@ -9,6 +9,9 @@ remote_branch: "gh-pages"
 use_directory_urls: false
 docs_dir: "docs"
 
+# Fail on warnings to detect issues with types and docstring
+strict: true
+
 nav:
   - Overview: index.md
   - Usage: usage.md
