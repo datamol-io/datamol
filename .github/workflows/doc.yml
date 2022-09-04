@@ -19,23 +19,15 @@ jobs:
       - name: Setup conda
         uses: mamba-org/provision-with-micromamba@main
         with:
-          environment-file: false
+          environment-file: env.yml
+          environment-name: datamol
           cache-downloads: true
 
-      - name: Install Dependencies
-        run: |
-          micromamba activate
-          micromamba create -n datamol -f env.yml
-
       - name: Install library
-        run: |
-          micromamba activate datamol
-          python -m pip install .
+        run: python -m pip install .
 
       - name: Deploy the doc
         run: |
-          micromamba activate datamol
-
           echo "Configure git"
           git config --global user.name 'hadim'
           git config --global user.email 'hadim@users.noreply.github.com'
