@@ -134,12 +134,12 @@ def anybreak(
 
 
 def mmpa_frag(
-    mol,
-    pattern: str = None,
+    mol: dm.Mol,
+    pattern: Optional[str] = None,
     max_cut: int = 1,
     max_bond_cut: int = 20,
     h_split: bool = False,
-) -> Optional[Set[Chem.Mol]]:
+) -> Optional[Set[dm.Mol]]:
     """Fragment molecule on specific bonds suitable for a MMPA analysis.
 
     Args:
@@ -152,7 +152,7 @@ def mmpa_frag(
             This is equivalent to enabling the addition of new fragments.
 
     Returns:
-        List of fragments
+        List of fragments.
     """
 
     frags = []
@@ -173,7 +173,7 @@ def mmpa_frag(
         )
 
     if h_split:
-        mol = Chem.AddHs(mol)
+        mol = dm.add_hs(mol)
         frags += rdMMPA.FragmentMol(
             mol,
             pattern="[#1]!@!=!#[!#1]",
@@ -184,7 +184,7 @@ def mmpa_frag(
     return set(frags)
 
 
-def mmpa_cut(mol: Chem.rdchem.Mol, rdkit_pattern: bool = False) -> Optional[Set[Any]]:
+def mmpa_cut(mol: dm.Mol, rdkit_pattern: bool = False) -> Optional[Set[Any]]:
     """Cut molecules to perform mmpa analysis later
 
     Args:
@@ -216,7 +216,7 @@ def mmpa_cut(mol: Chem.rdchem.Mol, rdkit_pattern: bool = False) -> Optional[Set[
         outlines.add(output)
 
     # hydrogen splitting
-    mol = Chem.AddHs(mol)
+    mol = dm.add_hs(mol)
     smiles = dm.to_smiles(mol)
 
     n = mol.GetNumHeavyAtoms()

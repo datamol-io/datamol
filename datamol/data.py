@@ -1,12 +1,9 @@
 from typing import Optional
-
-import os
+from typing import cast
 
 import pkg_resources
 
 import pandas as pd
-
-from rdkit.Chem import RDConfig
 
 from .io import read_sdf
 from .convert import from_df
@@ -26,7 +23,7 @@ def freesolv():
     """
 
     with pkg_resources.resource_stream("datamol", "data/freesolv.csv") as f:
-        data = pd.read_csv(f)  # type: ignore
+        data = pd.read_csv(f)
     return data
 
 
@@ -38,11 +35,9 @@ def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    return read_sdf(
-        os.path.join(RDConfig.RDDocsDir, "Book/data/cdk2.sdf"),
-        as_df=as_df,
-        mol_column=mol_column,
-    )
+    with pkg_resources.resource_stream("datamol", "data/cdk2.sdf") as f:
+        data = read_sdf(f, as_df=as_df, mol_column=mol_column)
+    return data
 
 
 def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
@@ -55,20 +50,16 @@ def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    train: pd.DataFrame = read_sdf(
-        os.path.join(RDConfig.RDDocsDir, "Book/data/solubility.train.sdf"),
-        as_df=True,
-        mol_column="mol",
-        smiles_column=None,
-    )  # type: ignore
-    train["split"] = "train"
+    with pkg_resources.resource_stream("datamol", "data/solubility.train.sdf") as f:
+        train = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
 
-    test: pd.DataFrame = read_sdf(
-        os.path.join(RDConfig.RDDocsDir, "Book/data/solubility.test.sdf"),
-        as_df=True,
-        mol_column="mol",
-        smiles_column=None,
-    )  # type: ignore
+    with pkg_resources.resource_stream("datamol", "data/solubility.test.sdf") as f:
+        test = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
+
+    train = cast(pd.DataFrame, train)
+    test = cast(pd.DataFrame, test)
+
+    train["split"] = "train"
     test["split"] = "test"
 
     # NOTE(hadim): LMAO RDkit consistency xD

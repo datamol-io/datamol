@@ -320,7 +320,7 @@ def sanitize_smiles(smiles: Optional[str], isomeric: bool = True) -> Optional[st
     return smiles
 
 
-def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool = True):
+def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool = True) -> Mol:
     """Sanitize a list of molecules and return the first valid molecule seen in the list.
 
     Args:
@@ -339,7 +339,7 @@ def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool 
     return None
 
 
-def standardize_smiles(smiles: str, tautomer: bool = False):
+def standardize_smiles(smiles: str, tautomer: bool = False) -> str:
     r"""
     Apply smile standardization procedure. This is a convenient function wrapped arrounf RDKit
     smiles standardizer and tautomeric canonicalization.
@@ -365,21 +365,55 @@ def standardize_mol(
     reionize: bool = True,
     uncharge: bool = False,
     stereo: bool = True,
-):
+) -> Mol:
     r"""
-    This function returns a standardized version the given molecule, with or without disconnect the metals.
-    The process is apply in the order of the argument.
+    This function returns a standardized version the given molecule. It relies on the
+    RDKit [`rdMolStandardize` module](https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html)
+    which is largely inspired from [MolVS](https://github.com/mcs07/MolVS).
 
     Arguments:
-        mol: The molecule to standardize.
-        disconnect_metals: Whether to disconnect the metallic atoms from non-metals
-        normalize: Whether to apply normalization (correct functional groups and recombine charges).
-        reionize: Whether to apply molecule reionization
-        uncharge: Whether to remove all charge from molecule
-        stereo: Whether to attempt to assign stereochemistry
+        mol: A molecule to standardize.
+
+        disconnect_metals: Disconnect metals that are defined as covalently bonded to non-metal.
+            Depending on the source of the database, some compounds may be reported in salt form
+            or associated to metallic ions (e.g. the sodium salt of a carboxylic compound).
+            In most cases, these counter-ions are not relevant so the use of this function is required
+            before further utilization of the dataset. In summary the process is the following:
+
+            - Break covalent bonds between metals and organic atoms under certain conditions.
+            - First, disconnect N, O, F from any metal. Then disconnect other non-metals from transition metals (with exceptions).
+            - For every bond broken, adjust the charges of the begin and end atoms accordingly.
+
+        normalize: Applies a series of standard transformations to correct functional groups and recombine charges.
+            It corrects drawing errors and standardizes functional groups in the molecule as well as ensuring the
+            overall proper charge of the compound. It includes:
+
+            - Uncharge-separate sulfones
+            - Charge-separate nitro groups
+            - Charge-separate pyridine oxide
+            - Charge-separate azide
+            - Charge-separate diazo and azo groups
+            - Charge-separate sulfoxides
+            - Hydrazine-diazonium system
+
+        reionize: If one or more acidic functionalities are present in the molecule, this option ensures the correct
+            neutral/ionized state for such functional groups. Molecules are uncharged by adding and/or removing hydrogens.
+            For zwitterions, hydrogens are moved to eliminate charges where possible. However, in cases where there is a
+            positive charge that is not neutralizable, an attempt is made to also preserve the corresponding negative charge
+            The algorithm works as follows:
+
+            - Use SMARTS to find the strongest protonated acid and the weakest ionized acid.
+            - If the ionized acid is weaker than the protonated acid, swap proton and repeat.
+
+        uncharge: This option neutralize the molecule by reversing the protonation state of protonated and deprotonated groups,
+            if present (e.g. a carboxylate is re-protonated to the corresponding carboxylic acid).
+            In cases where there is a positive charge that is not neutralizable, an attempt is made to also preserve the
+            corresponding negative charge to ensure a net zero charge.
+
+        stereo: Stereochemical information is corrected and/or added if missing using built-in RDKit functionality to force a clean recalculation of stereochemistry (`AssignStereochemistry`).
 
     Returns:
-        mol: The standardized molecule.
+        mol: A standardized molecule.
     """
     mol = copy_mol(mol)
 
@@ -474,7 +508,7 @@ def decrease_bond(bond: Chem.rdchem.Bond) -> Optional[Union[list, Chem.rdchem.Bo
     return bond
 
 
-def fix_valence(mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[Mol]:
+def fix_valence(mol: Mol, inplace: bool = False, allow_ring_break: bool = False) -> Optional[Mol]:
     """Identify and try to fix valence issues by removing any supplemental bond
     that should not be in the graph.
 
@@ -817,14 +851,14 @@ def atom_list_to_bond(
     return bonds
 
 
-def substructure_matching_bonds(mol: Mol, query: Mol, **kwargs):
+def substructure_matching_bonds(mol: Mol, query: Mol, **kwargs: Any) -> Tuple[list, list]:
     """Perform a substructure match using `GetSubstructMatches` but instead
     of returning only the atom indices also return the bond indices.
 
     Args:
         mol: A molecule.
         query: A molecule used as a query to match against.
-        kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
+        **kwargs: Any other arguments to pass to `mol.GetSubstructMatches()`.
 
     Returns:
         atom_matches: A list of lists of atom indices.
@@ -913,7 +947,6 @@ def add_hs(
     add_coords: bool = False,
     only_on_atoms: Optional[List[int]] = None,
     add_residue_info: bool = False,
-    copy: bool = True,
 ):
     """Adds hydrogens to the molecule.
 
@@ -924,12 +957,7 @@ def add_hs(
         only_on_atoms: a list of atoms to add hydrogens only on.
         add_residue_info: whether to add residue information to the hydrogens.
             Useful for PDB files.
-        copy: whether to copy the input molecule.
     """
-
-    if copy:
-        mol = copy_mol(mol)
-
     mol = AddHs(
         mol,
         explicitOnly=explicit_only,
@@ -946,7 +974,6 @@ def remove_hs(
     implicit_only: bool = False,
     update_explicit_count: bool = False,
     sanitize: bool = True,
-    copy: bool = True,
 ):
     """Removes hydrogens from a molecule.
 
@@ -955,12 +982,7 @@ def remove_hs(
         implicit_only: whether to only remove implicit hydrogens.
         update_explicit_count: whether to update the explicit hydrogen count.
         sanitize: whether to sanitize the molecule after the hydrogens are removed.
-        copy: whether to copy the input molecule.
     """
-
-    if copy:
-        mol = copy_mol(mol)
-
     mol = RemoveHs(
         mol,
         implicitOnly=implicit_only,
@@ -1007,6 +1029,11 @@ def to_scaffold_murcko(mol: Mol, make_generic: bool = False):
     """
     scf = MurckoScaffold.GetScaffoldForMol(mol)
 
+    # NOTE(hadim): this is already done in `GetScaffoldForMol`
+    # Note sure we need it here.
+    scf.UpdatePropertyCache()
+    Chem.GetSymmSSSR(scf)  # type: ignore
+
     if make_generic:
         scf = make_scaffold_generic(scf)
         scf = to_mol(scf)
@@ -1034,6 +1061,9 @@ def make_scaffold_generic(mol: Mol, include_bonds: bool = False):
     if include_bonds:
         for bond in mol.GetBonds():
             bond.SetBondType(UNSPECIFIED_BOND)
+
+    mol.UpdatePropertyCache()
+    Chem.GetSymmSSSR(mol)  # type: ignore
 
     return mol
 

@@ -9,16 +9,23 @@ remote_branch: "gh-pages"
 use_directory_urls: false
 docs_dir: "docs"
 
+# Fail on warnings to detect issues with types and docstring
+strict: true
+
 nav:
   - Overview: index.md
   - Usage: usage.md
   - Tutorials:
       - The Basics: tutorials/The_Basics.ipynb
-      - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
-      - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
-      - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
+      - Preprocessing: tutorials/Preprocessing.ipynb
+      - Descriptors: tutorials/Descriptors.ipynb
+      - Scaffolds: tutorials/Scaffolds.ipynb
+      - Fuzzy_Scaffolds: tutorials/Fuzzy_Scaffolds.ipynb
+      - Clustering: tutorials/Clustering.ipynb
+      - Fragment: tutorials/Fragment.ipynb
+      - Conformers: tutorials/Conformers.ipynb
       - Visualization: tutorials/Visualization.ipynb
-      - Working with local and remote data: tutorials/Filesystem.ipynb
+      - Datamol Filesystem Module: tutorials/Filesystem.ipynb
   - API:
       - datamol: api/datamol.md
       - datamol.descriptors: api/datamol.descriptors.md
@@ -26,8 +33,6 @@ nav:
       - datamol.viz: api/datamol.viz.md
       - datamol.fragment: api/datamol.fragment.md
       - datamol.scaffold: api/datamol.scaffold.md
-      - datamol.reactions: api/datamol.reactions.md
-      - datamol.actions: api/datamol.actions.md
       - datamol.molar: api/datamol.molar.md
       - datamol.align: api/datamol.align.md
       - datamol.utils: api/datamol.utils.md
@@ -86,9 +91,9 @@ plugins:
             heading_level: 3
             show_root_full_path: false
 
-  - mkdocs-jupyter:
-      execute: false
-      # kernel_name: python3
+  # - mkdocs-jupyter:
+  #     execute: false
+  #     # kernel_name: python3
 
   - mike:
       version_selector: true

@@ -17,26 +17,17 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup conda
-        # see https://github.com/mamba-org/provision-with-micromamba/issues/54
-        uses: mamba-org/provision-with-micromamba@755a9542150cc9dedd1c1dd95b963460ec320939
+        uses: mamba-org/provision-with-micromamba@main
         with:
-          environment-file: false
+          environment-file: env.yml
+          environment-name: datamol
           cache-downloads: true
 
-      - name: Install Dependencies
-        run: |
-          micromamba activate
-          micromamba create -n datamol -f env.yml
-
       - name: Install library
-        run: |
-          micromamba activate datamol
-          python -m pip install .
+        run: python -m pip install --no-deps .
 
       - name: Deploy the doc
         run: |
-          micromamba activate datamol
-
           echo "Configure git"
           git config --global user.name 'hadim'
           git config --global user.email 'hadim@users.noreply.github.com'

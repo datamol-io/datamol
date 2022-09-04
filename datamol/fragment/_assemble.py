@@ -9,6 +9,8 @@ the same fragment set in input. Thus, in theory fragments obtained using BRICS C
 This differs from rdkit BRICSBuild implementation that requires the presence of dummy indicator atoms added by a prior BRICS fragmentation.
 """
 
+from typing import Optional
+
 import copy
 import json
 import itertools
@@ -24,6 +26,7 @@ from rdkit import Chem
 from rdkit.Chem import rdChemReactions
 
 import datamol as dm
+from ..types import Mol
 
 CCQ = "[$([#6][!#6;!#1]):1]!@[#6;!a:2]>>[*:1].[*:2]"
 CCQ_RETRO = "[$([#6;!H0][!#6;!#1]):1].[#6;!a;!H0:2]>>[*:1][*:2]"
@@ -256,7 +259,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
         mol = None
         mSmi = ""
         try:
-            mSmi = Chem.MolToSmiles(m)
+            mSmi = dm.to_smiles(m)
             mol = dm.to_mol(mSmi)
         except:
             pass
@@ -264,7 +267,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
             try:
                 mol.UpdatePropertyCache()
                 mol = dm.sanitize_mol(mol)
-                mSmi = Chem.MolToSmiles(m)
+                mSmi = dm.to_smiles(m)
                 mol = dm.to_mol(mSmi)
             except:
                 pass
@@ -298,7 +301,7 @@ def break_mol(
         all_reactions_type = [all_reactions_type[ind] for ind in p]
 
     nx = dm.graph._get_networkx()
-    mSmi = Chem.MolToSmiles(mol, isomericSmiles=True)
+    mSmi = dm.to_smiles(mol, isomeric=True)
     G = nx.DiGraph()
     node_num = 0
     G.add_node(node_num, smiles=mSmi, mol=mol)
@@ -340,7 +343,7 @@ def break_mol(
                             seqOk = False
                             break
                         continue
-                    pSmi = Chem.MolToSmiles(prod, isomericSmiles=True)
+                    pSmi = dm.to_smiles(prod, isomeric=True)
                     seqOk = seqOk and (dm.to_mol(pSmi) is not None)
 
                     notDummies = sum([atm.GetSymbol() != "*" for atm in prod.GetAtoms()])
@@ -357,7 +360,7 @@ def break_mol(
                             continue
                         pSmi = prod.pSmi
                         node_num += 1
-                        usmi = Chem.MolToSmiles(dm.fix_mol(prod), isomericSmiles=True)
+                        usmi = dm.to_smiles(dm.fix_mol(prod), isomeric=True)
                         G.add_node(node_num, smiles=usmi, mol=prod)
                         G.add_edge(parent, node_num)
                         if usmi not in allNodes:
@@ -426,16 +429,16 @@ def build(ll_mols, max_n_mols=float("inf"), mode="brics", frag_rxn=None, ADD_RNX
 
 
 def assemble_fragment_order(
-    fragmentlist,
-    seen=None,
+    fragmentlist: list,
+    seen: Optional[Mol] = None,
     allow_incomplete: bool = False,
     max_n_mols: float = float("inf"),
     RXNS=None,
 ):
     """Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm
 
-    ..note ::
-        We are of course assuming:
+    We are of course assuming:
+
         1. that the order in the fragmentlist matter :D !
         2. that none of the fragment has explicitly defined hydrogen atoms.
         3. only a list of unique molecule is internally maintained
@@ -444,7 +447,6 @@ def assemble_fragment_order(
         fragmentlist: list of original fragments to grow
         seen: original molecules used as base. If none, the first element of fragment list will be poped out
         allow_incomplete: Whether to accept assembled molecules with missing fragment
-
     """
 
     if RXNS is None:
@@ -454,7 +456,7 @@ def assemble_fragment_order(
     yield_counter = 0
     if seen is None:
         seen = fragmentlist.pop(0)
-    seen = [Chem.MolToSmiles(seen)]  # only one molecule to assemble
+    seen = [dm.to_smiles(seen)]  # only one molecule to assemble
     while yield_counter < max_n_mols and len(fragmentlist) > 0:
         # find all the way to add this fragment to seen
         frag = fragmentlist.pop(0)
@@ -521,7 +523,7 @@ def assemble_fragment_iter(
                 max_n_mols=(max_n_mols - len(seen)),
                 maxdepth=maxdepth - 1,
             ):
-                pSmi = Chem.MolToSmiles(p, True)
+                pSmi = dm.to_smiles(p, True)
                 if pSmi not in seen:
                     seen.add(pSmi)
                     yield p if not as_smiles else pSmi

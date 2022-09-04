@@ -168,12 +168,12 @@ def is_local_path(path: Union[str, os.PathLike]):
     return get_protocol(str(path)) == "file"
 
 
-def join(*paths):
+def join(*paths: str):
     """Join paths together. The first element determine the
     filesystem to use (and so the separator.
 
     Args:
-        paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.
+        *paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.
     """
     paths = [str(path).rstrip("/") for path in paths]
     source_path = paths[0]
