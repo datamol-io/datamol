@@ -14,10 +14,15 @@ nav:
   - Usage: usage.md
   - Tutorials:
       - The Basics: tutorials/The_Basics.ipynb
+      - Preprocessing: tutorials/Preprocessing.ipynb
+      - Descriptors: tutorials/Descriptors.ipynb
+      - Scaffolds: tutorials/Scaffolds.ipynb
+      - Fuzzy_Scaffolds: tutorials/Fuzzy_Scaffolds.ipynb
       - Clustering: tutorials/Clustering.ipynb
       - Fragment: tutorials/Fragment.ipynb
+      - Conformers: tutorials/Conformers.ipynb
       - Visualization: tutorials/Visualization.ipynb
-      - Working with local and remote data: tutorials/Filesystem.ipynb
+      - Datamol Filesystem Module: tutorials/Filesystem.ipynb
   - API:
       - datamol: api/datamol.md
       - datamol.descriptors: api/datamol.descriptors.md
@@ -86,7 +91,6 @@ plugins:
   - mkdocs-jupyter:
       execute: false
       # kernel_name: python3
-      ignore: ["tutorials/new/*.ipynb"]
 
   - mike:
       version_selector: true

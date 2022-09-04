@@ -58,7 +58,7 @@ def to_image(
             - If set to a molecule, it is used as a template for alignment with `dm.align.template_align()`.
             - If set to False, no alignment is performed.
             For a more custom alignment, we suggest using directly the module `dm.align` instead.
-        kwargs: Additional arguments to pass to the drawing function. See RDKit
+        **kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
