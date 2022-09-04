@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+      <a href="../tutorials/The_Basics.ipynb" class="md-nav__link">
         The Basics
       </a>
     </li>
@@ -285,8 +285,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
-        Preprocessing Molecules
+      <a href="../tutorials/Preprocessing.ipynb" class="md-nav__link">
+        Preprocessing
       </a>
     </li>
   
@@ -299,8 +299,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
-        Cluster Molecules
+      <a href="../tutorials/Descriptors.ipynb" class="md-nav__link">
+        Descriptors
       </a>
     </li>
   
@@ -313,8 +313,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
-        Fragment and Scaffold
+      <a href="../tutorials/Scaffolds.ipynb" class="md-nav__link">
+        Scaffolds
       </a>
     </li>
   
@@ -327,7 +327,63 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Visualization.html" class="md-nav__link">
+      <a href="../tutorials/Fuzzy_Scaffolds.ipynb" class="md-nav__link">
+        Fuzzy_Scaffolds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Clustering.ipynb" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment.ipynb" class="md-nav__link">
+        Fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Conformers.ipynb" class="md-nav__link">
+        Conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.ipynb" class="md-nav__link">
         Visualization
       </a>
     </li>
@@ -341,8 +397,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Filesystem.html" class="md-nav__link">
-        Working with local and remote data
+      <a href="../tutorials/Filesystem.ipynb" class="md-nav__link">
+        Datamol Filesystem Module
       </a>
     </li>
   
@@ -579,34 +635,6 @@
     <li class="md-nav__item">
       <a href="datamol.scaffold.html" class="md-nav__link">
         datamol.scaffold
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.reactions.html" class="md-nav__link">
-        datamol.reactions
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.actions.html" class="md-nav__link">
-        datamol.actions
       </a>
     </li>
   
@@ -860,10 +888,10 @@
 
       <details class="quote">
         <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">):</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span>
+<span class="normal">84</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculate the number of aromatic atoms.&quot;&quot;&quot;</span>
     <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">_AROMATIC_QUERY</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
@@ -914,15 +942,15 @@
 
       <details class="quote">
         <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">90</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
 <span class="normal">93</span>
 <span class="normal">94</span>
-<span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms_proportion</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">):</span>
+<span class="normal">95</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms_proportion</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Calculate the aromatic proportion: # aromatic atoms/#atoms total.</span>
 
 <span class="sd">    Args:</span>
@@ -986,6 +1014,7 @@
     <tbody>
         <tr>
 <td><code>n_charged_atoms</code></td>          <td>
+                <code>int</code>
           </td>
           <td><p>number of charged atoms in the molecule</p></td>
         </tr>
@@ -994,16 +1023,16 @@
 
       <details class="quote">
         <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_charged_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">):</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_charged_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of charged atoms in a molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -1069,6 +1098,7 @@
     <tbody>
         <tr>
 <td><code>n_rigid_bonds</code></td>          <td>
+                <code>int</code>
           </td>
           <td><p>number of rigid bonds in the molecule</p></td>
         </tr>
@@ -1077,7 +1107,10 @@
 
       <details class="quote">
         <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">68</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
 <span class="normal">69</span>
 <span class="normal">70</span>
 <span class="normal">71</span>
@@ -1087,10 +1120,7 @@
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_rigid_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">):</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_rigid_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of rigid bonds in a molecule.</span>
 
 <span class="sd">    Rigid bonds are bonds that are not single and not in rings.</span>
@@ -1159,6 +1189,7 @@
     <tbody>
         <tr>
 <td><code>n_stero_center</code></td>          <td>
+                <code>int</code>
           </td>
           <td><p>number of stereocenters in the molecule</p></td>
         </tr>
@@ -1167,7 +1198,10 @@
 
       <details class="quote">
         <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
@@ -1179,10 +1213,7 @@
 <span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_stereo_centers</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">):</span>
+<span class="normal">113</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_stereo_centers</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
     <span class="sd">&quot;&quot;&quot;Compute the number of stereocenters in a molecule.</span>
 
 <span class="sd">    Args:</span>

@@ -271,7 +271,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+      <a href="../tutorials/The_Basics.ipynb" class="md-nav__link">
         The Basics
       </a>
     </li>
@@ -285,8 +285,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Preprocessing_Molecules.html" class="md-nav__link">
-        Preprocessing Molecules
+      <a href="../tutorials/Preprocessing.ipynb" class="md-nav__link">
+        Preprocessing
       </a>
     </li>
   
@@ -299,8 +299,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Cluster_Molecules.html" class="md-nav__link">
-        Cluster Molecules
+      <a href="../tutorials/Descriptors.ipynb" class="md-nav__link">
+        Descriptors
       </a>
     </li>
   
@@ -313,8 +313,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Fragment_and_Scaffold.html" class="md-nav__link">
-        Fragment and Scaffold
+      <a href="../tutorials/Scaffolds.ipynb" class="md-nav__link">
+        Scaffolds
       </a>
     </li>
   
@@ -327,7 +327,63 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Visualization.html" class="md-nav__link">
+      <a href="../tutorials/Fuzzy_Scaffolds.ipynb" class="md-nav__link">
+        Fuzzy_Scaffolds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Clustering.ipynb" class="md-nav__link">
+        Clustering
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment.ipynb" class="md-nav__link">
+        Fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Conformers.ipynb" class="md-nav__link">
+        Conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.ipynb" class="md-nav__link">
         Visualization
       </a>
     </li>
@@ -341,8 +397,8 @@
   
   
     <li class="md-nav__item">
-      <a href="../tutorials/Filesystem.html" class="md-nav__link">
-        Working with local and remote data
+      <a href="../tutorials/Filesystem.ipynb" class="md-nav__link">
+        Datamol Filesystem Module
       </a>
     </li>
   
@@ -525,34 +581,6 @@
   
 </nav>
       
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.reactions.html" class="md-nav__link">
-        datamol.reactions
-      </a>
-    </li>
-  
-
-            
-          
-            
-              
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="datamol.actions.html" class="md-nav__link">
-        datamol.actions
-      </a>
     </li>
   
 
@@ -773,7 +801,7 @@ in the core, forcing to keep the full side chain if required</p>
         <tr>
           <td><code>enforce_subs</code></td>
           <td>
-                <code><span title="typing.List">List</span>[str]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
           <td><p>List of substructure to enforce on the scaffold.</p></td>
           <td>
@@ -793,7 +821,7 @@ in the core, forcing to keep the full side chain if required</p>
         <tr>
           <td><code>additional_templates</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="rdkit.Chem">Chem</span>.<span title="rdkit.Chem.rdchem">rdchem</span>.<span title="Chem.rdchem.Mol">Mol</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]]</code>
           </td>
           <td><p>Additional template to use to generate scaffolds.</p></td>
           <td>
@@ -813,7 +841,7 @@ in the core, forcing to keep the full side chain if required</p>
         <tr>
           <td><code>mcs_params</code></td>
           <td>
-                <code><span title="typing.Dict">Dict</span>[<span title="typing.Any">Any</span>, <span title="typing.Any">Any</span>]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[<span title="typing.Any">Any</span>, <span title="typing.Any">Any</span>]]</code>
           </td>
           <td><p>Arguments of MCS algorithm.</p></td>
           <td>
@@ -834,6 +862,7 @@ in the core, forcing to keep the full side chain if required</p>
     <tbody>
         <tr>
           <td>
+                <code>set</code>
           </td>
           <td><ul>
 <li><code>set</code> - <code>scaffolds</code> - All found scaffolds in the molecules as valid smiles.</li>
@@ -841,6 +870,7 @@ in the core, forcing to keep the full side chain if required</p>
         </tr>
         <tr>
           <td>
+                <code><span title="typing.Dict">Dict</span>[str, dict]</code>
           </td>
           <td><ul>
 <li><code>Dict[Dict]</code> - <code>scaffold_infos</code> - Infos on the scaffold mapping, ignoring any side chain that had
@@ -851,6 +881,7 @@ in the core, forcing to keep the full side chain if required</p>
         </tr>
         <tr>
           <td>
+                <code><span title="typing.Dict">Dict</span>[str, list]</code>
           </td>
           <td><ul>
 <li><code>Dict[List]</code> - <code>scaffold_to_group</code> - Map between each generic scaffold and the R-groups decomposition row.</li>
@@ -861,16 +892,7 @@ in the core, forcing to keep the full side chain if required</p>
 
       <details class="quote">
         <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 67</span>
-<span class="normal"> 68</span>
-<span class="normal"> 69</span>
-<span class="normal"> 70</span>
-<span class="normal"> 71</span>
-<span class="normal"> 72</span>
-<span class="normal"> 73</span>
-<span class="normal"> 74</span>
-<span class="normal"> 75</span>
-<span class="normal"> 76</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
 <span class="normal"> 77</span>
 <span class="normal"> 78</span>
 <span class="normal"> 79</span>
@@ -1017,14 +1039,23 @@ in the core, forcing to keep the full side chain if required</p>
 <span class="normal">220</span>
 <span class="normal">221</span>
 <span class="normal">222</span>
-<span class="normal">223</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">enforce_subs</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">enforce_subs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_atom_cuttoff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
-    <span class="n">additional_templates</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">additional_templates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ignore_non_ring</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-    <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">):</span>
+    <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]:</span>
     <span class="sd">&quot;&quot;&quot;Generate fuzzy scaffold with enforceable group that needs to appear</span>
 <span class="sd">    in the core, forcing to keep the full side chain if required</span>
 
@@ -1092,14 +1123,14 @@ in the core, forcing to keep the full side chain if required</p>
                 <span class="n">rw_scf</span><span class="o">.</span><span class="n">RemoveAtom</span><span class="p">(</span><span class="n">a</span><span class="p">)</span>
             <span class="n">scfs</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">rdmolops</span><span class="o">.</span><span class="n">GetMolFrags</span><span class="p">(</span><span class="n">rw_scf</span><span class="p">,</span> <span class="n">asMols</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="n">scfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scf</span><span class="p">)]</span>
+            <span class="n">scfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scf</span><span class="p">)]</span>
 
         <span class="c1"># add templates mols if exists:</span>
         <span class="k">for</span> <span class="n">tmp</span> <span class="ow">in</span> <span class="n">additional_templates</span><span class="p">:</span>
-            <span class="n">tmp</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
+            <span class="n">tmp</span> <span class="o">=</span> <span class="n">to_mol</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
             <span class="n">tmp_scf</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MakeScaffoldGeneric</span><span class="p">(</span><span class="n">tmp</span><span class="p">)</span>
             <span class="k">if</span> <span class="n">generic_m</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">tmp_scf</span><span class="p">):</span>
-                <span class="n">scfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">tmp_scf</span><span class="p">))</span>
+                <span class="n">scfs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">tmp_scf</span><span class="p">))</span>
 
         <span class="k">for</span> <span class="n">scf</span> <span class="ow">in</span> <span class="n">scfs</span><span class="p">:</span>
             <span class="k">if</span> <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">]</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;mols&quot;</span><span class="p">):</span>
@@ -1124,14 +1155,14 @@ in the core, forcing to keep the full side chain if required</p>
             <span class="o">**</span><span class="n">mcs_params</span><span class="p">,</span>
         <span class="p">)</span>
 
-        <span class="n">mcsM</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">MolFromSmarts</span><span class="p">(</span><span class="n">mcs</span><span class="o">.</span><span class="n">smartsString</span><span class="p">)</span>
+        <span class="n">mcsM</span> <span class="o">=</span> <span class="n">from_smarts</span><span class="p">(</span><span class="n">mcs</span><span class="o">.</span><span class="n">smartsString</span><span class="p">)</span>
         <span class="n">mcsM</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">Chem</span><span class="o">.</span><span class="n">SetHybridization</span><span class="p">(</span><span class="n">mcsM</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="n">mcsM</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">()</span> <span class="o">&lt;</span> <span class="n">n_atom_cuttoff</span><span class="p">:</span>
             <span class="k">continue</span>
 
-        <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;smarts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">mcsM</span><span class="p">)</span>
+        <span class="n">scf2infos</span><span class="p">[</span><span class="n">scf</span><span class="p">][</span><span class="s2">&quot;smarts&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">to_smarts</span><span class="p">(</span><span class="n">mcsM</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">popout</span><span class="p">:</span>
             <span class="n">mols</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 
@@ -1161,7 +1192,7 @@ in the core, forcing to keep the full side chain if required</p>
             <span class="p">]</span>
 
             <span class="n">rgroups</span> <span class="o">=</span> <span class="p">[</span><span class="n">gp</span><span class="p">[</span><span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">acceptable_groups</span> <span class="k">if</span> <span class="sa">f</span><span class="s2">&quot;R</span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span> <span class="ow">in</span> <span class="n">gp</span><span class="o">.</span><span class="n">keys</span><span class="p">()]</span>
-            <span class="k">if</span> <span class="n">enforce_subs</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">enforce_subs</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                 <span class="n">rgroups</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="n">rgp</span>
                     <span class="k">for</span> <span class="n">rgp</span> <span class="ow">in</span> <span class="n">rgroups</span>
@@ -1171,7 +1202,7 @@ in the core, forcing to keep the full side chain if required</p>
                 <span class="n">scaff</span> <span class="o">=</span> <span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">AdjustQueryProperties</span><span class="p">(</span><span class="n">core</span><span class="p">,</span> <span class="n">core_query_param</span><span class="p">),</span> <span class="n">rgroups</span><span class="p">)</span>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">continue</span>
-            <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
+            <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
 
     <span class="k">return</span> <span class="n">all_scaffolds</span><span class="p">,</span> <span class="n">scf2infos</span><span class="p">,</span> <span class="n">scf2groups</span>
 </code></pre></div></td></tr></table></div>
@@ -1196,16 +1227,7 @@ in the core, forcing to keep the full side chain if required</p>
 
       <details class="quote">
         <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
-<span class="normal">23</span>
-<span class="normal">24</span>
-<span class="normal">25</span>
-<span class="normal">26</span>
-<span class="normal">27</span>
-<span class="normal">28</span>
-<span class="normal">29</span>
-<span class="normal">30</span>
-<span class="normal">31</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
@@ -1238,10 +1260,19 @@ in the core, forcing to keep the full side chain if required</p>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
-<span class="normal">64</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Trim list of side chain from a molecule.&quot;&quot;&quot;</span>
 
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">AddHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">add_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
     <span class="n">match</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatch</span><span class="p">(</span><span class="n">core</span><span class="p">)</span>
     <span class="n">map2idx</span> <span class="o">=</span> <span class="p">{}</span>
@@ -1271,16 +1302,16 @@ in the core, forcing to keep the full side chain if required</p>
             <span class="n">emol</span><span class="o">.</span><span class="n">AddBond</span><span class="p">(</span><span class="n">nei_idx</span><span class="p">,</span> <span class="n">new_ind</span><span class="p">,</span> <span class="n">bond</span><span class="o">.</span><span class="n">GetBondType</span><span class="p">())</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">emol</span><span class="o">.</span><span class="n">GetMol</span><span class="p">()</span>
-    <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">RemoveHs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">remove_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="n">query_param</span> <span class="o">=</span> <span class="n">AdjustQueryParameters</span><span class="p">()</span>
     <span class="n">query_param</span><span class="o">.</span><span class="n">makeDummiesQueries</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">query_param</span><span class="o">.</span><span class="n">adjustDegree</span> <span class="o">=</span> <span class="kc">False</span>
     <span class="n">query_param</span><span class="o">.</span><span class="n">aromatizeIfPossible</span> <span class="o">=</span> <span class="kc">True</span>
     <span class="k">for</span> <span class="n">patt</span><span class="p">,</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">unwanted2map</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-        <span class="n">cur_frag</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">patt</span><span class="p">)</span>
+        <span class="n">cur_frag</span> <span class="o">=</span> <span class="n">fix_mol</span><span class="p">(</span><span class="n">patt</span><span class="p">)</span>
         <span class="n">mol</span> <span class="o">=</span> <span class="n">Chem</span><span class="o">.</span><span class="n">DeleteSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cur_frag</span><span class="p">,</span> <span class="n">onlyFrags</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1328,13 +1359,13 @@ in the core, forcing to keep the full side chain if required</p>
       
       
         
-        <a href="datamol.reactions.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.reactions" rel="next">
+        <a href="datamol.molar.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.molar" rel="next">
           <div class="md-footer__title">
             <div class="md-ellipsis">
               <span class="md-footer__direction">
                 Next
               </span>
-              datamol.reactions
+              datamol.molar
             </div>
           </div>
           <div class="md-footer__button md-icon">
