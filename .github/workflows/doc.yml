@@ -24,7 +24,7 @@ jobs:
           cache-downloads: true
 
       - name: Install library
-        run: python -m pip install .
+        run: python -m pip install --no-deps .
 
       - name: Deploy the doc
         run: |

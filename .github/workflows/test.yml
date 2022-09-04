@@ -40,7 +40,7 @@ jobs:
             rdkit=${{ matrix.rdkit-version }}
 
       - name: Install library
-        run: python -m pip install -e . # `-e` required for correct `coverage` run.
+        run: python -m pip install --no-deps -e . # `-e` required for correct `coverage` run.
 
       - name: Run tests
         run: pytest
