@@ -1,6 +1,3 @@
-from typing import List
-from typing import Set
-
 import sys
 import os
 

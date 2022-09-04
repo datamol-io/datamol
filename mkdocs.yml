@@ -14,9 +14,8 @@ nav:
   - Usage: usage.md
   - Tutorials:
       - The Basics: tutorials/The_Basics.ipynb
-      - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
-      - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
-      - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
+      - Clustering: tutorials/Clustering.ipynb
+      - Fragment: tutorials/Fragment.ipynb
       - Visualization: tutorials/Visualization.ipynb
       - Working with local and remote data: tutorials/Filesystem.ipynb
   - API:

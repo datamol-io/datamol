@@ -146,6 +146,7 @@ def auto_align_many(
     Args:
         mols: A list of molecules to auto align.
         partition_method: Partition method to use:
+
             - 'scaffold': Cluster molecules by Murcko scaffold.
             - 'strip-scaffold': Cluster molecules by Murcko scaffold, but remove all atoms not
                 in the core.
@@ -155,6 +156,7 @@ def auto_align_many(
                 generic but keeping the bond order informations.
             - 'cluster': Cluster the molecules using Butina frm RDKit with `dm.cluster_mols`.
             Cautious as the method 'cluster' is very sensitive to the cutoff.
+
         copy: Whether to copy the molecules before aligning them.
         cluster_cutoff: Optional cluster cutoff.
         allow_r_groups: Optional, if True, terminal dummy atoms in the
