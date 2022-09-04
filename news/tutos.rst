@@ -16,6 +16,7 @@
 **Removed:**
 
 * Remove unused and unmaintained `dm.actions` and `dm.reactions` module.
+* Remove `copy` args from `add_hs` and `remove_hs` (RDKit already returns copies).
 
 **Fixed:**
 

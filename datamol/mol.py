@@ -947,7 +947,6 @@ def add_hs(
     add_coords: bool = False,
     only_on_atoms: Optional[List[int]] = None,
     add_residue_info: bool = False,
-    copy: bool = True,
 ):
     """Adds hydrogens to the molecule.
 
@@ -958,12 +957,7 @@ def add_hs(
         only_on_atoms: a list of atoms to add hydrogens only on.
         add_residue_info: whether to add residue information to the hydrogens.
             Useful for PDB files.
-        copy: whether to copy the input molecule.
     """
-
-    if copy:
-        mol = copy_mol(mol)
-
     mol = AddHs(
         mol,
         explicitOnly=explicit_only,
@@ -980,7 +974,6 @@ def remove_hs(
     implicit_only: bool = False,
     update_explicit_count: bool = False,
     sanitize: bool = True,
-    copy: bool = True,
 ):
     """Removes hydrogens from a molecule.
 
@@ -989,12 +982,7 @@ def remove_hs(
         implicit_only: whether to only remove implicit hydrogens.
         update_explicit_count: whether to update the explicit hydrogen count.
         sanitize: whether to sanitize the molecule after the hydrogens are removed.
-        copy: whether to copy the input molecule.
     """
-
-    if copy:
-        mol = copy_mol(mol)
-
     mol = RemoveHs(
         mol,
         implicitOnly=implicit_only,
