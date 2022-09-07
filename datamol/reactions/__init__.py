@@ -3,3 +3,7 @@ from ._reactions import compute_reaction_product
 from ._reactions import apply_reaction
 from ._reactions import can_react
 from ._reactions import inverse_reaction
+from ._attachments import convert_attach_to_isotope
+from ._reactions import ATTACHING_RXN
+from ._attachments import num_attachment_points
+from ._reactions import from_smarts
