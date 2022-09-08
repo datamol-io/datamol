@@ -1,5 +1,5 @@
 from functools import singledispatch
-
+from typing import Union
 import numpy as np
 from rdkit.Chem import rdChemReactions
 from rdkit.Chem import AllChem
@@ -15,20 +15,22 @@ def from_smarts(rxn_smarts: str):
     return rdChemReactions.ReactionFromSmarts(rxn_smarts)
 
 
-def is_reaction_ok(rxn):
+def is_reaction_ok(rxn: Union[str, rdChemReactions.ChemicalReaction]):
     """Check is the reaction is synthetically valid"""
+    if isinstance(rxn, str):
+        rxn = from_smarts(rxn_smarts=rxn)
     return rdChemReactions.SanitizeRxn(rxn) == rdChemReactions.SanitizeFlags.SANITIZE_NONE
 
 
 def compute_reaction_product(
-    out, single_output=True, rm_attach: bool = False, as_smiles: bool = False
+    out, single_output=True, rm_attach: bool = False, as_smiles: bool = False, sanitize: bool = True
 ):
     """Compute the products of a reaction"""
-    out = [dm.fix_mol(x[0], n_iter=0) for x in out]
-    if not single_output:
-        out = [dm.sanitize_mol(x) for x in out]
-    else:
-        out = [dm.sanitize_first(np.random.permutation(out))]
+    out = [x[0] for x in out]
+    if single_output:
+        out = np.random.choice(out, 1)
+    if sanitize:
+        out = [dm.sanitize_mol(m) for m in out]
     if rm_attach:
         out = [dm.remove_dummies(x) for x in out]
     if as_smiles:
@@ -40,7 +42,6 @@ def compute_reaction_product(
     # Might be a important to make a tradeoff decision in selecting products for greater speed.
     # product = sorted(out, key=lambda x: MoleculeEnv.compute_reward_from_mol(x, True))[-1]
     # sampling from list of products is an alternative
-    return out
 
 
 def apply_reaction(
@@ -49,13 +50,21 @@ def apply_reaction(
     single_output: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
+    disable_log: bool = True,
+    sanitize: bool = True,
 ):
     """Apply a chemical reaction on a molecule"""
+    if disable_log:
+        dm.disable_rdkit_log()
     if not rxn.IsInitialized():
         rxn.Initialize()
     out = rxn.RunReactants(reactants)
     return compute_reaction_product(
-        out=out, single_output=single_output, as_smiles=as_smiles, rm_attach=rm_attach
+        out=out,
+        single_output=single_output,
+        as_smiles=as_smiles,
+        rm_attach=rm_attach,
+        sanitize=sanitize,
     )
 
 

@@ -24,7 +24,7 @@ def add_brackets_to_attachment_points(smi: str):
     )
 
 
-def convert_attach_to_isotope(mol_or_smi: Union[Chem.Mol, str], same_isotope:bool=True):
+def convert_attach_to_isotope(mol_or_smi: Union[Chem.Mol, str], same_isotope:bool=False):
     """Convert attachment to isotope mapping"""
     mol = dm.to_mol(mol_or_smi)
     smiles = dm.to_smiles(mol)
