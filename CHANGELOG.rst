@@ -4,6 +4,28 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.13
+====================
+
+**Added:**
+
+* New aligning tutorials.
+
+**Removed:**
+
+* `rdkit` dep from pypi (the dep is only on the conda forge package)
+
+**Fixed:**
+
+* Grammar in tutorials.
+
+**Authors:**
+
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
 v0.7.12
 ====================
 
