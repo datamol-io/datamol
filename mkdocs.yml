@@ -20,6 +20,7 @@ nav:
       - Preprocessing: tutorials/Preprocessing.ipynb
       - Descriptors: tutorials/Descriptors.ipynb
       - Scaffolds: tutorials/Scaffolds.ipynb
+      - Aligning: tutorials/Aligning.ipynb
       - Fuzzy_Scaffolds: tutorials/Fuzzy_Scaffolds.ipynb
       - Clustering: tutorials/Clustering.ipynb
       - Fragment: tutorials/Fragment.ipynb
