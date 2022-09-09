@@ -11,7 +11,7 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 34
+  num_commits: 35
   first_commit: 2020-10-24 11:46:22
   github: matudor
 - name: michelml
@@ -63,3 +63,7 @@
   num_commits: 12
   first_commit: 2022-08-09 16:54:28
   github: matudor
+- name: Valence-JonnyHsu
+  email: 104230580+Valence-JonnyHsu@users.noreply.github.com
+  num_commits: 8
+  first_commit: 2022-09-08 10:46:44

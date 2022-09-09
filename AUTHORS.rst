@@ -11,6 +11,7 @@ Authors are sorted alphabetically.
 * Julien Horwood
 * Matt
 * Therence1
+* Valence-JonnyHsu
 * deepsource-autofix[bot]
 * michelml
 * mike
