@@ -15,7 +15,7 @@
     
     
       
-        <title>Pre-processing Molecules - datamol</title>
+        <title>Pre-Processing Molecules - datamol</title>
       
     
     
@@ -106,7 +106,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Pre-processing Molecules
+              Pre-Processing Molecules
             
           </span>
         </div>
@@ -297,12 +297,12 @@
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
-          Pre-processing Molecules
+          Pre-Processing Molecules
           <span class="md-nav__icon md-icon"></span>
         </label>
       
       <a href="Preprocessing.html" class="md-nav__link md-nav__link--active">
-        Pre-processing Molecules
+        Pre-Processing Molecules
       </a>
       
         
@@ -1802,29 +1802,29 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="pre-processing-molecules">Pre-processing Molecules<a class="anchor-link" href="#pre-processing-molecules">&#182;</a></h1><p>You’ve probably heard the adage “garbage in, garbage out” before in reference to the importance of data quality when it comes to AI/ML. The same holds true in the field of drug discovery. Given the scarcity and often non-consistent quality of available data for drug discovery, an initial clean up is almost always required to ensure the use of high quality data in the generation of your models. If you don’t do this, the use of lesser quality data would definitely impact the accuracy of your models in any downstream task. Pre-processing of data and molecules is extremely important, let’s dive in!</p>
+<h1 id="pre-processing-molecules">Pre-Processing Molecules<a class="anchor-link" href="#pre-processing-molecules">&#182;</a></h1><p>You’ve probably heard the adage “garbage in, garbage out” before in reference to the importance of data quality when it comes to AI/ML. The same holds true in the field of drug discovery. Given the scarcity and often non-consistent quality of available data for drug discovery, an initial clean-up is almost always required to ensure the use of high-quality data in the generation of your models. If you don’t do this, the use of lesser quality data would definitely impact the accuracy of your models in any downstream task. Pre-processing of data and molecules is extremely important - let’s dive in!</p>
 <h2 id="representing-molecules">Representing Molecules<a class="anchor-link" href="#representing-molecules">&#182;</a></h2><p>There are many ways in which molecules can be represented. In other words, how can we effectively express the complexity of a molecule in a way that machines can understand? Here are some existing methods:</p>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Chemical_table_file">Molfile</a> - A table that holds information about the atoms, bonds, connectivity and coordinates of a molecule</li>
-<li><strong>SMILES</strong> - stands for <strong>S</strong>implified <strong>M</strong>olecular <strong>I</strong>nput <strong>L</strong>ine-<strong>E</strong>ntry <strong>S</strong>ystem and the name essentially describes it. It’s a line notation for encoding molecular structures where atoms are represented by their standard abbreviation as a chemical element (i.e. C for carbon, N for nitrogen etc.). Multiple symbols are then used to define elements with charges, bonds, rings, aromaticity, stereochemistry, and much more. For more detail, read <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system#Terminology">here</a>.<ul>
+<li><a href="https://en.wikipedia.org/wiki/Chemical_table_file">Molfile</a> - a table that holds information about the atoms, bonds, connectivity and coordinates of a molecule</li>
+<li><strong>SMILES</strong> - stands for <strong>S</strong>implified <strong>M</strong>olecular <strong>I</strong>nput <strong>L</strong>ine-<strong>E</strong>ntry <strong>S</strong>ystem and the name essentially describes it. It’s a line notation for encoding molecular structures where atoms are represented by their standard abbreviation as a chemical element (i.e. C for carbon, N for nitrogen, etc.). Multiple symbols are then used to define elements with charges, bonds, rings, aromaticity, stereochemistry, and much more. For more detail, read <a href="https://en.wikipedia.org/wiki/Simplified_molecular-input_line-entry_system#Terminology">here</a>.<ul>
 <li>As an example, CCO, OCC and C(O)C all refer to ethanol. Having a number of equally valid SMILES strings for a given molecule can be an issue, therefore, canonicalization algorithms can be used to generate canonical SMILES to produce unique and consistent SMILES strings.</li>
-<li>Although SMILES are commonly used, they are not perfect. In a generative model using SMILES as inputs and outputs, there are often invalid SMILES strings that are produced (i.e. the SMILE string corresponds to an invalid molecule that violates basic chemical rules).</li>
+<li>Although SMILES are commonly used, they are not perfect. In a generative model using SMILES as inputs and outputs, there are often invalid SMILES strings that are produced (i.e. the SMILE string correspond to an invalid molecule that violates basic chemical rules).</li>
 </ul>
 </li>
 <li><strong>SELFIES</strong> - stands for <strong>SELF</strong>-referenc<strong>I</strong>ng <strong>E</strong>mbedded <strong>S</strong>trings, it is another string-based representation for molecules that is generally more suitable for ML models and exhibits more robustness (i.e. more SELFIE strings corresponds to a valid molecule). Read more <a href="https://aspuru.substack.com/p/molecular-graph-representations-and">here</a>.</li>
-<li><strong>InChi</strong> - another string-based method of representing chemical structures developed by IUPAC. Read more <a href="https://iupac.org/100/stories/what-on-earth-is-inchi/">here</a>. On the other hand, <a href="https://dev.drugbank.com/guides/terms/inchi-key">InChi key</a> is a newer version of InChi that is only useful to identify molecules, however, it is impossible to reconstruct a molecule from an InChi key.</li>
+<li><strong>InChi</strong> - another string-based method of representing chemical structures developed by IUPAC. Read more <a href="https://iupac.org/100/stories/what-on-earth-is-inchi/">here</a>. On the other hand, <a href="https://dev.drugbank.com/guides/terms/inchi-key">InChi key</a> is a newer version of InChi that is only useful for identifying molecules, however, it is impossible to reconstruct a molecule from an InChi key.</li>
 </ul>
 <p>See below for a graphic that summarizes some of the methods discussed in the section above:</p>
 <p><img src="./images/Preprocess_1.png" alt="Preprocess_1.png"></p>
 <p><strong><em><a href="https://www.researchgate.net/publication/344906202_Chemoinformatics-based_enumeration_of_chemical_libraries_a_tutorial">Source</a></em></strong></p>
-<p><strong>Note:</strong> it’s important to understand that all forms of molecular representation have their pro’s and con’s. It’s less of a “one-size-fits-all” and more about picking and choosing specific methods to represent a molecule given your specific use case.</p>
+<p><strong>Note:</strong> it’s important to understand that all forms of molecular representation have their pros and cons. It’s less of a one-size-fits-all and more about picking and choosing specific methods to represent a molecule given your specific use case.</p>
 <h2 id="sanitize-and-standardize">Sanitize and Standardize<a class="anchor-link" href="#sanitize-and-standardize">&#182;</a></h2><p><strong><em>Molecular sanitization</em></strong> is the process of ensuring that the molecules in your dataset <strong><em>are realistic</em></strong>. You can read more about the sanitization procedure as applied in the RDKit <a href="https://www.rdkit.org/docs/RDKit_Book.html#molecular-sanitization">here</a>. In Datamol, there are a few extra steps as well, sanitization is done under the following procedure:</p>
 <ol>
 <li>Adjusting for nitrogen aromaticity since faulty valence for nitrogen in aromatic rings is  <a href="https://github.com/rdkit/rdkit/issues/2011">currently</a> an issue in RDKit through the Sanifix algorithm. </li>
 <li>An extra conversion is done from mol → smiles → mol to ensure that the molecules are valid SMILES.</li>
 <li>Charge neutralization - this is NOT charge removal, it attempts to correct valence issues arising from incorrect charges being placed on atoms.</li>
 </ol>
-<p>Users can control the application of the sanifix algorithim or charge neutralization, users can toggle the respective parameters <strong><em>sanifix</em></strong> and <strong><em>charge_neutral</em></strong> to be TRUE/FALSE.</p>
+<p>Users can control the application of the sanifix algorithm or charge neutralization, users can toggle the respective parameters <strong><em>sanifix</em></strong> and <strong><em>charge_neutral</em></strong> to be TRUE/FALSE.</p>
 <p>The process of <strong>standardization</strong> is used to generate <strong><em>canonical SMILES.</em></strong> It is currently done using the following procedure which can be controlled by the user through the described parameters below:</p>
 <ul>
 <li><strong><em>disconnect_metals -</em></strong> metal disconnection<ul>
@@ -1843,7 +1843,7 @@ Licensed under the Apache License, Version 2.0.
 </ul>
 </li>
 <li><strong><em>uncharge</em> -</strong> charge removal<ul>
-<li>This option neutralize the molecule by reversing the protonation state of protonated and deprotonated groups, if present (e.g. a carboxylate is re-protonated to the corresponding carboxylic acid).</li>
+<li>This option neutralizes the molecule by reversing the protonation state of protonated and deprotonated groups if present (e.g. a carboxylate is re-protonated to the corresponding carboxylic acid).</li>
 <li>In cases where there is a positive charge that is not neutralizable, an attempt is made to also preserve the corresponding negative charge to ensure a net zero charge.</li>
 </ul>
 </li>
@@ -1864,7 +1864,7 @@ Licensed under the Apache License, Version 2.0.
 <li>Generate InChi and InChi key.</li>
 <li>Save the results as CSV or SDF file formats.</li>
 </ul>
-<p>From here, we will generate a table where it can more easily visualized. The option of parallelization will also be shown:</p>
+<p>From here, we will generate a table where it can be more easily visualized. The option of parallelization will also be shown:</p>
 <p><strong>Note:</strong> parallelizing the preprocessing will only be faster if your dataset is very large.</p>
 
 </div>
@@ -2427,9 +2427,9 @@ data_clean</div>
 
 
 
-<div id="00e06de1-61cf-486e-ba86-5cfcd86648d8" class="jupyter-widgets jp-OutputArea-output ">
+<div id="a8261e6c-ffb7-49c8-8d68-1cd212a26d1b" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('00e06de1-61cf-486e-ba86-5cfcd86648d8');
+var element = document.getElementById('a8261e6c-ffb7-49c8-8d68-1cd212a26d1b');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "9a0d0e72910e4229b03e9aa5498250d5", "version_major": 2, "version_minor": 0}

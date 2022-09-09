@@ -288,7 +288,7 @@
   
     <li class="md-nav__item">
       <a href="Preprocessing.html" class="md-nav__link">
-        Pre-processing Molecules
+        Pre-Processing Molecules
       </a>
     </li>
   
@@ -1816,7 +1816,7 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="generate-scaffold">Generate Scaffold<a class="anchor-link" href="#generate-scaffold">&#182;</a></h1><h2 id="introduction-to-scaffolds">Introduction to Scaffolds<a class="anchor-link" href="#introduction-to-scaffolds">&#182;</a></h2><p>A scaffold is best defined as a <strong>molecular core</strong> of a compound where R groups are attached via attachment points. Scaffolds are important in drug discovery as they help us uncover structure-activity relationships (<a href="https://info.collaborativedrug.com/tofu-content-what-is-sar">SAR</a>) and often are found to be essential for the bioactivity of a given class of compounds. The general idea behind this approach is finding relationships between the structure of a compound and its properties such as biological activity and/or physicochemical properties.</p>
+<h1 id="generate-scaffold">Generate Scaffold<a class="anchor-link" href="#generate-scaffold">&#182;</a></h1><h2 id="introduction-to-scaffolds">Introduction to Scaffolds<a class="anchor-link" href="#introduction-to-scaffolds">&#182;</a></h2><p>A scaffold is best defined as a <strong>molecular core</strong> of a compound where R groups are attached via attachment points. Scaffolds are important in drug discovery as they help us uncover structure-activity relationships (<a href="https://info.collaborativedrug.com/tofu-content-what-is-sar">SAR</a>) and often are found to be essential for the bioactivity of a given class of compounds. The general idea behind this approach is to find relationships between the structure of a compound and its properties such as biological activity and/or physicochemical properties.</p>
 <p>There are multiple ways to define a scaffold and this can make it hard to compare the results of different, independent studies that involve scaffolds.  If you’re interested, you can read more about scaffolding <a href="https://datagrok.ai/help/domains/chem/functions/murcko-scaffolds">here</a> and <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC3328312/">here</a>. Most of the time, we rely on the Murcko scaffold which is also known as the <a href="https://pubs.acs.org/doi/10.1021/jm9602928">Bemis-Murcko</a> framework.</p>
 <p>From <a href="https://docs.chemaxon.com/display/docs/bemis-murcko-clustering.md">Chemaxon</a>: “Bemis and Murcko outlined a popular method for deriving scaffolds from molecules by removing side chain atoms. A molecular framework can be interpreted as a graph containing nodes and edges representing atom and bond types, respectively. Removing atom and bond labels or agglomerating nodes by chemotype yields a hierarchy of reduced graphs, or molecular equivalence classes, that represent sets of related molecules. Likewise, a framework can be further decomposed into individual rings (or the core ring assembly) using chemically intuitive rules: the rings can individually or jointly be considered as scaffolds derived from the original compound.”</p>
 <p>Scaffolds are generally useful in two main ways:</p>
@@ -1832,8 +1832,8 @@ Licensed under the Apache License, Version 2.0.
 <ol>
 <li>Load an example dataset/list of molecules</li>
 <li>Identify the scaffolds</li>
-<li>This will then enable you to create a chemical series which can be used in a MMPA (see the <a href="https://www.notion.so/Fragmenting-Compounds-8c861697ae6c44f3991cb215fd93e393">fragmentation</a> tutorial)<ol>
-<li>A molecular series refers to a set of two or more molecules with the same scaffold but different R groups at the same position, read more <a href="https://pubs.acs.org/doi/10.1021/jm500022q#:~:text=A%20matched%20molecular%20series%20is,groups%20at%20the%20same%20position.">here</a>. Once a molecular series is generated, it enables scientists to focus on studying molecular properties and how changes in the structure are associated in the changes of these values (e.g. SAR studies).</li>
+<li>This will then enable you to create a chemical series that can be used in an MMPA (see the <a href="https://www.notion.so/Fragmenting-Compounds-8c861697ae6c44f3991cb215fd93e393">fragmentation</a> tutorial)<ol>
+<li>A molecular series refers to a set of two or more molecules with the same scaffold but different R groups at the same position, read more <a href="https://pubs.acs.org/doi/10.1021/jm500022q#:~:text=A%20matched%20molecular%20series%20is,groups%20at%20the%20same%20position.">here</a>. Once a molecular series is generated, it enables scientists to focus on studying molecular properties and how changes in the structure are associated with the changes in these values (e.g. SAR studies).</li>
 </ol>
 </li>
 </ol>

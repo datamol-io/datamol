@@ -288,7 +288,7 @@
   
     <li class="md-nav__item">
       <a href="Preprocessing.html" class="md-nav__link">
-        Pre-processing Molecules
+        Pre-Processing Molecules
       </a>
     </li>
   
@@ -1833,9 +1833,9 @@ Licensed under the Apache License, Version 2.0.
 <h1 id="fragmenting-compounds">Fragmenting Compounds<a class="anchor-link" href="#fragmenting-compounds">&#182;</a></h1><h2 id="background">Background<a class="anchor-link" href="#background">&#182;</a></h2><p>A <a href="https://www.frontiersin.org/articles/10.3389/fmolb.2020.00180/full#:~:text=Fragment%2Dbased%20drug%20discovery%20(FBDD,in%20target%2Dbased%20drug%20discovery.">fragment</a> is essentially a small molecule that has a low molecular weight and small size, often representing a small part of a bigger, drug-like compound. These small compounds are of great importance in drug discovery, especially in the early stages. Fragments are used to identify small chemical and functional groups that bind, even if weakly, to the target of interest and thus serve as useful starting points in a <a href="https://en.wikipedia.org/wiki/Medicinal_chemistry">medicinal chemistry</a> campaign. Once identified, fragments act as building blocks and are subsequently chemically modified (addition/removal of specific chemical groups) to improve the overall interaction of the newly generated compounds with the target of interest.</p>
 <p>Generally speaking, fragments will follow the <a href="https://www.sciencedirect.com/science/article/abs/pii/S1359644603028319?via%3Dihub">rule of three</a>. However, this is not always the case. Different researchers will have their own definitions of what is deemed a fragment:</p>
 <ol>
-<li><strong>Molecular weight less than 300 Da</strong></li>
+<li><strong>Molecular weight of less than 300 Da</strong></li>
 <li><strong>ClogP value less than 3</strong><ol>
-<li>ClogP is a well established measure of a compound’s hydrophilicity which is important for absorption, permeation, and other drug-related physical properties.</li>
+<li>ClogP is a well-established measure of a compound’s hydrophilicity which is important for absorption, permeation, and other drug-related physical properties.</li>
 </ol>
 </li>
 <li><strong>Less than 3 hydrogen donor and acceptor groups.</strong></li>
@@ -1872,14 +1872,14 @@ Licensed under the Apache License, Version 2.0.
 </ol>
 </li>
 </ol>
-<p><strong>Note:</strong> It’s challenging to point to one method and refer to it as the status quo. The method you should use depends on what exactly you are trying to do with the fragments, the types of molecules you’re working with etc. Generally speaking, it is ideal to fragment a molecule in a way that is synthesizable in the lab, and each of the methods listed above have slight variations in their approach. There’s no point fragmenting a molecule at certain bonds if these bonds have never been broken before in a lab setting, it’s not realistic.</p>
-<p>Once molecules are fragmented, the next step is typically a matched molecular pair analysis (MMPA). This analysis compares the chemical structure of two molecules that only differ by a <strong>single chemical transformation</strong> (i.e. changing one functional group). MMP’s are useful to analyze a large collection of compounds because the minimal structural differences make it much easier to interpret any observable changes in physical or biological properties. We will not cover MMPA’s in this tutorial. See below for a visualization of a matched molecular pair:</p>
+<p><strong>Note:</strong> It’s challenging to point to one method and refer to it as the status quo. The method you should use depends on what exactly you are trying to do with the fragments, the types of molecules you’re working with, etc. Generally speaking, it is ideal to fragment a molecule in a way that is synthesizable in the lab, and each of the methods listed above has slight variations in their approach. There’s no point fragmenting a molecule at certain bonds if these bonds have never been broken before in a lab setting, it’s not realistic.</p>
+<p>Once molecules are fragmented, the next step is typically a matched molecular pair analysis (MMPA). This analysis compares the chemical structure of two molecules that only differ by a <strong>single chemical transformation</strong> (i.e. changing one functional group). MMPs are useful to analyze a large collection of compounds because the minimal structural differences make it much easier to interpret any observable changes in physical or biological properties. We will not cover MMPA’s in this tutorial. See below for a visualization of a matched molecular pair:</p>
 <p><img src="./images/Fragment_3.png" alt="Fragment_3.png"></p>
 <p><a href="https://en.wikipedia.org/wiki/Matched_molecular_pair_analysis#:~:text=Matched%20molecular%20pair%20analysis%20(MMPA,matched%20molecular%20pairs%20(MMP">Source</a>.)</p>
 <p><strong>Note:</strong> Sometimes the term fragment is used synonymously with scaffolds. However, scaffolds are better defined as key core structures of a compound, often critical and essential for binding, whereas a fragment may only partially match with a “core structure”.</p>
-<h2 id="tutorial">Tutorial<a class="anchor-link" href="#tutorial">&#182;</a></h2><p>Now let’s walkthrough how you could do this in RDKit and then compare it with Datamol. Starting from a cluster of molecules, this tutorial will cover the following:</p>
+<h2 id="tutorial">Tutorial<a class="anchor-link" href="#tutorial">&#182;</a></h2><p>Now let’s walk through how you could do this in RDKit and then compare it with Datamol. Starting from a cluster of molecules, this tutorial will cover the following:</p>
 <ol>
-<li>Generate list of all fragments in different ways as described above<ol>
+<li>Generate a list of all fragments in different ways as described above<ol>
 <li>RECAP, BRICS, FraggleSim</li>
 </ol>
 </li>
@@ -2334,7 +2334,7 @@ class="
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>What you can also do is assemble some new molecules based off a list of fragments. This is how fragments are used as building blocks for larger, more optimized molecules. By having an understanding of the properties of the underlying fragments, you can essentially run a “mix and match” process to generate optimal molecules.</p>
+<p>What you can also do is assemble some new molecules based on a list of fragments. This is how fragments are used as building blocks for larger, more optimized molecules. By having an understanding of the properties of the underlying fragments, you can essentially run a “mix and match” process to generate optimal molecules.</p>
 <p>Assembling molecules from fragments is computationally expensive. Make sure you use the parameters:</p>
 <ul>
 <li><strong><em>frags</em></strong></li>
