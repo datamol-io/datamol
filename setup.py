@@ -16,7 +16,6 @@ install_requires = [
     "appdirs",
     "scikit-learn",
     "packaging",
-    "rdkit",
 ]
 
 setup(
