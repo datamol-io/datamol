@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.4.3">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.2">
     
     
       
@@ -19,13 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6b80c2a2.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.9f9400aa.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
+
     
     
     
@@ -50,6 +51,7 @@
     
       
 
+    
     
     
   </head>
@@ -129,7 +131,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -783,10 +785,11 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
   <a href="https://github.com/datamol-org/datamol/edit/master/docs/tutorials/Clustering.ipynb" title="Edit this page" class="md-content__button md-icon">
     
@@ -1858,22 +1861,22 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="clustering-molecules">Clustering Molecules<a class="anchor-link" href="#clustering-molecules">&#182;</a></h1><p>💡 <a href="https://en.wikipedia.org/wiki/Cluster_analysis">Clustering</a> - the act of <em>grouping a set of objects in such a way that objects in the same group (called a <strong>cluster</strong>) are more similar (in some sense) to each other than to those in other groups (clusters).</em></p>
+<h1 id="Clustering-Molecules">Clustering Molecules<a class="anchor-link" href="#Clustering-Molecules">&#182;</a></h1><p>💡 <a href="https://en.wikipedia.org/wiki/Cluster_analysis">Clustering</a> - the act of <em>grouping a set of objects in such a way that objects in the same group (called a </em><em>cluster</em><em>) are more similar (in some sense) to each other than to those in other groups (clusters).</em></p>
 <p>One of the largest challenges in early-stage drug discovery is narrowing down the massive chemical space of approximately <strong>10 to the power of 60 molecules (10^60)</strong> to a list of molecules that have the desired properties for a specific target of interest. This is where computational approaches come in, taking a large library of small molecules and reducing its size by filtering in/out molecules based on similarity, patterns, predicted physicochemical properties, specific rules, etc. This selection process allows scientists to focus on compounds with the highest chance of success before experimental testing in a lab, saving time and money.</p>
 <p>Clustering molecules is an extremely useful process where you can easily manipulate and subdivide large datasets to group compounds into smaller clusters with similar properties. Comparing molecules and their similarities can then be used to discover new molecules with optimal properties and desired biological activity.</p>
-<h3 id="how-are-compounds-clustered">How are compounds clustered?<a class="anchor-link" href="#how-are-compounds-clustered">&#182;</a></h3><p>Compounds can be clustered via multiple clustering algorithms. There are also multiple ways to measure similarity between compounds, and theoretically, any <a href="https://pubs.acs.org/doi/abs/10.1021/jm401411z">molecular descriptor</a> can be used. <strong><em>The current common approach for structural clustering is the <a href="https://pubs.acs.org/doi/abs/10.1021/ci9803381">Butina</a> algorithm which can use multiple similarity measures. In Datamol, the measure set as the default is the <a href="http://www.biotech.fyicenter.com/1000134_What_Is_Tanimoto_coefficient.html#:~:text=Tanimoto%20coefficient%20is%20a%20metric,union%20of%20the%20two%20sets.">Tanimoto similarity</a> index, measured on a scale between 0 (not similar) to 1 (most similar)</em></strong>. After clustering molecules, you can also identify <strong>centroids</strong>. These are essentially the molecules in the middle of the cluster and are frequently used to <strong>represent</strong> <strong>the cluster as a whole</strong>.</p>
+<h3 id="How-are-compounds-clustered?">How are compounds clustered?<a class="anchor-link" href="#How-are-compounds-clustered?">&#182;</a></h3><p>Compounds can be clustered via multiple clustering algorithms. There are also multiple ways to measure similarity between compounds, and theoretically, any <a href="https://pubs.acs.org/doi/abs/10.1021/jm401411z">molecular descriptor</a> can be used. *<strong>The current common approach for structural clustering is the <a href="https://pubs.acs.org/doi/abs/10.1021/ci9803381">Butina</a> algorithm which can use multiple similarity measures. In Datamol, the measure set as the default is the <a href="http://www.biotech.fyicenter.com/1000134_What_Is_Tanimoto_coefficient.html#:~:text=Tanimoto%20coefficient%20is%20a%20metric,union%20of%20the%20two%20sets.">Tanimoto similarity</a> index, measured on a scale between 0 (not similar) to 1 (most similar)</strong><em>. After clustering molecules, you can also identify </em><em>centroids</em><em>. These are essentially the molecules in the middle of the cluster and are frequently used to </em><em>represent</em>* <strong>the cluster as a whole</strong>.</p>
 <p>For a more detailed breakdown of clustering methods and their uses in computational chemistry, read <a href="https://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.94.630&amp;rep=rep1&amp;type=pdf">here</a>.</p>
 <p><strong>Note:</strong> centroids are highlighted here only as an example. Centroid identification is not linked to clustering itself, and there are algorithms commonly utilized that have nothing to do with centroids (i.e. <a href="https://chemaxon.com/presentation/hierarchical-clustering-of-chemical-structures-by-maximum-common-substructures">hierarchical clustering</a>).</p>
-<h2 id="molecular-fingerprints">Molecular Fingerprints<a class="anchor-link" href="#molecular-fingerprints">&#182;</a></h2><p>In order for us to perform machine learning techniques or statistical analyses on molecules, we must represent molecules as mathematical objects (i.e vectors). Molecular fingerprints essentially encode the structural characteristics of molecules in the form of vectors enabling us to subsequently leverage statistical techniques to uncover new insights.</p>
+<h2 id="Molecular-Fingerprints">Molecular Fingerprints<a class="anchor-link" href="#Molecular-Fingerprints">&#182;</a></h2><p>In order for us to perform machine learning techniques or statistical analyses on molecules, we must represent molecules as mathematical objects (i.e vectors). Molecular fingerprints essentially encode the structural characteristics of molecules in the form of vectors enabling us to subsequently leverage statistical techniques to uncover new insights.</p>
 <p>The most common fingerprint used today is ECFP4 (extended connectivity fingerprints), also known as the Morgan fingerprint. <a href="https://towardsdatascience.com/a-practical-introduction-to-the-use-of-molecular-fingerprints-in-drug-discovery-7f15021be2b1">Here</a> is a practical blog that explains what and how to use ECFP4.</p>
-<h2 id="tutorial">Tutorial<a class="anchor-link" href="#tutorial">&#182;</a></h2><p>This tutorial will walk you through the following:</p>
+<h2 id="Tutorial">Tutorial<a class="anchor-link" href="#Tutorial">&#182;</a></h2><p>This tutorial will walk you through the following:</p>
 <ol>
 <li>Loading an example dataset</li>
 <li>Calculate fingerprints</li>
 <li>Then generate distance matrix</li>
-<li>Cluster with the Butina algorithm </li>
+<li>Cluster with the Butina algorithm</li>
 <li>Pick diverse molecules from a list<ol>
-<li>Why is this useful? <ol>
+<li>Why is this useful?<ol>
 <li>Resource limitations generally prevent you from experimentally testing as many compounds as you want/are available. Therefore, you want to be able to collect as much information as possible through diversity. By selecting diverse molecules (i.e. one representative example from each chemical series in a list), you can quickly gain information about the effect of structural changes on in vitro activity while exploring a larger chemical space in fewer “shots”.</li>
 </ol>
 </li>
@@ -1882,7 +1885,7 @@ Licensed under the Apache License, Version 2.0.
 <li>Pick centroids from a set of molecules</li>
 </ol>
 <p>First, let’s see what this process would look like on RDKit:</p>
-<h2 id="rdkit-example">RDKit Example<a class="anchor-link" href="#rdkit-example">&#182;</a></h2>
+<h2 id="RDKit-Example">RDKit Example<a class="anchor-link" href="#RDKit-Example">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -2045,9 +2048,7 @@ picked_inds, picked_mols</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[1]:</div>
 
@@ -2112,9 +2113,7 @@ picked_inds, picked_mols</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
@@ -2143,7 +2142,7 @@ class="
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h2 id="datamol-example">Datamol Example<a class="anchor-link" href="#datamol-example">&#182;</a></h2><p><strong>Note:</strong> Datamol abstracts away the explicit steps 2 (calculating fingerprints) and 3 (generating a distance matrix) of the tutorial</p>
+<h2 id="Datamol-Example">Datamol Example<a class="anchor-link" href="#Datamol-Example">&#182;</a></h2><p><strong>Note:</strong> Datamol abstracts away the explicit steps 2 (calculating fingerprints) and 3 (generating a distance matrix) of the tutorial</p>
 
 </div>
 </div>
@@ -2207,9 +2206,7 @@ dm.to_image(mol_clusters[0], mol_size=(150, 100), n_cols=6, max_mols=18, use_svg
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
@@ -2270,9 +2267,7 @@ dm.to_image(mol_clusters[1], mol_size=(150, 100), n_cols=6, max_mols=18, use_svg
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
@@ -2335,9 +2330,7 @@ dm.to_image(picks, mol_size=(150, 100), use_svg=False)</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
@@ -2400,9 +2393,7 @@ dm.to_image(centroids, mol_size=(150, 100), n_cols=6, use_svg=False)</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
@@ -2432,7 +2423,7 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p><strong>Note</strong>: Datamol provides one method (Butina using Tanimoto/ECFP for distances computations) for clustering molecules. In practice, an infinite number of methods exist and the user should build them as needed. Please feel free to contribute to Datamol if you wish to add any specific methods that are useful!</p>
-<h2 id="understanding-key-parameters">Understanding key parameters<a class="anchor-link" href="#understanding-key-parameters">&#182;</a></h2><ul>
+<h2 id="Understanding-key-parameters">Understanding key parameters<a class="anchor-link" href="#Understanding-key-parameters">&#182;</a></h2><ul>
 <li>Determining an appropriate threshold for cutoff<ul>
 <li>Butina uses distances (which is 1 - distance) and the cutoff is dependent on the distance metric used. As mentioned earlier, Datamol uses Tanimoto with ECFP fingerprint. Therefore the distance cutoff is 1 - Tanimoto.</li>
 <li>Generally speaking, if you have a very small distance cutoff, compounds must be extremely similar (i.e. high Tanimoto score) in order to be grouped into one cluster. Therefore, with a small distance cutoff, you’ll get more clusters with fewer compounds per cluster. Vice versa is true.</li>
@@ -2441,7 +2432,7 @@ class="
 </ul>
 <p><strong>Note:</strong> This is an extremely general overview, in reality, the output greatly depends on both the size and diversity of the dataset being used. There is no “default” cutoff that is set in Datamol and instead, each user should set cutoffs according to their specific dataset and use case.</p>
 <p>You can also see a more detailed definition of the methods, arguments and their returns, <a href="https://github.com/datamol-org/datamol/blob/main/datamol/cluster.py#L173">here</a>.</p>
-<h2 id="references">References<a class="anchor-link" href="#references">&#182;</a></h2><ul>
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><ul>
 <li>Macs in Chemistry - <a href="https://www.macinchem.org/reviews/clustering/clustering.php">https://www.macinchem.org/reviews/clustering/clustering.php</a></li>
 <li>TeachOpenCADD - <a href="https://projects.volkamerlab.org/teachopencadd/talktorials/T005_compound_clustering.html#Picking-diverse-compounds">https://projects.volkamerlab.org/teachopencadd/talktorials/T005_compound_clustering.html#Picking-diverse-compounds</a></li>
 <li><a href="https://jcheminf.biomedcentral.com/articles/10.1186/s13321-020-00445-4">https://jcheminf.biomedcentral.com/articles/10.1186/s13321-020-00445-4</a></li>
@@ -2459,10 +2450,12 @@ class="
 
 
 
-              
-            </article>
-            
-          </div>
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -2533,7 +2526,7 @@ class="
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.2ab50757.min.js"></script>
+      <script src="../assets/javascripts/bundle.39f04ddb.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

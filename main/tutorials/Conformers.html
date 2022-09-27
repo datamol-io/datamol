@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.4.3">
+      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.2">
     
     
       
@@ -19,13 +19,14 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.6b80c2a2.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.9f9400aa.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
         
       
       
+
     
     
     
@@ -50,6 +51,7 @@
     
       
 
+    
     
     
   </head>
@@ -129,7 +131,7 @@
       </label>
       <nav class="md-search__options" aria-label="Search">
         
-        <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
         </button>
       </nav>
@@ -741,10 +743,11 @@
               </div>
             
           
-          <div class="md-content" data-md-component="content">
-            <article class="md-content__inner md-typeset">
-              
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
                 
+                  
 
   <a href="https://github.com/datamol-org/datamol/edit/master/docs/tutorials/Conformers.ipynb" title="Edit this page" class="md-content__button md-icon">
     
@@ -1816,23 +1819,23 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h1 id="generating-conformers">Generating Conformers<a class="anchor-link" href="#generating-conformers">&#182;</a></h1><p>A drug-like molecule can exist in a variety of diverse 3D shapes depending on the number of rotatable bonds, bond order, torsion, and in general, its degree of freedom. Each individual 3D spatial arrangement of a molecule is defined as a <strong><em>conformer</em></strong> and each conformer may have  different properties (e.g. relative energy). This is why the <a href="https://pubs.acs.org/doi/full/10.1021/acs.jcim.7b00221">sampling of the conformational space</a>, often referred to as conformational search, is a key step to understand the 3D properties of a given compound. You must factor in all the possible conformers and their respective properties in order to achieve the best representation of a molecule. It is a necessary step in any <a href="https://en.wikipedia.org/wiki/Virtual_screening">virtual screening</a> campaign.</p>
+<h1 id="Generating-Conformers">Generating Conformers<a class="anchor-link" href="#Generating-Conformers">&#182;</a></h1><p>A drug-like molecule can exist in a variety of diverse 3D shapes depending on the number of rotatable bonds, bond order, torsion, and in general, its degree of freedom. Each individual 3D spatial arrangement of a molecule is defined as a *<strong>conformer</strong>* and each conformer may have  different properties (e.g. relative energy). This is why the <a href="https://pubs.acs.org/doi/full/10.1021/acs.jcim.7b00221">sampling of the conformational space</a>, often referred to as conformational search, is a key step to understand the 3D properties of a given compound. You must factor in all the possible conformers and their respective properties in order to achieve the best representation of a molecule. It is a necessary step in any <a href="https://en.wikipedia.org/wiki/Virtual_screening">virtual screening</a> campaign.</p>
 <p><strong>Note:</strong> You can see a good visualization of how the relative energy of conformers changes based on manual manipulation of bond angles <a href="https://www.sas.upenn.edu/~kimg/mcephome/chem502/ethbutconform/ethbutmm2.html#:~:text=The%20highest%20energy%20conformer%2C%20the,energy%20of%203.5803%20kcal%2F%20mol.">here</a>.</p>
-<p>A common term that you will see throughout this example is <strong><em>RMSD</em></strong> which stands for root-mean-square deviation. RMSD is widely used as a similarity measure when analyzing conformations: the smaller the RMSD between two conformers, the more similar in 3D spatial arrangement they are. Once conformers are generated, they are usually pruned on RMSD, meaning, structures that are redundant and essentially correspond to the same conformation are removed from the list.</p>
+<p>A common term that you will see throughout this example is *<strong>RMSD</strong>* which stands for root-mean-square deviation. RMSD is widely used as a similarity measure when analyzing conformations: the smaller the RMSD between two conformers, the more similar in 3D spatial arrangement they are. Once conformers are generated, they are usually pruned on RMSD, meaning, structures that are redundant and essentially correspond to the same conformation are removed from the list.</p>
 <p><strong>Note:</strong> RMSD is not the only measure of conformer similarity, and it does have its limitations. If you’re interested in learning more about all the various ways in which chemical structural similarity can be measured, read more <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC6068280/">here.</a></p>
-<h3 id="how-are-conformers-generated">How are conformers generated?<a class="anchor-link" href="#how-are-conformers-generated">&#182;</a></h3><p>The current default RDKit method used to generate conformers leverages various versions of experimental-torsion distance geometry with additional basic knowledge (<a href="https://pubs.acs.org/doi/full/10.1021/acs.jcim.5b00654">ETKDG</a>) created by Riniker and Landrum. From the RDKit book the default algorithm followed is:</p>
+<h3 id="How-are-conformers-generated?">How are conformers generated?<a class="anchor-link" href="#How-are-conformers-generated?">&#182;</a></h3><p>The current default RDKit method used to generate conformers leverages various versions of experimental-torsion distance geometry with additional basic knowledge (<a href="https://pubs.acs.org/doi/full/10.1021/acs.jcim.5b00654">ETKDG</a>) created by Riniker and Landrum. From the RDKit book the default algorithm followed is:</p>
 <ol>
 <li>The molecule’s distance bounds matrix is calculated based on the connection table and a set of rules.</li>
 <li>The bounds matrix is smoothed using a triangle-bounds smoothing algorithm.</li>
 <li>A random distance matrix that satisfies the bound's matrix is generated.</li>
 <li>This distance matrix is embedded in 3D dimensions (producing coordinates for each atom).</li>
-<li>The resulting coordinates are cleaned up somewhat using the “distance geometry force field”, based on distance constraints from the bounds matrix. </li>
+<li>The resulting coordinates are cleaned up somewhat using the “distance geometry force field”, based on distance constraints from the bounds matrix.</li>
 </ol>
 <p>The first 5 steps describe the “ETDG” approach. The additional “K” in ETKDG just defines further constraints from chemical knowledge such as “aromatic rings are to be flat or bonds connected to triple bonds are to be collinear”. These additional constraints introduce a certain level of “chemical awareness” that helps generate correct conformers which are chemically and physically valid. Read more <a href="https://www.blopig.com/blog/2016/06/advances-in-conformer-generation-etkdg-and-etdg/">here</a>, <a href="https://greglandrum.github.io/rdkit-blog/conformers/exploration/2021/01/31/looking-at-random-coordinate-embedding.html">here</a> and <a href="https://greglandrum.github.io/rdkit-blog/conformers/exploration/2021/02/22/etkdg-and-distance-constraints.html">here</a>.</p>
-<p><img src="./images/Conformers_1.png" alt="Conformers_1.png"></p>
-<p><strong><em><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00654">Source</a></em></strong></p>
-<h2 id="tutorial">Tutorial<a class="anchor-link" href="#tutorial">&#182;</a></h2><p>Now let’s start with a tutorial on how you would go about generating conformers via RDKit.</p>
-<h2 id="rdkit-example">RDKit Example<a class="anchor-link" href="#rdkit-example">&#182;</a></h2><p>Below is an example of how you would go about generating conformers in RDKit.</p>
+<p><img src="./images/Conformers_1.png" alt="Conformers_1.png" /></p>
+<p>*<strong><a href="https://pubs.acs.org/doi/10.1021/acs.jcim.5b00654">Source</a></strong>*</p>
+<h2 id="Tutorial">Tutorial<a class="anchor-link" href="#Tutorial">&#182;</a></h2><p>Now let’s start with a tutorial on how you would go about generating conformers via RDKit.</p>
+<h2 id="RDKit-Example">RDKit Example<a class="anchor-link" href="#RDKit-Example">&#182;</a></h2><p>Below is an example of how you would go about generating conformers in RDKit.</p>
 
 </div>
 </div>
@@ -1928,9 +1931,7 @@ m</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
@@ -1990,9 +1991,7 @@ m2</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
@@ -2050,9 +2049,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
@@ -2107,9 +2104,7 @@ class="
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
@@ -2169,9 +2164,7 @@ rotatable_bonds</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
@@ -2302,9 +2295,7 @@ confs = rdDistGeom.EmbedMultipleConfs(m2, numConfs=50, params=params)</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
@@ -2397,9 +2388,7 @@ m2.RemoveAllConformers()
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
 
@@ -2507,9 +2496,7 @@ m2</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[11]:</div>
 
@@ -2538,7 +2525,7 @@ class="
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
 <p>As a beginner, this can be a bit overwhelming and complicated to get the hang of. Let’s see how this would look in Datamol</p>
-<h2 id="datamol-example">Datamol Example<a class="anchor-link" href="#datamol-example">&#182;</a></h2>
+<h2 id="Datamol-Example">Datamol Example<a class="anchor-link" href="#Datamol-Example">&#182;</a></h2>
 </div>
 </div>
 </div>
@@ -2615,9 +2602,7 @@ mol</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[14]:</div>
 
@@ -2679,9 +2664,7 @@ mol</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[15]:</div>
 
@@ -2773,9 +2756,7 @@ conformers = mol.GetConformers()</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[17]:</div>
 
@@ -2834,9 +2815,7 @@ positions</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[18]:</div>
 
@@ -2911,9 +2890,7 @@ print(props)</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
 <div class="jp-OutputArea-child">
-
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt"></div>
 
@@ -2970,9 +2947,7 @@ rmsd</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[20]:</div>
 
@@ -3039,9 +3014,7 @@ rmsd</div>
 
 
 <div class="jp-OutputArea jp-Cell-outputArea">
-
-<div class="jp-OutputArea-child">
-
+<div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
     <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[21]:</div>
 
@@ -3071,7 +3044,7 @@ rmsd</div>
 <ul>
 <li><strong>n_confs</strong> - Specifying the number of conformers to generate. This is based on the number of rotatable bonds and, by default, this is set to 200 if there are more than 8 rotatable bonds and 50 if there are less than 8. Theoretically, there are an unlimited number of conformers that can be derived from a single rotatable bond, however, in practice, not all the conformer structures make sense since only “stable” conformers are relevant in this context. This is why the defaults are set in place. Hypothetically, if you only have 2 rotatable bonds and you set n_confs to 2,000,000, not only will this be computationally expensive but a lot of the conformers generated will start to have non-relevant structures that are not useful.</li>
 <li><strong>add_hs</strong> - By default, hydrogen atoms are added before embedding because it is critical to generating high-quality 3D conformations.</li>
-<li><strong>minimize_energy</strong> - Minimizing energy releases the strain of the generated conformation to the closest local minima enabling you to find a more relevant conformation. In other words, <strong><em>finding the conformer that is most likely to exist</em></strong>. There are multiple force fields that you can apply.</li>
+<li><strong>minimize_energy</strong> - Minimizing energy releases the strain of the generated conformation to the closest local minima enabling you to find a more relevant conformation. In other words, *<strong>finding the conformer that is most likely to exist</strong>*. There are multiple force fields that you can apply.</li>
 <li><strong>method -</strong>  Within the ETKDG method, there are various versions that can be selected to generate conformers.</li>
 <li><strong>energy_iterations -</strong>  This option allows you to specify how many iterations of conformer generation you want to go through if you have enabled energy minimization. In general, the more iterations you specify, the more accurate the conformers are. However, there is a trade-off between the number of iterations and computation speed. Running through 1000 iterations will be significantly more expensive computationally as opposed to 100 iterations.</li>
 <li><strong>rms_cutoff</strong> is the max RMSD value for which two conformers are considered to be the same.</li>
@@ -3089,10 +3062,12 @@ rmsd</div>
 
 
 
-              
-            </article>
-            
-          </div>
+
+                
+              </article>
+            </div>
+          
+          
         </div>
         
       </main>
@@ -3163,7 +3138,7 @@ rmsd</div>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.2ab50757.min.js"></script>
+      <script src="../assets/javascripts/bundle.39f04ddb.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
