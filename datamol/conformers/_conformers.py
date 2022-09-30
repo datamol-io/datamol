@@ -89,7 +89,7 @@ def generate(
         sort_by_energy: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
-        forcefield: molecular forcefield to use, one of ['UFF','MMFF94S','MMFF94s_noEstat']
+        forcefield: molecular forcefield to use, one of ['UFF','MMFF94s','MMFF94s_noEstat']
         ewindow: maximum energy above minimum energy conformer to output
         eratio: max delta-energy divided by rotatable bonds for conformers
         energy_iterations: Maximum number of iterations during the energy minimization procedure.

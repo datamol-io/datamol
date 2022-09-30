@@ -120,7 +120,7 @@ def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return mapper.fs.isfile(path)
 
     else:
-        return True
+        return False
 
 
 def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
