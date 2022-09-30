@@ -117,7 +117,7 @@ def test_exists(tmp_path):
     assert dm.utils.fs.exists(tmp_file)
     assert dm.utils.fs.is_file(tmp_file)
 
-    assert dm.utils.fs.is_file(open(tmp_file))
+    assert not dm.utils.fs.is_file(open(tmp_file))
     assert not dm.utils.fs.is_dir(open(tmp_file))
 
 
