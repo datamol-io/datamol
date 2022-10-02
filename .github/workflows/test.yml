@@ -25,6 +25,11 @@ jobs:
       run:
         shell: bash -l {0}
 
+    name: |
+      os=${{ matrix.os }}
+      - python=${{ matrix.python-version }}
+      - rdkit=${{ matrix.rdkit-version }}
+
     steps:
       - name: Checkout the code
         uses: actions/checkout@v2
