@@ -4,6 +4,31 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.14
+====================
+
+**Added:**
+
+* Add `with_atom_indices` to `dm.to_smiles`. If enable, atom indices will be added to the SMILES.
+
+**Changed:**
+
+* Changed the default for `dm.fs.is_file()` from `True`` to `False`.
+* Refactor the API doc to breakdown all the submodules in individual doc. Thanks to @MichelML for the suggestion.
+* Re-enable pipy activity in rever.
+
+**Fixed:**
+
+* Minor typo in the documentation of `dm.conformers.generate()`
+
+**Authors:**
+
+* Cas
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
 v0.7.13
 ====================
 
