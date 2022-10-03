@@ -31,6 +31,7 @@ def to_smiles(
     randomize: bool = False,
     cxsmiles: bool = False,
     allow_to_fail: bool = False,
+    with_atom_indices: bool = False,
 ) -> Optional[str]:
     """Convert a mol to a SMILES.
 
@@ -45,6 +46,7 @@ def to_smiles(
         randomize: whether to randomize the generated smiles. Override `canonical`.
         cxsmiles: Whether to return a CXSMILES instead of a SMILES.
         allow_to_fail: Raise an error if the conversion to SMILES fails. Return None otherwise.
+        with_atom_indices: Whether to add atom indices to the SMILES.
     """
 
     if ordered and canonical is False:
@@ -53,6 +55,9 @@ def to_smiles(
     if randomize:
         mol = dm.randomize_atoms(mol)
         canonical = False
+
+    if with_atom_indices:
+        mol = dm.atom_indices_to_mol(mol, copy=True)
 
     smiles = None
     try:

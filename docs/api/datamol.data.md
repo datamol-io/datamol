@@ -1,0 +1,3 @@
+# `datamol.data`
+
+::: datamol.data
