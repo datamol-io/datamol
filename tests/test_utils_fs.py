@@ -121,11 +121,13 @@ def test_exists(tmp_path):
     assert not dm.utils.fs.is_dir(open(tmp_file))
 
 
+@pytest.mark.skip_platform("win")
 def test_get_protocol(tmp_path):
     assert dm.utils.fs.get_protocol(tmp_path / "ahahah.txt") == "file"
     assert dm.utils.fs.get_protocol("s3://a-bucket-that-likely-do-not-exist/test.txt") == "s3"
 
 
+@pytest.mark.skip_platform("win")
 def test_is_local_path(tmp_path):
     assert dm.utils.fs.is_local_path(tmp_path / "ahahah.txt")
     assert not dm.utils.fs.is_local_path("s3://a-bucket-that-likely-do-not-exist/test.txt")
