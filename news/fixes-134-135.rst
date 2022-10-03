@@ -1,10 +1,11 @@
 **Added:**
 
-* <news item>
+* Add `with_atom_indices` to `dm.to_smiles`. If enable, atom indices will be added to the SMILES.
 
 **Changed:**
 
-* Changed the default for `dm.fs.is_file()` from True to False
+* Changed the default for `dm.fs.is_file()` from `True`` to `False`.
+* Refactor the API doc to breakdown all the submodules in individual doc. Thanks to @MichelML for the suggestion.
 
 **Deprecated:**
 

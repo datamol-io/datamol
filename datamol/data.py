@@ -1,3 +1,9 @@
+"""
+The data module aims to provide a fast and convenient access to various molecular datasets.
+
+---
+"""
+
 from typing import Optional
 from typing import cast
 

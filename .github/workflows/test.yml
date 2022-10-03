@@ -40,6 +40,7 @@ jobs:
           environment-file: env.yml
           environment-name: datamol
           cache-downloads: true
+          cache-env: true
           extra-specs: |
             python=${{ matrix.python-version }}
             rdkit=${{ matrix.rdkit-version }}
