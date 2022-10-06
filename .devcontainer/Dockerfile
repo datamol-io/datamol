@@ -1,12 +1,48 @@
 FROM mambaorg/micromamba:focal
 
+# Take root for the system-wide setup
+USER root
 
 # Install system-wide packages with `apt`
-USER root
-ARG DEBIAN_FRONTEND=noninteractive
-RUN apt update --fix-missing && \
-    apt install --no-install-recommends -y wget git openssh-client && \
-    apt clean
+RUN export DEBIAN_FRONTEND=noninteractive && apt update --fix-missing && \
+    apt install --no-install-recommends -y \
+    ca-certificates \
+    moreutils \
+    bash-completion \
+    less \
+    watch \
+    git \
+    patch \
+    git-lfs \
+    nano \
+    jq \
+    gnupg2 \
+    openssh-client \
+    file \
+    htop \
+    zip \
+    unzip \
+    p7zip-full \
+    curl \
+    wget \
+    lsof \
+    iputils-ping \
+    iproute2 \
+    net-tools \
+    dnsutils \
+    socat \
+    telnet \
+    && apt clean && rm -rf /var/lib/apt/lists/*
+
+# Install bash completions
+RUN : \
+    && mkdir -p /etc/bash_completion.d \
+    && sh -c "curl -L https://raw.githubusercontent.com/docker/compose/1.29.2/contrib/completion/bash/docker-compose > /etc/bash_completion.d/docker-compose" \
+    && sh -c "curl -L https://raw.githubusercontent.com/docker/cli/v20.10.13/contrib/completion/bash/docker > /etc/bash_completion.d/docker" \
+    && sh -c "curl -L https://raw.githubusercontent.com/git/git/v2.35.1/contrib/completion/git-completion.bash > /etc/bash_completion.d/git" \
+    ;
+
+# Go back to regular user
 USER $MAMBA_USER
 
 # Copy env.yml file
