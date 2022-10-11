@@ -92,14 +92,15 @@ def test_get_mapper(tmp_path):
     assert fsmapper.fs.protocol == "file"
 
 
+@pytest.mark.skip_platform("win")
 def test_get_basename(tmp_path):
-    dm.utils.fs.get_basename(str(tmp_path / "test.txt")) == "test.txt"
-    dm.utils.fs.get_basename("s3://a-bucket-that-likely-do-not-exist/test.txt") == "test.txt"
+    assert dm.utils.fs.get_basename(str(tmp_path / "test.txt")) == "test.txt"
+    assert dm.utils.fs.get_basename("s3://a-bucket-that-likely-do-not-exist/test.txt") == "test.txt"
 
 
 def test_get_extension(tmp_path):
-    dm.utils.fs.get_extension(str(tmp_path / "test.txt")) == "txt"
-    dm.utils.fs.get_extension("s3://a-bucket-that-likely-do-not-exist/test.txt") == "txt"
+    assert dm.utils.fs.get_extension(str(tmp_path / "test.txt")) == "txt"
+    assert dm.utils.fs.get_extension("s3://a-bucket-that-likely-do-not-exist/test.txt") == "txt"
 
 
 def test_exists(tmp_path):
@@ -117,7 +118,7 @@ def test_exists(tmp_path):
     assert dm.utils.fs.exists(tmp_file)
     assert dm.utils.fs.is_file(tmp_file)
 
-    assert dm.utils.fs.is_file(open(tmp_file))
+    assert not dm.utils.fs.is_file(open(tmp_file))
     assert not dm.utils.fs.is_dir(open(tmp_file))
 
 

@@ -2,7 +2,7 @@
   email: emmanuel.noutahi@hotmail.ca
   aliases:
   - maclandrol
-  num_commits: 25
+  num_commits: 28
   first_commit: 2020-10-25 10:15:22
   github: DomInvivo
 - name: Hadrien Mary
@@ -11,11 +11,12 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 33
+  num_commits: 37
   first_commit: 2020-10-24 11:46:22
+  github: matudor
 - name: michelml
   email: michmoreau.l@gmail.com
-  num_commits: 19
+  num_commits: 20
   first_commit: 2021-02-25 15:48:52
 - name: Honoré Hounwanou
   email: mercuryseries@gmail.com
@@ -47,7 +48,7 @@
   first_commit: 2022-01-26 17:14:26
 - name: Cas
   email: caswognum@hotmail.com
-  num_commits: 2
+  num_commits: 5
   first_commit: 2022-06-02 16:20:56
   aliases:
   - cwognum
@@ -57,3 +58,12 @@
   num_commits: 27
   first_commit: 2022-06-14 09:40:04
   github: DomInvivo
+- name: Matt
+  email: mtudor@proteovant.com
+  num_commits: 12
+  first_commit: 2022-08-09 16:54:28
+  github: matudor
+- name: Valence-JonnyHsu
+  email: 104230580+Valence-JonnyHsu@users.noreply.github.com
+  num_commits: 11
+  first_commit: 2022-09-08 10:46:44

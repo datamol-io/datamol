@@ -107,8 +107,6 @@ def exists(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
 def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file exists.
 
-    Important: File-like object always exists.
-
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.
     """
@@ -120,13 +118,11 @@ def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
         return mapper.fs.isfile(path)
 
     else:
-        return True
+        return False
 
 
 def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     """Check whether a file exists.
-
-    Important: File-like object always exists.
 
     Args:
         path: a path supported by `fsspec` such as local, s3, gcs, etc.

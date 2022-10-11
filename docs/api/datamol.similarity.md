@@ -1,0 +1,3 @@
+# `datamol.similarity`
+
+::: datamol.similarity

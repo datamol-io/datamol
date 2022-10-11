@@ -2,35 +2,50 @@ site_name: "datamol"
 site_description: "A python library to work with molecules. Built on top of RDKit."
 repo_url: "https://github.com/datamol-org/datamol"
 repo_name: "datamol-org/datamol"
-copyright: Copyright 2020 - 2022 Valence
+copyright: Copyright 2020 - 2023 Valence
 
 site_url: ""
 remote_branch: "gh-pages"
 use_directory_urls: false
 docs_dir: "docs"
 
+# Fail on warnings to detect issues with types and docstring
+strict: true
+
 nav:
   - Overview: index.md
   - Usage: usage.md
   - Tutorials:
       - The Basics: tutorials/The_Basics.ipynb
-      - Preprocessing Molecules: tutorials/Preprocessing_Molecules.ipynb
-      - Cluster Molecules: tutorials/Cluster_Molecules.ipynb
-      - Fragment and Scaffold: tutorials/Fragment_and_Scaffold.ipynb
+      - Preprocessing: tutorials/Preprocessing.ipynb
+      - Descriptors: tutorials/Descriptors.ipynb
+      - Scaffolds: tutorials/Scaffolds.ipynb
+      - Aligning: tutorials/Aligning.ipynb
+      - Fuzzy_Scaffolds: tutorials/Fuzzy_Scaffolds.ipynb
+      - Clustering: tutorials/Clustering.ipynb
+      - Fragment: tutorials/Fragment.ipynb
+      - Conformers: tutorials/Conformers.ipynb
       - Visualization: tutorials/Visualization.ipynb
-      - Working with local and remote data: tutorials/Filesystem.ipynb
+      - Datamol Filesystem Module: tutorials/Filesystem.ipynb
   - API:
-      - datamol: api/datamol.md
-      - datamol.descriptors: api/datamol.descriptors.md
-      - datamol.conformers: api/datamol.conformers.md
-      - datamol.viz: api/datamol.viz.md
-      - datamol.fragment: api/datamol.fragment.md
-      - datamol.scaffold: api/datamol.scaffold.md
-      - datamol.reactions: api/datamol.reactions.md
-      - datamol.actions: api/datamol.actions.md
-      - datamol.molar: api/datamol.molar.md
-      - datamol.align: api/datamol.align.md
-      - datamol.utils: api/datamol.utils.md
+    - datamol.align: api/datamol.align.md
+    - datamol.cluster: api/datamol.cluster.md
+    - datamol.conformers: api/datamol.conformers.md
+    - datamol.convert: api/datamol.convert.md
+    - datamol.data: api/datamol.data.md
+    - datamol.descriptors: api/datamol.descriptors.md
+    - datamol.fp: api/datamol.fp.md
+    - datamol.fragment: api/datamol.fragment.md
+    - datamol.graph: api/datamol.graph.md
+    - datamol.io: api/datamol.io.md
+    - datamol.isomers: api/datamol.isomers.md
+    - datamol.log: api/datamol.log.md
+    - datamol.molar: api/datamol.molar.md
+    - datamol.mol: api/datamol.mol.md
+    - datamol.scaffold: api/datamol.scaffold.md
+    - datamol.similarity: api/datamol.similarity.md
+    - datamol.utils: api/datamol.utils.md
+    - datamol.viz: api/datamol.viz.md
 
   - Contribute: contribute.md
   - License: license.md
@@ -54,7 +69,7 @@ extra_javascript:
 
 markdown_extensions:
   - admonition
-  # - markdown_include.include  # see https://github.com/radude/mdx_truly_sane_lists/issues/9
+  - markdown_include.include
   - pymdownx.emoji
   - pymdownx.magiclink
   - pymdownx.superfences
@@ -62,7 +77,7 @@ markdown_extensions:
   - pymdownx.tasklist
   # For `tab_length=2` in the markdown extension
   # See https://github.com/mkdocs/mkdocs/issues/545
-  # - mdx_truly_sane_lists  # see https://github.com/radude/mdx_truly_sane_lists/issues/9
+  - mdx_truly_sane_lists
   - toc:
       permalink: true
       toc_depth: 4
@@ -82,7 +97,7 @@ plugins:
           selection:
             new_path_syntax: true
           rendering:
-            show_root_heading: true
+            show_root_heading: false
             heading_level: 3
             show_root_full_path: false
 

@@ -1,0 +1,3 @@
+# `datamol.fp`
+
+::: datamol.fp

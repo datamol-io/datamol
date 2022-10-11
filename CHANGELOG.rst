@@ -4,6 +4,117 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.15
+====================
+
+**Fixed:**
+
+* Missing header in the fragment tutorial.
+
+**Authors:**
+
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
+v0.7.14
+====================
+
+**Added:**
+
+* Add `with_atom_indices` to `dm.to_smiles`. If enable, atom indices will be added to the SMILES.
+
+**Changed:**
+
+* Changed the default for `dm.fs.is_file()` from `True`` to `False`.
+* Refactor the API doc to breakdown all the submodules in individual doc. Thanks to @MichelML for the suggestion.
+* Re-enable pipy activity in rever.
+
+**Fixed:**
+
+* Minor typo in the documentation of `dm.conformers.generate()`
+
+**Authors:**
+
+* Cas
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
+v0.7.13
+====================
+
+**Added:**
+
+* New aligning tutorials.
+
+**Removed:**
+
+* `rdkit` dep from pypi (the dep is only on the conda forge package)
+
+**Fixed:**
+
+* Grammar in tutorials.
+
+**Authors:**
+
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
+v0.7.12
+====================
+
+**Fixed:**
+
+* Fix minor typos in tutorials
+
+**Authors:**
+
+* Hadrien Mary
+* michelml
+
+
+
+v0.7.11
+====================
+
+**Added:**
+
+* Add configurations for dev containers based on the micromamba Docker image. More informations about dev container at https://docs.github.com/en/codespaces/setting-up-your-project-for-codespaces/introduction-to-dev-containers.
+* support for two additional forcefields: MMFF94s with and without electrostatic component
+* energies output along with delta-energy to lowest energy conformer
+
+**Changed:**
+
+* API of dm.conformers.generate() to support choice of forcefield.  In addition ewindow and eratio flags added to reject high energy conformers, either on absoute scale, or as ratio to rotatable bonds
+* Revamped all the datamol tutorials and add new tutorials. Huge thanks to @Valence-jonnyhsu for leading the refactoring of the datamol tutorials.
+* Improve documentation for `dm.standardize_mol()`
+* Multiple various docstring and typing improvments.
+* Embed the cdk2.sdf and solubility_*.sdf files within the datamol package to prevent issue with the RDKit config dir.
+* Enable strict mode on the documentation to prevent any issues and inconsistency with the types and docstrings of datamol.
+* Refactor micromamba CI to use latest and simplify it.
+
+**Removed:**
+
+* Remove unused and unmaintained `dm.actions` and `dm.reactions` module.
+* Remove `copy` args from `add_hs` and `remove_hs` (RDKit already returns copies).
+
+**Fixed:**
+
+* Errors in ECFP fingerprints that computes FCFP instead of ECFP.
+
+**Authors:**
+
+* Emmanuel Noutahi
+* Hadrien Mary
+* Matt
+
+
+
 v0.7.10
 ====================
 

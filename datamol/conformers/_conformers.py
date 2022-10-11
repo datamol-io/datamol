@@ -2,6 +2,7 @@ from typing import Union
 from typing import List
 from typing import Sequence
 from typing import Optional
+from typing import Tuple
 
 import copy
 
@@ -9,7 +10,6 @@ from loguru import logger
 
 import numpy as np
 
-from rdkit import Chem
 from rdkit.Chem import AllChem
 from rdkit.Chem import rdDistGeom
 from rdkit.Chem import rdMolAlign
@@ -86,10 +86,10 @@ def generate(
         align_conformers: Whether to align the conformers.
         minimize_energy: Whether to minimize conformer's energies using MMFF94s.
             Disable to generate conformers much faster.
-        sort_by_energies: Sort conformers by energy when minimizing is turned to False.
+        sort_by_energy: Sort conformers by energy when minimizing is turned to False.
         method: RDKit method to use for embedding. Choose among
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
-        forcfield: molecular forcefield to use, one of ['UFF','MMFF94S','MMFF94s_noEstat']
+        forcefield: molecular forcefield to use, one of ['UFF','MMFF94s','MMFF94s_noEstat']
         ewindow: maximum energy above minimum energy conformer to output
         eratio: max delta-energy divided by rotatable bonds for conformers
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
@@ -102,8 +102,6 @@ def generate(
             are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
             recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
             it's almost always a good idea to add hydrogens to the molecule first."
-        fallback_to_random_coords: Whether to use random coordinate initializations as a fallback if the initial
-            embedding fails.
         ignore_failure: It set to True, this will avoid raising an error when the embedding fails and return None instead.
         embed_params: Allows the user to specify arbitrary embedding parameters for the conformers. This will override any
             other default settings. See https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters
@@ -384,7 +382,7 @@ def align_conformers(
     copy: bool = True,
     conformer_id: int = -1,
     backend: str = "crippenO3A",
-):
+) -> Tuple[list, list]:
     """Align a list of molecules to a reference molecule.
 
     Note that using the `O3A` backend, hydrogens will be added at the beginning of the procedure
