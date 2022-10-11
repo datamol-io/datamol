@@ -4,6 +4,20 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.15
+====================
+
+**Fixed:**
+
+* Missing header in the fragment tutorial.
+
+**Authors:**
+
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
 v0.7.14
 ====================
 
