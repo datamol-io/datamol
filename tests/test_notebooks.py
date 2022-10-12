@@ -16,7 +16,7 @@ NOTEBOOK_PATHS = sorted(list(NOTEBOOK_DIR.glob("*.ipynb")))
 def test_notebook(nb_path):
 
     # Setup and configure the processor to execute the notebook
-    ep = ExecutePreprocessor(timeout=600, kernel_name="python3")
+    ep = ExecutePreprocessor(timeout=600, kernel_name="python")
 
     # Open the notebook
     with open(nb_path) as f:
