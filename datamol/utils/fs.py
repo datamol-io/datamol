@@ -348,6 +348,8 @@ def copy_dir(
 ):
     """Copy one directory to another location across different filesystem (local, S3, GCS, etc).
 
+    Note that if both FS from source and destination are the same, progress won't be shown.
+
     Args:
         source: Path to the source directory.
         destination: Path to the destination directory.
@@ -375,6 +377,12 @@ def copy_dir(
 
     if not force and is_dir(destination):
         raise ValueError(f"The destination folder to copy already exists: {destination}")
+
+    # If both fs are the same then we just rely on the internal `copy` method
+    # which is much faster.
+    if destination_fs.__class__ == source_fs.__class__:
+        source_fs.copy(source, destination, recursive=True)
+        return
 
     # Get all input paths with details
     # NOTE(hadim): we could have use `.glob(..., detail=True)` here but that API is inconsistent

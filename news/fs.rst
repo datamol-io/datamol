@@ -5,6 +5,7 @@
 **Changed:**
 
 * Bump upstream GH actions versions.
+* `dm.fs.copy_dir` now uses the internal fsspec `copy` when the two source and destination fs are the same. It makes the copy much faster.
 
 **Deprecated:**
 
