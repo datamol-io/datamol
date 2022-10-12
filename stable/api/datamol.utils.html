@@ -1466,6 +1466,7 @@
   <div class="doc doc-contents ">
   
       <p>Copy one directory to another location across different filesystem (local, S3, GCS, etc).</p>
+<p>Note that if both FS from source and destination are the same, progress won't be shown.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1654,7 +1655,15 @@ size is <code>None</code>, it is set to 2048.</p></td>
 <span class="normal">416</span>
 <span class="normal">417</span>
 <span class="normal">418</span>
-<span class="normal">419</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copy_dir</span><span class="p">(</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copy_dir</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1665,6 +1674,8 @@ size is <code>None</code>, it is set to 2048.</p></td>
     <span class="n">chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Copy one directory to another location across different filesystem (local, S3, GCS, etc).</span>
+
+<span class="sd">    Note that if both FS from source and destination are the same, progress won&#39;t be shown.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        source: Path to the source directory.</span>
@@ -1693,6 +1704,12 @@ size is <code>None</code>, it is set to 2048.</p></td>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The destination folder to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="c1"># If both fs are the same then we just rely on the internal `copy` method</span>
+    <span class="c1"># which is much faster.</span>
+    <span class="k">if</span> <span class="n">destination_fs</span><span class="o">.</span><span class="vm">__class__</span> <span class="o">==</span> <span class="n">source_fs</span><span class="o">.</span><span class="vm">__class__</span><span class="p">:</span>
+        <span class="n">source_fs</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">destination</span><span class="p">,</span> <span class="n">recursive</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+        <span class="k">return</span>
 
     <span class="c1"># Get all input paths with details</span>
     <span class="c1"># NOTE(hadim): we could have use `.glob(..., detail=True)` here but that API is inconsistent</span>
@@ -1950,12 +1967,12 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
     <span class="k">if</span> <span class="n">progress</span> <span class="ow">and</span> <span class="n">chunk_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="n">source_file</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">source_file</span> <span class="o">=</span> <span class="n">source</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
 
         <span class="c1"># adapt the file mode of the destination depending on the source file.</span>
         <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">&quot;wb&quot;</span>
@@ -2524,7 +2541,7 @@ size can't be retrieved.</p>
         <span class="n">fs_local</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs_local</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
         <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span>
 
@@ -2671,9 +2688,9 @@ size can't be retrieved.</p>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -2746,9 +2763,9 @@ size can't be retrieved.</p>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">)):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
-        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
@@ -2844,10 +2861,10 @@ filesystem to use (and so the separator.</p>
 <span class="sd">    Args:</span>
 <span class="sd">        *paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
-    <span class="n">source_path</span> <span class="o">=</span> <span class="n">paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">_paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
+    <span class="n">source_path</span> <span class="o">=</span> <span class="n">_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
-    <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">paths</span><span class="p">)</span>
+    <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_paths</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">full_path</span>
 </code></pre></div></td></tr></table></div>
       </details>
