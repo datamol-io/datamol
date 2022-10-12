@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* Bump upstream GH actions versions.
 
 **Deprecated:**
 
