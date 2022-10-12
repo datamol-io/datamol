@@ -113,9 +113,9 @@ def is_file(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     if isinstance(path, fsspec.core.OpenFile):
         return path.fs.isfile(path.path)
 
-    elif isinstance(path, (str, pathlib.Path)):
+    elif isinstance(path, (str, os.PathLike)):
         mapper = get_mapper(str(path))
-        return mapper.fs.isfile(path)
+        return mapper.fs.isfile(str(path))
 
     else:
         return False
@@ -130,9 +130,9 @@ def is_dir(path: Union[str, os.PathLike, fsspec.core.OpenFile, io.IOBase]):
     if isinstance(path, fsspec.core.OpenFile):
         return path.fs.isdir(path.path)
 
-    elif isinstance(path, (str, pathlib.Path)):
+    elif isinstance(path, (str, os.PathLike)):
         mapper = get_mapper(str(path))
-        return mapper.fs.isdir(path)
+        return mapper.fs.isdir(str(path))
 
     else:
         return False
@@ -171,10 +171,10 @@ def join(*paths: str):
     Args:
         *paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.
     """
-    paths = [str(path).rstrip("/") for path in paths]
-    source_path = paths[0]
+    _paths = [str(path).rstrip("/") for path in paths]
+    source_path = _paths[0]
     fs = get_mapper(source_path).fs
-    full_path = fs.sep.join(paths)
+    full_path = fs.sep.join(_paths)
     return full_path
 
 
@@ -187,7 +187,7 @@ def get_size(file: Union[str, os.PathLike, io.IOBase, fsspec.core.OpenFile]) -> 
         fs_local = fsspec.filesystem("file")
         file_size = fs_local.size(getattr(file, "name"))
 
-    elif isinstance(file, (str, pathlib.Path)):
+    elif isinstance(file, (str, os.PathLike)):
         fs = get_mapper(str(file)).fs
         file_size = fs.size(str(file))
 
@@ -223,12 +223,12 @@ def copy_file(
     if progress and chunk_size is None:
         chunk_size = 1024 * 1024
 
-    if isinstance(source, (str, pathlib.Path)):
+    if isinstance(source, (str, os.PathLike)):
         source_file = fsspec.open(str(source), "rb")
     else:
         source_file = source
 
-    if isinstance(destination, (str, pathlib.Path)):
+    if isinstance(destination, (str, os.PathLike)):
 
         # adapt the file mode of the destination depending on the source file.
         destination_mode = "wb"
@@ -348,6 +348,8 @@ def copy_dir(
 ):
     """Copy one directory to another location across different filesystem (local, S3, GCS, etc).
 
+    Note that if both FS from source and destination are the same, progress won't be shown.
+
     Args:
         source: Path to the source directory.
         destination: Path to the destination directory.
@@ -375,6 +377,12 @@ def copy_dir(
 
     if not force and is_dir(destination):
         raise ValueError(f"The destination folder to copy already exists: {destination}")
+
+    # If both fs are the same then we just rely on the internal `copy` method
+    # which is much faster.
+    if destination_fs.__class__ == source_fs.__class__:
+        source_fs.copy(source, destination, recursive=True)
+        return
 
     # Get all input paths with details
     # NOTE(hadim): we could have use `.glob(..., detail=True)` here but that API is inconsistent
