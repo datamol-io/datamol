@@ -67,10 +67,13 @@ def is_reaction_ok(rxn: Union[str, rdChemReactions.ChemicalReaction]) -> bool:
     logger.info(f"Number of reactants in reaction: {nReactants}")
     logger.info(f"Number of products in reaction: {nProducts}")
     logger.info(f"Preprocess labels added:{labels}")
-    return rdChemReactions.SanitizeRxn(rxn) == rdChemReactions.SanitizeFlags.SANITIZE_NONE
+    try:
+        rdChemReactions.SanitizeRxn(rxn) in [rdChemReactions.SanitizeFlags.SANITIZE_NONE, None]
+    except Exception as e:
+        raise ValueError(f"Cannot sanitize the reaction. {e}")
 
 
-def compute_reaction_product(
+def select_reaction_output(
     product,
     single_output=True,
     rm_attach: bool = False,
@@ -78,7 +81,7 @@ def compute_reaction_product(
     sanitize: bool = True,
 ) -> Union[list, str, Chem.Mol]:
     """
-    Compute the products from a reaction.
+    Compute the products from a reaction. It only takes the first product of the
 
     Args:
         product: All the products from a reaction.
@@ -90,7 +93,8 @@ def compute_reaction_product(
     Returns:
         Processed products from reaction.
     """
-    product = [x[0] for x in product]
+    # flatten all possible products of a reaction
+    product = sum(product, ())
     if single_output:
         product = np.random.choice(product, 1)
     if sanitize:
@@ -133,7 +137,7 @@ def apply_reaction(
     if not rxn.IsInitialized():
         rxn.Initialize()
     product = rxn.RunReactants(reactants)
-    return compute_reaction_product(
+    return select_reaction_output(
         product=product,
         single_output=single_output,
         as_smiles=as_smiles,
