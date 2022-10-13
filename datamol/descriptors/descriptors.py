@@ -23,7 +23,8 @@ def _sasscorer(mol: Mol):
         import sascorer  # type:ignore
     except ImportError:
         raise ImportError(
-            "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it and reinstall rdkit with `conda` or `mamba`."
+            "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it"
+            " and reinstall rdkit with `conda` or `mamba`."
         )
 
     return sascorer.calculateScore(mol)

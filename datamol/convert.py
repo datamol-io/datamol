@@ -412,8 +412,9 @@ def to_df(
 
     if smiles_column is not None and smiles_column in props_df.columns:
         logger.warning(
-            f"The SMILES column name provided ('{smiles_column}') is already present in the properties"
-            " of the molecules. THe returned dataframe will two columns with the same name."
+            f"The SMILES column name provided ('{smiles_column}') is already present in the"
+            " properties of the molecules. THe returned dataframe will two columns with the same"
+            " name."
         )
 
     # Concat the df with the properties df

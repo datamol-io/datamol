@@ -259,8 +259,8 @@ def to_fp(
 
     if fp_func is None:
         raise ValueError(
-            f"The fingerprint '{fp_type}' is not available. Use `dm.list_supported_fingerprints()` to "
-            "get a complete list of the available fingerprints."
+            f"The fingerprint '{fp_type}' is not available. Use `dm.list_supported_fingerprints()`"
+            " to get a complete list of the available fingerprints."
         )
 
     # Convert input to mol if needed

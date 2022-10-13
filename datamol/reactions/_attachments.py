@@ -13,9 +13,16 @@ ATTACHMENT_POINT_NO_BRACKETS_REGEXP = r"(?<![:\[]){0}(?![:\]])".format(
 ALL_POSSIBLE_ATTACHMENTS = r"\[(\d*){}:?(\d*)\]".format(re.escape(ATTACHMENT_POINT_TOKEN))
 
 
-def add_brackets_to_attachment_points(smi: str):
+def add_brackets_to_attachment_points(smi: str) -> str:
     """
     Adds brackets to the attachment points (if they don't have them).
+    Example: "CC(C)CO*" to "CC(C)CO[*]"
+
+    Args:
+        smi: A smiles string.
+
+    Returns:
+        A smiles string with brackets.
     """
     return re.sub(
         ATTACHMENT_POINT_NO_BRACKETS_REGEXP,
@@ -24,21 +31,49 @@ def add_brackets_to_attachment_points(smi: str):
     )
 
 
-def convert_attach_to_isotope(mol_or_smi: Union[Chem.Mol, str], same_isotope:bool=False):
-    """Convert attachment to isotope mapping"""
+def convert_attach_to_isotope(
+    mol_or_smi: Union[Chem.Mol, str],
+    same_isotope: bool = False,
+    as_smiles=False,
+) -> Chem.Mol:
+    """
+    Convert attachment to isotope mapping
+    Examples:
+         Convert "O=C(NCc1cnc([*])c1)[*]" to  "O=C(NCc1cnc([1*])c1)[2*]"
+
+
+    Args:
+        mol_or_smi: A Mol object or a smiles to be converted
+        same_isotope: Whether convert to the same isotope.
+            Example: "O=C(NCc1cnc([*])c1)[*]" to  "O=C(NCc1cnc([1*])c1)[1*]"
+
+    Returns:
+        Converted Mol object.
+    """
     mol = dm.to_mol(mol_or_smi)
     smiles = dm.to_smiles(mol)
+    print(smiles)
     smiles = add_brackets_to_attachment_points(smiles)
     # reg matching seems to be the most effective
     subs_reg = "[\g<1>{}]"
     if same_isotope:
         subs_reg = "[1{}]"
     smiles = re.sub(ATTACHMENT_POINT_NUM_REGEXP, subs_reg.format(ATTACHMENT_POINT_TOKEN), smiles)
+    if as_smiles:
+        return smiles
     return dm.to_mol(smiles)
 
 
-def num_attachment_points(mol_or_smi):
-    """Get the number of attachment point in the"""
+def num_attachment_points(mol_or_smi) -> int:
+    """
+    Get the number of attachment point in the
+
+    Args:
+        mol_or_smi: A Mol object or a smiles to be converted
+
+    Returns:
+        Number of attachment points of the given molecule.
+    """
     if isinstance(mol_or_smi, Chem.Mol):
         return len(
             [atom for atom in mol_or_smi.GetAtoms() if atom.GetSymbol() == ATTACHMENT_POINT_TOKEN]
@@ -46,10 +81,26 @@ def num_attachment_points(mol_or_smi):
     return len(re.findall(ATTACHMENT_POINT_REGEXP, mol_or_smi))
 
 
-def open_attach_points(mol, fix_atom_map=False, bond_type=dm.SINGLE_BOND):
-    """Compute attachment points on a molecule
-    This will highlight all valid attachment point on the current molecule instead
+def open_attach_points(
+    mol: Chem.Mol, fix_atom_map: bool = False, bond_type: Chem.rdchem.BondType = dm.SINGLE_BOND
+) -> Chem.Mol:
     """
+    Compute attachment points on a molecule.
+    This will highlight all valid attachment point on the current molecule instead.
+
+    Args:
+        mol: A Mol object to be processed.
+        fix_atom_map: Whether fix the atom mapping of the molecule.
+        bond_type: The bond type to be opened.
+
+    Returns:
+        Molecule with open attachment points
+
+    See Also:
+        - <datamol.mol>
+        - <Chem.rdchem.BondType>
+    """
+
     emol = Chem.RWMol(dm.to_mol(mol))
     with dm.log.without_rdkit_log():
         atoms = [

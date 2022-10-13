@@ -190,7 +190,8 @@ def pick_centroids(
     elif method.upper() in ClusterMethod.names.keys() and npick:
         if initial_picks:
             logger.warning(
-                "Initial picks is not supported by hierarchical clustering. You pick has been discarded."
+                "Initial picks is not supported by hierarchical clustering. You pick has been"
+                " discarded."
             )
 
         dist_mat = dm.parallelized(

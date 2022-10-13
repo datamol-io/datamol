@@ -31,7 +31,8 @@ def skip_by_platform(request, current_platform):
 def pytest_configure(config):
     config.addinivalue_line(
         "markers",
-        "skip_platform(current_platform): skip test for a given platform from `['linux', 'osx', 'win']`",
+        "skip_platform(current_platform): skip test for a given platform from `['linux', 'osx',"
+        " 'win']`",
     )
 
 

@@ -290,7 +290,8 @@ def reorder_mol_from_template(
             else:
                 if verbose:
                     logger.warning(
-                        f"{len(matches)} matches were found, ordering is ambiguous, even when ignoring hydrogens"
+                        f"{len(matches)} matches were found, ordering is ambiguous, even when"
+                        " ignoring hydrogens"
                     )
                 return None
 
