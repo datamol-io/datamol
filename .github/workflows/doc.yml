@@ -14,10 +14,10 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup conda
-        uses: mamba-org/provision-with-micromamba@v13
+        uses: mamba-org/provision-with-micromamba@e542c7a77b43dbb6919f9cc997a9881abcfe3ddb
         with:
           environment-file: env.yml
           environment-name: datamol

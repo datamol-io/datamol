@@ -1,5 +1,7 @@
 import pytest
 
+import pathlib
+
 import fsspec
 import datamol as dm
 
@@ -175,13 +177,27 @@ def test_glob(tmp_path):
 def test_copy_file(tmp_path):
     tmp_file = tmp_path / "test.txt"
 
+    assert dm.utils.fs.is_dir(tmp_path)
+    assert dm.utils.fs.is_dir(str(tmp_path))
+    assert dm.utils.fs.is_dir(pathlib.Path(str(tmp_path)))
+
+    assert not dm.utils.fs.is_dir(tmp_path / "not_exist_dir")
+    assert not dm.utils.fs.is_dir(str(tmp_path / "not_exist_dir"))
+    assert not dm.utils.fs.is_dir(pathlib.Path(str(tmp_path / "not_exist_dir")))
+
     with open(tmp_file, "w") as f:
         f.write("hello")
 
     tmp_file2 = tmp_path / "test2.txt"
     assert not dm.utils.fs.is_file(tmp_file2)
+    assert not dm.utils.fs.is_file(str(tmp_file2))
+    assert not dm.utils.fs.is_file(pathlib.Path(str(tmp_file2)))
+
     dm.utils.fs.copy_file(tmp_file, tmp_file2)
+
     assert dm.utils.fs.is_file(tmp_file2)
+    assert dm.utils.fs.is_file(str(tmp_file2))
+    assert dm.utils.fs.is_file(pathlib.Path(str(tmp_file2)))
     assert open(tmp_file2).read() == "hello"
 
     with pytest.raises(ValueError):
@@ -190,4 +206,6 @@ def test_copy_file(tmp_path):
     tmp_file3 = tmp_path / "test3.txt"
     dm.utils.fs.copy_file(tmp_file, tmp_file3, progress=True)
     assert dm.utils.fs.is_file(tmp_file3)
+    assert dm.utils.fs.is_file(str(tmp_file3))
+    assert dm.utils.fs.is_file(pathlib.Path(str(tmp_file3)))
     assert open(tmp_file3).read() == "hello"

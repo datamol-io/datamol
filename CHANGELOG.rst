@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.16
+====================
+
+**Changed:**
+
+* Bump upstream GH actions versions.
+* `dm.fs.copy_dir` now uses the internal fsspec `copy` when the two source and destination fs are the same. It makes the copy much faster.
+
+**Fixed:**
+
+* Use `os.PathLike` to recognize a broader range of string-based path inputs in the `dm.fs` module. It prevents file objects such as `py._path.local.LocalPath` not being recognized as path.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.15
 ====================
 
