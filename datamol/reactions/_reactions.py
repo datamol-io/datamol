@@ -31,7 +31,7 @@ def rxn_from_smarts(rxn_smarts: str) -> rdChemReactions.ChemicalReaction:
 
 
 def rxn_from_block(
-    rxn_block: str = None, rxn_file: str = None, sanitize=False
+    rxn_block_or_file: str = None, sanitize=False
 ) -> rdChemReactions.ChemicalReaction:
     """
     Create a reaction from smarts
@@ -40,12 +40,13 @@ def rxn_from_block(
         rxn_block_or_file:  Reaction SMARTS string or file path
 
     Returns:
-        Initilized reaction.
+        Initialized reaction.
     """
-    if rxn_file is not None and rxn_block is None:
+    try:
         with fsspec.open(rxn_block_or_file) as f:
-            rxn_block = f.read(f)
-
+            rxn_block = f.read()
+    except Exception:
+        rxn_block = rxn_block_or_file
     rxn = rdChemReactions.ReactionFromRxnBlock(rxnblock=rxn_block, sanitize=sanitize)
     rxn.Initialize()
     return rxn
@@ -68,7 +69,10 @@ def is_reaction_ok(rxn: Union[str, rdChemReactions.ChemicalReaction]) -> bool:
     logger.info(f"Number of products in reaction: {nProducts}")
     logger.info(f"Preprocess labels added:{labels}")
     try:
-        rdChemReactions.SanitizeRxn(rxn) in [rdChemReactions.SanitizeFlags.SANITIZE_NONE, None]
+        return rdChemReactions.SanitizeRxn(rxn) in [
+            rdChemReactions.SanitizeFlags.SANITIZE_NONE,
+            None,
+        ]
     except Exception as e:
         raise ValueError(f"Cannot sanitize the reaction. {e}")
 

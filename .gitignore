@@ -62,3 +62,8 @@ dev.ipynb
 
 # MkDocs
 site/
+/.pytest_cache/
+/.idea/
+/datamol/*/__pycache__/
+/*/__pycache__/
+.coverage*

@@ -1,10 +1,9 @@
 from typing import List
 from typing import Optional
 from typing import Union
+from typing import Any
 
 import functools
-
-from rdkit import Chem
 
 import numpy as np
 from sklearn.metrics import pairwise_distances_chunked
@@ -17,7 +16,7 @@ def pdist(
     mols: List[Union[str, dm.Mol]],
     n_jobs: Optional[int] = 1,
     squareform: bool = True,
-    **fp_args,
+    **fp_args: Any,
 ) -> np.ndarray:
     """Compute the pairwise tanimoto distance between the fingerprints of all the
     molecules in the input set.
@@ -57,7 +56,7 @@ def cdist(
     distances_chunk: bool = False,
     distances_chunk_memory: int = 1024,
     distances_n_jobs: int = -1,
-    **fp_args,
+    **fp_args: Any,
 ) -> np.ndarray:
     """Compute the tanimoto distance between the fingerprints of each pair of
     molecules of the two collections of inputs.

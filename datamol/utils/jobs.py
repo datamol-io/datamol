@@ -24,7 +24,7 @@ class JobRunner:
         progress: bool = False,
         total: Optional[int] = None,
         tqdm_kwargs: Optional[dict] = None,
-        **job_kwargs,
+        **job_kwargs: Any,
     ):
         """
         JobRunner with sequential/parallel regimes. The multiprocessing backend use joblib which
@@ -45,7 +45,7 @@ class JobRunner:
             progress: whether to display progress bar
             total: The number of elements in the iterator. Only used when `progress` is True.
             tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
-            job_kwargs: Any additional arguments supported by `joblib.Parallel`.
+            **job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
         Example:
 
@@ -98,7 +98,7 @@ class JobRunner:
             callable_fn (callable): function to call
             data (iterable): input data
             arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
-            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
+            **fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
         """
         total_length = JobRunner.get_iterator_length(data)
 
@@ -130,7 +130,7 @@ class JobRunner:
             callable_fn (callable): function to call
             data (iterable): input data
             arg_type (str, optional): function argument type ('arg'/None or 'args' or 'kwargs')
-            fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
+            **fn_kwargs (dict, optional): optional keyword argument to pass to the callable funciton
         """
 
         total_length = JobRunner.get_iterator_length(data)
@@ -216,7 +216,7 @@ def parallelized(
     arg_type: str = "arg",
     total: Optional[int] = None,
     tqdm_kwargs: Optional[dict] = None,
-    **job_kwargs,
+    **job_kwargs: Any,
 ) -> Sequence[Optional[Any]]:
     """Run a function in parallel.
 
@@ -238,7 +238,7 @@ def parallelized(
             - "kwargs": the input is passed as a map: `fn(**kwargs)`.
         total: The number of elements in the iterator. Only used when `progress` is True.
         tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
-        job_kwargs: Any additional arguments supported by `joblib.Parallel`.
+        **job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
     Returns:
         The results of the execution as a list.
@@ -268,7 +268,7 @@ def parallelized_with_batches(
     tqdm_kwargs: Optional[dict] = None,
     flatten_results: bool = True,
     joblib_batch_size: Union[int, str] = "auto",
-    **job_kwargs,
+    **job_kwargs: Any,
 ) -> Sequence[Optional[Any]]:
     """Run a function in parallel using batches.
 
@@ -288,10 +288,10 @@ def parallelized_with_batches(
             - "kwargs": the input is passed as a map: `fn(**kwargs)`.
         total: The number of elements in the iterator. Only used when `progress` is True.
         tqdm_kwargs: Any additional arguments supported by the `tqdm` progress bar.
-        job_kwargs: Any additional arguments supported by `joblib.Parallel`.
         flatten_results: Whether to flatten the results.
         joblib_batch_size: It corresponds to the `batch_size` argument of `dm.parallelized` that
-            is forwarded to `joblib.Parallel` under the hood..
+            is forwarded to `joblib.Parallel` under the hood.
+        **job_kwargs: Any additional arguments supported by `joblib.Parallel`.
 
     Returns:
         The results of the execution as a list.

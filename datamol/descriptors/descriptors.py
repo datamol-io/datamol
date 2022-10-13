@@ -1,6 +1,3 @@
-from typing import List
-from typing import Set
-
 import sys
 import os
 
@@ -23,8 +20,7 @@ def _sasscorer(mol: Mol):
         import sascorer  # type:ignore
     except ImportError:
         raise ImportError(
-            "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it"
-            " and reinstall rdkit with `conda` or `mamba`."
+            "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it and reinstall rdkit with `conda` or `mamba`."
         )
 
     return sascorer.calculateScore(mol)
@@ -66,7 +62,7 @@ n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
 n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
 
 
-def n_rigid_bonds(mol: Mol):
+def n_rigid_bonds(mol: Mol) -> int:
     """Compute the number of rigid bonds in a molecule.
 
     Rigid bonds are bonds that are not single and not in rings.
@@ -82,13 +78,13 @@ def n_rigid_bonds(mol: Mol):
     return n_rigid_bonds
 
 
-def n_aromatic_atoms(mol: Mol):
+def n_aromatic_atoms(mol: Mol) -> int:
     """Calculate the number of aromatic atoms."""
     matches = mol.GetSubstructMatches(_AROMATIC_QUERY)
     return len(matches)
 
 
-def n_aromatic_atoms_proportion(mol: Mol):
+def n_aromatic_atoms_proportion(mol: Mol) -> int:
     """Calculate the aromatic proportion: # aromatic atoms/#atoms total.
 
     Args:
@@ -99,7 +95,7 @@ def n_aromatic_atoms_proportion(mol: Mol):
     return n_aromatic_atoms(mol) / mol.GetNumHeavyAtoms()
 
 
-def n_stereo_centers(mol: Mol):
+def n_stereo_centers(mol: Mol) -> int:
     """Compute the number of stereocenters in a molecule.
 
     Args:
@@ -117,7 +113,7 @@ def n_stereo_centers(mol: Mol):
     return n
 
 
-def n_charged_atoms(mol: Mol):
+def n_charged_atoms(mol: Mol) -> int:
     """Compute the number of charged atoms in a molecule.
 
     Args:

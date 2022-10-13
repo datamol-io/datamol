@@ -164,8 +164,7 @@ def generate(
         if ignore_failure:
             if verbose:
                 logger.warning(
-                    f"Conformers embedding failed for {convert.to_smiles(mol)}. Returning None"
-                    " because ignore_failure is set."
+                    f"Conformers embedding failed for {convert.to_smiles(mol)}. Returning None because ignore_failure is set."
                 )
             return None
         raise ValueError(f"Conformers embedding failed for {convert.to_smiles(mol)}")
@@ -186,8 +185,7 @@ def generate(
         not_converged = sum([not_converged for not_converged, _ in results if not_converged])
         if warning_not_converged != 0 and not_converged > warning_not_converged and verbose:
             logger.warning(
-                f"{not_converged}/{len(results)} conformers have not converged for"
-                f" {convert.to_smiles(mol)}"
+                f"{not_converged}/{len(results)} conformers have not converged for {convert.to_smiles(mol)}"
             )
 
     elif sort_by_energy:
@@ -303,8 +301,7 @@ def rmsd(mol: Mol) -> np.ndarray:
 
     if mol.GetNumConformers() <= 1:
         raise ValueError(
-            "The molecule has 0 or 1 conformer. You can generate conformers with"
-            " `dm.conformers.generate(mol)`."
+            "The molecule has 0 or 1 conformer. You can generate conformers with `dm.conformers.generate(mol)`."
         )
 
     n_confs = mol.GetNumConformers()

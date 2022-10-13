@@ -55,8 +55,7 @@ def sasa(
 
     if mol.GetNumConformers() == 0:
         raise ValueError(
-            "The molecule has 0 conformers. You can generate conformers with"
-            " `dm.conformers.generate(mol)`."
+            "The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`."
         )
 
     # Get Van der Waals radii (angstrom)

@@ -1,4 +1,5 @@
 from typing import List
+from typing import Any
 
 from rdkit.Chem import rdFMCS
 
@@ -24,7 +25,7 @@ def find_mcs(
     bond_compare: str = "CompareOrder",
     ring_compare: str = "IgnoreRingFusion",
     with_details: bool = False,
-    **kwargs,
+    **kwargs: Any,
 ):
     """Find the maximum common substructure from a list of molecules.
 
@@ -44,7 +45,7 @@ def find_mcs(
         bond_compare: One of "CompareAny", "CompareOrder", "CompareOrderExact".
         ring_compare: One of "IgnoreRingFusion", "PermissiveRingFusion", "StrictRingFusion".
         with_details: Whether to return the RDKit MCS object or just the SMARTS string.
-        kwargs: Additional arguments for the MCS.
+        **kwargs: Additional arguments for the MCS.
     """
 
     if atom_compare not in ALLOWED_ATOM_COMPARE:

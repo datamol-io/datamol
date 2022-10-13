@@ -203,8 +203,8 @@ def test_to_df_smiles_warning(datadir, caplog):
 
     assert "WARNING" in caplog.text
     assert (
-        "The SMILES column name provided ('smiles') is already present in the properties of the"
-        " molecules" in caplog.text
+        "The SMILES column name provided ('smiles') is already present in the properties of the molecules"
+        in caplog.text
     )
 
 

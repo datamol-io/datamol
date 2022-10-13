@@ -1,6 +1,8 @@
 from typing import Dict
 from typing import List
 from typing import Any
+from typing import Tuple
+from typing import Optional
 
 import collections
 import itertools
@@ -13,16 +15,23 @@ from rdkit.Chem import rdRGroupDecomposition
 from rdkit.Chem.rdmolops import AdjustQueryParameters
 from rdkit.Chem.rdmolops import AdjustQueryProperties
 
-from rdkit.Chem.Fraggle import FraggleSim
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
-import datamol as dm
+from ..types import Mol
+from ..mol import keep_largest_fragment
+from ..mol import fix_mol
+from ..mol import to_mol
+from ..mol import add_hs
+from ..mol import remove_hs
+from ..convert import to_smiles
+from ..convert import to_smarts
+from ..convert import from_smarts
 
 
 def trim_side_chain(mol: Chem.rdchem.Mol, core, unwanted_side_chains):
     """Trim list of side chain from a molecule."""
 
-    mol = Chem.AddHs(mol)
+    mol = add_hs(mol)
 
     match = mol.GetSubstructMatch(core)
     map2idx = {}
@@ -52,26 +61,26 @@ def trim_side_chain(mol: Chem.rdchem.Mol, core, unwanted_side_chains):
             emol.AddBond(nei_idx, new_ind, bond.GetBondType())
 
     mol = emol.GetMol()
-    mol = Chem.RemoveHs(mol)
+    mol = remove_hs(mol)
     query_param = AdjustQueryParameters()
     query_param.makeDummiesQueries = False
     query_param.adjustDegree = False
     query_param.aromatizeIfPossible = True
     for patt, _ in unwanted2map.items():
-        cur_frag = dm.fix_mol(patt)
+        cur_frag = fix_mol(patt)
         mol = Chem.DeleteSubstructs(mol, cur_frag, onlyFrags=True)
 
-    return dm.keep_largest_fragment(mol)
+    return keep_largest_fragment(mol)
 
 
 def fuzzy_scaffolding(
     mols: List[Chem.rdchem.Mol],
-    enforce_subs: List[str] = None,
+    enforce_subs: Optional[List[str]] = None,
     n_atom_cuttoff: int = 8,
-    additional_templates: List[Chem.rdchem.Mol] = None,
+    additional_templates: Optional[List[Mol]] = None,
     ignore_non_ring: bool = False,
-    mcs_params: Dict[Any, Any] = None,
-):
+    mcs_params: Optional[Dict[Any, Any]] = None,
+) -> Tuple[set, Dict[str, dict], Dict[str, list]]:
     """Generate fuzzy scaffold with enforceable group that needs to appear
     in the core, forcing to keep the full side chain if required
 
@@ -139,14 +148,14 @@ def fuzzy_scaffolding(
                 rw_scf.RemoveAtom(a)
             scfs = list(rdmolops.GetMolFrags(rw_scf, asMols=False))
         else:
-            scfs = [dm.to_smiles(scf)]
+            scfs = [to_smiles(scf)]
 
         # add templates mols if exists:
         for tmp in additional_templates:
-            tmp = dm.to_mol(tmp)
+            tmp = to_mol(tmp)
             tmp_scf = MurckoScaffold.MakeScaffoldGeneric(tmp)
             if generic_m.HasSubstructMatch(tmp_scf):
-                scfs.append(dm.to_smiles(tmp_scf))
+                scfs.append(to_smiles(tmp_scf))
 
         for scf in scfs:
             if scf2infos[scf].get("mols"):
@@ -171,14 +180,14 @@ def fuzzy_scaffolding(
             **mcs_params,
         )
 
-        mcsM = Chem.MolFromSmarts(mcs.smartsString)
+        mcsM = from_smarts(mcs.smartsString)
         mcsM.UpdatePropertyCache(False)
         Chem.SetHybridization(mcsM)
 
         if mcsM.GetNumAtoms() < n_atom_cuttoff:
             continue
 
-        scf2infos[scf]["smarts"] = dm.to_smarts(mcsM)
+        scf2infos[scf]["smarts"] = to_smarts(mcsM)
         if popout:
             mols = mols[:-1]
 
@@ -208,7 +217,7 @@ def fuzzy_scaffolding(
             ]
 
             rgroups = [gp[f"R{k}"] for k in acceptable_groups if f"R{k}" in gp.keys()]
-            if enforce_subs:
+            if enforce_subs is not None:
                 rgroups = [
                     rgp
                     for rgp in rgroups
@@ -218,6 +227,6 @@ def fuzzy_scaffolding(
                 scaff = trim_side_chain(mol, AdjustQueryProperties(core, core_query_param), rgroups)
             except:
                 continue
-            all_scaffolds.add(dm.to_smiles(scaff))
+            all_scaffolds.add(to_smiles(scaff))
 
     return all_scaffolds, scf2infos, scf2groups
