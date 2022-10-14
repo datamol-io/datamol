@@ -1,5 +1,43 @@
-import pytest
 import datamol as dm
+
+REACTION_BLOCK = """$RXN
+
+      RDKit
+
+  2  1
+$MOL
+
+     RDKit          2D
+
+  2  1  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 *   0  0  0  0  0  0  0  0  0  0  0  0
+    1.2990    0.7500    0.0000 *   0  0  0  0  0  0  0  0  0  1  0  0
+  1  2  6  0
+V    1 [1*]
+V    2 [*:1]
+M  END
+$MOL
+
+     RDKit          2D
+
+  2  1  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 *   0  0  0  0  0  0  0  0  0  0  0  0
+    1.2990    0.7500    0.0000 *   0  0  0  0  0  0  0  0  0  2  0  0
+  1  2  6  0
+V    1 [1*]
+V    2 [*:2]
+M  END
+$MOL
+
+     RDKit          2D
+
+  2  1  0  0  0  0  0  0  0  0999 V2000
+    0.0000    0.0000    0.0000 *   0  0  0  0  0  0  0  0  0  1  0  0
+    1.2990    0.7500    0.0000 *   0  0  0  0  0  0  0  0  0  2  0  0
+  1  2  6  0
+V    1 [*:1]
+V    2 [*:2]
+M  END"""
 
 
 def test_convert_attach_to_isotope():
@@ -11,10 +49,18 @@ def test_convert_attach_to_isotope():
         dm.to_mol("O=C(Cc1ccnc(OCc2ccccc2)c1)NC[1*]"), canonical=True
     )
 
+    # same isotope
+    dm.reactions.convert_attach_to_isotope(mol_or_smiles=smiles, same_isotope=True)
+
+    isotope2 = dm.reactions.convert_attach_to_isotope(mol_or_smiles=smiles, as_smiles=True)
+    assert isotope2 == "O=C(Cc1ccnc(OCc2ccccc2)c1)NC[1*]"
+
 
 def test_num_attachment_points():
     smiles = "O=C(NC[*:1])Cc1c([*:2])nc(OCc2ccccc2)c1"
     assert dm.reactions.num_attachment_points(smiles) == 2
+
+    assert dm.reactions.num_attachment_points(dm.from_smarts(smiles)) == 2
 
 
 def test_open_attach_points():
@@ -31,50 +77,45 @@ def test_rxn_from_smarts():
     assert len(list(rxn.GetReactants())) == 2
 
 
+def test_rxn_to_smarts():
+    smarts = "[1*][*:1].[1*][*:2]>>[*:1][*:2]"
+    rxn = dm.reactions.rxn_from_smarts(smarts)
+
+    smarts2 = dm.reactions.rxn_to_smarts(rxn)
+    assert smarts == smarts2
+
+
 def test_rxn_from_block():
-    block = """$RXN
+    rxn = dm.reactions.rxn_from_block(REACTION_BLOCK)
+    assert rxn.GetNumProductTemplates() == 1
+    assert rxn.GetNumReactantTemplates() == 2
 
-      ISIS     090220091539
 
-  2  1
-$MOL
+def test_rxn_from_block_file(tmp_path):
+    block_path = tmp_path / "block.block"
 
-  -ISIS-  09020915392D
+    with open(block_path, "w") as f:
+        f.write(REACTION_BLOCK)
 
-  2  1  1  0  0  0  0  0  0  0999 V2000
-   -2.0744    0.1939    0.0000 L   0  0  0  0  0  0  0  0  0  0  0  0
-   -2.5440   -0.1592    0.0000 R#  0  0  0  0  0  0  0  0  0  1  0  0
-  1  2  1  0  0  0  0
-  1 F    2  17  35
-V    1 halogen
-M  RGP  1   2   1
-M  ALS   1  2 F Cl  Br
-M  END
-$MOL
+    rxn = dm.reactions.rxn_from_block_file(block_path)
+    assert rxn.GetNumProductTemplates() == 1
+    assert rxn.GetNumReactantTemplates() == 2
 
-  -ISIS-  09020915392D
 
-  2  1  0  0  0  0  0  0  0  0999 V2000
-    2.8375   -0.2500    0.0000 R#  0  0  0  0  0  0  0  0  0  2  0  0
-    3.3463    0.0438    0.0000 N   0  0  0  0  0  0  0  0  0  3  0  0
-  1  2  1  0  0  0  0
-V    2 amine.primary
-M  RGP  1   1   2
-M  END
-$MOL
+def test_rxn_to_block():
+    rxn = dm.reactions.rxn_from_smarts("[*:1][*:2]>>[*:1].[*:2]")
+    block = dm.reactions.rxn_to_block(rxn)
+    rxn2 = dm.reactions.rxn_from_block(block)
+    assert dm.reactions.rxn_to_smarts(rxn2) == dm.reactions.rxn_to_smarts(rxn)
 
-  -ISIS-  09020915392D
 
-  3  2  0  0  0  0  0  0  0  0999 V2000
-   13.5792    0.0292    0.0000 N   0  0  0  0  0  0  0  0  0  3  0  0
-   14.0880    0.3229    0.0000 R#  0  0  0  0  0  0  0  0  0  1  0  0
-   13.0704    0.3229    0.0000 R#  0  0  0  0  0  0  0  0  0  2  0  0
-  1  2  1  0  0  0  0
-  1  3  1  0  0  0  0
-M  RGP  2   2   1   3   2
-M  END"""
-    rxn = dm.reactions.rxn_from_block(block)
-    assert len(list(rxn.GetReactants())) == 2
+def test_rxn_to_block_file(tmp_path):
+    block_path = tmp_path / "block.block"
+    rxn = dm.reactions.rxn_from_smarts("[*:1][*:2]>>[*:1].[*:2]")
+    dm.reactions.rxn_to_block_file(rxn, block_path)
+
+    rxn2 = dm.reactions.rxn_from_block_file(block_path)
+    assert dm.reactions.rxn_to_smarts(rxn2) == dm.reactions.rxn_to_smarts(rxn)
 
 
 def test_is_reaction_ok():
@@ -83,50 +124,12 @@ def test_is_reaction_ok():
     assert dm.reactions.is_reaction_ok(rxn) == True
 
 
-def test_sanitize():
-    block = """$RXN
+def test_is_reaction_ok_with_logs(caplog):
+    smarts = "[1*][*:1].[1*][*:2]>>[*:1][*:2]"
+    rxn = dm.reactions.rxn_from_smarts(smarts)
+    assert dm.reactions.is_reaction_ok(rxn, enable_logs=True) == True
 
-      ISIS     090220091539
-
-  2  1
-$MOL
-
-  -ISIS-  09020915392D
-
-  2  1  1  0  0  0  0  0  0  0999 V2000
-   -2.0744    0.1939    0.0000 L   0  0  0  0  0  0  0  0  0  0  0  0
-   -2.5440   -0.1592    0.0000 R#  0  0  0  0  0  0  0  0  0  1  0  0
-  1  2  1  0  0  0  0
-  1 F    2  17  35
-V    1 halogen
-M  RGP  1   2   1
-M  ALS   1  2 F Cl  Br
-M  END
-$MOL
-
-  -ISIS-  09020915392D
-
-  2  1  0  0  0  0  0  0  0  0999 V2000
-    2.8375   -0.2500    0.0000 R#  0  0  0  0  0  0  0  0  0  2  0  0
-    3.3463    0.0438    0.0000 Na   0  0  0  0  0  0  0  0  0  3  0  0
-  1  2  1  0  0  0  0
-V    2 amine.primary
-M  RGP  1   1   2
-M  END
-$MOL
-
-  -ISIS-  09020915392D
-
-  3  2  0  0  0  0  0  0  0  0999 V2000
-   13.5792    0.0292    0.0000 Na   0  0  0  0  0  0  0  0  0  3  0  0
-   14.0880    0.3229    0.0000 R#  0  0  0  0  0  0  0  0  0  1  0  0
-   13.0704    0.3229    0.0000 R#  0  0  0  0  0  0  0  0  0  2  0  0
-  1  2  1  0  0  0  0
-  1  3  1  0  0  0  0
-M  RGP  2   2   1   3   2
-M  END"""
-    with pytest.raises(ValueError):
-        dm.reactions.rxn_from_block(rxn_block_or_file=block, sanitize=True)
+    assert "Number of" in caplog.text
 
 
 def test_apply_reaction():

@@ -1,5 +1,8 @@
+from typing import cast
 from typing import Union
-from typing import Optional
+
+import os
+import io
 
 from loguru import logger
 import numpy as np
@@ -7,7 +10,6 @@ import numpy as np
 import fsspec
 
 from rdkit.Chem import rdChemReactions
-from rdkit.Chem import AllChem
 
 import datamol as dm
 
@@ -30,57 +32,128 @@ def rxn_from_smarts(rxn_smarts: str) -> dm.ChemicalReaction:
     return rxn
 
 
-def rxn_from_block(
-    rxn_block_or_file: str,
-    sanitize: bool = False,
-) -> dm.ChemicalReaction:
-    """
-    Create a reaction from smarts
+def rxn_to_smarts(rxn: dm.ChemicalReaction) -> str:
+    """Create a SMARTS from a reaction.
 
     Args:
-        rxn_block_or_file:  Reaction SMARTS string or file path
+        rxn: dm.ChemicalReaction object.
+
+    Returns:
+        SMARTS as string.
+    """
+    return rdChemReactions.ReactionToSmarts(reaction=rxn)
+
+
+def rxn_from_block(
+    rxn_block: str,
+    sanitize: bool = False,
+) -> dm.ChemicalReaction:
+    """Create a reaction from a block.
+
+    Args:
+        rxn_block: A reaction block.
+        sanitize: Whether to sanitize the reaction.
 
     Returns:
         Initialized reaction.
 
     """
-
-    try:
-        with fsspec.open(rxn_block_or_file) as f:
-            rxn_block = f.read()  # type: ignore
-    except OSError:
-        rxn_block = rxn_block_or_file
-
     rxn = rdChemReactions.ReactionFromRxnBlock(rxnblock=rxn_block, sanitize=sanitize)
     rxn.Initialize()
     return rxn
 
 
-def is_reaction_ok(rxn: Union[str, dm.ChemicalReaction]) -> bool:
+def rxn_from_block_file(
+    rxn_block_path: Union[str, os.PathLike],
+    sanitize: bool = False,
+) -> dm.ChemicalReaction:
+    """Create a reaction from a block file.
+
+    Args:
+        rxn_block_path: Filepath to a reaction block file.
+        sanitize: Whether to sanitize the reaction.
+
+    Returns:
+        Initialized reaction.
     """
-    Check if the given reaction is synthetically valid
+    with fsspec.open(rxn_block_path) as f:
+        rxn_block = f.read()  # type: ignore
+        rxn = rxn_from_block(rxn_block=rxn_block, sanitize=sanitize)
+    return rxn
+
+
+def rxn_to_block(
+    rxn: dm.ChemicalReaction,
+    separate_agents: bool = False,
+    force_V3000: bool = False,
+) -> str:
+    """Create a block from a reaction object.
+
+    Args:
+        rxn: A reaction object.
+        separate_agents: Whether to separate agents from the reactants block. Not supported
+            if `force_V3000=True`.
+        force_V3000: Write the block in a V3000 format.
+
+    Returns:
+        Reaction block as string
+    """
+    return rdChemReactions.ReactionToRxnBlock(
+        reaction=rxn,
+        separateAgents=separate_agents,
+        forceV3000=force_V3000,
+    )
+
+
+def rxn_to_block_file(
+    rxn: dm.ChemicalReaction,
+    output_block_path: Union[str, os.PathLike],
+    separate_agents: bool = False,
+    force_V3000: bool = False,
+):
+    """Create a block from a reaction object.
+
+    Args:
+        rxn: A reaction object.
+        output_block_path: Filepath to a reaction block file.
+        separate_agents: Whether to separate agents from the reactants block. Not supported
+            if `force_V3000=True`.
+        force_V3000: Write the block in a V3000 format.
+    """
+    block = rxn_to_block(
+        rxn=rxn,
+        separate_agents=separate_agents,
+        force_V3000=force_V3000,
+    )
+
+    with fsspec.open(output_block_path, "w") as f:
+        f = cast(io.TextIOWrapper, f)
+        f.write(block)
+
+
+def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
+    """Check if the given reaction is synthetically valid.
 
     Args:
         rxn: dm.ChemicalReaction object
+        enable_logs: Whether to enable logs.
 
     Returns:
         Boolean whether reaction is valid
     """
     nWarn, nError, nReactants, nProducts, labels = rdChemReactions.PreprocessReaction(rxn)
 
-    logger.info(f"Number of warnings:{nWarn}")
-    logger.info(f"Number of preprocessing errors: {nError}")
-    logger.info(f"Number of reactants in reaction: {nReactants}")
-    logger.info(f"Number of products in reaction: {nProducts}")
-    logger.info(f"Preprocess labels added:{labels}")
+    if enable_logs:
+        logger.info(f"Number of warnings:{nWarn}")
+        logger.info(f"Number of preprocessing errors: {nError}")
+        logger.info(f"Number of reactants in reaction: {nReactants}")
+        logger.info(f"Number of products in reaction: {nProducts}")
+        logger.info(f"Preprocess labels added:{labels}")
 
-    try:
-        return rdChemReactions.SanitizeRxn(rxn) in [
-            rdChemReactions.SanitizeFlags.SANITIZE_NONE,
-            None,
-        ]
-    except Exception as e:
-        raise ValueError(f"Cannot sanitize the reaction. {e}")
+    return rdChemReactions.SanitizeRxn(rxn) in [
+        rdChemReactions.SanitizeFlags.SANITIZE_NONE,
+        None,
+    ]
 
 
 def select_reaction_output(
@@ -144,7 +217,7 @@ def apply_reaction(
     """
     with dm.without_rdkit_log(enable=disable_logs):
         if not rxn.IsInitialized():
-            rxn.Initialize()
+            rxn.Initialize()  # pragma: no cover
 
         product = rxn.RunReactants(reactants)
         outputs = select_reaction_output(
@@ -170,7 +243,7 @@ def can_react(rxn: dm.ChemicalReaction, mol: dm.Mol) -> bool:
         Position of mol
     """
     if not rxn.IsInitialized():
-        rxn.Initialize()
+        rxn.Initialize()  # pragma: no cover
     if rxn.IsMoleculeReactant(mol):
         return find_reactant_position(rxn, mol) != -1
     return False
@@ -187,8 +260,9 @@ def find_reactant_position(rxn: dm.ChemicalReaction, mol: dm.Mol) -> int:
     Returns:
         Reactant position
     """
+
     if not rxn.IsInitialized():
-        rxn.Initialize()
+        rxn.Initialize()  # pragma: no cover
 
     react_pos = -1
     for pos, rct in enumerate(rxn.GetReactants()):

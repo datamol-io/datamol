@@ -39,11 +39,9 @@ def convert_attach_to_isotope(
     same_isotope: bool = False,
     as_smiles: bool = False,
 ) -> Union[dm.Mol, str]:
-    """
-    Convert attachment to isotope mapping
-    Examples:
-         Convert "O=C(NCc1cnc([*])c1)[*]" to  "O=C(NCc1cnc([1*])c1)[2*]"
+    """Convert attachment to isotope mapping.
 
+    Examples: "O=C(NCc1cnc([*])c1)[*]" to  "O=C(NCc1cnc([1*])c1)[2*]"
 
     Args:
         mol_or_smiles: A Mol object or a smiles to be converted
@@ -51,13 +49,11 @@ def convert_attach_to_isotope(
             Example: "O=C(NCc1cnc([*])c1)[*]" to  "O=C(NCc1cnc([1*])c1)[1*]"
 
     Returns:
-        Converted Mol object.
+        Converted Mol object or SMILES.
     """
     mol = dm.to_mol(mol_or_smiles)
     smiles = dm.to_smiles(mol)
-
-    if smiles is None:
-        return mol
+    smiles = cast(str, smiles)
 
     smiles = add_brackets_to_attachment_points(smiles)
 
@@ -65,7 +61,9 @@ def convert_attach_to_isotope(
     subs_reg = r"[\g<1>{}]"
     if same_isotope:
         subs_reg = "[1{}]"
+
     smiles = re.sub(ATTACHMENT_POINT_NUM_REGEXP, subs_reg.format(ATTACHMENT_POINT_TOKEN), smiles)
+
     if as_smiles:
         return smiles
     return dm.to_mol(smiles)
@@ -83,8 +81,13 @@ def num_attachment_points(mol_or_smiles: Union[dm.Mol, str]) -> int:
     """
     if isinstance(mol_or_smiles, dm.Mol):
         mol = cast(dm.Mol, mol_or_smiles)
-        return len([atom for atom in mol.GetAtoms() if atom.GetSymbol() == ATTACHMENT_POINT_TOKEN])
-    return len(re.findall(ATTACHMENT_POINT_REGEXP, mol_or_smiles))
+        n_points = len(
+            [atom for atom in mol.GetAtoms() if atom.GetSymbol() == ATTACHMENT_POINT_TOKEN]
+        )
+    else:
+        n_points = len(re.findall(ATTACHMENT_POINT_REGEXP, mol_or_smiles))
+
+    return n_points
 
 
 def open_attach_points(
@@ -92,8 +95,7 @@ def open_attach_points(
     fix_atom_map: bool = False,
     bond_type: dm.BondType = dm.SINGLE_BOND,
 ) -> dm.Mol:
-    """
-    Compute attachment points on a molecule.
+    """Compute attachment points on a molecule.
     This will highlight all valid attachment point on the current molecule instead.
 
     Args:
@@ -103,10 +105,6 @@ def open_attach_points(
 
     Returns:
         Molecule with open attachment points
-
-    See Also:
-        - <datamol.mol>
-        - <Chem.rdchem.BondType>
     """
 
     emol = Chem.rdchem.RWMol(dm.to_mol(mol))
@@ -129,5 +127,6 @@ def open_attach_points(
                 emol.AddBond(atom[0], new_index, bond_type)
             else:
                 emol.AddBond(atom[0], new_index)
+
     mol = dm.sanitize_mol(emol)
     return mol
