@@ -98,11 +98,14 @@ def rxn_to_block(
     Returns:
         Reaction block as string
     """
-    return rdChemReactions.ReactionToRxnBlock(
-        reaction=rxn,
-        separateAgents=separate_agents,
-        forceV3000=force_V3000,
-    )
+
+    args = {}
+    if dm.is_lower_than_current_rdkit_version("2022"):
+        logger.warning("RDKit version prior to 2022.* does not support the `force_V3000` flag.")
+    else:
+        args["forceV3000"] = force_V3000
+
+    return rdChemReactions.ReactionToRxnBlock(reaction=rxn, separateAgents=separate_agents, **args)
 
 
 def rxn_to_block_file(
