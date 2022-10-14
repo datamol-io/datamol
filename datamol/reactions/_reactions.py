@@ -1,11 +1,11 @@
-from functools import singledispatch
 from typing import Union
+from typing import Optional
+
 from loguru import logger
 import numpy as np
 
 import fsspec
 
-from rdkit import Chem
 from rdkit.Chem import rdChemReactions
 from rdkit.Chem import AllChem
 
@@ -15,7 +15,7 @@ import datamol as dm
 ATTACHING_RXN = rdChemReactions.ReactionFromSmarts("[*;h:1]>>[*:1][*]")
 
 
-def rxn_from_smarts(rxn_smarts: str) -> rdChemReactions.ChemicalReaction:
+def rxn_from_smarts(rxn_smarts: str) -> dm.ChemicalReaction:
     """
     Create a reaction from smarts
 
@@ -31,8 +31,9 @@ def rxn_from_smarts(rxn_smarts: str) -> rdChemReactions.ChemicalReaction:
 
 
 def rxn_from_block(
-    rxn_block_or_file: str = None, sanitize=False
-) -> rdChemReactions.ChemicalReaction:
+    rxn_block_or_file: str,
+    sanitize: bool = False,
+) -> dm.ChemicalReaction:
     """
     Create a reaction from smarts
 
@@ -41,33 +42,38 @@ def rxn_from_block(
 
     Returns:
         Initialized reaction.
+
     """
+
     try:
         with fsspec.open(rxn_block_or_file) as f:
-            rxn_block = f.read()
-    except Exception:
+            rxn_block = f.read()  # type: ignore
+    except OSError:
         rxn_block = rxn_block_or_file
+
     rxn = rdChemReactions.ReactionFromRxnBlock(rxnblock=rxn_block, sanitize=sanitize)
     rxn.Initialize()
     return rxn
 
 
-def is_reaction_ok(rxn: Union[str, rdChemReactions.ChemicalReaction]) -> bool:
+def is_reaction_ok(rxn: Union[str, dm.ChemicalReaction]) -> bool:
     """
     Check if the given reaction is synthetically valid
 
     Args:
-        rxn: rdkit.rdChemReactions.ChemicalReaction object
+        rxn: dm.ChemicalReaction object
 
     Returns:
         Boolean whether reaction is valid
     """
-    nWarn, nError, nReactants, nProducts, labels = AllChem.PreprocessReaction(rxn)
+    nWarn, nError, nReactants, nProducts, labels = rdChemReactions.PreprocessReaction(rxn)
+
     logger.info(f"Number of warnings:{nWarn}")
     logger.info(f"Number of preprocessing errors: {nError}")
     logger.info(f"Number of reactants in reaction: {nReactants}")
     logger.info(f"Number of products in reaction: {nProducts}")
     logger.info(f"Preprocess labels added:{labels}")
+
     try:
         return rdChemReactions.SanitizeRxn(rxn) in [
             rdChemReactions.SanitizeFlags.SANITIZE_NONE,
@@ -78,12 +84,12 @@ def is_reaction_ok(rxn: Union[str, rdChemReactions.ChemicalReaction]) -> bool:
 
 
 def select_reaction_output(
-    product,
-    single_output=True,
+    product: list,
+    single_output: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
     sanitize: bool = True,
-) -> Union[list, str, Chem.Mol]:
+) -> Union[list, str, dm.Mol]:
     """
     Compute the products from a reaction. It only takes the first product of the
 
@@ -98,9 +104,9 @@ def select_reaction_output(
         Processed products from reaction.
     """
     # flatten all possible products of a reaction
-    product = sum(product, ())
+    product = list(sum(product, ()))
     if single_output:
-        product = np.random.choice(product, 1)
+        product = list(np.random.choice(product, 1))
     if sanitize:
         product = [dm.sanitize_mol(m) for m in product]
     if rm_attach:
@@ -113,14 +119,14 @@ def select_reaction_output(
 
 
 def apply_reaction(
-    rxn: rdChemReactions.ChemicalReaction,
+    rxn: dm.ChemicalReaction,
     reactants: tuple,
     single_output: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
-    disable_log: bool = True,
+    disable_logs: bool = True,
     sanitize: bool = True,
-) -> Union[list, str, Chem.Mol]:
+) -> Union[list, str, dm.Mol]:
     """
     Apply a chemical reaction on a molecule
 
@@ -130,27 +136,29 @@ def apply_reaction(
        single_output: Whether return one product from all possible product.
        as_smiles: Whether return product in SMILES.
        rm_attach: Whether remove the attachment point from product.
-       disable_log: Whether disable rdkit log.
+       disable_logs: Whether disable rdkit logs.
        sanitize: Whether sanitize the product.
 
     Returns:
        Reaction products.
     """
-    if disable_log:
-        dm.disable_rdkit_log()
-    if not rxn.IsInitialized():
-        rxn.Initialize()
-    product = rxn.RunReactants(reactants)
-    return select_reaction_output(
-        product=product,
-        single_output=single_output,
-        as_smiles=as_smiles,
-        rm_attach=rm_attach,
-        sanitize=sanitize,
-    )
+    with dm.without_rdkit_log(enable=disable_logs):
+        if not rxn.IsInitialized():
+            rxn.Initialize()
+
+        product = rxn.RunReactants(reactants)
+        outputs = select_reaction_output(
+            product=product,
+            single_output=single_output,
+            as_smiles=as_smiles,
+            rm_attach=rm_attach,
+            sanitize=sanitize,
+        )
+
+    return outputs
 
 
-def can_react(rxn, mol):
+def can_react(rxn: dm.ChemicalReaction, mol: dm.Mol) -> bool:
     """
     Check if a molecule is a reactant to a chemical reaction and return position
 
@@ -164,11 +172,11 @@ def can_react(rxn, mol):
     if not rxn.IsInitialized():
         rxn.Initialize()
     if rxn.IsMoleculeReactant(mol):
-        return _find_rct_position(rxn, mol)
+        return find_reactant_position(rxn, mol) != -1
     return False
 
 
-def _find_rct_position(rxn, mol):
+def find_reactant_position(rxn: dm.ChemicalReaction, mol: dm.Mol) -> int:
     """
     Find the position of a reactant in a reaction
 
@@ -179,6 +187,9 @@ def _find_rct_position(rxn, mol):
     Returns:
         Reactant position
     """
+    if not rxn.IsInitialized():
+        rxn.Initialize()
+
     react_pos = -1
     for pos, rct in enumerate(rxn.GetReactants()):
         if mol.HasSubstructMatch(rct):
@@ -186,7 +197,7 @@ def _find_rct_position(rxn, mol):
     return react_pos
 
 
-def inverse_reaction(rxn):
+def inverse_reaction(rxn: dm.ChemicalReaction) -> dm.ChemicalReaction:
     """
     Get the reverse reaction of the input reaction
 
@@ -196,7 +207,7 @@ def inverse_reaction(rxn):
     Returns:
         Inversed reaction.
     """
-    rxn2 = AllChem.ChemicalReaction()
+    rxn2 = rdChemReactions.ChemicalReaction()
     for i in range(rxn.GetNumReactantTemplates()):
         rxn2.AddProductTemplate(rxn.GetReactantTemplate(i))
     for i in range(rxn.GetNumProductTemplates()):

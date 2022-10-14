@@ -1,12 +1,11 @@
 import pytest
 import datamol as dm
-from rdkit import Chem
 
 
 def test_convert_attach_to_isotope():
     smiles = "O=C(NC[*:1])Cc1ccnc(OCc2ccccc2)c1"
 
-    isotope = dm.reactions.convert_attach_to_isotope(mol_or_smi=smiles)
+    isotope = dm.reactions.convert_attach_to_isotope(mol_or_smiles=smiles)
 
     assert dm.to_smiles(isotope, canonical=True) == dm.to_smiles(
         dm.to_mol("O=C(Cc1ccnc(OCc2ccccc2)c1)NC[1*]"), canonical=True
@@ -49,7 +48,7 @@ $MOL
   1 F    2  17  35
 V    1 halogen
 M  RGP  1   2   1
-M  ALS   1  2 F Cl  Br   
+M  ALS   1  2 F Cl  Br
 M  END
 $MOL
 
@@ -101,7 +100,7 @@ $MOL
   1 F    2  17  35
 V    1 halogen
 M  RGP  1   2   1
-M  ALS   1  2 F Cl  Br   
+M  ALS   1  2 F Cl  Br
 M  END
 $MOL
 
@@ -126,8 +125,8 @@ $MOL
   1  3  1  0  0  0  0
 M  RGP  2   2   1   3   2
 M  END"""
-    with pytest.raises(Exception) as e_info:
-        rxn = dm.reactions.rxn_from_block(rxn_block=block, sanitize=True)
+    with pytest.raises(ValueError):
+        dm.reactions.rxn_from_block(rxn_block_or_file=block, sanitize=True)
 
 
 def test_apply_reaction():
@@ -137,7 +136,7 @@ def test_apply_reaction():
     scf = dm.to_mol("O=C(NC[1*])NCc1ccnc(OCc2ccccc2)c1")
     prod = dm.reactions.apply_reaction(rxn=rxn, reactants=(scf, frag), single_output=True)
     assert len([prod]) == 1
-    assert isinstance(prod, Chem.Mol) == True
+    assert isinstance(prod, dm.Mol) == True
 
     prod = dm.reactions.apply_reaction(
         rxn=rxn, reactants=(scf, frag), single_output=False, as_smiles=True
