@@ -9,7 +9,9 @@ Authors are sorted alphabetically.
 * Honoré Hounwanou
 * Ishan Kumar
 * Julien Horwood
+* Matt
 * Therence1
+* Valence-JonnyHsu
 * deepsource-autofix[bot]
 * michelml
 * mike
