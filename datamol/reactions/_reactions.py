@@ -160,7 +160,8 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 
 
 def select_reaction_output(
-    product: list,
+    product: Union[list, tuple],
+    product_index: int = None,
     single_output: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
@@ -171,6 +172,7 @@ def select_reaction_output(
 
     Args:
         product: All the products from a reaction.
+        product_index: Index of the product to select.
         single_output: Whether return a single output from a reaction.
         rm_attach: Whether remove the attachment point from the product.
         as_smiles: Whether return the result in smiles.
@@ -179,16 +181,19 @@ def select_reaction_output(
     Returns:
         Processed products from reaction.
     """
-    # flatten all possible products of a reaction
-    product = list(sum(product, ()))
+    product = np.array(product)
+    if product_index is not None:
+        product = product[:, product_index]
     if single_output:
-        product = list(np.random.choice(product, 1))
+        index = np.random.randint(product.shape[0], size=1)
+        product = product[index]
     if sanitize:
-        product = [dm.sanitize_mol(m) for m in product]
+        product = np.vectorize(dm.sanitize_mol)(product)
     if rm_attach:
-        product = [dm.remove_dummies(x) for x in product]
+        product = np.vectorize(dm.remove_dummies)(product)
     if as_smiles:
-        product = [dm.to_smiles(x) for x in product if x is not None]
+        fn = lambda x: dm.to_smiles(x, allow_to_fail=True)
+        product = np.vectorize(fn)(product)
     if single_output:
         return product[0]
     return product
@@ -197,6 +202,7 @@ def select_reaction_output(
 def apply_reaction(
     rxn: dm.ChemicalReaction,
     reactants: tuple,
+    product_index: Union[int, list] = 0,
     single_output: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
@@ -209,6 +215,7 @@ def apply_reaction(
     Args:
        rxn: Reaction object.
        reactants: A tuple of reactants.
+       product_index: The index of the product of interest.
        single_output: Whether return one product from all possible product.
        as_smiles: Whether return product in SMILES.
        rm_attach: Whether remove the attachment point from product.
@@ -225,6 +232,7 @@ def apply_reaction(
         product = rxn.RunReactants(reactants)
         outputs = select_reaction_output(
             product=product,
+            product_index=product_index,
             single_output=single_output,
             as_smiles=as_smiles,
             rm_attach=rm_attach,
