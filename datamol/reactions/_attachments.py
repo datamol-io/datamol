@@ -1,7 +1,9 @@
 from typing import Union
+
 import re
-import datamol as dm
 import operator
+
+import datamol as dm
 from rdkit import Chem
 
 ATTACHMENT_POINT_TOKEN = "*"
@@ -32,10 +34,10 @@ def add_brackets_to_attachment_points(smi: str) -> str:
 
 
 def convert_attach_to_isotope(
-    mol_or_smi: Union[Chem.Mol, str],
+    mol_or_smi: Union[dm.Mol, str],
     same_isotope: bool = False,
     as_smiles=False,
-) -> Chem.Mol:
+) -> dm.Mol:
     """
     Convert attachment to isotope mapping
     Examples:
@@ -52,8 +54,12 @@ def convert_attach_to_isotope(
     """
     mol = dm.to_mol(mol_or_smi)
     smiles = dm.to_smiles(mol)
-    print(smiles)
+
+    if smiles is None:
+        return mol
+
     smiles = add_brackets_to_attachment_points(smiles)
+
     # reg matching seems to be the most effective
     subs_reg = "[\g<1>{}]"
     if same_isotope:
@@ -74,7 +80,7 @@ def num_attachment_points(mol_or_smi) -> int:
     Returns:
         Number of attachment points of the given molecule.
     """
-    if isinstance(mol_or_smi, Chem.Mol):
+    if isinstance(mol_or_smi, dm.Mol):
         return len(
             [atom for atom in mol_or_smi.GetAtoms() if atom.GetSymbol() == ATTACHMENT_POINT_TOKEN]
         )
@@ -82,8 +88,8 @@ def num_attachment_points(mol_or_smi) -> int:
 
 
 def open_attach_points(
-    mol: Chem.Mol, fix_atom_map: bool = False, bond_type: Chem.rdchem.BondType = dm.SINGLE_BOND
-) -> Chem.Mol:
+    mol: dm.Mol, fix_atom_map: bool = False, bond_type: Chem.rdchem.BondType = dm.SINGLE_BOND
+) -> dm.Mol:
     """
     Compute attachment points on a molecule.
     This will highlight all valid attachment point on the current molecule instead.
