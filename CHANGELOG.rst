@@ -4,6 +4,24 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.17
+====================
+
+**Added:**
+
+* Added a new chemical reaction module for rdkit chemical reactions and attachment manipulations.
+
+**Fixed:**
+
+
+
+**Authors:**
+
+* Hadrien Mary
+* Lu Zhu
+
+
+
 v0.7.16
 ====================
 
