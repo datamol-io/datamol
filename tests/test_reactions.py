@@ -1,4 +1,5 @@
 import datamol as dm
+import numpy as np
 
 REACTION_BLOCK = """$RXN
 
@@ -145,7 +146,7 @@ def test_apply_reaction():
         rxn=rxn, reactants=(scf, frag), single_output=False, as_smiles=True
     )
     assert len(prod) >= 1
-    assert isinstance(prod, list) == True
+    assert isinstance(prod, np.ndarray) == True
 
 
 def test_can_react():
@@ -164,3 +165,47 @@ def test_inverse_reaction():
     rxn_r = dm.reactions.inverse_reaction(rxn)
     assert len(list(rxn_r.GetReactants())) == 1
     assert len(list(rxn_r.GetProducts())) == 2
+
+
+def test_select_reaction_output():
+    smiles = (
+        (
+            "Cc1cnc(CNc(cccc2-c3cn(CC(C4)CC4O)c4ncnc(N)c34)c2F)s1",
+            "Cc1cnc(CNc(cccc2-c3cn(C(C4)CC4O)c4ncnc(N)c34)c2F)s1",
+        ),
+        (
+            "Nc1c(c(-c2cccc(NCc3nccs3)c2F)cn2Cc3cn(C4CC5(COCC5)OCC4)nn3)c2ncn1",
+            "C[C@@H](c1cn(CC2CCCCC2)nn1)N(Cc1nccs1)c(cccc1-c2c[nH]c3ncnc(N)c23)c1F",
+        ),
+        (
+            "Nc1c(c(-c2cccc(NCc3nccs3)c2F)cn2Cc3cn(CCN4CCOCC4)nn3)c2ncn1",
+            "Cc1cnc(C(Nc(cccc2-c3cn(C[C@H](C4)C[C@@H]4O)c4ncnc(N)c34)c2F)=O)s1",
+        ),
+    )
+    product = tuple(tuple([dm.to_mol(p[0]), dm.to_mol(p[1])]) for p in smiles)
+    prod = dm.reactions.select_reaction_output(
+        product,
+        product_index=None,
+        single_output=False,
+        rm_attach=True,
+        as_smiles=False,
+        sanitize=True,
+    )
+    assert prod.shape == np.array(smiles).shape
+
+    product = tuple(tuple([dm.to_mol(p[0]), dm.to_mol(p[1])]) for p in smiles)
+    prod = dm.reactions.select_reaction_output(
+        product,
+        product_index=[0, 1],
+        single_output=False,
+        rm_attach=True,
+        as_smiles=False,
+        sanitize=True,
+    )
+    assert prod.shape == np.array(smiles).shape
+
+    product = tuple(tuple([dm.to_mol(p[0]), dm.to_mol(p[1])]) for p in smiles)
+    prod = dm.reactions.select_reaction_output(
+        product, product_index=1, single_output=True, rm_attach=True, as_smiles=False, sanitize=True
+    )
+    assert isinstance(prod, dm.mol.Mol) == True
