@@ -1,6 +1,6 @@
 **Added:**
 
-* Added back the reaction module for rdkit chemical reactions and attachment manipulations.
+* Added a new chemical reaction module for rdkit chemical reactions and attachment manipulations.
 
 **Changed:**
 
