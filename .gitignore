@@ -62,3 +62,6 @@ dev.ipynb
 
 # MkDocs
 site/
+
+.idea/
+__pycache__

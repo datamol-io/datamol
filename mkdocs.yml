@@ -19,6 +19,7 @@ nav:
       - The Basics: tutorials/The_Basics.ipynb
       - Preprocessing: tutorials/Preprocessing.ipynb
       - Descriptors: tutorials/Descriptors.ipynb
+      - Chemical Reactions: tutorials/Reactions.ipynb
       - Scaffolds: tutorials/Scaffolds.ipynb
       - Aligning: tutorials/Aligning.ipynb
       - Fuzzy_Scaffolds: tutorials/Fuzzy_Scaffolds.ipynb
@@ -42,6 +43,7 @@ nav:
     - datamol.log: api/datamol.log.md
     - datamol.molar: api/datamol.molar.md
     - datamol.mol: api/datamol.mol.md
+    - datamol.reactions: api/datamol.reactions.md
     - datamol.scaffold: api/datamol.scaffold.md
     - datamol.similarity: api/datamol.similarity.md
     - datamol.utils: api/datamol.utils.md

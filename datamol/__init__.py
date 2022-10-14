@@ -1,6 +1,13 @@
 from ._version import __version__
 
+from ._version import is_lower_than_current_rdkit_version
+from ._version import is_greater_than_current_rdkit_version
+from ._version import is_lower_eq_than_current_rdkit_version
+from ._version import is_greater_eq_than_current_rdkit_version
+
 from .types import Mol
+from .types import BondType
+from .types import ChemicalReaction
 
 from . import utils
 
@@ -72,6 +79,7 @@ from . import scaffold
 from . import molar
 from . import descriptors
 from . import predictors
+from . import reactions
 
 from .convert import to_smiles
 from .convert import to_selfies
