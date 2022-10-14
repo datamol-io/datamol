@@ -61,7 +61,7 @@ def convert_attach_to_isotope(
     smiles = add_brackets_to_attachment_points(smiles)
 
     # reg matching seems to be the most effective
-    subs_reg = "[\g<1>{}]"
+    subs_reg = r"[\g<1>{}]"
     if same_isotope:
         subs_reg = "[1{}]"
     smiles = re.sub(ATTACHMENT_POINT_NUM_REGEXP, subs_reg.format(ATTACHMENT_POINT_TOKEN), smiles)

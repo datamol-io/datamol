@@ -1,6 +1,8 @@
 from ._version import __version__
 
 from .types import Mol
+from .types import BondType
+from .types import ChemicalReaction
 
 from . import utils
 
@@ -128,8 +130,3 @@ from .graph import to_graph
 from .graph import get_all_path_between
 from .graph import match_molecular_graphs
 from .graph import reorder_mol_from_template
-
-from .reactions import rxn_from_smarts
-from .reactions import rxn_from_block
-from .reactions import apply_reaction
-from .reactions import is_reaction_ok
