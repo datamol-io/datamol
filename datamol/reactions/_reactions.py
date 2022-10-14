@@ -232,15 +232,14 @@ def apply_reaction(
 
 
 def can_react(rxn: dm.ChemicalReaction, mol: dm.Mol) -> bool:
-    """
-    Check if a molecule is a reactant to a chemical reaction and return position
+    """Check if a molecule is a reactant to a chemical reaction.
 
     Args:
         rxn: Reaction to check.
         mol: Molecule to check if it is a reactant.
 
     Returns:
-        Position of mol
+        True if `mol` is a reactant of rxn.
     """
     if not rxn.IsInitialized():
         rxn.Initialize()  # pragma: no cover
@@ -250,15 +249,14 @@ def can_react(rxn: dm.ChemicalReaction, mol: dm.Mol) -> bool:
 
 
 def find_reactant_position(rxn: dm.ChemicalReaction, mol: dm.Mol) -> int:
-    """
-    Find the position of a reactant in a reaction
+    """Find the position of a reactant in a reaction.
 
     Args:
         rxn: Reaction
         mol: Molecule
 
     Returns:
-        Reactant position
+        Reactant position or -1 if `mol` is not a reactant.
     """
 
     if not rxn.IsInitialized():
