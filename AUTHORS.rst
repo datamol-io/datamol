@@ -9,6 +9,7 @@ Authors are sorted alphabetically.
 * Honoré Hounwanou
 * Ishan Kumar
 * Julien Horwood
+* Lu Zhu
 * Matt
 * Therence1
 * Valence-JonnyHsu
