@@ -72,6 +72,7 @@ from . import scaffold
 from . import molar
 from . import descriptors
 from . import predictors
+from . import reactions
 
 from .convert import to_smiles
 from .convert import to_selfies
@@ -127,3 +128,8 @@ from .graph import to_graph
 from .graph import get_all_path_between
 from .graph import match_molecular_graphs
 from .graph import reorder_mol_from_template
+
+from .reactions import rxn_from_smarts
+from .reactions import rxn_from_block
+from .reactions import apply_reaction
+from .reactions import is_reaction_ok

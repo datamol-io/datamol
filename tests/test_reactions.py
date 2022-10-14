@@ -74,7 +74,7 @@ $MOL
   1  3  1  0  0  0  0
 M  RGP  2   2   1   3   2
 M  END"""
-    rxn = dm.reactions.rxn_from_block(rxn_block=block)
+    rxn = dm.reactions.rxn_from_block(block)
     assert len(list(rxn.GetReactants())) == 2
 
 
