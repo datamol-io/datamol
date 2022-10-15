@@ -1,10 +1,8 @@
 **Added:**
 
-* Added a new chemical reaction module for rdkit chemical reactions and attachment manipulations.
-
 **Changed:**
 
-* <news item>
+* Changed the `select_reaction_output` to return specific product based on the output index
 
 **Deprecated:**
 

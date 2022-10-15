@@ -158,7 +158,7 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 
 def select_reaction_output(
     product: Union[list, tuple],
-    product_index: int = None,
+    product_index: int = 0,
     single_output: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
@@ -169,7 +169,7 @@ def select_reaction_output(
 
     Args:
         product: All the products from a reaction.
-        product_index: Index of the product to select.
+        product_index: Index of the product to select. By default,  `product_index=0` which returns the first product is returned.
         single_output: Whether return a single output from a reaction.
         rm_attach: Whether remove the attachment point from the product.
         as_smiles: Whether return the result in smiles.
