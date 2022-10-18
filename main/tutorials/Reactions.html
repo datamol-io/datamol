@@ -1961,7 +1961,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[1]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -1993,7 +1993,7 @@ Licensed under the Apache License, Version 2.0.
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2030,7 +2030,7 @@ rxn</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
 
 
 
@@ -2056,7 +2056,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2093,17 +2093,17 @@ class="
 
 
 <div class="jp-RenderedText jp-OutputArea-output" data-mime-type="application/vnd.jupyter.stderr">
-<pre>2022-10-14 12:30:01.734 | INFO     | datamol.reactions._reactions:is_reaction_ok:147 - Number of warnings:0
-2022-10-14 12:30:01.735 | INFO     | datamol.reactions._reactions:is_reaction_ok:148 - Number of preprocessing errors: 0
-2022-10-14 12:30:01.735 | INFO     | datamol.reactions._reactions:is_reaction_ok:149 - Number of reactants in reaction: 2
-2022-10-14 12:30:01.736 | INFO     | datamol.reactions._reactions:is_reaction_ok:150 - Number of products in reaction: 1
-2022-10-14 12:30:01.736 | INFO     | datamol.reactions._reactions:is_reaction_ok:151 - Preprocess labels added:((), ())
+<pre>2022-10-18 15:33:48.135 | INFO     | datamol.reactions._reactions:is_reaction_ok:152 - Number of warnings:0
+2022-10-18 15:33:48.136 | INFO     | datamol.reactions._reactions:is_reaction_ok:153 - Number of preprocessing errors: 0
+2022-10-18 15:33:48.137 | INFO     | datamol.reactions._reactions:is_reaction_ok:154 - Number of reactants in reaction: 2
+2022-10-18 15:33:48.138 | INFO     | datamol.reactions._reactions:is_reaction_ok:155 - Number of products in reaction: 1
+2022-10-18 15:33:48.138 | INFO     | datamol.reactions._reactions:is_reaction_ok:156 - Preprocess labels added:((), ())
 </pre>
 </div>
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
 
 
 
@@ -2125,7 +2125,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2146,7 +2146,8 @@ class="
     <span class="n">reactants</span><span class="o">=</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;CC(=O)O&quot;</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;NC&quot;</span><span class="p">)),</span>
     <span class="n">as_smiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">single_output</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">single_product_group</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">prod_mols</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -2156,7 +2157,8 @@ prod_mols = dm.reactions.apply_reaction(
     reactants=(dm.to_mol("CC(=O)O"), dm.to_mol("NC")),
     as_smiles=False,
     sanitize=True,
-    single_output=False,
+    single_product_group=False,
+    product_index=0
 )
 dm.to_image(prod_mols, use_svg=False)</div>
     
@@ -2174,7 +2176,7 @@ dm.to_image(prod_mols, use_svg=False)</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -2200,7 +2202,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2221,8 +2223,9 @@ class="
     <span class="n">reactants</span><span class="o">=</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;[2*]CC(=O)O&quot;</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;NC[1*]&quot;</span><span class="p">)),</span>
     <span class="n">as_smiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">single_product_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">rm_attach</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+    <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
 <span class="n">prod_smi_att</span>
 </pre></div>
@@ -2232,8 +2235,9 @@ prod_smi_att = dm.reactions.apply_reaction(
     reactants=(dm.to_mol("[2*]CC(=O)O"), dm.to_mol("NC[1*]")),
     as_smiles=False,
     sanitize=True,
-    single_output=True,
+    single_product_group=True,
     rm_attach=False,
+    product_index=0
 )
 prod_smi_att</div>
     
@@ -2251,7 +2255,7 @@ prod_smi_att</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -2277,7 +2281,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2293,26 +2297,28 @@ class="
             </clipboard-copy>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Return a single product in SMILES without any open attachment points</span>
-<span class="n">prod_smi</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span>
+<span class="n">prod_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span>
     <span class="n">rxn</span><span class="o">=</span><span class="n">rxn</span><span class="p">,</span>
     <span class="n">reactants</span><span class="o">=</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;[2*]CC(=O)O&quot;</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;NC[1*]&quot;</span><span class="p">)),</span>
     <span class="n">as_smiles</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
-    <span class="n">single_output</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">single_product_group</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">rm_attach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+    <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span>
 <span class="p">)</span>
-<span class="n">prod_smi</span>
+<span class="n">prod_mol</span>
 </pre></div>
 <div id="cell-6" class="clipboard-copy-txt"># Return a single product in SMILES without any open attachment points
-prod_smi = dm.reactions.apply_reaction(
+prod_mol = dm.reactions.apply_reaction(
     rxn=rxn,
     reactants=(dm.to_mol("[2*]CC(=O)O"), dm.to_mol("NC[1*]")),
     as_smiles=False,
     sanitize=True,
-    single_output=True,
+    single_product_group=True,
     rm_attach=True,
+    product_index=0
 )
-prod_smi</div>
+prod_mol</div>
     
         </div>
     </div>
@@ -2328,7 +2334,7 @@ prod_smi</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -2354,7 +2360,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[7]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2393,7 +2399,7 @@ dm.to_image([scaffold, frag1, frag2], use_svg=False)</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[7]:</div>
 
 
 
@@ -2419,7 +2425,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[8]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2437,13 +2443,13 @@ class="
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Define reaction with SMARTS and apply reaction on the specified attachment points</span>
 
 <span class="n">rxn1</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">rxn_from_smarts</span><span class="p">(</span><span class="s2">&quot;[1*][*:1].[1*][*:2]&gt;&gt;[*:1][*:2]&quot;</span><span class="p">)</span>
-<span class="n">res1</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn1</span><span class="p">,</span> <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">frag1</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">scaffold</span><span class="p">)),</span> <span class="n">rm_attach</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">res1</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn1</span><span class="p">,</span> <span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">frag1</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">scaffold</span><span class="p">)),</span> <span class="n">rm_attach</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">res1</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 <div id="cell-8" class="clipboard-copy-txt"># Define reaction with SMARTS and apply reaction on the specified attachment points
 
 rxn1 = dm.reactions.rxn_from_smarts("[1*][*:1].[1*][*:2]>>[*:1][*:2]")
-res1 = dm.reactions.apply_reaction(rxn1, (dm.to_mol(frag1), dm.to_mol(scaffold)), rm_attach=True)
+res1 = dm.reactions.apply_reaction(rxn1, (dm.to_mol(frag1), dm.to_mol(scaffold)), rm_attach=True, product_index=0)
 dm.to_image(res1, use_svg=False)</div>
     
         </div>
@@ -2460,7 +2466,7 @@ dm.to_image(res1, use_svg=False)</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[8]:</div>
 
 
 
@@ -2486,7 +2492,7 @@ class="
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[10]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[9]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2503,12 +2509,12 @@ class="
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># One reaction to attach multiple specified attchment points</span>
 <span class="n">rxn2</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">rxn_from_smarts</span><span class="p">(</span><span class="s2">&quot;[1*][*:1].[2*][*:4].([1*][*:2].[2*][*:3])&gt;&gt;([*:1][*:2].[*:3][*:4])&quot;</span><span class="p">)</span>
-<span class="n">res2</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn2</span><span class="p">,</span> <span class="p">(</span><span class="n">frag1</span><span class="p">,</span> <span class="n">frag2</span><span class="p">,</span> <span class="n">scaffold</span><span class="p">))</span>
+<span class="n">res2</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn2</span><span class="p">,</span> <span class="p">(</span><span class="n">frag1</span><span class="p">,</span> <span class="n">frag2</span><span class="p">,</span> <span class="n">scaffold</span><span class="p">),</span> <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">res2</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 <div id="cell-9" class="clipboard-copy-txt"># One reaction to attach multiple specified attchment points
 rxn2 = dm.reactions.rxn_from_smarts("[1*][*:1].[2*][*:4].([1*][*:2].[2*][*:3])>>([*:1][*:2].[*:3][*:4])")
-res2 = dm.reactions.apply_reaction(rxn2, (frag1, frag2, scaffold))
+res2 = dm.reactions.apply_reaction(rxn2, (frag1, frag2, scaffold), product_index=0)
 dm.to_image(res2, use_svg=False)</div>
     
         </div>
@@ -2525,7 +2531,7 @@ dm.to_image(res2, use_svg=False)</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[10]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[9]:</div>
 
 
 
@@ -2558,6 +2564,38 @@ class="
 
 </div>
 </div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-10">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div id="cell-10" class="clipboard-copy-txt"></div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
 </div>
 </div>
 </div>
