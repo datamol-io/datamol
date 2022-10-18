@@ -164,7 +164,7 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 def select_reaction_output(
     product: Sequence[Sequence[dm.Mol]],
     product_index: Optional[Union[int, list]] = None,
-    single_products: bool = True,
+    single_product_group: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
     sanitize: bool = True,
@@ -177,10 +177,10 @@ def select_reaction_output(
         product_index: Index of the product to select.
             Examples: A.B -> C.D. The indices of products are 0 and 1.
             Both C and D will be returned if index is None or product indices are to [0, 1].
-        single_products: Whether return a single list of products from a reaction.
-        rm_attach: Whether remove the attachment point from the product.
+        single_product_group: Whether return a single group of products from a reaction.
+        rm_attach: Whether remove the attachment point from the products.
         as_smiles: Whether return the result in smiles.
-        sanitize: Whether sanitize the product to return.
+        sanitize: Whether sanitize the products to return.
 
     Returns:
         Processed products from reaction.
@@ -190,7 +190,7 @@ def select_reaction_output(
     product = np.array(product)
     if product_index is not None:
         product = product[:, product_index]
-    if single_products:
+    if single_product_group:
         index = np.random.randint(product.shape[0], size=1)
         product = product[index]
     if sanitize:
@@ -202,7 +202,7 @@ def select_reaction_output(
         fn = lambda x: dm.to_smiles(x, allow_to_fail=True) if x is not None else x
         product = np.vectorize(fn)(product)
     product = product.tolist()
-    if single_products:
+    if single_product_group:
         return product[0]
     return product
 
@@ -211,7 +211,7 @@ def apply_reaction(
     rxn: dm.ChemicalReaction,
     reactants: tuple,
     product_index: Optional[Union[int, list]] = None,
-    single_products: bool = False,
+    single_product_group: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
     disable_logs: bool = True,
@@ -224,11 +224,11 @@ def apply_reaction(
        rxn: Reaction object.
        reactants: A tuple of reactants.
        product_index: The index of the product of interest.
-       single_products: Whether return one product from all possible product.
-       as_smiles: Whether return product in SMILES.
-       rm_attach: Whether remove the attachment point from product.
+       single_product_group: Whether return one product group from all possible product groups.
+       as_smiles: Whether return products in SMILES.
+       rm_attach: Whether remove the attachment point from products.
        disable_logs: Whether disable rdkit logs.
-       sanitize: Whether sanitize the product.
+       sanitize: Whether sanitize the products.
 
     Returns:
        Reaction products.
@@ -241,7 +241,7 @@ def apply_reaction(
         outputs = select_reaction_output(
             product=product,
             product_index=product_index,
-            single_products=single_products,
+            single_product_group=single_product_group,
             as_smiles=as_smiles,
             rm_attach=rm_attach,
             sanitize=sanitize,

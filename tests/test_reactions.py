@@ -139,13 +139,13 @@ def test_apply_reaction():
     frag = dm.to_mol("CC(O[1*])C(F)(F)F")
     scf = dm.to_mol("O=C(NC[1*])NCc1ccnc(OCc2ccccc2)c1")
     prod = dm.reactions.apply_reaction(
-        rxn=rxn, reactants=(scf, frag), product_index=0, single_products=True
+        rxn=rxn, reactants=(scf, frag), product_index=0, single_product_group=True
     )
     assert len([prod]) == 1
     assert isinstance(prod, dm.Mol) == True
 
     prod = dm.reactions.apply_reaction(
-        rxn=rxn, reactants=(scf, frag), single_products=False, as_smiles=True
+        rxn=rxn, reactants=(scf, frag), single_product_group=False, as_smiles=True
     )
     assert len(prod) >= 1
     assert isinstance(prod, list) == True
@@ -157,7 +157,7 @@ def test_apply_reaction_invalid():
     frag = dm.to_mol("CC(O)C(F)(F)F")
     scf = dm.to_mol("O=C(NC)NCc1ccnc(OCc2cc[2*]ccc2)c1")
     prod = dm.reactions.apply_reaction(
-        rxn=rxn, reactants=(scf, frag), product_index=0, single_products=True
+        rxn=rxn, reactants=(scf, frag), product_index=0, single_product_group=True
     )
     assert isinstance(prod, list)
     assert len(prod) == 0
@@ -200,7 +200,7 @@ def test_select_reaction_output():
     prod = dm.reactions.select_reaction_output(
         product,
         product_index=None,
-        single_products=False,
+        single_product_group=False,
         rm_attach=True,
         as_smiles=False,
         sanitize=True,
@@ -211,7 +211,7 @@ def test_select_reaction_output():
     prod = dm.reactions.select_reaction_output(
         product,
         product_index=[0, 1],
-        single_products=False,
+        single_product_group=False,
         rm_attach=True,
         as_smiles=False,
         sanitize=True,
@@ -222,7 +222,7 @@ def test_select_reaction_output():
     prod = dm.reactions.select_reaction_output(
         product,
         product_index=1,
-        single_products=True,
+        single_product_group=True,
         rm_attach=True,
         as_smiles=False,
         sanitize=True,
@@ -250,7 +250,7 @@ def test_select_reaction_output_invalid():
     prod = dm.reactions.select_reaction_output(
         product=product,
         product_index=1,
-        single_products=False,
+        single_product_group=False,
         rm_attach=True,
         as_smiles=True,
         sanitize=True,
