@@ -138,7 +138,9 @@ def test_apply_reaction():
     rxn = dm.reactions.rxn_from_smarts("[1*][*:1].[1*][*:2]>>[*:1][*:2]")
     frag = dm.to_mol("CC(O[1*])C(F)(F)F")
     scf = dm.to_mol("O=C(NC[1*])NCc1ccnc(OCc2ccccc2)c1")
-    prod = dm.reactions.apply_reaction(rxn=rxn, reactants=(scf, frag), single_output=True)
+    prod = dm.reactions.apply_reaction(
+        rxn=rxn, reactants=(scf, frag), product_index=0, single_output=True
+    )
     assert len([prod]) == 1
     assert isinstance(prod, dm.Mol) == True
 
@@ -146,7 +148,7 @@ def test_apply_reaction():
         rxn=rxn, reactants=(scf, frag), single_output=False, as_smiles=True
     )
     assert len(prod) >= 1
-    assert isinstance(prod, np.ndarray) == True
+    assert isinstance(prod, list) == True
 
 
 def test_can_react():
@@ -191,7 +193,7 @@ def test_select_reaction_output():
         as_smiles=False,
         sanitize=True,
     )
-    assert prod.shape == np.array(smiles).shape
+    assert len(prod) == len(smiles)
 
     product = tuple(tuple([dm.to_mol(p[0]), dm.to_mol(p[1])]) for p in smiles)
     prod = dm.reactions.select_reaction_output(
@@ -202,7 +204,7 @@ def test_select_reaction_output():
         as_smiles=False,
         sanitize=True,
     )
-    assert prod.shape == np.array(smiles).shape
+    assert len(prod) == len(smiles)
 
     product = tuple(tuple([dm.to_mol(p[0]), dm.to_mol(p[1])]) for p in smiles)
     prod = dm.reactions.select_reaction_output(

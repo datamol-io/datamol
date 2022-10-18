@@ -1,5 +1,7 @@
 from typing import cast
 from typing import Union
+from typing import Sequence
+from typing import Optional
 
 import os
 import io
@@ -160,8 +162,8 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 
 
 def select_reaction_output(
-    product: Union[list, tuple],
-    product_index: int = None,
+    product: Sequence[Sequence[dm.Mol]],
+    product_index: Optional[Union[int, list]] = None,
     single_output: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
@@ -173,6 +175,8 @@ def select_reaction_output(
     Args:
         product: All the products from a reaction.
         product_index: Index of the product to select.
+            Examples: A.B -> C.D. The indexes of products are 0 and 1.
+            Both C and D will be returned if index is None or product index is to [0, 1].
         single_output: Whether return a single output from a reaction.
         rm_attach: Whether remove the attachment point from the product.
         as_smiles: Whether return the result in smiles.
@@ -194,6 +198,7 @@ def select_reaction_output(
     if as_smiles:
         fn = lambda x: dm.to_smiles(x, allow_to_fail=True)
         product = np.vectorize(fn)(product)
+    product = product.tolist()
     if single_output:
         return product[0]
     return product
@@ -202,7 +207,7 @@ def select_reaction_output(
 def apply_reaction(
     rxn: dm.ChemicalReaction,
     reactants: tuple,
-    product_index: Union[int, list] = 0,
+    product_index: Optional[Union[int, list]] = None,
     single_output: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
