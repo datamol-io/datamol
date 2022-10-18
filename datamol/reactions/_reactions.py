@@ -164,7 +164,7 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 def select_reaction_output(
     product: Sequence[Sequence[dm.Mol]],
     product_index: Optional[Union[int, list]] = None,
-    single_output: bool = True,
+    single_products: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
     sanitize: bool = True,
@@ -173,11 +173,11 @@ def select_reaction_output(
     Compute the products from a reaction. It only takes the first product of the
 
     Args:
-        product: All the products from a reaction.
+        product: All the products from a reaction. A sequence of the list of products.
         product_index: Index of the product to select.
-            Examples: A.B -> C.D. The indexes of products are 0 and 1.
-            Both C and D will be returned if index is None or product index is to [0, 1].
-        single_output: Whether return a single output from a reaction.
+            Examples: A.B -> C.D. The indices of products are 0 and 1.
+            Both C and D will be returned if index is None or product indices are to [0, 1].
+        single_products: Whether return a single list of products from a reaction.
         rm_attach: Whether remove the attachment point from the product.
         as_smiles: Whether return the result in smiles.
         sanitize: Whether sanitize the product to return.
@@ -185,21 +185,24 @@ def select_reaction_output(
     Returns:
         Processed products from reaction.
     """
+    if len(product) == 0:
+        return list(product)
     product = np.array(product)
     if product_index is not None:
         product = product[:, product_index]
-    if single_output:
+    if single_products:
         index = np.random.randint(product.shape[0], size=1)
         product = product[index]
     if sanitize:
         product = np.vectorize(dm.sanitize_mol)(product)
     if rm_attach:
-        product = np.vectorize(dm.remove_dummies)(product)
+        fn = lambda x: dm.remove_dummies(x) if x is not None else x
+        product = np.vectorize(fn)(product)
     if as_smiles:
-        fn = lambda x: dm.to_smiles(x, allow_to_fail=True)
+        fn = lambda x: dm.to_smiles(x, allow_to_fail=True) if x is not None else x
         product = np.vectorize(fn)(product)
     product = product.tolist()
-    if single_output:
+    if single_products:
         return product[0]
     return product
 
@@ -208,7 +211,7 @@ def apply_reaction(
     rxn: dm.ChemicalReaction,
     reactants: tuple,
     product_index: Optional[Union[int, list]] = None,
-    single_output: bool = False,
+    single_products: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
     disable_logs: bool = True,
@@ -221,7 +224,7 @@ def apply_reaction(
        rxn: Reaction object.
        reactants: A tuple of reactants.
        product_index: The index of the product of interest.
-       single_output: Whether return one product from all possible product.
+       single_products: Whether return one product from all possible product.
        as_smiles: Whether return product in SMILES.
        rm_attach: Whether remove the attachment point from product.
        disable_logs: Whether disable rdkit logs.
@@ -238,7 +241,7 @@ def apply_reaction(
         outputs = select_reaction_output(
             product=product,
             product_index=product_index,
-            single_output=single_output,
+            single_products=single_products,
             as_smiles=as_smiles,
             rm_attach=rm_attach,
             sanitize=sanitize,
