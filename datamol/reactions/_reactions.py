@@ -1,5 +1,7 @@
 from typing import cast
 from typing import Union
+from typing import Sequence
+from typing import Optional
 
 import os
 import io
@@ -160,8 +162,9 @@ def is_reaction_ok(rxn: dm.ChemicalReaction, enable_logs: bool = False) -> bool:
 
 
 def select_reaction_output(
-    product: list,
-    single_output: bool = True,
+    product: Sequence[Sequence[dm.Mol]],
+    product_index: Optional[Union[int, list]] = None,
+    single_product_group: bool = True,
     rm_attach: bool = False,
     as_smiles: bool = False,
     sanitize: bool = True,
@@ -170,26 +173,36 @@ def select_reaction_output(
     Compute the products from a reaction. It only takes the first product of the
 
     Args:
-        product: All the products from a reaction.
-        single_output: Whether return a single output from a reaction.
-        rm_attach: Whether remove the attachment point from the product.
+        product: All the products from a reaction. A sequence of the list of products.
+        product_index: Index of the product to select.
+            Examples: A.B -> C.D. The indices of products are 0 and 1.
+            Both C and D will be returned if index is None or product indices are to [0, 1].
+        single_product_group: Whether return a single group of products from a reaction.
+        rm_attach: Whether remove the attachment point from the products.
         as_smiles: Whether return the result in smiles.
-        sanitize: Whether sanitize the product to return.
+        sanitize: Whether sanitize the products to return.
 
     Returns:
         Processed products from reaction.
     """
-    # flatten all possible products of a reaction
-    product = list(sum(product, ()))
-    if single_output:
-        product = list(np.random.choice(product, 1))
+    if len(product) == 0:
+        return list(product)
+    product = np.array(product)
+    if product_index is not None:
+        product = product[:, product_index]
+    if single_product_group:
+        index = np.random.randint(product.shape[0], size=1)
+        product = product[index]
     if sanitize:
-        product = [dm.sanitize_mol(m) for m in product]
+        product = np.vectorize(dm.sanitize_mol)(product)
     if rm_attach:
-        product = [dm.remove_dummies(x) for x in product]
+        fn = lambda x: dm.remove_dummies(x) if x is not None else x
+        product = np.vectorize(fn)(product)
     if as_smiles:
-        product = [dm.to_smiles(x) for x in product if x is not None]
-    if single_output:
+        fn = lambda x: dm.to_smiles(x, allow_to_fail=True) if x is not None else x
+        product = np.vectorize(fn)(product)
+    product = product.tolist()
+    if single_product_group:
         return product[0]
     return product
 
@@ -197,7 +210,8 @@ def select_reaction_output(
 def apply_reaction(
     rxn: dm.ChemicalReaction,
     reactants: tuple,
-    single_output: bool = False,
+    product_index: Optional[Union[int, list]] = None,
+    single_product_group: bool = False,
     as_smiles: bool = False,
     rm_attach: bool = False,
     disable_logs: bool = True,
@@ -209,11 +223,12 @@ def apply_reaction(
     Args:
        rxn: Reaction object.
        reactants: A tuple of reactants.
-       single_output: Whether return one product from all possible product.
-       as_smiles: Whether return product in SMILES.
-       rm_attach: Whether remove the attachment point from product.
+       product_index: The index of the product of interest.
+       single_product_group: Whether return one product group from all possible product groups.
+       as_smiles: Whether return products in SMILES.
+       rm_attach: Whether remove the attachment point from products.
        disable_logs: Whether disable rdkit logs.
-       sanitize: Whether sanitize the product.
+       sanitize: Whether sanitize the products.
 
     Returns:
        Reaction products.
@@ -225,7 +240,8 @@ def apply_reaction(
         product = rxn.RunReactants(reactants)
         outputs = select_reaction_output(
             product=product,
-            single_output=single_output,
+            product_index=product_index,
+            single_product_group=single_product_group,
             as_smiles=as_smiles,
             rm_attach=rm_attach,
             sanitize=sanitize,
