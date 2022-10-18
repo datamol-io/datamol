@@ -4,6 +4,20 @@ Datamol Changelogs
 
 .. current developments
 
+v0.7.18
+====================
+
+**Added:**
+
+* Added argument product_index in `select_reaction_output`.  It allows to return all products and a product of interest by the index.
+* Updated unit tests.
+
+**Authors:**
+
+* Lu Zhu
+
+
+
 v0.7.17
 ====================
 
