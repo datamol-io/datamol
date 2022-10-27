@@ -8,6 +8,8 @@ from ._version import is_greater_eq_than_current_rdkit_version
 from .types import Mol
 from .types import BondType
 from .types import ChemicalReaction
+from .types import Atom
+from .types import Bond
 
 from . import utils
 

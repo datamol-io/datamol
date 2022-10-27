@@ -1,6 +1,6 @@
 **Added:**
 
-* <news item>
+* `dm.Atom` and `dm.Bond` types.
 
 **Changed:**
 
