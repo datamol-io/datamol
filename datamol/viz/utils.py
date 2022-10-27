@@ -27,7 +27,10 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
                 mol.UpdatePropertyCache(False)  # type: ignore
 
             # Check for aromaticity
-            _kekulize = Draw._okToKekulizeMol(mol, kekulize)
+            if dm.is_lower_than_current_rdkit_version("2022.09"):
+                _kekulize = Draw._okToKekulizeMol(mol, kekulize)
+            else:
+                _kekulize = Draw.shouldKekulize(mol, kekulize)
 
             # Run the rdkit preparation procedure
             _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=_kekulize)

@@ -500,9 +500,12 @@ def render_mol_df(df: pd.DataFrame):
     Args:
         df: a dataframe.
     """
-    # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
-    # https://github.com/rdkit/rdkit/issues/3563 is fixed.
-    _ChangeMoleculeRendering(df)
+
+    # NOTE(hadim): _ChangeMoleculeRendering is not relevant anymore with rdkit>=2022.09
+    if dm.is_lower_than_current_rdkit_version("2022.09"):
+        # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
+        # https://github.com/rdkit/rdkit/issues/3563 is fixed.
+        _ChangeMoleculeRendering(df)
 
 
 def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
