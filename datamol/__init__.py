@@ -65,6 +65,7 @@ from .mol import substructure_matching_bonds
 from .mol import add_hs
 from .mol import remove_hs
 from .mol import unique_id
+from .mol import hash_mol
 from .mol import clear_mol_props
 from .mol import strip_mol_to_core
 from .mol import make_scaffold_generic
