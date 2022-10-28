@@ -4,6 +4,26 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.0
+====================
+
+**Added:**
+
+* `dm.Atom` and `dm.Bond` types.
+* Add RDKit as a pypi dep.
+* Add `datamol.hash_mol()` based on `rdkit.Chem.RegistrationHash`.
+
+**Changed:**
+
+* RDKit 2022.09: use `Draw.shouldKekulize` instead of `Draw._okToKekulizeMol`.
+* RDKit 2022.09: don't use `dm.convert._ChangeMoleculeRendering` for RDKit >=2022.09.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.7.18
 ====================
 
