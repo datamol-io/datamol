@@ -1,6 +1,7 @@
 **Added:**
 
 * `dm.Atom` and `dm.Bond` types.
+* Add RDKit as a pypi dep.
 
 **Changed:**
 
