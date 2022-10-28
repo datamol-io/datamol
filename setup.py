@@ -16,7 +16,10 @@ install_requires = [
     "appdirs",
     "scikit-learn",
     "packaging",
-    "rdkit",
+    # NOTE(hadim): can't add rdkit because of `pip` will always override
+    # the conda package at the moment.
+    # See https://github.com/rdkit/rdkit/pull/2690#issuecomment-1295375416
+    # "rdkit",
 ]
 
 setup(
