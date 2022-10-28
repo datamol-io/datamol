@@ -1,3 +1,5 @@
+import pytest
+
 import multiprocessing
 import platform
 
@@ -30,6 +32,7 @@ def _import_datamol_fn(queue):
     queue.put(duration)
 
 
+@pytest.mark.skip_platform("osx")
 def test_datamol_import():
 
     context = multiprocessing.get_context(method="spawn")

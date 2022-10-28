@@ -8,6 +8,8 @@ from ._version import is_greater_eq_than_current_rdkit_version
 from .types import Mol
 from .types import BondType
 from .types import ChemicalReaction
+from .types import Atom
+from .types import Bond
 
 from . import utils
 
@@ -63,6 +65,7 @@ from .mol import substructure_matching_bonds
 from .mol import add_hs
 from .mol import remove_hs
 from .mol import unique_id
+from .mol import hash_mol
 from .mol import clear_mol_props
 from .mol import strip_mol_to_core
 from .mol import make_scaffold_generic

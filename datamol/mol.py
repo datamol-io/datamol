@@ -43,6 +43,7 @@ from .convert import to_inchikey
 from .convert import to_smiles
 from .convert import from_smarts
 from .log import without_rdkit_log
+from ._version import is_lower_than_current_rdkit_version
 
 
 PERIODIC_TABLE = Chem.rdchem.GetPeriodicTable()
@@ -153,6 +154,52 @@ def unique_id(mol: Mol) -> Optional[str]:
         return None
 
     return hashlib.md5(ik.encode("utf-8")).hexdigest()
+
+
+def hash_mol(mol: Mol, hash_scheme: str = "all") -> str:
+    """Generate a unique hash code for a molecule based on chemistry. If two molecules are
+    chemically “the same”, they should have the same hash.
+
+    Using molhash adds value beyond using SMILES because it:
+
+    - Ignores SMILES features that are not chemically meaningful (e.g. atom map numbers).
+    - Canonicalizes enhanced stereochemistry groups. For example `C[C@H](O)CC |&1:1|` and `C[C@@H](O)CC |&1:1|`
+    have the same molhash.
+    - Canonicalizes S group data (for example, polymer data).
+
+    Args:
+        mol: A molecule.
+        hash_scheme: There are three hash schemes:
+            - "all": most strict hash scheme utilizing all layers.
+            - "no_stereo": excludes stereo sensitive layers.
+            - "no_tautomers": excludes tautomer sensitive layers.
+
+    Returns:
+        The hash as a 40 chars string.
+    """
+
+    if is_lower_than_current_rdkit_version("2022.09"):
+        raise NotImplementedError("`datamol.hash_mol() is only available with RDKit>=2022.09.")
+
+    from rdkit.Chem import RegistrationHash
+
+    # Compute the mol layers
+    all_layers = RegistrationHash.GetMolLayers(mol)
+
+    # Select the hash scheme
+    if hash_scheme == "all":
+        hash_scheme_enum = RegistrationHash.HashScheme.ALL_LAYERS
+    elif hash_scheme == "no_stereo":
+        hash_scheme_enum = RegistrationHash.HashScheme.STEREO_INSENSITIVE_LAYERS
+    elif hash_scheme == "no_tautomers":
+        hash_scheme_enum = RegistrationHash.HashScheme.TAUTOMER_INSENSITIVE_LAYERS
+    else:
+        raise ValueError(
+            f"`hash_scheme` is invalid. Please choose from: 'all', 'no_stereo' or 'no_tautomers'."
+        )
+
+    # Generate the hash
+    return RegistrationHash.GetMolHash(all_layers=all_layers, hash_scheme=hash_scheme_enum)
 
 
 def reorder_atoms(

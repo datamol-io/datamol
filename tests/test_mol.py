@@ -588,3 +588,94 @@ def test_compute_ring_systems():
     assert len(systems[1]) == 6
     assert isinstance(systems, list)
     assert isinstance(systems[0], set)
+
+
+def test_hash_mol():
+
+    # rdkit.Chem.RegistrationHash is not available for rdkit before
+    # 2022.09.
+    if dm.is_lower_than_current_rdkit_version("2022.09"):
+
+        with pytest.raises(NotImplementedError):
+            dm.hash_mol(dm.to_mol("CCC"))
+
+        return
+
+    with pytest.raises(ValueError):
+        dm.hash_mol(dm.to_mol("CCC"), hash_scheme="invalid")
+
+    data = [
+        {
+            "smiles": "Clc1ccc2ccccc2c1",
+            "all": "334adc7dd6bf2b9384e1d5dee8a983e57bbaed80",
+            "no_stereo": "6c0b4720e29e47be5062b0f13d71443a6fead14a",
+            "no_tautomers": "b92bca205301bf115e5acbac38827f2fc3f3b572",
+        },
+        {
+            "smiles": "CCCCCCCCCCCCO",
+            "all": "4827ecd92b1b8b865d7f9e9c47fe8aadc5827a72",
+            "no_stereo": "b2ae43fb4061ec507ffb11a61b009037500ac010",
+            "no_tautomers": "31cf7325e8beb6c46dfee7ce9968252309317b1b",
+        },
+        {
+            "smiles": "Nc1cnn(-c2ccccc2)c(=O)c1Br",
+            "all": "5a2bb241fb005ba2403bbd8c25453fb714fca3b0",
+            "no_stereo": "0b72a56d0b499e4e9bf58975b74ecaa86e50373a",
+            "no_tautomers": "32c8840b71755d5a859963be70e8db6bd29c01e7",
+        },
+        {
+            "smiles": "Cn1c(=O)[nH]c2[nH]c(=O)[nH]c2c1=O",
+            "all": "2a1f545077bec17e3b2a6f6819dda0e55eab4442",
+            "no_stereo": "8d7944f78fb61a6199f90f1505c6249b317272c0",
+            "no_tautomers": "ed2f9eb1f7ce5a6ba28fad24074f975470d6937c",
+        },
+        {
+            "smiles": "CN1CCCC(CN2c3ccccc3Sc3ccccc32)C1",
+            "all": "419aef09d075056837b15da108b87f6737436de2",
+            "no_stereo": "389d7084f68935d52f51fe850f72a2294e04acb3",
+            "no_tautomers": "6e9142b90e22152f73c2476a5531632a32f7b8c7",
+        },
+        {
+            "smiles": "Cc1cc(OC(=O)N(C)C)n(-c2ccccc2)n1",
+            "all": "f01015c60174e7efe1fee7eb6b64804da739d104",
+            "no_stereo": "274054a2de68853740504b260f6dec88cffaac28",
+            "no_tautomers": "68820d4a5e08bd5476b99684192fbd73d7da64bf",
+        },
+        {
+            "smiles": "O=[N+]([O-])c1ccc(Oc2ccc(Cl)cc2Cl)cc1",
+            "all": "cfff22a4055796418862d0cdf86126118113edd0",
+            "no_stereo": "f077a2f705f7e00c9206230c9c78df6641673dd8",
+            "no_tautomers": "3df1b08580a5615e305cb8c5eb86f519dad6257f",
+        },
+        {
+            "smiles": "Cc1ncc([N+](=O)[O-])n1CCO",
+            "all": "973825b3a38bf44b7f264daad8c4d7631c123ec4",
+            "no_stereo": "7678c0d9bb81169afd4ddf6d6f0503b126c9e1d7",
+            "no_tautomers": "407c5df463de39b4605132d5f28273637952d000",
+        },
+        {
+            "smiles": "Cc1cc(C)c2ccccc2c1",
+            "all": "f2e834775b5814cf7b6d503677b5751821ea2f5c",
+            "no_stereo": "1fe225caa22af11e2c32320fc6d11a8819168b92",
+            "no_tautomers": "5e566a9bab54c6e733e432001428e2f0d36767cc",
+        },
+        {
+            "smiles": "Oc1cccc2cccnc12",
+            "all": "2645e016677cf9e82977b8a08a3d207e7e571f51",
+            "no_stereo": "0bdcdca39192466f42f547dcd084772d13fd5f0e",
+            "no_tautomers": "2f4c569ee7c73804a11758d6d16aa411e7531571",
+        },
+    ]
+
+    for datum in data:
+
+        mol = dm.to_mol(datum["smiles"])
+
+        hash_value = dm.hash_mol(mol, hash_scheme="all")
+        assert hash_value == datum["all"]
+
+        hash_value = dm.hash_mol(mol, hash_scheme="no_stereo")
+        assert hash_value == datum["no_stereo"]
+
+        hash_value = dm.hash_mol(mol, hash_scheme="no_tautomers")
+        assert hash_value == datum["no_tautomers"]
