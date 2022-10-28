@@ -1646,16 +1646,22 @@ in-place only. So nothing is returned.</p>
 <span class="normal">502</span>
 <span class="normal">503</span>
 <span class="normal">504</span>
-<span class="normal">505</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">render_mol_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">render_mol_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Render the molecules column in a dataframe. The rendering is performed</span>
 <span class="sd">    in-place only. So nothing is returned.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        df: a dataframe.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once</span>
-    <span class="c1"># https://github.com/rdkit/rdkit/issues/3563 is fixed.</span>
-    <span class="n">_ChangeMoleculeRendering</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+
+    <span class="c1"># NOTE(hadim): _ChangeMoleculeRendering is not relevant anymore with rdkit&gt;=2022.09</span>
+    <span class="k">if</span> <span class="n">dm</span><span class="o">.</span><span class="n">is_lower_than_current_rdkit_version</span><span class="p">(</span><span class="s2">&quot;2022.09&quot;</span><span class="p">):</span>
+        <span class="c1"># NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once</span>
+        <span class="c1"># https://github.com/rdkit/rdkit/issues/3563 is fixed.</span>
+        <span class="n">_ChangeMoleculeRendering</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
