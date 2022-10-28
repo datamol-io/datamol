@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.1
+====================
+
+**Changed:**
+
+* Remove the `rdkit` dependency in the setup.py to prevent pip to always override the conda rdkit package. See https://github.com/rdkit/rdkit/pull/2690#issuecomment-1295375416 for context.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.8.0
 ====================
 
