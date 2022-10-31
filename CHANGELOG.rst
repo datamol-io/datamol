@@ -4,6 +4,20 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.2
+====================
+
+**Fixed:**
+
+* Fix a typo in a tutorial.
+
+**Authors:**
+
+* Hadrien Mary
+* Valence-JonnyHsu
+
+
+
 v0.8.1
 ====================
 
