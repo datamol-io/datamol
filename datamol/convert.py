@@ -410,9 +410,11 @@ def to_df(
             includeComputed=include_computed,
         )
 
-    props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs)
+    # EN: You cannot process here because all properties will be lost
+    # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
+    # But this has less overhead
+    props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs, scheduler="threads")
     props_df = pd.DataFrame(props)
-
     if smiles_column is not None and smiles_column in props_df.columns:
         logger.warning(
             f"The SMILES column name provided ('{smiles_column}') is already present in the properties"

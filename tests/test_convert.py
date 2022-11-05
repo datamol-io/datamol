@@ -158,7 +158,8 @@ def test_to_df(datadir):
         "reference.year",
     ]
 
-    large_mol_set = np.random.choice(mols, 1000)
+    # EN:
+    large_mol_set = np.random.choice(mols, 500)
     with dm.utils.perf.watch_duration(log=True) as w:
         df_sequential = dm.to_df(large_mol_set, n_jobs=1)
     sequential_time = w.duration
