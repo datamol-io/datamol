@@ -968,7 +968,7 @@ molecules of the two collections of inputs.</p>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for fingerprint computation. Let to 1 for no
-parallelization. Set to None or -1 to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1106,7 +1106,7 @@ parallelization. Set to None or -1 to use all available cores.</p></td>
 <span class="sd">        mols1: list of molecules.</span>
 <span class="sd">        mols2: list of molecules.</span>
 <span class="sd">        n_jobs: Number of jobs for fingerprint computation. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None or -1 to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 <span class="sd">        distances_chunk: Whether to use chunked computation.</span>
 <span class="sd">        distances_chunk_memory: Memory size in MB to use for chunked computation.</span>
 <span class="sd">        distances_n_jobs: Number of jobs for parallelization.</span>
@@ -1193,7 +1193,7 @@ molecules in the input set.</p>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to None to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1288,7 +1288,7 @@ form (1D vector).</p></td>
 <span class="sd">    Args:</span>
 <span class="sd">        mols: list of molecules</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 <span class="sd">        squareform: Whether to return in square form (matrix) or in a condensed</span>
 <span class="sd">            form (1D vector).</span>
 <span class="sd">        **fp_args: list of args to pass to `to_fp()`.</span>

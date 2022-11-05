@@ -1172,12 +1172,7 @@ precedence over <code>smiles_column</code>.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>datamol/convert.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">433</span>
-<span class="normal">434</span>
-<span class="normal">435</span>
-<span class="normal">436</span>
-<span class="normal">437</span>
-<span class="normal">438</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">438</span>
 <span class="normal">439</span>
 <span class="normal">440</span>
 <span class="normal">441</span>
@@ -1232,7 +1227,12 @@ precedence over <code>smiles_column</code>.</p></td>
 <span class="normal">490</span>
 <span class="normal">491</span>
 <span class="normal">492</span>
-<span class="normal">493</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">from_df</span><span class="p">(</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">from_df</span><span class="p">(</span>
     <span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1637,19 +1637,19 @@ in-place only. So nothing is returned.</p>
 
       <details class="quote">
         <summary>Source code in <code>datamol/convert.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">496</span>
-<span class="normal">497</span>
-<span class="normal">498</span>
-<span class="normal">499</span>
-<span class="normal">500</span>
-<span class="normal">501</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">501</span>
 <span class="normal">502</span>
 <span class="normal">503</span>
 <span class="normal">504</span>
 <span class="normal">505</span>
 <span class="normal">506</span>
 <span class="normal">507</span>
-<span class="normal">508</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">render_mol_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span>
+<span class="normal">513</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">render_mol_df</span><span class="p">(</span><span class="n">df</span><span class="p">:</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Render the molecules column in a dataframe. The rendering is performed</span>
 <span class="sd">    in-place only. So nothing is returned.</span>
 
@@ -1820,7 +1820,7 @@ e.g. [H]-[CH]-[<em>] -&gt; [H]-[CH2]-[</em>]</p></td>
 
 
 <h3 id="datamol.convert.to_df" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">to_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_df_mol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">render_all_df_mol</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">to_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">render_df_mol</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">render_all_df_mol</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
 
 <a href="#datamol.convert.to_df" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -1915,6 +1915,17 @@ mol in it.</p></td>
                 <code>False</code>
           </td>
         </tr>
+        <tr>
+          <td><code>n_jobs</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Number of jobs for parallelization. Leave to 1 for no
+parallelization. Set to -1 to use all available cores.</p></td>
+          <td>
+                <code>1</code>
+          </td>
+        </tr>
     </tbody>
   </table>
 
@@ -1986,7 +1997,12 @@ mol in it.</p></td>
 <span class="normal">427</span>
 <span class="normal">428</span>
 <span class="normal">429</span>
-<span class="normal">430</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_df</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
     <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -1994,6 +2010,7 @@ mol in it.</p></td>
     <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">render_df_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">render_all_df_mol</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
     <span class="sd">&quot;&quot;&quot;Convert a list of mols to a dataframe using each mol properties</span>
 <span class="sd">    as a column.</span>
@@ -2011,6 +2028,8 @@ mol in it.</p></td>
 <span class="sd">            If called once, it will be applied for the newly created dataframe with</span>
 <span class="sd">            mol in it.</span>
 <span class="sd">        render_all_df_mol: Whether to render all pandas dataframe mol column as images.</span>
+<span class="sd">        n_jobs: Number of jobs for parallelization. Leave to 1 for no</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># Init a dataframe</span>
@@ -2018,7 +2037,7 @@ mol in it.</p></td>
 
     <span class="c1"># Feed it with smiles</span>
     <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">smiles</span> <span class="o">=</span> <span class="p">[</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
+        <span class="n">smiles</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">)</span>
         <span class="n">df</span><span class="p">[</span><span class="n">smiles_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">smiles</span>
 
     <span class="c1"># Add a mol column</span>
@@ -2026,15 +2045,17 @@ mol in it.</p></td>
         <span class="n">df</span><span class="p">[</span><span class="n">mol_column</span><span class="p">]</span> <span class="o">=</span> <span class="n">mols</span>
 
     <span class="c1"># Add any other properties present in the molecule</span>
-    <span class="n">props</span> <span class="o">=</span> <span class="p">[</span>
-        <span class="n">mol</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">(</span>
+    <span class="k">def</span> <span class="nf">_mol_to_prop_dict</span><span class="p">(</span><span class="n">mol</span><span class="p">):</span>
+        <span class="k">return</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">(</span>
             <span class="n">includePrivate</span><span class="o">=</span><span class="n">include_private</span><span class="p">,</span>
             <span class="n">includeComputed</span><span class="o">=</span><span class="n">include_computed</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span>
-    <span class="p">]</span>
-    <span class="n">props_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
 
+    <span class="c1"># EN: You cannot use `processes` here because all properties will be lost</span>
+    <span class="c1"># An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html</span>
+    <span class="c1"># But this has less overhead</span>
+    <span class="n">props</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span><span class="n">_mol_to_prop_dict</span><span class="p">,</span> <span class="n">mols</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span> <span class="n">scheduler</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">)</span>
+    <span class="n">props_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">smiles_column</span> <span class="ow">in</span> <span class="n">props_df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
             <span class="sa">f</span><span class="s2">&quot;The SMILES column name provided (&#39;</span><span class="si">{</span><span class="n">smiles_column</span><span class="si">}</span><span class="s2">&#39;) is already present in the properties&quot;</span>
