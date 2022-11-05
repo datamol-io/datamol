@@ -158,7 +158,7 @@ def test_to_df(datadir):
         "reference.year",
     ]
 
-    # EN:
+    # EN: more than 500 will slow the test
     large_mol_set = np.random.choice(mols, 500)
     with dm.utils.perf.watch_duration(log=True) as w:
         df_sequential = dm.to_df(large_mol_set, n_jobs=1)
