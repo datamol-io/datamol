@@ -410,7 +410,7 @@ def to_df(
             includeComputed=include_computed,
         )
 
-    # EN: You cannot process here because all properties will be lost
+    # EN: You cannot use `processes` here because all properties will be lost
     # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
     # But this has less overhead
     props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs, scheduler="threads")
