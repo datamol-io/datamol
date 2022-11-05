@@ -1019,7 +1019,7 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to None to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1121,7 +1121,7 @@ Note that the centroid molecule is not added to the cluster.</p></td>
 <span class="sd">            distance between them. You might use partial to set the fingerprints as input.</span>
 <span class="sd">            By default, the Tanimoto similarity will be used. Default to None.</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        clusters_map: dict of index mapping each centroid index to the molecule index in the cluster</span>
@@ -1220,7 +1220,7 @@ Default to None.</p></td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to None to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1284,7 +1284,7 @@ parallelization. Set to None to use all available cores.</p></td>
 <span class="sd">            and return molecular features. By default, the `dm.to_fp()` is used.</span>
 <span class="sd">            Default to None.</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">feature_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -1432,7 +1432,7 @@ supported rdkit hierarchical clustering method such as <code>centroid</code>, <c
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to None to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1579,7 +1579,7 @@ parallelization. Set to None to use all available cores.</p></td>
 <span class="sd">        method: Picking method to use. One of  `sphere`, `maxmin` or any</span>
 <span class="sd">            supported rdkit hierarchical clustering method such as `centroid`, `clink`, `upgma`</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        picked_inds: index of the molecule that have been selected as centroids</span>
@@ -1737,7 +1737,7 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
           <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to None to use all available cores.</p></td>
+parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>1</code>
           </td>
@@ -1843,7 +1843,7 @@ parallelization. Set to None to use all available cores.</p></td>
 <span class="sd">            By default, the Tanimoto similarity will be used. Default to None.</span>
 <span class="sd">        seed: seed for reproducibility</span>
 <span class="sd">        n_jobs: Number of jobs for parallelization. Let to 1 for no</span>
-<span class="sd">            parallelization. Set to None to use all available cores.</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        picked_inds: index of the molecule that have been picked</span>
