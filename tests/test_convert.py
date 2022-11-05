@@ -1,10 +1,10 @@
 from typing import cast
 import pytest
 
+import numpy as np
 import pandas as pd
 from rdkit import Chem
 from selfies import __version__ as selfies_version
-
 import datamol as dm
 
 
@@ -157,6 +157,18 @@ def test_to_df(datadir):
         "reference.journal",
         "reference.year",
     ]
+
+    large_mol_set = np.random.choice(mols, 1000)
+    with dm.utils.perf.watch_duration(log=True) as w:
+        df_sequential = dm.to_df(large_mol_set, n_jobs=1)
+    sequential_time = w.duration
+
+    with w:
+        df_parallel = dm.to_df(large_mol_set, n_jobs=-1)
+    parallel_time = w.duration
+
+    pd.testing.assert_frame_equal(df_sequential, df_parallel)
+    assert parallel_time < sequential_time
 
 
 def test_from_df(datadir):
