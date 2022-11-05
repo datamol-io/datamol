@@ -369,6 +369,7 @@ def to_df(
     include_computed: bool = False,
     render_df_mol: bool = True,
     render_all_df_mol: bool = False,
+    n_jobs: Optional[int] = 1,
 ) -> Optional[pd.DataFrame]:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
@@ -386,6 +387,8 @@ def to_df(
             If called once, it will be applied for the newly created dataframe with
             mol in it.
         render_all_df_mol: Whether to render all pandas dataframe mol column as images.
+        n_jobs: Number of jobs for parallelization. Leave to 1 for no
+            parallelization. Set to -1 to use all available cores.
     """
 
     # Init a dataframe
@@ -393,7 +396,7 @@ def to_df(
 
     # Feed it with smiles
     if smiles_column is not None:
-        smiles = [to_smiles(mol) for mol in mols]
+        smiles = dm.parallelized(to_smiles, mols, n_jobs=n_jobs)
         df[smiles_column] = smiles
 
     # Add a mol column
@@ -401,15 +404,17 @@ def to_df(
         df[mol_column] = mols
 
     # Add any other properties present in the molecule
-    props = [
-        mol.GetPropsAsDict(
+    def _mol_to_prop_dict(mol):
+        return mol.GetPropsAsDict(
             includePrivate=include_private,
             includeComputed=include_computed,
         )
-        for mol in mols
-    ]
-    props_df = pd.DataFrame(props)
 
+    # EN: You cannot use `processes` here because all properties will be lost
+    # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
+    # But this has less overhead
+    props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs, scheduler="threads")
+    props_df = pd.DataFrame(props)
     if smiles_column is not None and smiles_column in props_df.columns:
         logger.warning(
             f"The SMILES column name provided ('{smiles_column}') is already present in the properties"

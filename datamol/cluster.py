@@ -43,7 +43,7 @@ def cluster_mols(
             and return molecular features. By default, the `dm.to_fp()` is used.
             Default to None.
         n_jobs: Number of jobs for parallelization. Let to 1 for no
-            parallelization. Set to None to use all available cores.
+            parallelization. Set to -1 to use all available cores.
     """
 
     if feature_fn is None:
@@ -94,7 +94,7 @@ def pick_diverse(
             By default, the Tanimoto similarity will be used. Default to None.
         seed: seed for reproducibility
         n_jobs: Number of jobs for parallelization. Let to 1 for no
-            parallelization. Set to None to use all available cores.
+            parallelization. Set to -1 to use all available cores.
 
     Returns:
         picked_inds: index of the molecule that have been picked
@@ -150,7 +150,7 @@ def pick_centroids(
         method: Picking method to use. One of  `sphere`, `maxmin` or any
             supported rdkit hierarchical clustering method such as `centroid`, `clink`, `upgma`
         n_jobs: Number of jobs for parallelization. Let to 1 for no
-            parallelization. Set to None to use all available cores.
+            parallelization. Set to -1 to use all available cores.
 
     Returns:
         picked_inds: index of the molecule that have been selected as centroids
@@ -227,7 +227,7 @@ def assign_to_centroids(
             distance between them. You might use partial to set the fingerprints as input.
             By default, the Tanimoto similarity will be used. Default to None.
         n_jobs: Number of jobs for parallelization. Let to 1 for no
-            parallelization. Set to None to use all available cores.
+            parallelization. Set to -1 to use all available cores.
 
     Returns:
         clusters_map: dict of index mapping each centroid index to the molecule index in the cluster

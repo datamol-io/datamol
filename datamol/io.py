@@ -91,6 +91,7 @@ def read_sdf(
     include_computed: bool = False,
     strict_parsing: bool = True,
     remove_hs: bool = True,
+    n_jobs: Optional[int] = 1,
 ) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
 
@@ -109,6 +110,8 @@ def read_sdf(
             `as_df` is True.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        n_jobs: Optional number of jobs for parallelization of `to_df`. Leave to 1 for no
+            parallelization. Set to -1 to use all available cores. Only relevant is `as_df` is True
     """
 
     # File-like object
@@ -148,6 +151,7 @@ def read_sdf(
             mol_column=mol_column,
             include_private=include_private,
             include_computed=include_computed,
+            n_jobs=n_jobs,
         )  # type: ignore
 
     return mols

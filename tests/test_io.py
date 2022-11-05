@@ -5,6 +5,7 @@ from rdkit import Chem
 
 import datamol as dm
 import numpy as np
+import pandas as pd
 
 
 def test_read_csv(datadir):
@@ -74,6 +75,13 @@ def test_read_sdf_as_df(datadir):
         "reference.journal",
         "reference.year",
     }
+
+
+def test_read_sdf_as_df_parallel(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    df = dm.read_sdf(data_path, as_df=True, n_jobs=1)
+    df2 = dm.read_sdf(data_path, as_df=True, n_jobs=-1)
+    pd.testing.assert_frame_equal(df, df2)
 
 
 def test_read_sdf_as_df_mol_col(datadir):
