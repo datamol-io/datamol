@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.3
+====================
+
+**Added:**
+
+* Parallelization to `to_df` for faster conversion to dataframe
+
+**Fixed:**
+
+* Error in docs
+
+**Authors:**
+
+* Emmanuel Noutahi
+
+
+
 v0.8.2
 ====================
 
