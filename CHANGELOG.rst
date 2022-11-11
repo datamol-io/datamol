@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.4
+====================
+
+**Changed:**
+
+* Add a comment recommending to not use the SMI file format.
+
+**Fixed:**
+
+* Fix a bug when reading a remote file with `dm.read_smi()`.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.8.3
 ====================
 
