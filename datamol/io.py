@@ -305,7 +305,6 @@ def read_smi(
 
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.
-            Note: file-like object are not supported yet.
     """
 
     active_path = urlpath
@@ -317,7 +316,7 @@ def read_smi(
     # Copy to a local temporary path if the path is a remote one.
     if not fsspec.utils.can_be_local(str(urlpath)):
         active_path = pathlib.Path(tempfile.mkstemp()[1])
-        dm.utils.fs.copy_file(urlpath, active_path)
+        dm.utils.fs.copy_file(urlpath, active_path, force=True)
 
     # Read the molecules
     supplier = rdmolfiles.SmilesMolSupplier(str(active_path), titleLine=0)
