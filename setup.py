@@ -18,7 +18,9 @@ install_requires = [
     "packaging",
     # NOTE(hadim): can't add rdkit because of `pip` will always override
     # the conda package at the moment.
-    # See https://github.com/rdkit/rdkit/pull/2690#issuecomment-1295375416
+    # See:
+    # - https://github.com/rdkit/rdkit/issues/5378
+    # - https://github.com/conda-forge/rdkit-feedstock/issues/104
     # "rdkit",
 ]
 
