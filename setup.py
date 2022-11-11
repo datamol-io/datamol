@@ -24,7 +24,7 @@ install_requires = [
 
 setup(
     name="datamol",
-    version="0.8.3",
+    version="0.8.4",
     author="Valence Discovery",
     author_email="hadrien@valencediscovery.com",
     url="https://github.com/datamol-org/datamol",
