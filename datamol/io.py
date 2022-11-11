@@ -270,6 +270,15 @@ def to_smi(
 ):
     """Save a list of molecules in an `.smi` file.
 
+    Note: We **strongly** recommend you to use `dm.to_csv` instead
+    of `dm.to_smi` since `.smi` files are CSV-like format. The only difference are the
+    default settings which changes:
+
+    - The default separator is a space ` ` instead of a comma `,`.
+    - The headers of the column are not included.
+
+    By modifying the args of `dm.to_csv()`, you will be able to save a SMI compatible file.
+
     Args:
         mols: a list of molecules.
         urlpath: Path to a file or a file-like object. Path can be remote or local.
@@ -302,6 +311,15 @@ def read_smi(
     urlpath: Union[str, pathlib.Path, io.IOBase, fsspec.core.OpenFile],
 ) -> Sequence[Mol]:
     """Read a list of smiles from am `.smi` file.
+
+    Note: We **strongly** recommend you to use `dm.read_csv` or `pandas.read_csv` instead
+    of `dm.read_smi` since `.smi` files are CSV-like format. The only difference are the
+    default settings which changes:
+
+    - The default separator is a space ` ` instead of a comma `,`.
+    - The headers of the column are not included.
+
+    By modifying the args of `dm.read_csv()`, you will be able to read an `.smi` files.
 
     Args:
         urlpath: Path to a file or a file-like object. Path can be remote or local.

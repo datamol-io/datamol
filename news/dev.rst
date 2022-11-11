@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* Add a comment recommending to not use the SMI file format.
 
 **Deprecated:**
 
