@@ -91,6 +91,8 @@ def read_sdf(
     include_computed: bool = False,
     strict_parsing: bool = True,
     remove_hs: bool = True,
+    max_num_mols: Optional[int] = None,
+    discard_fails: bool = True,
     n_jobs: Optional[int] = 1,
 ) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
@@ -110,6 +112,8 @@ def read_sdf(
             `as_df` is True.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        max_num_mols: Maximum number of molecules to read from the SDF file.
+        discard_fails: Discard the molecules that failed to be read correctly.
         n_jobs: Optional number of jobs for parallelization of `to_df`. Leave to 1 for no
             parallelization. Set to -1 to use all available cores. Only relevant is `as_df` is True
     """
@@ -122,7 +126,10 @@ def read_sdf(
             strictParsing=strict_parsing,
             removeHs=remove_hs,
         )
-        mols = list(supplier)
+        if max_num_mols is None:
+            mols = list(supplier)
+        else:
+            mols = [next(supplier) for _ in range(max_num_mols)]
 
     # Regular local or remote paths
     else:
@@ -138,10 +145,14 @@ def read_sdf(
                 strictParsing=strict_parsing,
                 removeHs=remove_hs,
             )
-            mols = list(supplier)
+            if max_num_mols is None:
+                mols = list(supplier)
+            else:
+                mols = [next(supplier) for _ in range(max_num_mols)]
 
     # Discard None values
-    mols = [mol for mol in mols if mol is not None]
+    if discard_fails:
+        mols = [mol for mol in mols if mol is not None]
 
     # Convert to dataframe
     if as_df:
