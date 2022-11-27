@@ -82,10 +82,10 @@ def read_excel(
 
 
 def _get_supplier_mols(
-    supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]
+    supplier: rdmolfiles.ForwardSDMolSupplier,
+    max_num_mols: Optional[int],
 ) -> List[dm.Mol]:
-    """
-    Given a supplier, read the molecules until we reach the `max_num_mols` limit.
+    """Given a supplier, read the molecules until we reach the `max_num_mols` limit.
     Useful when reading SDF files.
     """
     if max_num_mols is None:
@@ -111,7 +111,7 @@ def read_sdf(
     strict_parsing: bool = True,
     remove_hs: bool = True,
     max_num_mols: Optional[int] = None,
-    discard_fails: bool = True,
+    discard_invalid: bool = True,
     n_jobs: Optional[int] = 1,
 ) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
@@ -131,8 +131,10 @@ def read_sdf(
             `as_df` is True.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.
-        max_num_mols: Maximum number of molecules to read from the SDF file.
-        discard_fails: Discard the molecules that failed to be read correctly.
+        max_num_mols: Maximum number of molecules to read from the SDF file. Read all by default when set
+            to `None`.
+        discard_invalid: Discard the molecules that failed to be read correctly. Otherwise,
+            invalid molecules will be loaded as `None`.
         n_jobs: Optional number of jobs for parallelization of `to_df`. Leave to 1 for no
             parallelization. Set to -1 to use all available cores. Only relevant is `as_df` is True
     """
@@ -160,7 +162,7 @@ def read_sdf(
             mols = _get_supplier_mols(supplier, max_num_mols)
 
     # Discard None values
-    if discard_fails:
+    if discard_invalid:
         mols = [mol for mol in mols if mol is not None]
 
     # Convert to dataframe
