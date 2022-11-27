@@ -81,7 +81,11 @@ def read_excel(
     return df
 
 
-def _get_supplier_mols(supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]):
+def _get_supplier_mols(supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]) -> List[dm.Mol]:
+    """
+    Given a supplier, read the molecules until we reach the `max_num_mols` limit.
+    Useful when reading SDF files.
+    """
     if max_num_mols is None:
         mols = list(supplier)
     else:
@@ -92,6 +96,7 @@ def _get_supplier_mols(supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols
             except StopIteration:
                 break
     return mols
+
 
 def read_sdf(
     urlpath: Union[str, os.PathLike, IO],
@@ -142,11 +147,7 @@ def read_sdf(
 
     # Regular local or remote paths
     else:
-        with fsspec.open(urlpath) as f:
-
-            # Handle gzip file if needed
-            if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
-                f = gzip.open(f)  # type: ignore
+        with fsspec.open(urlpath, compression="infer") as f:
 
             supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
