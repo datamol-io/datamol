@@ -18,7 +18,6 @@ from .utils import parallelized_with_batches
 from .utils import JobRunner
 from .utils import fs
 
-from . import data
 from .data import freesolv
 from .data import cdk2
 from .data import solubility

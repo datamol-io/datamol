@@ -5,12 +5,13 @@ from typing import Sequence
 from typing import IO
 from typing import Any
 from typing import cast
+from typing import overload
+from typing import Literal
 
 import os
 import io
 import tempfile
 import pathlib
-import gzip
 
 from rdkit.Chem import PandasTools
 from rdkit.Chem import rdmolfiles
@@ -98,6 +99,42 @@ def _get_supplier_mols(
             except StopIteration:
                 break
     return mols
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: Literal[False] = False,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> List[Mol]:
+    ...
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: Literal[True] = True,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> pd.DataFrame:
+    ...
 
 
 def read_sdf(
