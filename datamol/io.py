@@ -44,7 +44,8 @@ def read_csv(
         df: a `pandas.DataFrame`
     """
 
-    df: pd.DataFrame = pd.read_csv(urlpath, **kwargs)  # type: ignore
+    df = pd.read_csv(urlpath, **kwargs)
+    df = cast(pd.DataFrame, df)
 
     if smiles_column is not None:
         PandasTools.AddMoleculeColumnToFrame(df, smiles_column, mol_column)
