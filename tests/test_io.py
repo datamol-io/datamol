@@ -51,6 +51,11 @@ def test_read_sdf(datadir):
     for mol in mols:
         assert isinstance(mol, Chem.rdchem.Mol)
 
+    mols = dm.read_sdf(data_path, max_num_mols=111)
+    assert len(mols) == 10
+    for mol in mols:
+        assert isinstance(mol, Chem.rdchem.Mol)
+
 
 def test_read_sdf_gz(datadir):
 

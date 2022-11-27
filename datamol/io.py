@@ -81,6 +81,18 @@ def read_excel(
     return df
 
 
+def _get_supplier_mols(supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]):
+    if max_num_mols is None:
+        mols = list(supplier)
+    else:
+        mols = []
+        for _ in range(max_num_mols):
+            try:
+                mols.append(next(supplier))
+            except StopIteration:
+                break
+    return mols
+
 def read_sdf(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
@@ -126,10 +138,7 @@ def read_sdf(
             strictParsing=strict_parsing,
             removeHs=remove_hs,
         )
-        if max_num_mols is None:
-            mols = list(supplier)
-        else:
-            mols = [next(supplier) for _ in range(max_num_mols)]
+        mols = _get_supplier_mols(supplier, max_num_mols)
 
     # Regular local or remote paths
     else:
@@ -145,10 +154,7 @@ def read_sdf(
                 strictParsing=strict_parsing,
                 removeHs=remove_hs,
             )
-            if max_num_mols is None:
-                mols = list(supplier)
-            else:
-                mols = [next(supplier) for _ in range(max_num_mols)]
+            mols = _get_supplier_mols(supplier, max_num_mols)
 
     # Discard None values
     if discard_fails:

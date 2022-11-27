@@ -405,10 +405,13 @@ def to_df(
 
     # Add any other properties present in the molecule
     def _mol_to_prop_dict(mol):
-        return mol.GetPropsAsDict(
-            includePrivate=include_private,
-            includeComputed=include_computed,
-        )
+        if mol is not None:
+            return mol.GetPropsAsDict(
+                includePrivate=include_private,
+                includeComputed=include_computed,
+            )
+        else:
+            return {}
 
     # EN: You cannot use `processes` here because all properties will be lost
     # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
