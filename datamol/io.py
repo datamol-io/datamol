@@ -81,7 +81,9 @@ def read_excel(
     return df
 
 
-def _get_supplier_mols(supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]) -> List[dm.Mol]:
+def _get_supplier_mols(
+    supplier: "rdmolfiles.ForwardSDMolSupplier", max_num_mols: Optional[int]
+) -> List[dm.Mol]:
     """
     Given a supplier, read the molecules until we reach the `max_num_mols` limit.
     Useful when reading SDF files.
