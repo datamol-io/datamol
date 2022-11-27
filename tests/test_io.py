@@ -69,14 +69,14 @@ def test_read_sdf(datadir):
         assert isinstance(mol, Chem.rdchem.Mol)
 
     # Read all sdf with last mol being broken
-    mols = dm.read_sdf(data_path, discard_fails=False)
+    mols = dm.read_sdf(data_path, discard_invalid=False)
     assert len(mols) == 10
     for mol in mols[:-1]:
         assert isinstance(mol, Chem.rdchem.Mol)
     assert mols[-1] is None
 
     # Read all sdf with last mol being broken
-    df = dm.read_sdf(data_path, discard_fails=False, as_df=True, mol_column="mols")
+    df = dm.read_sdf(data_path, discard_invalid=False, as_df=True, mol_column="mols")
     assert len(mols) == 10
     for mol in df["mols"].iloc[:-1]:
         assert isinstance(mol, Chem.rdchem.Mol)
