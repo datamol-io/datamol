@@ -2,7 +2,7 @@ import pytest
 import pathlib
 
 import nbformat
-from nbconvert.preprocessors import ExecutePreprocessor
+from nbconvert.preprocessors.execute import ExecutePreprocessor
 
 ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 
