@@ -50,6 +50,7 @@ def test_enumerate_stereo_timeout():
 
 def test_enumerate_structural():
     mol = dm.to_mol("CCCCC")  # pentane has only three structural isomers
+
     mols_iso = dm.enumerate_structisomers(
         mol,
         n_variants=5,
@@ -58,11 +59,16 @@ def test_enumerate_structural():
         allow_double_bond=False,
         allow_triple_bond=False,
     )
-    mols_cyclo_iso = dm.enumerate_structisomers(mol, n_variants=5, depth=2, allow_cycle=True)
+
 
     assert {dm.to_smiles(m) for m in mols_iso} == {"CCC(C)C", "CC(C)(C)C"}
-    # expect 3 molecules with cycles
-    assert sum([Chem.rdMolDescriptors.CalcNumRings(x) == 1 for x in mols_cyclo_iso]) == 3  # type: ignore
+
+
+    # NOTE(hadim): disable to reduce testing time
+    # mols_cyclo_iso = dm.enumerate_structisomers(mol, n_variants=5, depth=2, allow_cycle=True)
+
+    # # expect 3 molecules with cycles
+    # assert sum([Chem.rdMolDescriptors.CalcNumRings(x) == 1 for x in mols_cyclo_iso]) == 3  # type: ignore
 
     # mols_cyclo_iso_double = dm.enumerate_structisomers(
     #     mol, n_variants=10, allow_cycle=True, allow_double_bond=True
