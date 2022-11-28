@@ -43,23 +43,24 @@ n_lipinski_hba = rdMolDescriptors.CalcNumLipinskiHBA
 n_lipinski_hbd = rdMolDescriptors.CalcNumLipinskiHBD
 n_rings = rdMolDescriptors.CalcNumRings
 n_hetero_atoms = rdMolDescriptors.CalcNumHeteroatoms
-n_heavy_atoms = Descriptors.HeavyAtomCount  # type: ignore
+n_heavy_atoms = rdMolDescriptors.CalcNumHeavyAtoms
 n_rotatable_bonds = rdMolDescriptors.CalcNumRotatableBonds
 n_radical_electrons = Descriptors.NumRadicalElectrons
 n_NHOH = Lipinski.NHOHCount
 n_NO = Lipinski.NOCount
+n_spiro_atoms = rdMolDescriptors.CalcNumSpiroAtoms
 
-n_aliphatic_carbocycles = Lipinski.NumAliphaticCarbocycles  # type: ignore
-n_aliphatic_heterocyles = Lipinski.NumAliphaticHeterocycles  # type: ignore
-n_aliphatic_rings = Lipinski.NumAliphaticRings  # type: ignore
+n_aliphatic_carbocycles = rdMolDescriptors.CalcNumAliphaticCarbocycles
+n_aliphatic_heterocyles = rdMolDescriptors.CalcNumAliphaticHeterocycles
+n_aliphatic_rings = rdMolDescriptors.CalcNumAliphaticRings
 
-n_aromatic_carbocycles = Lipinski.NumAromaticCarbocycles  # type: ignore
-n_aromatic_heterocyles = Lipinski.NumAromaticHeterocycles  # type: ignore
-n_aromatic_rings = Lipinski.NumAromaticRings  # type: ignore
+n_aromatic_carbocycles = rdMolDescriptors.CalcNumAromaticCarbocycles
+n_aromatic_heterocyles = rdMolDescriptors.CalcNumAromaticHeterocycles
+n_aromatic_rings = rdMolDescriptors.CalcNumAromaticRings
 
-n_saturated_carbocycles = Lipinski.NumSaturatedCarbocycles  # type: ignore
-n_saturated_heterocyles = Lipinski.NumSaturatedHeterocycles  # type: ignore
-n_saturated_rings = Lipinski.NumSaturatedRings  # type: ignore
+n_saturated_carbocycles = rdMolDescriptors.CalcNumSaturatedCarbocycles
+n_saturated_heterocyles = rdMolDescriptors.CalcNumSaturatedHeterocycles
+n_saturated_rings = rdMolDescriptors.CalcNumSaturatedRings
 
 
 def n_rigid_bonds(mol: Mol) -> int:
@@ -108,6 +109,24 @@ def n_stereo_centers(mol: Mol) -> int:
     try:
         rdmolops.FindPotentialStereo(mol, cleanIt=False)
         n = rdMolDescriptors.CalcNumAtomStereoCenters(mol)
+    except:
+        pass
+    return n
+
+
+def n_stereo_centers_unspecified(mol: Mol) -> int:
+    """Compute the number of unspecified stereocenters in a molecule.
+
+    Args:
+        mol: A molecule.
+
+    Returns:
+        n_stereo_centers_unspecified: number of unspecified stereocenters in the molecule
+    """
+    n = 0
+    try:
+        rdmolops.FindPotentialStereo(mol, cleanIt=False)
+        n = rdMolDescriptors.CalcNumUnspecifiedAtomStereoCenters(mol)
     except:
         pass
     return n

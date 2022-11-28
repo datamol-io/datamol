@@ -6,17 +6,37 @@ The data module aims to provide a fast and convenient access to various molecula
 
 from typing import Optional
 from typing import cast
+from typing import Union
+from typing import List
+from typing import overload
+from typing import Literal
 
 import pkg_resources
 
 import pandas as pd
 
+from .types import Mol
 from .io import read_sdf
 from .convert import from_df
 from .convert import render_mol_df
 
 
-def freesolv():
+@overload
+def freesolv(as_df: Literal[True] = True) -> pd.DataFrame:
+    ...
+
+
+@overload
+def freesolv(as_df: Literal[False] = False) -> List[Mol]:
+    ...
+
+
+@overload
+def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
+    ...
+
+
+def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
     """Return the FreeSolv dataset as a dataframe.
 
     The dataset contains 642 molecules and the following columns:
@@ -30,7 +50,26 @@ def freesolv():
 
     with pkg_resources.resource_stream("datamol", "data/freesolv.csv") as f:
         data = pd.read_csv(f)
+
+    if not as_df:
+        data = from_df(data)
+
     return data
+
+
+@overload
+def cdk2(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame:
+    ...
+
+
+@overload
+def cdk2(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]:
+    ...
+
+
+@overload
+def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol") -> Union[List[Mol], pd.DataFrame]:
+    ...
 
 
 def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
@@ -44,6 +83,23 @@ def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
     with pkg_resources.resource_stream("datamol", "data/cdk2.sdf") as f:
         data = read_sdf(f, as_df=as_df, mol_column=mol_column)
     return data
+
+
+@overload
+def solubility(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame:
+    ...
+
+
+@overload
+def solubility(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]:
+    ...
+
+
+@overload
+def solubility(
+    as_df: bool = True, mol_column: Optional[str] = "mol"
+) -> Union[List[Mol], pd.DataFrame]:
+    ...
 
 
 def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):

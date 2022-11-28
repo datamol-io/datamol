@@ -41,10 +41,46 @@ def test_read_excel_with_mol_col(datadir):
 def test_read_sdf(datadir):
 
     data_path = datadir / "TUBB3-observations.sdf"
+
+    # Read all sdf
     mols = dm.read_sdf(data_path)
     assert len(mols) == 10
     for mol in mols:
         assert isinstance(mol, Chem.rdchem.Mol)
+
+    # Read 5 molecules
+    mols = dm.read_sdf(data_path, max_num_mols=5)
+    assert len(mols) == 5
+    for mol in mols:
+        assert isinstance(mol, Chem.rdchem.Mol)
+
+    # Read more than the max number of mols in the file
+    mols = dm.read_sdf(data_path, max_num_mols=111)
+    assert len(mols) == 10
+    for mol in mols:
+        assert isinstance(mol, Chem.rdchem.Mol)
+
+    data_path = datadir / "TUBB3-observations-last-broken.sdf"
+
+    # Read all sdf with last mol being broken
+    mols = dm.read_sdf(data_path)
+    assert len(mols) == 9
+    for mol in mols:
+        assert isinstance(mol, Chem.rdchem.Mol)
+
+    # Read all sdf with last mol being broken
+    mols = dm.read_sdf(data_path, discard_invalid=False)
+    assert len(mols) == 10
+    for mol in mols[:-1]:
+        assert isinstance(mol, Chem.rdchem.Mol)
+    assert mols[-1] is None
+
+    # Read all sdf with last mol being broken
+    df = dm.read_sdf(data_path, discard_invalid=False, as_df=True, mol_column="mols")
+    assert len(mols) == 10
+    for mol in df["mols"].iloc[:-1]:
+        assert isinstance(mol, Chem.rdchem.Mol)
+    assert df["mols"].iloc[-1] is None
 
 
 def test_read_sdf_gz(datadir):

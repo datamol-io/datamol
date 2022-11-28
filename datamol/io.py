@@ -5,12 +5,13 @@ from typing import Sequence
 from typing import IO
 from typing import Any
 from typing import cast
+from typing import overload
+from typing import Literal
 
 import os
 import io
 import tempfile
 import pathlib
-import gzip
 
 from rdkit.Chem import PandasTools
 from rdkit.Chem import rdmolfiles
@@ -43,7 +44,8 @@ def read_csv(
         df: a `pandas.DataFrame`
     """
 
-    df: pd.DataFrame = pd.read_csv(urlpath, **kwargs)  # type: ignore
+    df = pd.read_csv(urlpath, **kwargs)
+    df = cast(pd.DataFrame, df)
 
     if smiles_column is not None:
         PandasTools.AddMoleculeColumnToFrame(df, smiles_column, mol_column)
@@ -81,6 +83,79 @@ def read_excel(
     return df
 
 
+def _get_supplier_mols(
+    supplier: rdmolfiles.ForwardSDMolSupplier,
+    max_num_mols: Optional[int],
+) -> List[dm.Mol]:
+    """Given a supplier, read the molecules until we reach the `max_num_mols` limit.
+    Useful when reading SDF files.
+    """
+    if max_num_mols is None:
+        mols = list(supplier)
+    else:
+        mols = []
+        for _ in range(max_num_mols):
+            try:
+                mols.append(next(supplier))
+            except StopIteration:
+                break
+    return mols
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: Literal[False] = ...,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> List[Mol]:
+    ...
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: Literal[True] = ...,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> pd.DataFrame:
+    ...
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: bool = ...,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> Union[List[Mol], pd.DataFrame]:
+    ...
+
+
 def read_sdf(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
@@ -91,6 +166,8 @@ def read_sdf(
     include_computed: bool = False,
     strict_parsing: bool = True,
     remove_hs: bool = True,
+    max_num_mols: Optional[int] = None,
+    discard_invalid: bool = True,
     n_jobs: Optional[int] = 1,
 ) -> Union[List[Mol], pd.DataFrame]:
     """Read an SDF file.
@@ -110,6 +187,10 @@ def read_sdf(
             `as_df` is True.
         strict_parsing: If set to false, the parser is more lax about correctness of the contents.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        max_num_mols: Maximum number of molecules to read from the SDF file. Read all by default when set
+            to `None`.
+        discard_invalid: Discard the molecules that failed to be read correctly. Otherwise,
+            invalid molecules will be loaded as `None`.
         n_jobs: Optional number of jobs for parallelization of `to_df`. Leave to 1 for no
             parallelization. Set to -1 to use all available cores. Only relevant is `as_df` is True
     """
@@ -122,15 +203,11 @@ def read_sdf(
             strictParsing=strict_parsing,
             removeHs=remove_hs,
         )
-        mols = list(supplier)
+        mols = _get_supplier_mols(supplier, max_num_mols)
 
     # Regular local or remote paths
     else:
-        with fsspec.open(urlpath) as f:
-
-            # Handle gzip file if needed
-            if str(urlpath).endswith(".gz") or str(urlpath).endswith(".gzip"):
-                f = gzip.open(f)  # type: ignore
+        with fsspec.open(urlpath, compression="infer") as f:
 
             supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
@@ -138,10 +215,11 @@ def read_sdf(
                 strictParsing=strict_parsing,
                 removeHs=remove_hs,
             )
-            mols = list(supplier)
+            mols = _get_supplier_mols(supplier, max_num_mols)
 
     # Discard None values
-    mols = [mol for mol in mols if mol is not None]
+    if discard_invalid:
+        mols = [mol for mol in mols if mol is not None]
 
     # Convert to dataframe
     if as_df:

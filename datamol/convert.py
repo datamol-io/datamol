@@ -405,10 +405,13 @@ def to_df(
 
     # Add any other properties present in the molecule
     def _mol_to_prop_dict(mol):
-        return mol.GetPropsAsDict(
-            includePrivate=include_private,
-            includeComputed=include_computed,
-        )
+        if mol is not None:
+            return mol.GetPropsAsDict(
+                includePrivate=include_private,
+                includeComputed=include_computed,
+            )
+        else:
+            return {}
 
     # EN: You cannot use `processes` here because all properties will be lost
     # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
@@ -526,14 +529,14 @@ def _ChangeMoleculeRendering(frame=None, renderer="PNG"):
     import types
 
     if renderer == "String":
-        Chem.rdchem.Mol.__str__ = PandasTools.PrintDefaultMolRep
+        Chem.rdchem.Mol.__str__ = PandasTools.PrintDefaultMolRep  # type: ignore
     else:
         Chem.rdchem.Mol.__str__ = PandasTools.PrintAsBase64PNGString
 
     if frame is not None:
-        frame.to_html = types.MethodType(PandasTools.patchPandasHTMLrepr, frame)
+        frame.to_html = types.MethodType(PandasTools.patchPandasHTMLrepr, frame)  # type: ignore
 
-    if PandasTools.defPandasRepr is not None and renderer == "String":
+    if PandasTools.defPandasRepr is not None and renderer == "String":  # type: ignore
         frame._repr_html_ = types.MethodType(PandasTools.defPandasRepr, frame)  # type: ignore
     else:
         frame._repr_html_ = types.MethodType(PandasTools.patchPandasrepr, frame)  # type: ignore
