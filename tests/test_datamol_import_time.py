@@ -4,8 +4,8 @@ import multiprocessing
 import platform
 
 DATAMOL_MAX_IMPORT_DURATION = {}  # in seconds
-DATAMOL_MAX_IMPORT_DURATION["default"] = 3
-DATAMOL_MAX_IMPORT_DURATION["linux"] = 3
+DATAMOL_MAX_IMPORT_DURATION["default"] = 5
+DATAMOL_MAX_IMPORT_DURATION["linux"] = 5
 DATAMOL_MAX_IMPORT_DURATION["osx"] = 20
 DATAMOL_MAX_IMPORT_DURATION["windows"] = 6
 
