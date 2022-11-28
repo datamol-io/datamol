@@ -12,7 +12,7 @@ NOTEBOOK_PATHS = NOTEBOOK_DIR.glob("*.ipynb")
 NOTEBOOK_PATHS = sorted(list(NOTEBOOK_DIR.glob("*.ipynb")))
 
 # Discard `Filesystem.ipynb` because it takes too long to run.
-NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" == x.name, NOTEBOOK_PATHS))
+NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PATHS))
 
 
 @pytest.mark.skip_platform("win")
