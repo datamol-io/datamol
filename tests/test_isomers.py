@@ -60,9 +60,7 @@ def test_enumerate_structural():
         allow_triple_bond=False,
     )
 
-
     assert {dm.to_smiles(m) for m in mols_iso} == {"CCC(C)C", "CC(C)(C)C"}
-
 
     # NOTE(hadim): disable to reduce testing time
     # mols_cyclo_iso = dm.enumerate_structisomers(mol, n_variants=5, depth=2, allow_cycle=True)
