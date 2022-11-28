@@ -11,6 +11,7 @@ from rdkit.Chem import Crippen
 
 from .. import Mol
 from ..convert import from_smarts
+from .._version import is_lower_than_current_rdkit_version
 
 
 def _sasscorer(mol: Mol):
@@ -43,7 +44,13 @@ n_lipinski_hba = rdMolDescriptors.CalcNumLipinskiHBA
 n_lipinski_hbd = rdMolDescriptors.CalcNumLipinskiHBD
 n_rings = rdMolDescriptors.CalcNumRings
 n_hetero_atoms = rdMolDescriptors.CalcNumHeteroatoms
-n_heavy_atoms = rdMolDescriptors.CalcNumHeavyAtoms
+
+
+if is_lower_than_current_rdkit_version("2021.09"):
+    n_heavy_atoms = Descriptors.HeavyAtomCount  # type: ignore
+else:
+    n_heavy_atoms = rdMolDescriptors.CalcNumHeavyAtoms
+
 n_rotatable_bonds = rdMolDescriptors.CalcNumRotatableBonds
 n_radical_electrons = Descriptors.NumRadicalElectrons
 n_NHOH = Lipinski.NHOHCount
