@@ -106,7 +106,7 @@ def _get_supplier_mols(
 def read_sdf(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = ...,
-    as_df: Literal[False] = False,
+    as_df: Literal[False] = ...,
     smiles_column: Optional[str] = ...,
     mol_column: Optional[str] = ...,
     include_private: bool = ...,
@@ -124,7 +124,7 @@ def read_sdf(
 def read_sdf(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = ...,
-    as_df: Literal[True] = True,
+    as_df: Literal[True] = ...,
     smiles_column: Optional[str] = ...,
     mol_column: Optional[str] = ...,
     include_private: bool = ...,
@@ -135,6 +135,24 @@ def read_sdf(
     discard_invalid: bool = ...,
     n_jobs: Optional[int] = ...,
 ) -> pd.DataFrame:
+    ...
+
+
+@overload
+def read_sdf(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = ...,
+    as_df: bool = ...,
+    smiles_column: Optional[str] = ...,
+    mol_column: Optional[str] = ...,
+    include_private: bool = ...,
+    include_computed: bool = ...,
+    strict_parsing: bool = ...,
+    remove_hs: bool = ...,
+    max_num_mols: Optional[int] = ...,
+    discard_invalid: bool = ...,
+    n_jobs: Optional[int] = ...,
+) -> Union[List[Mol], pd.DataFrame]:
     ...
 
 

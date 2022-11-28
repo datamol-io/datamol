@@ -15,21 +15,9 @@ from loguru import logger
 
 from rdkit import Chem
 
-from rdkit.Chem import CanonicalRankAtoms  # type: ignore
-from rdkit.Chem import MolFromSmiles  # type: ignore
-from rdkit.Chem import AddHs  # type: ignore
-from rdkit.Chem import RemoveHs  # type: ignore
-from rdkit.Chem import Kekulize  # type: ignore
-from rdkit.Chem import RenumberAtoms  # type: ignore
-from rdkit.Chem import RWMol  # type: ignore
-from rdkit.Chem import AssignStereochemistry  # type: ignore
-from rdkit.Chem.AllChem import ReplaceSubstructs  # type: ignore
-from rdkit.Chem.AllChem import DeleteSubstructs  # type: ignore
-from rdkit.Chem import GetMolFrags  # type: ignore
-from rdkit.Chem import PathToSubmol  # type: ignore
-
 from rdkit.Chem import rdmolops
 from rdkit.Chem import rdchem
+from rdkit.Chem import rdmolfiles
 
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
@@ -94,7 +82,7 @@ def to_mol(
         raise ValueError(f"Input should be a Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
-        _mol = MolFromSmiles(mol, sanitize=sanitize)
+        _mol = rdmolfiles.MolFromSmiles(mol, sanitize=sanitize)
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
@@ -103,14 +91,15 @@ def to_mol(
 
     # Add hydrogens
     if _mol is not None and add_hs:
-        _mol = AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
+        _mol = rdmolops.AddHs(_mol, explicitOnly=explicit_only, addCoords=True)
 
     # Reorder atoms
     if _mol is not None and ordered:
         _mol = reorder_atoms(_mol)
 
     if _mol is not None and kekulize:
-        Kekulize(_mol, clearAromaticFlags=False)
+        rdmolops.Kekulize(_mol, clearAromaticFlags=False)
+
     return _mol
 
 
@@ -223,14 +212,14 @@ def reorder_atoms(
     if mol.GetNumAtoms() == 0:
         return mol
 
-    new_order = CanonicalRankAtoms(
+    new_order = rdmolfiles.CanonicalRankAtoms(
         mol,
         breakTies=break_ties,
         includeChirality=include_chirality,
         includeIsotopes=include_isotopes,
     )
     new_order = sorted([(y, x) for x, y in enumerate(new_order)])
-    return RenumberAtoms(mol, [y for (x, y) in new_order])
+    return rdmolops.RenumberAtoms(mol, [y for (x, y) in new_order])
 
 
 def randomize_atoms(mol: Mol) -> Optional[Mol]:
@@ -247,7 +236,7 @@ def randomize_atoms(mol: Mol) -> Optional[Mol]:
 
     atom_indices = list(range(mol.GetNumAtoms()))
     random.shuffle(atom_indices)
-    return RenumberAtoms(mol, atom_indices)
+    return rdmolops.RenumberAtoms(mol, atom_indices)
 
 
 def to_neutral(mol: Optional[Mol]) -> Optional[Mol]:
@@ -480,7 +469,7 @@ def standardize_mol(
         mol = uncharger.uncharge(mol)
 
     if stereo:
-        AssignStereochemistry(mol, force=False, cleanIt=True)
+        rdmolops.AssignStereochemistry(mol, force=False, cleanIt=True)
 
     return mol
 
@@ -593,7 +582,7 @@ def fix_valence(mol: Mol, inplace: bool = False, allow_ring_break: bool = False)
                 # atom.SetNumRadicalElectrons(0)
             atom.UpdatePropertyCache(False)
 
-        em = RWMol(m)
+        em = rdchem.RWMol(m)
         bonds = em.GetBonds()
         bonds = [
             bond
@@ -633,7 +622,7 @@ def adjust_singleton(mol: Mol) -> Optional[Mol]:
         mol: a molecule.
     """
     to_rem = []
-    em = RWMol(mol)
+    em = rdchem.RWMol(mol)
     for atom in mol.GetAtoms():
         if atom.GetExplicitValence() == 0:
             to_rem.append(atom.GetIdx())
@@ -650,10 +639,10 @@ def remove_dummies(mol: Mol, dummy: str = "*") -> Optional[Mol]:
     out = mol
 
     try:
-        out = ReplaceSubstructs(mol, du, to_mol("[H]"), True)[0]
+        out = rdmolops.ReplaceSubstructs(mol, du, to_mol("[H]"), True)[0]
         out = remove_hs(out)
     except Exception:
-        out = DeleteSubstructs(mol, du)
+        out = rdmolops.DeleteSubstructs(mol, du)
     return out
 
 
@@ -716,14 +705,14 @@ def replace_dummies_atoms(
     """
     du = to_mol(dummy)
     replacement = to_mol(atom)
-    out = ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]
+    out = rdmolops.ReplaceSubstructs(mol, du, replacement, replaceAll=replace_all)[0]
     return out
 
 
 def keep_largest_fragment(mol: Mol) -> Optional[Mol]:
     """Only keep largest fragment of each molecule."""
     return max(
-        GetMolFrags(mol, asMols=True),
+        rdmolops.GetMolFrags(mol, asMols=True),
         default=mol,
         key=lambda m: m.GetNumAtoms(),
     )
@@ -751,7 +740,7 @@ def set_dative_bonds(mol: Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional
     Returns:
         The modified molecule.
     """
-    rwmol = RWMol(mol)
+    rwmol = rdchem.RWMol(mol)
     rwmol.UpdatePropertyCache(strict=False)
 
     metals = [at for at in rwmol.GetAtoms() if is_transition_metal(at)]
@@ -878,7 +867,7 @@ def atom_list_to_bond(
 
     # Build an atom map
     atom_map = {}
-    submol = PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)
+    submol = rdmolops.PathToSubmol(mol, atom_indices, useQuery=True, atomMap=atom_map)
     atom_map_reversed = {v: k for k, v in atom_map.items()}
 
     bonds = []
@@ -1005,7 +994,7 @@ def add_hs(
         add_residue_info: whether to add residue information to the hydrogens.
             Useful for PDB files.
     """
-    mol = AddHs(
+    mol = rdmolops.AddHs(
         mol,
         explicitOnly=explicit_only,
         addCoords=add_coords,
@@ -1030,7 +1019,7 @@ def remove_hs(
         update_explicit_count: whether to update the explicit hydrogen count.
         sanitize: whether to sanitize the molecule after the hydrogens are removed.
     """
-    mol = RemoveHs(
+    mol = rdmolops.RemoveHs(
         mol,
         implicitOnly=implicit_only,
         updateExplicitCount=update_explicit_count,
