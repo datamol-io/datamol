@@ -11,7 +11,7 @@
   - hadim
   alternate_emails:
   - hadim@users.noreply.github.com
-  num_commits: 37
+  num_commits: 38
   first_commit: 2020-10-24 11:46:22
   github: matudor
 - name: michelml
@@ -55,7 +55,7 @@
   github: cwognum
 - name: DomInvivo
   email: dominique@invivoai.com
-  num_commits: 27
+  num_commits: 31
   first_commit: 2022-06-14 09:40:04
   github: DomInvivo
 - name: Matt
