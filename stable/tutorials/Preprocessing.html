@@ -11,7 +11,7 @@
       
       
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.3.0, mkdocs-material-8.5.2">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
     
     
       
@@ -19,10 +19,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.9f9400aa.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.472b142f.min.css">
       
         
-        <link rel="stylesheet" href="../assets/stylesheets/palette.cbb835fc.min.css">
+        <link rel="stylesheet" href="../assets/stylesheets/palette.08040f6c.min.css">
         
       
       
@@ -62,7 +62,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
   
     
     
@@ -2085,7 +2085,7 @@ dm.disable_rdkit_log()</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[2]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2102,11 +2102,13 @@ dm.disable_rdkit_log()</div>
         </div>
             <div class="highlight-ipynb hl-python"><pre><span></span><span class="c1"># Load a dataset</span>
 <span class="n">data</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
+<span class="n">data</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
 
 <span class="n">data</span>
 </pre></div>
 <div id="cell-2" class="clipboard-copy-txt"># Load a dataset
 data = dm.data.freesolv()
+data = data.iloc[:100]
 
 data</div>
     
@@ -2124,7 +2126,7 @@ data</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[2]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
 
 
 
@@ -2197,43 +2199,43 @@ data</div>
       <td>...</td>
     </tr>
     <tr>
-      <th>637</th>
-      <td>methyl octanoate</td>
-      <td>CCCCCCCC(=O)OC</td>
-      <td>-2.04</td>
-      <td>-3.035</td>
+      <th>95</th>
+      <td>methoxyethane</td>
+      <td>CCOC</td>
+      <td>-2.10</td>
+      <td>-0.710</td>
     </tr>
     <tr>
-      <th>638</th>
-      <td>pyrrolidine</td>
-      <td>C1CCNC1</td>
-      <td>-5.48</td>
-      <td>-4.278</td>
+      <th>96</th>
+      <td>2-chloro-1,1,1-trimethoxy-ethane</td>
+      <td>COC(CCl)(OC)OC</td>
+      <td>-4.59</td>
+      <td>-3.638</td>
     </tr>
     <tr>
-      <th>639</th>
-      <td>4-hydroxybenzaldehyde</td>
-      <td>c1cc(ccc1C=O)O</td>
-      <td>-8.83</td>
-      <td>-10.050</td>
+      <th>97</th>
+      <td>isobutane</td>
+      <td>CC(C)C</td>
+      <td>2.30</td>
+      <td>2.535</td>
     </tr>
     <tr>
-      <th>640</th>
-      <td>1-chloroheptane</td>
-      <td>CCCCCCCCl</td>
-      <td>0.29</td>
-      <td>1.467</td>
+      <th>98</th>
+      <td>3-methylbutanoic acid</td>
+      <td>CC(C)CC(=O)O</td>
+      <td>-6.09</td>
+      <td>-8.844</td>
     </tr>
     <tr>
-      <th>641</th>
-      <td>1,4-dioxane</td>
-      <td>C1COCCO1</td>
-      <td>-5.06</td>
-      <td>-4.269</td>
+      <th>99</th>
+      <td>2-chloro-1-(2,4-dichlorophenyl)ethenyl diethyl...</td>
+      <td>CCOP(=O)(OCC)O/C(=C/Cl)/c1ccc(cc1Cl)Cl</td>
+      <td>-7.07</td>
+      <td>-9.029</td>
     </tr>
   </tbody>
 </table>
-<p>642 rows × 4 columns</p>
+<p>100 rows × 4 columns</p>
 </div>
 </div>
 
@@ -2250,7 +2252,7 @@ data</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[3]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[5]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2331,7 +2333,7 @@ data_clean</div>
 <div class="jp-OutputArea jp-Cell-outputArea">
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[3]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[5]:</div>
 
 
 
@@ -2432,63 +2434,63 @@ data_clean</div>
       <td>...</td>
     </tr>
     <tr>
-      <th>637</th>
-      <td>methyl octanoate</td>
-      <td>CCCCCCCC(=O)OC</td>
-      <td>-2.04</td>
-      <td>-3.035</td>
-      <td>CCCCCCCC(=O)OC</td>
-      <td>[C][C][C][C][C][C][C][C][=Branch1][C][=O][O][C]</td>
-      <td>InChI=1S/C9H18O2/c1-3-4-5-6-7-8-9(10)11-2/h3-8...</td>
-      <td>JGHZJRVDZXSNKQ-UHFFFAOYSA-N</td>
+      <th>95</th>
+      <td>methoxyethane</td>
+      <td>CCOC</td>
+      <td>-2.10</td>
+      <td>-0.710</td>
+      <td>CCOC</td>
+      <td>[C][C][O][C]</td>
+      <td>InChI=1S/C3H8O/c1-3-4-2/h3H2,1-2H3</td>
+      <td>XOBKSJJDNFUZPF-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>638</th>
-      <td>pyrrolidine</td>
-      <td>C1CCNC1</td>
-      <td>-5.48</td>
-      <td>-4.278</td>
-      <td>C1CCNC1</td>
-      <td>[C][C][C][N][C][Ring1][Branch1]</td>
-      <td>InChI=1S/C4H9N/c1-2-4-5-3-1/h5H,1-4H2</td>
-      <td>RWRDLPDLKQPQOW-UHFFFAOYSA-N</td>
+      <th>96</th>
+      <td>2-chloro-1,1,1-trimethoxy-ethane</td>
+      <td>COC(CCl)(OC)OC</td>
+      <td>-4.59</td>
+      <td>-3.638</td>
+      <td>COC(CCl)(OC)OC</td>
+      <td>[C][O][C][Branch1][Ring1][C][Cl][Branch1][Ring...</td>
+      <td>InChI=1S/C5H11ClO3/c1-7-5(4-6,8-2)9-3/h4H2,1-3H3</td>
+      <td>NPEIUNVTLXEOLT-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>639</th>
-      <td>4-hydroxybenzaldehyde</td>
-      <td>c1cc(ccc1C=O)O</td>
-      <td>-8.83</td>
-      <td>-10.050</td>
-      <td>O=Cc1ccc(O)cc1</td>
-      <td>[O][=C][C][=C][C][=C][Branch1][C][O][C][=C][Ri...</td>
-      <td>InChI=1S/C7H6O2/c8-5-6-1-3-7(9)4-2-6/h1-5,9H</td>
-      <td>RGHHSNMVTDWUBI-UHFFFAOYSA-N</td>
+      <th>97</th>
+      <td>isobutane</td>
+      <td>CC(C)C</td>
+      <td>2.30</td>
+      <td>2.535</td>
+      <td>CC(C)C</td>
+      <td>[C][C][Branch1][C][C][C]</td>
+      <td>InChI=1S/C4H10/c1-4(2)3/h4H,1-3H3</td>
+      <td>NNPPMTNAJDCUHE-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>640</th>
-      <td>1-chloroheptane</td>
-      <td>CCCCCCCCl</td>
-      <td>0.29</td>
-      <td>1.467</td>
-      <td>CCCCCCCCl</td>
-      <td>[C][C][C][C][C][C][C][Cl]</td>
-      <td>InChI=1S/C7H15Cl/c1-2-3-4-5-6-7-8/h2-7H2,1H3</td>
-      <td>DZMDPHNGKBEVRE-UHFFFAOYSA-N</td>
+      <th>98</th>
+      <td>3-methylbutanoic acid</td>
+      <td>CC(C)CC(=O)O</td>
+      <td>-6.09</td>
+      <td>-8.844</td>
+      <td>CC(C)CC(=O)O</td>
+      <td>[C][C][Branch1][C][C][C][C][=Branch1][C][=O][O]</td>
+      <td>InChI=1S/C5H10O2/c1-4(2)3-5(6)7/h4H,3H2,1-2H3,...</td>
+      <td>GWYFCOCPABKNJV-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>641</th>
-      <td>1,4-dioxane</td>
-      <td>C1COCCO1</td>
-      <td>-5.06</td>
-      <td>-4.269</td>
-      <td>C1COCCO1</td>
-      <td>[C][C][O][C][C][O][Ring1][=Branch1]</td>
-      <td>InChI=1S/C4H8O2/c1-2-6-4-3-5-1/h1-4H2</td>
-      <td>RYHBNJHYFVUHQT-UHFFFAOYSA-N</td>
+      <th>99</th>
+      <td>2-chloro-1-(2,4-dichlorophenyl)ethenyl diethyl...</td>
+      <td>CCOP(=O)(OCC)O/C(=C/Cl)/c1ccc(cc1Cl)Cl</td>
+      <td>-7.07</td>
+      <td>-9.029</td>
+      <td>CCOP(=O)(OCC)O/C(=C/Cl)c1ccc(Cl)cc1Cl</td>
+      <td>[C][C][O][P][=Branch1][C][=O][Branch1][Ring2][...</td>
+      <td>InChI=1S/C12H14Cl3O4P/c1-3-17-20(16,18-4-2)19-...</td>
+      <td>FSAVDKDHPDSCTO-XYOKQWHBSA-N</td>
     </tr>
   </tbody>
 </table>
-<p>642 rows × 8 columns</p>
+<p>100 rows × 8 columns</p>
 </div>
 </div>
 
@@ -2505,7 +2507,7 @@ data_clean</div>
 <div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
 </div>
 <div class="jp-InputArea jp-Cell-inputArea">
-<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[4]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[6]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
         
         
         <div class="CodeMirror cm-s-jupyter">
@@ -2589,22 +2591,14 @@ data_clean</div>
 
 
 
-
-
-
-<div id="21c3bdc2-3aa6-4823-bebc-aabe460d0f56" class="jupyter-widgets jp-OutputArea-output ">
-<script type="text/javascript">
-var element = document.getElementById('21c3bdc2-3aa6-4823-bebc-aabe460d0f56');
-</script>
-<script type="application/vnd.jupyter.widget-view+json">
-{"model_id": "9a0d0e72910e4229b03e9aa5498250d5", "version_major": 2, "version_minor": 0}
-</script>
+<div class="jp-RenderedText jp-OutputArea-output " data-mime-type="text/plain">
+<pre>  0%|          | 0/100 [00:00&lt;?, ?it/s]</pre>
 </div>
 
 </div>
 <div class="jp-OutputArea-child jp-OutputArea-executeResult">
     
-    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[4]:</div>
+    <div class="jp-OutputPrompt jp-OutputArea-prompt">Out[6]:</div>
 
 
 
@@ -2705,63 +2699,63 @@ var element = document.getElementById('21c3bdc2-3aa6-4823-bebc-aabe460d0f56');
       <td>...</td>
     </tr>
     <tr>
-      <th>637</th>
-      <td>methyl octanoate</td>
-      <td>CCCCCCCC(=O)OC</td>
-      <td>-2.04</td>
-      <td>-3.035</td>
-      <td>CCCCCCCC(=O)OC</td>
-      <td>[C][C][C][C][C][C][C][C][=Branch1][C][=O][O][C]</td>
-      <td>InChI=1S/C9H18O2/c1-3-4-5-6-7-8-9(10)11-2/h3-8...</td>
-      <td>JGHZJRVDZXSNKQ-UHFFFAOYSA-N</td>
+      <th>95</th>
+      <td>methoxyethane</td>
+      <td>CCOC</td>
+      <td>-2.10</td>
+      <td>-0.710</td>
+      <td>CCOC</td>
+      <td>[C][C][O][C]</td>
+      <td>InChI=1S/C3H8O/c1-3-4-2/h3H2,1-2H3</td>
+      <td>XOBKSJJDNFUZPF-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>638</th>
-      <td>pyrrolidine</td>
-      <td>C1CCNC1</td>
-      <td>-5.48</td>
-      <td>-4.278</td>
-      <td>C1CCNC1</td>
-      <td>[C][C][C][N][C][Ring1][Branch1]</td>
-      <td>InChI=1S/C4H9N/c1-2-4-5-3-1/h5H,1-4H2</td>
-      <td>RWRDLPDLKQPQOW-UHFFFAOYSA-N</td>
+      <th>96</th>
+      <td>2-chloro-1,1,1-trimethoxy-ethane</td>
+      <td>COC(CCl)(OC)OC</td>
+      <td>-4.59</td>
+      <td>-3.638</td>
+      <td>COC(CCl)(OC)OC</td>
+      <td>[C][O][C][Branch1][Ring1][C][Cl][Branch1][Ring...</td>
+      <td>InChI=1S/C5H11ClO3/c1-7-5(4-6,8-2)9-3/h4H2,1-3H3</td>
+      <td>NPEIUNVTLXEOLT-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>639</th>
-      <td>4-hydroxybenzaldehyde</td>
-      <td>c1cc(ccc1C=O)O</td>
-      <td>-8.83</td>
-      <td>-10.050</td>
-      <td>O=Cc1ccc(O)cc1</td>
-      <td>[O][=C][C][=C][C][=C][Branch1][C][O][C][=C][Ri...</td>
-      <td>InChI=1S/C7H6O2/c8-5-6-1-3-7(9)4-2-6/h1-5,9H</td>
-      <td>RGHHSNMVTDWUBI-UHFFFAOYSA-N</td>
+      <th>97</th>
+      <td>isobutane</td>
+      <td>CC(C)C</td>
+      <td>2.30</td>
+      <td>2.535</td>
+      <td>CC(C)C</td>
+      <td>[C][C][Branch1][C][C][C]</td>
+      <td>InChI=1S/C4H10/c1-4(2)3/h4H,1-3H3</td>
+      <td>NNPPMTNAJDCUHE-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>640</th>
-      <td>1-chloroheptane</td>
-      <td>CCCCCCCCl</td>
-      <td>0.29</td>
-      <td>1.467</td>
-      <td>CCCCCCCCl</td>
-      <td>[C][C][C][C][C][C][C][Cl]</td>
-      <td>InChI=1S/C7H15Cl/c1-2-3-4-5-6-7-8/h2-7H2,1H3</td>
-      <td>DZMDPHNGKBEVRE-UHFFFAOYSA-N</td>
+      <th>98</th>
+      <td>3-methylbutanoic acid</td>
+      <td>CC(C)CC(=O)O</td>
+      <td>-6.09</td>
+      <td>-8.844</td>
+      <td>CC(C)CC(=O)O</td>
+      <td>[C][C][Branch1][C][C][C][C][=Branch1][C][=O][O]</td>
+      <td>InChI=1S/C5H10O2/c1-4(2)3-5(6)7/h4H,3H2,1-2H3,...</td>
+      <td>GWYFCOCPABKNJV-UHFFFAOYSA-N</td>
     </tr>
     <tr>
-      <th>641</th>
-      <td>1,4-dioxane</td>
-      <td>C1COCCO1</td>
-      <td>-5.06</td>
-      <td>-4.269</td>
-      <td>C1COCCO1</td>
-      <td>[C][C][O][C][C][O][Ring1][=Branch1]</td>
-      <td>InChI=1S/C4H8O2/c1-2-6-4-3-5-1/h1-4H2</td>
-      <td>RYHBNJHYFVUHQT-UHFFFAOYSA-N</td>
+      <th>99</th>
+      <td>2-chloro-1-(2,4-dichlorophenyl)ethenyl diethyl...</td>
+      <td>CCOP(=O)(OCC)O/C(=C/Cl)/c1ccc(cc1Cl)Cl</td>
+      <td>-7.07</td>
+      <td>-9.029</td>
+      <td>CCOP(=O)(OCC)O/C(=C/Cl)c1ccc(Cl)cc1Cl</td>
+      <td>[C][C][O][P][=Branch1][C][=O][Branch1][Ring2][...</td>
+      <td>InChI=1S/C12H14Cl3O4P/c1-3-17-20(16,18-4-2)19-...</td>
+      <td>FSAVDKDHPDSCTO-XYOKQWHBSA-N</td>
     </tr>
   </tbody>
 </table>
-<p>642 rows × 8 columns</p>
+<p>100 rows × 8 columns</p>
 </div>
 </div>
 
@@ -2786,6 +2780,38 @@ var element = document.getElementById('21c3bdc2-3aa6-4823-bebc-aabe460d0f56');
 
 </div>
 </div>
+</div>
+</div><div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell jp-CodeCell jp-Notebook-cell jp-mod-noOutputs  ">
+<div class="jp-Cell-inputWrapper">
+<div class="jp-Collapser jp-InputCollapser jp-Cell-inputCollapser">
+</div>
+<div class="jp-InputArea jp-Cell-inputArea">
+<div class="jp-InputPrompt jp-InputArea-prompt">In&nbsp;[&nbsp;]:</div><div class="jp-CodeMirrorEditor jp-Editor jp-InputArea-editor" data-type="inline">
+        
+        
+        <div class="CodeMirror cm-s-jupyter">
+        <div class="zeroclipboard-container">
+            <clipboard-copy for="cell-5">
+            <div>
+                <span class="notice" hidden>Copied!</span>
+                <svg aria-hidden="true" width="20" height="20" viewBox="0 0 16 16" version="1.1"  data-view-component="true" class="clipboard-copy-icon">
+                    <path fill="currentColor" fill-rule="evenodd" d="M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 010 1.5h-1.5a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-1.5a.75.75 0 011.5 0v1.5A1.75 1.75 0 019.25 16h-7.5A1.75 1.75 0 010 14.25v-7.5z"></path>
+                    <path fill="currentColor" fill-rule="evenodd" d="M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0114.25 11h-7.5A1.75 1.75 0 015 9.25v-7.5zm1.75-.25a.25.25 0 00-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 00.25-.25v-7.5a.25.25 0 00-.25-.25h-7.5z"></path>
+                </svg>
+                </div>
+            </clipboard-copy>
+        </div>
+            <div class="highlight-ipynb hl-python"><pre><span></span>
+</pre></div>
+<div id="cell-5" class="clipboard-copy-txt"></div>
+    
+        </div>
+    </div>
+
+</div>
+</div>
+
 </div>
 </div>
 </div>
@@ -2868,10 +2894,10 @@ var element = document.getElementById('21c3bdc2-3aa6-4823-bebc-aabe460d0f56');
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.ecf98df9.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.39f04ddb.min.js"></script>
+      <script src="../assets/javascripts/bundle.d6c3db9e.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
