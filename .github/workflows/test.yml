@@ -20,6 +20,10 @@ jobs:
         exclude:
           - python-version: 3.10
             rdkit-version: 2021.09
+        include:
+          - python-version: 3.9
+            rdkit-version: 2021.03
+            os: "ubuntu-latest"
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
