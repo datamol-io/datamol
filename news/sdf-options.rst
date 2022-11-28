@@ -9,6 +9,7 @@
 **Changed:**
 
 * Overload output types for `dm.read_sdf` and `dm.data.*`.
+* Reduce tests duration (especially in CI).
 
 **Deprecated:**
 
