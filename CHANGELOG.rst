@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.8.6
+====================
+
+**Fixed:**
+
+* Ensure rdkit 2021.03 works with latest datamol. The support is not "official" but only a single function must be adapted so it's ok.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.8.5
 ====================
 
