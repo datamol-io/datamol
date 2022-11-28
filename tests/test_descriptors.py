@@ -120,6 +120,7 @@ def test_compute_many_descriptors_with_function_as_string():
 
 def test_batch_compute_many_descriptors():
     data = dm.data.freesolv()
+    data = data.iloc[:30]
     mols = data["smiles"].apply(dm.to_mol).tolist()
 
     props = dm.descriptors.batch_compute_many_descriptors(
@@ -153,7 +154,7 @@ def test_batch_compute_many_descriptors():
         "n_saturated_heterocyles",
         "n_saturated_rings",
     }
-    assert props.shape == (642, 22)
+    assert props.shape == (30, 22)
 
 
 def test_any_rdkit_descriptor():
