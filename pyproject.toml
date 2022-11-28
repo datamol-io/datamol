@@ -6,7 +6,7 @@ exclude = 'typings/'
 
 [tool.pytest.ini_options]
 minversion = "6.0"
-addopts = "--verbose --cov=datamol --cov-fail-under=85 --cov-report xml --cov-report term pytest --durations=10"
+addopts = "--verbose --cov=datamol --cov-fail-under=85 --cov-report xml --cov-report term --durations=10"
 testpaths = ["tests"]
 filterwarnings = ["ignore::DeprecationWarning:rdkit.*:"]
 
