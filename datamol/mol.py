@@ -20,6 +20,7 @@ from rdkit import Chem
 from rdkit.Chem import rdmolops
 from rdkit.Chem import rdchem
 from rdkit.Chem import rdmolfiles
+from rdkit.Chem import rdGeometry
 
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
@@ -1258,6 +1259,31 @@ def set_atom_positions(
     if remove_previous_conformers:
         mol.RemoveAllConformers()
 
+    # Remap the rows order in `positions` so it matches
+    # with the atom map numbers.
+    if use_atom_map_numbers:
+        mapped_indices = np.array([a.GetAtomMapNum() for a in mol.GetAtoms()]) - 1
+        positions = positions[mapped_indices, :]
+
+    # Check if it's 3D or 2D coords
+    is_3d = True
+    if np.all(positions[:, 2] == 0):
+        is_3d = False
+
+    # Create the conformer object
+    conf = rdchem.Conformer()
+    conf.Set3D(is_3d)
+    conf.SetId(conf_id)
+
+    # Set the positions
+    for i, xyz in enumerate(positions):
+        conf.SetAtomPosition(i, rdGeometry.Point3D(*xyz.tolist()))
+
+    # Add the conformer to the molecule
+    mol.AddConformer(conf)
+
+    return mol
+
 
 def get_atom_positions(
     mol: Mol,
@@ -1289,12 +1315,9 @@ def get_atom_positions(
 
     if reorder_to_atom_map_number:
 
-        # Remap the row order in `positions` so it matches
+        # Remap the rows order in `positions` so it matches
         # with the atom map numbers.
-
-        mapped_indices = []
-        for atom in mol.GetAtoms():
-            mapped_indices.append(atom.GetAtomMapNum() - 1)
+        mapped_indices = np.array([a.GetAtomMapNum() for a in mol.GetAtoms()]) - 1
         positions = positions[mapped_indices, :]
 
     return positions

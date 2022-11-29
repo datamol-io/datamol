@@ -794,3 +794,107 @@ def test_get_atom_positions_fails():
 
     with pytest.raises(ValueError):
         dm.get_atom_positions(mol_with_conf, reorder_to_atom_map_number=True)
+
+
+def test_set_atom_positions():
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+
+    mol = dm.to_mol(smiles, remove_hs=False)
+
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+        [3.44, -0.2, 1.8],
+        [0.02, -1.5, -1.0],
+        [2.12, -4.54, 1.9],
+        [1.5, 0.48, 0.02],
+        [0.53, 7.24, 0.25],
+        [1.17, 2.91, -0.85],
+        [-1.22, 4.15, 2.71],
+        [4.64, -3.24, 4.55],
+        [-0.89, -5.43, -0.78],
+        [4.52, 1.43, 2.45],
+        [-1.45, -1.02, -2.48],
+        [-0.15, 8.68, 1.38],
+        [1.65, 7.88, -1.21],
+        [2.24, 3.64, -2.15],
+        [-1.96, 2.4, 3.0],
+        [-2.02, 5.59, 3.71],
+    ]
+    positions = np.array(positions)
+
+    # Using the atom map numbers
+    mol2 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    # Here the ordering has been changed so only the sum will be equal
+    conformer = mol2.GetConformers()[0]
+    assert np.allclose(conformer.GetPositions().sum(), positions.sum())
+
+    # Without using the atom map numbers
+    # Note that in that case, the conformer will be messed up here since
+    # the input positions are mapped to the atom map numbers
+    mol2 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=False,
+    )
+
+    # Here the order has been kept so the positions must match
+    conformer = mol2.GetConformers()[0]
+    np.allclose(conformer.GetPositions(), positions)
+
+
+def test_set_atom_positions_fails():
+    smiles = "CCCO"
+    mol = dm.to_mol(smiles)
+
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+    ]
+    positions = np.array(positions)
+
+    # Check it works
+    dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=False,
+    )
+
+    # Use atom map numbers but the prop is not set.
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=positions,
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )
+
+    # Wrong number of dimensions of the positions array
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=[positions],
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )
+
+    # Wrong shape of `positions`
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=positions[1:, :],
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )
