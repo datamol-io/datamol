@@ -834,7 +834,7 @@ def test_set_atom_positions():
     )
 
     # Check the 3d flag is set
-    assert not mol2.GetConformers()[0].Is3D()
+    assert mol2.GetConformers()[0].Is3D()
 
     # Here the ordering has been changed so only the sum will be equal
     conformer = mol2.GetConformers()[0]
