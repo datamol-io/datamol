@@ -778,7 +778,7 @@ def test_get_atom_positions():
     assert not np.allclose(positions_1, positions_2)
 
     # but their sums should be
-    assert np.sum(positions_1) == np.sum(positions_2)
+    assert np.allclose(np.sum(positions_1), np.sum(positions_2))
 
 
 def test_get_atom_positions_fails():
