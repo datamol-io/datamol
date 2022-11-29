@@ -1,3 +1,5 @@
+from typing import cast
+
 import pytest
 
 import itertools
@@ -251,12 +253,12 @@ def test_copy_mol_props():
 def test_atom_indices_to_mol():
     mol: dm.Mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
 
-    dm.atom_indices_to_mol(mol)
-    for atom in mol.GetAtoms():
+    mol2 = dm.atom_indices_to_mol(mol)
+    for atom in mol2.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
 
-    dm.atom_indices_to_mol(mol, copy=True)
-    for atom in mol.GetAtoms():
+    mol3 = dm.atom_indices_to_mol(mol, copy=True)
+    for atom in mol3.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
 
 
@@ -521,13 +523,37 @@ def test_unique_id():
 
 
 def test_clear_mol_props():
-    data = dm.freesolv().iloc[:10]
-    mols = dm.from_df(data)
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
 
-    assert all([list(mol.GetPropsAsDict().keys()) == ["iupac", "expt", "calc"] for mol in mols])
+    # Set properties to the molecule
+    props = dict(myname="hello", a_digit=99)
+    mol = dm.set_mol_props(mol, props)
 
-    mols = [dm.clear_mol_props(mol) for mol in mols]
-    assert all([list(mol.GetPropsAsDict().keys()) == [] for mol in mols])
+    # Check
+    assert "myname" in mol.GetPropsAsDict()
+    assert "a_digit" in mol.GetPropsAsDict()
+
+    # Clear all the properties
+    mol2 = dm.clear_mol_props(mol)
+
+    # Check
+    assert "myname" not in mol2.GetPropsAsDict()
+    assert "a_digit" not in mol2.GetPropsAsDict()
+
+    # Clear only a single properties
+    mol3 = dm.clear_mol_props(mol, property_keys=["a_digit"])
+
+    # Check
+    assert "myname" in mol3.GetPropsAsDict()
+    assert "a_digit" not in mol3.GetPropsAsDict()
+
+    # Clear only a single properties (from a string key)
+    mol3 = dm.clear_mol_props(mol, property_keys="a_digit")
+
+    # Check
+    assert "myname" in mol3.GetPropsAsDict()
+    assert "a_digit" not in mol3.GetPropsAsDict()
 
 
 def test_strip_mol_to_core():
@@ -679,3 +705,212 @@ def test_hash_mol():
 
         hash_value = dm.hash_mol(mol, hash_scheme="no_tautomers")
         assert hash_value == datum["no_tautomers"]
+
+
+def test_to_mol_keep_hs():
+    smiles = "[H]OC([H])([H])c1c([H])c([H])c(C([H])([H])[H])c(-c2nc3c(c([H])c2[H])n(C([H])([H])C(C([H])([H])[H])(C([H])([H])[H])C([H])([H])[H])c(=O)n3C([H])([H])[H])c1[H]"
+
+    mol = dm.to_mol(smiles)
+    mol = cast(dm.Mol, mol)
+    assert len(mol.GetAtoms()) == 25
+
+    mol = dm.to_mol(smiles, remove_hs=False)
+    mol = cast(dm.Mol, mol)
+    assert len(mol.GetAtoms()) == 50
+
+
+def test_clear_atom_props():
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
+
+    # add the `molAtomMapNumber` property to the atoms
+    mol = dm.atom_indices_to_mol(mol)
+
+    # Check
+    assert all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()])
+
+    # Remove all the properties
+    mol2 = dm.clear_atom_props(mol)
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+    # Remove only a single property
+    mol2 = dm.clear_atom_props(mol, property_keys=["molAtomMapNumber"])
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+    # Remove only a single property from a string key
+    mol3 = dm.clear_atom_props(mol, property_keys="molAtomMapNumber")
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol3.GetAtoms()])
+
+
+def test_clear_atom_map_number():
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
+
+    # add the `molAtomMapNumber` property to the atoms
+    mol = dm.atom_indices_to_mol(mol)
+
+    # Check
+    assert all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()])
+
+    # Remove all the properties
+    mol2 = dm.clear_atom_map_number(mol)
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+
+def test_get_atom_positions():
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+    mol = dm.to_mol(smiles, remove_hs=False)
+    mol = dm.conformers.generate(mol, n_confs=1, add_hs=False)
+
+    # Get positions
+    positions_1 = dm.get_atom_positions(mol, reorder_to_atom_map_number=False)
+    positions_2 = dm.get_atom_positions(mol, reorder_to_atom_map_number=True)
+
+    # both arrays should not be equal
+    assert not np.allclose(positions_1, positions_2)
+
+    # but their sums should be
+    assert np.allclose(np.sum(positions_1), np.sum(positions_2))
+
+
+def test_get_atom_positions_fails():
+    smiles = "CCCO"
+    mol = dm.to_mol(smiles)
+
+    with pytest.raises(ValueError):
+        dm.get_atom_positions(mol)
+
+    mol_with_conf = dm.conformers.generate(mol, n_confs=1)
+
+    dm.get_atom_positions(mol_with_conf, reorder_to_atom_map_number=False)
+
+    with pytest.raises(ValueError):
+        dm.get_atom_positions(mol_with_conf, reorder_to_atom_map_number=True)
+
+
+def test_set_atom_positions():
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+
+    mol = dm.to_mol(smiles, remove_hs=False)
+
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+        [3.44, -0.2, 1.8],
+        [0.02, -1.5, -1.0],
+        [2.12, -4.54, 1.9],
+        [1.5, 0.48, 0.02],
+        [0.53, 7.24, 0.25],
+        [1.17, 2.91, -0.85],
+        [-1.22, 4.15, 2.71],
+        [4.64, -3.24, 4.55],
+        [-0.89, -5.43, -0.78],
+        [4.52, 1.43, 2.45],
+        [-1.45, -1.02, -2.48],
+        [-0.15, 8.68, 1.38],
+        [1.65, 7.88, -1.21],
+        [2.24, 3.64, -2.15],
+        [-1.96, 2.4, 3.0],
+        [-2.02, 5.59, 3.71],
+    ]
+    positions = np.array(positions)
+
+    # Using the atom map numbers
+    mol2 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    # Check the 3d flag is set
+    assert mol2.GetConformers()[0].Is3D()
+
+    # Here the ordering has been changed so only the sum will be equal
+    conformer = mol2.GetConformers()[0]
+    assert np.allclose(conformer.GetPositions().sum(), positions.sum())
+
+    # Without using the atom map numbers
+    # Note that in that case, the conformer will be messed up here since
+    # the input positions are mapped to the atom map numbers
+    mol2 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=False,
+    )
+
+    # Here the order has been kept so the positions must match
+    conformer = mol2.GetConformers()[0]
+    np.allclose(conformer.GetPositions(), positions)
+
+    # Check 3d flag is not set
+    positions_2d = positions
+    positions_2d[:, 2] = 0
+
+    mol3 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    assert not mol3.GetConformers()[0].Is3D()
+
+
+def test_set_atom_positions_fails():
+    smiles = "CCCO"
+    mol = dm.to_mol(smiles)
+
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+    ]
+    positions = np.array(positions)
+
+    # Check it works
+    dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=False,
+    )
+
+    # Use atom map numbers but the prop is not set.
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=positions,
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )
+
+    # Wrong number of dimensions of the positions array
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=[positions],
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )
+
+    # Wrong shape of `positions`
+    with pytest.raises(ValueError):
+        dm.set_atom_positions(
+            mol=mol,
+            positions=positions[1:, :],
+            conf_id=0,
+            use_atom_map_numbers=True,
+        )

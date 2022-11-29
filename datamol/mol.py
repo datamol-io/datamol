@@ -13,11 +13,14 @@ import hashlib
 
 from loguru import logger
 
+import numpy as np
+import numpy.typing as npt
 from rdkit import Chem
 
 from rdkit.Chem import rdmolops
 from rdkit.Chem import rdchem
 from rdkit.Chem import rdmolfiles
+from rdkit.Chem import rdGeometry
 
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
@@ -59,12 +62,16 @@ def to_mol(
     ordered: bool = False,
     kekulize: bool = False,
     sanitize: bool = True,
+    allow_cxsmiles: bool = True,
+    parse_name: bool = True,
+    remove_hs: bool = True,
+    strict_cxsmiles: bool = True,
 ) -> Optional[Mol]:
     """Convert an input molecule (smiles representation) into a `Mol`.
 
     Args:
         mol: A SMILES or a molecule.
-        add_hs: Whether hydrogens should be added the molecule.
+        add_hs: Whether hydrogens should be added the molecule after the SMILES has been parsed.
         explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True.
         ordered: Whether the atom should be ordered. This option is
@@ -72,6 +79,10 @@ def to_mol(
             a single atom order for the same molecule, regardless of its original SMILES representation.
         kekulize: Whether to perform kekulization of the input molecules.
         sanitize: Whether to apply rdkit sanitization when input is a SMILES.
+        allow_cxsmiles: Recognize and parse CXSMILES.
+        parse_name: Parse (and set) the molecule name as well.
+        remove_hs: Wether to remove the hydrogens from the input SMILES.
+        strict_cxsmiles: Throw an exception if the CXSMILES parsing fails.
 
     Returns:
         mol: the molecule if some conversion have been made. If the conversion fails
@@ -82,7 +93,14 @@ def to_mol(
         raise ValueError(f"Input should be a Mol or a string instead of '{type(mol)}'")
 
     if isinstance(mol, str):
-        _mol = rdmolfiles.MolFromSmiles(mol, sanitize=sanitize)
+        smiles_params = rdmolfiles.SmilesParserParams()
+        smiles_params.sanitize = sanitize
+        smiles_params.allowCXSMILES = allow_cxsmiles
+        smiles_params.parseName = parse_name
+        smiles_params.removeHs = remove_hs
+        smiles_params.strictCXSMILES = strict_cxsmiles
+
+        _mol = rdmolfiles.MolFromSmiles(mol, params=smiles_params)
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
@@ -814,29 +832,87 @@ def copy_mol_props(
 
 def clear_mol_props(
     mol: Mol,
+    property_keys: Optional[Union[List[str], str]] = None,
     copy: bool = True,
     include_private: bool = False,
     include_computed: bool = False,
-):
-    """Clear all properties from a molecule.
+) -> Mol:
+    """Clear properties from a molecule.
 
     Args:
         mol: A molecule.
+        property_keys: If set, only the set properties will be cleared.
+            It not set, all the properties are cleared.
         copy: Whether to copy the molecule.
+        include_private: Whether to also clean the private properties.
+        include_computed: Whether to also clean the computed properties.
     """
 
     if copy:
         mol = copy_mol(mol)
 
-    props = mol.GetPropsAsDict(includePrivate=include_private, includeComputed=include_computed)
+    if property_keys is not None and isinstance(property_keys, str):
+        property_keys = [property_keys]
 
-    for key in props.keys():
+    if property_keys is None:
+        props = mol.GetPropsAsDict(includePrivate=include_private, includeComputed=include_computed)
+        property_keys = list(props.keys())
+
+    for key in property_keys:
         mol.ClearProp(key)
 
     return mol
 
 
-def atom_indices_to_mol(mol: Mol, copy: bool = False):
+def clear_atom_props(
+    mol: Mol,
+    property_keys: Optional[Union[List[str], str]] = None,
+    copy: bool = True,
+    include_private: bool = False,
+    include_computed: bool = False,
+) -> Mol:
+    """Clear atom properties from a molecule.
+
+    Args:
+        mol: A molecule.
+        property_keys: If set, only the set properties will be cleared.
+            It not set, all the properties are cleared.
+        copy: Whether to copy the molecule.
+        include_private: Whether to also clean the private properties.
+        include_computed: Whether to also clean the computed properties.
+    """
+
+    if copy:
+        mol = copy_mol(mol)
+
+    if property_keys is not None and isinstance(property_keys, str):
+        property_keys = [property_keys]
+
+    for atom in mol.GetAtoms():
+
+        if property_keys is None:
+            props = atom.GetPropsAsDict(
+                includePrivate=include_private, includeComputed=include_computed
+            )
+            property_keys = list(props.keys())
+
+        for key in property_keys:
+            atom.ClearProp(key)
+
+    return mol
+
+
+def clear_atom_map_number(mol: Mol, copy: bool = True):
+    """Clear the `molAtomMapNumber` property of the atom's molecule.
+
+    Args:
+        mol: A molecule.
+        copy: Whether to copy the molecule.
+    """
+    return clear_atom_props(mol, copy=copy, property_keys="molAtomMapNumber")
+
+
+def atom_indices_to_mol(mol: Mol, copy: bool = True):
     """Add the `molAtomMapNumber` property to each atoms.
 
     Args:
@@ -1129,3 +1205,180 @@ def compute_ring_system(mol: Mol, include_spiro: bool = True) -> List[Set[int]]:
         nSystems.append(ringAts)
         systems = nSystems
     return systems
+
+
+def set_atom_positions(
+    mol: Mol,
+    positions: npt.ArrayLike,
+    conf_id: int = 0,
+    copy: bool = True,
+    use_atom_map_numbers: bool = True,
+    remove_previous_conformers: bool = True,
+) -> Mol:
+    """Add a conformer to a molecule given the atom's positions.
+
+    The conformer 3D flag is automatically set if all the z coordinates are 0.
+
+    **Example:**
+
+    The below example is common when you want to reconstruct a molecule object
+    from its SMILES and its held out atomic positions. The position array
+    is ordered according to the atom number seen in the SMILES. This is a common
+    data structure when working with Quantum Mechanics dataset.
+
+    ```python
+
+    import datamol as dm
+    import numpy as np
+
+    # We start with a SMILES where every atoms is mapped to a specific number
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+
+    # Every atom position below is mapped to the atom number in the SMILES above
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+        [3.44, -0.2, 1.8],
+        [0.02, -1.5, -1.0],
+        [2.12, -4.54, 1.9],
+        [1.5, 0.48, 0.02],
+        [0.53, 7.24, 0.25],
+        [1.17, 2.91, -0.85],
+        [-1.22, 4.15, 2.71],
+        [4.64, -3.24, 4.55],
+        [-0.89, -5.43, -0.78],
+        [4.52, 1.43, 2.45],
+        [-1.45, -1.02, -2.48],
+        [-0.15, 8.68, 1.38],
+        [1.65, 7.88, -1.21],
+        [2.24, 3.64, -2.15],
+        [-1.96, 2.4, 3.0],
+        [-2.02, 5.59, 3.71],
+    ]
+
+    # We build the mol object by setting `remove_hs` to `False`.
+    # This is important so the hydrogens and their atom number are preserved.
+    mol = dm.to_mol(smiles, remove_hs=False)
+
+    # If you plot the molecule with `dm.to_image(mol)`, you'll notice
+    # the atom numbers are added to the drawing.
+
+    # Now we set the atom positions to the newly constructed `mol` object.
+    # Here it's important to set `use_atom_map_numbers` to `True`, so the atom numbers
+    # from the SMILES are used to match the input positions array.
+    # Under the hood, RDKit has set the `molAtomMapNumber` property to all the atoms in the
+    # molecule.
+    new_mol = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    # The newly set conformer now had the correct 3D positions.
+    # You can visualize the molecule with `dm.to_image(new_mol)` in 2D
+    # or `dm.viz.conformers(new_mol)`.
+    ```
+
+    Args:
+        mol: A molecule.
+        positions: An array or a list of atomic positions. Shape of `[n_atoms, 3]`.
+        conf_id: The conformer ID to set the conformer to.
+        copy: Whether to copy the molecule.
+        use_atom_map_numbers: Whether to input positions are ordered given the atom mapped
+            numbers set in the `molAtomMapNumber` atom property keys. If set to False,
+            the default atom indices order is assumed.
+        remove_previous_conformers: Whether to remove the previous conformers if any in the input molecule.
+    """
+
+    if copy:
+        mol = copy_mol(mol)
+
+    # Convert to an array
+    positions = np.array(positions)
+
+    # Perform a few sanity checks
+
+    if positions.ndim != 2:
+        raise ValueError(f"The positions array is not of dimension 2. Found: {positions.ndim}.")
+
+    excpected_shape = (mol.GetNumAtoms(), 3)
+    if positions.shape != excpected_shape:
+        raise ValueError(
+            f"The shape of `positions` is {positions.shape} instead of {excpected_shape}."
+        )
+
+    if use_atom_map_numbers and not all(
+        ["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()]
+    ):
+        raise ValueError(
+            f"The atoms of the input molecule does not contain the molAtomMapNumber property."
+            "Set it before calling this function or set `from_atom_map_numbers` to `False`."
+        )
+
+    # Remove previous conformers
+    if remove_previous_conformers:
+        mol.RemoveAllConformers()
+
+    # Remap the rows order in `positions` so it matches
+    # with the atom map numbers.
+    if use_atom_map_numbers:
+        mapped_indices = np.array([a.GetAtomMapNum() for a in mol.GetAtoms()]) - 1
+        positions = positions[mapped_indices, :]
+
+    # Check if it's 3D or 2D coords
+    is_3d = not np.all(positions[:, 2] == 0)
+
+    # Create the conformer object
+    conf = rdchem.Conformer()
+    conf.Set3D(is_3d)
+    conf.SetId(conf_id)
+
+    # Set the positions
+    for i, xyz in enumerate(positions):
+        conf.SetAtomPosition(i, rdGeometry.Point3D(*xyz.tolist()))
+
+    # Add the conformer to the molecule
+    mol.AddConformer(conf)
+
+    return mol
+
+
+def get_atom_positions(
+    mol: Mol,
+    conf_id: int = -1,
+    reorder_to_atom_map_number: bool = False,
+) -> np.ndarray:
+    """Return the atom positions of a given molecule.
+
+    Args:
+        mol: A molecule.
+        conf_id: The conformer ID to set the conformer to.
+        reorder_to_atom_map_number: Whether to reorder the positions to map the
+            atom map numbers given by the `molAtomMapNumber` atom property.
+    """
+
+    if mol.GetNumConformers() == 0:
+        raise ValueError("This molecule does not have conformers.")
+
+    if reorder_to_atom_map_number and not all(
+        ["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()]
+    ):
+        raise ValueError(
+            f"The atoms of the input molecule does not contain the molAtomMapNumber property."
+            "Set it before calling this function or set `from_atom_map_numbers` to `False`."
+        )
+
+    conformer = mol.GetConformer(id=conf_id)
+    positions = conformer.GetPositions()
+
+    if reorder_to_atom_map_number:
+
+        # Remap the rows order in `positions` so it matches
+        # with the atom map numbers.
+        mapped_indices = np.array([a.GetAtomMapNum() for a in mol.GetAtoms()]) - 1
+        positions = positions[mapped_indices, :]
+
+    return positions
