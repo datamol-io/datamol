@@ -1,3 +1,5 @@
+from typing import cast
+
 import pytest
 
 import itertools
@@ -251,12 +253,12 @@ def test_copy_mol_props():
 def test_atom_indices_to_mol():
     mol: dm.Mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
 
-    dm.atom_indices_to_mol(mol)
-    for atom in mol.GetAtoms():
+    mol2 = dm.atom_indices_to_mol(mol)
+    for atom in mol2.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
 
-    dm.atom_indices_to_mol(mol, copy=True)
-    for atom in mol.GetAtoms():
+    mol3 = dm.atom_indices_to_mol(mol, copy=True)
+    for atom in mol3.GetAtoms():
         assert atom.GetIntProp("molAtomMapNumber") == atom.GetIdx()
 
 
@@ -521,13 +523,37 @@ def test_unique_id():
 
 
 def test_clear_mol_props():
-    data = dm.freesolv().iloc[:10]
-    mols = dm.from_df(data)
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
 
-    assert all([list(mol.GetPropsAsDict().keys()) == ["iupac", "expt", "calc"] for mol in mols])
+    # Set properties to the molecule
+    props = dict(myname="hello", a_digit=99)
+    mol = dm.set_mol_props(mol, props)
 
-    mols = [dm.clear_mol_props(mol) for mol in mols]
-    assert all([list(mol.GetPropsAsDict().keys()) == [] for mol in mols])
+    # Check
+    assert "myname" in mol.GetPropsAsDict()
+    assert "a_digit" in mol.GetPropsAsDict()
+
+    # Clear all the properties
+    mol2 = dm.clear_mol_props(mol)
+
+    # Check
+    assert "myname" not in mol2.GetPropsAsDict()
+    assert "a_digit" not in mol2.GetPropsAsDict()
+
+    # Clear only a single properties
+    mol3 = dm.clear_mol_props(mol, property_keys=["a_digit"])
+
+    # Check
+    assert "myname" in mol3.GetPropsAsDict()
+    assert "a_digit" not in mol3.GetPropsAsDict()
+
+    # Clear only a single properties (from a string key)
+    mol3 = dm.clear_mol_props(mol, property_keys="a_digit")
+
+    # Check
+    assert "myname" in mol3.GetPropsAsDict()
+    assert "a_digit" not in mol3.GetPropsAsDict()
 
 
 def test_strip_mol_to_core():
@@ -679,3 +705,92 @@ def test_hash_mol():
 
         hash_value = dm.hash_mol(mol, hash_scheme="no_tautomers")
         assert hash_value == datum["no_tautomers"]
+
+
+def test_to_mol_keep_hs():
+    smiles = "[H]OC([H])([H])c1c([H])c([H])c(C([H])([H])[H])c(-c2nc3c(c([H])c2[H])n(C([H])([H])C(C([H])([H])[H])(C([H])([H])[H])C([H])([H])[H])c(=O)n3C([H])([H])[H])c1[H]"
+
+    mol = dm.to_mol(smiles)
+    mol = cast(dm.Mol, mol)
+    assert len(mol.GetAtoms()) == 25
+
+    mol = dm.to_mol(smiles, remove_hs=False)
+    mol = cast(dm.Mol, mol)
+    assert len(mol.GetAtoms()) == 50
+
+
+def test_clear_atom_props():
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
+
+    # add the `molAtomMapNumber` property to the atoms
+    mol = dm.atom_indices_to_mol(mol)
+
+    # Check
+    assert all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()])
+
+    # Remove all the properties
+    mol2 = dm.clear_atom_props(mol)
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+    # Remove only a single property
+    mol2 = dm.clear_atom_props(mol, property_keys=["molAtomMapNumber"])
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+    # Remove only a single property from a string key
+    mol3 = dm.clear_atom_props(mol, property_keys="molAtomMapNumber")
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol3.GetAtoms()])
+
+
+def test_clear_atom_map_number():
+    smiles = "Cc1ccc(CO)cc1-c1ccc2c(n1)n(C)c(=O)n2CC(C)(C)C"
+    mol = dm.to_mol(smiles)
+
+    # add the `molAtomMapNumber` property to the atoms
+    mol = dm.atom_indices_to_mol(mol)
+
+    # Check
+    assert all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()])
+
+    # Remove all the properties
+    mol2 = dm.clear_atom_map_number(mol)
+
+    # Check
+    assert not all(["molAtomMapNumber" in a.GetPropsAsDict() for a in mol2.GetAtoms()])
+
+
+def test_get_atom_positions():
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+    mol = dm.to_mol(smiles, remove_hs=False)
+    mol = dm.conformers.generate(mol, n_confs=1, add_hs=False)
+
+    # Get positions
+    positions_1 = dm.get_atom_positions(mol, reorder_to_atom_map_number=False)
+    positions_2 = dm.get_atom_positions(mol, reorder_to_atom_map_number=True)
+
+    # both arrays should not be equal
+    assert not np.allclose(positions_1, positions_2)
+
+    # but their sums should be
+    assert np.sum(positions_1) == np.sum(positions_2)
+
+
+def test_get_atom_positions_fails():
+    smiles = "CCCO"
+    mol = dm.to_mol(smiles)
+
+    with pytest.raises(ValueError):
+        dm.get_atom_positions(mol)
+
+    mol_with_conf = dm.conformers.generate(mol, n_confs=1)
+
+    dm.get_atom_positions(mol_with_conf, reorder_to_atom_map_number=False)
+
+    with pytest.raises(ValueError):
+        dm.get_atom_positions(mol_with_conf, reorder_to_atom_map_number=True)

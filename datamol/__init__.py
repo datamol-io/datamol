@@ -70,6 +70,10 @@ from .mol import strip_mol_to_core
 from .mol import make_scaffold_generic
 from .mol import to_scaffold_murcko
 from .mol import compute_ring_system
+from .mol import clear_atom_props
+from .mol import clear_atom_map_number
+from .mol import set_atom_positions
+from .mol import get_atom_positions
 
 from .cluster import cluster_mols
 from .cluster import pick_diverse
