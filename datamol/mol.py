@@ -1266,9 +1266,7 @@ def set_atom_positions(
         positions = positions[mapped_indices, :]
 
     # Check if it's 3D or 2D coords
-    is_3d = True
-    if np.all(positions[:, 2] == 0):
-        is_3d = False
+    is_3d = not np.all(positions[:, 2] == 0)
 
     # Create the conformer object
     conf = rdchem.Conformer()
