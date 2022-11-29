@@ -1219,6 +1219,69 @@ def set_atom_positions(
 
     The conformer 3D flag is automatically set if all the z coordinates are 0.
 
+    **Example:**
+
+    The below example is common when you want to reconstruct a molecule object
+    from its SMILES and its held out atomic positions. The position array
+    is ordered according to the atom number seen in the SMILES. This is a common
+    data structure when working with Quantum Mechanics dataset.
+
+    ```python
+
+    import datamol as dm
+    import numpy as np
+
+    # We start with a SMILES where every atoms is mapped to a specific number
+    smiles = "[H:14][c:5]1[c:3]([c:7]([c:4]([c:6]([c:8]1[N:10]([H:18])[C:2](=[N+:11]([H:19])[H:20])[N:9]([H:16])[H:17])[H:15])[H:13])[F:1])[H:12]"
+
+    # Every atom position below is mapped to the atom number in the SMILES above
+    positions = [
+        [1.7, -6.67, 3.15],
+        [0.2, 4.72, 0.78],
+        [3.54, -2.64, 2.88],
+        [0.43, -3.87, -0.09],
+        [3.44, -0.2, 1.8],
+        [0.02, -1.5, -1.0],
+        [2.12, -4.54, 1.9],
+        [1.5, 0.48, 0.02],
+        [0.53, 7.24, 0.25],
+        [1.17, 2.91, -0.85],
+        [-1.22, 4.15, 2.71],
+        [4.64, -3.24, 4.55],
+        [-0.89, -5.43, -0.78],
+        [4.52, 1.43, 2.45],
+        [-1.45, -1.02, -2.48],
+        [-0.15, 8.68, 1.38],
+        [1.65, 7.88, -1.21],
+        [2.24, 3.64, -2.15],
+        [-1.96, 2.4, 3.0],
+        [-2.02, 5.59, 3.71],
+    ]
+
+    # We build the mol object by setting `remove_hs` to `False`.
+    # This is important so the hydrogens and their atom number are preserved.
+    mol = dm.to_mol(smiles, remove_hs=False)
+
+    # If you plot the molecule with `dm.to_image(mol)`, you'll notice
+    # the atom numbers are added to the drawing.
+
+    # Now we set the atom positions to the newly constructed `mol` object.
+    # Here it's important to set `use_atom_map_numbers` to `True`, so the atom numbers
+    # from the SMILES are used to match the input positions array.
+    # Under the hood, RDKit has set the `molAtomMapNumber` property to all the atoms in the
+    # molecule.
+    new_mol = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    # The newly set conformer now had the correct 3D positions.
+    # You can visualize the molecule with `dm.to_image(new_mol)` in 2D
+    # or `dm.viz.conformers(new_mol)`.
+    ```
+
     Args:
         mol: A molecule.
         positions: An array or a list of atomic positions. Shape of `[n_atoms, 3]`.
