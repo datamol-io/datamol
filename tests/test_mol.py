@@ -833,6 +833,9 @@ def test_set_atom_positions():
         use_atom_map_numbers=True,
     )
 
+    # Check the 3d flag is set
+    assert not mol2.GetConformers()[0].Is3D()
+
     # Here the ordering has been changed so only the sum will be equal
     conformer = mol2.GetConformers()[0]
     assert np.allclose(conformer.GetPositions().sum(), positions.sum())
@@ -850,6 +853,19 @@ def test_set_atom_positions():
     # Here the order has been kept so the positions must match
     conformer = mol2.GetConformers()[0]
     np.allclose(conformer.GetPositions(), positions)
+
+    # Check 3d flag is not set
+    positions_2d = positions
+    positions_2d[:, 2] = 0
+
+    mol3 = dm.set_atom_positions(
+        mol=mol,
+        positions=positions,
+        conf_id=0,
+        use_atom_map_numbers=True,
+    )
+
+    assert not mol3.GetConformers()[0].Is3D()
 
 
 def test_set_atom_positions_fails():
