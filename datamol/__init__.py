@@ -122,6 +122,10 @@ from .io import read_smi
 from .io import read_molblock
 from .io import to_molblock
 from .io import to_xlsx
+from .io import read_pdbblock
+from .io import to_pdbblock
+from .io import read_pdbfile
+from .io import to_pdbfile
 
 from .isomers import enumerate_stereoisomers
 from .isomers import enumerate_tautomers

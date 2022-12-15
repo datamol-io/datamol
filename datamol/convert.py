@@ -1,6 +1,7 @@
 from typing import Union
 from typing import List
 from typing import Optional
+from typing import cast
 
 import re
 
@@ -370,7 +371,7 @@ def to_df(
     render_df_mol: bool = True,
     render_all_df_mol: bool = False,
     n_jobs: Optional[int] = 1,
-) -> Optional[pd.DataFrame]:
+) -> pd.DataFrame:
     """Convert a list of mols to a dataframe using each mol properties
     as a column.
 
@@ -473,9 +474,10 @@ def from_df(
     if mol_column is None:
         for col in df.columns:
             if isinstance(df[col].iloc[0], Mol):
+                col = cast(str, col)
                 mol_column = col
 
-    def _row_to_mol(row):
+    def _row_to_mol(row) -> Optional[Mol]:
 
         props = row.to_dict()
 
@@ -498,7 +500,7 @@ def from_df(
         dm.set_mol_props(mol, props)
         return mol
 
-    return df.apply(_row_to_mol, axis=1).tolist()
+    return df.apply(_row_to_mol, axis=1).tolist()  # type: ignore
 
 
 def render_mol_df(df: pd.DataFrame):
