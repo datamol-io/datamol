@@ -341,6 +341,94 @@ def to_molblock(
     return molblock
 
 
+def read_pdbblock(
+    molblock: str,
+    sanitize: bool = True,
+    remove_hs: bool = True,
+    flavor: int = 0,
+    proximity_bonding: bool = True,
+) -> dm.Mol:
+    """Read a PDB string block.
+
+    Args:
+        molblock: String containing the Mol block.
+        sanitize: Whether to sanitize the molecules.
+        remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        flavor: RDKit flavor options.
+        proximity_bonding: Whether to toggles automatic proximity bonding.
+    """
+
+    mol = rdmolfiles.MolFromPDBBlock(
+        molblock,
+        sanitize=sanitize,
+        removeHs=remove_hs,
+        flavor=flavor,
+        proximityBonding=proximity_bonding,
+    )
+    return mol
+
+
+def to_pdbblock(mol: Mol, conf_id: int = -1) -> str:
+    """Convert a molecule to a PDB string block.
+
+    Args:
+        mol: A molecule.
+        conf_id: Selects which conformation to use.
+    """
+    molblock = rdmolfiles.MolToPDBBlock(mol, confId=conf_id)
+    return molblock
+
+
+def read_pdbfile(
+    urlpath: Union[str, os.PathLike],
+    sanitize: bool = True,
+    remove_hs: bool = True,
+    flavor: int = 0,
+    proximity_bonding: bool = True,
+) -> Mol:
+    """Read a PDB file.
+
+    Args:
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
+        sanitize: Whether to sanitize the molecules.
+        remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        flavor: RDKit flavor options.
+        proximity_bonding: Whether to toggles automatic proximity bonding.
+
+    Returns:
+        mol: a molecule
+    """
+
+    with fsspec.open(urlpath, "r") as f:
+        f = cast(IO, f)
+        mol = read_pdbblock(
+            f.read(),
+            sanitize=sanitize,
+            remove_hs=remove_hs,
+            flavor=flavor,
+            proximity_bonding=proximity_bonding,
+        )
+    return mol
+
+
+def to_pdbfile(
+    mol: Mol,
+    urlpath: Union[str, os.PathLike],
+    conf_id: int = -1,
+):
+    """Save a molecule to a PDB file.
+
+    Args:
+        mol: A molecule.
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
+        conf_id: Selects which conformation to use.
+    """
+    molblock = to_pdbblock(mol, conf_id=conf_id)
+    with fsspec.open(urlpath, "w") as f:
+        f = cast(IO, f)
+        f.write(molblock)
+
+
 def to_smi(
     mols: Sequence[Mol],
     urlpath: Union[str, os.PathLike, IO],
