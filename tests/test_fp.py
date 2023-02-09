@@ -20,6 +20,7 @@ def test_list_fp():
         "atompair-count",
         "avalon-count",
         "ecfp",
+        "fcfp",
         "ecfp-count",
         "erg",
         "estate",
@@ -61,6 +62,7 @@ def test_all_fps():
     assert fp_infos == {
         "maccs": {"size": 167, "bits_sum": 21},
         "ecfp": {"size": 2048, "bits_sum": 31},
+        "fcfp": {"size": 2048, "bits_sum": 22},
         "topological": {"size": 2048, "bits_sum": 18},
         "atompair": {"size": 2048, "bits_sum": 68},
         "rdkit": {"size": 2048, "bits_sum": 354},
