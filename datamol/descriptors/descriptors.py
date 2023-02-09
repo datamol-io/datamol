@@ -15,7 +15,6 @@ from .._version import is_lower_than_current_rdkit_version
 
 
 def _sasscorer(mol: Mol):
-
     sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
     try:
         import sascorer  # type:ignore

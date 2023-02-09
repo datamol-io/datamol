@@ -29,7 +29,6 @@ def _convert_ipython_to_array(image):
 
 
 def test_to_image():
-
     # Get a list of molecules
     data = dm.data.freesolv()
     mols = dm.from_df(data)  # type: ignore
@@ -99,7 +98,6 @@ def test_to_image_save_file(tmpdir):
 
 
 def test_conformers():
-
     import nglview as nv
 
     smiles = "CCCC=O"
@@ -130,7 +128,6 @@ def test_circle_grid(tmp_path):
 
 
 def test_to_image_align():
-
     # Get a list of molecules
     data = dm.data.freesolv()
     mols = dm.from_df(data)  # type: ignore
@@ -141,7 +138,6 @@ def test_to_image_align():
 
 
 def test_to_image_align_template():
-
     # Get a list of molecules
     data = dm.data.freesolv()
     mols = dm.from_df(data)  # type: ignore

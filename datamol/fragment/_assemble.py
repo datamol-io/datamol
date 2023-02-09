@@ -318,7 +318,6 @@ def break_mol(
                 continue
             ps = reaction.RunReactants((mol,))
             if ps:
-
                 all_pass = [
                     all([prod.GetNumAtoms(onlyExplicit=True) > minFragmentSize for prod in p_])
                     for p_ in ps

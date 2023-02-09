@@ -7,7 +7,6 @@ import random
 
 
 def test_generate():
-
     with pytest.raises(ValueError):
         smiles = "CCCC"
         mol = dm.to_mol(smiles)
@@ -30,7 +29,6 @@ def test_generate():
 # We disable this test as it takes too long due to the size of the SMILES
 @pytest.mark.skip
 def test_generate_fail():
-
     # This mol should fail
     smiles = "C=CC1=C(N)Oc2cc1c(-c1cc(C(C)O)cc(=O)cc1C1NCC(=O)N1)c(OC)c2OC"
     mol = dm.to_mol(smiles)
@@ -38,7 +36,6 @@ def test_generate_fail():
 
 
 def test_generate_2():
-
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
@@ -47,7 +44,6 @@ def test_generate_2():
 
 
 def test_generate_3():
-
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=False)
@@ -56,7 +52,6 @@ def test_generate_3():
 
 
 def test_generate_4():
-
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=True)
@@ -66,7 +61,6 @@ def test_generate_4():
 
 @pytest.mark.skip_platform("win")
 def test_sasa():
-
     with pytest.raises(ValueError):
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
         mol = dm.to_mol(smiles)
@@ -80,7 +74,6 @@ def test_sasa():
 
 
 def test_rmsd():
-
     with pytest.raises(ValueError):
         smiles = "O=C(C)Oc1ccccc1C(=O)O"
         mol = dm.to_mol(smiles)
@@ -163,7 +156,6 @@ def test_translate():
 
 
 def test_align_conformers():
-
     smiles_list = [
         "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
         "Cc1ccn(-c2ccccc2)c(=O)c1F",
@@ -192,7 +184,6 @@ def test_align_conformers():
 
 
 def test_align_conformers_O3A():
-
     smiles_list = [
         "Nc1cnn(-c2ccccc2)c(=O)c1Cl",
         "Cc1ccn(-c2ccccc2)c(=O)c1F",

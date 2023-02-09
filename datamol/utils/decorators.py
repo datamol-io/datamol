@@ -30,7 +30,6 @@ def disable_on_os(os_names: Union[str, List[str]]):
     def real_decorator(function: Callable):
         @wraps(function)
         def wrapper(*args, **kwargs):
-
             if platform.system() not in valid_os_names:
                 retval = function(*args, **kwargs)
                 return retval

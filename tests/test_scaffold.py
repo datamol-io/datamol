@@ -2,7 +2,6 @@ import datamol as dm
 
 
 def test_fuzzy_scaffolding():
-
     smiles = [
         "Cc1ccc(NC(=O)Cn2cccn2)c(Br)c1",
         "COc1ccc(OC(C)C(=O)N=c2sccn2C)cc1",

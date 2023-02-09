@@ -6,7 +6,6 @@ import datamol.utils.testing
 
 
 def test_pdist():
-
     smiles_list = ["CC(=O)Oc1ccccc1C(=O)O", "C1OC1CC", "c1cc2ccccc2cc1"]
     mols = [dm.to_mol(smiles) for smiles in smiles_list]
 
@@ -32,7 +31,6 @@ def test_pdist_condensed():
 
 
 def test_cdist():
-
     smiles_list1 = ["CC(=O)Oc1ccccc1C(=O)O", "C1OC1CC", "c1cc2ccccc2cc1"]
     mols1 = [dm.to_mol(smiles) for smiles in smiles_list1]
 
@@ -50,7 +48,6 @@ def test_cdist():
 
 
 def test_cdist_chunked():
-
     smiles_list1 = ["CC(=O)Oc1ccccc1C(=O)O", "C1OC1CC", "c1cc2ccccc2cc1"]
     mols1 = [dm.to_mol(smiles) for smiles in smiles_list1]
 
@@ -80,7 +77,6 @@ def test_cdist_pdist_consistent():
 
 
 def test_cdist_pdist_invalid_input():
-
     smiles_list = ["CC(=O)Oc1ccccc1C(=O)O", "C1OC1CC", "c1cc2ccccc2cc1", "dsdsdsd"]
 
     with pytest.raises(ValueError):

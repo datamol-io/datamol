@@ -18,7 +18,6 @@ duration_intervals = (
 
 
 def human_duration(seconds: float, granularity: int = 1):
-
     # NOTE(hadim): far from being perfect.
 
     result = []
@@ -68,7 +67,6 @@ class watch_duration:
         return self
 
     def __exit__(self, *_):
-
         assert self.start is not None
 
         self.end = time.time()

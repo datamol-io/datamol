@@ -2,14 +2,12 @@ import datamol as dm
 
 
 def test_freesolv():
-
     data = dm.data.freesolv()
     assert data.shape == (642, 4)
     assert list(data.columns) == ["iupac", "smiles", "expt", "calc"]
 
 
 def test_cdk2():
-
     data = dm.data.cdk2()
     assert data.shape == (47, 12)
     assert list(data.columns) == [
@@ -29,7 +27,6 @@ def test_cdk2():
 
 
 def test_solubility():
-
     data = dm.data.solubility()
     assert data.shape == (1282, 7)
     assert list(data.columns) == [

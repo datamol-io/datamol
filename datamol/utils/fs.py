@@ -229,7 +229,6 @@ def copy_file(
         source_file = source
 
     if isinstance(destination, (str, os.PathLike)):
-
         # adapt the file mode of the destination depending on the source file.
         destination_mode = "wb"
         if hasattr(source_file, "mode"):
@@ -251,7 +250,6 @@ def copy_file(
 
     with source_file as source_stream:
         with destination_file as destination_stream:
-
             if chunk_size is None:
                 # copy without chunks
                 destination_stream.write(source_stream.read())  # type: ignore

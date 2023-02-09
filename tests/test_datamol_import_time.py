@@ -38,7 +38,6 @@ def _import_datamol_fn(queue):
 
 @pytest.mark.skip_platform("osx")
 def test_datamol_import():
-
     context = multiprocessing.get_context(method="spawn")
 
     queue = context.Queue()

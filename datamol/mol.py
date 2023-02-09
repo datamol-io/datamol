@@ -323,7 +323,6 @@ def sanitize_mol(
         mol = _sanifix4.sanifix(mol)
 
     if mol is not None:
-
         # Detect multiple conformers
         if verbose and mol.GetNumConformers() > 1:
             logger.warning(
@@ -507,7 +506,6 @@ def fix_valence_charge(mol: Mol, inplace: bool = False) -> Optional[Mol]:
 
     # Don't fix something that is not broken
     if len(vm.validate(mol)) > 0:
-
         if not inplace:
             mol = copy.copy(mol)
 
@@ -889,7 +887,6 @@ def clear_atom_props(
         property_keys = [property_keys]
 
     for atom in mol.GetAtoms():
-
         if property_keys is None:
             props = atom.GetPropsAsDict(
                 includePrivate=include_private, includeComputed=include_computed
@@ -997,7 +994,6 @@ def substructure_matching_bonds(mol: Mol, query: Mol, **kwargs: Any) -> Tuple[li
     bond_matches = []
 
     for match in atom_matches:
-
         # Map the atom of the query to the atom of the mol matching the query
         atom_map = dict(zip(query_atom_indices, match))
 
@@ -1118,7 +1114,6 @@ def strip_mol_to_core(mol: Mol, bond_cutter: Mol = None):
         bond_cutter = from_smarts("[R;!$(*=,#[!#6])]!@!=!#[*;$([A;!R][A;!R])]")
 
     with without_rdkit_log():
-
         scaffold = MurckoScaffold.GetScaffoldForMol(mol)
         out = mol.GetSubstructMatches(bond_cutter)
         bond_inds = [mol.GetBondBetweenAtoms(i, j).GetIdx() for i, j in out]
@@ -1375,7 +1370,6 @@ def get_atom_positions(
     positions = conformer.GetPositions()
 
     if reorder_to_atom_map_number:
-
         # Remap the rows order in `positions` so it matches
         # with the atom map numbers.
         mapped_indices = np.array([a.GetAtomMapNum() for a in mol.GetAtoms()]) - 1

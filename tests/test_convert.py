@@ -9,7 +9,6 @@ import datamol as dm
 
 
 def test_to_smiles():
-
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
 
@@ -137,7 +136,6 @@ def test_inchi():
 
 
 def test_to_df(datadir):
-
     data_path = datadir / "TUBB3-observations.sdf"
     mols = dm.read_sdf(data_path)
     df = dm.to_df(mols)

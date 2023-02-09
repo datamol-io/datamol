@@ -99,7 +99,6 @@ def enumerate_stereoisomers(
 
     isomers = []
     while timeout_seconds is None or duration < timeout_seconds:
-
         try:
             isomer = next(isomers_iterator)
             isomers.append(isomer)
@@ -166,7 +165,6 @@ def enumerate_structisomers(
 
     isomers = []
     while timeout_seconds is None or duration < timeout_seconds:
-
         try:
             isomer = next(isomers_iterator)
             isomers.append(dm.to_mol(isomer))
