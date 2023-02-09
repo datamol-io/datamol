@@ -10,7 +10,6 @@ DATA_DIR_PATH = pathlib.Path(__file__).parent.resolve() / "data"
 
 @pytest.fixture
 def current_platform():
-
     if platform.system() == "Linux":
         return "linux"
     elif platform.system() == "Darwin":

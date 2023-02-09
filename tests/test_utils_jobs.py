@@ -74,7 +74,6 @@ class TestJobs(unittest.TestCase):
         self.assertEqual(o4, [6, 4 * 5 * 6, 0])
 
     def test_seq_vs_parallel(self):
-
         # test parallel vs sequential
         jobrunner = dm.JobRunner(n_jobs=4, progress=False)  # use loky backend
         o_seq = jobrunner.sequential(

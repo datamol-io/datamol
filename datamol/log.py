@@ -23,7 +23,6 @@ class without_rdkit_log:
         mute_debug: bool = True,
         enable: bool = True,
     ):
-
         if enable is False:
             mute_errors = False
             mute_warning = False

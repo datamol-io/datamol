@@ -18,7 +18,6 @@ NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PA
 @pytest.mark.skip_platform("win")
 @pytest.mark.parametrize("nb_path", NOTEBOOK_PATHS, ids=[str(n.name) for n in NOTEBOOK_PATHS])
 def test_notebook(nb_path):
-
     # Setup and configure the processor to execute the notebook
     ep = ExecutePreprocessor(timeout=600, kernel_name="python")
 

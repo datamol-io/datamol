@@ -48,7 +48,6 @@ def test_randomize_atoms():
 
 
 def test_to_neutral():
-
     smiles = "[NH4+]"
     mol = dm.to_mol(smiles, add_hs=False, explicit_only=False)
 
@@ -102,7 +101,6 @@ def test_sanitize():
 
 
 def test_sanitize_first():
-
     smiles = ["fake_smiles", "CC(=O)Oc1ccccc1C(=O)O"]
     mols = [dm.to_mol(s) for s in smiles]
     mol = dm.sanitize_first(mols)
@@ -226,7 +224,6 @@ def test_set_mol_props():
 
 
 def test_set_mol_props_overflow():
-
     mol = dm.to_mol("CCC")
     dm.set_mol_props(mol, dict(hello=661440088496))
     assert mol.GetPropsAsDict() == {"hello": 661440088496}
@@ -310,7 +307,6 @@ def test_standardize_smiles_tautomer():
 
 
 def test_decrease_bond():
-
     smiles = "C=CCC#C"
     mol = dm.to_mol(smiles)
 
@@ -377,7 +373,6 @@ def test_sanitize_mol_multiple_conformers_warning(caplog):
 
 
 def test_sanitize_mol_multiple_conformers_no_warning(caplog):
-
     # Generate a mol with props and a conformer
     smiles = "CCC[N+](=O)[O-]"
 
@@ -450,7 +445,6 @@ def test_protect_atoms():
 
 
 def test_add_remove_hs():
-
     smiles = "OC1=CC2CCCCC2[N:1]=C1"
 
     mol = dm.to_mol(smiles)
@@ -564,7 +558,6 @@ def test_strip_mol_to_core():
 
 
 def test_make_scaffold_generic():
-
     # NOTE(hadim): pretty sure doing assert on SMARTS string is fragile and might change
     # in the future RDKit versions. So... hold and wait for it to break xD
 
@@ -584,7 +577,6 @@ def test_make_scaffold_generic():
 
 
 def test_to_scaffold():
-
     mol = dm.to_mol("CC(=O)NC1CCC2=CC(=C(C(=C2C3=CC=C(C(=O)C=C13)OC)OC)OC)OC")
     mol2 = dm.to_scaffold_murcko(mol)
     assert dm.to_inchikey(mol2) == "XSMDDAFPLXKNOA-UHFFFAOYSA-N"
@@ -617,11 +609,9 @@ def test_compute_ring_systems():
 
 
 def test_hash_mol():
-
     # rdkit.Chem.RegistrationHash is not available for rdkit before
     # 2022.09.
     if dm.is_lower_than_current_rdkit_version("2022.09"):
-
         with pytest.raises(NotImplementedError):
             dm.hash_mol(dm.to_mol("CCC"))
 
@@ -694,7 +684,6 @@ def test_hash_mol():
     ]
 
     for datum in data:
-
         mol = dm.to_mol(datum["smiles"])
 
         hash_value = dm.hash_mol(mol, hash_scheme="all")

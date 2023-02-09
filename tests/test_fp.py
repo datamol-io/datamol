@@ -6,7 +6,6 @@ import datamol as dm
 
 
 def test_to_fp():
-
     smiles = "CC(=O)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
 
@@ -36,13 +35,11 @@ def test_list_fp():
 
 
 def test_all_fps():
-
     smiles = "CC(=O)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
 
     fp_infos = {}
     for fp_type in dm.list_supported_fingerprints():
-
         fold_size = None
         if fp_type == "rdkit-count":
             fold_size = 2048
@@ -80,7 +77,6 @@ def test_all_fps():
 
 
 def test_fp_invalid_input():
-
     args = {}
     args["mol"] = None
     args["radius"] = 3

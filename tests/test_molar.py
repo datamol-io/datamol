@@ -20,14 +20,12 @@ MOLAR_TEST_VALUES = pd.DataFrame(
 
 
 def test_molar_to_log():
-
     # test scalar
     value, log_value, unit = MOLAR_TEST_VALUES.iloc[0].values
     assert dm.molar.molar_to_log(value, unit=unit) == log_value
 
     # test arrays
     for unit in ["uM", "mM", "nM"]:
-
         mask = MOLAR_TEST_VALUES["unit"] == unit
         values = MOLAR_TEST_VALUES[mask]["xc50"].tolist()
         log_values = MOLAR_TEST_VALUES[mask]["pxc50"].tolist()
@@ -39,14 +37,12 @@ def test_molar_to_log():
 
 
 def test_log_to_molar():
-
     # test scalar
     value, log_value, unit = MOLAR_TEST_VALUES.iloc[0].values
     np.testing.assert_almost_equal(dm.molar.log_to_molar(log_value, unit=unit), value)
 
     # test arrays
     for unit in ["uM", "mM", "nM"]:
-
         mask = MOLAR_TEST_VALUES["unit"] == unit
         values = MOLAR_TEST_VALUES[mask]["xc50"].tolist()
         log_values = MOLAR_TEST_VALUES[mask]["pxc50"].tolist()
@@ -60,5 +56,4 @@ def test_log_to_molar():
 
 
 def test_log_to_molar_with_integer():
-
     dm.molar.log_to_molar(6, unit="uM")

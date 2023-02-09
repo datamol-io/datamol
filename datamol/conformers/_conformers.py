@@ -173,7 +173,6 @@ def generate(
 
     # Minimize energy
     if minimize_energy:
-
         # Minimize conformer's energy using MMFF
         ff = _get_ff(mol, forcefield)
         results = rdForceFieldHelpers.OptimizeMoleculeConfs(
@@ -420,7 +419,6 @@ def align_conformers(
     mol_probes = mols
 
     if backend == "crippenO3A":
-
         # Compute Crippen contributions for every atoms and molecules
         crippen_contribs = [rdMolDescriptors._CalcCrippenContribs(mol) for mol in mol_probes]
         crippen_contrib_ref = crippen_contribs[ref_id]
@@ -431,7 +429,6 @@ def align_conformers(
 
         scores = []
         for i, mol in enumerate(mol_probes):
-
             crippenO3A = rdMolAlign.GetCrippenO3A(
                 prbMol=mol,
                 refMol=mol_ref,
@@ -446,7 +443,6 @@ def align_conformers(
             scores.append(crippenO3A.Score())
 
     elif backend == "O3A":
-
         # Add hydrogens first
         mol_probes = [dm_mol.add_hs(mol, add_coords=True) for mol in mol_probes]
         mol_ref = dm_mol.add_hs(mol_ref, add_coords=True)
@@ -463,7 +459,6 @@ def align_conformers(
 
         scores = []
         for i, mol in enumerate(mol_probes):
-
             pyO3A = rdMolAlign.GetO3A(
                 prbMol=mol,
                 refMol=mol_ref,

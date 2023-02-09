@@ -3,7 +3,6 @@ import unittest as ut
 
 
 def test_to_mol():
-
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     graph = dm.to_graph(mol)
@@ -156,7 +155,6 @@ class Test_match_molecular_graphs(ut.TestCase):
 
 class Test_reorder_mol_from_template(ut.TestCase):
     def test_reorder_mol_from_template(self):
-
         # No re-ordering because too many matches
         mol1 = dm.to_mol("C1CCCCC1", ordered=False)
         mol2 = dm.to_mol("C1=CC=CC=C1", ordered=True)

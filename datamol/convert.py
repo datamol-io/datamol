@@ -62,7 +62,6 @@ def to_smiles(
 
     smiles = None
     try:
-
         if cxsmiles:
             smiles = rdmolfiles.MolToCXSmiles(
                 mol,
@@ -84,7 +83,6 @@ def to_smiles(
             )
 
     except Exception as e:
-
         if allow_to_fail:
             raise e
 
@@ -430,7 +428,6 @@ def to_df(
 
     # Render mol column to images
     if render_df_mol is True and mol_column is not None:
-
         render_mol_df(df)
 
         if render_all_df_mol:
@@ -478,13 +475,11 @@ def from_df(
                 mol_column = col
 
     def _row_to_mol(row) -> Optional[Mol]:
-
         props = row.to_dict()
 
         if mol_column is not None:
             mol = props.pop(mol_column)
         else:
-
             if conserve_smiles:
                 smiles = props[smiles_column]
             else:
@@ -552,7 +547,6 @@ def _process_inchi_options(
     tautomerism_15: bool = True,
     options: Optional[List[str]] = None,
 ):
-
     inchi_options = []
 
     if fixed_hydrogen_layer:

@@ -58,7 +58,6 @@ def test_auto_align_many():
             "strip-scaffold",
         ]
     ):
-
         print(partition_method)
 
         data["aligned_mol"] = dm.align.auto_align_many(
