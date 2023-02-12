@@ -63,7 +63,7 @@ include-package-data = true
 [tool.setuptools.packages.find]
 where = ["."]
 include = ["datamol", "datamol.*"]
-exclude = ["docs/*"]
+exclude = []
 namespaces = false
 
 [tool.setuptools.package-data]
