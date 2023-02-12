@@ -10,7 +10,7 @@ dependencies:
   - fsspec >=2021.9
   - s3fs >=2021.9
   - gcsfs >=2021.9
-  - appdirs
+  - platformdirs
   - packaging
   - typing_extensions
 
