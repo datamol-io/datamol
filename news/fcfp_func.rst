@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* <news item>
+* Add `TypeAlias` types to `datamol.types.*`.
 
 **Deprecated:**
 
