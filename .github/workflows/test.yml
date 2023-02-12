@@ -8,6 +8,8 @@ on:
     branches:
       - "*"
       - "!gh-pages"
+  schedule:
+    - cron: "0 4 * * MON"
 
 jobs:
   test:

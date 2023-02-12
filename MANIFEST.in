@@ -1,9 +1,0 @@
-include README.md
-include LICENSE
-include *.py
-include datamol/py.typed
-graft datamol/data
-graft typings
-recursive-exclude * __pycache__
-recursive-exclude * *.py[co]
-recursive-exclude * .ipynb_checkpoints/*
