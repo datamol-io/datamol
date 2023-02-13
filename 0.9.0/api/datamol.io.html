@@ -1,0 +1,3106 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A python library to work with molecules. Built on top of RDKit.">
+      
+      
+      
+      
+        <link rel="prev" href="datamol.graph.html">
+      
+      
+        <link rel="next" href="datamol.isomers.html">
+      
+      <link rel="icon" href="../images/logo.png">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
+    
+    
+      
+        <title>datamol.io - datamol</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
+      
+      
+
+    
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/_mkdocstrings.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom.css">
+    
+      <link rel="stylesheet" href="../assets/css/custom-datamol.css">
+    
+      <link rel="stylesheet" href="../assets/css/tweak-width.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
+  
+    
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#datamolio" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      <div data-md-component="outdated" hidden>
+        
+      </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../index.html" title="datamol" class="md-header__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            datamol
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              datamol.io
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../index.html" title="datamol" class="md-nav__button md-logo" aria-label="datamol" data-md-component="logo">
+      
+  <img src="../images/logo.png" alt="logo">
+
+    </a>
+    datamol
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/datamol-org/datamol" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2022 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    datamol-org/datamol
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../index.html" class="md-nav__link">
+        Overview
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../usage.html" class="md-nav__link">
+        Usage
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+      
+      
+      
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+          Tutorials
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          Tutorials
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/The_Basics.html" class="md-nav__link">
+        The Basics
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Preprocessing.html" class="md-nav__link">
+        Pre-Processing Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Descriptors.html" class="md-nav__link">
+        Descriptors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Reactions.html" class="md-nav__link">
+        Chemical Reactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Scaffolds.html" class="md-nav__link">
+        Generate Scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Aligning.html" class="md-nav__link">
+        Aligning Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
+        Fuzzy Scaffolds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Clustering.html" class="md-nav__link">
+        Clustering Molecules
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Fragment.html" class="md-nav__link">
+        Fragmenting Compounds
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Conformers.html" class="md-nav__link">
+        Generating Conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Visualization.html" class="md-nav__link">
+        Visualization
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../tutorials/Filesystem.html" class="md-nav__link">
+        Datamol Filesystem Module
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+      
+      
+      
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+          API
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          API
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.align.html" class="md-nav__link">
+        datamol.align
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.cluster.html" class="md-nav__link">
+        datamol.cluster
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.conformers.html" class="md-nav__link">
+        datamol.conformers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.convert.html" class="md-nav__link">
+        datamol.convert
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.data.html" class="md-nav__link">
+        datamol.data
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.descriptors.html" class="md-nav__link">
+        datamol.descriptors
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fp.html" class="md-nav__link">
+        datamol.fp
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.fragment.html" class="md-nav__link">
+        datamol.fragment
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.graph.html" class="md-nav__link">
+        datamol.graph
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          datamol.io
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="datamol.io.html" class="md-nav__link md-nav__link--active">
+        datamol.io
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io" class="md-nav__link">
+    io
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_csv" class="md-nav__link">
+    read_csv()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_excel" class="md-nav__link">
+    read_excel()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_molblock" class="md-nav__link">
+    read_molblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_pdbblock" class="md-nav__link">
+    read_pdbblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_pdbfile" class="md-nav__link">
+    read_pdbfile()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_sdf" class="md-nav__link">
+    read_sdf()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_smi" class="md-nav__link">
+    read_smi()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_molblock" class="md-nav__link">
+    to_molblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_pdbblock" class="md-nav__link">
+    to_pdbblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_pdbfile" class="md-nav__link">
+    to_pdbfile()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_sdf" class="md-nav__link">
+    to_sdf()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_smi" class="md-nav__link">
+    to_smi()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_xlsx" class="md-nav__link">
+    to_xlsx()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.isomers.html" class="md-nav__link">
+        datamol.isomers
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.log.html" class="md-nav__link">
+        datamol.log
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.molar.html" class="md-nav__link">
+        datamol.molar
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.mol.html" class="md-nav__link">
+        datamol.mol
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.reactions.html" class="md-nav__link">
+        datamol.reactions
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.scaffold.html" class="md-nav__link">
+        datamol.scaffold
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.similarity.html" class="md-nav__link">
+        datamol.similarity
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.utils.html" class="md-nav__link">
+        datamol.utils
+      </a>
+    </li>
+  
+
+            
+          
+            
+              
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="datamol.viz.html" class="md-nav__link">
+        datamol.viz
+      </a>
+    </li>
+  
+
+            
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../contribute.html" class="md-nav__link">
+        Contribute
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../license.html" class="md-nav__link">
+        License
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io" class="md-nav__link">
+    io
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_csv" class="md-nav__link">
+    read_csv()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_excel" class="md-nav__link">
+    read_excel()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_molblock" class="md-nav__link">
+    read_molblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_pdbblock" class="md-nav__link">
+    read_pdbblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_pdbfile" class="md-nav__link">
+    read_pdbfile()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_sdf" class="md-nav__link">
+    read_sdf()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.read_smi" class="md-nav__link">
+    read_smi()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_molblock" class="md-nav__link">
+    to_molblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_pdbblock" class="md-nav__link">
+    to_pdbblock()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_pdbfile" class="md-nav__link">
+    to_pdbfile()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_sdf" class="md-nav__link">
+    to_sdf()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_smi" class="md-nav__link">
+    to_smi()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.io.to_xlsx" class="md-nav__link">
+    to_xlsx()
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+  
+  
+
+
+
+<h1 id="datamolio"><code>datamol.io</code><a class="headerlink" href="#datamolio" title="Permanent link">&para;</a></h1>
+
+
+<div class="doc doc-object doc-module">
+
+
+<a id="datamol.io"></a>
+  <div class="doc doc-contents first">
+
+  
+
+  <div class="doc doc-children">
+
+
+
+
+
+
+
+
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_csv" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_csv</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_csv" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read a CSV file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="typing.IO">IO</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>smiles_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Use this column to build a mol column.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Name to give to the mol column. If not None a mol column will be build.
+Avoid when loading a very large file.</p></td>
+          <td>
+                <code>&#39;mol&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+                <code><span title="typing.Any">Any</span></code>
+          </td>
+          <td><p>Arguments to pass to <code>pd.read_csv()</code>.</p></td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>df</code></td>          <td>
+                <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>a <code>pandas.DataFrame</code></p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+<span class="normal">29</span>
+<span class="normal">30</span>
+<span class="normal">31</span>
+<span class="normal">32</span>
+<span class="normal">33</span>
+<span class="normal">34</span>
+<span class="normal">35</span>
+<span class="normal">36</span>
+<span class="normal">37</span>
+<span class="normal">38</span>
+<span class="normal">39</span>
+<span class="normal">40</span>
+<span class="normal">41</span>
+<span class="normal">42</span>
+<span class="normal">43</span>
+<span class="normal">44</span>
+<span class="normal">45</span>
+<span class="normal">46</span>
+<span class="normal">47</span>
+<span class="normal">48</span>
+<span class="normal">49</span>
+<span class="normal">50</span>
+<span class="normal">51</span>
+<span class="normal">52</span>
+<span class="normal">53</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_csv</span><span class="p">(</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a CSV file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        smiles_column: Use this column to build a mol column.</span>
+<span class="sd">        mol_column: Name to give to the mol column. If not None a mol column will be build.</span>
+<span class="sd">            Avoid when loading a very large file.</span>
+<span class="sd">        **kwargs: Arguments to pass to `pd.read_csv()`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df: a `pandas.DataFrame`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">PandasTools</span><span class="o">.</span><span class="n">AddMoleculeColumnToFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_excel" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_excel</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_excel" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read an excel file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="typing.IO">IO</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sheet_name</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, int, list]]</code>
+          </td>
+          <td><p>see <code>pandas.read_excel()</code> doc.</p></td>
+          <td>
+                <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Name to give to the mol column. If not None a mol column will be build.
+Avoid when loading a very large file.</p></td>
+          <td>
+                <code>&#39;mol&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>name to give to the mol column.</p></td>
+          <td>
+                <code>&#39;mol&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>**kwargs</code></td>
+          <td>
+                <code><span title="typing.Any">Any</span></code>
+          </td>
+          <td><p>Arguments to pass to <code>pd.read_excel()</code>.</p></td>
+          <td>
+                <code>{}</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>df</code></td>          <td>
+                <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
+          </td>
+          <td><p>a <code>pandas.DataFrame</code></p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+<span class="normal">57</span>
+<span class="normal">58</span>
+<span class="normal">59</span>
+<span class="normal">60</span>
+<span class="normal">61</span>
+<span class="normal">62</span>
+<span class="normal">63</span>
+<span class="normal">64</span>
+<span class="normal">65</span>
+<span class="normal">66</span>
+<span class="normal">67</span>
+<span class="normal">68</span>
+<span class="normal">69</span>
+<span class="normal">70</span>
+<span class="normal">71</span>
+<span class="normal">72</span>
+<span class="normal">73</span>
+<span class="normal">74</span>
+<span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span>
+<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_excel</span><span class="p">(</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">sheet_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
+    <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read an excel file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        sheet_name: see `pandas.read_excel()` doc.</span>
+<span class="sd">        mol_column: Name to give to the mol column. If not None a mol column will be build.</span>
+<span class="sd">            Avoid when loading a very large file.</span>
+<span class="sd">        mol_column: name to give to the mol column.</span>
+<span class="sd">        **kwargs: Arguments to pass to `pd.read_excel()`.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        df: a `pandas.DataFrame`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sheet_name</span><span class="o">=</span><span class="n">sheet_name</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">df</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">smiles_column</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">PandasTools</span><span class="o">.</span><span class="n">AddMoleculeColumnToFrame</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">df</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_molblock" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_molblock</span><span class="p">(</span><span class="n">molblock</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fail_if_invalid</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_molblock" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read a Mol block.</p>
+<p>Note that potential molecule properties are <strong>not</strong> read.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>molblock</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>String containing the Mol block.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sanitize</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to sanitize the molecules.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>strict_parsing</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If set to false, the parser is more lax about correctness of the contents.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>remove_hs</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to remove the existing hydrogens in the SDF files.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>fail_if_invalid</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If set to true, the parser will raise an exception if the molecule is invalid
+instead of returning None.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
+<span class="normal">279</span>
+<span class="normal">280</span>
+<span class="normal">281</span>
+<span class="normal">282</span>
+<span class="normal">283</span>
+<span class="normal">284</span>
+<span class="normal">285</span>
+<span class="normal">286</span>
+<span class="normal">287</span>
+<span class="normal">288</span>
+<span class="normal">289</span>
+<span class="normal">290</span>
+<span class="normal">291</span>
+<span class="normal">292</span>
+<span class="normal">293</span>
+<span class="normal">294</span>
+<span class="normal">295</span>
+<span class="normal">296</span>
+<span class="normal">297</span>
+<span class="normal">298</span>
+<span class="normal">299</span>
+<span class="normal">300</span>
+<span class="normal">301</span>
+<span class="normal">302</span>
+<span class="normal">303</span>
+<span class="normal">304</span>
+<span class="normal">305</span>
+<span class="normal">306</span>
+<span class="normal">307</span>
+<span class="normal">308</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_molblock</span><span class="p">(</span>
+    <span class="n">molblock</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">fail_if_invalid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a Mol block.</span>
+
+<span class="sd">    Note that potential molecule properties are **not** read.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        molblock: String containing the Mol block.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules.</span>
+<span class="sd">        strict_parsing: If set to false, the parser is more lax about correctness of the contents.</span>
+<span class="sd">        remove_hs: Whether to remove the existing hydrogens in the SDF files.</span>
+<span class="sd">        fail_if_invalid: If set to true, the parser will raise an exception if the molecule is invalid</span>
+<span class="sd">            instead of returning None.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolFromMolBlock</span><span class="p">(</span>
+        <span class="n">molblock</span><span class="p">,</span>
+        <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+        <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
+        <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">fail_if_invalid</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid molecule: </span><span class="si">{</span><span class="n">molblock</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_pdbblock" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_pdbblock</span><span class="p">(</span><span class="n">molblock</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flavor</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">proximity_bonding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_pdbblock" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read a PDB string block.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>molblock</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>String containing the Mol block.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sanitize</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to sanitize the molecules.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>remove_hs</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to remove the existing hydrogens in the SDF files.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>flavor</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>RDKit flavor options.</p></td>
+          <td>
+                <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>proximity_bonding</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to toggles automatic proximity bonding.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">343</span>
+<span class="normal">344</span>
+<span class="normal">345</span>
+<span class="normal">346</span>
+<span class="normal">347</span>
+<span class="normal">348</span>
+<span class="normal">349</span>
+<span class="normal">350</span>
+<span class="normal">351</span>
+<span class="normal">352</span>
+<span class="normal">353</span>
+<span class="normal">354</span>
+<span class="normal">355</span>
+<span class="normal">356</span>
+<span class="normal">357</span>
+<span class="normal">358</span>
+<span class="normal">359</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
+<span class="normal">367</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_pdbblock</span><span class="p">(</span>
+    <span class="n">molblock</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">flavor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">proximity_bonding</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a PDB string block.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        molblock: String containing the Mol block.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules.</span>
+<span class="sd">        remove_hs: Whether to remove the existing hydrogens in the SDF files.</span>
+<span class="sd">        flavor: RDKit flavor options.</span>
+<span class="sd">        proximity_bonding: Whether to toggles automatic proximity bonding.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">mol</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolFromPDBBlock</span><span class="p">(</span>
+        <span class="n">molblock</span><span class="p">,</span>
+        <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+        <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
+        <span class="n">flavor</span><span class="o">=</span><span class="n">flavor</span><span class="p">,</span>
+        <span class="n">proximityBonding</span><span class="o">=</span><span class="n">proximity_bonding</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_pdbfile" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_pdbfile</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">flavor</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">proximity_bonding</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_pdbfile" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read a PDB file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sanitize</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to sanitize the molecules.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>remove_hs</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to remove the existing hydrogens in the SDF files.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>flavor</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>RDKit flavor options.</p></td>
+          <td>
+                <code>0</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>proximity_bonding</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to toggles automatic proximity bonding.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+  <p><strong>Returns:</strong></p>
+  <table>
+    <thead>
+      <tr>
+<th>Name</th>        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+<td><code>mol</code></td>          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>a molecule</p></td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">381</span>
+<span class="normal">382</span>
+<span class="normal">383</span>
+<span class="normal">384</span>
+<span class="normal">385</span>
+<span class="normal">386</span>
+<span class="normal">387</span>
+<span class="normal">388</span>
+<span class="normal">389</span>
+<span class="normal">390</span>
+<span class="normal">391</span>
+<span class="normal">392</span>
+<span class="normal">393</span>
+<span class="normal">394</span>
+<span class="normal">395</span>
+<span class="normal">396</span>
+<span class="normal">397</span>
+<span class="normal">398</span>
+<span class="normal">399</span>
+<span class="normal">400</span>
+<span class="normal">401</span>
+<span class="normal">402</span>
+<span class="normal">403</span>
+<span class="normal">404</span>
+<span class="normal">405</span>
+<span class="normal">406</span>
+<span class="normal">407</span>
+<span class="normal">408</span>
+<span class="normal">409</span>
+<span class="normal">410</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_pdbfile</span><span class="p">(</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">flavor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+    <span class="n">proximity_bonding</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a PDB file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules.</span>
+<span class="sd">        remove_hs: Whether to remove the existing hydrogens in the SDF files.</span>
+<span class="sd">        flavor: RDKit flavor options.</span>
+<span class="sd">        proximity_bonding: Whether to toggles automatic proximity bonding.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        mol: a molecule</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="s2">&quot;r&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">IO</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">read_pdbblock</span><span class="p">(</span>
+            <span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">(),</span>
+            <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+            <span class="n">remove_hs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
+            <span class="n">flavor</span><span class="o">=</span><span class="n">flavor</span><span class="p">,</span>
+            <span class="n">proximity_bonding</span><span class="o">=</span><span class="n">proximity_bonding</span><span class="p">,</span>
+        <span class="p">)</span>
+    <span class="k">return</span> <span class="n">mol</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_sdf" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_sdf</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">include_private</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">include_computed</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">strict_parsing</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">remove_hs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">max_num_mols</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">discard_invalid</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_sdf" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read an SDF file.</p>
+<p>Note: This function is meant to be used with dataset that fit <em>in-memory</em>.
+For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMolSupplier</code>.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="typing.IO">IO</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>sanitize</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to sanitize the molecules.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>as_df</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to return a list mol or a pandas DataFrame.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>smiles_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Name of the SMILES column. Only relevant if <code>as_df</code> is True.</p></td>
+          <td>
+                <code>&#39;smiles&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Name of the mol column. Only relevant if <code>as_df</code> is True.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>include_private</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Include private properties in the columns.  Only relevant if
+<code>as_df</code> is True.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>include_computed</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Include computed properties in the columns.  Only relevant if
+<code>as_df</code> is True.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>strict_parsing</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>If set to false, the parser is more lax about correctness of the contents.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>remove_hs</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Whether to remove the existing hydrogens in the SDF files.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>max_num_mols</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Maximum number of molecules to read from the SDF file. Read all by default when set
+to <code>None</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>discard_invalid</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Discard the molecules that failed to be read correctly. Otherwise,
+invalid molecules will be loaded as <code>None</code>.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_jobs</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[int]</code>
+          </td>
+          <td><p>Optional number of jobs for parallelization of <code>to_df</code>. Leave to 1 for no
+parallelization. Set to -1 to use all available cores. Only relevant is <code>as_df</code> is True</p></td>
+          <td>
+                <code>1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span>
+<span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_sdf</span><span class="p">(</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">include_private</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">include_computed</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">strict_parsing</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">max_num_mols</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">discard_invalid</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read an SDF file.</span>
+
+<span class="sd">    Note: This function is meant to be used with dataset that fit _in-memory_.</span>
+<span class="sd">    For a more advanced usage we suggest you to use directly `Chem.ForwardSDMolSupplier`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        sanitize: Whether to sanitize the molecules.</span>
+<span class="sd">        as_df: Whether to return a list mol or a pandas DataFrame.</span>
+<span class="sd">        smiles_column: Name of the SMILES column. Only relevant if `as_df` is True.</span>
+<span class="sd">        mol_column: Name of the mol column. Only relevant if `as_df` is True.</span>
+<span class="sd">        include_private: Include private properties in the columns.  Only relevant if</span>
+<span class="sd">            `as_df` is True.</span>
+<span class="sd">        include_computed: Include computed properties in the columns.  Only relevant if</span>
+<span class="sd">            `as_df` is True.</span>
+<span class="sd">        strict_parsing: If set to false, the parser is more lax about correctness of the contents.</span>
+<span class="sd">        remove_hs: Whether to remove the existing hydrogens in the SDF files.</span>
+<span class="sd">        max_num_mols: Maximum number of molecules to read from the SDF file. Read all by default when set</span>
+<span class="sd">            to `None`.</span>
+<span class="sd">        discard_invalid: Discard the molecules that failed to be read correctly. Otherwise,</span>
+<span class="sd">            invalid molecules will be loaded as `None`.</span>
+<span class="sd">        n_jobs: Optional number of jobs for parallelization of `to_df`. Leave to 1 for no</span>
+<span class="sd">            parallelization. Set to -1 to use all available cores. Only relevant is `as_df` is True</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="c1"># File-like object</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+        <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+            <span class="n">urlpath</span><span class="p">,</span>
+            <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+            <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+            <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
+        <span class="p">)</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">_get_supplier_mols</span><span class="p">(</span><span class="n">supplier</span><span class="p">,</span> <span class="n">max_num_mols</span><span class="p">)</span>
+
+    <span class="c1"># Regular local or remote paths</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">compression</span><span class="o">=</span><span class="s2">&quot;infer&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">ForwardSDMolSupplier</span><span class="p">(</span>
+                <span class="n">f</span><span class="p">,</span>
+                <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">,</span>
+                <span class="n">strictParsing</span><span class="o">=</span><span class="n">strict_parsing</span><span class="p">,</span>
+                <span class="n">removeHs</span><span class="o">=</span><span class="n">remove_hs</span><span class="p">,</span>
+            <span class="p">)</span>
+            <span class="n">mols</span> <span class="o">=</span> <span class="n">_get_supplier_mols</span><span class="p">(</span><span class="n">supplier</span><span class="p">,</span> <span class="n">max_num_mols</span><span class="p">)</span>
+
+    <span class="c1"># Discard None values</span>
+    <span class="k">if</span> <span class="n">discard_invalid</span><span class="p">:</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># Convert to dataframe</span>
+    <span class="k">if</span> <span class="n">as_df</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_df</span><span class="p">(</span>
+            <span class="n">mols</span><span class="p">,</span>
+            <span class="n">smiles_column</span><span class="o">=</span><span class="n">smiles_column</span><span class="p">,</span>
+            <span class="n">mol_column</span><span class="o">=</span><span class="n">mol_column</span><span class="p">,</span>
+            <span class="n">include_private</span><span class="o">=</span><span class="n">include_private</span><span class="p">,</span>
+            <span class="n">include_computed</span><span class="o">=</span><span class="n">include_computed</span><span class="p">,</span>
+            <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
+        <span class="p">)</span>  <span class="c1"># type: ignore</span>
+
+    <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.read_smi" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">read_smi</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span></code>
+
+<a href="#datamol.io.read_smi" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Read a list of smiles from am <code>.smi</code> file.</p>
+<p>Note: We <strong>strongly</strong> recommend you to use <code>dm.read_csv</code> or <code>pandas.read_csv</code> instead
+of <code>dm.read_smi</code> since <code>.smi</code> files are CSV-like format. The only difference are the
+default settings which changes:</p>
+<ul>
+<li>The default separator is a space <code></code> instead of a comma <code>,</code>.</li>
+<li>The headers of the column are not included.</li>
+</ul>
+<p>By modifying the args of <code>dm.read_csv()</code>, you will be able to read an <code>.smi</code> files.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">475</span>
+<span class="normal">476</span>
+<span class="normal">477</span>
+<span class="normal">478</span>
+<span class="normal">479</span>
+<span class="normal">480</span>
+<span class="normal">481</span>
+<span class="normal">482</span>
+<span class="normal">483</span>
+<span class="normal">484</span>
+<span class="normal">485</span>
+<span class="normal">486</span>
+<span class="normal">487</span>
+<span class="normal">488</span>
+<span class="normal">489</span>
+<span class="normal">490</span>
+<span class="normal">491</span>
+<span class="normal">492</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span>
+<span class="normal">498</span>
+<span class="normal">499</span>
+<span class="normal">500</span>
+<span class="normal">501</span>
+<span class="normal">502</span>
+<span class="normal">503</span>
+<span class="normal">504</span>
+<span class="normal">505</span>
+<span class="normal">506</span>
+<span class="normal">507</span>
+<span class="normal">508</span>
+<span class="normal">509</span>
+<span class="normal">510</span>
+<span class="normal">511</span>
+<span class="normal">512</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">read_smi</span><span class="p">(</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Read a list of smiles from am `.smi` file.</span>
+
+<span class="sd">    Note: We **strongly** recommend you to use `dm.read_csv` or `pandas.read_csv` instead</span>
+<span class="sd">    of `dm.read_smi` since `.smi` files are CSV-like format. The only difference are the</span>
+<span class="sd">    default settings which changes:</span>
+
+<span class="sd">    - The default separator is a space ` ` instead of a comma `,`.</span>
+<span class="sd">    - The headers of the column are not included.</span>
+
+<span class="sd">    By modifying the args of `dm.read_csv()`, you will be able to read an `.smi` files.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">active_path</span> <span class="o">=</span> <span class="n">urlpath</span>
+
+    <span class="c1"># NOTE(hadim): the temporary local file copy</span>
+    <span class="c1"># is because `SmilesMolSupplier` does not support</span>
+    <span class="c1"># using file-like object, only path.</span>
+
+    <span class="c1"># Copy to a local temporary path if the path is a remote one.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">can_be_local</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)):</span>
+        <span class="n">active_path</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">tempfile</span><span class="o">.</span><span class="n">mkstemp</span><span class="p">()[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">dm</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">copy_file</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">active_path</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># Read the molecules</span>
+    <span class="n">supplier</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesMolSupplier</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">active_path</span><span class="p">),</span> <span class="n">titleLine</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">supplier</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># Delete the local temporary path</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">can_be_local</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)):</span>
+        <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">active_path</span><span class="p">))</span><span class="o">.</span><span class="n">unlink</span><span class="p">()</span>
+
+    <span class="k">return</span> <span class="n">mols</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_molblock" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_molblock</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">include_stereo</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">force_V3000</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.io.to_molblock" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert a molecule to a mol block string.</p>
+<p>Note that any molecule properties are lost.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>A molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>include_stereo</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Toggles inclusion of stereochemical information in the output.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Selects which conformation to output.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>kekulize</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Triggers kekulization of the molecule before it's written,
+as suggested by the MDL spec.</p></td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>force_V3000</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>Force generation a V3000 mol block (happens automatically
+with more than 999 atoms or bonds).</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">311</span>
+<span class="normal">312</span>
+<span class="normal">313</span>
+<span class="normal">314</span>
+<span class="normal">315</span>
+<span class="normal">316</span>
+<span class="normal">317</span>
+<span class="normal">318</span>
+<span class="normal">319</span>
+<span class="normal">320</span>
+<span class="normal">321</span>
+<span class="normal">322</span>
+<span class="normal">323</span>
+<span class="normal">324</span>
+<span class="normal">325</span>
+<span class="normal">326</span>
+<span class="normal">327</span>
+<span class="normal">328</span>
+<span class="normal">329</span>
+<span class="normal">330</span>
+<span class="normal">331</span>
+<span class="normal">332</span>
+<span class="normal">333</span>
+<span class="normal">334</span>
+<span class="normal">335</span>
+<span class="normal">336</span>
+<span class="normal">337</span>
+<span class="normal">338</span>
+<span class="normal">339</span>
+<span class="normal">340</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_molblock</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">include_stereo</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+    <span class="n">kekulize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">force_V3000</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a molecule to a mol block string.</span>
+
+<span class="sd">    Note that any molecule properties are lost.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        include_stereo: Toggles inclusion of stereochemical information in the output.</span>
+<span class="sd">        conf_id: Selects which conformation to output.</span>
+<span class="sd">        kekulize: Triggers kekulization of the molecule before it&#39;s written,</span>
+<span class="sd">            as suggested by the MDL spec.</span>
+<span class="sd">        force_V3000: Force generation a V3000 mol block (happens automatically</span>
+<span class="sd">            with more than 999 atoms or bonds).</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">molblock</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolToMolBlock</span><span class="p">(</span>
+        <span class="n">mol</span><span class="p">,</span>
+        <span class="n">includeStereo</span><span class="o">=</span><span class="n">include_stereo</span><span class="p">,</span>
+        <span class="n">confId</span><span class="o">=</span><span class="n">conf_id</span><span class="p">,</span>
+        <span class="n">kekulize</span><span class="o">=</span><span class="n">kekulize</span><span class="p">,</span>
+        <span class="n">forceV3000</span><span class="o">=</span><span class="n">force_V3000</span><span class="p">,</span>
+    <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">molblock</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_pdbblock" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_pdbblock</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.io.to_pdbblock" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Convert a molecule to a PDB string block.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>A molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Selects which conformation to use.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">370</span>
+<span class="normal">371</span>
+<span class="normal">372</span>
+<span class="normal">373</span>
+<span class="normal">374</span>
+<span class="normal">375</span>
+<span class="normal">376</span>
+<span class="normal">377</span>
+<span class="normal">378</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_pdbblock</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a molecule to a PDB string block.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        conf_id: Selects which conformation to use.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">molblock</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolToPDBBlock</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">molblock</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_pdbfile" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_pdbfile</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">urlpath</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span></code>
+
+<a href="#datamol.io.to_pdbfile" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Save a molecule to a PDB file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.types.Mol">Mol</span></code>
+          </td>
+          <td><p>A molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>conf_id</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td><p>Selects which conformation to use.</p></td>
+          <td>
+                <code>-1</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_pdbfile</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+    <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Save a molecule to a PDB file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: A molecule.</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        conf_id: Selects which conformation to use.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">molblock</span> <span class="o">=</span> <span class="n">to_pdbblock</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">IO</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+        <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">molblock</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_sdf" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_sdf</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">urlpath</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span></code>
+
+<a href="#datamol.io.to_sdf" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Write molecules to a file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mols</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, <span title="typing.Sequence">Sequence</span>[<span title="datamol.types.Mol">Mol</span>], <span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span>]</code>
+          </td>
+          <td><p>a dataframe, a molecule or a list of molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="typing.IO">IO</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>smiles_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Column name to extract the molecule.</p></td>
+          <td>
+                <code>&#39;smiles&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Column name to extract the molecule. It takes
+precedence over <code>smiles_column</code>.</p></td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span>
+<span class="normal">256</span>
+<span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span>
+<span class="normal">265</span>
+<span class="normal">266</span>
+<span class="normal">267</span>
+<span class="normal">268</span>
+<span class="normal">269</span>
+<span class="normal">270</span>
+<span class="normal">271</span>
+<span class="normal">272</span>
+<span class="normal">273</span>
+<span class="normal">274</span>
+<span class="normal">275</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_sdf</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write molecules to a file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: a dataframe, a molecule or a list of molecule.</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        smiles_column: Column name to extract the molecule.</span>
+<span class="sd">        mol_column: Column name to extract the molecule. It takes</span>
+<span class="sd">            precedence over `smiles_column`.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="n">mol_column</span><span class="p">)</span>
+
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Mol</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
+
+    <span class="c1"># Filter out None values</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># File-like object</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Regular local or remote paths</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SDWriter</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_smi" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_smi</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">urlpath</span><span class="p">,</span> <span class="n">error_if_empty</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.io.to_smi" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Save a list of molecules in an <code>.smi</code> file.</p>
+<p>Note: We <strong>strongly</strong> recommend you to use <code>dm.to_csv</code> instead
+of <code>dm.to_smi</code> since <code>.smi</code> files are CSV-like format. The only difference are the
+default settings which changes:</p>
+<ul>
+<li>The default separator is a space <code></code> instead of a comma <code>,</code>.</li>
+<li>The headers of the column are not included.</li>
+</ul>
+<p>By modifying the args of <code>dm.to_csv()</code>, you will be able to save a SMI compatible file.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mols</code></td>
+          <td>
+                <code><span title="typing.Sequence">Sequence</span>[<span title="datamol.types.Mol">Mol</span>]</code>
+          </td>
+          <td><p>a list of molecules.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="typing.IO">IO</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>error_if_empty</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td><p>whether to raise and error if the input list is empty.</p></td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span>
+<span class="normal">439</span>
+<span class="normal">440</span>
+<span class="normal">441</span>
+<span class="normal">442</span>
+<span class="normal">443</span>
+<span class="normal">444</span>
+<span class="normal">445</span>
+<span class="normal">446</span>
+<span class="normal">447</span>
+<span class="normal">448</span>
+<span class="normal">449</span>
+<span class="normal">450</span>
+<span class="normal">451</span>
+<span class="normal">452</span>
+<span class="normal">453</span>
+<span class="normal">454</span>
+<span class="normal">455</span>
+<span class="normal">456</span>
+<span class="normal">457</span>
+<span class="normal">458</span>
+<span class="normal">459</span>
+<span class="normal">460</span>
+<span class="normal">461</span>
+<span class="normal">462</span>
+<span class="normal">463</span>
+<span class="normal">464</span>
+<span class="normal">465</span>
+<span class="normal">466</span>
+<span class="normal">467</span>
+<span class="normal">468</span>
+<span class="normal">469</span>
+<span class="normal">470</span>
+<span class="normal">471</span>
+<span class="normal">472</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_smi</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">IO</span><span class="p">],</span>
+    <span class="n">error_if_empty</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Save a list of molecules in an `.smi` file.</span>
+
+<span class="sd">    Note: We **strongly** recommend you to use `dm.to_csv` instead</span>
+<span class="sd">    of `dm.to_smi` since `.smi` files are CSV-like format. The only difference are the</span>
+<span class="sd">    default settings which changes:</span>
+
+<span class="sd">    - The default separator is a space ` ` instead of a comma `,`.</span>
+<span class="sd">    - The headers of the column are not included.</span>
+
+<span class="sd">    By modifying the args of `dm.to_csv()`, you will be able to save a SMI compatible file.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: a list of molecules.</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        error_if_empty: whether to raise and error if the input list is empty.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span> <span class="ow">and</span> <span class="n">error_if_empty</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The list of mols/smiles provided is empty.&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Filter out None values</span>
+    <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+
+    <span class="c1"># File-like object</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">):</span>
+        <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+        <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+
+    <span class="c1"># Regular local or remote paths</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="s2">&quot;w&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+            <span class="n">writer</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">SmilesWriter</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">includeHeader</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">nameHeader</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">:</span>
+                <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+            <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+
+<h3 id="datamol.io.to_xlsx" class="doc doc-heading">
+<code class="highlight language-python"><span class="n">to_xlsx</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">urlpath</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="s1">&#39;smiles&#39;</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="s1">&#39;mol&#39;</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">])</span></code>
+
+<a href="#datamol.io.to_xlsx" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Write molecules to an Excel file with a molecule column as an RDKit rendered
+image.</p>
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mols</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, <span title="typing.Sequence">Sequence</span>[<span title="datamol.types.Mol">Mol</span>], <span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span>]</code>
+          </td>
+          <td><p>a dataframe, a molecule or a list of molecule.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>urlpath</code></td>
+          <td>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
+          </td>
+          <td><p>Path to a file or a file-like object. Path can be remote or local.</p></td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>smiles_column</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[str]</code>
+          </td>
+          <td><p>Column name to extract the molecule.</p></td>
+          <td>
+                <code>&#39;smiles&#39;</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>mol_column</code></td>
+          <td>
+                <code>str</code>
+          </td>
+          <td><p>Column name to extract the molecule. It takes
+precedence over <code>smiles_column</code>.
+Column name to write the RDKit rendered image. If none,
+the molecule images are not written.</p></td>
+          <td>
+                <code>&#39;mol&#39;</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+      <details class="quote">
+        <summary>Source code in <code>datamol/io.py</code></summary>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">515</span>
+<span class="normal">516</span>
+<span class="normal">517</span>
+<span class="normal">518</span>
+<span class="normal">519</span>
+<span class="normal">520</span>
+<span class="normal">521</span>
+<span class="normal">522</span>
+<span class="normal">523</span>
+<span class="normal">524</span>
+<span class="normal">525</span>
+<span class="normal">526</span>
+<span class="normal">527</span>
+<span class="normal">528</span>
+<span class="normal">529</span>
+<span class="normal">530</span>
+<span class="normal">531</span>
+<span class="normal">532</span>
+<span class="normal">533</span>
+<span class="normal">534</span>
+<span class="normal">535</span>
+<span class="normal">536</span>
+<span class="normal">537</span>
+<span class="normal">538</span>
+<span class="normal">539</span>
+<span class="normal">540</span>
+<span class="normal">541</span>
+<span class="normal">542</span>
+<span class="normal">543</span>
+<span class="normal">544</span>
+<span class="normal">545</span>
+<span class="normal">546</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_xlsx</span><span class="p">(</span>
+    <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">],</span>
+    <span class="n">urlpath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
+    <span class="n">smiles_column</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;smiles&quot;</span><span class="p">,</span>
+    <span class="n">mol_column</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;mol&quot;</span><span class="p">,</span>
+    <span class="n">mol_size</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">],</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Write molecules to an Excel file with a molecule column as an RDKit rendered</span>
+<span class="sd">    image.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mols: a dataframe, a molecule or a list of molecule.</span>
+<span class="sd">        urlpath: Path to a file or a file-like object. Path can be remote or local.</span>
+<span class="sd">        smiles_column: Column name to extract the molecule.</span>
+<span class="sd">        mol_column: Column name to extract the molecule. It takes</span>
+<span class="sd">            precedence over `smiles_column`.</span>
+<span class="sd">            Column name to write the RDKit rendered image. If none,</span>
+<span class="sd">            the molecule images are not written.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Mol</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mols</span><span class="p">]</span>
+
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">Sequence</span><span class="p">):</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span> <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">]</span>
+        <span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_df</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">smiles_column</span><span class="o">=</span><span class="n">smiles_column</span><span class="p">,</span> <span class="n">mol_column</span><span class="o">=</span><span class="n">mol_column</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">mols</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">mols</span><span class="o">.</span><span class="n">empty</span><span class="p">:</span>  <span class="c1"># type: ignore</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No molecules to write&quot;</span><span class="p">)</span>
+
+    <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">PandasTools</span><span class="o">.</span><span class="n">SaveXlsxFromFrame</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">molCol</span><span class="o">=</span><span class="n">mol_column</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">mol_size</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+      </details>
+  </div>
+
+</div>
+
+
+
+  </div>
+
+  </div>
+
+</div>
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+    <div class="md-copyright__highlight">
+      Copyright 2020 - 2023 Valence
+    </div>
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
+      
+        <script src="../assets/js/google-analytics.js"></script>
+      
+    
+  </body>
+</html>
