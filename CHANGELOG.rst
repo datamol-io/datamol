@@ -4,6 +4,27 @@ Datamol Changelogs
 
 .. current developments
 
+v0.9.0
+====================
+
+**Changed:**
+
+* Add `TypeAlias` types to `datamol.types.*`.
+* Drop `setup.py` in favour of `pyproject.toml` only.
+* Replace unmaintained `appdirs` by maintained `platformdirs`.
+* Enable weekly tests on `main` branch.
+
+**Fixed:**
+
+* Add missing fcfp func in fingerprint functions dict
+
+**Authors:**
+
+* Hadrien Mary
+* michelml
+
+
+
 v0.8.8
 ====================
 
