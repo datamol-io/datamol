@@ -110,11 +110,11 @@ The CI run tests and perform code quality checks for the following combinations:
 - The two latest Python versions.
 - The two latest RDKit versions.
 
-|                                         | `main`                                                                                                                                                                             |
-| --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lib build & Testing                     | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/test)](https://github.com/datamol-org/datamol/actions/workflows/test.yml)             |
-| Code Sanity (linting and type analysis) | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/code-check)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml) |
-| Documentation Build                     | [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/datamol-org/datamol/doc)](https://github.com/datamol-org/datamol/actions/workflows/doc.yml)               |
+|                                         | `main`                                                                                                                                                                      |
+| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lib build & Testing                     | [![test](https://github.com/datamol-org/datamol/actions/workflows/test.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/test.yml)                   |
+| Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml) |
+| Documentation Build                     | [![doc](https://github.com/datamol-org/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/doc.yml)                      |
 
 ## Changelogs
 
