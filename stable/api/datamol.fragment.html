@@ -10,8 +10,14 @@
       
       
       
+      
+        <link rel="prev" href="datamol.fp.html">
+      
+      
+        <link rel="next" href="datamol.graph.html">
+      
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -62,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -143,7 +148,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -250,17 +255,20 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
       
       
       
-      
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Tutorials
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Tutorials
@@ -454,17 +462,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_4">
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -578,7 +587,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1015,10 +1024,9 @@
                 
                   
 
-  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.fragment.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="datamolfragment"><code>datamol.fragment</code><a class="headerlink" href="#datamolfragment" title="Permanent link">&para;</a></h1>
@@ -1141,7 +1149,7 @@
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fragment molecule by applying brics first, then fall back to frag.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fragment molecule by applying brics first, then fall back to frag.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -1280,7 +1288,7 @@
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Run BRICS on the molecules and potentially fix dummy atoms.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Run BRICS on the molecules and potentially fix dummy atoms.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -1416,7 +1424,7 @@
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Generate all possible fragmentation of a molecule.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate all possible fragmentation of a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -1561,7 +1569,7 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p></td>
 <span class="normal">227</span>
 <span class="normal">228</span>
 <span class="normal">229</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mmpa_cut</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">rdkit_pattern</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">Any</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Cut molecules to perform mmpa analysis later</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Cut molecules to perform mmpa analysis later</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: Molecule to fragment.</span>
@@ -1764,7 +1772,7 @@ This is equivalent to enabling the addition of new fragments.</p></td>
     <span class="n">max_bond_cut</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="n">h_split</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Set</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]:</span>
-    <span class="sd">&quot;&quot;&quot;Fragment molecule on specific bonds suitable for a MMPA analysis.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fragment molecule on specific bonds suitable for a MMPA analysis.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: Molecule to fragment.</span>
@@ -1914,7 +1922,7 @@ This is equivalent to enabling the addition of new fragments.</p></td>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">fix</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Fragment the molecule using the recap algorithm.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fragment the molecule using the recap algorithm.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -1992,7 +2000,8 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 
       <details class="quote">
         <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">484</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">483</span>
+<span class="normal">484</span>
 <span class="normal">485</span>
 <span class="normal">486</span>
 <span class="normal">487</span>
@@ -2038,8 +2047,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 <span class="normal">527</span>
 <span class="normal">528</span>
 <span class="normal">529</span>
-<span class="normal">530</span>
-<span class="normal">531</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_iter</span><span class="p">(</span>
+<span class="normal">530</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_iter</span><span class="p">(</span>
     <span class="n">fragmentlist</span><span class="p">,</span>
     <span class="n">seens</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
     <span class="n">scrambleReagents</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
@@ -2048,7 +2056,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
     <span class="n">as_smiles</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
     <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Perform an assembly from fragment given all potential RXNS transformation.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Perform an assembly from fragment given all potential RXNS transformation.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">RXNS</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">RXNS</span> <span class="o">=</span> <span class="n">ALL_BRICS_RETRO</span>
@@ -2161,7 +2169,8 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 
       <details class="quote">
         <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">431</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">430</span>
+<span class="normal">431</span>
 <span class="normal">432</span>
 <span class="normal">433</span>
 <span class="normal">434</span>
@@ -2210,15 +2219,14 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 <span class="normal">477</span>
 <span class="normal">478</span>
 <span class="normal">479</span>
-<span class="normal">480</span>
-<span class="normal">481</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_order</span><span class="p">(</span>
+<span class="normal">480</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">assemble_fragment_order</span><span class="p">(</span>
     <span class="n">fragmentlist</span><span class="p">:</span> <span class="nb">list</span><span class="p">,</span>
     <span class="n">seen</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">allow_incomplete</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">max_n_mols</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span>
     <span class="n">RXNS</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Assemble a list of fragment into a set of possible molecules under rules defined by the brics algorithm</span>
 
 <span class="sd">    We are of course assuming:</span>
 
@@ -2382,8 +2390,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 <span class="normal">373</span>
 <span class="normal">374</span>
 <span class="normal">375</span>
-<span class="normal">376</span>
-<span class="normal">377</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">break_mol</span><span class="p">(</span>
+<span class="normal">376</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">break_mol</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">minFragmentSize</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">silent</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -2392,7 +2399,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
     <span class="n">mode</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;brics&quot;</span><span class="p">,</span>
     <span class="n">returnTree</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Breaks a molecules into a list of fragment.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Breaks a molecules into a list of fragment.&quot;&quot;&quot;</span>
 
     <span class="k">if</span> <span class="n">mode</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;brics&quot;</span><span class="p">:</span>
         <span class="n">all_reactions</span> <span class="o">=</span> <span class="n">ALL_BRICS</span>
@@ -2426,7 +2433,6 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
                 <span class="k">continue</span>
             <span class="n">ps</span> <span class="o">=</span> <span class="n">reaction</span><span class="o">.</span><span class="n">RunReactants</span><span class="p">((</span><span class="n">mol</span><span class="p">,))</span>
             <span class="k">if</span> <span class="n">ps</span><span class="p">:</span>
-
                 <span class="n">all_pass</span> <span class="o">=</span> <span class="p">[</span>
                     <span class="nb">all</span><span class="p">([</span><span class="n">prod</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(</span><span class="n">onlyExplicit</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="o">&gt;</span> <span class="n">minFragmentSize</span> <span class="k">for</span> <span class="n">prod</span> <span class="ow">in</span> <span class="n">p_</span><span class="p">])</span>
                     <span class="k">for</span> <span class="n">p_</span> <span class="ow">in</span> <span class="n">ps</span>
@@ -2505,7 +2511,8 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 
       <details class="quote">
         <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">380</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">379</span>
+<span class="normal">380</span>
 <span class="normal">381</span>
 <span class="normal">382</span>
 <span class="normal">383</span>
@@ -2552,9 +2559,8 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 <span class="normal">424</span>
 <span class="normal">425</span>
 <span class="normal">426</span>
-<span class="normal">427</span>
-<span class="normal">428</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">ll_mols</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;brics&quot;</span><span class="p">,</span> <span class="n">frag_rxn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ADD_RNXS</span><span class="o">=</span><span class="p">[]):</span>
-    <span class="sd">&quot;&quot;&quot;Build a super molecule from a list of fragments&quot;&quot;&quot;</span>
+<span class="normal">427</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">build</span><span class="p">(</span><span class="n">ll_mols</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="nb">float</span><span class="p">(</span><span class="s2">&quot;inf&quot;</span><span class="p">),</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;brics&quot;</span><span class="p">,</span> <span class="n">frag_rxn</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">ADD_RNXS</span><span class="o">=</span><span class="p">[]):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Build a super molecule from a list of fragments&quot;&quot;&quot;</span>
 
     <span class="n">seen</span> <span class="o">=</span> <span class="nb">set</span><span class="p">()</span>
     <span class="n">stop</span> <span class="o">=</span> <span class="kc">False</span>
@@ -2631,42 +2637,6 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="datamol.fp.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.fp" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              datamol.fp
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="datamol.graph.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.graph" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              datamol.graph
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -2692,14 +2662,13 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
-    
     
   </body>
 </html>

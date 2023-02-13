@@ -10,8 +10,14 @@
       
       
       
+      
+        <link rel="prev" href="datamol.mol.html">
+      
+      
+        <link rel="next" href="datamol.scaffold.html">
+      
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -62,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -143,7 +148,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -250,17 +255,20 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
       
       
       
-      
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Tutorials
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Tutorials
@@ -454,17 +462,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_4">
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -676,7 +685,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -1099,10 +1108,9 @@
                 
                   
 
-  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.reactions.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="datamolreactions"><code>datamol.reactions</code><a class="headerlink" href="#datamolreactions" title="Permanent link">&para;</a></h1>
@@ -1304,7 +1312,7 @@
     <span class="n">disable_logs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Apply a chemical reaction on a molecule</span>
 
 <span class="sd">    Args:</span>
@@ -1424,7 +1432,7 @@
 <span class="normal">265</span>
 <span class="normal">266</span>
 <span class="normal">267</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">can_react</span><span class="p">(</span><span class="n">rxn</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Check if a molecule is a reactant to a chemical reaction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if a molecule is a reactant to a chemical reaction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: Reaction to check.</span>
@@ -1531,7 +1539,7 @@
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">find_reactant_position</span><span class="p">(</span><span class="n">rxn</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">,</span> <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Find the position of a reactant in a reaction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find the position of a reactant in a reaction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: Reaction</span>
@@ -1630,7 +1638,7 @@
 <span class="normal">305</span>
 <span class="normal">306</span>
 <span class="normal">307</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">inverse_reaction</span><span class="p">(</span><span class="n">rxn</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the reverse reaction of the input reaction</span>
 
 <span class="sd">    Args:</span>
@@ -1743,7 +1751,7 @@
 <span class="normal">159</span>
 <span class="normal">160</span>
 <span class="normal">161</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_reaction_ok</span><span class="p">(</span><span class="n">rxn</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">,</span> <span class="n">enable_logs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Check if the given reaction is synthetically valid.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check if the given reaction is synthetically valid.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: dm.ChemicalReaction object</span>
@@ -1859,7 +1867,7 @@
     <span class="n">rxn_block</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a reaction from a block.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a reaction from a block.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn_block: A reaction block.</span>
@@ -1966,7 +1974,7 @@
     <span class="n">rxn_block_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a reaction from a block file.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a reaction from a block file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn_block_path: Filepath to a reaction block file.</span>
@@ -2056,7 +2064,7 @@
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rxn_from_smarts</span><span class="p">(</span><span class="n">rxn_smarts</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Create a reaction from smarts</span>
 
 <span class="sd">    Args:</span>
@@ -2181,7 +2189,7 @@ if <code>force_V3000=True</code>.</p></td>
     <span class="n">separate_agents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">force_V3000</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a block from a reaction object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a block from a reaction object.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: A reaction object.</span>
@@ -2306,7 +2314,7 @@ if <code>force_V3000=True</code>.</p></td>
     <span class="n">separate_agents</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">force_V3000</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Create a block from a reaction object.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a block from a reaction object.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: A reaction object.</span>
@@ -2398,7 +2406,7 @@ if <code>force_V3000=True</code>.</p></td>
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">rxn_to_smarts</span><span class="p">(</span><span class="n">rxn</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">ChemicalReaction</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Create a SMARTS from a reaction.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a SMARTS from a reaction.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        rxn: dm.ChemicalReaction object.</span>
@@ -2574,7 +2582,7 @@ Both C and D will be returned if index is None or product indices are to [0, 1].
     <span class="n">as_smiles</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">sanitize</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">list</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Compute the products from a reaction. It only takes the first product of the</span>
 
 <span class="sd">    Args:</span>
@@ -2717,7 +2725,7 @@ Example: "CC(C)CO<em>" to "CC(C)CO[</em>]"</p>
 <span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">add_brackets_to_attachment_points</span><span class="p">(</span><span class="n">smiles</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Adds brackets to the attachment points (if they don&#39;t have them).</span>
 <span class="sd">    Example: &quot;CC(C)CO*&quot; to &quot;CC(C)CO[*]&quot;</span>
 
@@ -2847,7 +2855,7 @@ Example: "O=C(NCc1cnc([<em>])c1)[</em>]" to  "O=C(NCc1cnc([1<em>])c1)[1</em>]"</
     <span class="n">same_isotope</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">as_smiles</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Convert attachment to isotope mapping.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert attachment to isotope mapping.</span>
 
 <span class="sd">    Examples: &quot;O=C(NCc1cnc([*])c1)[*]&quot; to  &quot;O=C(NCc1cnc([1*])c1)[2*]&quot;</span>
 
@@ -2958,7 +2966,7 @@ Example: "O=C(NCc1cnc([<em>])c1)[</em>]" to  "O=C(NCc1cnc([1<em>])c1)[1</em>]"</
 <span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">num_attachment_points</span><span class="p">(</span><span class="n">mol_or_smiles</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Get the number of attachment point in the</span>
 
 <span class="sd">    Args:</span>
@@ -3105,7 +3113,7 @@ This will highlight all valid attachment point on the current molecule instead.<
     <span class="n">fix_atom_map</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">bond_type</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">BondType</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">SINGLE_BOND</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Compute attachment points on a molecule.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute attachment points on a molecule.</span>
 <span class="sd">    This will highlight all valid attachment point on the current molecule instead.</span>
 
 <span class="sd">    Args:</span>
@@ -3169,42 +3177,6 @@ This will highlight all valid attachment point on the current molecule instead.<
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="datamol.mol.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: datamol.mol" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              datamol.mol
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="datamol.scaffold.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.scaffold" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              datamol.scaffold
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -3230,14 +3202,13 @@ This will highlight all valid attachment point on the current molecule instead.<
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
-    
     
   </body>
 </html>

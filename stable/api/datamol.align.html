@@ -10,8 +10,14 @@
       
       
       
+      
+        <link rel="prev" href="../tutorials/Filesystem.html">
+      
+      
+        <link rel="next" href="datamol.cluster.html">
+      
       <link rel="icon" href="../images/logo.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-8.5.10">
+      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.0.12">
     
     
       
@@ -19,11 +25,10 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.975780f9.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.0d440cfe.min.css">
       
         
         <link rel="stylesheet" href="../assets/stylesheets/palette.2505c338.min.css">
-        
       
       
 
@@ -62,7 +67,7 @@
     
     
     
-    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="None" data-md-color-accent="None">
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="" data-md-color-accent="">
   
     
     
@@ -143,7 +148,7 @@
           <div class="md-search-result__meta">
             Initializing search
           </div>
-          <ol class="md-search-result__list"></ol>
+          <ol class="md-search-result__list" role="presentation"></ol>
         </div>
       </div>
     </div>
@@ -250,17 +255,20 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+      
+      
+        
+      
+      <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
       
       
       
-      
-        <label class="md-nav__link" for="__nav_3">
+        <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
           Tutorials
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="Tutorials" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
         <label class="md-nav__title" for="__nav_3">
           <span class="md-nav__icon md-icon"></span>
           Tutorials
@@ -454,17 +462,18 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
+      
+      
+      <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
       
       
       
-      
-        <label class="md-nav__link" for="__nav_4">
+        <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
           API
           <span class="md-nav__icon md-icon"></span>
         </label>
       
-      <nav class="md-nav" aria-label="API" data-md-level="1">
+      <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
         <label class="md-nav__title" for="__nav_4">
           <span class="md-nav__icon md-icon"></span>
           API
@@ -480,7 +489,7 @@
   
     <li class="md-nav__item md-nav__item--active">
       
-      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
         
@@ -903,10 +912,9 @@
                 
                   
 
-  <a href="https://github.com/datamol-org/datamol/edit/master/docs/api/datamol.align.md" title="Edit this page" class="md-content__button md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.71 7.04c.39-.39.39-1.04 0-1.41l-2.34-2.34c-.37-.39-1.02-.39-1.41 0l-1.84 1.83 3.75 3.75M3 17.25V21h3.75L17.81 9.93l-3.75-3.75L3 17.25Z"/></svg>
-  </a>
+  
+  
+
 
 
 <h1 id="datamolalign"><code>datamol.align</code><a class="headerlink" href="#datamolalign" title="Permanent link">&para;</a></h1>
@@ -1040,7 +1048,9 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
 
       <details class="quote">
         <summary>Source code in <code>datamol/align.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">130</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
 <span class="normal">131</span>
 <span class="normal">132</span>
 <span class="normal">133</span>
@@ -1164,11 +1174,7 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
 <span class="normal">251</span>
 <span class="normal">252</span>
 <span class="normal">253</span>
-<span class="normal">254</span>
-<span class="normal">255</span>
-<span class="normal">256</span>
-<span class="normal">257</span>
-<span class="normal">258</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">auto_align_many</span><span class="p">(</span>
+<span class="normal">254</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">auto_align_many</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Sequence</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">],</span>
     <span class="n">partition_method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;anon-scaffold&quot;</span><span class="p">,</span>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1176,7 +1182,7 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
     <span class="n">allow_r_groups</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-    <span class="sd">&quot;&quot;&quot;Partition a list of molecules into clusters sharing common scaffold of common core,</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Partition a list of molecules into clusters sharing common scaffold of common core,</span>
 <span class="sd">    then align the molecules to that common core. This function will compute the list of</span>
 <span class="sd">    smiles/smarts representative of each cluster first.</span>
 
@@ -1214,7 +1220,6 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
     <span class="n">scaffold_mols</span> <span class="o">=</span> <span class="p">{}</span>
 
     <span class="k">if</span> <span class="n">partition_method</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;scaffold&quot;</span><span class="p">):</span>
-
         <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_scaffold_murcko</span><span class="p">(</span><span class="n">m</span><span class="p">)</span> <span class="k">for</span> <span class="n">m</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
         <span class="n">scaffolds_ids</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">scaffolds</span><span class="p">]</span>
 
@@ -1265,7 +1270,6 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
         <span class="n">core_mol</span> <span class="o">=</span> <span class="n">scaffold_mols</span><span class="p">[</span><span class="n">core</span><span class="p">]</span>
 
         <span class="k">for</span> <span class="n">mol_id</span> <span class="ow">in</span> <span class="n">mols_ids</span><span class="p">:</span>
-
             <span class="n">mol</span> <span class="o">=</span> <span class="n">mols</span><span class="p">[</span><span class="n">mol_id</span><span class="p">]</span>
 
             <span class="k">if</span> <span class="n">core_mol</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -1367,7 +1371,7 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_2d_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span> <span class="n">verbose</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Mol</span><span class="p">:</span>
-    <span class="sd">&quot;&quot;&quot;Compute 2D coordinates for a molecule.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute 2D coordinates for a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
@@ -1587,9 +1591,7 @@ You can set this to true when not using depiction</p></td>
 <span class="normal">122</span>
 <span class="normal">123</span>
 <span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">template_align</span><span class="p">(</span>
+<span class="normal">125</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">template_align</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">],</span>
     <span class="n">template</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -1597,7 +1599,7 @@ You can set this to true when not using depiction</p></td>
     <span class="n">remove_confs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">auto_select_coord_gen</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Mol</span><span class="p">]:</span>
-    <span class="sd">&quot;&quot;&quot;Align an input molecule to a template. If the template is not provided then the input molecule is</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Align an input molecule to a template. If the template is not provided then the input molecule is</span>
 <span class="sd">    returned.</span>
 
 <span class="sd">    Args:</span>
@@ -1651,7 +1653,6 @@ You can set this to true when not using depiction</p></td>
     <span class="c1"># supergraph of the template vs molecules that are subgraph of the template.</span>
     <span class="n">pattern</span> <span class="o">=</span> <span class="n">_template</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">_mol</span><span class="o">.</span><span class="n">HasSubstructMatch</span><span class="p">(</span><span class="n">_template</span><span class="p">):</span>
-
         <span class="n">pattern</span> <span class="o">=</span> <span class="kc">None</span>
         <span class="n">mcs_smarts</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">find_mcs</span><span class="p">([</span><span class="n">_mol</span><span class="p">,</span> <span class="n">_template</span><span class="p">])</span>
 
@@ -1659,7 +1660,6 @@ You can set this to true when not using depiction</p></td>
             <span class="n">pattern</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_smarts</span><span class="p">(</span><span class="n">mcs_smarts</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">pattern</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-
         <span class="k">if</span> <span class="n">auto_select_coord_gen</span><span class="p">:</span>
             <span class="n">rdDepictor</span><span class="o">.</span><span class="n">SetPreferCoordGen</span><span class="p">(</span><span class="n">use_depiction</span><span class="p">)</span>
 
@@ -1710,42 +1710,6 @@ You can set this to true when not using depiction</p></td>
       
         <footer class="md-footer">
   
-    
-    <nav class="md-footer__inner md-grid" aria-label="Footer" >
-      
-        
-        <a href="../tutorials/Filesystem.html" class="md-footer__link md-footer__link--prev" aria-label="Previous: Datamol Filesystem Module" rel="prev">
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
-          </div>
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Previous
-              </span>
-              Datamol Filesystem Module
-            </div>
-          </div>
-        </a>
-      
-      
-        
-        <a href="datamol.cluster.html" class="md-footer__link md-footer__link--next" aria-label="Next: datamol.cluster" rel="next">
-          <div class="md-footer__title">
-            <div class="md-ellipsis">
-              <span class="md-footer__direction">
-                Next
-              </span>
-              datamol.cluster
-            </div>
-          </div>
-          <div class="md-footer__button md-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4Z"/></svg>
-          </div>
-        </a>
-      
-    </nav>
-  
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
       <div class="md-copyright">
@@ -1771,14 +1735,13 @@ You can set this to true when not using depiction</p></td>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.16e2a7d4.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.expand"], "search": "../assets/javascripts/workers/search.db81ec45.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.5a2dcb6a.min.js"></script>
+      <script src="../assets/javascripts/bundle.4b2c34cd.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
-    
     
   </body>
 </html>
