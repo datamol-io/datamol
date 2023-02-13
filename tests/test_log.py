@@ -40,7 +40,6 @@ def test_rdkit_log(capfd):
 
 @pytest.mark.skip_platform("win")
 def test_rdkit_log_enable(capfd):
-
     dm.enable_rdkit_log()
 
     with dm.without_rdkit_log():

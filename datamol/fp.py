@@ -24,6 +24,7 @@ from rdkit.DataStructs.cDataStructs import ULongSparseIntVect
 _FP_FUNCS = {
     "maccs": rdMolDescriptors.GetMACCSKeysFingerprint,
     "ecfp": rdMolDescriptors.GetMorganFingerprintAsBitVect,
+    "fcfp": rdMolDescriptors.GetMorganFingerprintAsBitVect,
     "topological": rdMolDescriptors.GetHashedTopologicalTorsionFingerprintAsBitVect,
     "atompair": rdMolDescriptors.GetHashedAtomPairFingerprintAsBitVect,
     "rdkit": rdmolops.RDKFingerprint,

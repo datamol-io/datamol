@@ -6,7 +6,6 @@ import datamol as dm
 
 
 def test_cluster_mols():
-
     # Get some mols
     data = dm.data.freesolv()
     smiles = data["smiles"].iloc[:100].tolist()
@@ -18,7 +17,6 @@ def test_cluster_mols():
 
 
 def test_pick_diverse():
-
     # Get some mols
     data = dm.data.freesolv()
     smiles = data["smiles"].iloc[:100].tolist()

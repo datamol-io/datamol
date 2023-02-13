@@ -2,16 +2,17 @@ channels:
   - conda-forge
 
 dependencies:
-  - python >=3.7
+  - python >=3.8
   - pip
   - tqdm
   - loguru
   - joblib
   - fsspec >=2021.9
-  - s3fs
-  - gcsfs
-  - appdirs
+  - s3fs >=2021.9
+  - gcsfs >=2021.9
+  - platformdirs
   - packaging
+  - typing_extensions
 
   # Scientific
   - pandas
@@ -22,32 +23,37 @@ dependencies:
   - scikit-learn
 
   # Chemistry
-  - rdkit >=2021.09
+  - rdkit >=2021.03
   - selfies
 
   # Optional deps
   - openpyxl
   - networkx
   - nglview
-  - ipywidgets
+  - ipywidgets =7.7  # because of nglview
+  - xlsxwriter
 
   # Dev
   - pytest >=6.0
   - pytest-cov
-  - black >=20.8b1
+  - pytest-xdist
+  - black >=22
   - jupyterlab
   - mypy
   - codecov
+  - nbconvert
 
   # Doc
   - mkdocs
   - mkdocs-material >=7.1.1
   - mkdocs-material-extensions
-  - mkdocstrings =0.17
+  - mkdocstrings
+  - mkdocstrings-python
   - mkdocs-jupyter
   - markdown-include
   - mdx_truly_sane_lists
   - mike >=1.0.0
+  - seaborn
 
   # Releasing tools
   - rever >=0.4.5

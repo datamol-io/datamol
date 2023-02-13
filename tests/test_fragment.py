@@ -39,7 +39,6 @@ def test_mmpa():
 
 
 def test_assemble():
-
     # Fragment a molecule
     smiles = "CCCOCc1cc(c2ncccc2)ccc1"
     mol = dm.to_mol(smiles)

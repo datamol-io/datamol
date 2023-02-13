@@ -8,6 +8,8 @@ on:
     branches:
       - "*"
       - "!gh-pages"
+  schedule:
+    - cron: "0 4 * * MON"
 
 jobs:
   test:
@@ -16,14 +18,7 @@ jobs:
       matrix:
         python-version: ["3.9", "3.10"]
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        rdkit-version: ["2021.09", "2022.03", "2022.09"]
-        exclude:
-          - python-version: 3.10
-            rdkit-version: 2021.09
-        include:
-          - python-version: 3.9
-            rdkit-version: 2021.03
-            os: "ubuntu-latest"
+        rdkit-version: ["2022.03", "2022.09"]
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30

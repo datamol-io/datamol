@@ -95,7 +95,6 @@ def template_align(
     # supergraph of the template vs molecules that are subgraph of the template.
     pattern = _template
     if not _mol.HasSubstructMatch(_template):
-
         pattern = None
         mcs_smarts = dm.find_mcs([_mol, _template])
 
@@ -103,7 +102,6 @@ def template_align(
             pattern = dm.from_smarts(mcs_smarts)
 
     if pattern is not None:
-
         if auto_select_coord_gen:
             rdDepictor.SetPreferCoordGen(use_depiction)
 
@@ -173,7 +171,6 @@ def auto_align_many(
     scaffold_mols = {}
 
     if partition_method.endswith("scaffold"):
-
         scaffolds = [dm.to_scaffold_murcko(m) for m in mols]
         scaffolds_ids = [dm.to_smiles(x) for x in scaffolds]
 
@@ -224,7 +221,6 @@ def auto_align_many(
         core_mol = scaffold_mols[core]
 
         for mol_id in mols_ids:
-
             mol = mols[mol_id]
 
             if core_mol is not None:

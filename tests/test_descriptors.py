@@ -5,11 +5,9 @@ import datamol as dm
 
 
 def test_descriptors():
-
     smiles_list = ["CC(=O)OC1=CC=CC=C1C(=O)O", "CCN(CC)CCCC(C)NC1=C2C=CC(=CC2=NC=C1)Cl"]
 
     for smiles in smiles_list:
-
         mol = dm.to_mol(smiles)
 
         dm.descriptors.mw(mol)
@@ -46,7 +44,6 @@ def test_descriptors():
 
 
 def test_compute_many_descriptors():
-
     mol = dm.to_mol("CCN(CC)CCCC(C)NC1=C2C=CC(=CC2=NC=C1)Cl")
 
     true_values = pd.Series(
@@ -171,7 +168,6 @@ def test_any_rdkit_descriptor():
 
 
 def test_n_aromatic_atoms():
-
     smiles = "Nc1cnn(-c2ccccc2)c(=O)c1Cl"
     mol = dm.to_mol(smiles)
 

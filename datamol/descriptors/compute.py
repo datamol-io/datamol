@@ -108,7 +108,6 @@ def compute_many_descriptors(
 
     props = {}
     for k, v in properties_fn.items():
-
         if isinstance(v, str):
             v = any_rdkit_descriptor(v)
 

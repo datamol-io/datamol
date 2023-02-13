@@ -10,6 +10,8 @@ import io
 import hashlib
 import pathlib
 
+import platformdirs
+
 import fsspec
 import fsspec.utils
 
@@ -25,15 +27,6 @@ def _import_tqdm():
         return None
 
 
-def _import_appdirs():
-    try:
-        import appdirs
-
-        return appdirs
-    except ImportError:
-        return None
-
-
 def get_cache_dir(app_name: str, suffix: Optional[str] = None, create: bool = True):
     """Get a local cache directory for a given application name.
 
@@ -44,14 +37,7 @@ def get_cache_dir(app_name: str, suffix: Optional[str] = None, create: bool = Tr
             already exist.
     """
 
-    appdirs = _import_appdirs()
-
-    if appdirs is None:
-        raise ImportError(
-            "To use `dm.utils.fs.get_cache_dir()`, you must have `appdirs` "
-            "installed: `conda install appdirs`."
-        )
-    cache_dir = pathlib.Path(appdirs.user_cache_dir(appname=app_name))
+    cache_dir = pathlib.Path(platformdirs.user_cache_dir(appname=app_name))
 
     if suffix is not None:
         cache_dir /= suffix
@@ -229,7 +215,6 @@ def copy_file(
         source_file = source
 
     if isinstance(destination, (str, os.PathLike)):
-
         # adapt the file mode of the destination depending on the source file.
         destination_mode = "wb"
         if hasattr(source_file, "mode"):
@@ -251,7 +236,6 @@ def copy_file(
 
     with source_file as source_stream:
         with destination_file as destination_stream:
-
             if chunk_size is None:
                 # copy without chunks
                 destination_stream.write(source_stream.read())  # type: ignore

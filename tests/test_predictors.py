@@ -5,7 +5,6 @@ import numpy as np
 
 
 def test_esol():
-
     smiles = "Nc1cnn(-c2ccccc2)c(=O)c1Cl"
     mol = dm.to_mol(smiles)
 

@@ -71,10 +71,11 @@ Please cite Datamol if you use it in your research: [![DOI](https://zenodo.org/b
 
 Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between `datamol`, `python` and `rdkit`.
 
-See below the associated versions of Python and RDKit, for which a minor version of Datamol has been tested during its whole lifecycle.
+See below the associated versions of Python and RDKit, for which a minor version of Datamol **has been tested** during its whole lifecycle. _It does not mean other combinations does not work but that those are not tested._
 
 | `datamol` | `python`           | `rdkit`                       |
 | --------- | ------------------ | ----------------------------- |
+| `0.9`     | `[3.9, 3.10]`      | `[2022.03, 2022.09]`          |
 | `0.8`     | `[3.8, 3.9, 3.10]` | `[2021.09, 2022.03, 2022.09]` |
 | `0.7`     | `[3.8, 3.9]`       | `[2021.09, 2022.03]`          |
 | `0.6`     | `[3.8, 3.9]`       | `[2021.09]`                   |

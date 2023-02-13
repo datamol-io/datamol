@@ -208,7 +208,6 @@ def read_sdf(
     # Regular local or remote paths
     else:
         with fsspec.open(urlpath, compression="infer") as f:
-
             supplier = rdmolfiles.ForwardSDMolSupplier(
                 f,
                 sanitize=sanitize,

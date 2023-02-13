@@ -47,7 +47,6 @@ def match_substructure(
     all_bond_indices = []
 
     for mol in mols:
-
         atom_indices = []
         bond_indices = []
 

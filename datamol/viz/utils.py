@@ -21,7 +21,6 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
 
     try:
         with dm.without_rdkit_log():
-
             # Check for implicit and explicit valence
             if mol.NeedsUpdatePropertyCache():  # type: ignore
                 mol.UpdatePropertyCache(False)  # type: ignore
@@ -36,7 +35,6 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
             _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=_kekulize)
 
     except ValueError:  # <- can happen on a kekulization failure
-
         # Run the rdkit preparation procedure with kekulize set to `False`
         _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=False)
 
