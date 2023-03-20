@@ -226,7 +226,7 @@ def fp_to_array(
     else:
         raise ValueError(
             f"The fingerprint of type '{type(fp)}' is not supported. "
-            "Please open a ticket at https://github.com/datamol-org/datamol/issues."
+            "Please open a ticket at https://github.com/datamol-io/datamol/issues."
         )
 
     return fp_out

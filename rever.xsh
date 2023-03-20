@@ -1,8 +1,8 @@
 # Configuration
 
 $PROJECT = $GITHUB_REPO  = 'datamol'
-$GITHUB_ORG = 'datamol-org'
-$PUSH_TAG_REMOTE = 'git@github.com:datamol-org/datamol.git'
+$GITHUB_ORG = 'datamol-io'
+$PUSH_TAG_REMOTE = 'git@github.com:datamol-io/datamol.git'
 $GHRELEASE_TARGET = 'main'
 
 # Logic

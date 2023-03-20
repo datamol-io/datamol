@@ -6,28 +6,28 @@
 ---
 
 [![DOI](https://zenodo.org/badge/341603042.svg)](https://zenodo.org/badge/latestdoi/341603042)
-[![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/main?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb)
+[![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-io/datamol/main?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb)
 [![PyPI](https://img.shields.io/pypi/v/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/v/conda-forge/datamol?label=conda&color=success)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/dn/conda-forge/datamol)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datamol)](https://pypi.org/project/datamol/)
-[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-org/datamol/blob/main/LICENSE)
-[![GitHub Repo stars](https://img.shields.io/github/stars/datamol-org/datamol)](https://github.com/datamol-org/datamol/stargazers)
-[![GitHub Repo stars](https://img.shields.io/github/forks/datamol-org/datamol)](https://github.com/datamol-org/datamol/network/members)
-[![Codecov](https://codecov.io/gh/datamol-org/datamol/branch/main/graph/badge.svg?token=2ETG8SA7IG)](https://codecov.io/gh/datamol-org/datamol)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-io/datamol/blob/main/LICENSE)
+[![GitHub Repo stars](https://img.shields.io/github/stars/datamol-io/datamol)](https://github.com/datamol-io/datamol/stargazers)
+[![GitHub Repo stars](https://img.shields.io/github/forks/datamol-io/datamol)](https://github.com/datamol-io/datamol/network/members)
+[![Codecov](https://codecov.io/gh/datamol-io/datamol/branch/main/graph/badge.svg?token=2ETG8SA7IG)](https://codecov.io/gh/datamol-io/datamol)
 
 Datamol is a python library to work with molecules. It's a layer built on top of [RDKit](https://www.rdkit.org/) and aims to be as light as possible.
 
 - 🐍 Simple pythonic API
 - ⚗️ RDKit first: all you manipulate are `rdkit.Chem.Mol` objects.
-- ✅ Manipulating molecules often rely on many options; Datamol provides good defaults by design.
-- 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
+- ✅ Manipulating molecules often relies on many options; Datamol provides good defaults by design.
+- 🧠 Performance matters: built-in efficient parallelization when possible with an optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
 ## Try Online
 
-Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-org/datamol/main?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb) and try Datamol online.
+Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/datamol-io/datamol/main?urlpath=lab/tree/docs/tutorials/The_Basics.ipynb) and try Datamol online.
 
 ## Documentation
 
@@ -104,17 +104,17 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 ## CI Status
 
-The CI run tests and perform code quality checks for the following combinations:
+The CI runs tests and performs code quality checks for the following combinations:
 
 - The three major platforms: Windows, OSX and Linux.
 - The two latest Python versions.
 - The two latest RDKit versions.
 
-|                                         | `main`                                                                                                                                                                      |
-| --------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Lib build & Testing                     | [![test](https://github.com/datamol-org/datamol/actions/workflows/test.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/test.yml)                   |
-| Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/code-check.yml) |
-| Documentation Build                     | [![doc](https://github.com/datamol-org/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-org/datamol/actions/workflows/doc.yml)                      |
+|                                         | `main`                                                                                                                                                                    |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lib build & Testing                     | [![test](https://github.com/datamol-io/datamol/actions/workflows/test.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/test.yml)                   |
+| Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
+| Documentation Build                     | [![doc](https://github.com/datamol-io/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/doc.yml)                      |
 
 ## Changelogs
 
