@@ -53,8 +53,8 @@ dependencies = [
 
 [project.urls]
 Website = "https://datamol.io"
-"Source Code" = "https://github.com/datamol-org/datamol"
-"Bug Tracker" = "https://github.com/datamol-org/datamol/issues"
+"Source Code" = "https://github.com/datamol-io/datamol"
+"Bug Tracker" = "https://github.com/datamol-io/datamol/issues"
 Documentation = "https://doc.datamol.io"
 
 [tool.setuptools]
@@ -64,7 +64,7 @@ include-package-data = true
 where = ["."]
 include = ["datamol", "datamol.*"]
 exclude = []
-namespaces = false
+namespaces = true
 
 [tool.setuptools.package-data]
 "datamol.data" = ["*"]
