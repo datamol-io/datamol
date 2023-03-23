@@ -1,5 +1,5 @@
 :root {
-  --datamol-primary: #f2994a;
+  --datamol-primary: #F89D4C;
   --datamol-secondary: #343a40;
 
   /* Primary color shades */
@@ -28,13 +28,17 @@
   --md-footer-fg-color: var(--datamol-secondary);
   --md-footer-fg-color--light: var(--datamol-secondary);
   --md-footer-fg-color--lighter: var(--datamol-secondary);
+
+}
+
+.md-header{
+  background-image: linear-gradient(to right, #F89D4C, #E20000);
 }
 
 /* Increase the size of the logo */
 .md-header__button.md-logo img,
 .md-header__button.md-logo svg {
-  width: 4em;
-  height: 4em;
+  height: 2rem !important;
 }
 
 /* Reduce the margin around the logo */
