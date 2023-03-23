@@ -1,6 +1,5 @@
 <div align="center">
-    <img src="docs/images/logo-title.png" height="80px">
-    <h3>Molecular Manipulation Made Easy</h3>
+    <img src="docs/images/logo-title.png" width="85%">
 </div>
 
 ---

@@ -58,8 +58,8 @@ theme:
   # color check `docs/assets/css/datamol-custom.css`.
   features:
     - navigation.expand
-  favicon: images/logo.png
-  logo: images/logo.png
+  favicon: images/logo-black.png
+  logo: images/logo.svg
 
 extra_css:
   - assets/css/custom.css
