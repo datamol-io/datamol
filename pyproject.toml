@@ -60,8 +60,8 @@ Documentation = "https://doc.datamol.io"
 [tool.setuptools]
 include-package-data = true
 
-[tool.setuptools.dynamic]
-version = { attr = "datamol.__version__" }
+[tool.setuptools_scm]
+fallback_version = "dev"
 
 [tool.setuptools.packages.find]
 where = ["."]

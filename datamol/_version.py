@@ -1,9 +1,16 @@
-__version__ = "0.9.0"
+from importlib.metadata import version
+from importlib.metadata import PackageNotFoundError
 
 
 import rdkit
 import packaging.version
 
+
+try:
+    __version__ = version("datamol")
+except PackageNotFoundError:
+    # package is not installed
+    __version__ = "dev"
 
 CURRENT_RDKIT_VERSION = rdkit.__version__
 CURRENT_RDKIT_VERSION_OBJ = packaging.version.parse(CURRENT_RDKIT_VERSION)
