@@ -56,4 +56,4 @@ The doc is built for eash push on `main` and every git tags using [mike](https:/
   - Bump the version number in `setup.py` and `_version.py`.
   - Add a git tag.
   - Push the git tag.
-  - Add a new release on the GH repo associated with the git tag.
+  - Then a GH Action will upload a new release on the GH repo associated with the git tag and push the package to PyPi.
