@@ -5,6 +5,7 @@
 **Changed:**
 
 * moved `CODE_OF_CONDUCT.md`, `CODEOWNDERS`, `CONTRIBUTING.md` and `SECURITY.md` to `.github/` dir
+* Improve and automate the release process.
 
 **Deprecated:**
 

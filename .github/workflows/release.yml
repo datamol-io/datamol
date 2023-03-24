@@ -1,0 +1,49 @@
+name: release
+
+on:
+  push:
+    tags:
+      - "*"
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    defaults:
+      run:
+        shell: bash -l {0}
+
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v3
+
+      - name: Setup conda
+        uses: mamba-org/provision-with-micromamba@v15
+        with:
+          environment-file: env.yml
+          environment-name: datamol
+          cache-downloads: true
+          cache-env: true
+          extra-specs: |
+            setuptools-scm
+
+      - name: Install library
+        run: python -m pip install --no-deps .
+
+      - name: Build the wheel and sdist
+        run: python -m build --no-isolation
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          packages-dir: dist/
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
+        with:
+          body: "See [CHANGELOGS.rst](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.rst)."

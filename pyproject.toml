@@ -5,9 +5,9 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "datamol"
 description = "A python library to work with molecules. Built on top of RDKit."
-version = "0.9.0" # project
 authors = [{ name = "Hadrien Mary", email = "hadrien@valencediscovery.com" }]
 readme = "README.md"
+dynamic = ["version"]
 requires-python = ">=3.8"
 license = { text = "Apache" }
 classifiers = [
@@ -59,6 +59,9 @@ Documentation = "https://doc.datamol.io"
 
 [tool.setuptools]
 include-package-data = true
+
+[tool.setuptools.dynamic]
+version = { attr = "datamol.__version__" }
 
 [tool.setuptools.packages.find]
 where = ["."]
