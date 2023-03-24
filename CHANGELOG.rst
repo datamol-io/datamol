@@ -4,6 +4,23 @@ Datamol Changelogs
 
 .. current developments
 
+v0.9.1
+====================
+
+**Changed:**
+
+* moved `CODE_OF_CONDUCT.md`, `CODEOWNDERS`, `CONTRIBUTING.md` and `SECURITY.md` to `.github/` dir
+* Improve and automate the release process.
+* Adapt the logo and colors to the new branding.
+* Replace `datamol-org` to `datamol-io` everywhere in the codebase due to GH org rename.
+
+**Authors:**
+
+* Hadrien Mary
+* Saurav Maheshkar
+
+
+
 v0.9.0
 ====================
 
