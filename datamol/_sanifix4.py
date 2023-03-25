@@ -2,9 +2,11 @@
 sanifix4.py
 Original code from rdkit [James Davidson]
 """
-import logging
 
-from rdkit import Chem
+from rdkit import Chem, RDLogger
+
+
+logger = RDLogger.logger()
 
 
 def _FragIndicesToMol(oMol, indices):
@@ -118,16 +120,16 @@ def sanifix(m):
         Chem.SanitizeMol(cp)
         return cp
     except ValueError as e:
-        logging.debug(e, Chem.MolToSmiles(m))
+        logger.debug(f"{Chem.MolToSmiles(m)} failed due to {e}")
         try:
             m = AdjustAromaticNs(m)
             if m is not None:
                 Chem.SanitizeMol(m)
             return m
         except Exception as ee:
-            logging.debug(ee, Chem.MolToSmiles(m))
+            logger.debug(f"{Chem.MolToSmiles(m)} failed due to {ee}")
             return None
     except RuntimeError as e:
-        logging.debug(e, Chem.MolToSmiles(m))
-        logging.info("The faulty smiles is: {}".format(Chem.MolToSmiles(m)))
+        logger.debug(f"{Chem.MolToSmiles(m)} failed due to {e}")
+        logger.info(f"The faulty smiles is: {Chem.MolToSmiles(m)}")
         raise e
