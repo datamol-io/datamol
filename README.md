@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="docs/images/cover-datamol.svg" width="100%">
+    <img src="docs/images/cover-datamol.svg" width="85%">
 </div>
 
 <p align="center">
