@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="docs/images/cover-datamol.svg" width="100%">
+    <img src="docs/images/logo-title.svg" width="100%">
 </div>
 
 <p align="center">
@@ -8,11 +8,12 @@
 <p align="center">
   <a href="https://doc.datamol.io/stable/" target="_blank">
       Docs
-  </a> | 
-  <a href="https://www.datamol.io/" target="_blank">
+  </a> |
+  <a href="https://datamol.io/" target="_blank">
       Homepage
   </a>
 </p>
+
 ---
 
 [![DOI](https://zenodo.org/badge/341603042.svg)](https://zenodo.org/badge/latestdoi/341603042)
