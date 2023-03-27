@@ -3,7 +3,7 @@
 </div>
 
 <p align="center">
-    <b>datamol - molecular processing made easy </b>. <br />
+    <b>datamol - molecular processing made easy</b> <br />
 </p>
 <p align="center">
   <a href="https://doc.datamol.io/stable/" target="_blank">
