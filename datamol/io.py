@@ -274,14 +274,14 @@ def to_sdf(
                 writer.write(mol)
             writer.close()
 
+
 def read_mol2file(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
     cleanupSubstructures: bool = True,
     remove_hs: bool = True,
-    fail_if_invalid: bool = False,  
+    fail_if_invalid: bool = False,
 ) -> List[Mol]:
-    
     """Read a Mol2 File
 
     Args:
@@ -292,21 +292,21 @@ def read_mol2file(
         fail_if_invalid: If set to true, the parser will raise an exception if the molecule is invalid
             instead of returning None.
     """
-    
-    block=[]
-    mols=[]
+
+    block = []
+    mols = []
     with fsspec.open(urlpath, compression="infer") as f:
         fReadLines = f.readlines()
-        #reversing due to ambiguous end line for mol2 files
+        # reversing due to ambiguous end line for mol2 files
         fReadLines.reverse()
         for line in fReadLines:
-            #ignores any header info
+            # ignores any header info
             if b"#" not in line:
-                block.append(str(line,'utf-8'))
-            #since reversed, this is the 'end' a mol2
-            if b'@<TRIPOS>MOLECULE' in line:
+                block.append(str(line, "utf-8"))
+            # since reversed, this is the 'end' a mol2
+            if b"@<TRIPOS>MOLECULE" in line:
                 block.reverse()
-                mol2block = ",".join(block).replace(',','')
+                mol2block = ",".join(block).replace(",", "")
                 mol = rdmolfiles.MolFromMol2Block(
                     mol2block,
                     sanitize=sanitize,
@@ -316,10 +316,11 @@ def read_mol2file(
                 if mol is None and fail_if_invalid:
                     raise ValueError(f"Invalid molecule: {mol2block}")
                 mols.append(mol)
-                block=[]
-    
+                block = []
+
     mols.reverse()
     return mols
+
 
 def read_molblock(
     molblock: str,
