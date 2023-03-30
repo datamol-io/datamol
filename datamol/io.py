@@ -288,7 +288,7 @@ def read_mol2file(
         urlpath: Path to a file or a file-like object. Path can be remote or local.
         sanitize: Whether to sanitize the molecules.
         remove_hs: Whether to remove the existing hydrogens in the SDF files.
-        cleanupSubstructures: Whether to clean up substructure in the Mol2 Files.
+        cleanup_substructures: Whether to clean up substructure in the Mol2 Files.
         fail_if_invalid: If set to true, the parser will raise an exception if the molecule is invalid
             instead of returning None.
     """
