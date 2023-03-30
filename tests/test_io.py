@@ -245,16 +245,28 @@ def test_read_mol2(datadir):
     data_path = datadir / "test.mol2"
 
     # to list of mols
-    mols = dm.read_mol2file(data_path)
+    mols = dm.read_mol2_file(data_path)
 
-    for mol in mols:
-        assert isinstance(mol, Chem.rdchem.Mol)
+    assert isinstance(mols[0], Chem.rdchem.Mol)
+    assert isinstance(mols[1], Chem.rdchem.Mol)
+    assert isinstance(mols[2], Chem.rdchem.Mol)
+    # cases where mol2 formats are damaged
+    assert mols[3] is None
+    assert mols[4] is None
+    assert mols[5] is None
+    assert mols[6] is None
+    assert mols[7] is None
 
     firstMol = dm.to_mol("c1ccncc1")
     secondMol = dm.to_mol("c1c[nH]cn1")
 
     assert dm.same_mol(mols[0], firstMol)
     assert dm.same_mol(mols[1], secondMol)
+    assert dm.same_mol(mols[2], secondMol)
+
+    # a case where exception is raised because of None values
+    with pytest.raises(ValueError):
+        mols = dm.read_mol2_file(data_path, fail_if_invalid=True)
 
 
 def test_read_save_molblock():

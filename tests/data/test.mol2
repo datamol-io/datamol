@@ -60,3 +60,184 @@ AMBER ff14SB
      9    5    9 1
 @<TRIPOS>SUBSTRUCTURE
      1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_third
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2973   -0.3859   -0.0124 C       1 UNK    0.0838
+      2 N2          0.0021   -0.0041    0.0020 N       1 UNK   -0.3106
+      3 H3         -0.7708   -0.5902    0.0062 H       1 UNK    0.1532
+      4 C4         -0.0165    1.3646    0.0095 C       1 UNK    0.0120
+      5 C5          1.2671    1.7717   -0.0005 C       1 UNK    0.0422
+      6 N6          2.0482    0.6814   -0.0138 N       1 UNK   -0.2480
+      7 H7          1.6529   -1.4057   -0.0216 H       1 UNK    0.1014
+      8 H8         -0.8923    1.9965    0.0173 H       1 UNK    0.0806
+      9 H9          1.6079    2.7966    0.0017 H       1 UNK    0.0854
+@<TRIPOS>BOND
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_sec_f
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2973   -0.3859   -0.0124 C.2       1 UNK    0.0838
+      2 N2          0.0021   -0.0041    0.0020 N.pl3     1 UNK   -0.3106
+      3 H3         -0.7708   -0.5902    0.0062 H         1 UNK    0.1532
+      4 C4         -0.0165    1.3646    0.0095 C.2       1 UNK    0.0120
+      5 C5          1.2671    1.7717   -0.0005 C.2       1 UNK    0.0422
+      6 N6          2.0482    0.6814   -0.0138 N.2       1 UNK   -0.2480
+      7 H7          1.6529   -1.4057   -0.0216 H         1 UNK    0.1014
+      8 H8         -0.8923    1.9965    0.0173 H         1 UNK    0.0806
+      9 H9          1.6079    2.7966    0.0017 H         1 UNK    0.0854
+
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_sec_f1
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+
+
+      1 C1          1.2973   -0.3859   -0.0124 C.2       1 UNK    0.0838
+      2 N2          0.0021   -0.0041    0.0020 N.pl3     1 UNK   -0.3106
+      3 H3         -0.7708   -0.5902    0.0062 H         1 UNK    0.1532
+      4 C4         -0.0165    1.3646    0.0095 C.2       1 UNK    0.0120
+      5 C5          1.2671    1.7717   -0.0005 C.2       1 UNK    0.0422
+      6 N6          2.0482    0.6814   -0.0138 N.2       1 UNK   -0.2480
+      7 H7          1.6529   -1.4057   -0.0216 H         1 UNK    0.1014
+      8 H8         -0.8923    1.9965    0.0173 H         1 UNK    0.0806
+      9 H9          1.6079    2.7966    0.0017 H         1 UNK    0.0854
+@<TRIPOS>BOND
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_sec_f3
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+@<TRIPOS>ATOM
+@<TRIPOS>BOND
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_sec_f4
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+@<TRIPOS>ATOM
+@<TRIPOS>BOND
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+
+
+@<TRIPOS>MOLECULE
+
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2973   -0.3859   -0.0124 C.2       1 UNK    0.0838
+      2 N2          0.0021   -0.0041    0.0020 N.pl3     1 UNK   -0.3106
+      3 H3         -0.7708   -0.5902    0.0062 H         1 UNK    0.1532
+      4 C4         -0.0165    1.3646    0.0095 C.2       1 UNK    0.0120
+      5 C5          1.2671    1.7717   -0.0005 C.2       1 UNK    0.0422
+      6 N6          2.0482    0.6814   -0.0138 N.2       1 UNK   -0.2480
+      7 H7          1.6529   -1.4057   -0.0216 H         1 UNK    0.1014
+      8 H8         -0.8923    1.9965    0.0173 H         1 UNK    0.0806
+      9 H9          1.6079    2.7966    0.0017 H         1 UNK    0.0854
+
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
+@<TRIPOS>MOLECULE
+mol_sec
+9 9 1 0 0 
+SMALL
+AMBER ff14SB
+
+
+@<TRIPOS>ATOM
+      1 C1          1.2973   -0.3859   -0.0124 C       1 UNK    0.0838
+      2 N2          0.0021   -0.0041    0.0020 N       1 UNK   -0.3106
+      3 H3         -0.7708   -0.5902    0.0062 H       1 UNK    0.1532
+      4 C4         -0.0165    1.3646    0.0095 C       1 UNK    0.0120
+      5 C5          1.2671    1.7717   -0.0005 C       1 UNK    0.0422
+      6 N6          2.0482    0.6814   -0.0138 N       1 UNK   -0.2480
+      7 H7          1.6529   -1.4057   -0.0216 H       1 UNK    0.1014
+      8 H8         -0.8923    1.9965    0.0173 H       1 UNK    0.0806
+      9 H9          1.6079    2.7966    0.0017 H       1 UNK    0.0854
+@<TRIPOS>BOND
+     1    1    6 2 
+     2    1    2 1 
+     3    1    7 1
+     4    2    3 1
+     5    2    4 1
+     6    4    5 2
+     7    4    8 1
+     8    5    6 1
+     9    5    9 1
+@<TRIPOS>SUBSTRUCTURE
+     1 UNK     1 RESIDUE           4 A     UNK     0 ROOT
+
