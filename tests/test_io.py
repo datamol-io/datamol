@@ -240,6 +240,21 @@ def test_sdf_props_and_conformer_preserved(tmp_path):
     assert conf.Is3D()
     np.testing.assert_almost_equal(conf.GetPositions(), pos, decimal=4)
 
+def test_read_mol2(datadir):
+    data_path = datadir / "test.mol2"
+        
+    # to list of mols
+    mols = dm.read_mol2file(data_path)
+
+    for mol in mols:
+        assert isinstance(mol, Chem.rdchem.Mol)
+
+    firstMol = dm.to_mol('c1ccncc1')
+    secondMol = dm.to_mol('c1c[nH]cn1')
+
+    assert dm.same_mol(mols[0], firstMol)
+    assert dm.same_mol(mols[1], secondMol)
+
 
 def test_read_save_molblock():
     mol = dm.to_mol("Cn1c(=O)c2c(ncn2C)n(C)c1=O")
