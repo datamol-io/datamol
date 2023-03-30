@@ -275,7 +275,7 @@ def to_sdf(
             writer.close()
 
 
-def read_mol2file(
+def read_mol2_file(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
     cleanupSubstructures: bool = True,
