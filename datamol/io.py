@@ -274,6 +274,45 @@ def to_sdf(
                 writer.write(mol)
             writer.close()
 
+def read_mol2file(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = True,
+    cleanupSubstructures: bool = True,
+    remove_hs: bool = True,
+    fail_if_invalid: bool = False,  
+) -> List[Mol]:
+    
+    with fsspec.open(urlpath, compression="infer") as f:
+        fReadLines = f.readlines()
+        for line in fReadLines:
+            # with fsspec.open(urlpath, mode="w") as f:
+            mols = rdmolfiles.MolFromMol2File(
+                urlpath,
+                sanitize=sanitize,
+                removeHs=remove_hs,
+                cleanupSubstructures=cleanupSubstructures
+            )
+
+    return mols
+
+# def read_mol2block(
+#     mol2block: str,
+#     sanitize: bool = True,
+#     cleanupSubstructures: bool = True,
+#     remove_hs: bool = True,
+#     fail_if_invalid: bool = False,  
+# ) -> Optional[dm.Mol]:
+    
+#     mol = rdmolfiles.MolFromMol2Block(
+#     mol2block,
+#     sanitize=sanitize,
+#     removeHs=remove_hs,
+#     cleanupSubstructures=cleanupSubstructures,
+# )
+#     if mol is None and fail_if_invalid:
+#         raise ValueError(f"Invalid molecule: {mol2block}")
+
+#     return mol
 
 def read_molblock(
     molblock: str,
