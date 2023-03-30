@@ -119,7 +119,7 @@ from .io import read_sdf
 from .io import to_sdf
 from .io import to_smi
 from .io import read_smi
-from .io import read_mol2_file
+from .io import read_mol2file
 from .io import read_molblock
 from .io import to_molblock
 from .io import to_xlsx

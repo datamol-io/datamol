@@ -275,10 +275,10 @@ def to_sdf(
             writer.close()
 
 
-def read_mol2_file(
+def read_mol2file(
     urlpath: Union[str, os.PathLike, IO],
     sanitize: bool = True,
-    cleanupSubstructures: bool = True,
+    cleanup_substructures: bool = True,
     remove_hs: bool = True,
     fail_if_invalid: bool = False,
 ) -> List[Mol]:
@@ -311,7 +311,7 @@ def read_mol2_file(
                     mol2block,
                     sanitize=sanitize,
                     removeHs=remove_hs,
-                    cleanupSubstructures=cleanupSubstructures,
+                    cleanupSubstructures=cleanup_substructures,
                 )
                 if mol is None and fail_if_invalid:
                     raise ValueError(f"Invalid molecule: {mol2block}")

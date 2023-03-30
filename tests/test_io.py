@@ -245,7 +245,7 @@ def test_read_mol2(datadir):
     data_path = datadir / "test.mol2"
 
     # to list of mols
-    mols = dm.read_mol2_file(data_path)
+    mols = dm.read_mol2file(data_path)
 
     assert isinstance(mols[0], Chem.rdchem.Mol)
     assert isinstance(mols[1], Chem.rdchem.Mol)
@@ -266,7 +266,7 @@ def test_read_mol2(datadir):
 
     # a case where exception is raised because of None values
     with pytest.raises(ValueError):
-        mols = dm.read_mol2_file(data_path, fail_if_invalid=True)
+        mols = dm.read_mol2file(data_path, fail_if_invalid=True)
 
 
 def test_read_save_molblock():
