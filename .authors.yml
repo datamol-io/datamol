@@ -24,7 +24,7 @@
   first_commit: 2021-02-12 17:01:32
 - name: Therence1
   email: 38595485+Therence1@users.noreply.github.com
-  num_commits: 3
+  num_commits: 13
   first_commit: 2021-04-03 17:31:09
 - name: mike
   email: michael@invivoai.com
@@ -48,12 +48,12 @@
   first_commit: 2022-01-26 17:14:26
 - name: Cas
   email: caswognum@hotmail.com
-  num_commits: 5
+  num_commits: 7
   first_commit: 2022-06-02 16:20:56
   aliases:
   - cwognum
   alternate_emails:
-    - caswognum@outlook.com
+  - caswognum@outlook.com
   github: cwognum
 - name: DomInvivo
   email: dominique@invivoai.com
@@ -78,3 +78,8 @@
   num_commits: 5
   first_commit: 2023-03-07 16:59:47
   github: SauravMaheshkar
+- name: Pakman450
+  email: steven.pak10@gmail.com
+  num_commits: 10
+  first_commit: 2023-03-30 00:37:39
+  github: Pakman450
