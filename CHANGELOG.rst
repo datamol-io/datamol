@@ -4,6 +4,26 @@ Datamol Changelogs
 
 .. current developments
 
+v0.9.2
+====================
+
+**Added:**
+
+* A multi-mol2 file reader that converts into rdkit objects
+
+**Fixed:**
+
+* Updated the logging in `_sanifix4.py` to use the RDKit logger
+
+**Authors:**
+
+* Cas
+* Hadrien Mary
+* Pakman450
+* Therence1
+
+
+
 v0.9.1
 ====================
 
