@@ -6,7 +6,7 @@
     <b>datamol - molecular processing made easy</b> <br />
 </p>
 <p align="center">
-  <a href="https://doc.datamol.io/stable/" target="_blank">
+  <a href="https://docs.datamol.io/stable/" target="_blank">
       Docs
   </a> |
   <a href="https://datamol.io/" target="_blank">
@@ -42,7 +42,7 @@ Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh
 
 ## Documentation
 
-Visit https://doc.datamol.io.
+Visit https://docs.datamol.io.
 
 ## Installation
 

@@ -55,7 +55,7 @@ dependencies = [
 Website = "https://datamol.io"
 "Source Code" = "https://github.com/datamol-io/datamol"
 "Bug Tracker" = "https://github.com/datamol-io/datamol/issues"
-Documentation = "https://doc.datamol.io"
+Documentation = "https://docs.datamol.io"
 
 [tool.setuptools]
 include-package-data = true
