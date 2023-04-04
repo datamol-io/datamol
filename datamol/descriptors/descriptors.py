@@ -77,7 +77,6 @@ def n_matches_filt_cat(
 ) -> int:
     """Compute the number of PAINS in a molecule.
 
-    Rigid bonds are bonds that are not single and not in rings.
 
     Args:
         mol: A molecule.
