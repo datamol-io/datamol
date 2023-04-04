@@ -91,7 +91,7 @@ def n_matches_filt_cat(
     PAINS_catalog = FilterCatalog.FilterCatalog(PAINS_params) 
 
     entries = PAINS_catalog.GetMatches(mol)
-    return len(entries) 
+    return len(entries)
 
 def n_rigid_bonds(mol: Mol) -> int:
     """Compute the number of rigid bonds in a molecule.

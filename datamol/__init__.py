@@ -86,6 +86,7 @@ from . import molar
 from . import descriptors
 from . import predictors
 from . import reactions
+from . import filter
 
 from .convert import to_smiles
 from .convert import to_selfies
