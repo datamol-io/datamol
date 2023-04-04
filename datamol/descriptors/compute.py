@@ -36,6 +36,7 @@ from .descriptors import n_aromatic_rings
 from .descriptors import n_saturated_carbocycles
 from .descriptors import n_saturated_heterocyles
 from .descriptors import n_saturated_rings
+from .descriptors import n_matches_filt_cat
 
 
 def any_rdkit_descriptor(name: str) -> Callable:
@@ -79,6 +80,7 @@ _DEFAULT_PROPERTIES_FN = {
     "n_saturated_carbocycles": n_saturated_carbocycles,
     "n_saturated_heterocyles": n_saturated_heterocyles,
     "n_saturated_rings": n_saturated_rings,
+    "n_matches_filt_cat": n_matches_filt_cat,
 }
 
 

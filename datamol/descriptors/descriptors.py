@@ -73,7 +73,7 @@ n_saturated_rings = rdMolDescriptors.CalcNumSaturatedRings
 
 def n_matches_filt_cat(    
     mol: Mol,
-    filt_specifier: str = "PAINS",
+    filt_specifier: str = "ALL",
 ) -> int:
     """Compute the number of PAINS in a molecule.
 
