@@ -138,6 +138,7 @@ from . import conformers
 from . import viz
 
 from .viz import to_image
+from .viz import lasso_highlight_image
 
 from .mcs import find_mcs
 
