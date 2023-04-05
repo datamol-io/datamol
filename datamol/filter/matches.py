@@ -8,6 +8,14 @@ from .. import Mol
 from .._version import is_lower_than_current_rdkit_version
 
 
+def set_filter_params(
+    filt_specifier
+) -> object:
+    Catalog = FilterCatalog.FilterCatalogParams()
+    Catalog.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[filt_specifier])
+    Catalog = FilterCatalog.FilterCatalog(Catalog) 
+    return Catalog
+
 
 def n_matches(    
     mol: Mol,
@@ -23,11 +31,9 @@ def n_matches(
     Returns:
         n_matches: number of matches based on specified catalog
     """
-    PAINS_params = FilterCatalog.FilterCatalogParams()
-    PAINS_params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[filt_specifier])
-    PAINS_catalog = FilterCatalog.FilterCatalog(PAINS_params) 
+    Catalog = set_filter_params(filt_specifier)
 
-    entries = PAINS_catalog.GetMatches(mol)
+    entries = Catalog.GetMatches(mol)
     return len(entries)
 
 def get_descriptions(    
@@ -44,11 +50,9 @@ def get_descriptions(
     Returns:
         get_descriptions: list of strings that expresses the description of each hit
     """
-    PAINS_params = FilterCatalog.FilterCatalogParams()
-    PAINS_params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[filt_specifier])
-    PAINS_catalog = FilterCatalog.FilterCatalog(PAINS_params) 
+    Catalog = set_filter_params(filt_specifier)
 
-    entries = PAINS_catalog.GetMatches(mol)
+    entries = Catalog.GetMatches(mol)
     descriptions = [entry.GetDescription() for entry in entries]
     return descriptions
 
@@ -66,11 +70,9 @@ def get_filter_set(
     Returns:
         get_descriptions: list of strings that expresses the filter set of each hit
     """
-    PAINS_params = FilterCatalog.FilterCatalogParams()
-    PAINS_params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[filt_specifier])
-    PAINS_catalog = FilterCatalog.FilterCatalog(PAINS_params) 
+    Catalog = set_filter_params(filt_specifier)
 
-    entries = PAINS_catalog.GetMatches(mol)
+    entries = Catalog.GetMatches(mol)
     props = [entry.GetProp('FilterSet') for entry in entries]
 
     return props
