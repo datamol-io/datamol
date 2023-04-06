@@ -33,7 +33,7 @@ from .descriptors import n_stereo_centers
 from .descriptors import n_charged_atoms
 from .descriptors import n_stereo_centers_unspecified
 from .descriptors import n_spiro_atoms
-from .descriptors import n_matches_filt_cat
+from ..filter import n_matches
 
 from .compute import any_rdkit_descriptor
 from .compute import compute_many_descriptors
