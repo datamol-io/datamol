@@ -19,14 +19,27 @@ def set_filter_params(
     Returns:
         Catalog: a catalog of the user-defined parameters
     """
+
+    #To make sure if you write 'ALL' in in catalog_specifiers
+    #that list just has ['ALL'] so there are no repeats
+    for a_set in catalog_specifiers:
+        if 'ALL' in a_set:
+            catalog_specifiers = ['ALL']
+            break
+        if 'PAINS' == a_set:
+            catalog_specifiers = [cat for cat in catalog_specifiers if "PAINS" not in cat]
+            catalog_specifiers.append('PAINS')
+        if a_set in catalog_specifiers:
+            raise ValueError('Your catalog_specifiers have duplicate filter catalogs')
+
     params = FilterCatalog.FilterCatalogParams()
     for cat in catalog_specifiers:
         params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
-    Catalog = FilterCatalog.FilterCatalog(params) 
+    Catalog = FilterCatalog.FilterCatalog(params)
     return Catalog
 
 
-def n_matches(    
+def n_matches(
     mol: Mol,
     catalog_specifiers: List[str] = ["ALL"],
 ) -> int:
@@ -45,7 +58,8 @@ def n_matches(
     matches = Catalog.GetMatches(mol)
     return len(matches)
 
-def get_descriptions(    
+
+def get_descriptions(
     mol: Mol,
     catalog_specifiers: List[str] = ["ALL"],
 ) -> List[str]:
@@ -66,10 +80,9 @@ def get_descriptions(
 
     return descriptions
 
-def get_props(    
-    mol: Mol,
-    catalog_specifiers: List[str] = ["ALL"],
-    prop: str = 'FilterSet'
+
+def get_props(
+    mol: Mol, catalog_specifiers: List[str] = ["ALL"], prop: str = "FilterSet"
 ) -> List[str]:
     """Get the values of the props RDKit FilterCatalog hits for a given molecule
 
@@ -81,12 +94,11 @@ def get_props(
         get_props: list of strings that expresses the values of the RDKit FilterCatalog hits
     """
     Catalog = set_filter_params(catalog_specifiers)
-    entries = Catalog.GetMatches(
-        mol = mol
-        )
+    entries = Catalog.GetMatches(mol=mol)
     vals = [entry.GetProp(prop) for entry in entries]
 
     return vals
+
 
 def get_prop_list(
     mol: Mol,
@@ -104,14 +116,12 @@ def get_prop_list(
         get_props_list: list of all prop keys for each RDKit FilterCatalog hit for a molecule
     """
     Catalog = set_filter_params(catalog_specifiers)
-    entries = Catalog.GetMatches(
-        mol=mol
-        )
+    entries = Catalog.GetMatches(mol=mol)
     prop_list = [entry.GetPropList() for entry in entries]
     if deconstruct:
         decons_list = []
         for prop in prop_list:
-            one_hit=[]
+            one_hit = []
             for single in prop:
                 one_hit.append(single)
             decons_list.append(one_hit)
@@ -120,10 +130,9 @@ def get_prop_list(
 
 
 def run_filter_catalog(
-        list_smi: List[str],
-        catalog_specifiers: List[str] = ["ALL"],
-        num_of_threads: int = 1,
-        
+    list_smi: List[str],
+    catalog_specifiers: List[str] = ["ALL"],
+    num_of_threads: int = 1,
 ) -> List[str]:
     """Run the filter catalog here on a list of smiles to find hits.
 
@@ -140,9 +149,8 @@ def run_filter_catalog(
         filterCatalog=Catalog,
         smiles=list_smi,
         numThreads=num_of_threads,
-        )
+    )
     for results in list_of_results:
         for line in results:
             print(line.GetDescription())
     return len(results)
-        
