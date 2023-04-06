@@ -1,4 +1,4 @@
-#This file is thanks Christian W. Feldman
+# This file is thanks Christian W. Feldman
 # Christian Feldman (2021) lassohighlight [sourcecode]. https://github.com/c-feldmann/lassohighlight.
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
@@ -10,29 +10,35 @@ from collections import namedtuple
 from typing import *
 from PIL import Image
 import io
+from loguru import logger
 
 import datamol as dm
 from .utils import prepare_mol_for_drawing
+
 
 def _angle_to_coord(center: np.ndarray, angle: np.float64, radius: np.float64) -> np.ndarray:
     """Determines a point relative to the center with distance (radius) at given angle.
     Angles are given in rad and 0 rad correspond to north of the center point.
     """
-    
+
     x = radius * np.sin(angle)
     y = radius * np.cos(angle)
     x += center[0]
     y += center[1]
     return np.array([x, y])
 
-def _arch_points(radius: np.float64, start_ang: np.float64, end_ang:np.float64, n: int) -> np.ndarray:
-    """Returns an array of the shape (2, n) with equidistant points on the arch defined by 
+
+def _arch_points(
+    radius: np.float64, start_ang: np.float64, end_ang: np.float64, n: int
+) -> np.ndarray:
+    """Returns an array of the shape (2, n) with equidistant points on the arch defined by
     given radius and angles. Angles are given in rad.
     """
     angles = np.linspace(start_ang, end_ang, n)
     x = radius * np.sin(angles)
     y = radius * np.cos(angles)
     return np.vstack([x, y]).T
+
 
 def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     """Calculates the angle in rad between two points.
@@ -41,9 +47,9 @@ def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     diff = pos - center
     return np.arctan2(diff[0], diff[1])
 
+
 def _avg_bondlen(mol: Chem.Mol) -> np.ndarray:
-    """Calculates the average bond length of an rdkit.Chem.Mol object.
-    """
+    """Calculates the average bond length of an rdkit.Chem.Mol object."""
     distance_matrix = Get3DDistanceMatrix(mol)
     bondlength_list: List = []
     for bond in mol.GetBonds():
@@ -52,14 +58,14 @@ def _avg_bondlen(mol: Chem.Mol) -> np.ndarray:
         bondlength_list.append(distance_matrix[a1, a2])
     return np.mean(bondlength_list)
 
+
 Bond = namedtuple("Bond", ["angle", "neighbour_id", "bond_id"])
 
 
 class _AttachmentPointManager:
-    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for arches and bond-attachment-points.
-    """
+    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for arches and bond-attachment-points."""
 
-    def __init__(self, position: np.array, radius: np.float64, bond_width: np.float64 ):
+    def __init__(self, position: np.array, radius: np.float64, bond_width: np.float64):
         self.pos = position
         self.bond_width = bond_width
         self.radius = radius
@@ -90,10 +96,8 @@ class _AttachmentPointManager:
             else:
                 prev_bond_angle = sorted_bonds[i - 1].angle
 
-
             # #  If both points intersect the mean angle is calculated.
             if prev_bond_angle + self.delta_angle >= alpha_left:
-
                 alpha_left = np.mean([prev_bond_angle + self.delta_angle, alpha_left])
 
                 a_rhombus = bond.angle - prev_bond_angle
@@ -115,13 +119,15 @@ class _AttachmentPointManager:
                 len_rhombus = self.bond_width / np.sin(a_rhombus)
                 d_right = 2 * len_rhombus * np.cos(a_rhombus / 2)
 
-            self.bond_attachment_points[bond.bond_id] = [(alpha_left, d_left), (alpha_right, d_right)]
+            self.bond_attachment_points[bond.bond_id] = [
+                (alpha_left, d_left),
+                (alpha_right, d_right),
+            ]
         return self
 
     def get_arch_attachment_points(self) -> Iterator[Tuple[float, float]]:
-        """Points between bonds which are drawn as arch.
-        """
-        
+        """Points between bonds which are drawn as arch."""
+
         if self.bonds:
             sorted_bonds = sorted(self.bonds, key=lambda x: x[0])
             _, _, bond_keys = zip(*sorted_bonds)
@@ -140,15 +146,15 @@ ColorTuple = Union[Tuple[float, float, float, float], Tuple[float, float, float]
 
 
 def _draw_substructurematch(
-    canvas: rdMolDraw2D.MolDraw2D, 
-    mol: Chem.Mol, 
-    indices: Union[list, str], 
-    rel_radius: float=0.3, 
-    rel_width: float=0.5, 
-    line_width: int=2, 
-    color: ColorTuple=None
-    ) -> None :
-    """ Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
+    canvas: rdMolDraw2D.MolDraw2D,
+    mol: Chem.Mol,
+    indices: Union[list, str],
+    rel_radius: float = 0.3,
+    rel_width: float = 0.5,
+    line_width: int = 2,
+    color: ColorTuple = None,
+) -> None:
+    """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
     Parameters
     ----------
     canvas : rdMolDraw2D.MolDraw2D
@@ -208,14 +214,13 @@ def _draw_substructurematch(
             neigbor_pos = conf.GetAtomPosition(neigbor_idx)
             neigbor_pos = np.array([neigbor_pos.x, neigbor_pos.y])
             bond_angle = _angle_between(atom_pos, neigbor_pos)
-            bond_angle = bond_angle % (2*np.pi)  # Assuring 0 <= bond_angle <= 2 pi
+            bond_angle = bond_angle % (2 * np.pi)  # Assuring 0 <= bond_angle <= 2 pi
             at_manager.add_bond(bond_angle, neigbor_idx, bond.GetIdx())
         at_manager.generate_attachment_points()
         a_obj_dict[a_idx] = at_manager
 
     added_bonds = set()
     for idx, at_manager in a_obj_dict.items():
-
         # A circle is drawn to atoms without outgoing connections
         if not at_manager.bonds:
             pos_list1 = _arch_points(r, 0, np.pi * 2, 60)
@@ -244,24 +249,29 @@ def _draw_substructurematch(
             atom_i_left_at = _angle_to_coord(at_manager.pos, *bnd_points[0])
             atom_i_right_at = _angle_to_coord(at_manager.pos, *bnd_points[1])
             atom_j = a_obj_dict[bond.neighbour_id]
-            atom_j_left_at = _angle_to_coord(atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][0])
-            atom_j_right_at = _angle_to_coord(atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][1])
+            atom_j_left_at = _angle_to_coord(
+                atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][0]
+            )
+            atom_j_right_at = _angle_to_coord(
+                atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][1]
+            )
             canvas.DrawLine(Point2D(*atom_i_left_at), Point2D(*atom_j_right_at))
             canvas.DrawLine(Point2D(*atom_i_right_at), Point2D(*atom_j_left_at))
     # restoring prior line width
     canvas.SetLineWidth(prior_lw)
 
-#TODO switch this over to other doc string
+
+# TODO switch this over to other doc string
 def _draw_multi_matches(
-    canvas: rdMolDraw2D.MolDraw2D, 
-    mol: Chem.Mol, 
-    indices_set_lists: List[Union[list, str]], 
-    r_min: float=0.3, 
-    r_dist: float=0.13, 
-    relative_bond_width: float=0.5, 
-    color_list: List[ColorTuple]=None,
-    line_width: int=2
-    ) -> None:
+    canvas: rdMolDraw2D.MolDraw2D,
+    mol: Chem.Mol,
+    indices_set_lists: List[Union[list, str]],
+    r_min: float = 0.3,
+    r_dist: float = 0.13,
+    relative_bond_width: float = 0.5,
+    color_list: List[ColorTuple] = None,
+    line_width: int = 2,
+) -> None:
     """
     Parameters
     ----------
@@ -311,69 +321,119 @@ def _draw_multi_matches(
             level_manager[a].add(draw_level)
 
         ar = r_min + r_dist * draw_level
-        _draw_substructurematch(canvas,
-                                mol,
-                                match_atoms,
-                                rel_radius=ar,
-                                rel_width=max(relative_bond_width, ar),
-                                color=color,
-                                line_width=line_width)
+        _draw_substructurematch(
+            canvas,
+            mol,
+            match_atoms,
+            rel_radius=ar,
+            rel_width=max(relative_bond_width, ar),
+            color=color,
+            line_width=line_width,
+        )
+
+
+color_dict = {
+    "red": (1, 0, 0, 1),
+    "blue": (0, 0.5, 1, 1),
+    "orange": (1, 0.5, 0, 1),
+    "green": (0, 1, 0, 1),
+    "yellow": (1, 1, 0, 1),
+    "dark blue": (0, 0, 0.5, 1),
+}
+
 
 def lasso_highlight_image(
-    canvas_width: int, 
+    canvas_width: int,
     canvas_height: int,
     target_molecule: Union[str, dm.Mol],
-    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]]
-    ) -> Image:
+    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
+) -> Image:
     """A generalized interface to access both highlighting options whether the input is as a smiles, smarts or mol
 
     Args:
         canvas_width (int): _description_
         canvas_height (int): _description_
-        target_molecule (Union[str, dm.Mol]): 
+        target_molecule (Union[str, dm.Mol]):
         search_molecules (Union[str, List[str], dm.Mol, List[dm.Mol]]): Various ways to enter but the search molecules must be entered as smart
     """
-    
-    color_dict = { "red":   (1,   0,    0,  1),
-            "blue":   (0,   0.5,  1,    1), 
-            "orange": (1,   0.5,  0,    1),
-            "green": (0,   1, 0, 1),
-            "yellow": (1, 1, 0, 1),
-            "dark blue": (0, 0, 0.5 , 1)
-            }
-    
-    #less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
+
+    # check if the input is valid
+    if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
+        raise ValueError("Please enter a valid target molecule or smiles")
+
+    if search_molecules is None or (
+        isinstance(search_molecules, str) and len(search_molecules) == 0
+    ):
+        raise ValueError("Please enter valid search molecules or smarts")
+
+    # less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
     if canvas_width < 1 or canvas_width > 5000 or canvas_height < 1 or canvas_height > 5000:
-        raise ValueError(f"To avoid errors please choose a number between 1-5000 for the canvas width or height")
-    
+        raise ValueError(
+            "To avoid errors please choose a number between 1-5000 for the canvas width or height"
+        )
+
     if isinstance(target_molecule, str):
-            target_molecule = dm.to_mol(target_molecule)
-    
+        target_molecule = dm.to_mol(target_molecule)
+
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
     d = rdMolDraw2D.MolDraw2DCairo(500, 500)
     d.drawOptions().updateAtomPalette({i: (0, 0, 0, 1) for i in range(100)})
     d.DrawMolecule(mol)
     d.ClearDrawing()
 
+    # get the atom indices for the search molecules
     atom_idx_list = []
-        
     if isinstance(search_molecules, str):
         smart_obj = Chem.MolFromSmarts(search_molecules)
-        matched_atoms = set.union(*[set(x) for x in mol.GetSubstructMatches(smart_obj)])
-        if len(matched_atoms) >=1:
+        matches = mol.GetSubstructMatches(smart_obj)
+        if not matches:
+            logger.warning(f"no matching substructure found for {search_molecules}")
+        else:
+            matched_atoms = set.union(*[set(x) for x in matches])
             atom_idx_list.append(matched_atoms)
-        
-    elif isinstance(search_molecules[0], str):
+
+    elif isinstance(search_molecules, dm.Mol):
+        matches = mol.GetSubstructMatches(search_molecules)
+        if not matches:
+            logger.warning(f"no matching substructure found for {dm.to_smiles(search_molecules)}")
+        else:
+            matched_atoms = set.union(*[set(x) for x in matches])
+            atom_idx_list.append(matched_atoms)
+
+    elif len(search_molecules) and isinstance(search_molecules[0], str):
         for smart_str in search_molecules:
             smart_obj = Chem.MolFromSmarts(smart_str)
-            matched_atoms = set.union(*[set(x) for x in mol.GetSubstructMatches(smart_obj)])
-            if len(matched_atoms) >=1:
+            matches = mol.GetSubstructMatches(smart_obj)
+            if not matches:
+                logger.warning(f"no matching substructure found for {smart_str}")
+            else:
+                matched_atoms = set.union(*[set(x) for x in matches])
                 atom_idx_list.append(matched_atoms)
-        
-    _draw_multi_matches(d, mol, atom_idx_list, r_min=0.3, r_dist=0.12, relative_bond_width=0.5, color_list=color_dict.values(), line_width=2)
-        
+
+    elif len(search_molecules) and isinstance(search_molecules[0], dm.Mol):
+        for smart_obj in search_molecules:
+            matches = mol.GetSubstructMatches(smart_obj)
+            if not matches:
+                logger.warning(f"no matching substructure found for {dm.to_smiles(smart_obj)}")
+            else:
+                matched_atoms = set.union(*[set(x) for x in matches])
+                atom_idx_list.append(matched_atoms)
+
+    if len(atom_idx_list) == 0:
+        logger.warning("No matches found for the given search molecules")
+    else:
+        _draw_multi_matches(
+            d,
+            mol,
+            atom_idx_list,
+            r_min=0.3,
+            r_dist=0.12,
+            relative_bond_width=0.5,
+            color_list=color_dict.values(),
+            line_width=2,
+        )
+
     d.DrawMolecule(mol)
     d.FinishDrawing()
 
     return Image.open(io.BytesIO(d.GetDrawingText()))
-        
