@@ -10,7 +10,7 @@ from .._version import is_lower_than_current_rdkit_version
 
 def set_filter_params(
     catalog_specifiers: List[str],
-) -> object:
+) -> FilterCatalog.FilterCatalog:
     """Utility function that sets filter set parameters
 
     Args:
@@ -130,7 +130,7 @@ def run_filter_catalog(
     Args:
         mol: A molecule.
         catalog_specifiers: Specify what kind of filtering catalog you want.
-        num_of_threads: number of threads you want to run. Use num_of_threads=0 to use all available processors.
+        num_of_threads: Number of threads you want to run. Use num_of_threads=0 to use all available processors.
 
     Returns:
         get_props_list: list of all prop keys for each RDKit FilterCatalog hit for a molecule
