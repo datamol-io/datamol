@@ -113,7 +113,7 @@ def test_set_filter_params():
     with pytest.raises(ValueError):
         dm.filter.matches.set_filter_params(["", ""])
 
-    #If the set strings have lower case
+    # If the set strings have lower case
     Catalog = dm.filter.matches.set_filter_params(["pains_a", "paiNS_b"])
     assert Catalog.GetNumEntries() == PAINS_A + PAINS_B
 
@@ -126,8 +126,6 @@ def test_set_filter_params():
     with pytest.raises(ValueError):
         dm.filter.matches.set_filter_params(["pain", ""])
 
-
-    
 
 def test_n_matches():
     for i, smi in enumerate(list_of_smi, 0):

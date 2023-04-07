@@ -42,7 +42,7 @@ def set_filter_params(
         try:
             params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
         except KeyError:
-            raise KeyError(f'{cat}, you specified is not available')
+            raise KeyError(f"{cat}, you specified is not available")
     Catalog = FilterCatalog.FilterCatalog(params)
     return Catalog
 
