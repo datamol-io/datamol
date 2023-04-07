@@ -99,9 +99,6 @@ def test_set_filter_params():
     Catalog = dm.filter.matches.set_filter_params(["PAINS", "NIH", "BRENK", "ZINC", "ALL"])
     assert Catalog.GetNumEntries() == ALL
 
-    Catalog = dm.filter.matches.set_filter_params(["ALL"])
-    assert Catalog.GetNumEntries() == ALL
-
     # negative cases
     with pytest.raises(ValueError):
         dm.filter.matches.set_filter_params([])
@@ -116,6 +113,21 @@ def test_set_filter_params():
     with pytest.raises(ValueError):
         dm.filter.matches.set_filter_params(["", ""])
 
+    #If the set strings have lower case
+    Catalog = dm.filter.matches.set_filter_params(["pains_a", "paiNS_b"])
+    assert Catalog.GetNumEntries() == PAINS_A + PAINS_B
+
+    with pytest.raises(ValueError):
+        dm.filter.matches.set_filter_params(["pains_a", ""])
+
+    with pytest.raises(KeyError):
+        dm.filter.matches.set_filter_params(["pain", "pains_b"])
+
+    with pytest.raises(ValueError):
+        dm.filter.matches.set_filter_params(["pain", ""])
+
+
+    
 
 def test_n_matches():
     for i, smi in enumerate(list_of_smi, 0):

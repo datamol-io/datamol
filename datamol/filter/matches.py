@@ -1,3 +1,4 @@
+import sys
 from typing import List
 
 from rdkit.Chem import FilterCatalog
@@ -22,6 +23,7 @@ def set_filter_params(
     # uniqufy the list that the user inputs so there
     # can be no duplicates.
     unique_set = set(catalog_specifiers)
+    unique_set = [cat.upper() for cat in unique_set]
     if len(unique_set) == 0 or "" in unique_set:
         raise ValueError("There are either at least one or no filter sets specified.")
 
@@ -37,7 +39,10 @@ def set_filter_params(
 
     params = FilterCatalog.FilterCatalogParams()
     for cat in unique_set:
-        params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
+        try:
+            params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
+        except KeyError:
+            raise KeyError(f'{cat}, you specified is not available')
     Catalog = FilterCatalog.FilterCatalog(params)
     return Catalog
 
