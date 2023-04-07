@@ -19,23 +19,24 @@ def set_filter_params(
     Returns:
         Catalog: a catalog of the user-defined parameters
     """
-
-    unique_data = set(catalog_specifiers)
-    if len(unique_data) == 0 or "" in unique_data:
-        raise ValueError("There are no filter sets specified.")
+    # uniqufy the list that the user inputs so there
+    # can be no duplicates.
+    unique_set = set(catalog_specifiers)
+    if len(unique_set) == 0 or "" in unique_set:
+        raise ValueError("There are either at least one or no filter sets specified.")
 
     # To make sure if you write 'ALL' in in catalog_specifiers
-    # that list just has ['ALL'] so there are no repeats
-    for a_set in unique_data:
+    # that list just has ['ALL'] so there are no duplicates
+    for a_set in unique_set:
         if "ALL" in a_set:
-            unique_data = ["ALL"]
+            unique_set = ["ALL"]
             break
         if "PAINS" == a_set:
-            unique_data = [cat for cat in unique_data if "PAINS" not in cat]
-            unique_data.append("PAINS")
+            unique_set = [cat for cat in unique_set if "PAINS" not in cat]
+            unique_set.append("PAINS")
 
     params = FilterCatalog.FilterCatalogParams()
-    for cat in unique_data:
+    for cat in unique_set:
         params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
     Catalog = FilterCatalog.FilterCatalog(params)
     return Catalog
@@ -93,6 +94,7 @@ def get_props(
     Args:
         mol: A molecule.
         catalog_specifiers: Specify what kind of filtering catalog you want.
+        prop: Specify the RDKit prop
 
     Returns:
         get_props: list of strings that expresses the values of the RDKit FilterCatalog hits
@@ -137,7 +139,7 @@ def run_filter_catalog(
     list_smi: List[str],
     catalog_specifiers: List[str] = ["ALL"],
     num_of_threads: int = 1,
-) -> List[str]:
+) -> FilterCatalog.FilterCatalogListOfEntryList:
     """Run the filter catalog here on a list of smiles to find hits.
 
     Args:
@@ -146,7 +148,7 @@ def run_filter_catalog(
         num_of_threads: Number of threads you want to run. Use num_of_threads=0 to use all available processors.
 
     Returns:
-        get_props_list: list of all prop keys for each RDKit FilterCatalog hit for a molecule
+        FilterCatalog.FilterCatalogListOfEntryList: for each molecular hit, if no hit, returns nothing
     """
     Catalog = set_filter_params(catalog_specifiers)
     list_of_results = FilterCatalog.RunFilterCatalog(
