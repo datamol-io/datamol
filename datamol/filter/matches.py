@@ -21,20 +21,19 @@ def set_filter_params(
     """
 
     unique_data = set(catalog_specifiers)
-    if len(unique_data) == 0 or '' in unique_data:
-        raise ValueError('There are no filter sets specified.')
+    if len(unique_data) == 0 or "" in unique_data:
+        raise ValueError("There are no filter sets specified.")
 
-    #To make sure if you write 'ALL' in in catalog_specifiers
-    #that list just has ['ALL'] so there are no repeats
+    # To make sure if you write 'ALL' in in catalog_specifiers
+    # that list just has ['ALL'] so there are no repeats
     for a_set in unique_data:
-        if 'ALL' in a_set:
-            unique_data = ['ALL']
+        if "ALL" in a_set:
+            unique_data = ["ALL"]
             break
-        if 'PAINS' == a_set:
+        if "PAINS" == a_set:
             unique_data = [cat for cat in unique_data if "PAINS" not in cat]
-            unique_data.append('PAINS')
+            unique_data.append("PAINS")
 
-    
     params = FilterCatalog.FilterCatalogParams()
     for cat in unique_data:
         params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
@@ -155,5 +154,5 @@ def run_filter_catalog(
         smiles=list_smi,
         numThreads=num_of_threads,
     )
-   
+
     return list_of_results
