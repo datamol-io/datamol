@@ -148,7 +148,7 @@ def run_filter_catalog(
     """Run the filter catalog here on a list of smiles to find hits.
 
     Args:
-        mol: A molecule.
+        list_smi: A list of SMILES.
         catalog_specifiers: Specify what kind of filtering catalog you want.
         num_of_threads: Number of threads you want to run. Use num_of_threads=0 to use all available processors.
 
