@@ -20,20 +20,23 @@ def set_filter_params(
         Catalog: a catalog of the user-defined parameters
     """
 
+    unique_data = set(catalog_specifiers)
+    if len(unique_data) == 0 or '' in unique_data:
+        raise ValueError('There are no filter sets specified.')
+
     #To make sure if you write 'ALL' in in catalog_specifiers
     #that list just has ['ALL'] so there are no repeats
-    for a_set in catalog_specifiers:
+    for a_set in unique_data:
         if 'ALL' in a_set:
-            catalog_specifiers = ['ALL']
+            unique_data = ['ALL']
             break
         if 'PAINS' == a_set:
-            catalog_specifiers = [cat for cat in catalog_specifiers if "PAINS" not in cat]
-            catalog_specifiers.append('PAINS')
-        if a_set in catalog_specifiers:
-            raise ValueError('Your catalog_specifiers have duplicate filter catalogs')
+            unique_data = [cat for cat in unique_data if "PAINS" not in cat]
+            unique_data.append('PAINS')
 
+    
     params = FilterCatalog.FilterCatalogParams()
-    for cat in catalog_specifiers:
+    for cat in unique_data:
         params.AddCatalog(FilterCatalog.FilterCatalogParams.FilterCatalogs.names[cat])
     Catalog = FilterCatalog.FilterCatalog(params)
     return Catalog
@@ -82,7 +85,9 @@ def get_descriptions(
 
 
 def get_props(
-    mol: Mol, catalog_specifiers: List[str] = ["ALL"], prop: str = "FilterSet"
+    mol: Mol,
+    catalog_specifiers: List[str] = ["ALL"],
+    prop: str = "FilterSet",
 ) -> List[str]:
     """Get the values of the props RDKit FilterCatalog hits for a given molecule
 
@@ -150,7 +155,5 @@ def run_filter_catalog(
         smiles=list_smi,
         numThreads=num_of_threads,
     )
-    for results in list_of_results:
-        for line in results:
-            print(line.GetDescription())
-    return len(results)
+   
+    return list_of_results
