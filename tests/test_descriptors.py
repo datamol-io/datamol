@@ -70,6 +70,7 @@ def test_compute_many_descriptors():
             "n_saturated_carbocycles": 0.0,
             "n_saturated_heterocyles": 0.0,
             "n_saturated_rings": 0.0,
+            "n_hits_of_catalogs": 0,
         }
     )
 
@@ -150,8 +151,9 @@ def test_batch_compute_many_descriptors():
         "n_saturated_carbocycles",
         "n_saturated_heterocyles",
         "n_saturated_rings",
+        "n_hits_of_catalogs",
     }
-    assert props.shape == (30, 22)
+    assert props.shape == (30, 23)
 
 
 def test_any_rdkit_descriptor():

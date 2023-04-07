@@ -68,7 +68,6 @@ n_saturated_heterocyles = rdMolDescriptors.CalcNumSaturatedHeterocycles
 n_saturated_rings = rdMolDescriptors.CalcNumSaturatedRings
 
 
-
 def n_rigid_bonds(mol: Mol) -> int:
     """Compute the number of rigid bonds in a molecule.
 
