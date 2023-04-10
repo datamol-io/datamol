@@ -1,22 +1,28 @@
 # This file is thanks Christian W. Feldman
 # Christian Feldman (2021) lassohighlight [sourcecode]. https://github.com/c-feldmann/lassohighlight.
+
+# features to add to this project
+# - flag to determine color palette
+# - possibility to do this for multiple target molecules at once
+# - have the option to write to a file like to_image
+
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit import Chem
 from rdkit.Geometry.rdGeometry import Point2D
-import numpy as np
-from collections import defaultdict
-from collections import namedtuple
-from typing import *
+from collections import defaultdict, namedtuple
+from typing import List, Iterator, Tuple, Union, Optional
+
 from PIL import Image
 import io
 from loguru import logger
 
+import numpy as np
 import datamol as dm
 from .utils import prepare_mol_for_drawing
 
 
-def _angle_to_coord(center: np.ndarray, angle: np.float64, radius: np.float64) -> np.ndarray:
+def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarray:
     """Determines a point relative to the center with distance (radius) at given angle.
     Angles are given in rad and 0 rad correspond to north of the center point.
     """
@@ -29,7 +35,7 @@ def _angle_to_coord(center: np.ndarray, angle: np.float64, radius: np.float64) -
 
 
 def _arch_points(
-    radius: np.float64, start_ang: np.float64, end_ang: np.float64, n: int
+    radius: float, start_ang: float, end_ang: float, n: int
 ) -> np.ndarray:
     """Returns an array of the shape (2, n) with equidistant points on the arch defined by
     given radius and angles. Angles are given in rad.
@@ -48,8 +54,8 @@ def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     return np.arctan2(diff[0], diff[1])
 
 
-def _avg_bondlen(mol: Chem.Mol) -> np.ndarray:
-    """Calculates the average bond length of an rdkit.Chem.Mol object."""
+def _avg_bondlen(mol: dm.Mol) -> np.ndarray:
+    """Calculates the average bond length of an dm.Mol object."""
     distance_matrix = Get3DDistanceMatrix(mol)
     bondlength_list: List = []
     for bond in mol.GetBonds():
@@ -65,14 +71,14 @@ Bond = namedtuple("Bond", ["angle", "neighbour_id", "bond_id"])
 class _AttachmentPointManager:
     """AnchorManager is an invisible overlay for RDKit Atoms storing positions for arches and bond-attachment-points."""
 
-    def __init__(self, position: np.array, radius: np.float64, bond_width: np.float64):
+    def __init__(self, position: np.ndarray, radius: float, bond_width: float):
         self.pos = position
         self.bond_width = bond_width
         self.radius = radius
         self.bonds: List[Bond] = []
-        self.bond_attachment_points: Optional[List[Tuple]] = None
+        self.bond_attachment_points: dict = None
 
-    def add_bond(self, angle: np.float64, neighbor_id: int, bond_id: int):
+    def add_bond(self, angle: float, neighbor_id: int, bond_id: int):
         self.bonds.append(Bond(angle, neighbor_id, bond_id))
 
     @property
@@ -147,19 +153,19 @@ ColorTuple = Union[Tuple[float, float, float, float], Tuple[float, float, float]
 
 def _draw_substructurematch(
     canvas: rdMolDraw2D.MolDraw2D,
-    mol: Chem.Mol,
+    mol: dm.Mol,
     indices: Union[list, str],
     rel_radius: float = 0.3,
     rel_width: float = 0.5,
     line_width: int = 2,
-    color: ColorTuple = None,
+    color: Optional[ColorTuple] = None,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
     Parameters
     ----------
     canvas : rdMolDraw2D.MolDraw2D
         RDKit Canvas, where highlighting is drawn to.
-    mol: Chem.Mol
+    mol: dm.Mol
         Atoms from the molecule `mol` are takes as positional reference for the highlighting.
     indices: Union[list, str]
         Atom indices delineating highlighted substructure.
@@ -213,7 +219,7 @@ def _draw_substructurematch(
                 continue
             neigbor_pos = conf.GetAtomPosition(neigbor_idx)
             neigbor_pos = np.array([neigbor_pos.x, neigbor_pos.y])
-            bond_angle = _angle_between(atom_pos, neigbor_pos)
+            bond_angle = float(_angle_between(atom_pos, neigbor_pos))
             bond_angle = bond_angle % (2 * np.pi)  # Assuring 0 <= bond_angle <= 2 pi
             at_manager.add_bond(bond_angle, neigbor_idx, bond.GetIdx())
         at_manager.generate_attachment_points()
@@ -264,20 +270,20 @@ def _draw_substructurematch(
 # TODO switch this over to other doc string
 def _draw_multi_matches(
     canvas: rdMolDraw2D.MolDraw2D,
-    mol: Chem.Mol,
+    mol: dm.Mol,
     indices_set_lists: List[Union[list, str]],
     r_min: float = 0.3,
     r_dist: float = 0.13,
     relative_bond_width: float = 0.5,
-    color_list: List[ColorTuple] = None,
+    color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
-) -> None:
+):
     """
     Parameters
     ----------
     canvas : rdMolDraw2D.MolDraw2D
         RDKit Canvas, where highlighting is drawn to.
-    mol: Chem.Mol
+    mol: dm.Mol
         Atoms from the molecule `mol` are takes as positional reference for the highlighting.
     indices_set_lists: List[Union[list, str]]
         Atom indices delineating highlighted substructure.
@@ -301,7 +307,10 @@ def _draw_multi_matches(
     if color_list is None:
         color_list = [(0.5, 0.5, 0.5)] * len(indices_set_lists)
     if len(color_list) < len(indices_set_lists):
-        raise ValueError("Not enough colors for referenced substructures!")
+        colors_to_add = []
+        for i in range(len(indices_set_lists) - len(color_list)):
+            colors_to_add.append(color_list[i % len(color_list)])
+        color_list.extend(colors_to_add)
 
     level_manager = defaultdict(set)
     for match_atoms, color in zip(indices_set_lists, color_list):
@@ -332,29 +341,23 @@ def _draw_multi_matches(
         )
 
 
-color_dict = {
-    "red": (1, 0, 0, 1),
-    "blue": (0, 0.5, 1, 1),
-    "orange": (1, 0.5, 0, 1),
-    "green": (0, 1, 0, 1),
-    "yellow": (1, 1, 0, 1),
-    "dark blue": (0, 0, 0.5, 1),
-}
+colors = [
+    (1, 0, 0, 1), # red
+    (0, 0.5, 1, 1), # blue
+    (1, 0.5, 0, 1), # orange
+    (0, 1, 0, 1), # green
+    (1, 1, 0, 1), # yellow
+    (0, 0, 0.5, 1), # dark blue
+]
 
 
 def lasso_highlight_image(
-    canvas_width: int,
-    canvas_height: int,
     target_molecule: Union[str, dm.Mol],
     search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
-) -> Image:
+    mol_size: Optional[Tuple[int, int]] = (300, 300),
+    use_svg: Optional[bool] = True,
+):
     """A generalized interface to access both highlighting options whether the input is as a smiles, smarts or mol
-
-    Args:
-        canvas_width (int): _description_
-        canvas_height (int): _description_
-        target_molecule (Union[str, dm.Mol]):
-        search_molecules (Union[str, List[str], dm.Mol, List[dm.Mol]]): Various ways to enter but the search molecules must be entered as smart
     """
 
     # check if the input is valid
@@ -367,7 +370,7 @@ def lasso_highlight_image(
         raise ValueError("Please enter valid search molecules or smarts")
 
     # less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
-    if canvas_width < 1 or canvas_width > 5000 or canvas_height < 1 or canvas_height > 5000:
+    if mol_size[0] < 1 or mol_size[0] > 5000 or mol_size[1] < 1 or mol_size[1] > 5000:
         raise ValueError(
             "To avoid errors please choose a number between 1-5000 for the canvas width or height"
         )
@@ -376,15 +379,21 @@ def lasso_highlight_image(
         target_molecule = dm.to_mol(target_molecule)
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
-    d = rdMolDraw2D.MolDraw2DCairo(500, 500)
-    d.drawOptions().updateAtomPalette({i: (0, 0, 0, 1) for i in range(100)})
+    
+    if use_svg:
+        d = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
+    else:
+        d = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
+    
+    
+    # Setting up the coordinate system by drawing and erasing molecule
     d.DrawMolecule(mol)
     d.ClearDrawing()
 
     # get the atom indices for the search molecules
     atom_idx_list = []
     if isinstance(search_molecules, str):
-        smart_obj = Chem.MolFromSmarts(search_molecules)
+        smart_obj = dm.to_mol(search_molecules)
         matches = mol.GetSubstructMatches(smart_obj)
         if not matches:
             logger.warning(f"no matching substructure found for {search_molecules}")
@@ -402,7 +411,7 @@ def lasso_highlight_image(
 
     elif len(search_molecules) and isinstance(search_molecules[0], str):
         for smart_str in search_molecules:
-            smart_obj = Chem.MolFromSmarts(smart_str)
+            smart_obj = dm.to_mol(smart_str)
             matches = mol.GetSubstructMatches(smart_obj)
             if not matches:
                 logger.warning(f"no matching substructure found for {smart_str}")
@@ -429,11 +438,14 @@ def lasso_highlight_image(
             r_min=0.3,
             r_dist=0.12,
             relative_bond_width=0.5,
-            color_list=color_dict.values(),
+            color_list=colors,
             line_width=2,
         )
 
     d.DrawMolecule(mol)
     d.FinishDrawing()
-
-    return Image.open(io.BytesIO(d.GetDrawingText()))
+    
+    if use_svg:
+        return d.GetDrawingText()
+    else:
+        return Image.open(io.BytesIO(d.GetDrawingText()))
