@@ -1,11 +1,14 @@
 import pytest
 import datamol as dm
 
+from PIL import Image
+
+
 # The following tests are supposed to work and should not raise any errors
 def test_original_working_solution_str():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = "CONN"
-    assert dm.lasso_highlight_image(smi, smarts_list , (400, 400))
+    assert dm.lasso_highlight_image(smi, smarts_list, (400, 400))
 
 
 def test_original_working_solution_list_single_str():
@@ -36,7 +39,8 @@ def test_original_working_solution_List_mol():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = [dm.to_mol("CONN"), dm.to_mol("N#CC~CO"), dm.to_mol("C=CON"), dm.to_mol("CONNCN")]
     assert dm.lasso_highlight_image(smi, smarts_list, (400, 400))
-    
+
+
 def test_wokring_solution_with_more_structures_than_colors():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CONN", "N#CC~CO", "C=CON", "CONNCN", "FCCl", "OCO", "N#C", "N#CC", "CC#N"]
@@ -91,6 +95,30 @@ def test_search_input_error_smarts_no_substructure():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CCCCCC"]
     assert dm.lasso_highlight_image(smi, smarts_list, (400, 400))
+
+
+# testing using <class 'IPython.core.display.SVG'>" == str(type(img)) so to not bring in IPython
+# as a dependency for the tests
+def test_SVG_is_returned_explicit():
+    smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
+    smarts_list = ["CC"]
+    img = dm.lasso_highlight_image(smi, smarts_list, (400, 400), use_svg=True)
+    assert "<class 'IPython.core.display.SVG'>" == str(type(img))
+
+
+def test_SVG_is_returned_implict():
+    smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
+    smarts_list = ["CC"]
+    img = dm.lasso_highlight_image(smi, smarts_list, (400, 400))
+    assert "<class 'IPython.core.display.SVG'>" == str(type(img))
+
+
+def test_PNG_is_returned():
+    smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
+    smarts_list = ["CC"]
+    img = dm.lasso_highlight_image(smi, smarts_list, (400, 400), use_svg=False)
+    image_format = img.format.lower()
+    assert image_format == "png"
 
 
 """

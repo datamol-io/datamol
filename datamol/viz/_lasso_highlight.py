@@ -6,7 +6,7 @@
 # - possibility to do this for multiple target molecules at once
 # - have the option to write to a file like to_image
 
-from rdkit.Chem.Draw import rdMolDraw2D
+from rdkit.Chem.Draw import rdMolDraw2D, IPythonConsole
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit import Chem
 from rdkit.Geometry.rdGeometry import Point2D
@@ -15,6 +15,7 @@ from typing import List, Iterator, Tuple, Union, Optional
 
 from PIL import Image
 import io
+import sys
 from loguru import logger
 
 import numpy as np
@@ -34,9 +35,7 @@ def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarr
     return np.array([x, y])
 
 
-def _arch_points(
-    radius: float, start_ang: float, end_ang: float, n: int
-) -> np.ndarray:
+def _arch_points(radius: float, start_ang: float, end_ang: float, n: int) -> np.ndarray:
     """Returns an array of the shape (2, n) with equidistant points on the arch defined by
     given radius and angles. Angles are given in rad.
     """
@@ -342,12 +341,12 @@ def _draw_multi_matches(
 
 
 colors = [
-    (1, 0, 0, 1), # red
-    (0, 0.5, 1, 1), # blue
-    (1, 0.5, 0, 1), # orange
-    (0, 1, 0, 1), # green
-    (1, 1, 0, 1), # yellow
-    (0, 0, 0.5, 1), # dark blue
+    (1, 0, 0, 1),  # red
+    (0, 0.5, 1, 1),  # blue
+    (1, 0.5, 0, 1),  # orange
+    (0, 1, 0, 1),  # green
+    (1, 1, 0, 1),  # yellow
+    (0, 0, 0.5, 1),  # dark blue
 ]
 
 
@@ -357,8 +356,7 @@ def lasso_highlight_image(
     mol_size: Optional[Tuple[int, int]] = (300, 300),
     use_svg: Optional[bool] = True,
 ):
-    """A generalized interface to access both highlighting options whether the input is as a smiles, smarts or mol
-    """
+    """A generalized interface to access both highlighting options whether the input is as a smiles, smarts or mol"""
 
     # check if the input is valid
     if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
@@ -379,13 +377,12 @@ def lasso_highlight_image(
         target_molecule = dm.to_mol(target_molecule)
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
-    
+
     if use_svg:
         d = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
     else:
         d = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
-    
-    
+
     # Setting up the coordinate system by drawing and erasing molecule
     d.DrawMolecule(mol)
     d.ClearDrawing()
@@ -444,8 +441,11 @@ def lasso_highlight_image(
 
     d.DrawMolecule(mol)
     d.FinishDrawing()
-    
-    if use_svg:
-        return d.GetDrawingText()
+
+    if "ipykernel" in sys.modules:
+        if use_svg:
+            return IPythonConsole.SVG(d.GetDrawingText())
+        else:
+            return Image.open(io.BytesIO(d.GetDrawingText()))
     else:
-        return Image.open(io.BytesIO(d.GetDrawingText()))
+        return d.GetDrawingText()
