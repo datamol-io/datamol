@@ -26,13 +26,12 @@ from .utils import prepare_mol_for_drawing
 def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarray:
     """Determines a point relative to the center with distance (radius) at given angle.
     Angles are given in rad and 0 rad correspond to north of the center point.
-    
+
     args:
         center: The center point.
         angle: The angle in rad.
         radius: The distance of the point to the center.
     """
-   
 
     x = radius * np.sin(angle)
     y = radius * np.cos(angle)
@@ -44,7 +43,7 @@ def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarr
 def _arch_points(radius: float, start_ang: float, end_ang: float, n: int) -> np.ndarray:
     """Returns an array of the shape (2, n) with equidistant points on the arch defined by
     given radius and angles. Angles are given in rad.
-    
+
     args:
         radius: The radius of the arch.
         start_ang: The start angle of the arch.
@@ -60,20 +59,19 @@ def _arch_points(radius: float, start_ang: float, end_ang: float, n: int) -> np.
 def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     """Calculates the angle in rad between two points.
     An angle of 0 corresponds to north of the center.
-    
+
     args:
         center: The center point.
         pos: The point to calculate the angle to.
     """
-    
-    
+
     diff = pos - center
     return np.arctan2(diff[0], diff[1])
 
 
 def _avg_bondlen(mol: dm.Mol) -> np.ndarray:
     """Calculates the average bond length of an dm.Mol object.
-    
+
     args:
         mol: The dm.Mol object.
     """
@@ -90,7 +88,7 @@ Bond = namedtuple("Bond", ["angle", "neighbour_id", "bond_id"])
 
 
 class _AttachmentPointManager:
-    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for 
+    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for
     arches and bond-attachment-points.
     """
 
@@ -184,7 +182,7 @@ def _draw_substructurematch(
     color: Optional[ColorTuple] = None,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
-    
+
     args:
         canvas : RDKit Canvas, where highlighting is drawn to.
         mol: Atoms from the molecule `mol` are takes as positional reference for the highlighting.
@@ -280,7 +278,6 @@ def _draw_substructurematch(
     canvas.SetLineWidth(prior_lw)
 
 
-
 def _draw_multi_matches(
     canvas: rdMolDraw2D.MolDraw2D,
     mol: dm.Mol,
@@ -292,7 +289,7 @@ def _draw_multi_matches(
     line_width: int = 2,
 ):
     """Draws multiple substructure matches on a canvas.
-    
+
     args:
         canvas : RDKit Canvas, where highlighting is drawn to.
         mol: Atoms from the molecule `mol` are takes as positional reference for the highlighting.
@@ -357,10 +354,10 @@ def lasso_highlight_image(
     mol_size: Optional[Tuple[int, int]] = (300, 300),
     use_svg: Optional[bool] = True,
 ):
-    """A generalized interface to access both highlighting options whether the 
+    """A generalized interface to access both highlighting options whether the
     input is as a smiles, smarts or mol
-    
-    args:   
+
+    args:
         target_molecule: The molecule to be highlighted
         search_molecules: The substructure to be identified
         mol_size: The size of the image to be returned
