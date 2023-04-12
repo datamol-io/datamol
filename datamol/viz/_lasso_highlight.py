@@ -26,7 +26,13 @@ from .utils import prepare_mol_for_drawing
 def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarray:
     """Determines a point relative to the center with distance (radius) at given angle.
     Angles are given in rad and 0 rad correspond to north of the center point.
+    
+    args:
+        center: The center point.
+        angle: The angle in rad.
+        radius: The distance of the point to the center.
     """
+   
 
     x = radius * np.sin(angle)
     y = radius * np.cos(angle)
@@ -38,6 +44,12 @@ def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarr
 def _arch_points(radius: float, start_ang: float, end_ang: float, n: int) -> np.ndarray:
     """Returns an array of the shape (2, n) with equidistant points on the arch defined by
     given radius and angles. Angles are given in rad.
+    
+    args:
+        radius: The radius of the arch.
+        start_ang: The start angle of the arch.
+        end_ang: The end angle of the arch.
+        n: The number of points to return.
     """
     angles = np.linspace(start_ang, end_ang, n)
     x = radius * np.sin(angles)
@@ -48,13 +60,23 @@ def _arch_points(radius: float, start_ang: float, end_ang: float, n: int) -> np.
 def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     """Calculates the angle in rad between two points.
     An angle of 0 corresponds to north of the center.
+    
+    args:
+        center: The center point.
+        pos: The point to calculate the angle to.
     """
+    
+    
     diff = pos - center
     return np.arctan2(diff[0], diff[1])
 
 
 def _avg_bondlen(mol: dm.Mol) -> np.ndarray:
-    """Calculates the average bond length of an dm.Mol object."""
+    """Calculates the average bond length of an dm.Mol object.
+    
+    args:
+        mol: The dm.Mol object.
+    """
     distance_matrix = Get3DDistanceMatrix(mol)
     bondlength_list: List = []
     for bond in mol.GetBonds():
@@ -68,7 +90,9 @@ Bond = namedtuple("Bond", ["angle", "neighbour_id", "bond_id"])
 
 
 class _AttachmentPointManager:
-    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for arches and bond-attachment-points."""
+    """AnchorManager is an invisible overlay for RDKit Atoms storing positions for 
+    arches and bond-attachment-points.
+    """
 
     def __init__(self, position: np.ndarray, radius: float, bond_width: float):
         self.pos = position
@@ -160,25 +184,15 @@ def _draw_substructurematch(
     color: Optional[ColorTuple] = None,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
-    Parameters
-    ----------
-    canvas : rdMolDraw2D.MolDraw2D
-        RDKit Canvas, where highlighting is drawn to.
-    mol: dm.Mol
-        Atoms from the molecule `mol` are takes as positional reference for the highlighting.
-    indices: Union[list, str]
-        Atom indices delineating highlighted substructure.
-    rel_radius: float
-        Radius of the circle around atoms. Length is relative to average bond length (1 = avg. bond len).
-    rel_width: float
-        Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
-    line_width: int
-        width of drawn lines.
-    color: ColorTuple
-           Tuple with RGBA or RGB values specifying the color of the highlighting.
-    Returns
-    -------
-    None
+    
+    args:
+        canvas : RDKit Canvas, where highlighting is drawn to.
+        mol: Atoms from the molecule `mol` are takes as positional reference for the highlighting.
+        indices: Atom indices delineating highlighted substructure.
+        rel_radius: Radius of the circle around atoms. Length is relative to average bond length (1 = avg. bond len).
+        rel_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
+        line_width: width of drawn lines.
+        color: Tuple with RGBA or RGB values specifying the color of the highlighting.
     """
 
     prior_lw = canvas.LineWidth()
@@ -266,7 +280,7 @@ def _draw_substructurematch(
     canvas.SetLineWidth(prior_lw)
 
 
-# TODO switch this over to other doc string
+
 def _draw_multi_matches(
     canvas: rdMolDraw2D.MolDraw2D,
     mol: dm.Mol,
@@ -277,30 +291,17 @@ def _draw_multi_matches(
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
 ):
-    """
-    Parameters
-    ----------
-    canvas : rdMolDraw2D.MolDraw2D
-        RDKit Canvas, where highlighting is drawn to.
-    mol: dm.Mol
-        Atoms from the molecule `mol` are takes as positional reference for the highlighting.
-    indices_set_lists: List[Union[list, str]]
-        Atom indices delineating highlighted substructure.
-    r_min: float
-        Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
-    r_dist: float
-        Incremental increase of radius for the next substructure.
-    relative_bond_width: float
-        Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
-    line_width: int
-        width of drawn lines.
-    color_list: List[ColorTuple]
-        List of tuples with RGBA or RGB values specifying the color of the highlighting.
-    Returns
-    -------
-    None
-    Returns
-    -------
+    """Draws multiple substructure matches on a canvas.
+    
+    args:
+        canvas : RDKit Canvas, where highlighting is drawn to.
+        mol: Atoms from the molecule `mol` are takes as positional reference for the highlighting.
+        indices_set_lists: Atom indices delineating highlighted substructure.
+        r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
+        r_dist: Incremental increase of radius for the next substructure.
+        relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
+        line_width: width of drawn lines.
+        color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
     """
     # If no colors are given, all substructures are depicted in gray.
     if color_list is None:
@@ -356,7 +357,15 @@ def lasso_highlight_image(
     mol_size: Optional[Tuple[int, int]] = (300, 300),
     use_svg: Optional[bool] = True,
 ):
-    """A generalized interface to access both highlighting options whether the input is as a smiles, smarts or mol"""
+    """A generalized interface to access both highlighting options whether the 
+    input is as a smiles, smarts or mol
+    
+    args:   
+        target_molecule: The molecule to be highlighted
+        search_molecules: The substructure to be identified
+        mol_size: The size of the image to be returned
+        use_svg: Whether to return an svg or png image
+    """
 
     # check if the input is valid
     if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
