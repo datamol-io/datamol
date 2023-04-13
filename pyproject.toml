@@ -84,6 +84,7 @@ testpaths = ["tests"]
 filterwarnings = [
     "ignore::DeprecationWarning:rdkit.*:",
     "ignore::DeprecationWarning:jupyter_client.*:",
+    "ignore::DeprecationWarning:pkg_resources.*:",
 ]
 
 [tool.coverage.run]
