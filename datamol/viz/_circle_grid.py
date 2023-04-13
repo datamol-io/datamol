@@ -85,12 +85,14 @@ class MolsCircleGrid:
         self._draw_center_mol()
         self._draw_ring_mols(all_radius)
         font = None
-        w, h = draw.textsize(self.legend)
+        left, top, right, bottom = draw.textbbox((0, 0), self.legend)
+        w, h = right - left, bottom - top
         try:
             fn = FontManager()
             fontpath = fn.findfont("Droid sans")
             font = ImageFont.truetype(fontpath, 12 * self.size // 800)
-            w, h = font.getsize(self.legend)
+            left, top, right, bottom = font.getbbox(self.legend)
+            w, h = right - left, bottom - top
         except:
             pass
         draw.text(

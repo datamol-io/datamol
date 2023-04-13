@@ -10,15 +10,49 @@ from typing import Union
 from typing import List
 from typing import overload
 from typing import Literal
+from typing import cast
 
-import pkg_resources
+import sys
+import io
+
+try:
+    import importlib.resources as importlib_resources
+except:
+    import importlib_resources
 
 import pandas as pd
 
-from .types import Mol
-from .io import read_sdf
-from .convert import from_df
-from .convert import render_mol_df
+from ..types import Mol
+from ..io import read_sdf
+from ..convert import from_df
+from ..convert import render_mol_df
+
+
+def _open_datamol_data_file(
+    filename: str,
+    open_binary: bool = False,
+    dm_module: str = "datamol.data",
+):
+    if sys.version_info < (3, 9, 0):
+        if open_binary:
+            file_context_manager = importlib_resources.open_binary(dm_module, filename)
+        else:
+            file_context_manager = importlib_resources.open_text(dm_module, filename)
+    else:
+
+        if open_binary:
+            mode = "rb"
+        else:
+            mode = "r"
+
+        file_context_manager = (
+            importlib_resources.files(dm_module).joinpath(filename).open(mode=mode)
+        )
+
+    # NOTE(hadim): we assume the file always exists
+    file_context_manager = cast(io.TextIOWrapper, file_context_manager)
+
+    return file_context_manager
 
 
 @overload
@@ -48,7 +82,7 @@ def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
         model training.
     """
 
-    with pkg_resources.resource_stream("datamol", "data/freesolv.csv") as f:
+    with _open_datamol_data_file("freesolv.csv") as f:
         data = pd.read_csv(f)
 
     if not as_df:
@@ -80,7 +114,7 @@ def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    with pkg_resources.resource_stream("datamol", "data/cdk2.sdf") as f:
+    with _open_datamol_data_file("cdk2.sdf", open_binary=True) as f:
         data = read_sdf(f, as_df=as_df, mol_column=mol_column)
     return data
 
@@ -112,10 +146,10 @@ def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    with pkg_resources.resource_stream("datamol", "data/solubility.train.sdf") as f:
+    with _open_datamol_data_file("solubility.train.sdf", open_binary=True) as f:
         train = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
 
-    with pkg_resources.resource_stream("datamol", "data/solubility.test.sdf") as f:
+    with _open_datamol_data_file("solubility.test.sdf", open_binary=True) as f:
         test = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
 
     train = cast(pd.DataFrame, train)

@@ -4,7 +4,9 @@
 
 **Changed:**
 
-* <news item>
+* Switch from `pkg_resources` to `importlib.resources` for loading resources.
+* Enable python 3.11 on the CI.
+* Relocatem `datamol/data.py` to `datamol/data/__init__.py`.
 
 **Deprecated:**
 

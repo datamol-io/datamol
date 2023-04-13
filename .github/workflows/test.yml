@@ -20,6 +20,12 @@ jobs:
         os: ["ubuntu-latest", "macos-latest", "windows-latest"]
         rdkit-version: ["2022.03", "2022.09"]
 
+        # just enable python 3.11 on ubuntu to not blow up the CI time.
+        include:
+          - os: ubuntu-latest
+            python-version: "3.11"
+            rdkit-version: "2022.03"
+
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
 
