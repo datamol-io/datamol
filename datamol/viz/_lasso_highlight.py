@@ -373,6 +373,7 @@ def lasso_highlight_image(
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
+    **kwargs,
 ):
     """A generalized interface to access both highlighting options whether the
     input is as a smiles, smarts or mol
@@ -387,6 +388,9 @@ def lasso_highlight_image(
         relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         line_width: width of drawn lines.
         color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
+        **kwargs: Additional arguments to pass to the drawing function. See RDKit
+            documentation related to `MolDrawOptions` for more details at
+            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
     # check if the input is valid
@@ -416,6 +420,16 @@ def lasso_highlight_image(
         d = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
     else:
         d = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
+
+    # Setting the drawing options
+    draw_options = d.drawOptions()
+    for k, v in kwargs.items():
+        if not hasattr(draw_options, k):
+            raise ValueError(
+                f"Invalid drawing option: {k}={v}. Check `rdkit.Chem.Draw.rdMolDraw2D.MolDrawOptions` for valid ones."
+            )
+        else:
+            setattr(draw_options, k, v)
 
     # Setting up the coordinate system by drawing and erasing molecule
     d.DrawMolecule(mol)
