@@ -325,7 +325,6 @@ def _draw_multi_matches(
 
     level_manager = defaultdict(set)
     for match_atoms, color in zip(indices_set_lists, _color_list):
-
         used_levels = set.union(*[level_manager[a] for a in match_atoms])
 
         if len(used_levels) == 0:
