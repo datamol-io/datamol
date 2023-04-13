@@ -6,20 +6,24 @@
 # - possibility to do this for multiple target molecules at once
 # - have the option to write to a file like to_image
 
-from rdkit.Chem.Draw import rdMolDraw2D, IPythonConsole
-from rdkit.Chem.rdmolops import Get3DDistanceMatrix
-from rdkit import Chem
-from rdkit.Geometry.rdGeometry import Point2D
-from collections import defaultdict, namedtuple
-from typing import List, Iterator, Tuple, Union, Optional
+from typing import List, Iterator, Tuple, Union, Optional, cast
 
-from PIL import Image
+from collections import defaultdict
+from collections import namedtuple
 import io
 import sys
+
+from rdkit.Chem.Draw import rdMolDraw2D, IPythonConsole
+from rdkit.Chem.rdmolops import Get3DDistanceMatrix
+from rdkit.Geometry.rdGeometry import Point2D
+
+from PIL import Image
+
 from loguru import logger
 
 import numpy as np
 import datamol as dm
+
 from .utils import prepare_mol_for_drawing
 
 
@@ -69,19 +73,21 @@ def _angle_between(center: np.ndarray, pos: np.ndarray) -> np.ndarray:
     return np.arctan2(diff[0], diff[1])
 
 
-def _avg_bondlen(mol: dm.Mol) -> np.ndarray:
+def _avg_bondlen(mol: dm.Mol) -> float:
     """Calculates the average bond length of an dm.Mol object.
 
     args:
         mol: The dm.Mol object.
     """
     distance_matrix = Get3DDistanceMatrix(mol)
-    bondlength_list: List = []
+
+    bondlength_list = []
     for bond in mol.GetBonds():
         a1 = bond.GetBeginAtomIdx()
         a2 = bond.GetEndAtomIdx()
         bondlength_list.append(distance_matrix[a1, a2])
-    return np.mean(bondlength_list)
+
+    return float(np.mean(bondlength_list))
 
 
 Bond = namedtuple("Bond", ["angle", "neighbour_id", "bond_id"])
@@ -97,7 +103,7 @@ class _AttachmentPointManager:
         self.bond_width = bond_width
         self.radius = radius
         self.bonds: List[Bond] = []
-        self.bond_attachment_points: dict = None
+        self.bond_attachment_points: Optional[dict] = None
 
     def add_bond(self, angle: float, neighbor_id: int, bond_id: int):
         self.bonds.append(Bond(angle, neighbor_id, bond_id))
@@ -154,6 +160,11 @@ class _AttachmentPointManager:
 
     def get_arch_attachment_points(self) -> Iterator[Tuple[float, float]]:
         """Points between bonds which are drawn as arch."""
+
+        if self.bond_attachment_points is None:
+            raise ValueError(
+                "Attachment points have to be generated first with `generate_attachment_points()`"
+            )
 
         if self.bonds:
             sorted_bonds = sorted(self.bonds, key=lambda x: x[0])
@@ -302,16 +313,21 @@ def _draw_multi_matches(
     """
     # If no colors are given, all substructures are depicted in gray.
     if color_list is None:
-        color_list = [(0.5, 0.5, 0.5)] * len(indices_set_lists)
-    if len(color_list) < len(indices_set_lists):
+        _color_list = [(0.5, 0.5, 0.5)] * len(indices_set_lists)
+    else:
+        _color_list = color_list
+
+    if len(_color_list) < len(indices_set_lists):
         colors_to_add = []
-        for i in range(len(indices_set_lists) - len(color_list)):
-            colors_to_add.append(color_list[i % len(color_list)])
-        color_list.extend(colors_to_add)
+        for i in range(len(indices_set_lists) - len(_color_list)):
+            colors_to_add.append(_color_list[i % len(_color_list)])
+        _color_list.extend(colors_to_add)
 
     level_manager = defaultdict(set)
-    for match_atoms, color in zip(indices_set_lists, color_list):
+    for match_atoms, color in zip(indices_set_lists, _color_list):
+
         used_levels = set.union(*[level_manager[a] for a in match_atoms])
+
         if len(used_levels) == 0:
             free_levels = {0}
         else:
@@ -338,7 +354,7 @@ def _draw_multi_matches(
         )
 
 
-colors = [
+DEFAULT_LASSO_COLORS = [
     (1, 0, 0, 1),  # red
     (0, 0.5, 1, 1),  # blue
     (1, 0.5, 0, 1),  # orange
@@ -351,8 +367,13 @@ colors = [
 def lasso_highlight_image(
     target_molecule: Union[str, dm.Mol],
     search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
-    mol_size: Optional[Tuple[int, int]] = (300, 300),
+    mol_size: Tuple[int, int] = (300, 300),
     use_svg: Optional[bool] = True,
+    r_min: float = 0.3,
+    r_dist: float = 0.13,
+    relative_bond_width: float = 0.5,
+    color_list: Optional[List[ColorTuple]] = None,
+    line_width: int = 2,
 ):
     """A generalized interface to access both highlighting options whether the
     input is as a smiles, smarts or mol
@@ -362,6 +383,11 @@ def lasso_highlight_image(
         search_molecules: The substructure to be identified
         mol_size: The size of the image to be returned
         use_svg: Whether to return an svg or png image
+        r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
+        r_dist: Incremental increase of radius for the next substructure.
+        relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
+        line_width: width of drawn lines.
+        color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
     """
 
     # check if the input is valid
@@ -383,6 +409,9 @@ def lasso_highlight_image(
         target_molecule = dm.to_mol(target_molecule)
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
+
+    if mol is None:
+        raise ValueError("The molecule has failed to be prepared by `prepare_mol_for_drawing`.")
 
     if use_svg:
         d = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
@@ -431,6 +460,9 @@ def lasso_highlight_image(
                 matched_atoms = set.union(*[set(x) for x in matches])
                 atom_idx_list.append(matched_atoms)
 
+    if color_list is None:
+        color_list = DEFAULT_LASSO_COLORS
+
     if len(atom_idx_list) == 0:
         logger.warning("No matches found for the given search molecules")
     else:
@@ -438,11 +470,11 @@ def lasso_highlight_image(
             d,
             mol,
             atom_idx_list,
-            r_min=0.3,
-            r_dist=0.12,
-            relative_bond_width=0.5,
-            color_list=colors,
-            line_width=2,
+            r_min=r_min,
+            r_dist=r_dist,
+            relative_bond_width=relative_bond_width,
+            line_width=line_width,
+            color_list=color_list,
         )
 
     d.DrawMolecule(mol)
