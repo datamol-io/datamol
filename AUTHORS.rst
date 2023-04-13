@@ -16,5 +16,6 @@ Authors are sorted alphabetically.
 * Therence1
 * Valence-JonnyHsu
 * deepsource-autofix[bot]
+* dessygil
 * michelml
 * mike
