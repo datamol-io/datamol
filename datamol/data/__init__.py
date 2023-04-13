@@ -39,7 +39,6 @@ def _open_datamol_data_file(
         else:
             file_context_manager = importlib_resources.open_text(dm_module, filename)
     else:
-
         if open_binary:
             mode = "rb"
         else:
