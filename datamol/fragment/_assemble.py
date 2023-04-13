@@ -16,7 +16,6 @@ import json
 import itertools
 import random
 import re
-import pkg_resources
 
 from functools import lru_cache
 
@@ -26,7 +25,9 @@ from rdkit import Chem
 from rdkit.Chem import rdChemReactions
 
 import datamol as dm
+
 from ..types import Mol
+from ..data import open_datamol_data_file
 
 CCQ = "[$([#6][!#6;!#1]):1]!@[#6;!a:2]>>[*:1].[*:2]"
 CCQ_RETRO = "[$([#6;!H0][!#6;!#1]):1].[#6;!a;!H0:2]>>[*:1][*:2]"
@@ -207,7 +208,8 @@ def get_reactions_list():
     all_rxns = []
     all_rxns_retro = []
     all_rxns_type = []
-    with pkg_resources.resource_stream("datamol", "data/reactions.json") as IN:
+
+    with open_datamol_data_file("reactions.json") as IN:
         rxns = json.load(IN)
         for k, data in rxns.items():
             try:

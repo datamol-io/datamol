@@ -28,7 +28,7 @@ from ..convert import from_df
 from ..convert import render_mol_df
 
 
-def _open_datamol_data_file(
+def open_datamol_data_file(
     filename: str,
     open_binary: bool = False,
     dm_module: str = "datamol.data",
@@ -81,7 +81,7 @@ def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
         model training.
     """
 
-    with _open_datamol_data_file("freesolv.csv") as f:
+    with open_datamol_data_file("freesolv.csv") as f:
         data = pd.read_csv(f)
 
     if not as_df:
@@ -113,7 +113,7 @@ def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    with _open_datamol_data_file("cdk2.sdf", open_binary=True) as f:
+    with open_datamol_data_file("cdk2.sdf", open_binary=True) as f:
         data = read_sdf(f, as_df=as_df, mol_column=mol_column)
     return data
 
@@ -145,10 +145,10 @@ def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
         mol_column: Name of the mol column. Only relevant if `as_df` is True.
     """
 
-    with _open_datamol_data_file("solubility.train.sdf", open_binary=True) as f:
+    with open_datamol_data_file("solubility.train.sdf", open_binary=True) as f:
         train = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
 
-    with _open_datamol_data_file("solubility.test.sdf", open_binary=True) as f:
+    with open_datamol_data_file("solubility.test.sdf", open_binary=True) as f:
         test = read_sdf(f, as_df=True, mol_column="mol", smiles_column=None)
 
     train = cast(pd.DataFrame, train)
