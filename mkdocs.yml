@@ -84,12 +84,13 @@ markdown_extensions:
       permalink: true
       toc_depth: 4
 
+watch:
+  - datamol/
+
 plugins:
   - search
 
   - mkdocstrings:
-      watch:
-        - datamol/
       handlers:
         python:
           setup_commands:
