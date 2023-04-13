@@ -6,7 +6,7 @@
 # - possibility to do this for multiple target molecules at once
 # - have the option to write to a file like to_image
 
-from typing import List, Iterator, Tuple, Union, Optional, cast
+from typing import List, Iterator, Tuple, Union, Optional, Any
 
 from collections import defaultdict
 from collections import namedtuple
@@ -373,7 +373,7 @@ def lasso_highlight_image(
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
-    **kwargs,
+    **kwargs: Any,
 ):
     """A generalized interface to access both highlighting options whether the
     input is as a smiles, smarts or mol
