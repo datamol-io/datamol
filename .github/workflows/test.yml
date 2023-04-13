@@ -24,7 +24,7 @@ jobs:
         include:
           - os: ubuntu-latest
             python-version: "3.11"
-            rdkit-version: "2022.03"
+            rdkit-version: "2022.09"
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
