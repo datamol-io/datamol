@@ -2367,8 +2367,7 @@ conformer is displayed. When -1, show all conformers.</p></td>
 <a id="datamol.viz.lasso_highlight_image"></a>
   <div class="doc doc-contents first">
   
-      <p>A generalized interface to access both highlighting options whether the
-input is as a smiles, smarts or mol</p>
+      <p>Create an image of a molecule with substructure matches using lasso-based highlighting.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2488,7 +2487,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
 
       <details class="quote">
         <summary>Source code in <code>datamol/viz/_lasso_highlight.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">366</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span>
 <span class="normal">367</span>
 <span class="normal">368</span>
 <span class="normal">369</span>
@@ -2615,16 +2617,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">490</span>
 <span class="normal">491</span>
 <span class="normal">492</span>
-<span class="normal">493</span>
-<span class="normal">494</span>
-<span class="normal">495</span>
-<span class="normal">496</span>
-<span class="normal">497</span>
-<span class="normal">498</span>
-<span class="normal">499</span>
-<span class="normal">500</span>
-<span class="normal">501</span>
-<span class="normal">502</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
+<span class="normal">493</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
     <span class="n">target_molecule</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">search_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">mol_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
@@ -2636,8 +2629,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">line_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A generalized interface to access both highlighting options whether the</span>
-<span class="sd">    input is as a smiles, smarts or mol</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an image of a molecule with substructure matches using lasso-based highlighting.</span>
 
 <span class="sd">    args:</span>
 <span class="sd">        target_molecule: The molecule to be highlighted</span>
@@ -2678,12 +2670,12 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The molecule has failed to be prepared by `prepare_mol_for_drawing`.&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">use_svg</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DSVG</span><span class="p">(</span><span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">d</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DCairo</span><span class="p">(</span><span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">drawer</span> <span class="o">=</span> <span class="n">rdMolDraw2D</span><span class="o">.</span><span class="n">MolDraw2DCairo</span><span class="p">(</span><span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
     <span class="c1"># Setting the drawing options</span>
-    <span class="n">draw_options</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span>
+    <span class="n">draw_options</span> <span class="o">=</span> <span class="n">drawer</span><span class="o">.</span><span class="n">drawOptions</span><span class="p">()</span>
     <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">draw_options</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
@@ -2693,8 +2685,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="nb">setattr</span><span class="p">(</span><span class="n">draw_options</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
     <span class="c1"># Setting up the coordinate system by drawing and erasing molecule</span>
-    <span class="n">d</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="n">d</span><span class="o">.</span><span class="n">ClearDrawing</span><span class="p">()</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">ClearDrawing</span><span class="p">()</span>
 
     <span class="c1"># get the atom indices for the search molecules</span>
     <span class="n">atom_idx_list</span> <span class="o">=</span> <span class="p">[]</span>
@@ -2741,7 +2733,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No matches found for the given search molecules&quot;</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">_draw_multi_matches</span><span class="p">(</span>
-            <span class="n">d</span><span class="p">,</span>
+            <span class="n">drawer</span><span class="p">,</span>
             <span class="n">mol</span><span class="p">,</span>
             <span class="n">atom_idx_list</span><span class="p">,</span>
             <span class="n">r_min</span><span class="o">=</span><span class="n">r_min</span><span class="p">,</span>
@@ -2751,16 +2743,11 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="n">color_list</span><span class="o">=</span><span class="n">color_list</span><span class="p">,</span>
         <span class="p">)</span>
 
-    <span class="n">d</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="n">d</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+    <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
 
-    <span class="k">if</span> <span class="s2">&quot;ipykernel&quot;</span> <span class="ow">in</span> <span class="n">sys</span><span class="o">.</span><span class="n">modules</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">use_svg</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">IPythonConsole</span><span class="o">.</span><span class="n">SVG</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">())</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="k">return</span> <span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">(</span><span class="n">d</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()))</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">d</span><span class="o">.</span><span class="n">GetDrawingText</span><span class="p">()</span>
+    <span class="c1"># NOTE(hadim): process the drawer object to return the image type matching the same behavior as RDkit and `datamol.to_image()`</span>
+    <span class="k">return</span> <span class="n">drawer_to_image</span><span class="p">(</span><span class="n">drawer</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
