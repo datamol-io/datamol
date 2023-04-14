@@ -69,6 +69,11 @@ jobs:
             exit 1
           fi
 
+      - name: Configure git
+        run: |
+          git config user.name "$GITHUB_ACTOR"
+          git config user.email "<>"
+
       - name: Perform the release with rever
         env:
           # It's important to be able to allow the GA to trigger child GA such as docker image build upon a tag push.
