@@ -5,18 +5,17 @@ import os
 import importlib
 
 
-from ._version import __version__
-from ._version import is_lower_than_current_rdkit_version
-from ._version import is_greater_than_current_rdkit_version
-from ._version import is_lower_eq_than_current_rdkit_version
-from ._version import is_greater_eq_than_current_rdkit_version
-
-
 # The below lazy import logic is coming from openff-toolkit:
 # https://github.com/openforcefield/openff-toolkit/blob/b52879569a0344878c40248ceb3bd0f90348076a/openff/toolkit/__init__.py#L44
 
 # Dictionary of objects to lazily import; maps the object's name to its module path
 _lazy_imports_obj = {
+    # version
+    "__version__": "datamol._version",
+    "is_lower_than_current_rdkit_version": "datamol._version",
+    "is_greater_than_current_rdkit_version": "datamol._version",
+    "is_lower_eq_than_current_rdkit_version": "datamol._version",
+    "is_greater_eq_than_current_rdkit_version": "datamol._version",
     # types
     "Mol": "datamol.types",
     "BondType": "datamol.types",
@@ -195,6 +194,12 @@ def __dir__():
 if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     # These types are imported lazily at runtime, but we need to tell type
     # checkers what they are.
+
+    from ._version import __version__
+    from ._version import is_lower_than_current_rdkit_version
+    from ._version import is_greater_than_current_rdkit_version
+    from ._version import is_lower_eq_than_current_rdkit_version
+    from ._version import is_greater_eq_than_current_rdkit_version
 
     from .types import Mol
     from .types import BondType
