@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING
 
+import os
 
 import importlib
 
@@ -191,7 +192,7 @@ def __dir__():
     return sorted(keys)
 
 
-if TYPE_CHECKING:
+if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     # These types are imported lazily at runtime, but we need to tell type
     # checkers what they are.
 
