@@ -3,6 +3,7 @@
 $PROJECT = $GITHUB_REPO  = 'datamol'
 $GITHUB_ORG = 'datamol-io'
 $PUSH_TAG_REMOTE = 'git@github.com:datamol-io/datamol.git'
+$PUSH_TAG_TARGET = 'main'
 
 # Logic
 
@@ -15,4 +16,4 @@ $CHANGELOG_FILENAME = 'CHANGELOG.rst'
 $CHANGELOG_TEMPLATE = 'TEMPLATE.rst'
 $CHANGELOG_NEWS = 'news'
 
-$ACTIVITIES = ['check', 'authors', 'changelog', 'tag', 'push_tag']
+$ACTIVITIES = ['authors', 'changelog', 'tag', 'push_tag']
