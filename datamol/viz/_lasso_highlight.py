@@ -10,20 +10,17 @@ from typing import List, Iterator, Tuple, Union, Optional, Any
 
 from collections import defaultdict
 from collections import namedtuple
-import io
-import sys
 
-from rdkit.Chem.Draw import rdMolDraw2D, IPythonConsole
+from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit.Geometry.rdGeometry import Point2D
-
-from PIL import Image
 
 from loguru import logger
 
 import numpy as np
 import datamol as dm
 
+from .utils import drawer_to_image
 from .utils import prepare_mol_for_drawing
 
 
@@ -375,8 +372,7 @@ def lasso_highlight_image(
     line_width: int = 2,
     **kwargs: Any,
 ):
-    """A generalized interface to access both highlighting options whether the
-    input is as a smiles, smarts or mol
+    """Create an image of a molecule with substructure matches using lasso-based highlighting.
 
     args:
         target_molecule: The molecule to be highlighted
@@ -417,12 +413,12 @@ def lasso_highlight_image(
         raise ValueError("The molecule has failed to be prepared by `prepare_mol_for_drawing`.")
 
     if use_svg:
-        d = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
+        drawer = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
     else:
-        d = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
+        drawer = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
 
     # Setting the drawing options
-    draw_options = d.drawOptions()
+    draw_options = drawer.drawOptions()
     for k, v in kwargs.items():
         if not hasattr(draw_options, k):
             raise ValueError(
@@ -432,8 +428,8 @@ def lasso_highlight_image(
             setattr(draw_options, k, v)
 
     # Setting up the coordinate system by drawing and erasing molecule
-    d.DrawMolecule(mol)
-    d.ClearDrawing()
+    drawer.DrawMolecule(mol)
+    drawer.ClearDrawing()
 
     # get the atom indices for the search molecules
     atom_idx_list = []
@@ -480,7 +476,7 @@ def lasso_highlight_image(
         logger.warning("No matches found for the given search molecules")
     else:
         _draw_multi_matches(
-            d,
+            drawer,
             mol,
             atom_idx_list,
             r_min=r_min,
@@ -490,13 +486,8 @@ def lasso_highlight_image(
             color_list=color_list,
         )
 
-    d.DrawMolecule(mol)
-    d.FinishDrawing()
+    drawer.DrawMolecule(mol)
+    drawer.FinishDrawing()
 
-    if "ipykernel" in sys.modules:
-        if use_svg:
-            return IPythonConsole.SVG(d.GetDrawingText())
-        else:
-            return Image.open(io.BytesIO(d.GetDrawingText()))
-    else:
-        return d.GetDrawingText()
+    # NOTE(hadim): process the drawer object to return the image type matching the same behavior as RDkit and `datamol.to_image()`
+    return drawer_to_image(drawer)

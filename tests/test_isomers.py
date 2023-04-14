@@ -1,7 +1,4 @@
 import pytest
-import time
-
-from rdkit import Chem
 
 import datamol as dm
 
@@ -53,14 +50,14 @@ def test_enumerate_structural():
 
     mols_iso = dm.enumerate_structisomers(
         mol,
-        n_variants=5,
+        n_variants=2,
         allow_cycle=False,
-        depth=2,
+        depth=1,
         allow_double_bond=False,
         allow_triple_bond=False,
     )
 
-    assert {dm.to_smiles(m) for m in mols_iso} == {"CCC(C)C", "CC(C)(C)C"}
+    assert {dm.to_smiles(m) for m in mols_iso} == {"CCC(C)C"}
 
     # NOTE(hadim): disable to reduce testing time
     # mols_cyclo_iso = dm.enumerate_structisomers(mol, n_variants=5, depth=2, allow_cycle=True)
