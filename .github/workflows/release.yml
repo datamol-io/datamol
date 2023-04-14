@@ -30,7 +30,7 @@ jobs:
         uses: mamba-org/provision-with-micromamba@v15
         with:
           environment-file: env.yml
-          environment-name: datamol
+          environment-name: release
           cache-downloads: true
           cache-env: true
           extra-specs: |
