@@ -106,4 +106,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
         with:
+          tag_name: ${{ inputs.release-version }}
           body: "See [CHANGELOGS.rst](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.rst)."
