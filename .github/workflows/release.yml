@@ -37,6 +37,7 @@ jobs:
             pip
             semver
             rever==0.5.1
+            python-build
             setuptools_scm
 
       - name: Check the version is valid semver
