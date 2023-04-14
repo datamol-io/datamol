@@ -71,8 +71,9 @@ jobs:
 
       - name: Configure git
         run: |
-          git config user.name "$GITHUB_ACTOR"
-          git config user.email "<>"
+          git config --global init.defaultBranch main
+          git config --global user.name "$GITHUB_ACTOR"
+          git config --global user.email "<>"
 
       - name: Perform the release with rever
         env:
