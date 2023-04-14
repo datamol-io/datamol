@@ -136,10 +136,11 @@ from .isomers import remove_stereochemistry
 
 from . import align
 from . import conformers
-from . import viz
 
-from .viz import to_image
-from .viz import lasso_highlight_image
+# from . import viz
+
+# from .viz import to_image
+# from .viz import lasso_highlight_image
 
 from .mcs import find_mcs
 
@@ -147,3 +148,40 @@ from .graph import to_graph
 from .graph import get_all_path_between
 from .graph import match_molecular_graphs
 from .graph import reorder_mol_from_template
+
+import importlib
+
+# Dictionary of objects to lazily import; maps the object's name to its module path
+_lazy_imports_obj = {
+    "to_image": "datamol.viz",
+    "lasso_highlight_image": "datamol.viz",
+    # Remember to add new lazy imports to __all__ and the if TYPE_CHECKING imports
+}
+
+# Dictionary of modules to lazily import; maps the modules's name to its path
+_lazy_imports_mod = {
+    "viz": "datamol.viz",
+}
+
+
+def __getattr__(name):
+    """Lazily import objects from _lazy_imports_obj or _lazy_imports_mod
+
+    Note that this method is only called by Python if the name cannot be found
+    in the current module."""
+    obj_mod = _lazy_imports_obj.get(name)
+    if obj_mod is not None:
+        mod = importlib.import_module(obj_mod)
+        return mod.__dict__[name]
+
+    lazy_mod = _lazy_imports_mod.get(name)
+    if lazy_mod is not None:
+        return importlib.import_module(lazy_mod)
+
+    raise AttributeError(f"module {__name__!r} has no attribute {name!r}")
+
+
+def __dir__():
+    """Add _lazy_imports_obj and _lazy_imports_mod to dir(<module>)"""
+    keys = (*globals().keys(), *_lazy_imports_obj.keys(), *_lazy_imports_mod.keys())
+    return sorted(keys)
