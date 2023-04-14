@@ -2,7 +2,7 @@
 
 $PROJECT = $GITHUB_REPO  = 'datamol'
 $GITHUB_ORG = 'datamol-io'
-$PUSH_TAG_REMOTE = 'https://github.com/datamol-io/datamol.git'
+$PUSH_TAG_REMOTE = 'git@github.com:datamol-io/datamol.git'
 $PUSH_TAG_TARGET = 'main'
 
 # Logic
