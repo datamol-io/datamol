@@ -39,3 +39,16 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
         _mol = Draw.rdMolDraw2D.PrepareMolForDrawing(mol, kekulize=False)
 
     return _mol
+
+
+def is_ipython_session() -> bool:
+    try:
+        kernel_name = get_ipython().__class__.__name__  # type: ignore
+        module_name = get_ipython().__class__.__module__  # type: ignore
+
+        if kernel_name == "ZMQInteractiveShell" or module_name == "google.colab._shell":
+            return True
+    except Exception:
+        pass
+
+    return False

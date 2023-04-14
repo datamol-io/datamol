@@ -13,7 +13,7 @@ from collections import namedtuple
 import io
 import sys
 
-from rdkit.Chem.Draw import rdMolDraw2D, IPythonConsole
+from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit.Geometry.rdGeometry import Point2D
 
@@ -24,6 +24,7 @@ from loguru import logger
 import numpy as np
 import datamol as dm
 
+from .utils import is_ipython_session
 from .utils import prepare_mol_for_drawing
 
 
@@ -493,10 +494,13 @@ def lasso_highlight_image(
     d.DrawMolecule(mol)
     d.FinishDrawing()
 
-    if "ipykernel" in sys.modules:
-        if use_svg:
-            return IPythonConsole.SVG(d.GetDrawingText())
-        else:
-            return Image.open(io.BytesIO(d.GetDrawingText()))
-    else:
-        return d.GetDrawingText()
+    # if is_ipython_session():
+    #     if use_svg:
+    #         from IPython.core.display import SVG
+
+    #         return SVG(d.GetDrawingText())
+    #     else:
+    #         return Image.open(io.BytesIO(d.GetDrawingText()))
+    # else:
+    #     return Image.open(io.BytesIO(d.GetDrawingText()))
+
