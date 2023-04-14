@@ -82,7 +82,13 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          # Tag the release
           git tag -a "${{ inputs.release-version }}" -m "Release version ${{ inputs.release-version }}"
+
+          # Push the commit from rever to main
+          git push origin main
+
+          # Push the tags
           git push origin "${{ inputs.release-version }}"
 
       - name: Install library
