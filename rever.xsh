@@ -16,4 +16,4 @@ $CHANGELOG_FILENAME = 'CHANGELOG.rst'
 $CHANGELOG_TEMPLATE = 'TEMPLATE.rst'
 $CHANGELOG_NEWS = 'news'
 
-$ACTIVITIES = ['check', 'authors', 'changelog', 'tag', 'push_tag']
+$ACTIVITIES = ['authors', 'changelog', 'tag', 'push_tag']
