@@ -372,8 +372,7 @@ def lasso_highlight_image(
     line_width: int = 2,
     **kwargs: Any,
 ):
-    """A generalized interface to access both highlighting options whether the
-    input is as a smiles, smarts or mol
+    """Create an image of a molecule with substructure matches using lasso-based highlighting.
 
     args:
         target_molecule: The molecule to be highlighted
