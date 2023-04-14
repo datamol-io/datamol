@@ -1007,19 +1007,7 @@ mike<span class="w"> </span>serve
 <h3 id="multi-versionning">Multi-versionning<a class="headerlink" href="#multi-versionning" title="Permanent link">&para;</a></h3>
 <p>The doc is built for eash push on <code>main</code> and every git tags using <a href="https://github.com/jimporter/mike">mike</a>. Everything is automated using Github Actions. Please refer to the official mike's documentation for the details.</p>
 <h2 id="release-a-new-version">Release a new version<a class="headerlink" href="#release-a-new-version" title="Permanent link">&para;</a></h2>
-<ul>
-<li>Run check: <code>rever check</code>.</li>
-<li>Bump and release new version: <code>rever VERSION_NUMBER</code>.</li>
-<li>Releasing a new version will do the following things in that order:<ul>
-<li>Update <code>AUTHORS.rst</code>.</li>
-<li>Update <code>CHANGELOG.rst</code>.</li>
-<li>Bump the version number in <code>setup.py</code> and <code>_version.py</code>.</li>
-<li>Add a git tag.</li>
-<li>Push the git tag.</li>
-<li>Then a GH Action will upload a new release on the GH repo associated with the git tag and push the package to PyPi.</li>
-</ul>
-</li>
-</ul>
+<p>The process is fully automated by executing the <a href="https://github.com/datamol-io/datamol/actions/workflows/release.yml"><code>release</code> GH Action</a>.</p>
 
 
 
