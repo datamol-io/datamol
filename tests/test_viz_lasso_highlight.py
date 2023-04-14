@@ -130,19 +130,21 @@ def test_SVG_is_returned_explicit():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CC"]
     img = dm.lasso_highlight_image(smi, smarts_list, use_svg=True)
-    assert "<class 'IPython.core.display.SVG'>" == str(type(img))
+    assert isinstance(img, str)
 
 
 def test_SVG_is_returned_implict():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CC"]
     img = dm.lasso_highlight_image(smi, smarts_list)
-    assert "<class 'IPython.core.display.SVG'>" == str(type(img))
+    assert isinstance(img, str)
 
 
 def test_PNG_is_returned():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CC"]
     img = dm.lasso_highlight_image(smi, smarts_list, use_svg=False)
-    image_format = img.format.lower()
-    assert image_format == "png"
+
+    from PIL import Image
+
+    assert isinstance(img, Image.Image)

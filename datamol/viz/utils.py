@@ -1,5 +1,7 @@
 from typing import Optional
 
+import io
+
 from rdkit.Chem import Draw
 
 import datamol as dm
@@ -27,7 +29,7 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
 
             # Check for aromaticity
             if dm.is_lower_than_current_rdkit_version("2022.09"):
-                _kekulize = Draw._okToKekulizeMol(mol, kekulize)
+                _kekulize = Draw._okToKekulizeMol(mol, kekulize)  # type: ignore
             else:
                 _kekulize = Draw.shouldKekulize(mol, kekulize)
 
@@ -52,3 +54,37 @@ def is_ipython_session() -> bool:
         pass
 
     return False
+
+
+def drawer_to_image(drawer: Draw.rdMolDraw2D.MolDraw2D):
+    """Convert an RDkit drawer to an image. The image can be either a PNG or SVG depending on the
+    drawer class. The returned image type will depends whether the Python session is an IPython one or not.
+
+    This function matches the behavior of `datamol.to_image` and `rdkit.Chem.Draw.MolDraw2DToImage`.
+
+    Args:
+        drawer: An RDkit drawer.
+
+    Returns:
+        An image: either PNG or SVG depending on the drawer class. If within an IPython sessions,
+                  IPython display objects are returned.
+    """
+
+    is_svg = isinstance(drawer, Draw.rdMolDraw2D.MolDraw2DSVG)
+
+    if is_ipython_session():
+        if is_svg:
+            from IPython.core.display import SVG
+
+            return SVG(drawer.GetDrawingText())
+        else:
+            from IPython.core.display import Image
+
+            return Image(drawer.GetDrawingText())
+    else:
+        if is_svg:
+            return drawer.GetDrawingText()
+        else:
+            from PIL import Image
+
+            return Image.open(io.BytesIO(drawer.GetDrawingText()))
