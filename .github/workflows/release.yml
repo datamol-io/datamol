@@ -36,7 +36,6 @@ jobs:
           extra-specs: |
             pip
             semver
-            git
             rever==0.5.1
             setuptools_scm
 
@@ -74,6 +73,7 @@ jobs:
           git config --global init.defaultBranch main
           git config --global user.name github-actions
           git config --global user.email github-actions@github.com
+          git config --global url."git@github.com:".insteadOf "https://github.com/"
 
       - name: Perform the release with rever
         env:
