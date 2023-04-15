@@ -1,15 +1,20 @@
 name: release
 
 on:
-  push:
-    tags:
-      - "*"
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: "A valid Semver version string"
+        required: true
 
 permissions:
   contents: write
 
 jobs:
   release:
+    # Do not release if not triggered from the default branch
+    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
+
     runs-on: ubuntu-latest
     timeout-minutes: 30
 
@@ -21,15 +26,70 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3
 
-      - name: Setup conda
+      - name: Setup Mamba
         uses: mamba-org/provision-with-micromamba@v15
         with:
           environment-file: env.yml
-          environment-name: datamol
+          environment-name: release
           cache-downloads: true
           cache-env: true
           extra-specs: |
-            setuptools-scm
+            pip
+            semver
+            rever==0.5.1
+            python-build
+            setuptools_scm
+
+      - name: Check the version is valid semver
+        run: |
+          RELEASE_VERSION="${{ inputs.release-version }}"
+
+          {
+            pysemver check $RELEASE_VERSION
+          } || {
+            echo "The version '$RELEASE_VERSION' is not a valid Semver version string."
+            echo "Please use a valid semver version string. More details at https://semver.org/"
+            echo "The release process is aborted."
+            exit 1
+          }
+
+      - name: Check the version is higher than the latest one
+        run: |
+          # Retrieve the git tags first
+          git fetch --prune --unshallow --tags &> /dev/null
+
+          RELEASE_VERSION="${{ inputs.release-version }}"
+          LATEST_VERSION=$(git describe --abbrev=0 --tags)
+
+          IS_HIGHER_VERSION=$(pysemver compare $RELEASE_VERSION $LATEST_VERSION)
+
+          if [ "$IS_HIGHER_VERSION" != "1" ]; then
+            echo "The version '$RELEASE_VERSION' is not higher than the latest version '$LATEST_VERSION'."
+            echo "The release process is aborted."
+            exit 1
+          fi
+
+      - name: Configure git
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
+      - name: Perform the release with rever
+        run: |
+          rever ${{ inputs.release-version }}
+
+      - name: Create and push git tag
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Tag the release
+          git tag -a "${{ inputs.release-version }}" -m "Release version ${{ inputs.release-version }}"
+
+          # Push the commit from rever to main
+          git push origin main
+
+          # Push the tags
+          git push origin "${{ inputs.release-version }}"
 
       - name: Install library
         run: python -m pip install --no-deps .
@@ -46,4 +106,5 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
         with:
+          tag_name: ${{ inputs.release-version }}
           body: "See [CHANGELOGS.rst](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.rst)."
