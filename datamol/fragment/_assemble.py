@@ -14,8 +14,9 @@ from typing import Optional
 import copy
 import json
 import itertools
-import random
 import re
+
+from loguru import logger
 
 from functools import lru_cache
 
@@ -473,60 +474,10 @@ def assemble_fragment_order(
                             yield_counter += 1
                         seen.add(mSmi)
             except Exception as e:
-                print(e)
+                logger.error(e)
                 pass
 
     for m in seen:
         if yield_counter < max_n_mols:
             yield dm.to_mol(m)
             yield_counter += 1
-
-
-def assemble_fragment_iter(
-    fragmentlist,
-    seens=None,
-    scrambleReagents=False,
-    max_n_mols=float("inf"),
-    maxdepth=3,
-    as_smiles=True,
-    RXNS=None,
-):
-    """Perform an assembly from fragment given all potential RXNS transformation."""
-
-    if RXNS is None:
-        RXNS = ALL_BRICS_RETRO
-
-    seen = set()
-    if max_n_mols <= 0:
-        return
-    if not seens:
-        seens = list(fragmentlist)
-    if scrambleReagents:
-        seens = list(seens)
-        random.shuffle(seens, random=random.random)
-
-    for seen in seens:
-        nextSteps = []
-        for rxn in RXNS:
-            for fg in fragmentlist:
-                for m, pSmi in _run_at_all_rct(rxn, fg, seen):
-                    if pSmi not in seen:
-                        seen.add(pSmi)
-                        yield m if not as_smiles else pSmi
-                    if _can_continue_with(m, rxn):
-                        nextSteps.append(m)
-
-        if nextSteps and len(seen) <= max_n_mols and maxdepth > 0:
-            for p in assemble_fragment_iter(
-                fragmentlist,
-                seens=nextSteps,
-                scrambleReagents=scrambleReagents,
-                max_n_mols=(max_n_mols - len(seen)),
-                maxdepth=maxdepth - 1,
-            ):
-                pSmi = dm.to_smiles(p, True)
-                if pSmi not in seen:
-                    seen.add(pSmi)
-                    yield p if not as_smiles else pSmi
-                    if len(seen) >= max_n_mols:
-                        return

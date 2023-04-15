@@ -13,7 +13,7 @@
 
 **Removed:**
 
-* <news item>
+* Remove unused, broken and uncovered `datamol.fragment.assemble_fragment_iter()` function.
 
 **Fixed:**
 

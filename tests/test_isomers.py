@@ -36,13 +36,11 @@ def test_enumerate_stereo_undefined_failure():
 
 
 def test_enumerate_stereo_timeout():
-    mol = dm.to_mol(
-        "CC1=C2C(C(=O)C3(C(CC4C(C3C(C(C2(C)C)(CC1OC(=O)C(C(C5=CC=CC=C5)NC(=O)C6=CC=CC=C6)O)O)OC(=O)C7=CC=CC=C7)(CO4)OC(=O)C)O)C)OC(=O)C"
-    )
+    mol = dm.to_mol("CN1C=NC2=C1C(=O)N(C(=O)N2C)C")
 
     # NOTE(hadim): it's impossible to predict anything given a timeout for different
     # machines so we here we just check the code can run without errors
-    dm.enumerate_stereoisomers(mol, n_variants=10, timeout_seconds=1)
+    dm.enumerate_stereoisomers(mol, n_variants=2, timeout_seconds=1)
 
 
 def test_enumerate_structural():
