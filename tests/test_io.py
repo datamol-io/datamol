@@ -1,11 +1,14 @@
 import pytest
 import io
+import gzip
 
 from rdkit import Chem
 
 import datamol as dm
 import numpy as np
 import pandas as pd
+from pandas.testing import assert_frame_equal
+
 
 
 def test_read_csv(datadir):
@@ -396,3 +399,62 @@ def test_to_pdbfile(tmp_path):
     assert "CONECT" in molblock
     assert "C19" in molblock
     assert "C11" in molblock
+
+# tests begining open_df and save_df
+@pytest.fixture
+def tmp_path(tmpdir):
+    return str(tmpdir.mkdir("temp").join("test_file"))
+    
+def test_dataframe_csv(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    dm.save_df(data, tmp_path + ".csv")
+    loaded_data = dm.open_df(tmp_path + ".csv")
+    assert_frame_equal(data, loaded_data)
+
+def test_dataframe_excel(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    dm.save_df(data, tmp_path + ".xlsx")
+    loaded_data = dm.open_df(tmp_path + ".xlsx")
+    assert_frame_equal(data, loaded_data)
+
+def test_dataframe_parquet(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    dm.save_df(data, tmp_path + ".parquet")
+    loaded_data = dm.open_df(tmp_path + ".parquet")
+    assert_frame_equal(data, loaded_data)
+
+def test_dataframe_json(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    dm.save_df(data, tmp_path + ".json")
+    loaded_data = dm.open_df(tmp_path + ".json")
+    assert_frame_equal(data, loaded_data)
+
+def test_dataframe_sdf(tmp_path):
+    data = pd.DataFrame({"smiles": ["CC", "CCCC"], "col2": ["a", "b"]})
+    dm.save_df(data, tmp_path + ".sdf")
+    loaded_data = dm.open_df(tmp_path + ".sdf")
+    assert_frame_equal(data, loaded_data)
+
+def test_dataframe_sdf_gz(tmp_path):
+    data = pd.DataFrame({"smiles": ["CC", "CCCC"], "col2": ["a", "b"]})
+    dm.save_df(data, tmp_path + ".sdf")
+    with open(tmp_path + '.sdf', 'rb') as f_in:
+        with gzip.open(tmp_path + '.sdf.gz', 'wb') as f_out:
+            f_out.writelines(f_in)
+    loaded_data = dm.open_df(tmp_path + ".sdf.gz")
+    assert_frame_equal(data, loaded_data)
+
+def test_save_dataframe_invalid(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    with pytest.raises(ValueError):
+        dm.save_df(data, tmp_path + ".invalid")
+        
+def test_load_dataframe_invalid(tmp_path):
+    with pytest.raises(ValueError):
+        dm.open_df(tmp_path + ".invalid")
+
+# No assertions, just checking that the function runs with kwargs
+def test_file_with_kwargs(tmp_path):
+    data = pd.DataFrame({"col1": [1, 2, 3], "col2": ["a", "b", "c"]})
+    dm.save_df(data, tmp_path + ".csv", doublequote=False, sep=";")
+    dm.open_df(tmp_path + ".csv", verbose=True)

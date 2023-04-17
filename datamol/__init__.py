@@ -17,8 +17,6 @@ from .utils import parallelized
 from .utils import parallelized_with_batches
 from .utils import JobRunner
 from .utils import fs
-from .utils import open_dataframe
-from .utils import save_dataframe
 
 from .data import freesolv
 from .data import cdk2
@@ -128,6 +126,8 @@ from .io import read_pdbblock
 from .io import to_pdbblock
 from .io import read_pdbfile
 from .io import to_pdbfile
+from .io import save_df
+from .io import open_df
 
 from .isomers import enumerate_stereoisomers
 from .isomers import enumerate_tautomers
