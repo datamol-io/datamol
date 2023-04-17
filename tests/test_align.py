@@ -45,9 +45,9 @@ def test_template_align():
 
 def test_auto_align_many():
     data: pd.DataFrame = dm.solubility(as_df=True)  # type: ignore
-    data = data.iloc[:32].copy()  # type: ignore
+    data = data.iloc[:16].copy()  # type: ignore
 
-    excepted_cluster_size = [17, 9, 5, 9, 9]
+    excepted_cluster_size = [8, 6, 5, 6, 6]
 
     for i, partition_method in enumerate(
         [

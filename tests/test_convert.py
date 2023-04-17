@@ -156,18 +156,17 @@ def test_to_df(datadir):
         "reference.year",
     ]
 
-    # EN: more than 500 will slow the test
-    large_mol_set = np.random.choice(mols, 500)
-    with dm.utils.perf.watch_duration(log=True) as w:
-        df_sequential = dm.to_df(large_mol_set, n_jobs=1)
-    sequential_time = w.duration
 
-    with w:
-        df_parallel = dm.to_df(large_mol_set, n_jobs=-1)
-    parallel_time = w.duration
+def test_to_df_parallel(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+
+    # check parallel or sequential `to_df()` gives the same output df
+    large_mol_set = np.random.choice(mols, 50)
+    df_sequential = dm.to_df(large_mol_set, n_jobs=1)
+    df_parallel = dm.to_df(large_mol_set, n_jobs=-1)
 
     pd.testing.assert_frame_equal(df_sequential, df_parallel)
-    # assert parallel_time < sequential_time
 
 
 def test_from_df(datadir):

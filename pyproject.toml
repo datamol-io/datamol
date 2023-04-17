@@ -89,8 +89,12 @@ filterwarnings = [
 ]
 
 [tool.coverage.run]
-omit = ["setup.py", "tests/*", "SA_Score/*"]
+source = ["datamol/"]
 disable_warnings = ["no-data-collected"]
+data_file = ".coverage/coverage"
+
+[tool.coverage.report]
+omit = ["datamol/__init__.py", "datamol/_version.py"]
 
 [tool.coverage.xml]
 output = "coverage.xml"
