@@ -546,6 +546,7 @@ def to_xlsx(
     with fsspec.open(urlpath, mode="wb") as f:
         PandasTools.SaveXlsxFromFrame(mols, f, molCol=mol_column, size=mol_size)
 
+
 EXTENSIONS_DICT = {
     "csv": [
         ".csv",
@@ -592,7 +593,10 @@ def _guess_filetype(path: str):
 
 # I was hoping to use something along the lines of this for checking kwargs
 # I dont think I'm correctly implementing it right now
-def _check_file_kwargs(func: callable, **kwargs: Any,) -> None:
+def _check_file_kwargs(
+    func: callable,
+    **kwargs: Any,
+) -> None:
     """Check that the keyword arguments passed to the file reader are valid.
 
     args:
@@ -601,7 +605,7 @@ def _check_file_kwargs(func: callable, **kwargs: Any,) -> None:
     """
     if not kwargs:
         return
-    
+
     sig = inspect.signature(func)
     allowed_kwargs = [p.name for p in sig.parameters.values() if p.kind == p.KEYWORD_ONLY]
     for kwarg in kwargs:
@@ -612,14 +616,14 @@ def _check_file_kwargs(func: callable, **kwargs: Any,) -> None:
 def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
     """Open a dataframe file whatever its filetype from
     `csv, excel, parquet, json, sdf`.
-    
+
     args:
         path: path to the file.
         kwargs: keyword arguments to pass to the underlying reader.
     """
 
     filetype = _guess_filetype(path)
-    
+
     data = None
     if filetype == "csv":
         data = pd.read_csv(path, **kwargs)
@@ -639,10 +643,14 @@ def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
     return data
 
 
-def save_df(data: pd.DataFrame, path: str, **kwargs: Any,):
+def save_df(
+    data: pd.DataFrame,
+    path: str,
+    **kwargs: Any,
+):
     """Save a dataframe file whatever its filetype from
     `csv, excel, parquet, json, sdf`.
-    
+
     args:
         data: dataframe to save.
         path: path to save the file.
@@ -650,7 +658,7 @@ def save_df(data: pd.DataFrame, path: str, **kwargs: Any,):
     """
 
     filetype = _guess_filetype(path)
-    
+
     if filetype == "csv":
         data.to_csv(path, index=False, **kwargs)
     elif filetype == "excel":
@@ -660,6 +668,6 @@ def save_df(data: pd.DataFrame, path: str, **kwargs: Any,):
     elif filetype == "json":
         data.to_json(path, **kwargs)
     elif filetype == "sdf":
-        dm.to_sdf(data, path, **kwargs) 
+        dm.to_sdf(data, path, **kwargs)
     else:
         raise ValueError(f"The file type of {path} is not supported.")
