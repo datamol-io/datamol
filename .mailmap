@@ -9,7 +9,7 @@
 # This file is up-to-date if the command git log --format="%aN <%aE>" | sort -u
 # gives no duplicates.
 
-Cas <caswognum@hotmail.com> cwognum <caswognum@hotmail.com>
+Cas <caswognum@hotmail.com> cwognum <caswognum@outlook.com>
 DeepSource Bot <bot@deepsource.io>
 DomInvivo <dominique@invivoai.com>
 Emmanuel Noutahi <emmanuel.noutahi@hotmail.ca> maclandrol <emmanuel.noutahi@hotmail.ca>
@@ -19,9 +19,11 @@ Ishan Kumar <ishankumar216@gmail.com>
 Julien Horwood <julien@invivoai.com>
 Lu Zhu <lu@valencediscovery.com>
 Matt <mtudor@proteovant.com>
+Pakman450 <steven.pak10@gmail.com>
 Saurav Maheshkar <sauravvmaheshkar@gmail.com>
 Therence1 <38595485+Therence1@users.noreply.github.com>
 Valence-JonnyHsu <104230580+Valence-JonnyHsu@users.noreply.github.com>
 deepsource-autofix[bot] <62050782+deepsource-autofix[bot]@users.noreply.github.com>
+dessygil <desmondgilmour@gmail.com>
 michelml <michmoreau.l@gmail.com>
 mike <michael@invivoai.com>

@@ -276,6 +276,53 @@ def to_sdf(
             writer.close()
 
 
+def read_mol2file(
+    urlpath: Union[str, os.PathLike, IO],
+    sanitize: bool = True,
+    cleanup_substructures: bool = True,
+    remove_hs: bool = True,
+    fail_if_invalid: bool = False,
+) -> List[Mol]:
+    """Read a Mol2 File
+
+    Args:
+        urlpath: Path to a file or a file-like object. Path can be remote or local.
+        sanitize: Whether to sanitize the molecules.
+        remove_hs: Whether to remove the existing hydrogens in the SDF files.
+        cleanup_substructures: Whether to clean up substructure in the Mol2 Files.
+        fail_if_invalid: If set to true, the parser will raise an exception if the molecule is invalid
+            instead of returning None.
+    """
+
+    block = []
+    mols = []
+    with fsspec.open(urlpath, compression="infer") as f:
+        fReadLines = f.readlines()
+        # reversing due to ambiguous end line for mol2 files
+        fReadLines.reverse()
+        for line in fReadLines:
+            # ignores any header info
+            if b"#" not in line:
+                block.append(str(line, "utf-8"))
+            # since reversed, this is the 'end' a mol2
+            if b"@<TRIPOS>MOLECULE" in line:
+                block.reverse()
+                mol2block = ",".join(block).replace(",", "")
+                mol = rdmolfiles.MolFromMol2Block(
+                    mol2block,
+                    sanitize=sanitize,
+                    removeHs=remove_hs,
+                    cleanupSubstructures=cleanup_substructures,
+                )
+                if mol is None and fail_if_invalid:
+                    raise ValueError(f"Invalid molecule: {mol2block}")
+                mols.append(mol)
+                block = []
+
+    mols.reverse()
+    return mols
+
+
 def read_molblock(
     molblock: str,
     sanitize: bool = True,

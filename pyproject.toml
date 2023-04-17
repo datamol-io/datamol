@@ -43,6 +43,7 @@ dependencies = [
     "scikit-learn",
     "packaging",
     "typing-extensions",
+    "importlib-resources",
     # NOTE(hadim): can't add rdkit because of `pip` will always override
     # the conda package at the moment.
     # See:
@@ -55,7 +56,7 @@ dependencies = [
 Website = "https://datamol.io"
 "Source Code" = "https://github.com/datamol-io/datamol"
 "Bug Tracker" = "https://github.com/datamol-io/datamol/issues"
-Documentation = "https://doc.datamol.io"
+Documentation = "https://docs.datamol.io"
 
 [tool.setuptools]
 include-package-data = true
@@ -81,11 +82,19 @@ include = '\.pyi?$'
 minversion = "6.0"
 addopts = "--verbose --cov=datamol --cov-fail-under=85 --cov-report xml --cov-report term --durations=10 -n auto"
 testpaths = ["tests"]
-filterwarnings = ["ignore::DeprecationWarning:rdkit.*:"]
+filterwarnings = [
+    "ignore::DeprecationWarning:rdkit.*:",
+    "ignore::DeprecationWarning:jupyter_client.*:",
+    "ignore::DeprecationWarning:pkg_resources.*:",
+]
 
 [tool.coverage.run]
-omit = ["setup.py", "tests/*", "SA_Score/*"]
+source = ["datamol/"]
 disable_warnings = ["no-data-collected"]
+data_file = ".coverage/coverage"
+
+[tool.coverage.report]
+omit = ["datamol/__init__.py", "datamol/_version.py"]
 
 [tool.coverage.xml]
 output = "coverage.xml"

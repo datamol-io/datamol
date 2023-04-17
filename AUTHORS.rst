@@ -11,9 +11,11 @@ Authors are sorted alphabetically.
 * Julien Horwood
 * Lu Zhu
 * Matt
+* Pakman450
 * Saurav Maheshkar
 * Therence1
 * Valence-JonnyHsu
 * deepsource-autofix[bot]
+* dessygil
 * michelml
 * mike

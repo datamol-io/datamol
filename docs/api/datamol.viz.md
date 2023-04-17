@@ -10,3 +10,6 @@
 ::: datamol.viz.MolsCircleGrid
 ::: datamol.viz.circle_grid
 
+## Vizualize 2D molecule with highlighted substructures
+
+::: datamol.viz.lasso_highlight_image

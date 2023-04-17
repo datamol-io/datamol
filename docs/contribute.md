@@ -48,12 +48,4 @@ The doc is built for eash push on `main` and every git tags using [mike](https:/
 
 ## Release a new version
 
-- Run check: `rever check`.
-- Bump and release new version: `rever VERSION_NUMBER`.
-- Releasing a new version will do the following things in that order:
-  - Update `AUTHORS.rst`.
-  - Update `CHANGELOG.rst`.
-  - Bump the version number in `setup.py` and `_version.py`.
-  - Add a git tag.
-  - Push the git tag.
-  - Then a GH Action will upload a new release on the GH repo associated with the git tag and push the package to PyPi.
+The process is fully automated by executing the [`release` GH Action](https://github.com/datamol-io/datamol/actions/workflows/release.yml).

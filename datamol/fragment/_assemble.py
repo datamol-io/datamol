@@ -14,9 +14,9 @@ from typing import Optional
 import copy
 import json
 import itertools
-import random
 import re
-import pkg_resources
+
+from loguru import logger
 
 from functools import lru_cache
 
@@ -26,7 +26,9 @@ from rdkit import Chem
 from rdkit.Chem import rdChemReactions
 
 import datamol as dm
+
 from ..types import Mol
+from ..data import open_datamol_data_file
 
 CCQ = "[$([#6][!#6;!#1]):1]!@[#6;!a:2]>>[*:1].[*:2]"
 CCQ_RETRO = "[$([#6;!H0][!#6;!#1]):1].[#6;!a;!H0:2]>>[*:1][*:2]"
@@ -207,7 +209,8 @@ def get_reactions_list():
     all_rxns = []
     all_rxns_retro = []
     all_rxns_type = []
-    with pkg_resources.resource_stream("datamol", "data/reactions.json") as IN:
+
+    with open_datamol_data_file("reactions.json") as IN:
         rxns = json.load(IN)
         for k, data in rxns.items():
             try:
@@ -471,60 +474,10 @@ def assemble_fragment_order(
                             yield_counter += 1
                         seen.add(mSmi)
             except Exception as e:
-                print(e)
+                logger.error(e)
                 pass
 
     for m in seen:
         if yield_counter < max_n_mols:
             yield dm.to_mol(m)
             yield_counter += 1
-
-
-def assemble_fragment_iter(
-    fragmentlist,
-    seens=None,
-    scrambleReagents=False,
-    max_n_mols=float("inf"),
-    maxdepth=3,
-    as_smiles=True,
-    RXNS=None,
-):
-    """Perform an assembly from fragment given all potential RXNS transformation."""
-
-    if RXNS is None:
-        RXNS = ALL_BRICS_RETRO
-
-    seen = set()
-    if max_n_mols <= 0:
-        return
-    if not seens:
-        seens = list(fragmentlist)
-    if scrambleReagents:
-        seens = list(seens)
-        random.shuffle(seens, random=random.random)
-
-    for seen in seens:
-        nextSteps = []
-        for rxn in RXNS:
-            for fg in fragmentlist:
-                for m, pSmi in _run_at_all_rct(rxn, fg, seen):
-                    if pSmi not in seen:
-                        seen.add(pSmi)
-                        yield m if not as_smiles else pSmi
-                    if _can_continue_with(m, rxn):
-                        nextSteps.append(m)
-
-        if nextSteps and len(seen) <= max_n_mols and maxdepth > 0:
-            for p in assemble_fragment_iter(
-                fragmentlist,
-                seens=nextSteps,
-                scrambleReagents=scrambleReagents,
-                max_n_mols=(max_n_mols - len(seen)),
-                maxdepth=maxdepth - 1,
-            ):
-                pSmi = dm.to_smiles(p, True)
-                if pSmi not in seen:
-                    seen.add(pSmi)
-                    yield p if not as_smiles else pSmi
-                    if len(seen) >= max_n_mols:
-                        return

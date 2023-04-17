@@ -4,6 +4,87 @@ Datamol Changelogs
 
 .. current developments
 
+v0.9.8
+====================
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
+v0.9.7
+====================
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
+v0.9.4
+====================
+
+**Fixed:**
+
+* Fix wrong image output for lasso viz function. Make it consistent with `dm.to_image()` and rdkit.
+* Avoid global `IPython` import so it's not an hard datamol dependency.
+* Add `importlib-resources` dep in the datamol pypi package.
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
+v0.9.3
+====================
+
+**Added:**
+
+* added a feature that highlights substructures of 2D molecular images
+
+**Changed:**
+
+* Update CNAME to docs.datamol.io
+* Replace all occurrences of doc.datamol.io by docs.datamol.io
+* Switch from `pkg_resources` to `importlib.resources` for loading resources.
+* Enable python 3.11 on the CI.
+* Relocatem `datamol/data.py` to `datamol/data/__init__.py`.
+
+**Fixed:**
+
+* Color bug of the search input bar
+
+**Authors:**
+
+* Emmanuel Noutahi
+* Hadrien Mary
+* Honoré Hounwanou
+* dessygil
+
+
+
+v0.9.2
+====================
+
+**Added:**
+
+* A multi-mol2 file reader that converts into rdkit objects
+
+**Fixed:**
+
+* Updated the logging in `_sanifix4.py` to use the RDKit logger
+
+**Authors:**
+
+* Cas
+* Hadrien Mary
+* Pakman450
+* Therence1
+
+
+
 v0.9.1
 ====================
 

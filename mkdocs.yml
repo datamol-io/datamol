@@ -47,6 +47,7 @@ nav:
     - datamol.scaffold: api/datamol.scaffold.md
     - datamol.similarity: api/datamol.similarity.md
     - datamol.utils: api/datamol.utils.md
+    - datamol.utils.fs: api/datamol.utils.fs.md
     - datamol.viz: api/datamol.viz.md
 
   - Contribute: contribute.md
@@ -84,12 +85,13 @@ markdown_extensions:
       permalink: true
       toc_depth: 4
 
+watch:
+  - datamol/
+
 plugins:
   - search
 
   - mkdocstrings:
-      watch:
-        - datamol/
       handlers:
         python:
           setup_commands:
