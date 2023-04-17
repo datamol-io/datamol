@@ -638,35 +638,13 @@ def _guess_filetype(path: str):
                 return name
 
 
-# I was hoping to use something along the lines of this for checking kwargs
-# I dont think I'm correctly implementing it right now
-def _check_file_kwargs(
-    func: callable,
-    **kwargs: Any,
-) -> None:
-    """Check that the keyword arguments passed to the file reader are valid.
-
-    args:
-        func: function to check.
-        **kwargs: keyword arguments to check.
-    """
-    if not kwargs:
-        return
-
-    sig = inspect.signature(func)
-    allowed_kwargs = [p.name for p in sig.parameters.values() if p.kind == p.KEYWORD_ONLY]
-    for kwarg in kwargs:
-        if kwarg not in allowed_kwargs:
-            raise TypeError(f"Invalid keyword argument '{kwarg}'")
-
-
 def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
     """Open a dataframe file whatever its filetype from
     `csv, excel, parquet, json, sdf`.
 
-    args:
+    Args:
         path: path to the file.
-        kwargs: keyword arguments to pass to the underlying reader.
+        **kwargs: keyword arguments to pass to the underlying reader.
     """
 
     filetype = _guess_filetype(path)
@@ -698,10 +676,10 @@ def save_df(
     """Save a dataframe file whatever its filetype from
     `csv, excel, parquet, json, sdf`.
 
-    args:
+    Args:
         data: dataframe to save.
         path: path to save the file.
-        kwargs: additional arguments to pass that are specific to the file save type.
+        **kwargs: additional arguments to pass that are specific to the file save type.
     """
 
     filetype = _guess_filetype(path)
