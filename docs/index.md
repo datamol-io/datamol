@@ -8,7 +8,7 @@ Datamol is a python library to work with molecules. It's a layer built on top of
 - 🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.
 - 🕹️ Modern IO: out-of-the-box support for remote paths using `fsspec` to read and write multiple formats (sdf, xlsx, csv, etc).
 
-Visit our website at https://datamol.io.
+Visit our website at <https://datamol.io>.
 
 ## Installation
 
@@ -75,10 +75,11 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
-| `0.9`     | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |
-| `0.8`     | `[3.8, 3.9, 3.10]`  | `[2021.09, 2022.03, 2022.09]` |
-| `0.7`     | `[3.8, 3.9]`        | `[2021.09, 2022.03]`          |
-| `0.6`     | `[3.8, 3.9]`        | `[2021.09]`                   |
-| `0.5`     | `[3.8, 3.9]`        | `[2021.03, 2021.09]`          |
-| `0.4`     | `[3.8, 3.9]`        | `[2020.09, 2021.03]`          |
-| `0.3`     | `[3.8, 3.9]`        | `[2020.09, 2021.03]`          |
+| `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |
+| `0.9.x`   | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |
+| `0.8.x`   | `[3.8, 3.9, 3.10]`  | `[2021.09, 2022.03, 2022.09]` |
+| `0.7.x`   | `[3.8, 3.9]`        | `[2021.09, 2022.03]`          |
+| `0.6.x`   | `[3.8, 3.9]`        | `[2021.09]`                   |
+| `0.5.x`   | `[3.8, 3.9]`        | `[2021.03, 2021.09]`          |
+| `0.4.x`   | `[3.8, 3.9]`        | `[2020.09, 2021.03]`          |
+| `0.3.x`   | `[3.8, 3.9]`        | `[2020.09, 2021.03]`          |

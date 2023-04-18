@@ -1,5 +1,7 @@
 # Usage
 
+## How to use
+
 Datamol has been designed to be used with a single import:
 
 ```python
@@ -8,13 +10,6 @@ import datamol as dm
 
 All `datamol` functions are available under `dm`.
 
-## Available modules
+## Lazy loading
 
-- `dm`: top-level module that contains common functions.
-- `dm.actions`: functions to edit molecules.
-- `dm.conformers`: generate and perform computation on conformers.
-- `dm.data`: get some common data (mainly for dev purposes).
-- `dm.fragment`: fragment molecules in a list of fragments.
-- `dm.reactions`: functions to work with reactions.
-- `dm.scaffold`: get representative scaffolds from a list of molecules.
-- `dm.viz`: 2D/3D visualization functions.
+datamol uses lazy loading to dynamically expose all its API without imposing a long import time during `import datamol as dm`. In case of trouble you can always disable lazy loading by setting `DATAMOL_DISABLE_LAZY_LOADING="1"`. Please report any issue [on the datamol repo](https://github.com/datamol-io/datamol/issues).

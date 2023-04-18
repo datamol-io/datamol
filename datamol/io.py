@@ -14,7 +14,7 @@ import tempfile
 import pathlib
 
 from rdkit.Chem import PandasTools
-from rdkit.Chem import rdmolfiles
+from rdkit.Chem import rdmolfiles  # type: ignore
 
 import pandas as pd
 import fsspec

@@ -246,7 +246,7 @@ class IsomerEnumerator:
         if not self.rxn_cache:
             raise ValueError("No isomeric transformation matches your")
 
-    def _resolve(self, rxn_list: list):
+    def _resolve(self, rxn_list: Optional[list]):
         """Resolve map of rxn to use
 
         Args:
@@ -315,7 +315,7 @@ class IsomerEnumerator:
 
     def enumerate(
         self,
-        mol,
+        mol: dm.Mol,
         depth: Optional[int] = None,
         include_input: bool = True,
         protect_substruct: Optional[Chem.rdchem.Mol] = None,
@@ -324,42 +324,44 @@ class IsomerEnumerator:
         """Enumerate the list of isomers of the current mol
 
         Args:
-            mol (Chem.rdchem.Mol): input molecule or smiles
-            depth (int, optional): optional maximum depth of the breadth search (default=None)
-            as_smiles (bool, optional): whether to return smiles strings of mols (default=False)
-            include_input (bool, optional): whether to include the input molecule (default=True)
-            protect_substruct (Chem.rdchem.Mol, optional): Optional substruct to protect
-            max_mols (int, optional): maximum number of molecule to sample
+            mol: input molecule or smiles
+            depth: optional maximum depth of the breadth search (default=None)
+            include_input: whether to include the input molecule (default=True)
+            protect_substruct: Optional substruct to protect
+            max_mols: maximum number of molecule to sample
         """
 
         mol = dm.to_mol(mol)
         if protect_substruct is not None:
-            mol = dm.protect_atoms(mol, substruct=protect_substruct, in_place=False, as_smarts=True)
+            mol = dm.protect_atoms(mol, substruct=protect_substruct, in_place=False)
         smiles = dm.to_smiles(mol, isomeric=True, canonical=True)
         mol_size = mol.GetNumHeavyAtoms()
         source_mols = [(mol, 0)]
         seen = set([smiles])
         seen_inchi_key = set([dm.to_inchikey(smiles)])
-        depth = depth or float("inf")
-        max_mols = max_mols or float("inf")
+
+        _depth = depth or float("inf")
+        _max_mols = max_mols or float("inf")
+
         if include_input:
             yield smiles
-        while len(source_mols) > 0 and max_mols > 0:
+        while len(source_mols) > 0 and _max_mols > 0:
             curmol, curdepth = source_mols.pop(0)
             try:
                 # we first try to kekulize the molecule
                 Chem.Kekulize(curmol)
                 curmol = Chem.AddHs(curmol, explicitOnly=False)
-            except Exception as e:
+            except Exception:
                 pass
-            if curdepth >= depth:
+
+            if curdepth >= _depth:
                 return
             with dm.without_rdkit_log():
                 for k, rxn in self.rxn_cache.items():
-                    if max_mols < 1:
+                    if _max_mols < 1:
                         break
                     for new_mols in rxn.RunReactants((curmol,)):
-                        if max_mols < 1:
+                        if _max_mols < 1:
                             break
                         new_mol = new_mols[0]
                         # sanitize mol
@@ -386,4 +388,4 @@ class IsomerEnumerator:
                         source_mols.append((new_mol, curdepth + 1))
                         if self._is_valid(new_mol, new_smiles, protect_substruct):
                             yield new_smiles
-                            max_mols -= 1
+                            _max_mols -= 1

@@ -98,9 +98,8 @@ plugins:
             - import sys
             - sys.path.append("docs")
             - sys.path.append("datamol")
-          selection:
+          options:
             new_path_syntax: true
-          rendering:
             show_root_heading: false
             heading_level: 3
             show_root_full_path: false
