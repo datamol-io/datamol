@@ -296,6 +296,7 @@ def read_mol2file(
     block = []
     mols = []
     with fsspec.open(urlpath, compression="infer") as f:
+        f = cast(IO, f)
         fReadLines = f.readlines()
         # reversing due to ambiguous end line for mol2 files
         fReadLines.reverse()
@@ -591,3 +592,110 @@ def to_xlsx(
 
     with fsspec.open(urlpath, mode="wb") as f:
         PandasTools.SaveXlsxFromFrame(mols, f, molCol=mol_column, size=mol_size)
+
+
+EXTENSIONS_DICT = {
+    "csv": [
+        ".csv",
+        ".csv.gz",
+        ".csv.bz2",
+        ".csv.zip",
+        ".csv.xz",
+        ".csv.zst",
+        ".csv.tar",
+        ".csv.tar.gz",
+        ".csv.tar.xz",
+        ".csv.tar.bz2",
+    ],
+    "excel": [".xlsx"],
+    "parquet": [".parquet"],
+    "json": [
+        ".json",
+        ".json.gz",
+        ".json.bz2",
+        ".json.zip",
+        ".json.xz",
+        ".json.zst",
+        ".json.tar",
+        ".json.tar.gz",
+        ".json.tar.xz",
+        ".json.tar.bz2",
+    ],
+    "sdf": [
+        ".sdf",
+        ".sdf.gz",
+    ],
+}
+
+
+def _guess_filetype(path: str):
+    """Return a filetype given an input path. Filetypes returned can be from
+    `csv, excel, parquet, json, sdf`.
+    """
+    for name, extensions in EXTENSIONS_DICT.items():
+        for ext in extensions:
+            if path.endswith(ext):
+                return name
+
+
+def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
+    """Open a dataframe file whatever its filetype from
+    `csv, excel, parquet, json, sdf`.
+
+    Args:
+        path: path to the file.
+        **kwargs: keyword arguments to pass to the underlying reader.
+    """
+
+    filetype = _guess_filetype(path)
+
+    data = None
+    if filetype == "csv":
+        data = pd.read_csv(path, **kwargs)
+    elif filetype == "excel":
+        data = pd.read_excel(path, **kwargs)
+    elif filetype == "parquet":
+        data = pd.read_parquet(path, **kwargs)
+    elif filetype == "json":
+        data = pd.read_json(path, **kwargs)
+    elif filetype == "sdf":
+        kwargs.setdefault("as_df", True)
+        data = dm.read_sdf(path, **kwargs)
+    else:
+        raise ValueError(f"The file type of {path} is not supported.")
+
+    data = cast(pd.DataFrame, data)
+
+    return data
+
+
+def save_df(
+    data: pd.DataFrame,
+    path: str,
+    **kwargs: Any,
+):
+    """Save a dataframe file whatever its filetype from
+    `csv, excel, parquet, json, sdf`.
+
+    Args:
+        data: dataframe to save.
+        path: path to save the file.
+        **kwargs: additional arguments to pass that are specific to the file save type.
+    """
+
+    filetype = _guess_filetype(path)
+
+    if filetype == "csv":
+        kwargs.setdefault("index", False)
+        data.to_csv(path, **kwargs)
+    elif filetype == "excel":
+        kwargs.setdefault("index", False)
+        data.to_excel(path, **kwargs)
+    elif filetype == "parquet":
+        data.to_parquet(path, **kwargs)
+    elif filetype == "json":
+        data.to_json(path, **kwargs)
+    elif filetype == "sdf":
+        dm.to_sdf(data, path, **kwargs)
+    else:
+        raise ValueError(f"The file type of {path} is not supported.")

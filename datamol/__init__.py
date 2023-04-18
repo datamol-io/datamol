@@ -126,6 +126,8 @@ _lazy_imports_obj = {
     "to_pdbblock": "datamol.io",
     "read_pdbfile": "datamol.io",
     "to_pdbfile": "datamol.io",
+    "open_df": "datamol.io",
+    "save_df": "datamol.io",
     # isomers
     "enumerate_stereoisomers": "datamol.isomers",
     "enumerate_tautomers": "datamol.isomers",
@@ -313,6 +315,8 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .io import to_pdbblock
     from .io import read_pdbfile
     from .io import to_pdbfile
+    from .io import save_df
+    from .io import open_df
 
     from .isomers import enumerate_stereoisomers
     from .isomers import enumerate_tautomers
