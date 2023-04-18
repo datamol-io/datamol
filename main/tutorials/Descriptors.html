@@ -2047,7 +2047,7 @@ Licensed under the Apache License, Version 2.0.
 
 <span class="n">mols</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">[:</span><span class="mi">12</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">[:</span><span class="mi">12</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-1" class="clipboard-copy-txt">import datamol as dm
 
@@ -2060,7 +2060,7 @@ data["mol"] = data["smiles"].apply(dm.to_mol)
 
 mols = data["mol"].tolist()
 
-dm.to_image(mols[:12], mol_size=(200, 150), use_svg=False)</div>
+dm.to_image(mols[:12], mol_size=(200, 150))</div>
         
         </div>
     </div>

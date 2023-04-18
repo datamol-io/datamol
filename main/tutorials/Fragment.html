@@ -2358,13 +2358,13 @@ class="
 <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
     <span class="n">frags</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fragment</span><span class="o">.</span><span class="n">brics</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-4" class="clipboard-copy-txt"># BRICS
 with dm.without_rdkit_log():
     frags = dm.fragment.brics(mol)
 
-dm.to_image(frags, mol_size=(250, 150), use_svg=False)</div>
+dm.to_image(frags, mol_size=(250, 150))</div>
         
         </div>
     </div>
@@ -2425,13 +2425,13 @@ class="
 <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
     <span class="n">frags</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fragment</span><span class="o">.</span><span class="n">frag</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-5" class="clipboard-copy-txt"># FraggleSims
 with dm.without_rdkit_log():
     frags = dm.fragment.frag(mol)
 
-dm.to_image(frags, mol_size=(250, 150), use_svg=False)</div>
+dm.to_image(frags, mol_size=(250, 150))</div>
         
         </div>
     </div>
@@ -2492,13 +2492,13 @@ class="
 <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
     <span class="n">frags</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fragment</span><span class="o">.</span><span class="n">recap</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-6" class="clipboard-copy-txt"># Recap
 with dm.without_rdkit_log():
     frags = dm.fragment.recap(mol)
 
-dm.to_image(frags, mol_size=(250, 150), use_svg=False)</div>
+dm.to_image(frags, mol_size=(250, 150))</div>
         
         </div>
     </div>
@@ -2588,7 +2588,7 @@ class="
 <span class="k">with</span> <span class="n">dm</span><span class="o">.</span><span class="n">without_rdkit_log</span><span class="p">():</span>
     <span class="n">mols</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">fragment</span><span class="o">.</span><span class="n">assemble_fragment_order</span><span class="p">(</span><span class="n">frags</span><span class="p">,</span> <span class="n">max_n_mols</span><span class="o">=</span><span class="mi">8</span><span class="p">))</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">250</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-7" class="clipboard-copy-txt"># Assembling new molecules based on a list of fragments
 # Get the fragment set of a molecule
@@ -2605,7 +2605,7 @@ frags = frags[:3]
 with dm.without_rdkit_log():
     mols = list(dm.fragment.assemble_fragment_order(frags, max_n_mols=8))
 
-dm.to_image(mols, mol_size=(250, 150), use_svg=False)</div>
+dm.to_image(mols, mol_size=(250, 150))</div>
         
         </div>
     </div>

@@ -2274,9 +2274,9 @@ picked_inds, picked_mols</div>
                     </div>
                 </clipboard-copy>
             </div>
-            <div class="highlight-ipynb hl-python "><pre><span></span><span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">picked_mols</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <div class="highlight-ipynb hl-python "><pre><span></span><span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">picked_mols</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
-<div id="cell-2" class="clipboard-copy-txt">dm.to_image(picked_mols, mol_size=(150, 100), use_svg=False)</div>
+<div id="cell-2" class="clipboard-copy-txt">dm.to_image(picked_mols, mol_size=(150, 100))</div>
         
         </div>
     </div>
@@ -2355,7 +2355,7 @@ class="
 <span class="n">clusters</span><span class="p">,</span> <span class="n">mol_clusters</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">cluster_mols</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">cutoff</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span>
 
 <span class="c1"># Cluster #1</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_clusters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_clusters</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 <div id="cell-3" class="clipboard-copy-txt">import datamol as dm
 
@@ -2368,7 +2368,7 @@ mols = [dm.to_mol(s) for s in smiles]
 clusters, mol_clusters = dm.cluster_mols(mols, cutoff=0.7)
 
 # Cluster #1
-dm.to_image(mol_clusters[0], mol_size=(150, 100), n_cols=6, max_mols=18, use_svg=False)</div>
+dm.to_image(mol_clusters[0], mol_size=(150, 100), n_cols=6, max_mols=18)</div>
         
         </div>
     </div>
@@ -2425,10 +2425,10 @@ class="
                 </clipboard-copy>
             </div>
             <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Cluster #2</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_clusters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_clusters</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
 </pre></div>
 <div id="cell-4" class="clipboard-copy-txt"># Cluster #2
-dm.to_image(mol_clusters[1], mol_size=(150, 100), n_cols=6, max_mols=18, use_svg=False)</div>
+dm.to_image(mol_clusters[1], mol_size=(150, 100), n_cols=6, max_mols=18)</div>
         
         </div>
     </div>
@@ -2486,11 +2486,11 @@ class="
             </div>
             <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Pick a diverse set of molecules</span>
 <span class="n">indices</span><span class="p">,</span> <span class="n">picks</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">pick_diverse</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">npick</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">picks</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
 </pre></div>
 <div id="cell-5" class="clipboard-copy-txt"># Pick a diverse set of molecules
 indices, picks = dm.pick_diverse(mols, npick=10)
-dm.to_image(picks, mol_size=(150, 100), use_svg=False)</div>
+dm.to_image(picks, mol_size=(150, 100))</div>
         
         </div>
     </div>
@@ -2548,11 +2548,11 @@ class="
             </div>
             <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Pick centroids from a set of molecules</span>
 <span class="n">indices</span><span class="p">,</span> <span class="n">centroids</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">pick_centroids</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">npick</span><span class="o">=</span><span class="mi">18</span><span class="p">,</span> <span class="n">threshold</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;sphere&quot;</span><span class="p">,</span> <span class="n">n_jobs</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">centroids</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">150</span><span class="p">,</span> <span class="mi">100</span><span class="p">),</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">6</span><span class="p">)</span>
 </pre></div>
 <div id="cell-6" class="clipboard-copy-txt"># Pick centroids from a set of molecules
 indices, centroids = dm.pick_centroids(mols, npick=18, threshold=0.7, method="sphere", n_jobs=-1)
-dm.to_image(centroids, mol_size=(150, 100), n_cols=6, use_svg=False)</div>
+dm.to_image(centroids, mol_size=(150, 100), n_cols=6)</div>
         
         </div>
     </div>

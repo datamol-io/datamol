@@ -2009,7 +2009,7 @@ Licensed under the Apache License, Version 2.0.
 
 <span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span><span class="p">[</span><span class="s2">&quot;smiles&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">)</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">12</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-1" class="clipboard-copy-txt">import datamol as dm
 
@@ -2018,7 +2018,7 @@ data = dm.data.cdk2()
 
 data["mol"] = data["smiles"].apply(dm.to_mol)
 
-dm.to_image(data["mol"].iloc[:12].tolist(), mol_size=(200, 150), use_svg=False)</div>
+dm.to_image(data["mol"].iloc[:12].tolist(), mol_size=(200, 150))</div>
         
         </div>
     </div>
@@ -2079,13 +2079,13 @@ class="
     <span class="n">scaffolds</span><span class="p">,</span> <span class="n">scf2infos</span><span class="p">,</span> <span class="n">scf2groups</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">scaffold</span><span class="o">.</span><span class="n">fuzzy_scaffolding</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="s2">&quot;mol&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
 
 <span class="n">sfs</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="n">scaffolds</span><span class="p">)]</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">sfs</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">sfs</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">max_mols</span><span class="o">=</span><span class="mi">12</span><span class="p">)</span>
 </pre></div>
 <div id="cell-2" class="clipboard-copy-txt">with dm.without_rdkit_log():
     scaffolds, scf2infos, scf2groups = dm.scaffold.fuzzy_scaffolding(data["mol"].tolist())
 
 sfs = [dm.to_mol(s) for s in list(scaffolds)]
-dm.to_image(sfs, mol_size=(200, 150), max_mols=12, use_svg=False)</div>
+dm.to_image(sfs, mol_size=(200, 150), max_mols=12)</div>
         
         </div>
     </div>

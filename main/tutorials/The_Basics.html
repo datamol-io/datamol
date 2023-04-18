@@ -2669,7 +2669,7 @@ df.head()</div>
 
 <span class="c1"># Make an image from the molecules list with their SMILES as legend.</span>
 <span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">,</span> <span class="n">n_cols</span><span class="o">=</span><span class="mi">4</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">200</span><span class="p">))</span>
 </pre></div>
 <div id="cell-9" class="clipboard-copy-txt"># Get a list of molecules
 data = dm.data.freesolv()
@@ -2678,7 +2678,7 @@ mols = mols[:8]
 
 # Make an image from the molecules list with their SMILES as legend.
 legends = [dm.to_smiles(mol) for mol in mols]
-dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200), use_svg=False)</div>
+dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200))</div>
         
         </div>
     </div>
@@ -2966,9 +2966,9 @@ dm.viz.conformers(mol, n_confs=3, width="auto")</div>
 
 
 
-<div id="9f4dd091-8d54-4253-8702-31610e69ee3d" class="jupyter-widgets jp-OutputArea-output ">
+<div id="2b741080-fc17-41d7-94dc-fcae604445c4" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('9f4dd091-8d54-4253-8702-31610e69ee3d');
+var element = document.getElementById('2b741080-fc17-41d7-94dc-fcae604445c4');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "37a43320292c444b8db9f4698766418a", "version_major": 2, "version_minor": 0}
@@ -2986,9 +2986,9 @@ var element = document.getElementById('9f4dd091-8d54-4253-8702-31610e69ee3d');
 
 
 
-<div id="bb10821b-a6a4-4565-90d0-f3abd839f9ab" class="jupyter-widgets jp-OutputArea-output ">
+<div id="ab8a120a-e1e2-4fe7-a05c-922663836baf" class="jupyter-widgets jp-OutputArea-output ">
 <script type="text/javascript">
-var element = document.getElementById('bb10821b-a6a4-4565-90d0-f3abd839f9ab');
+var element = document.getElementById('ab8a120a-e1e2-4fe7-a05c-922663836baf');
 </script>
 <script type="application/vnd.jupyter.widget-view+json">
 {"model_id": "22acb948bd0f4265864862d49128ecd8", "version_major": 2, "version_minor": 0}

@@ -2226,7 +2226,7 @@ class="
     <span class="s2">&quot;O=C(CN1CCCCCC1=O)NCC1=CC=C(N2C=CN=C2)C(F)=C1&quot;</span><span class="p">,</span>
 <span class="p">]</span>
 <span class="n">mol_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smi</span><span class="p">)</span> <span class="k">for</span> <span class="n">smi</span> <span class="ow">in</span> <span class="n">smiles_list</span><span class="p">]</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_list</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mol_list</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-3" class="clipboard-copy-txt">import datamol as dm
 
@@ -2239,7 +2239,7 @@ smiles_list = [
     "O=C(CN1CCCCCC1=O)NCC1=CC=C(N2C=CN=C2)C(F)=C1",
 ]
 mol_list = [dm.to_mol(smi) for smi in smiles_list]
-dm.to_image(mol_list, mol_size=(200, 150), use_svg=False)</div>
+dm.to_image(mol_list, mol_size=(200, 150))</div>
         
         </div>
     </div>
@@ -2298,12 +2298,12 @@ class="
             <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Extracting Murcko scaffolds from list of compounds</span>
 <span class="n">scaffolds</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_scaffold_murcko</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mol_list</span><span class="p">]</span>
 
-<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">scaffolds</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">),</span> <span class="n">use_svg</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">scaffolds</span><span class="p">,</span> <span class="n">mol_size</span><span class="o">=</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">150</span><span class="p">))</span>
 </pre></div>
 <div id="cell-4" class="clipboard-copy-txt"># Extracting Murcko scaffolds from list of compounds
 scaffolds = [dm.to_scaffold_murcko(mol) for mol in mol_list]
 
-dm.to_image(scaffolds, mol_size=(200, 150), use_svg=False)</div>
+dm.to_image(scaffolds, mol_size=(200, 150))</div>
         
         </div>
     </div>
