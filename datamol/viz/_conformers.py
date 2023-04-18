@@ -1,5 +1,6 @@
 from typing import Union
 from typing import List
+from typing import Optional
 
 import copy
 import itertools
@@ -31,7 +32,7 @@ def _get_ipywidgets():
 def conformers(
     mol: Chem.rdchem.Mol,
     conf_id: int = -1,
-    n_confs: Union[int, List[int]] = None,
+    n_confs: Optional[Union[int, List[int]]] = None,
     align_conf: bool = True,
     n_cols: int = 3,
     sync_views: bool = True,

@@ -8,7 +8,6 @@ ROOT_DIR = pathlib.Path(__file__).parent.resolve()
 
 NOTEBOOK_DIR = ROOT_DIR.parent / "docs" / "tutorials"
 
-NOTEBOOK_PATHS = NOTEBOOK_DIR.glob("*.ipynb")
 NOTEBOOK_PATHS = sorted(list(NOTEBOOK_DIR.glob("*.ipynb")))
 
 # Discard `Filesystem.ipynb` because it takes too long to run.

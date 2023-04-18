@@ -303,8 +303,8 @@ def md5(filepath: Union[str, os.PathLike]):
     with fsspec.open(filepath) as f:
         file_hash = hashlib.md5()
         file_hash.update(f.read())  # type: ignore
-        file_hash = file_hash.hexdigest()
-    return file_hash
+        file_hash_str = file_hash.hexdigest()
+    return file_hash_str
 
 
 def glob(path: str, detail: bool = False, **kwargs) -> List[str]:

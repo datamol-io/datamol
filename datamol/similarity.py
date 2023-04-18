@@ -39,9 +39,9 @@ def pdist(
         n_jobs=n_jobs,
     )
 
-    fps = np.array(fps)
+    fps_array = np.array(fps)
 
-    dist_mat = distance.pdist(fps, metric="jaccard")
+    dist_mat = distance.pdist(fps_array, metric="jaccard")
 
     if squareform:
         dist_mat = distance.squareform(dist_mat, force="tomatrix")
@@ -87,20 +87,19 @@ def cdist(
         n_jobs=n_jobs,
     )
 
-    fps1 = np.array(fps1).astype(bool)
-    fps2 = np.array(fps2).astype(bool)
+    fps1_array = np.array(fps1).astype(bool)
+    fps2_array = np.array(fps2).astype(bool)
 
     if distances_chunk:
         distances = pairwise_distances_chunked(
-            fps1,
-            fps2,
+            fps1_array,
+            fps2_array,
             metric="jaccard",
             n_jobs=distances_n_jobs,
             working_memory=distances_chunk_memory,
         )
-        distances = [i for i in distances]
-        distances = np.vstack(distances)
+        distances_array = np.vstack(list(distances))
     else:
-        distances = distance.cdist(fps1, fps2, metric="jaccard")
+        distances_array = distance.cdist(fps1_array, fps2_array, metric="jaccard")
 
-    return distances
+    return distances_array
