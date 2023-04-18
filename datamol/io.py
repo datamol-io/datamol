@@ -660,7 +660,7 @@ def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
         data = pd.read_json(path, **kwargs)
     elif filetype == "sdf":
         kwargs.setdefault("as_df", True)
-        data = dm.read_sdf(path, as_df=True, **kwargs)
+        data = dm.read_sdf(path, **kwargs)
     else:
         raise ValueError(f"The file type of {path} is not supported.")
 
