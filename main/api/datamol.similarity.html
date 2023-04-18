@@ -1112,8 +1112,7 @@ parallelization. Set to -1 to use all available cores.</p></td>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
-<span class="normal">105</span>
-<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cdist</span><span class="p">(</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cdist</span><span class="p">(</span>
     <span class="n">mols1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">mols2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -1151,23 +1150,22 @@ parallelization. Set to -1 to use all available cores.</p></td>
         <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">fps1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
-    <span class="n">fps2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">fps1_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps1</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
+    <span class="n">fps2_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps2</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">bool</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">distances_chunk</span><span class="p">:</span>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">pairwise_distances_chunked</span><span class="p">(</span>
-            <span class="n">fps1</span><span class="p">,</span>
-            <span class="n">fps2</span><span class="p">,</span>
+            <span class="n">fps1_array</span><span class="p">,</span>
+            <span class="n">fps2_array</span><span class="p">,</span>
             <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">,</span>
             <span class="n">n_jobs</span><span class="o">=</span><span class="n">distances_n_jobs</span><span class="p">,</span>
             <span class="n">working_memory</span><span class="o">=</span><span class="n">distances_chunk_memory</span><span class="p">,</span>
         <span class="p">)</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="p">[</span><span class="n">i</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">distances</span><span class="p">]</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="n">distances</span><span class="p">)</span>
+        <span class="n">distances_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">distances</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">distances</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">fps1</span><span class="p">,</span> <span class="n">fps2</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
+        <span class="n">distances_array</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">fps1_array</span><span class="p">,</span> <span class="n">fps2_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">distances</span>
+    <span class="k">return</span> <span class="n">distances_array</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1326,9 +1324,9 @@ form (1D vector).</p></td>
         <span class="n">n_jobs</span><span class="o">=</span><span class="n">n_jobs</span><span class="p">,</span>
     <span class="p">)</span>
 
-    <span class="n">fps</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
+    <span class="n">fps_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
 
-    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">fps</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
+    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">fps_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">squareform</span><span class="p">:</span>
         <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s2">&quot;tomatrix&quot;</span><span class="p">)</span>

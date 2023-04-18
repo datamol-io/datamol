@@ -1554,7 +1554,7 @@ the first conformer. Only works if <code>n_confs</code> is None.</p></td>
         <tr>
           <td><code>n_confs</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]</code>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]]</code>
           </td>
           <td><p>Can be a number of conformers
 to shows or a list of conformer indices. When None, only the first
@@ -1618,8 +1618,7 @@ conformer is displayed. When -1, show all conformers.</p></td>
 
       <details class="quote">
         <summary>Source code in <code>datamol/viz/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 31</span>
-<span class="normal"> 32</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 32</span>
 <span class="normal"> 33</span>
 <span class="normal"> 34</span>
 <span class="normal"> 35</span>
@@ -1696,10 +1695,11 @@ conformer is displayed. When -1, show all conformers.</p></td>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
-<span class="normal">109</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
+<span class="normal">109</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
-    <span class="n">n_confs</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">n_confs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">align_conf</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
     <span class="n">sync_views</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
