@@ -12,7 +12,6 @@ import os
 import io
 import tempfile
 import pathlib
-import inspect
 
 from rdkit.Chem import PandasTools
 from rdkit.Chem import rdmolfiles
@@ -297,6 +296,7 @@ def read_mol2file(
     block = []
     mols = []
     with fsspec.open(urlpath, compression="infer") as f:
+        f = cast(IO, f)
         fReadLines = f.readlines()
         # reversing due to ambiguous end line for mol2 files
         fReadLines.reverse()
@@ -659,6 +659,7 @@ def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
     elif filetype == "json":
         data = pd.read_json(path, **kwargs)
     elif filetype == "sdf":
+        kwargs.setdefault("as_df", True)
         data = dm.read_sdf(path, as_df=True, **kwargs)
     else:
         raise ValueError(f"The file type of {path} is not supported.")
@@ -685,9 +686,11 @@ def save_df(
     filetype = _guess_filetype(path)
 
     if filetype == "csv":
-        data.to_csv(path, index=False, **kwargs)
+        kwargs.setdefault("index", False)
+        data.to_csv(path, **kwargs)
     elif filetype == "excel":
-        data.to_excel(path, index=False, **kwargs)
+        kwargs.setdefault("index", False)
+        data.to_excel(path, **kwargs)
     elif filetype == "parquet":
         data.to_parquet(path, **kwargs)
     elif filetype == "json":

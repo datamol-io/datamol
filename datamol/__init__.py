@@ -193,22 +193,6 @@ def __dir__():
     return sorted(keys)
 
 
-from .io import read_csv
-from .io import read_excel
-from .io import read_sdf
-from .io import to_sdf
-from .io import to_smi
-from .io import read_smi
-from .io import read_molblock
-from .io import to_molblock
-from .io import to_xlsx
-from .io import read_pdbblock
-from .io import to_pdbblock
-from .io import read_pdbfile
-from .io import to_pdbfile
-from .io import save_df
-from .io import open_df
-
 if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     # These types are imported lazily at runtime, but we need to tell type
     # checkers what they are.
