@@ -4,6 +4,19 @@ Datamol Changelogs
 
 .. current developments
 
+v0.10.1
+====================
+
+**Changed:**
+
+* Different docs style, with Tabs on the top for `Overview`, `Usage`, `Tutorials`, `API`, `Contribute`, `License`
+
+**Authors:**
+
+* DomInvivo
+
+
+
 v0.10.0
 ====================
 
