@@ -5,6 +5,8 @@ on:
     branches: ["main"]
   release:
     types: [published]
+  # The doc GA is not triggered upon new release so for now we trigger it manually.
+  workflow_dispatch: 
 
 # Prevent doc action on `main` to conflict with each others.
 concurrency:
