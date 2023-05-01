@@ -3,7 +3,8 @@ name: doc
 on:
   push:
     branches: ["main"]
-    tags: ["*"]
+  release:
+    types: [published]
 
 # Prevent doc action on `main` to conflict with each others.
 concurrency:
