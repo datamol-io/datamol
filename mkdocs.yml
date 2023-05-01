@@ -58,6 +58,7 @@ theme:
   # NOTE(hadim): to customize the material primary and secondary
   # color check `docs/assets/css/datamol-custom.css`.
   features:
+    - navigation.tabs
     - navigation.expand
   favicon: images/logo-black.png
   logo: images/logo.svg
