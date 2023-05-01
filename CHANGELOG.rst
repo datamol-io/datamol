@@ -4,6 +4,15 @@ Datamol Changelogs
 
 .. current developments
 
+v0.10.2
+====================
+
+**Authors:**
+
+* Hadrien Mary
+
+
+
 v0.10.1
 ====================
 
