@@ -4,7 +4,7 @@ on:
   push:
     branches: ["main"]
   release:
-    types: [published]
+    types: [released]
 
 # Prevent doc action on `main` to conflict with each others.
 concurrency:
