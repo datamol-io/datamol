@@ -82,7 +82,7 @@ def fuzzy_scaffolding(
     ignore_non_ring: bool = False,
     mcs_params: Optional[Dict[Any, Any]] = None,
     if_df: bool = False,
-) -> Tuple[set, Dict[str, dict], Dict[str, list]] or Tuple[set, pd.DataFrame, pd.DataFrame]:
+) -> Tuple[set, Dict[str, dict], Dict[str, list]] | Tuple[set, pd.DataFrame, pd.DataFrame]:
     """Generate fuzzy scaffold with enforceable group that needs to appear
     in the core, forcing to keep the full side chain if required
 
