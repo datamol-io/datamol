@@ -6,6 +6,7 @@ from typing import Optional
 
 import collections
 import itertools
+import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdFMCS
@@ -80,7 +81,8 @@ def fuzzy_scaffolding(
     additional_templates: Optional[List[Mol]] = None,
     ignore_non_ring: bool = False,
     mcs_params: Optional[Dict[Any, Any]] = None,
-) -> Tuple[set, Dict[str, dict], Dict[str, list]]:
+    if_df: bool = False,
+) -> Tuple[set, Dict[str, dict], Dict[str, list]] or Tuple[set, pd.DataFrame, pd.DataFrame]:
     """Generate fuzzy scaffold with enforceable group that needs to appear
     in the core, forcing to keep the full side chain if required
 
@@ -91,6 +93,7 @@ def fuzzy_scaffolding(
         additional_templates: Additional template to use to generate scaffolds.
         ignore_non_ring: Whether to ignore atom no in murcko ring system, even if they are in the framework.
         mcs_params: Arguments of MCS algorithm.
+        if_df: Turn on true if you want to return data frames for scaffold_infos and scaffold_to_group
 
     Returns:
         - `set` - `scaffolds` - All found scaffolds in the molecules as valid smiles.
@@ -229,4 +232,15 @@ def fuzzy_scaffolding(
                 continue
             all_scaffolds.add(to_smiles(scaff))
 
+        #if user wants a dataframe turned on...
+        #there are processing routines to make the df more readable.
+        if if_df:
+
+            #the way scf2infos is created is absolutely perfect 
+            #to be pandas transposed. Every murkold scaffold output has its corresponding
+            #"matched" input rdkit mol and its smarts pattern.  
+            df_infos = pd.DataFrame(scf2infos)
+            df_infos_t = df_infos.transpose()
+            
+            return all_scaffolds, df_infos_t, df_groups_t
     return all_scaffolds, scf2infos, scf2groups
