@@ -102,6 +102,12 @@ def fuzzy_scaffolding(
                 Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
                 Values at ['mols'] corresponds to list of molecules matching the scaffold
         - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.
+        - `pd.DataFrame` - `df_scaffold_infos_transposed` - A pandas dataframe with Infos on the scaffold mapping, ignoring
+            any side chain that had to be enforced. Key corresponds to generic scaffold smiles.
+            Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
+            Values at ['mols'] corresponds to list of molecules matching the scaffold
+        - `pd.DataFrame` - `df_scaffold_groups` - A pandas dataframe with Map between each generic scaffold
+            and the R-groups decomposition row.
     """
 
     # NOTE(hadim): consider parallelize this (if possible).
@@ -234,12 +240,6 @@ def fuzzy_scaffolding(
         # if user wants a dataframe turned on...
         # there are processing routines to make the df more readable.
     if if_df:
-        # the way scf2infos is created is absolutely perfect
-        # to be pandas transposed. Every Murcko scaffold output has its corresponding
-        # "matched" input rdkit mol and its smarts pattern.
-        # This means every row will represent the scffold and every col
-        # will have its "matched" mol
-
         df_infos = pd.DataFrame(scf2infos)
         df_infos_t = df_infos.transpose()
         df_infos_t.insert(0, "scf", list(scf2infos.keys()), True)
@@ -249,11 +249,6 @@ def fuzzy_scaffolding(
         # to be more readable
         df_infos_t.index.name = "index"
 
-        # scf2groups is trickier because the core 'groups' are in their individual
-        # dictionaries contained in a list. This can be difficult to create a df due
-        # to these multi-valued attributes. Thankfully, Pandas can control
-        # for the multi-valued attributes by calling from the .from_dict method
-        # and setting orient to 'index'.
         df_groups = pd.DataFrame.from_dict(scf2groups, orient="index")
         df_groups.reset_index(inplace=True, drop=True)
 
