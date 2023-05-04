@@ -231,41 +231,39 @@ def fuzzy_scaffolding(
             except:
                 continue
             all_scaffolds.add(to_smiles(scaff))
-        #if user wants a dataframe turned on...
-        #there are processing routines to make the df more readable.
+        # if user wants a dataframe turned on...
+        # there are processing routines to make the df more readable.
     if if_df:
-
-        #the way scf2infos is created is absolutely perfect 
-        #to be pandas transposed. Every Murcko scaffold output has its corresponding
-        #"matched" input rdkit mol and its smarts pattern. 
+        # the way scf2infos is created is absolutely perfect
+        # to be pandas transposed. Every Murcko scaffold output has its corresponding
+        # "matched" input rdkit mol and its smarts pattern.
         # This means every row will represent the scffold and every col
-        # will have its "matched" mol 
+        # will have its "matched" mol
 
         df_infos = pd.DataFrame(scf2infos)
         df_infos_t = df_infos.transpose()
-        df_infos_t.insert(0,'scf', list(scf2infos.keys()), True)
+        df_infos_t.insert(0, "scf", list(scf2infos.keys()), True)
         df_infos_t.reset_index(inplace=True, drop=True)
 
-        #relabel index and column labels to
-        #damp down confusion
-        df_infos_t.index.name = 'index'
-        # df_infos_t.rename(columns = {'mols': 'core_groups_mols'}, inplace = True)
+        # relabel index and column labels to
+        # to be more readable
+        df_infos_t.index.name = "index"
 
         # scf2groups is trickier because the core 'groups' are in their individual
-        # dictionaries contained in a list. This can be difficult to create a df due 
-        # to these multi-valued attributes. Thankfully, Pandas can control 
-        # for the multi-valued attributes by calling from the .from_dict method 
+        # dictionaries contained in a list. This can be difficult to create a df due
+        # to these multi-valued attributes. Thankfully, Pandas can control
+        # for the multi-valued attributes by calling from the .from_dict method
         # and setting orient to 'index'.
-        df_groups = pd.DataFrame.from_dict(scf2groups, orient='index')
+        df_groups = pd.DataFrame.from_dict(scf2groups, orient="index")
         df_groups.reset_index(inplace=True, drop=True)
 
-        #relabel index and column labels to
-        #damp down confusion
-        df_groups.index.name = 'index'
-        df_groups.columns = [f'{str(h)}_core_group' for h in df_groups.columns]
+        # relabel index and column labels to
+        # to be more readable
+        df_groups.index.name = "index"
+        df_groups.columns = [f"{str(h)}_core_group" for h in df_groups.columns]
 
-        #enter the scf columns at the first column
-        df_groups.insert(0,'scf', list(scf2groups.keys()), True)
-        
+        # enter the scf columns at the first column for df_groups
+        df_groups.insert(0, "scf", list(scf2groups.keys()), True)
+
         return all_scaffolds, df_infos_t, df_groups
     return all_scaffolds, scf2infos, scf2groups
