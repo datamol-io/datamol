@@ -240,18 +240,32 @@ def fuzzy_scaffolding(
         #"matched" input rdkit mol and its smarts pattern. 
         # This means every row will represent the scffold and every col
         # will have its "matched" mol 
+
         df_infos = pd.DataFrame(scf2infos)
         df_infos_t = df_infos.transpose()
+        df_infos_t.insert(0,'scf', list(scf2infos.keys()), True)
+        df_infos_t.reset_index(inplace=True, drop=True)
+
+        #relabel index and column labels to
+        #damp down confusion
+        df_infos_t.index.name = 'index'
+        # df_infos_t.rename(columns = {'mols': 'core_groups_mols'}, inplace = True)
 
         # scf2groups is trickier because the core 'groups' are in their individual
         # dictionaries contained in a list. This can be difficult to create a df due 
         # to these multi-valued attributes. Thankfully, Pandas can control 
         # for the multi-valued attributes by calling from the .from_dict method 
-        # and setting orient to 'index'. While 'index' turns the keys of 
-        # the scf2groups into df rows, you can transpose to turn them into 
-        # column values so the each scf can be accessed by key again. 
-        df_groups_t = pd.DataFrame.from_dict(scf2groups, orient='index')
-        df_groups_t = df_groups_t.transpose()
+        # and setting orient to 'index'.
+        df_groups = pd.DataFrame.from_dict(scf2groups, orient='index')
+        df_groups.reset_index(inplace=True, drop=True)
+
+        #relabel index and column labels to
+        #damp down confusion
+        df_groups.index.name = 'index'
+        df_groups.columns = [f'{str(h)}_core_group' for h in df_groups.columns]
+
+        #enter the scf columns at the first column
+        df_groups.insert(0,'scf', list(scf2groups.keys()), True)
         
-        return all_scaffolds, df_infos_t, df_groups_t
+        return all_scaffolds, df_infos_t, df_groups
     return all_scaffolds, scf2infos, scf2groups
