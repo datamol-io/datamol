@@ -231,16 +231,27 @@ def fuzzy_scaffolding(
             except:
                 continue
             all_scaffolds.add(to_smiles(scaff))
-
         #if user wants a dataframe turned on...
         #there are processing routines to make the df more readable.
-        if if_df:
+    if if_df:
 
-            #the way scf2infos is created is absolutely perfect 
-            #to be pandas transposed. Every murkold scaffold output has its corresponding
-            #"matched" input rdkit mol and its smarts pattern.  
-            df_infos = pd.DataFrame(scf2infos)
-            df_infos_t = df_infos.transpose()
-            
-            return all_scaffolds, df_infos_t, df_groups_t
+        #the way scf2infos is created is absolutely perfect 
+        #to be pandas transposed. Every Murcko scaffold output has its corresponding
+        #"matched" input rdkit mol and its smarts pattern. 
+        # This means every row will represent the scffold and every col
+        # will have its "matched" mol 
+        df_infos = pd.DataFrame(scf2infos)
+        df_infos_t = df_infos.transpose()
+
+        # scf2groups is trickier because the core 'groups' are in their individual
+        # dictionaries contained in a list. This can be difficult to create a df due 
+        # to these multi-valued attributes. Thankfully, Pandas can control 
+        # for the multi-valued attributes by calling from the .from_dict method 
+        # and setting orient to 'index'. While 'index' turns the keys of 
+        # the scf2groups into df rows, you can transpose to turn them into 
+        # column values so the each scf can be accessed by key again. 
+        df_groups_t = pd.DataFrame.from_dict(scf2groups, orient='index')
+        df_groups_t = df_groups_t.transpose()
+        
+        return all_scaffolds, df_infos_t, df_groups_t
     return all_scaffolds, scf2infos, scf2groups
