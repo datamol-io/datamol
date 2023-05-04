@@ -13,7 +13,7 @@ def test_fuzzy_scaffolding():
     ]
 
     mols = [dm.to_mol(s) for s in smiles]
-    all_scaffolds, scf2infos, scf2groups = dm.scaffold.fuzzy_scaffolding(mols)
+    all_scaffolds, scf2infos, scf2groups = dm.scaffold.fuzzy_scaffolding(mols, if_df=False)
 
     assert scf2infos.keys() == scf2groups.keys()
     assert len(all_scaffolds) == 5
@@ -24,7 +24,7 @@ def test_fuzzy_scaffolding():
     # assert "O=C(CSCc1cccs1)NC(C1CCCO1)[*:1]" in all_scaffolds
     # assert "O=C(N=c1sccn1[*:1])C(Oc1ccc([*:3])cc1)[*:2]" in all_scaffolds
 
-    all_scaffolds, df_scf2infos, df_scf2groups = dm.scaffold.fuzzy_scaffolding(mols, if_df=True)
+    all_scaffolds, df_scf2infos, df_scf2groups = dm.scaffold.fuzzy_scaffolding(mols)
 
     assert len(all_scaffolds) == 5
     assert len(df_scf2infos.columns) == 3

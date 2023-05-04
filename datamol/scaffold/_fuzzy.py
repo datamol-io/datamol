@@ -3,6 +3,7 @@ from typing import List
 from typing import Any
 from typing import Tuple
 from typing import Optional
+from typing import Union
 
 import collections
 import itertools
@@ -81,8 +82,8 @@ def fuzzy_scaffolding(
     additional_templates: Optional[List[Mol]] = None,
     ignore_non_ring: bool = False,
     mcs_params: Optional[Dict[Any, Any]] = None,
-    if_df: bool = False,
-) -> Tuple[set, Dict[str, dict], Dict[str, list]] | Tuple[set, pd.DataFrame, pd.DataFrame]:
+    if_df: bool = True,
+) -> Union[Tuple[set, Dict[str, dict], Dict[str, list]], Tuple[set, pd.DataFrame, pd.DataFrame]]:
     """Generate fuzzy scaffold with enforceable group that needs to appear
     in the core, forcing to keep the full side chain if required
 
