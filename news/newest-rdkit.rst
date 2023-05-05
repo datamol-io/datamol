@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* The newest version of rdkit was added to the test.yml
+* The newest version of rdkit, "2023.03.1" was added to the CI.
 
 **Deprecated:**
 
@@ -12,7 +12,7 @@
 
 **Removed:**
 
-* The oldest version of rdkit was removed from the test.yml
+* The oldest version of rdkit, "2022.03" was removed from the CI.
 
 **Fixed:**
 
