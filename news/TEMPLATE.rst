@@ -4,7 +4,7 @@
 
 **Changed:**
 
-* The newest version of rdkit was added to the test.yml
+* <news item>
 
 **Deprecated:**
 
@@ -12,7 +12,7 @@
 
 **Removed:**
 
-* The oldest version of rdkit was removed from the test.yml
+* <news item>
 
 **Fixed:**
 
