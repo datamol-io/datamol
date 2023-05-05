@@ -6,6 +6,7 @@ from typing import Optional
 
 import collections
 import itertools
+import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdFMCS
@@ -80,7 +81,7 @@ def fuzzy_scaffolding(
     additional_templates: Optional[List[Mol]] = None,
     ignore_non_ring: bool = False,
     mcs_params: Optional[Dict[Any, Any]] = None,
-) -> Tuple[set, Dict[str, dict], Dict[str, list]]:
+) -> Tuple[set, pd.DataFrame, pd.DataFrame]:
     """Generate fuzzy scaffold with enforceable group that needs to appear
     in the core, forcing to keep the full side chain if required
 
@@ -94,11 +95,13 @@ def fuzzy_scaffolding(
 
     Returns:
         - `set` - `scaffolds` - All found scaffolds in the molecules as valid smiles.
-        - `Dict[Dict]` - `scaffold_infos` - Infos on the scaffold mapping, ignoring any side chain that had
-                to be enforced. Key corresponds to generic scaffold smiles
-                Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
-                Values at ['mols'] corresponds to list of molecules matching the scaffold
-        - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.
+        - `pd.DataFrame` - `df_scaffold_infos_transposed` - A pandas dataframe with Infos on the scaffold mapping, ignoring
+            any side chain that had to be enforced. Key corresponds to generic scaffold smiles.
+            Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
+            Values at ['mols'] corresponds to list of molecules matching the scaffold
+            Values at ['scf'] corresponds to the list of scaffolds from MurckoScaffold.GetScaffoldForMol
+        - `pd.DataFrame` - `df_scaffold_groups` - A pandas dataframe with Map between each generic scaffold
+            and the R-groups decomposition row.
     """
 
     # NOTE(hadim): consider parallelize this (if possible).
@@ -228,5 +231,25 @@ def fuzzy_scaffolding(
             except:
                 continue
             all_scaffolds.add(to_smiles(scaff))
+        # if user wants a dataframe turned on...
+        # there are processing routines to make the df more readable.
+    df_infos = pd.DataFrame(scf2infos)
+    df_infos_t = df_infos.transpose()
+    df_infos_t.insert(0, "scf", list(scf2infos.keys()), True)
+    df_infos_t.reset_index(inplace=True, drop=True)
 
-    return all_scaffolds, scf2infos, scf2groups
+    # relabel index and column labels to
+    # to be more readable
+    df_infos_t.index.name = "index"
+
+    df_groups = pd.DataFrame.from_dict(scf2groups, orient="index")
+    df_groups.reset_index(inplace=True, drop=True)
+
+    # relabel index and column labels to
+    # to be more readable
+    df_groups.index.name = "index"
+    df_groups.columns = [f"{str(h)}_core_group" for h in df_groups.columns]
+
+    # enter the scf columns at the first column for df_groups
+    df_groups.insert(0, "scf", list(scf2groups.keys()), True)
+    return all_scaffolds, df_infos_t, df_groups
