@@ -1132,21 +1132,23 @@ in the core, forcing to keep the full side chain if required</p>
         </tr>
         <tr>
           <td>
-                <code><span title="typing.Dict">Dict</span>[str, dict]</code>
+                <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
           <td><ul>
-<li><code>Dict[Dict]</code> - <code>scaffold_infos</code> - Infos on the scaffold mapping, ignoring any side chain that had
-    to be enforced. Key corresponds to generic scaffold smiles
-    Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
-    Values at ['mols'] corresponds to list of molecules matching the scaffold</li>
+<li><code>pd.DataFrame</code> - <code>df_scaffold_infos_transposed</code> - A pandas dataframe with Infos on the scaffold mapping, ignoring
+any side chain that had to be enforced. Key corresponds to generic scaffold smiles.
+Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
+Values at ['mols'] corresponds to list of molecules matching the scaffold
+Values at ['scf'] corresponds to the list of scaffolds from MurckoScaffold.GetScaffoldForMol</li>
 </ul></td>
         </tr>
         <tr>
           <td>
-                <code><span title="typing.Dict">Dict</span>[str, list]</code>
+                <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
           <td><ul>
-<li><code>Dict[List]</code> - <code>scaffold_to_group</code> - Map between each generic scaffold and the R-groups decomposition row.</li>
+<li><code>pd.DataFrame</code> - <code>df_scaffold_groups</code> - A pandas dataframe with Map between each generic scaffold
+and the R-groups decomposition row.</li>
 </ul></td>
         </tr>
     </tbody>
@@ -1154,8 +1156,7 @@ in the core, forcing to keep the full side chain if required</p>
 
       <details class="quote">
         <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 76</span>
-<span class="normal"> 77</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 77</span>
 <span class="normal"> 78</span>
 <span class="normal"> 79</span>
 <span class="normal"> 80</span>
@@ -1310,14 +1311,37 @@ in the core, forcing to keep the full side chain if required</p>
 <span class="normal">229</span>
 <span class="normal">230</span>
 <span class="normal">231</span>
-<span class="normal">232</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span>
+<span class="normal">241</span>
+<span class="normal">242</span>
+<span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span>
+<span class="normal">255</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fuzzy_scaffolding</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">enforce_subs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_atom_cuttoff</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">8</span><span class="p">,</span>
     <span class="n">additional_templates</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">ignore_non_ring</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">mcs_params</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">Any</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">,</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">],</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">list</span><span class="p">]]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">set</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">,</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate fuzzy scaffold with enforceable group that needs to appear</span>
 <span class="sd">    in the core, forcing to keep the full side chain if required</span>
 
@@ -1331,11 +1355,13 @@ in the core, forcing to keep the full side chain if required</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        - `set` - `scaffolds` - All found scaffolds in the molecules as valid smiles.</span>
-<span class="sd">        - `Dict[Dict]` - `scaffold_infos` - Infos on the scaffold mapping, ignoring any side chain that had</span>
-<span class="sd">                to be enforced. Key corresponds to generic scaffold smiles</span>
-<span class="sd">                Values at [&#39;smarts&#39;] corresponds to smarts representation of the true scaffold (from MCS)</span>
-<span class="sd">                Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
-<span class="sd">        - `Dict[List]` - `scaffold_to_group` - Map between each generic scaffold and the R-groups decomposition row.</span>
+<span class="sd">        - `pd.DataFrame` - `df_scaffold_infos_transposed` - A pandas dataframe with Infos on the scaffold mapping, ignoring</span>
+<span class="sd">            any side chain that had to be enforced. Key corresponds to generic scaffold smiles.</span>
+<span class="sd">            Values at [&#39;smarts&#39;] corresponds to smarts representation of the true scaffold (from MCS)</span>
+<span class="sd">            Values at [&#39;mols&#39;] corresponds to list of molecules matching the scaffold</span>
+<span class="sd">            Values at [&#39;scf&#39;] corresponds to the list of scaffolds from MurckoScaffold.GetScaffoldForMol</span>
+<span class="sd">        - `pd.DataFrame` - `df_scaffold_groups` - A pandas dataframe with Map between each generic scaffold</span>
+<span class="sd">            and the R-groups decomposition row.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="c1"># NOTE(hadim): consider parallelize this (if possible).</span>
@@ -1465,8 +1491,28 @@ in the core, forcing to keep the full side chain if required</p>
             <span class="k">except</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
+        <span class="c1"># if user wants a dataframe turned on...</span>
+        <span class="c1"># there are processing routines to make the df more readable.</span>
+    <span class="n">df_infos</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">scf2infos</span><span class="p">)</span>
+    <span class="n">df_infos_t</span> <span class="o">=</span> <span class="n">df_infos</span><span class="o">.</span><span class="n">transpose</span><span class="p">()</span>
+    <span class="n">df_infos_t</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">scf2infos</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="n">df_infos_t</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
-    <span class="k">return</span> <span class="n">all_scaffolds</span><span class="p">,</span> <span class="n">scf2infos</span><span class="p">,</span> <span class="n">scf2groups</span>
+    <span class="c1"># relabel index and column labels to</span>
+    <span class="c1"># to be more readable</span>
+    <span class="n">df_infos_t</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span>
+
+    <span class="n">df_groups</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_dict</span><span class="p">(</span><span class="n">scf2groups</span><span class="p">,</span> <span class="n">orient</span><span class="o">=</span><span class="s2">&quot;index&quot;</span><span class="p">)</span>
+    <span class="n">df_groups</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">inplace</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="c1"># relabel index and column labels to</span>
+    <span class="c1"># to be more readable</span>
+    <span class="n">df_groups</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;index&quot;</span>
+    <span class="n">df_groups</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="nb">str</span><span class="p">(</span><span class="n">h</span><span class="p">)</span><span class="si">}</span><span class="s2">_core_group&quot;</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">df_groups</span><span class="o">.</span><span class="n">columns</span><span class="p">]</span>
+
+    <span class="c1"># enter the scf columns at the first column for df_groups</span>
+    <span class="n">df_groups</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">scf2groups</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="kc">True</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">all_scaffolds</span><span class="p">,</span> <span class="n">df_infos_t</span><span class="p">,</span> <span class="n">df_groups</span>
 </code></pre></div></td></tr></table></div>
       </details>
   </div>
@@ -1489,8 +1535,7 @@ in the core, forcing to keep the full side chain if required</p>
 
       <details class="quote">
         <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">31</span>
-<span class="normal">32</span>
+        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1531,7 +1576,8 @@ in the core, forcing to keep the full side chain if required</p>
 <span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
-<span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
+<span class="normal">73</span>
+<span class="normal">74</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">core</span><span class="p">,</span> <span class="n">unwanted_side_chains</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Trim list of side chain from a molecule.&quot;&quot;&quot;</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">add_hs</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
