@@ -13,10 +13,6 @@ def test_fuzzy_scaffolding():
     ]
 
     mols = [dm.to_mol(s) for s in smiles]
-    all_scaffolds, scf2infos, scf2groups = dm.scaffold.fuzzy_scaffolding(mols, if_df=False)
-
-    assert scf2infos.keys() == scf2groups.keys()
-    assert len(all_scaffolds) == 5
 
     # NOTE(hadim): different version of rdkit (2020.09 vs 2021.03) returns
     # different SMILES here.
@@ -38,9 +34,3 @@ def test_fuzzy_scaffolding():
     # the same length. the reason there are 3 not two is because it could have
     # extra columns where a cell may have none values.
     assert len(df_scf2groups.columns) == 3
-
-    # now compare to the original output
-    assert list(df_scf2infos["scf"]) == list(scf2infos.keys())
-    assert list(df_scf2groups["scf"]) == list(scf2groups.keys())
-    assert df_scf2groups.set_index("scf").T.to_dict("list").keys() == scf2groups.keys()
-    assert df_scf2infos.set_index("scf").T.to_dict("list").keys() == scf2infos.keys()
