@@ -131,12 +131,8 @@ The CI runs tests and performs code quality checks for the following combination
 
 ## Changelogs
 
-See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
+See the latest changelogs at [CHANGELOG.md](./CHANGELOG.md).
 
 ## License
 
 Under the Apache-2.0 license. See [LICENSE](LICENSE).
-
-## Authors
-
-See [AUTHORS.rst](./AUTHORS.rst).

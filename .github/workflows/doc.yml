@@ -3,10 +3,6 @@ name: doc
 on:
   push:
     branches: ["main"]
-  release:
-    types: [published]
-  # The doc GA is not triggered upon new release so for now we trigger it manually.
-  workflow_dispatch: 
 
 # Prevent doc action on `main` to conflict with each others.
 concurrency:
@@ -15,7 +11,9 @@ concurrency:
 
 jobs:
   doc:
-    runs-on: ubuntu-latest
+    runs-on: "ubuntu-latest"
+    timeout-minutes: 30
+
     defaults:
       run:
         shell: bash -l {0}
@@ -24,34 +22,26 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3
 
-      - name: Setup conda
-        uses: mamba-org/provision-with-micromamba@v15
+      - name: Setup mamba
+        uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: env.yml
-          environment-name: datamol
+          environment-name: my_env
+          cache-environment: true
           cache-downloads: true
-          cache-env: true
 
       - name: Install library
         run: python -m pip install --no-deps .
 
+      - name: Configure git
+        run: |
+          git config --global user.name "${GITHUB_ACTOR}"
+          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+
       - name: Deploy the doc
         run: |
-          echo "Configure git"
-          git config --global user.name 'hadim'
-          git config --global user.email 'hadim@users.noreply.github.com'
-
           echo "Get the gh-pages branch"
           git fetch origin gh-pages
 
-          TAG_OR_BRANCH_NAME=${GITHUB_REF##*/}
-
-          if [ $TAG_OR_BRANCH_NAME = "main" ]; then
-            echo "Build and deploy the doc on main"
-            mike deploy --push --force main
-          else
-            echo "Build and deploy the doc on $TAG_OR_BRANCH_NAME"
-
-            mike deploy --push --force stable
-            mike deploy --push --force $TAG_OR_BRANCH_NAME
-          fi
+          echo "Build and deploy the doc on main"
+          mike deploy --push --force main

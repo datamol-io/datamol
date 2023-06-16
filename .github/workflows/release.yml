@@ -9,6 +9,7 @@ on:
 
 permissions:
   contents: write
+  pull-requests: write
 
 jobs:
   release:
@@ -26,17 +27,16 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v3
 
-      - name: Setup Mamba
-        uses: mamba-org/provision-with-micromamba@v15
+      - name: Setup mamba
+        uses: mamba-org/setup-micromamba@v1
         with:
           environment-file: env.yml
-          environment-name: release
+          environment-name: my_env
+          cache-environment: true
           cache-downloads: true
-          cache-env: true
-          extra-specs: |
+          create-args: >-
             pip
             semver
-            rever==0.5.1
             python-build
             setuptools_scm
 
@@ -69,14 +69,16 @@ jobs:
             exit 1
           fi
 
+      - name: Build Changelog
+        id: github_release
+        uses: mikepenz/release-changelog-builder-action@v4
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Configure git
         run: |
           git config --global user.name "${GITHUB_ACTOR}"
           git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
-
-      - name: Perform the release with rever
-        run: |
-          rever ${{ inputs.release-version }}
 
       - name: Create and push git tag
         env:
@@ -85,7 +87,10 @@ jobs:
           # Tag the release
           git tag -a "${{ inputs.release-version }}" -m "Release version ${{ inputs.release-version }}"
 
-          # Push the commit from rever to main
+          # Checkout the git tag
+          git checkout "${{ inputs.release-version }}"
+
+          # Push the modified changelogs
           git push origin main
 
           # Push the tags
@@ -107,4 +112,13 @@ jobs:
         uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
         with:
           tag_name: ${{ inputs.release-version }}
-          body: "See [CHANGELOGS.rst](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.rst)."
+          body: ${{steps.github_release.outputs.changelog}}
+
+      - name: Deploy the doc
+        run: |
+          echo "Get the gh-pages branch"
+          git fetch origin gh-pages
+
+          echo "Build and deploy the doc on ${{ inputs.release-version }}"
+          mike deploy --push --force stable
+          mike deploy --push --force ${{ inputs.release-version }}
