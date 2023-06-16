@@ -6,7 +6,7 @@
 # - possibility to do this for multiple target molecules at once
 # - have the option to write to a file like to_image
 
-from typing import List, Iterator, Tuple, Union, Optional, Any
+from typing import List, Iterator, Tuple, Union, Optional, Any, cast
 
 from collections import defaultdict
 from collections import namedtuple
@@ -362,7 +362,8 @@ DEFAULT_LASSO_COLORS = [
 
 def lasso_highlight_image(
     target_molecule: Union[str, dm.Mol],
-    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
+    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]] = None,
+    atom_indices: Optional[Union[List[int], List[List[int]]]] = None,
     mol_size: Tuple[int, int] = (300, 300),
     use_svg: Optional[bool] = True,
     r_min: float = 0.3,
@@ -372,11 +373,13 @@ def lasso_highlight_image(
     line_width: int = 2,
     **kwargs: Any,
 ):
-    """Create an image of a molecule with substructure matches using lasso-based highlighting.
+    """Create an image of a molecule with substructure matches using lasso-based highlighting. Substructure matching is
+    optional and it's also possible to pass a list of list of atom indices to highlight.
 
     args:
         target_molecule: The molecule to be highlighted
-        search_molecules: The substructure to be identified
+        search_molecules: The substructure to be highlighted.
+        atom_indices: Atom indices to be highlighted substructure.
         mol_size: The size of the image to be returned
         use_svg: Whether to return an svg or png image
         r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
@@ -389,14 +392,14 @@ def lasso_highlight_image(
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
+    if search_molecules is None:
+        search_molecules = []
+
+    ## Step 0: Input validation
+
     # check if the input is valid
     if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
         raise ValueError("Please enter a valid target molecule or smiles")
-
-    if search_molecules is None or (
-        isinstance(search_molecules, str) and len(search_molecules) == 0
-    ):
-        raise ValueError("Please enter valid search molecules or smarts")
 
     # less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
     if mol_size[0] < 1 or mol_size[0] > 5000 or mol_size[1] < 1 or mol_size[1] > 5000:
@@ -406,6 +409,43 @@ def lasso_highlight_image(
 
     if isinstance(target_molecule, str):
         target_molecule = dm.to_mol(target_molecule)
+
+    if target_molecule is None:
+        raise ValueError("Please enter a valid target molecule or smiles")
+
+    # Always make the type checker happy
+    target_mol = cast(dm.Mol, target_molecule)
+
+    ## Step 1: Match the search molecules or SMARTS to the target molecule
+
+    # Make `search_molecules` a list if it is not already
+    if not isinstance(search_molecules, (list, tuple)):
+        search_molecules = [search_molecules]
+
+    atom_idx_list = []
+    for search_mol in search_molecules:
+        if isinstance(search_mol, str):
+            search_mol = dm.from_smarts(search_mol)
+
+        if search_mol is None or not isinstance(search_mol, dm.Mol):
+            raise ValueError(f"Please enter valid search molecules or smarts: {search_mol}")
+
+        matches = target_mol.GetSubstructMatches(search_mol)
+        if not matches:
+            logger.warning(f"No matching substructures found for {dm.to_smarts(search_mol)}")
+        else:
+            matched_atoms = set.union(*[set(x) for x in matches])
+            atom_idx_list.append(matched_atoms)
+
+    ## Step 2: add the atom indices to the list if any
+    if atom_indices is not None:
+        if not isinstance(atom_indices[0], (list, tuple)):
+            atom_indices_list_of_list = [atom_indices]
+        else:
+            atom_indices_list_of_list = atom_indices
+        atom_idx_list += atom_indices_list_of_list
+
+    ## Step 3: Prepare the molecule for drawing and draw it
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
 
@@ -431,43 +471,7 @@ def lasso_highlight_image(
     drawer.DrawMolecule(mol)
     drawer.ClearDrawing()
 
-    # get the atom indices for the search molecules
-    atom_idx_list = []
-    if isinstance(search_molecules, str):
-        smart_obj = dm.to_mol(search_molecules)
-        matches = mol.GetSubstructMatches(smart_obj)
-        if not matches:
-            logger.warning(f"no matching substructure found for {search_molecules}")
-        else:
-            matched_atoms = set.union(*[set(x) for x in matches])
-            atom_idx_list.append(matched_atoms)
-
-    elif isinstance(search_molecules, dm.Mol):
-        matches = mol.GetSubstructMatches(search_molecules)
-        if not matches:
-            logger.warning(f"no matching substructure found for {dm.to_smiles(search_molecules)}")
-        else:
-            matched_atoms = set.union(*[set(x) for x in matches])
-            atom_idx_list.append(matched_atoms)
-
-    elif len(search_molecules) and isinstance(search_molecules[0], str):
-        for smart_str in search_molecules:
-            smart_obj = dm.to_mol(smart_str)
-            matches = mol.GetSubstructMatches(smart_obj)
-            if not matches:
-                logger.warning(f"no matching substructure found for {smart_str}")
-            else:
-                matched_atoms = set.union(*[set(x) for x in matches])
-                atom_idx_list.append(matched_atoms)
-
-    elif len(search_molecules) and isinstance(search_molecules[0], dm.Mol):
-        for smart_obj in search_molecules:
-            matches = mol.GetSubstructMatches(smart_obj)
-            if not matches:
-                logger.warning(f"no matching substructure found for {dm.to_smiles(smart_obj)}")
-            else:
-                matched_atoms = set.union(*[set(x) for x in matches])
-                atom_idx_list.append(matched_atoms)
+    ## Step 4: Draw the matches
 
     if color_list is None:
         color_list = DEFAULT_LASSO_COLORS

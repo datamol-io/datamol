@@ -79,14 +79,7 @@ def test_canvas_input_error():
     with pytest.raises(ValueError):
         smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
         smarts_list = ["CONN", "N#CC~CO", "C=CON", "CONNCN"]
-        dm.lasso_highlight_image(smi, smarts_list, (5001, 400))
-
-
-def test_search_input_error_empty_str():
-    with pytest.raises(ValueError):
-        smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
-        smarts_list = ""
-        dm.lasso_highlight_image(smi, smarts_list)
+        dm.lasso_highlight_image(smi, smarts_list, mol_size=(5001, 400))
 
 
 def test_search_input_error_empty_list():
@@ -94,13 +87,6 @@ def test_search_input_error_empty_list():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = []
     assert dm.lasso_highlight_image(smi, smarts_list)
-
-
-def test_search_input_error_None():
-    with pytest.raises(ValueError):
-        smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
-        smarts_list = None
-        dm.lasso_highlight_image(smi, smarts_list)
 
 
 def test_target_input_error_empty_str():
@@ -148,3 +134,39 @@ def test_PNG_is_returned():
     from PIL import Image
 
     assert isinstance(img, Image.Image)
+
+
+def test_aromatic_query_work():
+    smi = "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3"
+    smarts_list = ["c1ccccc1"]
+    assert dm.lasso_highlight_image(smi, smarts_list)
+
+
+def test_smarts_query():
+    smi = "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3"
+    smarts_list = "[#6]"
+    assert dm.lasso_highlight_image(smi, smarts_list)
+
+
+def test_query_and_atom_indices_list():
+    dm.viz.lasso_highlight_image(
+        "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3",
+        search_molecules="c1ccccc1",
+        atom_indices=[[4, 5, 6], [1, 2, 3, 4]],
+    )
+
+
+def test_atom_indices_list_of_list():
+    dm.viz.lasso_highlight_image(
+        "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3",
+        search_molecules=None,
+        atom_indices=[[4, 5, 6], [1, 2, 3, 4]],
+    )
+
+
+def test_atom_indices_list():
+    dm.viz.lasso_highlight_image(
+        "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3",
+        search_molecules=None,
+        atom_indices=[4, 5, 6],
+    )
