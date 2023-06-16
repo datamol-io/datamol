@@ -6,7 +6,7 @@
 # - possibility to do this for multiple target molecules at once
 # - have the option to write to a file like to_image
 
-from typing import List, Iterator, Tuple, Union, Optional, Any
+from typing import List, Iterator, Tuple, Union, Optional, Any, cast
 
 from collections import defaultdict
 from collections import namedtuple
@@ -389,6 +389,8 @@ def lasso_highlight_image(
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
+    ## Step 0: Input validation
+
     # check if the input is valid
     if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
         raise ValueError("Please enter a valid target molecule or smiles")
@@ -406,6 +408,54 @@ def lasso_highlight_image(
 
     if isinstance(target_molecule, str):
         target_molecule = dm.to_mol(target_molecule)
+
+    if target_molecule is None:
+        raise ValueError("Please enter a valid target molecule or smiles")
+
+    # Always make the type checker happy
+    target_mol = cast(dm.Mol, target_molecule)
+
+    ## Step 1: Match the search molecules or SMARTS to the target molecule
+
+    # get the atom indices for the search molecules
+    atom_idx_list = []
+    if isinstance(search_molecules, str):
+        smart_obj = dm.to_mol(search_molecules)
+        matches = target_mol.GetSubstructMatches(smart_obj)
+        if not matches:
+            logger.warning(f"no matching substructure found for {search_molecules}")
+        else:
+            matched_atoms = set.union(*[set(x) for x in matches])
+            atom_idx_list.append(matched_atoms)
+
+    elif isinstance(search_molecules, dm.Mol):
+        matches = target_mol.GetSubstructMatches(search_molecules)
+        if not matches:
+            logger.warning(f"no matching substructure found for {dm.to_smiles(search_molecules)}")
+        else:
+            matched_atoms = set.union(*[set(x) for x in matches])
+            atom_idx_list.append(matched_atoms)
+
+    elif len(search_molecules) and isinstance(search_molecules[0], str):
+        for smart_str in search_molecules:
+            smart_obj = dm.to_mol(smart_str)
+            matches = target_mol.GetSubstructMatches(smart_obj)
+            if not matches:
+                logger.warning(f"no matching substructure found for {smart_str}")
+            else:
+                matched_atoms = set.union(*[set(x) for x in matches])
+                atom_idx_list.append(matched_atoms)
+
+    elif len(search_molecules) and isinstance(search_molecules[0], dm.Mol):
+        for smart_obj in search_molecules:
+            matches = target_mol.GetSubstructMatches(smart_obj)
+            if not matches:
+                logger.warning(f"no matching substructure found for {dm.to_smiles(smart_obj)}")
+            else:
+                matched_atoms = set.union(*[set(x) for x in matches])
+                atom_idx_list.append(matched_atoms)
+
+    # Step 2: Prepare the molecule for drawing and draw it
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
 
@@ -431,43 +481,7 @@ def lasso_highlight_image(
     drawer.DrawMolecule(mol)
     drawer.ClearDrawing()
 
-    # get the atom indices for the search molecules
-    atom_idx_list = []
-    if isinstance(search_molecules, str):
-        smart_obj = dm.to_mol(search_molecules)
-        matches = mol.GetSubstructMatches(smart_obj)
-        if not matches:
-            logger.warning(f"no matching substructure found for {search_molecules}")
-        else:
-            matched_atoms = set.union(*[set(x) for x in matches])
-            atom_idx_list.append(matched_atoms)
-
-    elif isinstance(search_molecules, dm.Mol):
-        matches = mol.GetSubstructMatches(search_molecules)
-        if not matches:
-            logger.warning(f"no matching substructure found for {dm.to_smiles(search_molecules)}")
-        else:
-            matched_atoms = set.union(*[set(x) for x in matches])
-            atom_idx_list.append(matched_atoms)
-
-    elif len(search_molecules) and isinstance(search_molecules[0], str):
-        for smart_str in search_molecules:
-            smart_obj = dm.to_mol(smart_str)
-            matches = mol.GetSubstructMatches(smart_obj)
-            if not matches:
-                logger.warning(f"no matching substructure found for {smart_str}")
-            else:
-                matched_atoms = set.union(*[set(x) for x in matches])
-                atom_idx_list.append(matched_atoms)
-
-    elif len(search_molecules) and isinstance(search_molecules[0], dm.Mol):
-        for smart_obj in search_molecules:
-            matches = mol.GetSubstructMatches(smart_obj)
-            if not matches:
-                logger.warning(f"no matching substructure found for {dm.to_smiles(smart_obj)}")
-            else:
-                matched_atoms = set.union(*[set(x) for x in matches])
-                atom_idx_list.append(matched_atoms)
+    ## Step 3: Draw the matches
 
     if color_list is None:
         color_list = DEFAULT_LASSO_COLORS
