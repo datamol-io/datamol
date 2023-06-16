@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.viz.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1253,7 +1253,11 @@
           <td>
                 <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>]</code>
           </td>
-          <td><p>Path to the source directory.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Path to the source directory.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1263,7 +1267,11 @@
           <td>
                 <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>]</code>
           </td>
-          <td><p>Path to the destination directory.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Path to the destination directory.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1273,8 +1281,12 @@
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>the chunk size to use. If progress is enabled the chunk
-size is <code>None</code>, it is set to 2048.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the chunk size to use. If progress is enabled the chunk
+size is <code>None</code>, it is set to 2048.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1284,7 +1296,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to overwrite the destination directory if it exists.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to overwrite the destination directory if it exists.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1294,7 +1310,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to display a progress bar.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to display a progress bar.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1304,7 +1324,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to hide the progress bar once the copy is done.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to hide the progress bar once the copy is done.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1314,7 +1338,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to display a progress bar for each file.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to display a progress bar for each file.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1324,7 +1352,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to hide the progress bar once a file copy is done.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to hide the progress bar once a file copy is done.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1334,7 +1366,11 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>See <code>dm.utils.fs.copy_file</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>See <code>dm.utils.fs.copy_file</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1555,9 +1591,13 @@ size is <code>None</code>, it is set to 2048.</p></td>
         <tr>
           <td><code>source</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>]</code>
           </td>
-          <td><p>path or file-like object to copy from.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>path or file-like object to copy from.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1565,9 +1605,13 @@ size is <code>None</code>, it is set to 2048.</p></td>
         <tr>
           <td><code>destination</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>]</code>
           </td>
-          <td><p>path or file-like object to copy to.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>path or file-like object to copy to.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1577,8 +1621,12 @@ size is <code>None</code>, it is set to 2048.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>the chunk size to use. If progress is enabled the chunk
-size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the chunk size to use. If progress is enabled the chunk
+size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1588,7 +1636,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to overwrite the destination file if it exists.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to overwrite the destination file if it exists.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1598,7 +1650,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to display a progress bar.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to display a progress bar.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1608,7 +1664,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to hide the progress bar once the copy is done.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to hide the progress bar once the copy is done.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1840,9 +1900,13 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1905,7 +1969,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1970,7 +2038,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>The name of the application.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The name of the application.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1980,7 +2052,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>A subdirectory appended to the cache dir.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A subdirectory appended to the cache dir.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1990,8 +2066,12 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to create the directory and its parents if it does not
-already exist.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to create the directory and its parents if it does not
+already exist.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -2074,7 +2154,11 @@ already exist.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2135,7 +2219,11 @@ already exist.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2194,7 +2282,11 @@ already exist.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2339,7 +2431,11 @@ size can't be retrieved.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>A glob-style path.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A glob-style path.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2404,9 +2500,13 @@ size can't be retrieved.</p>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2479,9 +2579,13 @@ size can't be retrieved.</p>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
-          <td><p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a path supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2584,7 +2688,11 @@ filesystem to use (and so the separator.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>a list of paths supported by <code>fsspec</code> such as local, s3, gcs, etc.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a list of paths supported by <code>fsspec</code> such as local, s3, gcs, etc.</p>
+            </div>
+          </td>
           <td>
                 <code>()</code>
           </td>
@@ -2653,7 +2761,11 @@ filesystem to use (and so the separator.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>The path to the file to compute the MD5 hash on.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The path to the file to compute the MD5 hash on.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2720,7 +2832,11 @@ filesystem to use (and so the separator.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>]</code>
           </td>
-          <td><p>The path of the directory to create.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The path of the directory to create.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2730,8 +2846,12 @@ filesystem to use (and so the separator.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to ignore the error if the directory
-already exists.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to ignore the error if the directory
+already exists.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2817,9 +2937,11 @@ already exists.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

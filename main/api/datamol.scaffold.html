@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.similarity.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1053,9 +1053,13 @@ in the core, forcing to keep the full side chain if required</p>
         <tr>
           <td><code>mols</code></td>
           <td>
-                <code><span title="typing.List">List</span>[<span title="rdkit.Chem">Chem</span>.<span title="rdkit.Chem.rdchem">rdchem</span>.<span title="Chem.rdchem.Mol">Mol</span>]</code>
+                <code><span title="typing.List">List</span>[<span title="rdkit.Chem">Chem</span>.<span title="rdkit.Chem.rdchem">rdchem</span>.<span title="rdkit.Chem.rdchem.Mol">Mol</span>]</code>
           </td>
-          <td><p>List of all molecules</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of all molecules</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1065,7 +1069,11 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>List of substructure to enforce on the scaffold.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of substructure to enforce on the scaffold.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1075,7 +1083,11 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Minimum number of atom a core should have.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Minimum number of atom a core should have.</p>
+            </div>
+          </td>
           <td>
                 <code>8</code>
           </td>
@@ -1085,7 +1097,11 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]]</code>
           </td>
-          <td><p>Additional template to use to generate scaffolds.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Additional template to use to generate scaffolds.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1095,7 +1111,11 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to ignore atom no in murcko ring system, even if they are in the framework.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to ignore atom no in murcko ring system, even if they are in the framework.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1105,7 +1125,11 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[<span title="typing.Any">Any</span>, <span title="typing.Any">Any</span>]]</code>
           </td>
-          <td><p>Arguments of MCS algorithm.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Arguments of MCS algorithm.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1126,30 +1150,42 @@ in the core, forcing to keep the full side chain if required</p>
           <td>
                 <code>set</code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>set</code> - <code>scaffolds</code> - All found scaffolds in the molecules as valid smiles.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>pd.DataFrame</code> - <code>df_scaffold_infos_transposed</code> - A pandas dataframe with Infos on the scaffold mapping, ignoring
 any side chain that had to be enforced. Key corresponds to generic scaffold smiles.
 Values at ['smarts'] corresponds to smarts representation of the true scaffold (from MCS)
 Values at ['mols'] corresponds to list of molecules matching the scaffold
 Values at ['scf'] corresponds to the list of scaffolds from MurckoScaffold.GetScaffoldForMol</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="pandas">pd</span>.<span title="pandas.DataFrame">DataFrame</span></code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>pd.DataFrame</code> - <code>df_scaffold_groups</code> - A pandas dataframe with Map between each generic scaffold
 and the R-groups decomposition row.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1677,9 +1713,11 @@ and the R-groups decomposition row.</li>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

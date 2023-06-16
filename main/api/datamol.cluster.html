@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.conformers.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1082,7 +1082,11 @@
           <td>
                 <code><span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>a list of molecules to assign to centroids</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a list of molecules to assign to centroids</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1092,7 +1096,11 @@
           <td>
                 <code><span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>list of molecules to use as centroid</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of molecules to use as centroid</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1102,9 +1110,13 @@
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A feature function that takes a Mol object
+          <td>
+            <div class="doc-md-description">
+              <p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
-Default to None.</p></td>
+Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1114,9 +1126,13 @@ Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A function that takes two indexes (i,j) and return the
+          <td>
+            <div class="doc-md-description">
+              <p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
-By default, the Tanimoto similarity will be used. Default to None.</p></td>
+By default, the Tanimoto similarity will be used. Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1126,8 +1142,12 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to -1 to use all available cores.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of jobs for parallelization. Let to 1 for no
+parallelization. Set to -1 to use all available cores.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1148,14 +1168,22 @@ parallelization. Set to -1 to use all available cores.</p></td>
 <td><code>clusters_map</code></td>          <td>
                 <code>dict</code>
           </td>
-          <td><p>dict of index mapping each centroid index to the molecule index in the cluster</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>dict of index mapping each centroid index to the molecule index in the cluster</p>
+            </div>
+          </td>
         </tr>
         <tr>
 <td><code>clusters_list</code></td>          <td>
                 <code>list</code>
           </td>
-          <td><p>list of all molecules in each cluster. The cluster index follows the index of the centroid.
-Note that the centroid molecule is not added to the cluster.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of all molecules in each cluster. The cluster index follows the index of the centroid.
+Note that the centroid molecule is not added to the cluster.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1295,7 +1323,11 @@ Note that the centroid molecule is not added to the cluster.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[<span title="typing.Sequence">Sequence</span>[<span title="datamol.types.Mol">Mol</span>], <span title="pandas">pd</span>.<span title="pandas.Series">Series</span>]</code>
           </td>
-          <td><p>a list of molecules.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a list of molecules.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1305,7 +1337,11 @@ Note that the centroid molecule is not added to the cluster.</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>Cuttoff for the clustering. Default to 0.2.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Cuttoff for the clustering. Default to 0.2.</p>
+            </div>
+          </td>
           <td>
                 <code>0.2</code>
           </td>
@@ -1315,9 +1351,13 @@ Note that the centroid molecule is not added to the cluster.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A feature function that takes a Mol object
+          <td>
+            <div class="doc-md-description">
+              <p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
-Default to None.</p></td>
+Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1327,8 +1367,12 @@ Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to -1 to use all available cores.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of jobs for parallelization. Let to 1 for no
+parallelization. Set to -1 to use all available cores.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1453,7 +1497,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code><span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>a list of molecules.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a list of molecules.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1463,7 +1511,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of element to pick from mols, including the preselection.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of element to pick from mols, including the preselection.</p>
+            </div>
+          </td>
           <td>
                 <code>0</code>
           </td>
@@ -1473,7 +1525,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>Minimum distance between centroids for <code>maxmin</code> and sphere exclusion (<code>sphere</code>) methods.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Minimum distance between centroids for <code>maxmin</code> and sphere exclusion (<code>sphere</code>) methods.</p>
+            </div>
+          </td>
           <td>
                 <code>0.5</code>
           </td>
@@ -1483,8 +1539,12 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[int]]</code>
           </td>
-          <td><p>Starting list of index for molecules that should be in the
-set of picked molecules. Default to None.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Starting list of index for molecules that should be in the
+set of picked molecules. Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1494,9 +1554,13 @@ set of picked molecules. Default to None.</p></td>
           <td>
                 <code>callable</code>
           </td>
-          <td><p>A feature function that takes a Mol object
+          <td>
+            <div class="doc-md-description">
+              <p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
-Default to None.</p></td>
+Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1506,9 +1570,13 @@ Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A function that takes two indexes (i,j) and return the
+          <td>
+            <div class="doc-md-description">
+              <p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
-By default, the Tanimoto similarity will be used. Default to None.</p></td>
+By default, the Tanimoto similarity will be used. Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1518,7 +1586,11 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>seed for reproducibility</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>seed for reproducibility</p>
+            </div>
+          </td>
           <td>
                 <code>42</code>
           </td>
@@ -1528,8 +1600,12 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Picking method to use. One of  <code>sphere</code>, <code>maxmin</code> or any
-supported rdkit hierarchical clustering method such as <code>centroid</code>, <code>clink</code>, <code>upgma</code></p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Picking method to use. One of  <code>sphere</code>, <code>maxmin</code> or any
+supported rdkit hierarchical clustering method such as <code>centroid</code>, <code>clink</code>, <code>upgma</code></p>
+            </div>
+          </td>
           <td>
                 <code>&#39;sphere&#39;</code>
           </td>
@@ -1539,8 +1615,12 @@ supported rdkit hierarchical clustering method such as <code>centroid</code>, <c
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to -1 to use all available cores.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of jobs for parallelization. Let to 1 for no
+parallelization. Set to -1 to use all available cores.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1561,13 +1641,21 @@ parallelization. Set to -1 to use all available cores.</p></td>
 <td><code>picked_inds</code></td>          <td>
                 <code>int</code>
           </td>
-          <td><p>index of the molecule that have been selected as centroids</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>index of the molecule that have been selected as centroids</p>
+            </div>
+          </td>
         </tr>
         <tr>
 <td><code>mols</code></td>          <td>
                 <code>list</code>
           </td>
-          <td><p>molecules that have been picked</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>molecules that have been picked</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1779,7 +1867,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code><span title="typing.List">List</span>[<span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>a list of molecules.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a list of molecules.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1789,7 +1881,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of element to pick from mols, including the preselection.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of element to pick from mols, including the preselection.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1799,8 +1895,12 @@ parallelization. Set to -1 to use all available cores.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[int]]</code>
           </td>
-          <td><p>Starting list of index for molecules that should be in the
-set of picked molecules. Default to None.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Starting list of index for molecules that should be in the
+set of picked molecules. Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1810,9 +1910,13 @@ set of picked molecules. Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A feature function that takes a Mol object
+          <td>
+            <div class="doc-md-description">
+              <p>A feature function that takes a Mol object
 and return molecular features. By default, the <code>dm.to_fp()</code> is used.
-Default to None.</p></td>
+Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1822,9 +1926,13 @@ Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Callable">Callable</span>]</code>
           </td>
-          <td><p>A function that takes two indexes (i,j) and return the
+          <td>
+            <div class="doc-md-description">
+              <p>A function that takes two indexes (i,j) and return the
 distance between them. You might use partial to set the fingerprints as input.
-By default, the Tanimoto similarity will be used. Default to None.</p></td>
+By default, the Tanimoto similarity will be used. Default to None.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1834,7 +1942,11 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>seed for reproducibility</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>seed for reproducibility</p>
+            </div>
+          </td>
           <td>
                 <code>42</code>
           </td>
@@ -1844,8 +1956,12 @@ By default, the Tanimoto similarity will be used. Default to None.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of jobs for parallelization. Let to 1 for no
-parallelization. Set to -1 to use all available cores.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of jobs for parallelization. Let to 1 for no
+parallelization. Set to -1 to use all available cores.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1866,13 +1982,21 @@ parallelization. Set to -1 to use all available cores.</p></td>
 <td><code>picked_inds</code></td>          <td>
                 <code>int</code>
           </td>
-          <td><p>index of the molecule that have been picked</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>index of the molecule that have been picked</p>
+            </div>
+          </td>
         </tr>
         <tr>
 <td><code>mols</code></td>          <td>
                 <code>list</code>
           </td>
-          <td><p>molecules that have been picked</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>molecules that have been picked</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2033,9 +2157,11 @@ parallelization. Set to -1 to use all available cores.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

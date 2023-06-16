@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.fragment.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.12">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.85bb2934.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1082,7 +1082,11 @@
           <td>
                 <code><span title="typing.Union">Union</span>[<span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span>, <span title="rdkit.DataStructs.cDataStructs.SparseBitVect">SparseBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.ExplicitBitVect">ExplicitBitVect</span>]</code>
           </td>
-          <td><p>A fingerprint.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A fingerprint.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1092,7 +1096,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>The dimension of the folded array.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The dimension of the folded array.</p>
+            </div>
+          </td>
           <td>
                 <code>1024</code>
           </td>
@@ -1102,7 +1110,11 @@
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to fold into a binary array or take use a count vector.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to fold into a binary array or take use a count vector.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1123,7 +1135,11 @@
 <td><code>folded</code></td>          <td>
                 <code><span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span></code>
           </td>
-          <td><p>returns folded array to the provided dimension.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>returns folded array to the provided dimension.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1266,7 +1282,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
           <td>
                 <code><span title="typing.Union">Union</span>[<span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span>, <span title="rdkit.DataStructs.cDataStructs.SparseBitVect">SparseBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.ExplicitBitVect">ExplicitBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.UIntSparseIntVect">UIntSparseIntVect</span>]</code>
           </td>
-          <td><p>The fingerprint.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The fingerprint.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1430,9 +1450,13 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
         <tr>
           <td><code>mol</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, <span title="rdkit.Chem">Chem</span>.<span title="rdkit.Chem.rdchem">rdchem</span>.<span title="Chem.rdchem.Mol">Mol</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, <span title="rdkit.Chem">Chem</span>.<span title="rdkit.Chem.rdchem">rdchem</span>.<span title="rdkit.Chem.rdchem.Mol">Mol</span>]</code>
           </td>
-          <td><p>a molecule or a SMILES.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule or a SMILES.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1442,7 +1466,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to return a numpy array of an RDKit vec. Default to True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to return a numpy array of an RDKit vec. Default to True.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1452,8 +1480,12 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
           <td>
                 <code>str</code>
           </td>
-          <td><p>The type of the fingerprint. See <code>dm.list_supported_fingerprints()</code> for a
-complete list.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The type of the fingerprint. See <code>dm.list_supported_fingerprints()</code> for a
+complete list.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;ecfp&#39;</code>
           </td>
@@ -1463,8 +1495,12 @@ complete list.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>If set, fold the fingerprint to the <code>fold_size</code>. If set, returned array is
-always a numpy array.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>If set, fold the fingerprint to the <code>fold_size</code>. If set, returned array is
+always a numpy array.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1474,7 +1510,11 @@ always a numpy array.</p></td>
           <td>
                 <code><span title="typing.Any">Any</span></code>
           </td>
-          <td><p>Arguments to build the fingerprint. Refer to the official RDKit documentation.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Arguments to build the fingerprint. Refer to the official RDKit documentation.</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -1495,7 +1535,11 @@ always a numpy array.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span>, <span title="rdkit.DataStructs.cDataStructs.SparseBitVect">SparseBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.ExplicitBitVect">ExplicitBitVect</span>]]</code>
           </td>
-          <td><p>A fingerprint vector or None</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A fingerprint vector or None</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1674,9 +1718,11 @@ always a numpy array.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.c2be25ad.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>
