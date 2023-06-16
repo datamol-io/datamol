@@ -151,7 +151,12 @@ def test_PNG_is_returned():
 
 
 def test_aromatic_query_work():
-    # This test should still continue but will just print out a structure without any highlights and a warning
     smi = "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3"
     smarts_list = ["c1ccccc1"]
+    assert dm.lasso_highlight_image(smi, smarts_list)
+
+
+def test_smarts_query():
+    smi = "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3"
+    smarts_list = "[#6]"
     assert dm.lasso_highlight_image(smi, smarts_list)
