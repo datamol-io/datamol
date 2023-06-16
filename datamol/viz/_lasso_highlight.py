@@ -362,7 +362,8 @@ DEFAULT_LASSO_COLORS = [
 
 def lasso_highlight_image(
     target_molecule: Union[str, dm.Mol],
-    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
+    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]] = None,
+    atom_indices: Optional[Union[List[int], List[List[int]]]] = None,
     mol_size: Tuple[int, int] = (300, 300),
     use_svg: Optional[bool] = True,
     r_min: float = 0.3,
@@ -372,11 +373,13 @@ def lasso_highlight_image(
     line_width: int = 2,
     **kwargs: Any,
 ):
-    """Create an image of a molecule with substructure matches using lasso-based highlighting.
+    """Create an image of a molecule with substructure matches using lasso-based highlighting. Substructure matching is
+    optional and it's also possible to pass a list of list of atom indices to highlight.
 
     args:
         target_molecule: The molecule to be highlighted
-        search_molecules: The substructure to be identified
+        search_molecules: The substructure to be highlighted.
+        atom_indices: Atom indices to be highlighted substructure.
         mol_size: The size of the image to be returned
         use_svg: Whether to return an svg or png image
         r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
@@ -389,16 +392,14 @@ def lasso_highlight_image(
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
+    if search_molecules is None:
+        search_molecules = []
+
     ## Step 0: Input validation
 
     # check if the input is valid
     if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
         raise ValueError("Please enter a valid target molecule or smiles")
-
-    if search_molecules is None or (
-        isinstance(search_molecules, str) and len(search_molecules) == 0
-    ):
-        raise ValueError("Please enter valid search molecules or smarts")
 
     # less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
     if mol_size[0] < 1 or mol_size[0] > 5000 or mol_size[1] < 1 or mol_size[1] > 5000:
@@ -436,7 +437,15 @@ def lasso_highlight_image(
             matched_atoms = set.union(*[set(x) for x in matches])
             atom_idx_list.append(matched_atoms)
 
-    # Step 2: Prepare the molecule for drawing and draw it
+    ## Step 2: add the atom indices to the list if any
+    if atom_indices is not None:
+        if not isinstance(atom_indices[0], (list, tuple)):
+            atom_indices_list_of_list = [atom_indices]
+        else:
+            atom_indices_list_of_list = atom_indices
+        atom_idx_list += atom_indices_list_of_list
+
+    ## Step 3: Prepare the molecule for drawing and draw it
 
     mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
 
@@ -462,7 +471,7 @@ def lasso_highlight_image(
     drawer.DrawMolecule(mol)
     drawer.ClearDrawing()
 
-    ## Step 3: Draw the matches
+    ## Step 4: Draw the matches
 
     if color_list is None:
         color_list = DEFAULT_LASSO_COLORS
