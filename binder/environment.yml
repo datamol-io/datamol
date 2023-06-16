@@ -13,6 +13,7 @@ dependencies:
   - platformdirs
   - packaging
   - typing_extensions
+  - importlib_resources
 
   # Scientific
   - pandas
@@ -30,14 +31,14 @@ dependencies:
   - openpyxl
   - networkx
   - nglview
-  - ipywidgets =7.7  # because of nglview
   - xlsxwriter
+  - pyarrow
 
   # Dev
   - pytest >=6.0
   - pytest-cov
   - pytest-xdist
-  - black >=22
+  - black >=23
   - jupyterlab
   - mypy
   - codecov
@@ -54,9 +55,3 @@ dependencies:
   - mdx_truly_sane_lists
   - mike >=1.0.0
   - seaborn
-
-  # Releasing tools
-  - rever >=0.4.5
-  - conda-smithy
-  - twine
-  - build

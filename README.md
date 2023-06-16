@@ -129,14 +129,6 @@ The CI runs tests and performs code quality checks for the following combination
 | Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
 | Documentation Build                     | [![doc](https://github.com/datamol-io/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/doc.yml)                      |
 
-## Changelogs
-
-See the latest changelogs at [CHANGELOG.rst](./CHANGELOG.rst).
-
 ## License
 
 Under the Apache-2.0 license. See [LICENSE](LICENSE).
-
-## Authors
-
-See [AUTHORS.rst](./AUTHORS.rst).
