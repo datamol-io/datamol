@@ -2606,7 +2606,8 @@ conformer is displayed. When -1, show all conformers.</p>
 <a id="datamol.viz.lasso_highlight_image"></a>
   <div class="doc doc-contents first">
   
-      <p>Create an image of a molecule with substructure matches using lasso-based highlighting.</p>
+      <p>Create an image of a molecule with substructure matches using lasso-based highlighting. Substructure matching is
+optional and it's also possible to pass a list of list of atom indices to highlight.</p>
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2640,11 +2641,25 @@ conformer is displayed. When -1, show all conformers.</p>
           </td>
           <td>
             <div class="doc-md-description">
-              <p>The substructure to be identified</p>
+              <p>The substructure to be highlighted.</p>
             </div>
           </td>
           <td>
-              <em>required</em>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>atom_indices</code></td>
+          <td>
+                <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="typing.List">List</span>[int], <span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]]</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Atom indices to be highlighted substructure.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
           </td>
         </tr>
         <tr>
@@ -2896,9 +2911,14 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">490</span>
 <span class="normal">491</span>
 <span class="normal">492</span>
-<span class="normal">493</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
+<span class="normal">493</span>
+<span class="normal">494</span>
+<span class="normal">495</span>
+<span class="normal">496</span>
+<span class="normal">497</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
     <span class="n">target_molecule</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
-    <span class="n">search_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
+    <span class="n">search_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">atom_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">mol_size</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">),</span>
     <span class="n">use_svg</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">r_min</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">0.3</span><span class="p">,</span>
@@ -2908,11 +2928,13 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">line_width</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">2</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an image of a molecule with substructure matches using lasso-based highlighting.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an image of a molecule with substructure matches using lasso-based highlighting. Substructure matching is</span>
+<span class="sd">    optional and it&#39;s also possible to pass a list of list of atom indices to highlight.</span>
 
 <span class="sd">    args:</span>
 <span class="sd">        target_molecule: The molecule to be highlighted</span>
-<span class="sd">        search_molecules: The substructure to be identified</span>
+<span class="sd">        search_molecules: The substructure to be highlighted.</span>
+<span class="sd">        atom_indices: Atom indices to be highlighted substructure.</span>
 <span class="sd">        mol_size: The size of the image to be returned</span>
 <span class="sd">        use_svg: Whether to return an svg or png image</span>
 <span class="sd">        r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).</span>
@@ -2925,14 +2947,14 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
+    <span class="k">if</span> <span class="n">search_molecules</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">search_molecules</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1">## Step 0: Input validation</span>
+
     <span class="c1"># check if the input is valid</span>
     <span class="k">if</span> <span class="n">target_molecule</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please enter a valid target molecule or smiles&quot;</span><span class="p">)</span>
-
-    <span class="k">if</span> <span class="n">search_molecules</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="p">(</span>
-        <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span>
-    <span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please enter valid search molecules or smarts&quot;</span><span class="p">)</span>
 
     <span class="c1"># less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on</span>
     <span class="k">if</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5000</span> <span class="ow">or</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span> <span class="ow">or</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">&gt;</span> <span class="mi">5000</span><span class="p">:</span>
@@ -2942,6 +2964,43 @@ documentation related to <code>MolDrawOptions</code> for more details at
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">target_molecule</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">)</span>
+
+    <span class="k">if</span> <span class="n">target_molecule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please enter a valid target molecule or smiles&quot;</span><span class="p">)</span>
+
+    <span class="c1"># Always make the type checker happy</span>
+    <span class="n">target_mol</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">target_molecule</span><span class="p">)</span>
+
+    <span class="c1">## Step 1: Match the search molecules or SMARTS to the target molecule</span>
+
+    <span class="c1"># Make `search_molecules` a list if it is not already</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+        <span class="n">search_molecules</span> <span class="o">=</span> <span class="p">[</span><span class="n">search_molecules</span><span class="p">]</span>
+
+    <span class="n">atom_idx_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">search_mol</span> <span class="ow">in</span> <span class="n">search_molecules</span><span class="p">:</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+            <span class="n">search_mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_smarts</span><span class="p">(</span><span class="n">search_mol</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">search_mol</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_mol</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Please enter valid search molecules or smarts: </span><span class="si">{</span><span class="n">search_mol</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="n">matches</span> <span class="o">=</span> <span class="n">target_mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">search_mol</span><span class="p">)</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No matching substructures found for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">search_mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">matched_atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">])</span>
+            <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
+
+    <span class="c1">## Step 2: add the atom indices to the list if any</span>
+    <span class="k">if</span> <span class="n">atom_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">atom_indices</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
+            <span class="n">atom_indices_list_of_list</span> <span class="o">=</span> <span class="p">[</span><span class="n">atom_indices</span><span class="p">]</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">atom_indices_list_of_list</span> <span class="o">=</span> <span class="n">atom_indices</span>
+        <span class="n">atom_idx_list</span> <span class="o">+=</span> <span class="n">atom_indices_list_of_list</span>
+
+    <span class="c1">## Step 3: Prepare the molecule for drawing and draw it</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">prepare_mol_for_drawing</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
@@ -2967,43 +3026,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="n">drawer</span><span class="o">.</span><span class="n">ClearDrawing</span><span class="p">()</span>
 
-    <span class="c1"># get the atom indices for the search molecules</span>
-    <span class="n">atom_idx_list</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="n">smart_obj</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span>
-        <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smart_obj</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no matching substructure found for </span><span class="si">{</span><span class="n">search_molecules</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">matched_atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">])</span>
-            <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
-        <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span>
-        <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no matching substructure found for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-        <span class="k">else</span><span class="p">:</span>
-            <span class="n">matched_atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">])</span>
-            <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">str</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">smart_str</span> <span class="ow">in</span> <span class="n">search_molecules</span><span class="p">:</span>
-            <span class="n">smart_obj</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smart_str</span><span class="p">)</span>
-            <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smart_obj</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no matching substructure found for </span><span class="si">{</span><span class="n">smart_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">matched_atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">])</span>
-                <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
-
-    <span class="k">elif</span> <span class="nb">len</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">smart_obj</span> <span class="ow">in</span> <span class="n">search_molecules</span><span class="p">:</span>
-            <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">smart_obj</span><span class="p">)</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="n">matches</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;no matching substructure found for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">smart_obj</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="k">else</span><span class="p">:</span>
-                <span class="n">matched_atoms</span> <span class="o">=</span> <span class="nb">set</span><span class="o">.</span><span class="n">union</span><span class="p">(</span><span class="o">*</span><span class="p">[</span><span class="nb">set</span><span class="p">(</span><span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">matches</span><span class="p">])</span>
-                <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
+    <span class="c1">## Step 4: Draw the matches</span>
 
     <span class="k">if</span> <span class="n">color_list</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">color_list</span> <span class="o">=</span> <span class="n">DEFAULT_LASSO_COLORS</span>
