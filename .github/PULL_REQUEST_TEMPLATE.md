@@ -4,6 +4,7 @@ Checklist:
 - [ ] Add tests to cover the fixed bug(s) or the new introduced feature(s) (if appropriate).
 - [ ] Update the API documentation is a new function is added or an existing one is deleted.
 - [ ] Write concise and explanatory changelogs below.
+- [ ] If possible assign one of the following label to the PR: `feature`, `fix` or `test` (or ask a maintainer to do it for you).
 
 ---
 
