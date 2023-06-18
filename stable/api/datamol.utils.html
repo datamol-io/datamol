@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.utils.fs.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1234,7 +1234,11 @@
           <td>
                 <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str]]</code>
           </td>
-          <td><p>OS names to disable this function. Valid OS names are: <code>["linux", "osx", "win"]</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>OS names to disable this function. Valid OS names are: <code>["linux", "osx", "win"]</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1800,9 +1804,13 @@ allows taking advantage of its features, while the progress bar use tqdm</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of process. Use 0 or None to force sequential.
+          <td>
+            <div class="doc-md-description">
+              <p>Number of process. Use 0 or None to force sequential.
 Use -1 to use all the available processors. For details see
-<a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
+<a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -1812,8 +1820,12 @@ Use -1 to use all the available processors. For details see
           <td>
                 <code><span title="typing.Union">Union</span>[int, str]</code>
           </td>
-          <td><p>Whether to  batch <code>inputs_list</code>. You can specify batch_size when the length
-of <code>inputs_list</code> is very large (&gt;100k elements). By default, the auto batching of joblib is used.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to  batch <code>inputs_list</code>. You can specify batch_size when the length
+of <code>inputs_list</code> is very large (&gt;100k elements). By default, the auto batching of joblib is used.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;auto&#39;</code>
           </td>
@@ -1823,12 +1835,16 @@ of <code>inputs_list</code> is very large (&gt;100k elements). By default, the a
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>Choose from ['processes', 'threads'] or None. Default to None.
+          <td>
+            <div class="doc-md-description">
+              <p>Choose from ['processes', 'threads'] or None. Default to None.
 Soft hint to choose the default backend if no specific backend
 was selected with the parallel_backend context manager. The
 default process-based backend is 'loky' and the default
 thread-based backend is 'threading'. Ignored if the <code>backend</code>
-parameter is specified.</p></td>
+parameter is specified.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1838,7 +1854,11 @@ parameter is specified.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to display progress bar</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to display progress bar</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1848,7 +1868,11 @@ parameter is specified.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1858,7 +1882,11 @@ parameter is specified.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1868,7 +1896,11 @@ parameter is specified.</p></td>
           <td>
                 <code><span title="typing.Any">Any</span></code>
           </td>
-          <td><p>Any additional arguments supported by <code>joblib.Parallel</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by <code>joblib.Parallel</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -2059,7 +2091,11 @@ parameter is specified.</p></td>
           <td>
                 <code>callable</code>
           </td>
-          <td><p>function to call</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>function to call</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2069,7 +2105,11 @@ parameter is specified.</p></td>
           <td>
                 <code>iterable</code>
           </td>
-          <td><p>input data</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>input data</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2079,7 +2119,11 @@ parameter is specified.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>function argument type ('arg'/None or 'args' or 'kwargs')</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>function argument type ('arg'/None or 'args' or 'kwargs')</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2089,7 +2133,11 @@ parameter is specified.</p></td>
           <td>
                 <code>dict</code>
           </td>
-          <td><p>optional keyword argument to pass to the callable funciton</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>optional keyword argument to pass to the callable funciton</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -2200,7 +2248,11 @@ parameter is specified.</p></td>
           <td>
                 <code>callable</code>
           </td>
-          <td><p>function to call</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>function to call</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2210,7 +2262,11 @@ parameter is specified.</p></td>
           <td>
                 <code>iterable</code>
           </td>
-          <td><p>input data</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>input data</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2220,7 +2276,11 @@ parameter is specified.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>function argument type ('arg'/None or 'args' or 'kwargs')</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>function argument type ('arg'/None or 'args' or 'kwargs')</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2230,7 +2290,11 @@ parameter is specified.</p></td>
           <td>
                 <code>dict</code>
           </td>
-          <td><p>optional keyword argument to pass to the callable funciton</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>optional keyword argument to pass to the callable funciton</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -2397,7 +2461,11 @@ parameter is specified.</p></td>
           <td>
                 <code><span title="typing.Callable">Callable</span></code>
           </td>
-          <td><p>The function to run in parallel.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The function to run in parallel.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2407,7 +2475,11 @@ parameter is specified.</p></td>
           <td>
                 <code><span title="typing.Iterable">Iterable</span>[<span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>List of inputs to pass to <code>fn</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of inputs to pass to <code>fn</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2417,8 +2489,12 @@ parameter is specified.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Choose between ["processes", "threads"]. Defaults
-to None which uses the default joblib "loky" scheduler.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Choose between ["processes", "threads"]. Defaults
+to None which uses the default joblib "loky" scheduler.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;processes&#39;</code>
           </td>
@@ -2428,9 +2504,13 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of process. Use 0 or None to force sequential.
+          <td>
+            <div class="doc-md-description">
+              <p>Number of process. Use 0 or None to force sequential.
     Use -1 to use all the available processors. For details see
-    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
+    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2440,9 +2520,13 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[int, str]</code>
           </td>
-          <td><p>Whether to automatically batch <code>inputs_list</code>. You should only use it when the length
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to automatically batch <code>inputs_list</code>. You should only use it when the length
 of <code>inputs_list</code> is very large (&gt;100k elements). The length of <code>inputs_list</code> must also be
-defined.</p></td>
+defined.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;auto&#39;</code>
           </td>
@@ -2452,7 +2536,11 @@ defined.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Display a progress bar. Defaults to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Display a progress bar. Defaults to False.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2462,10 +2550,14 @@ defined.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>One of ["arg", "args", "kwargs]:
+          <td>
+            <div class="doc-md-description">
+              <p>One of ["arg", "args", "kwargs]:
 - "arg": the input is passed as an argument: <code>fn(arg)</code> (default).
 - "args": the input is passed as a list: <code>fn(*args)</code>.
-- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
+- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;arg&#39;</code>
           </td>
@@ -2475,7 +2567,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2485,7 +2581,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2495,7 +2595,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Any">Any</span></code>
           </td>
-          <td><p>Any additional arguments supported by <code>joblib.Parallel</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by <code>joblib.Parallel</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -2516,7 +2620,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Sequence">Sequence</span>[<span title="typing.Optional">Optional</span>[<span title="typing.Any">Any</span>]]</code>
           </td>
-          <td><p>The results of the execution as a list.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The results of the execution as a list.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2654,7 +2762,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Callable">Callable</span></code>
           </td>
-          <td><p>The function to run in parallel. It must accept a batch of <code>inputs_list</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The function to run in parallel. It must accept a batch of <code>inputs_list</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2664,7 +2776,11 @@ defined.</p></td>
           <td>
                 <code><span title="typing.Iterable">Iterable</span>[<span title="typing.Any">Any</span>]</code>
           </td>
-          <td><p>List of inputs to pass to <code>fn</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of inputs to pass to <code>fn</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2674,7 +2790,11 @@ defined.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Batch size on which to run <code>fn</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Batch size on which to run <code>fn</code>.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2684,8 +2804,12 @@ defined.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Choose between ["processes", "threads"]. Defaults
-to None which uses the default joblib "loky" scheduler.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Choose between ["processes", "threads"]. Defaults
+to None which uses the default joblib "loky" scheduler.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;processes&#39;</code>
           </td>
@@ -2695,9 +2819,13 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of process. Use 0 or None to force sequential.
+          <td>
+            <div class="doc-md-description">
+              <p>Number of process. Use 0 or None to force sequential.
     Use -1 to use all the available processors. For details see
-    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p></td>
+    <a href="https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation">https://joblib.readthedocs.io/en/latest/parallel.html#parallel-reference-documentation</a></p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2707,7 +2835,11 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Display a progress bar. Defaults to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Display a progress bar. Defaults to False.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -2717,10 +2849,14 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>One of ["arg", "args", "kwargs]:
+          <td>
+            <div class="doc-md-description">
+              <p>One of ["arg", "args", "kwargs]:
 - "arg": the input is passed as an argument: <code>fn(arg)</code> (default).
 - "args": the input is passed as a list: <code>fn(*args)</code>.
-- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p></td>
+- "kwargs": the input is passed as a map: <code>fn(**kwargs)</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;arg&#39;</code>
           </td>
@@ -2730,7 +2866,11 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The number of elements in the iterator. Only used when <code>progress</code> is True.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2740,7 +2880,11 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by the <code>tqdm</code> progress bar.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2750,7 +2894,11 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to flatten the results.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to flatten the results.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -2760,8 +2908,12 @@ to None which uses the default joblib "loky" scheduler.</p></td>
           <td>
                 <code><span title="typing.Union">Union</span>[int, str]</code>
           </td>
-          <td><p>It corresponds to the <code>batch_size</code> argument of <code>dm.parallelized</code> that
-is forwarded to <code>joblib.Parallel</code> under the hood.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>It corresponds to the <code>batch_size</code> argument of <code>dm.parallelized</code> that
+is forwarded to <code>joblib.Parallel</code> under the hood.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;auto&#39;</code>
           </td>
@@ -2771,7 +2923,11 @@ is forwarded to <code>joblib.Parallel</code> under the hood.</p></td>
           <td>
                 <code><span title="typing.Any">Any</span></code>
           </td>
-          <td><p>Any additional arguments supported by <code>joblib.Parallel</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Any additional arguments supported by <code>joblib.Parallel</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -2792,7 +2948,11 @@ is forwarded to <code>joblib.Parallel</code> under the hood.</p></td>
           <td>
                 <code><span title="typing.Sequence">Sequence</span>[<span title="typing.Optional">Optional</span>[<span title="typing.Any">Any</span>]]</code>
           </td>
-          <td><p>The results of the execution as a list.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The results of the execution as a list.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3021,7 +3181,11 @@ is forwarded to <code>joblib.Parallel</code> under the hood.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to log the measured duration.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to log the measured duration.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -3031,8 +3195,12 @@ is forwarded to <code>joblib.Parallel</code> under the hood.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to log duration in a human way
-depending on the amount.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to log duration in a human way
+depending on the amount.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -3224,9 +3392,11 @@ depending on the amount.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

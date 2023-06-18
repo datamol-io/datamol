@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.io.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1082,7 +1082,11 @@
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1092,7 +1096,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>Atom index 1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Atom index 1.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1102,7 +1110,11 @@
           <td>
                 <code>int</code>
           </td>
-          <td><p>Atom index 2.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Atom index 2.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1112,8 +1124,12 @@
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to ignore cycle basis.
-Defaults to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to ignore cycle basis.
+Defaults to False.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1134,7 +1150,11 @@ Defaults to False.</p></td>
           <td>
                 <code>list</code>
           </td>
-          <td><p>list of path between two atoms.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of path between two atoms.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1239,12 +1259,12 @@ Defaults to False.</p></td>
       <p>Match the node indices of 2 molecular graphs,
 with optional usage of atomic number and edge type.</p>
 
-<details class="note">
+<details class="note" open>
   <summary>Note</summary>
   <p>The matching fails if the hydrogens are implicit in one molecule,
 but explicit in the other.</p>
 </details>
-<details class="note">
+<details class="note" open>
   <summary>Note</summary>
   <p>Explicit hydrogens might lead to too many matches, since for an atom with 2
 hydrogens, they can be re-ordered in any way.</p>
@@ -1265,7 +1285,11 @@ hydrogens, they can be re-ordered in any way.</p>
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>A molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1275,7 +1299,11 @@ hydrogens, they can be re-ordered in any way.</p>
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>A molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1285,7 +1313,9 @@ hydrogens, they can be re-ordered in any way.</p>
           <td>
                 <code><span title="typing.List">List</span>[str]</code>
           </td>
-          <td><p>Properties on which to match the atom types.
+          <td>
+            <div class="doc-md-description">
+              <p>Properties on which to match the atom types.
 By default, it matches on the <code>'atomic_num'</code> property.
 Empty list means that it does not consider atom features during matching.</p>
 <p>Other properties are defined by the <code>datamol.graph.to_graph</code> function and include:
@@ -1298,7 +1328,9 @@ Empty list means that it does not consider atom features during matching.</p>
 - degree
 - symbol
 - ring_atom
-- is_aromatic</p></td>
+- is_aromatic</p>
+            </div>
+          </td>
           <td>
                 <code>[&#39;atomic_num&#39;]</code>
           </td>
@@ -1308,10 +1340,14 @@ Empty list means that it does not consider atom features during matching.</p>
           <td>
                 <code><span title="typing.List">List</span>[str]</code>
           </td>
-          <td><p>Properties on which to match the bond types.
+          <td>
+            <div class="doc-md-description">
+              <p>Properties on which to match the bond types.
 Empty list means that it does not consider bond features during matching.
 By default, it matches on the <code>'bond_type'</code> property.
-No other properties are defined by the <code>datamol.graph.to_graph</code> function.</p></td>
+No other properties are defined by the <code>datamol.graph.to_graph</code> function.</p>
+            </div>
+          </td>
           <td>
                 <code>[&#39;bond_type&#39;]</code>
           </td>
@@ -1332,19 +1368,31 @@ No other properties are defined by the <code>datamol.graph.to_graph</code> funct
           <td>
                 <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
           </td>
-          <td><p>A list of all matches dictionaries. In case of a single match, the list has len==1.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of all matches dictionaries. In case of a single match, the list has len==1.</p>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
           </td>
-          <td><p>Each dictionary contains as key the indices of <code>mol1</code> and as value the corresponding</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Each dictionary contains as key the indices of <code>mol1</code> and as value the corresponding</p>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, int]]</code>
           </td>
-          <td><p>indices of <code>mol2</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>indices of <code>mol2</code>.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1553,7 +1601,11 @@ hydrogens, they can be re-ordered in any way.</li>
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>The molecule to re-order</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The molecule to re-order</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1563,7 +1615,11 @@ hydrogens, they can be re-ordered in any way.</li>
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>The molecule containing the right node order.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The molecule containing the right node order.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1573,9 +1629,13 @@ hydrogens, they can be re-ordered in any way.</li>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to enforce atomic number. Atomic numbers are always enforced
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to enforce atomic number. Atomic numbers are always enforced
 for a first try. If no match are found and this parameter is <code>False</code>,
-the matching is tried again.</p></td>
+the matching is tried again.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1585,9 +1645,13 @@ the matching is tried again.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to enforce bond types. Bond types are always enforced
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to enforce bond types. Bond types are always enforced
 for a first try. If no match are found and this parameter is <code>False</code>,
-the matching is tried again.</p></td>
+the matching is tried again.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1597,7 +1661,9 @@ the matching is tried again.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Whether to allow ambiguous matching. This means that,
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to allow ambiguous matching. This means that,
 if there are many matches to the molecule, it will still re-order
 the molecule according to specific rules. Options are:
 - "no": Does not allow ambiguous matching.
@@ -1609,7 +1675,9 @@ the molecule according to specific rules. Options are:
   on the edges with 0.25 points, and on the Stereo with 0.05 points.
   If the option <code>enforce_atomic_num</code> is used, then no errors on the atoms are allowed.
   If the option <code>enforce_bond_type</code> is used, then no errors on the edges are allowed.
-- "best-first": "best", followed by "first".</p></td>
+- "best-first": "best", followed by "first".</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;No&#39;</code>
           </td>
@@ -1619,8 +1687,12 @@ the molecule according to specific rules. Options are:
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to warn when the matching does not work or is ambiguous.
-Different warnings are raised depending on the value of <code>ambiguous_match_mode</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to warn when the matching does not work or is ambiguous.
+Different warnings are raised depending on the value of <code>ambiguous_match_mode</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1641,27 +1713,39 @@ Different warnings are raised depending on the value of <code>ambiguous_match_mo
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>None</code> if the molecular graphs do not match (both the graph and atom types).
 Pring a warning.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>None</code> if multiple matche are found, which can happen for symmetric molecules such as benzene
 Pring a warning.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
         <tr>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span>]</code>
           </td>
-          <td><ul>
+          <td>
+            <div class="doc-md-description">
+              <ul>
 <li><code>Mol</code> The re-ordered molecule when a single match is found.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2050,7 +2134,11 @@ to every nodes and edges.</p>
           <td>
                 <code><span title="datamol">dm</span>.<span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2071,7 +2159,11 @@ to every nodes and edges.</p>
 <td><code>mol_graph</code></td>          <td>
                 <code>networkx.<span title="networkx.Graph">Graph</span></code>
           </td>
-          <td><p>a graph representing the molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a graph representing the molecule.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2204,9 +2296,11 @@ to every nodes and edges.</p>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

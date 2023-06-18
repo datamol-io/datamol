@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.convert.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1182,7 +1182,11 @@ and removed at the end of the procedure.</p>
           <td>
                 <code><span title="typing.List">List</span>[<span title="datamol.Mol">Mol</span>]</code>
           </td>
-          <td><p>List of molecules to align. All the molecules must have a conformer.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>List of molecules to align. All the molecules must have a conformer.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1192,8 +1196,12 @@ and removed at the end of the procedure.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Index of the reference molecule. By default, the first molecule in the list
-will be used as reference.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Index of the reference molecule. By default, the first molecule in the list
+will be used as reference.</p>
+            </div>
+          </td>
           <td>
                 <code>0</code>
           </td>
@@ -1203,7 +1211,11 @@ will be used as reference.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to copy the molecules before performing the alignement.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to copy the molecules before performing the alignement.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1213,7 +1225,11 @@ will be used as reference.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Conformer id to use.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Conformer id to use.</p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -1223,7 +1239,11 @@ will be used as reference.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Backend to use to compute the alignment from <code>crippenO3A</code>, <code>O3A</code>.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Backend to use to compute the alignment from <code>crippenO3A</code>, <code>O3A</code>.</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;crippenO3A&#39;</code>
           </td>
@@ -1244,13 +1264,21 @@ will be used as reference.</p></td>
 <td><code>mols</code></td>          <td>
                 <code>list</code>
           </td>
-          <td><p>The aligned molecules.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The aligned molecules.</p>
+            </div>
+          </td>
         </tr>
         <tr>
 <td><code>scores</code></td>          <td>
                 <code>list</code>
           </td>
-          <td><p>The score of the alignement.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The score of the alignement.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1504,7 +1532,11 @@ will be used as reference.</p></td>
           <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1514,7 +1546,11 @@ will be used as reference.</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>The RMS cutoff in Angstrom.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>The RMS cutoff in Angstrom.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1524,8 +1560,12 @@ will be used as reference.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether or not the conformers are aligned. If False,
-they will be aligmned furing the RMS computation.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether or not the conformers are aligned. If False,
+they will be aligmned furing the RMS computation.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1535,9 +1575,13 @@ they will be aligmned furing the RMS computation.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If True, return one molecule with centroid conformers
+          <td>
+            <div class="doc-md-description">
+              <p>If True, return one molecule with centroid conformers
 only. If False return a list of molecules per cluster with all
-the conformers of the cluster. Defaults to True.</p></td>
+the conformers of the cluster. Defaults to True.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1669,7 +1713,11 @@ the conformers of the cluster. Defaults to True.</p></td>
           <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1679,8 +1727,12 @@ the conformers of the cluster. Defaults to True.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of conformers to generate. Depends on the number of rotatable bonds
-by default: 50 for &lt;8, 200 for &lt;12 and 300 for &gt;12.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of conformers to generate. Depends on the number of rotatable bonds
+by default: 50 for &lt;8, 200 for &lt;12 and 300 for &gt;12.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1690,8 +1742,12 @@ by default: 50 for &lt;8, 200 for &lt;12 and 300 for &gt;12.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Start the embedding from random coordinates instead of using eigenvalues
-of the distance matrix.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Start the embedding from random coordinates instead of using eigenvalues
+of the distance matrix.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1701,7 +1757,11 @@ of the distance matrix.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Enforce correct chirilaty if chiral centers are present.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Enforce correct chirilaty if chiral centers are present.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1711,7 +1771,11 @@ of the distance matrix.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of threads to use when embedding multiple conformations.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of threads to use when embedding multiple conformations.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -1721,9 +1785,13 @@ of the distance matrix.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[float]</code>
           </td>
-          <td><p>The minimum RMS value in Angstrom at which two conformers
+          <td>
+            <div class="doc-md-description">
+              <p>The minimum RMS value in Angstrom at which two conformers
 are considered redundant and one is deleted. If None, all conformers
-are kept. This step is done after an eventual minimization step.</p></td>
+are kept. This step is done after an eventual minimization step.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1733,7 +1801,11 @@ are kept. This step is done after an eventual minimization step.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to overwrite existing conformers for the molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to overwrite existing conformers for the molecule.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1743,7 +1815,11 @@ are kept. This step is done after an eventual minimization step.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to align the conformers.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to align the conformers.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1753,8 +1829,12 @@ are kept. This step is done after an eventual minimization step.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to minimize conformer's energies using MMFF94s.
-Disable to generate conformers much faster.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to minimize conformer's energies using MMFF94s.
+Disable to generate conformers much faster.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1764,7 +1844,11 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Sort conformers by energy when minimizing is turned to False.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Sort conformers by energy when minimizing is turned to False.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1774,8 +1858,12 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[str]</code>
           </td>
-          <td><p>RDKit method to use for embedding. Choose among
-["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>RDKit method to use for embedding. Choose among
+["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1785,7 +1873,11 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code>str</code>
           </td>
-          <td><p>molecular forcefield to use, one of ['UFF','MMFF94s','MMFF94s_noEstat']</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>molecular forcefield to use, one of ['UFF','MMFF94s','MMFF94s_noEstat']</p>
+            </div>
+          </td>
           <td>
                 <code>&#39;UFF&#39;</code>
           </td>
@@ -1795,7 +1887,11 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>maximum energy above minimum energy conformer to output</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>maximum energy above minimum energy conformer to output</p>
+            </div>
+          </td>
           <td>
                 <code>np.inf</code>
           </td>
@@ -1805,7 +1901,11 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code>float</code>
           </td>
-          <td><p>max delta-energy divided by rotatable bonds for conformers</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>max delta-energy divided by rotatable bonds for conformers</p>
+            </div>
+          </td>
           <td>
                 <code>np.inf</code>
           </td>
@@ -1815,8 +1915,12 @@ Disable to generate conformers much faster.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Maximum number of iterations during the energy minimization procedure.
-It corresponds to the <code>maxIters</code> argument in RDKit.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Maximum number of iterations during the energy minimization procedure.
+It corresponds to the <code>maxIters</code> argument in RDKit.</p>
+            </div>
+          </td>
           <td>
                 <code>200</code>
           </td>
@@ -1826,9 +1930,13 @@ It corresponds to the <code>maxIters</code> argument in RDKit.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Wether to log a warning when the number of not converged conformers
+          <td>
+            <div class="doc-md-description">
+              <p>Wether to log a warning when the number of not converged conformers
 during the minimization is higher than <code>warning_not_converged</code>. Only works when <code>verbose</code> is set to True.
-Disable with 0. Defaults to 10.</p></td>
+Disable with 0. Defaults to 10.</p>
+            </div>
+          </td>
           <td>
                 <code>0</code>
           </td>
@@ -1838,7 +1946,11 @@ Disable with 0. Defaults to 10.</p></td>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Set to None or -1 to disable.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Set to None or -1 to disable.</p>
+            </div>
+          </td>
           <td>
                 <code>19</code>
           </td>
@@ -1848,10 +1960,14 @@ Disable with 0. Defaults to 10.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to add hydrogens to the mol before embedding. If set to True, the hydrogens
 are removed in the returned molecule. Warning: explicit hydrogens won't be conserved. It is strongly
 recommended to let the default value to True. The RDKit documentation says: "To get good 3D conformations,
-it's almost always a good idea to add hydrogens to the molecule first."</p></td>
+it's almost always a good idea to add hydrogens to the molecule first."</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1861,7 +1977,11 @@ it's almost always a good idea to add hydrogens to the molecule first."</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>It set to True, this will avoid raising an error when the embedding fails and return None instead.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>It set to True, this will avoid raising an error when the embedding fails and return None instead.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1871,9 +1991,13 @@ it's almost always a good idea to add hydrogens to the molecule first."</p></td>
           <td>
                 <code><span title="typing.Optional">Optional</span>[dict]</code>
           </td>
-          <td><p>Allows the user to specify arbitrary embedding parameters for the conformers. This will override any
+          <td>
+            <div class="doc-md-description">
+              <p>Allows the user to specify arbitrary embedding parameters for the conformers. This will override any
 other default settings. See <a href="https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters">https://www.rdkit.org/docs/source/rdkit.Chem.rdDistGeom.html#rdkit.Chem.rdDistGeom.EmbedParameters</a>
-for more details.</p></td>
+for more details.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1883,7 +2007,11 @@ for more details.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Wether to enable logs during the process.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Wether to enable logs during the process.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1904,7 +2032,11 @@ for more details.</p></td>
 <td><code>mol</code></td>          <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>the molecule with the conformers.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the molecule with the conformers.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -2363,7 +2495,11 @@ with only the centroid of the clusters of a list of molecules per cluster.</p>
           <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2373,7 +2509,11 @@ with only the centroid of the clusters of a list of molecules per cluster.</p>
           <td>
                 <code><span title="typing.Sequence">Sequence</span>[<span title="typing.Sequence">Sequence</span>[int]]</code>
           </td>
-          <td><p>list of cluster indices.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>list of cluster indices.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2383,9 +2523,13 @@ with only the centroid of the clusters of a list of molecules per cluster.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>If True, return one molecule with centroid conformers
+          <td>
+            <div class="doc-md-description">
+              <p>If True, return one molecule with centroid conformers
 only. If False return a list of molecules per cluster with all
-the conformers of the cluster.</p></td>
+the conformers of the cluster.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -2502,7 +2646,11 @@ the conformers of the cluster.</p></td>
           <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2586,7 +2734,11 @@ in place.</p>
           <td>
                 <code><span title="datamol.Mol">Mol</span></code>
           </td>
-          <td><p>the molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2596,7 +2748,11 @@ in place.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[<span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span>, <span title="typing.List">List</span>[int]]</code>
           </td>
-          <td><p>the new position to move to of shape [x, y, z]</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the new position to move to of shape [x, y, z]</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2606,7 +2762,11 @@ in place.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>id of the conformer.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>id of the conformer.</p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2723,7 +2883,11 @@ in place.</p>
           <td>
                 <code><span title="datamol.types.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2733,7 +2897,11 @@ in place.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to compute the true center of mass or the geometrical center.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to compute the true center of mass or the geometrical center.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -2743,7 +2911,11 @@ in place.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[int]</code>
           </td>
-          <td><p>Number of digits to round to.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of digits to round to.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -2753,7 +2925,11 @@ in place.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>the conformer id.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the conformer id.</p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2862,7 +3038,11 @@ in place.</p>
           <td>
                 <code><span title="datamol.types.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2872,7 +3052,11 @@ in place.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>a conformer id.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a conformer id.</p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2943,7 +3127,11 @@ in place.</p>
           <td>
                 <code><span title="datamol.types.Mol">Mol</span></code>
           </td>
-          <td><p>A molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -2953,7 +3141,11 @@ in place.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]</code>
           </td>
-          <td><p>A indice or a least of indices of conformers to keep.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A indice or a least of indices of conformers to keep.</p>
+            </div>
+          </td>
           <td>
                 <code>-1</code>
           </td>
@@ -2963,7 +3155,11 @@ in place.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to assign the kept conformers an id or keep the original one.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to assign the kept conformers an id or keep the original one.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -2973,7 +3169,11 @@ in place.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to copy the molecule or not.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to copy the molecule or not.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -3106,7 +3306,11 @@ called <code>rdkit_free_sasa</code>.</p>
           <td>
                 <code><span title="datamol.types.Mol">Mol</span></code>
           </td>
-          <td><p>a molecule</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>a molecule</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -3116,7 +3320,11 @@ called <code>rdkit_free_sasa</code>.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]]</code>
           </td>
-          <td><p>Id of the conformers to compute. If None, compute all.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Id of the conformers to compute. If None, compute all.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -3126,8 +3334,12 @@ called <code>rdkit_free_sasa</code>.</p>
           <td>
                 <code>int</code>
           </td>
-          <td><p>Number of jobs for parallelization. Set to 1 to disable
-and -1 to use all cores.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Number of jobs for parallelization. Set to 1 to disable
+and -1 to use all cores.</p>
+            </div>
+          </td>
           <td>
                 <code>1</code>
           </td>
@@ -3148,7 +3360,11 @@ and -1 to use all cores.</p></td>
 <td><code>mol</code></td>          <td>
                 <code><span title="numpy">np</span>.<span title="numpy.ndarray">ndarray</span></code>
           </td>
-          <td><p>the molecule with the conformers.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>the molecule with the conformers.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -3347,9 +3563,11 @@ and -1 to use all cores.</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>

@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.cluster.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.2, mkdocs-material-9.1.8">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.ded33207.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
       
       
 
@@ -1075,7 +1075,11 @@ smiles/smarts representative of each cluster first.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[<span title="typing.Sequence">Sequence</span>[<span title="datamol.types.Mol">Mol</span>], <span title="pandas">pd</span>.<span title="pandas.Series">Series</span>]</code>
           </td>
-          <td><p>A list of molecules to auto align.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A list of molecules to auto align.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1085,7 +1089,9 @@ smiles/smarts representative of each cluster first.</p>
           <td>
                 <code>str</code>
           </td>
-          <td><p>Partition method to use:</p>
+          <td>
+            <div class="doc-md-description">
+              <p>Partition method to use:</p>
 <ul>
 <li>'scaffold': Cluster molecules by Murcko scaffold.</li>
 <li>'strip-scaffold': Cluster molecules by Murcko scaffold, but remove all atoms not
@@ -1096,7 +1102,9 @@ smiles/smarts representative of each cluster first.</p>
     generic but keeping the bond order informations.</li>
 <li>'cluster': Cluster the molecules using Butina frm RDKit with <code>dm.cluster_mols</code>.
 Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
-</ul></td>
+</ul>
+            </div>
+          </td>
           <td>
                 <code>&#39;anon-scaffold&#39;</code>
           </td>
@@ -1106,7 +1114,11 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to copy the molecules before aligning them.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to copy the molecules before aligning them.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1116,7 +1128,11 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code>float</code>
           </td>
-          <td><p>Optional cluster cutoff.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Optional cluster cutoff.</p>
+            </div>
+          </td>
           <td>
                 <code>0.7</code>
           </td>
@@ -1126,9 +1142,13 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Optional, if True, terminal dummy atoms in the
+          <td>
+            <div class="doc-md-description">
+              <p>Optional, if True, terminal dummy atoms in the
             reference are ignored if they match an implicit hydrogen in the
-            molecule, and a constrained depiction is still attempted</p></td>
+            molecule, and a constrained depiction is still attempted</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1138,7 +1158,11 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code><span title="typing.Any">Any</span></code>
           </td>
-          <td><p>Additional arguments to pass to clustering method</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Additional arguments to pass to clustering method</p>
+            </div>
+          </td>
           <td>
                 <code>{}</code>
           </td>
@@ -1437,7 +1461,11 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code><span title="datamol.types.Mol">Mol</span></code>
           </td>
-          <td><p>A molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1447,7 +1475,11 @@ Cautious as the method 'cluster' is very sensitive to the cutoff.</li>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to copy the molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to copy the molecule.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1521,7 +1553,11 @@ returned.</p>
           <td>
                 <code><span title="typing.Union">Union</span>[str, <span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>A molecule.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>A molecule.</p>
+            </div>
+          </td>
           <td>
               <em>required</em>
           </td>
@@ -1531,7 +1567,11 @@ returned.</p>
           <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[str, <span title="datamol.types.Mol">Mol</span>]]</code>
           </td>
-          <td><p>Template to align to.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Template to align to.</p>
+            </div>
+          </td>
           <td>
                 <code>None</code>
           </td>
@@ -1541,7 +1581,11 @@ returned.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>whether to copy the molecule before aligning it.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>whether to copy the molecule before aligning it.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1551,9 +1595,13 @@ returned.</p>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to use the depiction API or use MolAlign
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to use the depiction API or use MolAlign
 The main difference is around how 3D information is handled, but also, because the depiction API
-will emphasize the atoms that do not match, whereas AlignMol will not.</p></td>
+will emphasize the atoms that do not match, whereas AlignMol will not.</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1563,8 +1611,12 @@ will emphasize the atoms that do not match, whereas AlignMol will not.</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to remove all conformation in the input molecule first.
-You can set this to true when not using depiction</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to remove all conformation in the input molecule first.
+You can set this to true when not using depiction</p>
+            </div>
+          </td>
           <td>
                 <code>True</code>
           </td>
@@ -1574,7 +1626,11 @@ You can set this to true when not using depiction</p></td>
           <td>
                 <code>bool</code>
           </td>
-          <td><p>Whether to automatically select the coordinate generation method.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether to automatically select the coordinate generation method.</p>
+            </div>
+          </td>
           <td>
                 <code>False</code>
           </td>
@@ -1595,7 +1651,11 @@ You can set this to true when not using depiction</p></td>
 <td><code>mol</code></td>          <td>
                 <code><span title="typing.Optional">Optional</span>[<span title="datamol.types.Mol">Mol</span>]</code>
           </td>
-          <td><p>aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</p></td>
+          <td>
+            <div class="doc-md-description">
+              <p>aligned molecule (dm.Mol). None if initial mol argument is undefined or invalid.</p>
+            </div>
+          </td>
         </tr>
     </tbody>
   </table>
@@ -1838,9 +1898,11 @@ You can set this to true when not using depiction</p></td>
     <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.51198bba.min.js"></script>
+      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
       
-        <script src="../assets/js/google-analytics.js"></script>
+        
+          <script src="../assets/js/google-analytics.js"></script>
+        
       
     
   </body>
