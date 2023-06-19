@@ -17,7 +17,7 @@ from .utils import prepare_mol_for_drawing
 
 
 def to_image(
-    mols: Union[List[dm.Mol], dm.Mol],
+    mols: Union[List[Union[dm.Mol, str]], dm.Mol, str],
     legends: Union[List[Union[str, None]], str, None] = None,
     n_cols: int = 4,
     use_svg: bool = True,
@@ -67,8 +67,14 @@ def to_image(
     if isinstance(mol_size, int):
         mol_size = (mol_size, mol_size)
 
-    if isinstance(mols, dm.Mol):
+    if isinstance(mols, (dm.Mol, str)):
         mols = [mols]
+
+    # Convert smiles to molecules if strings are provided as input for API consistency
+    mols = mols[:]  # avoid in place modification
+    for i in range(len(mols)):
+        if isinstance(mols[i], str):
+            mols[i] = dm.to_mol(mols[i])
 
     if isinstance(legends, str):
         legends = [legends]

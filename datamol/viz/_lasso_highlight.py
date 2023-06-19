@@ -445,13 +445,8 @@ def lasso_highlight_image(
                 f"Please enter valid search molecules or smarts: {search_molecules[i]}"
             )
 
-    if isinstance(target_molecules, (str, dm.Mol)):
+    if not isinstance(target_molecules, (list, tuple)):
         target_molecules = [target_molecules]
-
-    if legends is None:
-        legends = [""] * len(target_molecules)
-    elif isinstance(legends, str):
-        legends = [legends] * len(target_molecules)
 
     if n_cols is None:
         n_cols = 4
@@ -460,6 +455,11 @@ def lasso_highlight_image(
     n_rows = len(target_molecules) // n_cols
     if len(target_molecules) % n_cols:
         n_rows += 1
+
+    if legends is None:
+        legends = [""] * len(target_molecules)
+    elif isinstance(legends, str):
+        legends = [legends] * len(target_molecules)
 
     ## Step 1: setup drawer and canvas
     if use_svg:
@@ -542,7 +542,12 @@ def lasso_highlight_image(
     # EN: the following is edge-case free after trying 6 different logics, but may break if RDKit changes the way it draws molecules
     scaling_val = Point2D(scale_padding, scale_padding)
 
-    drawer.DrawMolecules(mols_to_draw, legends=legends, **kwargs)
+    try:
+        drawer.DrawMolecules(mols_to_draw, legends=legends, **kwargs)
+    except Exception as e:
+        raise ValueError(
+            "Failed to draw molecules. Some arguments neither match expected MolDrawOptions, nor DrawMolecule inputs. Please check the input arguments."
+        )
     drawer.ClearDrawing()
     if draw_mols_same_scale:
         drawer.SetScale(
