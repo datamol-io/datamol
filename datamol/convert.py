@@ -3,7 +3,6 @@ from typing import List
 from typing import Optional
 from typing import cast
 from typing import Sequence
-import numpy.typing as npt
 
 import re
 
@@ -363,7 +362,7 @@ def from_smarts(smarts: Optional[str]) -> Optional[Mol]:
 
 
 def to_df(
-    mols: Union[Sequence[Mol], npt.NDArray[Mol]],
+    mols: Sequence[Mol],
     smiles_column: Optional[str] = "smiles",
     mol_column: Optional[str] = None,
     include_private: bool = False,
