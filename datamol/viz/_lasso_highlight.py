@@ -14,7 +14,6 @@ from collections import namedtuple
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit.Geometry.rdGeometry import Point2D
-from rdkit.Chem.rdShapeHelpers import ComputeConfBox
 
 from loguru import logger
 
