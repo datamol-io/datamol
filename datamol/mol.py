@@ -5,11 +5,13 @@ from typing import Optional
 from typing import Dict
 from typing import Any
 from typing import Set
+from typing import Iterable
 
 import copy
 import random
 import itertools
 import hashlib
+import importlib_resources
 
 from loguru import logger
 
@@ -26,6 +28,7 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
+from rdkit.Chem.SaltRemover import SaltRemover
 
 from . import _sanifix4
 from .types import Mol
@@ -44,6 +47,10 @@ SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
 UNSPECIFIED_BOND = Chem.rdchem.BondType.UNSPECIFIED
+SALT_PATH = str(importlib_resources.files("datamol").joinpath("data/salts.smi"))
+SALT_REMOVER = SaltRemover(defnFilename=SALT_PATH)
+SOLVENT_PATH = str(importlib_resources.files("datamol").joinpath("data/solvents.smi"))
+SOLVENT_REMOVER = SaltRemover(defnFilename=SOLVENT_PATH)
 
 
 def copy_mol(mol: Mol) -> Mol:
@@ -1376,3 +1383,19 @@ def get_atom_positions(
         positions = positions[mapped_indices, :]
 
     return positions
+
+
+def remove_salt(
+    mol: Mol,
+    remover:Optional = SALT_REMOVER
+):
+    """ Remove salt from molecule"""
+    return remover.StripMol(mol)
+
+
+def remove_solvent(
+    mol: Mol,
+    remover: Optional = SOLVENT_REMOVER
+):
+    """ Remove solvent from molecule"""
+    return remover.StripMol(mol)
