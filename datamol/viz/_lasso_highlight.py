@@ -490,7 +490,7 @@ def lasso_highlight_image(
     # scaling parameters
     min_scale_val = Point2D(np.inf, np.inf)
     max_scale_val = Point2D(-np.inf, -np.inf)
-
+    color_list_indexes = []
     ## Step 2: Prepare all the inputs for drawing
     for mol_idx, target_molecule in enumerate(target_molecules):
         # check if the input is valid
@@ -502,14 +502,15 @@ def lasso_highlight_image(
 
         # Always make the type checker happy
         target_mol = cast(dm.Mol, target_molecule)
-
         # Match the search molecules or SMARTS to the target molecule
         atom_idx_list = []
-        for search_mol in search_molecules:
+        target_color_list = []
+        for color_idx, search_mol in enumerate(search_molecules):
             matches = target_mol.GetSubstructMatches(search_mol)
             if matches:
                 matched_atoms = set.union(*[set(x) for x in matches])
                 atom_idx_list.append(matched_atoms)
+                target_color_list.append(color_idx % len(color_list))
             elif verbose:
                 logger.warning(f"No matching substructures found for {dm.to_smarts(search_mol)}")
 
@@ -522,6 +523,7 @@ def lasso_highlight_image(
             atom_idx_list += atom_indices_list_of_list
 
         atoms_idx_list.append(atom_idx_list)
+        color_list_indexes.append(target_color_list)
 
         ## Prepare the molecule for drawing and draw it
         mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
@@ -565,10 +567,10 @@ def lasso_highlight_image(
             offset = drawer.Offset()
             # EN: if the molecule has a legend we need to offset the highlight by the height of the legend
             # we also need to account for the padding around the molecule
-            # for unknown reasons, the magic number 20 for the fraction of the padding works well
             if legends[ind]:
-                padding_fraction = 20 - drawer.drawOptions().legendFontSize
-                offset -= Point2D(0, draw_options.legendFontSize + padding_fraction)
+                # geometry is hard
+                padding_fraction = (drawer.drawOptions().legendFraction * mol_size[1]) // 2
+                offset -= Point2D(0, padding_fraction)
 
         if len(atom_idx_list) > 0:
             dm.viz._lasso_highlight._draw_multi_matches(
@@ -579,7 +581,7 @@ def lasso_highlight_image(
                 r_dist=r_dist,
                 relative_bond_width=relative_bond_width,
                 line_width=line_width,
-                color_list=color_list,
+                color_list=[color_list[i] for i in color_list_indexes[ind]],
                 offset=offset,
             )
         elif verbose:
