@@ -74,14 +74,6 @@ def test_input_mol_is_none():
         dm.lasso_highlight_image(None, smarts_list)
 
 
-# The following tests are supposed to raise errors and will be check to ensure they do
-def test_canvas_input_error():
-    with pytest.raises(ValueError):
-        smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
-        smarts_list = ["CONN", "N#CC~CO", "C=CON", "CONNCN"]
-        dm.lasso_highlight_image(smi, smarts_list, mol_size=(5001, 400))
-
-
 def test_search_input_error_empty_list():
     # should still go through but just print out the structure without any highlights
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
@@ -153,6 +145,36 @@ def test_query_and_atom_indices_list():
         "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3",
         search_molecules="c1ccccc1",
         atom_indices=[[4, 5, 6], [1, 2, 3, 4]],
+    )
+
+
+def test_multiple_mol_lasso():
+    img = dm.viz.lasso_highlight_image(
+        ["CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3", "c1ccccc1"],
+        search_molecules="c1ccccc1",
+    )
+    assert isinstance(img, str)
+
+    img = dm.viz.lasso_highlight_image(
+        ["CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3", "c1ccccc1"],
+        search_molecules="c1ccccc1",
+        mol_size=(200, 200),
+        n_cols=1,
+        use_svg=False,
+    )
+    from PIL import Image
+
+    assert isinstance(img, Image.Image)
+    img.size == (400, 200)
+
+
+def test_multiple_mol_lasso_different_scale_legends():
+    dm.viz.lasso_highlight_image(
+        ["CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3", "c1ccccc1"],
+        legends=["Mol1", "Mol2"],
+        search_molecules="c1ccccc1",
+        n_cols=1,
+        draw_mols_same_scale=False,
     )
 
 

@@ -189,7 +189,7 @@ def _draw_substructurematch(
     rel_width: float = 0.5,
     line_width: int = 2,
     color: Optional[ColorTuple] = None,
-    offset: bool = False,
+    offset: Optional[Tuple[int, int]] = None,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
 
@@ -201,7 +201,7 @@ def _draw_substructurematch(
         rel_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         line_width: width of drawn lines.
         color: Tuple with RGBA or RGB values specifying the color of the highlighting.
-        offset: If True, the highlighting is drawn offset to the atom position in the grid.
+        offset: The offset in raw coordinates for drawing the highlighting given the atom position in the grid.
     """
 
     prior_lw = canvas.LineWidth()
@@ -248,17 +248,17 @@ def _draw_substructurematch(
         a_obj_dict[a_idx] = at_manager
 
     added_bonds = set()
-    offset_pos = Point2D(0, 0)
-    if offset:
-        offset_pos = canvas.Offset()
-    for idx, at_manager in a_obj_dict.items():
+    if offset is None:
+        offset = Point2D(0, 0)
+
+    for _, at_manager in a_obj_dict.items():
         # A circle is drawn to atoms without outgoing connections
         if not at_manager.bonds:
             pos_list1 = _arch_points(r, 0, np.pi * 2, 60)
             pos_list1[:, 0] += at_manager.pos[0]
             pos_list1[:, 1] += at_manager.pos[1]
             points = [Point2D(*c) for c in pos_list1]
-            points = [canvas.GetDrawCoords(p) + offset_pos for p in points]
+            points = [canvas.GetDrawCoords(p) + offset for p in points]
             canvas.DrawPolygon(points, rawCoords=True)
 
         # A arch is drawn between attachment points of neighbouring bonds
@@ -269,7 +269,7 @@ def _draw_substructurematch(
             pos_list1[:, 1] += at_manager.pos[1]
             # Transforming points to RDKit Objects
             points = [Point2D(*c) for c in pos_list1]
-            points = [canvas.GetDrawCoords(p) + offset_pos for p in points]
+            points = [canvas.GetDrawCoords(p) + offset for p in points]
             canvas.DrawPolygon(points, rawCoords=True)
 
         # Drawing lines parallel to each bond
@@ -292,14 +292,14 @@ def _draw_substructurematch(
                 atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][1]
             )
             atom_i_left = Point2D(*atom_i_left_at)
-            atom_i_left = canvas.GetDrawCoords(atom_i_left) + offset_pos
+            atom_i_left = canvas.GetDrawCoords(atom_i_left) + offset
             atom_j_right = Point2D(*atom_j_right_at)
-            atom_j_right = canvas.GetDrawCoords(atom_j_right) + offset_pos
+            atom_j_right = canvas.GetDrawCoords(atom_j_right) + offset
 
             atom_i_right = Point2D(*atom_i_right_at)
-            atom_i_right = canvas.GetDrawCoords(atom_i_right) + offset_pos
+            atom_i_right = canvas.GetDrawCoords(atom_i_right) + offset
             atom_j_left = Point2D(*atom_j_left_at)
-            atom_j_left = canvas.GetDrawCoords(atom_j_left) + offset_pos
+            atom_j_left = canvas.GetDrawCoords(atom_j_left) + offset
 
             canvas.DrawLine(atom_i_left, atom_j_right, rawCoords=True)
             canvas.DrawLine(atom_i_right, atom_j_left, rawCoords=True)
@@ -316,7 +316,7 @@ def _draw_multi_matches(
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
-    offset: bool = False,
+    offset: Optional[Tuple[int, int]] = None,
 ):
     """Draws multiple substructure matches on a canvas.
 
@@ -329,7 +329,7 @@ def _draw_multi_matches(
         relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         line_width: width of drawn lines.
         color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
-        offset: If True, the highlighting is drawn with an offset to the original atom positions.
+        offset: The offset in raw coordinates for drawing the highlighting given the atom position in the grid.
     """
     # If no colors are given, all substructures are depicted in gray.
     if color_list is None:
@@ -398,6 +398,7 @@ def lasso_highlight_image(
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
+    scale_padding: float = 1.0,
     verbose: bool = False,
     **kwargs: Any,
 ):
@@ -418,6 +419,7 @@ def lasso_highlight_image(
         relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
         line_width: width of drawn lines.
+        scale_padding: Padding around the molecule when drawing to scale.
         verbose: Whether to print the verbose information.
         **kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
@@ -538,10 +540,14 @@ def lasso_highlight_image(
 
     # Setting up the coordinate system by drawing the molecules as a grid
     # EN: the following is edge-case free after trying 6 different logics, but may break if RDKit changes the way it draws molecules
+    scaling_val = Point2D(scale_padding, scale_padding)
+
     drawer.DrawMolecules(mols_to_draw, legends=legends, **kwargs)
     drawer.ClearDrawing()
     if draw_mols_same_scale:
-        drawer.SetScale(mol_size[0], mol_size[1], min_scale_val, max_scale_val)
+        drawer.SetScale(
+            mol_size[0], mol_size[1], min_scale_val - scaling_val, max_scale_val + scaling_val
+        )
 
     for ind, (mol, atom_idx_list) in enumerate(zip(mols_to_draw, atoms_idx_list)):
         h_pos, w_pos = np.unravel_index(ind, (n_rows, n_cols))
@@ -549,6 +555,15 @@ def lasso_highlight_image(
         offset_y = int(h_pos * mol_size[1])
         drawer.SetOffset(offset_x, offset_y)
         drawer.DrawMolecule(mol, legend=legends[ind], **kwargs)
+        offset = None
+        if draw_mols_same_scale:
+            offset = drawer.Offset()
+            # EN: if the molecule has a legend we need to offset the highlight by the height of the legend
+            # we also need to account for the padding around the molecule
+            # for unknown reasons, the magic number 20 for the fraction of the padding works well
+            if legends[ind]:
+                padding_fraction = 20 - drawer.drawOptions().legendFontSize
+                offset -= Point2D(0, draw_options.legendFontSize + padding_fraction)
 
         if len(atom_idx_list) > 0:
             dm.viz._lasso_highlight._draw_multi_matches(
@@ -560,7 +575,7 @@ def lasso_highlight_image(
                 relative_bond_width=relative_bond_width,
                 line_width=line_width,
                 color_list=color_list,
-                offset=draw_mols_same_scale,
+                offset=offset,
             )
         elif verbose:
             logger.warning("No matches found for the given search molecules")
