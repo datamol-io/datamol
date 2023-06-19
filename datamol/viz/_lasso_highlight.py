@@ -14,6 +14,7 @@ from collections import namedtuple
 from rdkit.Chem.Draw import rdMolDraw2D
 from rdkit.Chem.rdmolops import Get3DDistanceMatrix
 from rdkit.Geometry.rdGeometry import Point2D
+from rdkit.Chem.rdShapeHelpers import ComputeConfBox
 
 from loguru import logger
 
@@ -188,6 +189,7 @@ def _draw_substructurematch(
     rel_width: float = 0.5,
     line_width: int = 2,
     color: Optional[ColorTuple] = None,
+    offset: bool = False,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
 
@@ -199,6 +201,7 @@ def _draw_substructurematch(
         rel_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         line_width: width of drawn lines.
         color: Tuple with RGBA or RGB values specifying the color of the highlighting.
+        offset: If True, the highlighting is drawn offset to the atom position in the grid.
     """
 
     prior_lw = canvas.LineWidth()
@@ -245,6 +248,9 @@ def _draw_substructurematch(
         a_obj_dict[a_idx] = at_manager
 
     added_bonds = set()
+    offset_pos = Point2D(0, 0)
+    if offset:
+        offset_pos = canvas.Offset()
     for idx, at_manager in a_obj_dict.items():
         # A circle is drawn to atoms without outgoing connections
         if not at_manager.bonds:
@@ -252,7 +258,8 @@ def _draw_substructurematch(
             pos_list1[:, 0] += at_manager.pos[0]
             pos_list1[:, 1] += at_manager.pos[1]
             points = [Point2D(*c) for c in pos_list1]
-            canvas.DrawPolygon(points)
+            points = [canvas.GetDrawCoords(p) + offset_pos for p in points]
+            canvas.DrawPolygon(points, rawCoords=True)
 
         # A arch is drawn between attachment points of neighbouring bonds
         for points in at_manager.get_arch_attachment_points():
@@ -262,9 +269,13 @@ def _draw_substructurematch(
             pos_list1[:, 1] += at_manager.pos[1]
             # Transforming points to RDKit Objects
             points = [Point2D(*c) for c in pos_list1]
-            canvas.DrawPolygon(points)
+            points = [canvas.GetDrawCoords(p) + offset_pos for p in points]
+            canvas.DrawPolygon(points, rawCoords=True)
 
         # Drawing lines parallel to each bond
+        # EN: we need to convert the coordinates to raw drawing coordinates
+        # since RDKit does not expose getDrawTransformers or getAtomCoords
+        # and we can't operate in molecule coordinates.
         for bond in at_manager.bonds:
             if bond.bond_id in added_bonds:
                 continue
@@ -280,8 +291,18 @@ def _draw_substructurematch(
             atom_j_right_at = _angle_to_coord(
                 atom_j.pos, *atom_j.bond_attachment_points[bond.bond_id][1]
             )
-            canvas.DrawLine(Point2D(*atom_i_left_at), Point2D(*atom_j_right_at))
-            canvas.DrawLine(Point2D(*atom_i_right_at), Point2D(*atom_j_left_at))
+            atom_i_left = Point2D(*atom_i_left_at)
+            atom_i_left = canvas.GetDrawCoords(atom_i_left) + offset_pos
+            atom_j_right = Point2D(*atom_j_right_at)
+            atom_j_right = canvas.GetDrawCoords(atom_j_right) + offset_pos
+
+            atom_i_right = Point2D(*atom_i_right_at)
+            atom_i_right = canvas.GetDrawCoords(atom_i_right) + offset_pos
+            atom_j_left = Point2D(*atom_j_left_at)
+            atom_j_left = canvas.GetDrawCoords(atom_j_left) + offset_pos
+
+            canvas.DrawLine(atom_i_left, atom_j_right, rawCoords=True)
+            canvas.DrawLine(atom_i_right, atom_j_left, rawCoords=True)
     # restoring prior line width
     canvas.SetLineWidth(prior_lw)
 
@@ -295,6 +316,7 @@ def _draw_multi_matches(
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
+    offset: bool = False,
 ):
     """Draws multiple substructure matches on a canvas.
 
@@ -307,6 +329,7 @@ def _draw_multi_matches(
         relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
         line_width: width of drawn lines.
         color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
+        offset: If True, the highlighting is drawn with an offset to the original atom positions.
     """
     # If no colors are given, all substructures are depicted in gray.
     if color_list is None:
@@ -347,6 +370,7 @@ def _draw_multi_matches(
             rel_width=max(relative_bond_width, ar),
             color=color,
             line_width=line_width,
+            offset=offset,
         )
 
 
@@ -361,137 +385,186 @@ DEFAULT_LASSO_COLORS = [
 
 
 def lasso_highlight_image(
-    target_molecule: Union[str, dm.Mol],
+    target_molecules: Union[str, dm.Mol, List[Union[str, dm.Mol]]],
     search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]] = None,
     atom_indices: Optional[Union[List[int], List[List[int]]]] = None,
+    legends: Union[List[Union[str, None]], str, None] = None,
+    n_cols: int = 4,
     mol_size: Tuple[int, int] = (300, 300),
     use_svg: Optional[bool] = True,
+    draw_mols_same_scale: bool = True,
     r_min: float = 0.3,
     r_dist: float = 0.13,
     relative_bond_width: float = 0.5,
     color_list: Optional[List[ColorTuple]] = None,
     line_width: int = 2,
+    verbose: bool = False,
     **kwargs: Any,
 ):
-    """Create an image of a molecule with substructure matches using lasso-based highlighting. Substructure matching is
-    optional and it's also possible to pass a list of list of atom indices to highlight.
+    """Create an image of a list of molecules with substructure matches using lasso-based highlighting.
+    Substructure matching is optional and it's also possible to pass a list of list of atom indices to highlight.
 
-    args:
-        target_molecule: The molecule to be highlighted
+    Args:
+        target_molecules:  One or a list of molecules to be highlighted.
         search_molecules: The substructure to be highlighted.
         atom_indices: Atom indices to be highlighted substructure.
+        legends: A string or a list of string as legend for every molecules.
+        n_cols: Number of molecules per column.
         mol_size: The size of the image to be returned
         use_svg: Whether to return an svg or png image
+        draw_mols_same_scale: Whether to draw all the molecules on the same scale. This has the same effect as the `drawMolsSameScale` of the drawing options (which cannot be applied).
         r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).
         r_dist: Incremental increase of radius for the next substructure.
         relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.
-        line_width: width of drawn lines.
         color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.
+        line_width: width of drawn lines.
+        verbose: Whether to print the verbose information.
         **kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
             https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
     """
 
-    if search_molecules is None:
-        search_molecules = []
-
     ## Step 0: Input validation
 
-    # check if the input is valid
-    if target_molecule is None or (isinstance(target_molecule, str) and len(target_molecule) == 0):
-        raise ValueError("Please enter a valid target molecule or smiles")
-
-    # less than 1 throws File parsing error: PNG header not recognized over 5,000 leads to a DecompressionBombError later on
-    if mol_size[0] < 1 or mol_size[0] > 5000 or mol_size[1] < 1 or mol_size[1] > 5000:
-        raise ValueError(
-            "To avoid errors please choose a number between 1-5000 for the canvas width or height"
-        )
-
-    if isinstance(target_molecule, str):
-        target_molecule = dm.to_mol(target_molecule)
-
-    if target_molecule is None:
-        raise ValueError("Please enter a valid target molecule or smiles")
-
-    # Always make the type checker happy
-    target_mol = cast(dm.Mol, target_molecule)
-
-    ## Step 1: Match the search molecules or SMARTS to the target molecule
+    if search_molecules is None:
+        search_molecules = []
 
     # Make `search_molecules` a list if it is not already
     if not isinstance(search_molecules, (list, tuple)):
         search_molecules = [search_molecules]
 
-    atom_idx_list = []
-    for search_mol in search_molecules:
+    # Convert search molecules into RDKit patterns
+    search_molecules = list(search_molecules)
+    for i, search_mol in enumerate(search_molecules):
         if isinstance(search_mol, str):
-            search_mol = dm.from_smarts(search_mol)
+            search_molecules[i] = dm.from_smarts(search_mol)
+        if search_molecules[i] is None or not isinstance(search_molecules[i], dm.Mol):
+            raise ValueError(
+                f"Please enter valid search molecules or smarts: {search_molecules[i]}"
+            )
 
-        if search_mol is None or not isinstance(search_mol, dm.Mol):
-            raise ValueError(f"Please enter valid search molecules or smarts: {search_mol}")
+    if isinstance(target_molecules, (str, dm.Mol)):
+        target_molecules = [target_molecules]
 
-        matches = target_mol.GetSubstructMatches(search_mol)
-        if not matches:
-            logger.warning(f"No matching substructures found for {dm.to_smarts(search_mol)}")
-        else:
-            matched_atoms = set.union(*[set(x) for x in matches])
-            atom_idx_list.append(matched_atoms)
+    if legends is None:
+        legends = [""] * len(target_molecules)
+    elif isinstance(legends, str):
+        legends = [legends] * len(target_molecules)
 
-    ## Step 2: add the atom indices to the list if any
-    if atom_indices is not None:
-        if not isinstance(atom_indices[0], (list, tuple)):
-            atom_indices_list_of_list = [atom_indices]
-        else:
-            atom_indices_list_of_list = atom_indices
-        atom_idx_list += atom_indices_list_of_list
+    if n_cols is None:
+        n_cols = 4
 
-    ## Step 3: Prepare the molecule for drawing and draw it
+    n_cols = min(n_cols, len(target_molecules))
+    n_rows = len(target_molecules) // n_cols
+    if len(target_molecules) % n_cols:
+        n_rows += 1
 
-    mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
-
-    if mol is None:
-        raise ValueError("The molecule has failed to be prepared by `prepare_mol_for_drawing`.")
-
+    ## Step 1: setup drawer and canvas
     if use_svg:
-        drawer = rdMolDraw2D.MolDraw2DSVG(mol_size[0], mol_size[1])
+        drawer = rdMolDraw2D.MolDraw2DSVG(
+            mol_size[0] * n_cols, mol_size[1] * n_rows, mol_size[0], mol_size[1]
+        )
     else:
-        drawer = rdMolDraw2D.MolDraw2DCairo(mol_size[0], mol_size[1])
+        drawer = rdMolDraw2D.MolDraw2DCairo(
+            mol_size[0] * n_cols, mol_size[1] * n_rows, mol_size[0], mol_size[1]
+        )
 
     # Setting the drawing options
     draw_options = drawer.drawOptions()
+    kwargs = kwargs.copy()
+    del_attr = []
     for k, v in kwargs.items():
-        if not hasattr(draw_options, k):
-            raise ValueError(
-                f"Invalid drawing option: {k}={v}. Check `rdkit.Chem.Draw.rdMolDraw2D.MolDrawOptions` for valid ones."
-            )
-        else:
+        if hasattr(draw_options, k):
             setattr(draw_options, k, v)
-
-    # Setting up the coordinate system by drawing and erasing molecule
-    drawer.DrawMolecule(mol)
-    drawer.ClearDrawing()
-
-    ## Step 4: Draw the matches
+            del_attr.append(k)
+    kwargs = {k: v for k, v in kwargs.items() if k not in del_attr}
+    # we will pass the remaining kwargs to the draw function later on
 
     if color_list is None:
         color_list = DEFAULT_LASSO_COLORS
 
-    if len(atom_idx_list) == 0:
-        logger.warning("No matches found for the given search molecules")
-    else:
-        _draw_multi_matches(
-            drawer,
-            mol,
-            atom_idx_list,
-            r_min=r_min,
-            r_dist=r_dist,
-            relative_bond_width=relative_bond_width,
-            line_width=line_width,
-            color_list=color_list,
-        )
+    mols_to_draw = []
+    atoms_idx_list = []
+    # scaling parameters
+    min_scale_val = Point2D(np.inf, np.inf)
+    max_scale_val = Point2D(-np.inf, -np.inf)
 
-    drawer.DrawMolecule(mol)
+    ## Step 2: Prepare all the inputs for drawing
+    for mol_idx, target_molecule in enumerate(target_molecules):
+        # check if the input is valid
+        if target_molecule is None:
+            raise ValueError("Please enter a valid target molecule or smiles")
+
+        if isinstance(target_molecule, str):
+            target_molecule = dm.to_mol(target_molecule)
+
+        # Always make the type checker happy
+        target_mol = cast(dm.Mol, target_molecule)
+
+        # Match the search molecules or SMARTS to the target molecule
+        atom_idx_list = []
+        for search_mol in search_molecules:
+            matches = target_mol.GetSubstructMatches(search_mol)
+            if matches:
+                matched_atoms = set.union(*[set(x) for x in matches])
+                atom_idx_list.append(matched_atoms)
+            elif verbose:
+                logger.warning(f"No matching substructures found for {dm.to_smarts(search_mol)}")
+
+        ## Add the atom indices to the list if any
+        if atom_indices is not None:
+            if not isinstance(atom_indices[0], (list, tuple)):
+                atom_indices_list_of_list = [atom_indices]
+            else:
+                atom_indices_list_of_list = atom_indices
+            atom_idx_list += atom_indices_list_of_list
+
+        atoms_idx_list.append(atom_idx_list)
+
+        ## Prepare the molecule for drawing and draw it
+        mol = prepare_mol_for_drawing(target_molecule, kekulize=True)
+        if mol is None:
+            raise ValueError(
+                f"A molecule {mol_idx} has failed to be prepared by `prepare_mol_for_drawing`."
+            )
+
+        conf = mol.GetConformer()
+        coordinates = conf.GetPositions()
+        min_scale_val.x = min(min_scale_val.x, min(coordinates[:, 0]))
+        min_scale_val.y = min(min_scale_val.y, min(coordinates[:, 1]))
+        max_scale_val.x = max(max_scale_val.x, max(coordinates[:, 0]))
+        max_scale_val.y = max(max_scale_val.y, max(coordinates[:, 1]))
+        mols_to_draw.append(mol)
+
+    # Setting up the coordinate system by drawing the molecules as a grid
+    # EN: the following is edge-case free after trying 6 different logics, but may break if RDKit changes the way it draws molecules
+    drawer.DrawMolecules(mols_to_draw, legends=legends, **kwargs)
+    drawer.ClearDrawing()
+    if draw_mols_same_scale:
+        drawer.SetScale(mol_size[0], mol_size[1], min_scale_val, max_scale_val)
+
+    for ind, (mol, atom_idx_list) in enumerate(zip(mols_to_draw, atoms_idx_list)):
+        h_pos, w_pos = np.unravel_index(ind, (n_rows, n_cols))
+        offset_x = int(w_pos * mol_size[0])
+        offset_y = int(h_pos * mol_size[1])
+        drawer.SetOffset(offset_x, offset_y)
+        drawer.DrawMolecule(mol, legend=legends[ind], **kwargs)
+
+        if len(atom_idx_list) > 0:
+            dm.viz._lasso_highlight._draw_multi_matches(
+                drawer,
+                mol,
+                atom_idx_list,
+                r_min=r_min,
+                r_dist=r_dist,
+                relative_bond_width=relative_bond_width,
+                line_width=line_width,
+                color_list=color_list,
+                offset=draw_mols_same_scale,
+            )
+        elif verbose:
+            logger.warning("No matches found for the given search molecules")
+
     drawer.FinishDrawing()
-
     # NOTE(hadim): process the drawer object to return the image type matching the same behavior as RDkit and `datamol.to_image()`
     return drawer_to_image(drawer)
