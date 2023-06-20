@@ -59,6 +59,16 @@ def test_to_image():
 
     dm.viz.to_image(mol, indices=True, mol_size=400)
 
+    # With input smiles
+    mol = "CCCOCc1cc(c2ncccc2)ccc1"
+    legends = mol
+    image = dm.viz.to_image(mol, legends=legends, mol_size=(200, 200), use_svg=False)
+    image = _convert_ipython_to_array(image)
+    image = np.array(image)
+
+    assert image.dtype == np.uint8
+    assert image.shape == (200, 200, 3)
+
 
 def test_to_image_incorrect_aromaticity():
     query = "C-c1cn(-C-2-[N,O:3]-[#6@H](-C-[#6,#8:1]-[*:2])-C(-[#8])-C-2-[#1,#8,#9:4])c2ncnc(-C)c12"
@@ -113,18 +123,20 @@ def test_conformers():
     assert type(view) == widgets.GridspecLayout
 
 
+@pytest.mark.skipif(
+    not dm.is_greater_than_current_rdkit_version("2023.03"),
+    reason="Circle Grid requires rdkit>2022.09",
+)
 def test_circle_grid(tmp_path):
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
-
-    im = dm.viz.circle_grid(
+    dm.viz.circle_grid(
         mol,
         [
             [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")],
             [dm.to_mol("CCCO"), dm.to_mol("CCCCCCCO")],
         ],
+        outfile=str(tmp_path / "image.png"),
     )
-
-    im.save(tmp_path / "image.png")
 
 
 def test_to_image_align():

@@ -4,20 +4,16 @@ from typing import Tuple
 from typing import Optional
 from typing import Any
 
-import fsspec
-
 from rdkit.Chem import Draw
-
-import PIL
 
 import datamol as dm
 
-
 from .utils import prepare_mol_for_drawing
+from .utils import image_to_file
 
 
 def to_image(
-    mols: Union[List[dm.Mol], dm.Mol],
+    mols: Union[List[Union[dm.Mol, str]], dm.Mol, str],
     legends: Union[List[Union[str, None]], str, None] = None,
     n_cols: int = 4,
     use_svg: bool = True,
@@ -67,8 +63,14 @@ def to_image(
     if isinstance(mol_size, int):
         mol_size = (mol_size, mol_size)
 
-    if isinstance(mols, dm.Mol):
+    if isinstance(mols, (dm.Mol, str)):
         mols = [mols]
+
+    # Convert smiles to molecules if strings are provided as input for API consistency
+    mols = mols[:]  # avoid in place modification
+    for i in range(len(mols)):
+        if isinstance(mols[i], str):
+            mols[i] = dm.to_mol(mols[i])
 
     if isinstance(legends, str):
         legends = [legends]
@@ -131,20 +133,5 @@ def to_image(
     )
 
     if outfile is not None:
-        with fsspec.open(outfile, "wb") as f:
-            if use_svg:
-                if isinstance(image, str):
-                    # in a terminal process
-                    f.write(image.encode())  # type: ignore
-                else:
-                    # in a jupyter kernel process
-                    f.write(image.data.encode())  # type: ignore
-            else:
-                if isinstance(image, PIL.PngImagePlugin.PngImageFile):  # type: ignore
-                    # in a terminal process
-                    image.save(f)
-                else:
-                    # in a jupyter kernel process
-                    f.write(image.data)  # type: ignore
-
+        image_to_file(image, outfile, as_svg=use_svg)
     return image

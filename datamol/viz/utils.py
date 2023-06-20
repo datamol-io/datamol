@@ -1,9 +1,12 @@
 from typing import Optional
+from typing import Union
 
 import io
+import fsspec
 
 from rdkit.Chem import Draw
 
+import PIL.PngImagePlugin
 import datamol as dm
 
 
@@ -88,3 +91,31 @@ def drawer_to_image(drawer: Draw.rdMolDraw2D.MolDraw2D):
             from PIL import Image
 
             return Image.open(io.BytesIO(drawer.GetDrawingText()))
+
+
+def image_to_file(
+    image: Union[str, PIL.PngImagePlugin.PngImageFile, bytes], outfile, as_svg: bool = False
+):
+    """Save image to file. The image can be either a PNG or SVG depending
+
+    Args:
+        image: Image to save to a file
+        outfile: Path to the output file where to save the image
+        as_svg: Whether the image is an SVG or not
+    """
+
+    with fsspec.open(outfile, "wb") as f:
+        if as_svg:
+            if isinstance(image, str):
+                # in a terminal process
+                f.write(image.encode())  # type: ignore
+            else:
+                # in a jupyter kernel process
+                f.write(image.data.encode())  # type: ignore
+        else:
+            if isinstance(image, PIL.PngImagePlugin.PngImageFile):  # type: ignore
+                # in a terminal process
+                image.save(f)
+            else:
+                # in a jupyter kernel process
+                f.write(image.data)  # type: ignore
