@@ -1,0 +1,12 @@
+// Solvent data from Chembl structure pipeline
+// Version: 2019
+// https://github.com/chembl/ChEMBL_Structure_Pipeline/tree/master/chembl_structure_pipeline/data
+[OH2]	WATER
+ClCCl	DICHLOROMETHANE
+ClC(Cl)Cl	TRICHLOROMETHANE
+CCOC(=O)C	ETHYL ACETATE
+CO	METHANOL
+CC(C)O	PROPAN-2-OL
+CC(=O)C	ACETONE
+CS(=O)C	DMSO
+CCO	ETHANOL

@@ -5,7 +5,6 @@ from typing import Optional
 from typing import Dict
 from typing import Any
 from typing import Set
-from typing import Iterable
 
 import copy
 import random
@@ -29,7 +28,9 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 from rdkit.Chem.SaltRemover import SaltRemover
+from rdkit.Chem.rdmolops import RemoveStereochemistry
 
+import datamol
 from . import _sanifix4
 from .types import Mol
 from .convert import to_inchikey_non_standard
@@ -1385,17 +1386,40 @@ def get_atom_positions(
     return positions
 
 
-def remove_salt(
-    mol: Mol,
-    remover:Optional = SALT_REMOVER
-):
-    """ Remove salt from molecule"""
+def remove_salts(mol: Mol, remover: Optional[SaltRemover] = SALT_REMOVER) -> Mol:
+    """Remove all salts from the molecule
+
+    Args:
+        mol: A molecule.
+        remover: A object that defines salts to be removed.
+
+    See Also:
+        <rdkit.Chem.SaltRemover.SaltRemover>
+    """
     return remover.StripMol(mol)
 
 
-def remove_solvent(
-    mol: Mol,
-    remover: Optional = SOLVENT_REMOVER
-):
-    """ Remove solvent from molecule"""
+def remove_solvents(mol: Mol, remover: Optional = SOLVENT_REMOVER) -> Mol:
+    """Remove all solvents from the molecule.
+
+    Args:
+        mol: A molecule.
+        remover: A object that defines solvents to be removed.
+
+    """
     return remover.StripMol(mol)
+
+
+def remove_stereochemistry(mol: Mol) -> Mol:
+    """Removes all stereochemistry info from the molecule.
+
+    Args:
+        mol: A molecule.
+
+    See Also:
+        <rdkit.Chem.rdmolops.RemoveStereochemistry>
+
+    """
+    mol_copy = datamol.copy_mol(mol)
+    RemoveStereochemistry(mol_copy)
+    return mol_copy
