@@ -226,7 +226,7 @@ class MolsCircleGrid:
             max_height + (self.margin + max_height) * 2 * self.ring_count,
         )
         self.size = (
-            self.size[0] + self._global_legend_size * 2,
+            self.size[0],
             self.size[1] + self._global_legend_size * 2,
         )
         self.midpoint = Point2D(self.size[0] // 2, self.size[1] // 2)
