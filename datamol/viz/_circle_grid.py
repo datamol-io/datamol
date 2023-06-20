@@ -126,6 +126,9 @@ class MolsCircleGrid:
                 documentation related to `MolDrawOptions` for more details at
                 https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
         """
+        assert dm.is_greater_than_current_rdkit_version(
+            "2022.09"
+        ), "MolsCircleGrid requires RDKit version >= 2022.09"
         self.center_mol = center_mol
         self.ring_mols = ring_mols
         if not isinstance(self.ring_mols[0], (tuple, list, np.ndarray)):

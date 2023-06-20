@@ -123,10 +123,13 @@ def test_conformers():
     assert type(view) == widgets.GridspecLayout
 
 
+@pytest.mark.skipif(
+    not dm._version.is_greater_than_current_rdkit_version("2022.09"),
+    reason="Circle Grid requires rdkit>2022.09",
+)
 def test_circle_grid(tmp_path):
     mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
-
-    im = dm.viz.circle_grid(
+    dm.viz.circle_grid(
         mol,
         [
             [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")],
