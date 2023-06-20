@@ -19,7 +19,7 @@ NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PA
 @pytest.mark.parametrize("nb_path", NOTEBOOK_PATHS, ids=[str(n.name) for n in NOTEBOOK_PATHS])
 def test_notebook(nb_path):
     # Setup and configure the processor to execute the notebook
-    if "Visualization.ipynb" in nb_path.name and dm.is_greater_than_current_rdkit_version(
+    if "Visualization.ipynb" in nb_path.name and not dm.is_greater_than_current_rdkit_version(
         "2023.03"
     ):
         pytest.skip("Circle Grid requires rdkit>2022.09")
