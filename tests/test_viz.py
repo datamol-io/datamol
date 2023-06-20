@@ -124,7 +124,7 @@ def test_conformers():
 
 
 @pytest.mark.skipif(
-    not dm._version.is_greater_than_current_rdkit_version("2022.09"),
+    not dm.is_greater_than_current_rdkit_version("2022.09"),
     reason="Circle Grid requires rdkit>2022.09",
 )
 def test_circle_grid(tmp_path):
