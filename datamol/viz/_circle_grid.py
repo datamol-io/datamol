@@ -127,7 +127,7 @@ class MolsCircleGrid:
                 https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
         """
         assert dm.is_greater_than_current_rdkit_version(
-            "2022.09"
+            "2023.03"
         ), "MolsCircleGrid requires RDKit version >= 2022.09"
         self.center_mol = center_mol
         self.ring_mols = ring_mols

@@ -20,7 +20,7 @@ NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PA
 def test_notebook(nb_path):
     # Setup and configure the processor to execute the notebook
     if "Visualization.ipynb" in nb_path.name and dm.is_greater_than_current_rdkit_version(
-        "2022.09"
+        "2023.03"
     ):
         pytest.skip("Circle Grid requires rdkit>2022.09")
     ep = ExecutePreprocessor(timeout=600, kernel_name="python")
