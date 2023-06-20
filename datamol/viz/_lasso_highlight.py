@@ -20,6 +20,7 @@ from loguru import logger
 import numpy as np
 import datamol as dm
 
+from datamol.types import ColorTuple
 from .utils import drawer_to_image
 from .utils import prepare_mol_for_drawing
 
@@ -175,9 +176,6 @@ class _AttachmentPointManager:
                 if np.isclose(start_angle % (np.pi * 2), end_angle % (np.pi * 2)):
                     continue
                 yield start_angle, end_angle
-
-
-ColorTuple = Union[Tuple[float, float, float, float], Tuple[float, float, float]]
 
 
 def _draw_substructurematch(

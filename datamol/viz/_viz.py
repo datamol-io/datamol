@@ -4,16 +4,12 @@ from typing import Tuple
 from typing import Optional
 from typing import Any
 
-import fsspec
-
 from rdkit.Chem import Draw
-
-import PIL
 
 import datamol as dm
 
-
 from .utils import prepare_mol_for_drawing
+from .utils import image_to_file
 
 
 def to_image(
@@ -137,20 +133,5 @@ def to_image(
     )
 
     if outfile is not None:
-        with fsspec.open(outfile, "wb") as f:
-            if use_svg:
-                if isinstance(image, str):
-                    # in a terminal process
-                    f.write(image.encode())  # type: ignore
-                else:
-                    # in a jupyter kernel process
-                    f.write(image.data.encode())  # type: ignore
-            else:
-                if isinstance(image, PIL.PngImagePlugin.PngImageFile):  # type: ignore
-                    # in a terminal process
-                    image.save(f)
-                else:
-                    # in a jupyter kernel process
-                    f.write(image.data)  # type: ignore
-
+        image_to_file(image, outfile, as_svg=use_svg)
     return image

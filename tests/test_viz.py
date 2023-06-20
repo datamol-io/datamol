@@ -132,9 +132,8 @@ def test_circle_grid(tmp_path):
             [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")],
             [dm.to_mol("CCCO"), dm.to_mol("CCCCCCCO")],
         ],
+        outfile=str(tmp_path / "image.png"),
     )
-
-    im.save(tmp_path / "image.png")
 
 
 def test_to_image_align():
