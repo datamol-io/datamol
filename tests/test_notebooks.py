@@ -2,6 +2,7 @@ import pytest
 import pathlib
 
 import nbformat
+import datamol as dm
 from nbconvert.preprocessors.execute import ExecutePreprocessor
 
 ROOT_DIR = pathlib.Path(__file__).parent.resolve()
@@ -18,6 +19,10 @@ NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PA
 @pytest.mark.parametrize("nb_path", NOTEBOOK_PATHS, ids=[str(n.name) for n in NOTEBOOK_PATHS])
 def test_notebook(nb_path):
     # Setup and configure the processor to execute the notebook
+    if "Visualization.ipynb" in nb_path.name and dm.is_greater_than_current_rdkit_version(
+        "2022.09"
+    ):
+        pytest.skip("Circle Grid requires rdkit>2022.09")
     ep = ExecutePreprocessor(timeout=600, kernel_name="python")
 
     # Open the notebook
