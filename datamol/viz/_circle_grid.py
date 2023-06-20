@@ -1,6 +1,7 @@
 from typing import List
 from typing import Union
 from typing import Optional
+from typing import Any
 
 import math
 import numpy as np
@@ -32,7 +33,7 @@ def circle_grid(
     ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
     ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
     outfile: Optional[str] = None,
-    **kwargs,
+    **kwargs: Any,
 ):
     """Show molecules in concentric rings, with one molecule at the center
     Args:
@@ -97,7 +98,7 @@ class MolsCircleGrid:
         ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
         ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
         kekulize: bool = True,
-        **kwargs,
+        **kwargs: Any,
     ):
         """Show molecules in concentric rings, with one molecule at the center
 
