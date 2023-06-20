@@ -329,11 +329,12 @@ def _draw_multi_matches(
         offset: The offset in raw coordinates for drawing the highlighting given the atom position in the grid.
     """
     # If no colors are given, all substructures are depicted in gray.
-    if color_list is None:
+    if color_list is None or len(color_list) == 0:
         _color_list = [(0.5, 0.5, 0.5)] * len(indices_set_lists)
     else:
         _color_list = color_list
 
+    print(len(_color_list), len(indices_set_lists))
     if len(_color_list) < len(indices_set_lists):
         colors_to_add = []
         for i in range(len(indices_set_lists) - len(_color_list)):
