@@ -83,9 +83,7 @@ _lazy_imports_obj = {
     "clear_atom_map_number": "datamol.mol",
     "set_atom_positions": "datamol.mol",
     "get_atom_positions": "datamol.mol",
-    "remove_salts": "datamol.mol",
-    "remove_solvents": "datamol.mol",
-    "remove_stereochemistry": "datamol.mol",
+    "remove_salts_solvents": "datamol.mol",
     # cluster
     "cluster_mols": "datamol.cluster",
     "pick_diverse": "datamol.cluster",
@@ -275,9 +273,7 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .mol import clear_atom_map_number
     from .mol import set_atom_positions
     from .mol import get_atom_positions
-    from .mol import remove_stereochemistry
-    from .mol import remove_salts
-    from .mol import remove_solvents
+    from .mol import remove_salts_solvents
 
     from .cluster import cluster_mols
     from .cluster import pick_diverse

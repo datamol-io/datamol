@@ -910,13 +910,13 @@ def test_remove_salt():
     mol = dm.to_mol(smiles)
 
     # case of success
-    mol_no_salt = dm.remove_salts(mol)
+    mol_no_salt = dm.remove_salts_solvents(mol)
     assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms() - 3
 
     # case salt-like atoms in the molecule are unchanged
     smiles = "CN(Br)Cl"
     mol = dm.to_mol(smiles)
-    mol_no_salt = dm.remove_salts(mol)
+    mol_no_salt = dm.remove_salts_solvents(mol)
     assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms()
 
 
@@ -925,26 +925,11 @@ def test_remove_solvent():
     mol = dm.to_mol(smiles)
 
     # case of success
-    mol_no_salt = dm.remove_solvents(mol)
-    assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms() - 4
+    mol_no_solvent = dm.remove_salts_solvents(mol)
+    assert mol_no_solvent.GetNumAtoms() == mol.GetNumAtoms() - 4
 
     # case solvent-like atoms in the molecule are unchanged
     smiles = "CCOc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
-    mol_no_salt = dm.remove_solvents(mol)
+    mol_no_salt = dm.remove_salts_solvents(mol)
     assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms()
-
-
-def test_remove_stereochemistry():
-    smiles = "CC1=CC(=O)[C@@H](CC1)C(C)C"
-    mol = dm.to_mol(smiles)
-
-    # case where removes the stereochemistry information from molecule
-    mol_no_stereo = dm.remove_stereochemistry(mol)
-    assert dm.same_mol(mol, mol_no_stereo) == False
-
-    # case where there is no stereochemistry information to be removed
-    smiles = "CC1=CC(=O)C(CC1)C(C)C"
-    mol = dm.to_mol(smiles)
-    mol_no_stereo = dm.remove_stereochemistry(mol)
-    assert dm.same_mol(mol, mol_no_stereo) == True

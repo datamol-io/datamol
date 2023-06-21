@@ -10,7 +10,6 @@ import copy
 import random
 import itertools
 import hashlib
-import importlib_resources
 
 from loguru import logger
 
@@ -28,7 +27,6 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 from rdkit.Chem.SaltRemover import SaltRemover
-from rdkit.Chem.rdmolops import RemoveStereochemistry
 
 import datamol
 from . import _sanifix4
@@ -48,10 +46,8 @@ SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
 UNSPECIFIED_BOND = Chem.rdchem.BondType.UNSPECIFIED
-SALT_PATH = str(importlib_resources.files("datamol").joinpath("data/salts.smi"))
-SALT_REMOVER = SaltRemover(defnFilename=SALT_PATH)
-SOLVENT_PATH = str(importlib_resources.files("datamol").joinpath("data/solvents.smi"))
-SOLVENT_REMOVER = SaltRemover(defnFilename=SOLVENT_PATH)
+SALT_SOLVENT_PATH = datamol.data.open_datamol_data_file("salts_solvents.smi").name
+SALT_SOLVENT_REMOVER = SaltRemover(defnFilename=SALT_SOLVENT_PATH)
 
 
 def copy_mol(mol: Mol) -> Mol:
@@ -1386,40 +1382,15 @@ def get_atom_positions(
     return positions
 
 
-def remove_salts(mol: Mol, remover: Optional[SaltRemover] = SALT_REMOVER) -> Mol:
-    """Remove all salts from the molecule
+def remove_salts_solvents(mol: Mol) -> Mol:
+    """Remove all salts and solvents from the molecule.
 
     Args:
         mol: A molecule.
-        remover: A object that defines salts to be removed.
 
     See Also:
         <rdkit.Chem.SaltRemover.SaltRemover>
+        "datamol/data/salts_solvents.smi"
     """
-    return remover.StripMol(mol)
-
-
-def remove_solvents(mol: Mol, remover: Optional = SOLVENT_REMOVER) -> Mol:
-    """Remove all solvents from the molecule.
-
-    Args:
-        mol: A molecule.
-        remover: A object that defines solvents to be removed.
-
-    """
-    return remover.StripMol(mol)
-
-
-def remove_stereochemistry(mol: Mol) -> Mol:
-    """Removes all stereochemistry info from the molecule.
-
-    Args:
-        mol: A molecule.
-
-    See Also:
-        <rdkit.Chem.rdmolops.RemoveStereochemistry>
-
-    """
-    mol_copy = datamol.copy_mol(mol)
-    RemoveStereochemistry(mol_copy)
-    return mol_copy
+    mol_copy = copy_mol(mol)
+    return SALT_SOLVENT_REMOVER.StripMol(mol_copy)
