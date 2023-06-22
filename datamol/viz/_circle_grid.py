@@ -98,6 +98,7 @@ class MolsCircleGrid:
         ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
         ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
         kekulize: bool = True,
+        layout_random_seed: Optional[int] = 19,
         **kwargs: Any,
     ):
         """Show molecules in concentric rings, with one molecule at the center
@@ -121,7 +122,8 @@ class MolsCircleGrid:
             ring_mol_highlight_atoms: List of list of atom indices to highlight for molecules at each level of the concentric rings
             ring_mol_highlight_bonds: List of list of bond indices to highlight for molecules at each level of the concentric rings
             ring_color: Color of the concentric rings. Set to None to not draw any ring.
-            kekulize: Whether to kekulize the molecules before drawing
+            kekulize: Whether to kekulize the molecules before drawing.
+            layout_random_seed: Random seed for the layout of the molecules. Set to None for no seed.
             **kwargs: Additional arguments to pass to the drawing function. See RDKit
                 documentation related to `MolDrawOptions` for more details at
                 https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
@@ -146,6 +148,7 @@ class MolsCircleGrid:
         self.center_mol_highlight_atoms = center_mol_highlight_atoms
         self.center_mol_highlight_bonds = center_mol_highlight_bonds
         self.kekulize = kekulize
+        self.layout_random_seed = layout_random_seed
         self._global_legend_size = 0
         if self.legend is not None:
             self._global_legend_size = max(25, self.margin)
@@ -276,12 +279,15 @@ class MolsCircleGrid:
             highlight_atom=self.center_mol_highlight_atoms,
             highlight_bond=self.center_mol_highlight_bonds,
         )
+
+        rng = random.Random(self.layout_random_seed)
+
         # draw the ring mols
         self.draw_options.scalingFactor *= self.ring_scaler
         for i, mols in enumerate(self.ring_mols):
             radius = radius_list[i]
             ni = len(mols)
-            rand_unit = random.random() * 2 * math.pi
+            rand_unit = rng.random() * 2 * math.pi
             for k, mol in enumerate(mols):
                 center_x = radius * math.cos(2 * k * math.pi / ni + rand_unit) + self.midpoint.x
                 center_y = radius * math.sin(2 * k * math.pi / ni + rand_unit) + self.midpoint.y
