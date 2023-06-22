@@ -36,6 +36,7 @@ def circle_grid(
     ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
     ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
     outfile: Optional[str] = None,
+    kekulize: bool = True,
     layout_random_seed: Optional[int] = 19,
     **kwargs: Any,
 ):
@@ -81,6 +82,7 @@ def circle_grid(
         center_mol_highlight_bonds=center_mol_highlight_bonds,
         ring_mol_highlight_atoms=ring_mol_highlight_atoms,
         ring_mol_highlight_bonds=ring_mol_highlight_bonds,
+        kekulize=kekulize,
         layout_random_seed=layout_random_seed,
         **kwargs,
     )
