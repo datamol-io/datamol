@@ -916,7 +916,7 @@ def test_remove_salt():
     # case to keep one salt in case the molecule is consisted by multiple salts
     smiles = "[Cl].[Ca]"
     mol = dm.to_mol(smiles)
-    mol_no_salt = dm.remove_salts_solvents(mol, dontRemoveEverything=True)
+    mol_no_salt = dm.remove_salts_solvents(mol, dont_remove_everything=True)
     assert mol_no_salt.GetNumAtoms() == 1
     mol_no_salt = dm.remove_salts_solvents(mol)
     assert mol_no_salt.GetNumAtoms() == 0
@@ -955,6 +955,6 @@ def test_remove_solvent():
 
     # define the solvent to be removed
     mol_no_solvent = dm.remove_salts_solvents(
-        mol, defnData="C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C(=O)O)O)O)O)O)O)O", defnFormat="smiles"
+        mol, defn_data="C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C(=O)O)O)O)O)O)O)O", defn_format="smiles"
     )
     assert dm.to_smiles(mol_no_solvent, canonical=True) == smi_compound

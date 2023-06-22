@@ -1383,9 +1383,9 @@ def get_atom_positions(
 
 def remove_salts_solvents(
     mol: Mol,
-    defnData: str = None,
-    defnFormat: str = "smarts",
-    dontRemoveEverything: bool = False,
+    defn_data: str = None,
+    defn_format: str = "smarts",
+    dont_remove_everything: bool = False,
     sanitize: bool = True,
 ) -> Mol:
     """Remove all salts and solvents from the molecule.
@@ -1398,10 +1398,10 @@ def remove_salts_solvents(
 
     Args:
         mol: A molecule.
-        defnData: A string to define salts and solvents. Use "\n" as seperator for multiple units.
-        defnFormat: "smarts" or "smiles" when define the above salt/solvent units.
+        defn_data: A string to define salts and solvents. Use "\n" as seperator for multiple units.
+        defn_format: "smarts" or "smiles" when define the above salt/solvent units.
         sanitize: Whether sanitize molecule after removing salt/solvent units.
-        dontRemoveEverything: When set to `True`, the last salt/solvent will remain when the molecule is consisted by
+        dont_remove_everything: When set to `True`, the last salt/solvent will remain when the molecule is consisted by
                               multiple salt/solvent units.
 
 
@@ -1410,8 +1410,10 @@ def remove_salts_solvents(
         <datamol.mol.keep_largest_fragment>
     """
     mol_copy = copy_mol(mol)
-    if defnData is None:
+    if defn_data is None:
         remover = SALT_SOLVENT_REMOVER
     else:
-        remover = SaltRemover(defnData=defnData, defnFormat=defnFormat)
-    return remover.StripMol(mol_copy, dontRemoveEverything=dontRemoveEverything, sanitize=sanitize)
+        remover = SaltRemover(defnData=defn_data, defnFormat=defn_format)
+    return remover.StripMol(
+        mol_copy, dontRemoveEverything=dont_remove_everything, sanitize=sanitize
+    )
