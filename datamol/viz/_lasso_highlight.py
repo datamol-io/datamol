@@ -20,9 +20,12 @@ from loguru import logger
 import numpy as np
 import datamol as dm
 
-from datamol.types import ColorTuple
+from datamol.types import RDKitColor
+from datamol.types import DatamolColor
+
 from .utils import drawer_to_image
 from .utils import prepare_mol_for_drawing
+from .utils import to_rdkit_color
 
 
 def _angle_to_coord(center: np.ndarray, angle: float, radius: float) -> np.ndarray:
@@ -185,7 +188,7 @@ def _draw_substructurematch(
     rel_radius: float = 0.3,
     rel_width: float = 0.5,
     line_width: int = 2,
-    color: Optional[ColorTuple] = None,
+    color: Optional[RDKitColor] = None,
     offset: Optional[Tuple[int, int]] = None,
 ) -> None:
     """Draws the substructure defined by (atom-) `indices`, as lasso-highlight onto `canvas`.
@@ -208,7 +211,7 @@ def _draw_substructurematch(
     # #  Default color is gray.
     if not color:
         color = (0.5, 0.5, 0.5, 1)
-    canvas.SetColour(color)
+    canvas.SetColour(tuple(color))
 
     # Selects first conformer and calculates the mean bond length
     conf = mol.GetConformer(0)
@@ -311,7 +314,7 @@ def _draw_multi_matches(
     r_min: float = 0.3,
     r_dist: float = 0.13,
     relative_bond_width: float = 0.5,
-    color_list: Optional[List[ColorTuple]] = None,
+    color_list: Optional[List[DatamolColor]] = None,
     line_width: int = 2,
     offset: Optional[Tuple[int, int]] = None,
 ):
@@ -365,7 +368,7 @@ def _draw_multi_matches(
             match_atoms,
             rel_radius=ar,
             rel_width=max(relative_bond_width, ar),
-            color=color,
+            color=to_rdkit_color(color),
             line_width=line_width,
             offset=offset,
         )
@@ -393,7 +396,7 @@ def lasso_highlight_image(
     r_min: float = 0.3,
     r_dist: float = 0.13,
     relative_bond_width: float = 0.5,
-    color_list: Optional[List[ColorTuple]] = None,
+    color_list: Optional[List[DatamolColor]] = None,
     line_width: int = 2,
     scale_padding: float = 1.0,
     verbose: bool = False,
@@ -437,6 +440,7 @@ def lasso_highlight_image(
     for i, search_mol in enumerate(search_molecules):
         if isinstance(search_mol, str):
             search_molecules[i] = dm.from_smarts(search_mol)
+
         if search_molecules[i] is None or not isinstance(search_molecules[i], dm.Mol):
             raise ValueError(
                 f"Please enter valid search molecules or smarts: {search_molecules[i]}"
@@ -461,11 +465,17 @@ def lasso_highlight_image(
     ## Step 1: setup drawer and canvas
     if use_svg:
         drawer = rdMolDraw2D.MolDraw2DSVG(
-            mol_size[0] * n_cols, mol_size[1] * n_rows, mol_size[0], mol_size[1]
+            mol_size[0] * n_cols,
+            mol_size[1] * n_rows,
+            mol_size[0],
+            mol_size[1],
         )
     else:
         drawer = rdMolDraw2D.MolDraw2DCairo(
-            mol_size[0] * n_cols, mol_size[1] * n_rows, mol_size[0], mol_size[1]
+            mol_size[0] * n_cols,
+            mol_size[1] * n_rows,
+            mol_size[0],
+            mol_size[1],
         )
 
     # Setting the drawing options

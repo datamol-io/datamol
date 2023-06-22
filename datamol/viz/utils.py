@@ -5,10 +5,15 @@ import io
 import fsspec
 
 from rdkit.Chem import Draw
+from matplotlib import colors as mcolors
 
 import PIL.Image
 import PIL.PngImagePlugin
+
 import datamol as dm
+
+from datamol.types import RDKitColor
+from datamol.types import DatamolColor
 
 
 def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Optional[dm.Mol]:
@@ -127,3 +132,13 @@ def image_to_file(
             else:
                 # in a jupyter kernel process
                 f.write(image.data)  # type: ignore
+
+
+def to_rdkit_color(color: Optional[DatamolColor]) -> Optional[RDKitColor]:
+    """If required convert a datamol color (rgb, rgba or hex string) to an RDKit
+    color (rgb or rgba).
+    """
+    if isinstance(color, str):
+        return mcolors.to_rgba(color)  # type: ignore
+    else:
+        return color

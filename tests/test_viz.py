@@ -139,6 +139,23 @@ def test_circle_grid(tmp_path):
     )
 
 
+@pytest.mark.skipif(
+    not dm.is_greater_than_current_rdkit_version("2023.03"),
+    reason="Circle Grid requires rdkit>2022.09",
+)
+def test_circle_grid_with_hex_color(tmp_path):
+    mol = dm.to_mol("CC(=O)OC1=CC=CC=C1C(=O)O")
+    dm.viz.circle_grid(
+        mol,
+        [
+            [dm.to_mol("CCC"), dm.to_mol("CCCCCCC")],
+            [dm.to_mol("CCCO"), dm.to_mol("CCCCCCCO")],
+        ],
+        ring_color="#ff1472",
+        layout_random_seed=None,
+    )
+
+
 def test_to_image_align():
     # Get a list of molecules
     data = dm.data.freesolv()

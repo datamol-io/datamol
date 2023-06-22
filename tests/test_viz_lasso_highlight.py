@@ -192,3 +192,12 @@ def test_atom_indices_list():
         search_molecules=None,
         atom_indices=[4, 5, 6],
     )
+
+
+def test_with_hex_color():
+    dm.viz.lasso_highlight_image(
+        "CC(N)Cc1c[nH]c2ccc3c(c12)CCCO3",
+        search_molecules=None,
+        atom_indices=[4, 5, 6],
+        color_list=["#ff1472"],
+    )
