@@ -12,4 +12,5 @@ ChemicalReaction: TypeAlias = rdChemReactions.ChemicalReaction
 Atom: TypeAlias = Chem.rdchem.Atom
 Bond: TypeAlias = Chem.rdchem.Bond
 
-ColorTuple = Union[Tuple[float, float, float, float], Tuple[float, float, float]]
+RDKitColor = Union[Tuple[float, float, float, float], Tuple[float, float, float]]
+DatamolColor = Union[RDKitColor, str]

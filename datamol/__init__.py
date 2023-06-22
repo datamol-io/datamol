@@ -22,7 +22,8 @@ _lazy_imports_obj = {
     "ChemicalReaction": "datamol.types",
     "Atom": "datamol.types",
     "Bond": "datamol.types",
-    "ColorTuple": "datamol.types",
+    "DatamolColor": "datamol.types",
+    "RDKitColor": "datamol.types",
     # utils
     "parallelized": "datamol.utils",
     "parallelized_with_batches": "datamol.utils",
@@ -209,7 +210,8 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .types import ChemicalReaction
     from .types import Atom
     from .types import Bond
-    from .types import ColorTuple
+    from .types import DatamolColor
+    from .types import RDKitColor
 
     from . import utils
 

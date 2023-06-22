@@ -12,8 +12,11 @@ from rdkit.Geometry.rdGeometry import Point2D
 from .utils import drawer_to_image
 from .utils import prepare_mol_for_drawing
 from .utils import image_to_file
-from datamol.types import ColorTuple
+from .utils import to_rdkit_color
+
+from datamol.types import DatamolColor
 from datamol.types import Mol
+from datamol.types import RDKitColor
 
 import datamol as dm
 
@@ -27,12 +30,15 @@ def circle_grid(
     ring_scaler: float = 1.0,
     align: Optional[Union[Mol, str, bool]] = None,
     use_svg: bool = True,
-    ring_color: Optional[ColorTuple] = None,
+    ring_color: Optional[DatamolColor] = None,
+    ring_mol_start_angles_degrees: Optional[List[float]] = None,
     center_mol_highlight_atoms: Optional[List[int]] = None,
     center_mol_highlight_bonds: Optional[List[int]] = None,
     ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
     ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
     outfile: Optional[str] = None,
+    kekulize: bool = True,
+    layout_random_seed: Optional[int] = 19,
     **kwargs: Any,
 ):
     """Show molecules in concentric rings, with one molecule at the center
@@ -54,6 +60,10 @@ def circle_grid(
         ring_mol_highlight_atoms: List of list of atom indices to highlight for molecules at each level of the concentric rings
         ring_mol_highlight_bonds: List of list of bond indices to highlight for molecules at each level of the concentric rings
         ring_color: Color of the concentric rings. Set to None to not draw any ring.
+        ring_mol_start_angles_degrees: List of angles in degrees to start drawing the molecules at each level of the concentric
+            rings. If None then a random position will be used.
+        kekulize: Whether to kekulize the molecules before drawing.
+        layout_random_seed: Random seed for the layout of the molecules. Set to None for no seed.
         outfile: Optional path to the save the output file.
         **kwargs: Additional arguments to pass to the drawing function. See RDKit
             documentation related to `MolDrawOptions` for more details at
@@ -71,10 +81,13 @@ def circle_grid(
         align=align,
         use_svg=use_svg,
         ring_color=ring_color,
+        ring_mol_start_angles_degrees=ring_mol_start_angles_degrees,
         center_mol_highlight_atoms=center_mol_highlight_atoms,
         center_mol_highlight_bonds=center_mol_highlight_bonds,
         ring_mol_highlight_atoms=ring_mol_highlight_atoms,
         ring_mol_highlight_bonds=ring_mol_highlight_bonds,
+        kekulize=kekulize,
+        layout_random_seed=layout_random_seed,
         **kwargs,
     )
     return grid(outfile=outfile)
@@ -92,12 +105,14 @@ class MolsCircleGrid:
         align: Optional[Union[Mol, str, bool]] = None,
         use_svg: bool = True,
         line_width: Optional[float] = None,
-        ring_color: Optional[ColorTuple] = None,
+        ring_color: Optional[DatamolColor] = None,
+        ring_mol_start_angles_degrees: Optional[List[float]] = None,
         center_mol_highlight_atoms: Optional[List[int]] = None,
         center_mol_highlight_bonds: Optional[List[int]] = None,
         ring_mol_highlight_atoms: Optional[List[List[int]]] = None,
         ring_mol_highlight_bonds: Optional[List[List[int]]] = None,
         kekulize: bool = True,
+        layout_random_seed: Optional[int] = 19,
         **kwargs: Any,
     ):
         """Show molecules in concentric rings, with one molecule at the center
@@ -121,7 +136,10 @@ class MolsCircleGrid:
             ring_mol_highlight_atoms: List of list of atom indices to highlight for molecules at each level of the concentric rings
             ring_mol_highlight_bonds: List of list of bond indices to highlight for molecules at each level of the concentric rings
             ring_color: Color of the concentric rings. Set to None to not draw any ring.
-            kekulize: Whether to kekulize the molecules before drawing
+            ring_mol_start_angles_degrees: List of angles in degrees to start drawing the molecules at each level of the concentric
+                rings. If None then a random position will be used.
+            kekulize: Whether to kekulize the molecules before drawing.
+            layout_random_seed: Random seed for the layout of the molecules. Set to None for no seed.
             **kwargs: Additional arguments to pass to the drawing function. See RDKit
                 documentation related to `MolDrawOptions` for more details at
                 https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.
@@ -141,11 +159,14 @@ class MolsCircleGrid:
         self.use_svg = use_svg
         self.line_width = line_width
         self.ring_color = ring_color
+        self.ring_mol_start_angles_degrees = ring_mol_start_angles_degrees
+        self.ring_color_rdkit: Optional[RDKitColor] = to_rdkit_color(ring_color)
         self.ring_mol_highlight_atoms = ring_mol_highlight_atoms
         self.ring_mol_highlight_bonds = ring_mol_highlight_bonds
         self.center_mol_highlight_atoms = center_mol_highlight_atoms
         self.center_mol_highlight_bonds = center_mol_highlight_bonds
         self.kekulize = kekulize
+        self.layout_random_seed = layout_random_seed
         self._global_legend_size = 0
         if self.legend is not None:
             self._global_legend_size = max(25, self.margin)
@@ -276,12 +297,20 @@ class MolsCircleGrid:
             highlight_atom=self.center_mol_highlight_atoms,
             highlight_bond=self.center_mol_highlight_bonds,
         )
+
+        rng = random.Random(self.layout_random_seed)
+
         # draw the ring mols
         self.draw_options.scalingFactor *= self.ring_scaler
         for i, mols in enumerate(self.ring_mols):
             radius = radius_list[i]
             ni = len(mols)
-            rand_unit = random.random() * 2 * math.pi
+
+            if self.ring_mol_start_angles_degrees is not None:
+                rand_unit = np.deg2rad(self.ring_mol_start_angles_degrees[i])
+            else:
+                rand_unit = rng.random() * 2 * math.pi
+
             for k, mol in enumerate(mols):
                 center_x = radius * math.cos(2 * k * math.pi / ni + rand_unit) + self.midpoint.x
                 center_y = radius * math.sin(2 * k * math.pi / ni + rand_unit) + self.midpoint.y
@@ -323,8 +352,8 @@ class MolsCircleGrid:
         for _, radius in enumerate(full_range):
             radius += self.margin // 2
             if radius > self.margin:
-                if self.ring_color is not None:
-                    self.canvas.SetColour(self.ring_color)
+                if self.ring_color_rdkit is not None:
+                    self.canvas.SetColour(self.ring_color_rdkit)
                     self.canvas.DrawArc(self.midpoint, radius, 0, 360, rawCoords=True)
             radius_list.append(radius + radius_step)
         return radius_list
