@@ -2095,38 +2095,38 @@ Licensed under the Apache License, Version 2.0.
 </ul>
 <p>See below for a graphic that summarizes some of the methods discussed in the section above:</p>
 <p><img src="./images/Preprocess_1.png" alt="Preprocess_1.png" /></p>
-<p>*<strong><a href="https://www.researchgate.net/publication/344906202_Chemoinformatics-based_enumeration_of_chemical_libraries_a_tutorial">Source</a></strong>*</p>
+<p><em><strong><a href="https://www.researchgate.net/publication/344906202_Chemoinformatics-based_enumeration_of_chemical_libraries_a_tutorial">Source</a></strong></em></p>
 <p><strong>Note:</strong> it’s important to understand that all forms of molecular representation have their pros and cons. It’s less of a one-size-fits-all and more about picking and choosing specific methods to represent a molecule given your specific use case.</p>
-<h2 id="sanitize-and-standardize">Sanitize and Standardize<a class="anchor-link" href="#sanitize-and-standardize">&#182;</a></h2><p>*<strong>Molecular sanitization</strong>* is the process of ensuring that the molecules in your dataset *<strong>are realistic</strong>*. You can read more about the sanitization procedure as applied in the RDKit <a href="https://www.rdkit.org/docs/RDKit_Book.html#molecular-sanitization">here</a>. In Datamol, there are a few extra steps as well, sanitization is done under the following procedure:</p>
+<h2 id="sanitize-and-standardize">Sanitize and Standardize<a class="anchor-link" href="#sanitize-and-standardize">&#182;</a></h2><p><em><strong>Molecular sanitization</strong></em> is the process of ensuring that the molecules in your dataset <em><strong>are realistic</strong></em>. You can read more about the sanitization procedure as applied in the RDKit <a href="https://www.rdkit.org/docs/RDKit_Book.html#molecular-sanitization">here</a>. In Datamol, there are a few extra steps as well, sanitization is done under the following procedure:</p>
 <ol>
 <li>Adjusting for nitrogen aromaticity since faulty valence for nitrogen in aromatic rings is  <a href="https://github.com/rdkit/rdkit/issues/2011">currently</a> an issue in RDKit through the Sanifix algorithm.</li>
 <li>An extra conversion is done from mol → smiles → mol to ensure that the molecules are valid SMILES.</li>
 <li>Charge neutralization - this is NOT charge removal, it attempts to correct valence issues arising from incorrect charges being placed on atoms.</li>
 </ol>
-<p>Users can control the application of the sanifix algorithm or charge neutralization, users can toggle the respective parameters *<strong>sanifix</strong>* and *<strong>charge_neutral</strong>* to be TRUE/FALSE.</p>
-<p>The process of <strong>standardization</strong> is used to generate *<strong>canonical SMILES.</strong>* It is currently done using the following procedure which can be controlled by the user through the described parameters below:</p>
+<p>Users can control the application of the sanifix algorithm or charge neutralization, users can toggle the respective parameters <em><strong>sanifix</strong></em> and <em><strong>charge_neutral</strong></em> to be TRUE/FALSE.</p>
+<p>The process of <strong>standardization</strong> is used to generate <em><strong>canonical SMILES.</strong></em> It is currently done using the following procedure which can be controlled by the user through the described parameters below:</p>
 <ul>
-<li>*<strong>disconnect_metals -</strong>* metal disconnection<ul>
+<li><em><strong>disconnect_metals -</strong></em> metal disconnection<ul>
 <li>Depending on the source of the database, some compounds may be reported in salt form or associated to metallic ions (e.g. the sodium salt of a carboxylic compound). In most cases, these counter-ions are not relevant so the use of this function is required before further utilization of the dataset.)</li>
 <li>More details <a href="https://molvs.readthedocs.io/en/latest/guide/standardize.html#disconnect-metals">here</a></li>
 </ul>
 </li>
-<li>*<strong>normalize -</strong>* ion (charge) and functional groups normalization<ul>
+<li><em><strong>normalize -</strong></em> ion (charge) and functional groups normalization<ul>
 <li>It corrects drawing errors and standardizes functional groups in the molecule as well as ensuring the overall proper charge of the compound</li>
 <li>More details <a href="https://molvs.readthedocs.io/en/latest/guide/standardize.html#apply-normalization-rules">here</a></li>
 </ul>
 </li>
-<li>*<strong>reionize -</strong>* reionization of the molecule (protonation following the acidity order)<ul>
+<li><em><strong>reionize -</strong></em> reionization of the molecule (protonation following the acidity order)<ul>
 <li>If one or more acidic functionalities are present in the molecule, this option ensures the correct neutral/ionized state for such functional groups. Molecules are uncharged by adding and/or removing hydrogens. For zwitterions, hydrogens are moved to eliminate charges where possible. However, in cases where there is a positive charge that is not neutralizable, an attempt is made to also preserve the corresponding negative charge</li>
 <li>Read more <a href="https://molvs.readthedocs.io/en/latest/guide/standardize.html#reionize-acids">here</a></li>
 </ul>
 </li>
-<li>*<strong>uncharge* -</strong> charge removal<ul>
+<li>***uncharge* -** charge removal<ul>
 <li>This option neutralizes the molecule by reversing the protonation state of protonated and deprotonated groups if present (e.g. a carboxylate is re-protonated to the corresponding carboxylic acid).</li>
 <li>In cases where there is a positive charge that is not neutralizable, an attempt is made to also preserve the corresponding negative charge to ensure a net zero charge.</li>
 </ul>
 </li>
-<li>*<strong>stereo -</strong>* stereochemistry proper reassignment if missing.<ul>
+<li><em><strong>stereo -</strong></em> stereochemistry proper reassignment if missing.<ul>
 <li>Stereochemical information is corrected and/or added if missing using built-in RDKit functionality to force a clean recalculation of stereochemistry</li>
 </ul>
 </li>
