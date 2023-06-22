@@ -913,6 +913,14 @@ def test_remove_salt():
     mol_no_salt = dm.remove_salts_solvents(mol)
     assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms() - 3
 
+    # case to keep one salt in case the molecule is consisted by multiple salts
+    smiles = "[Cl].[Ca]"
+    mol = dm.to_mol(smiles)
+    mol_no_salt = dm.remove_salts_solvents(mol, dontRemoveEverything=True)
+    assert mol_no_salt.GetNumAtoms() == 1
+    mol_no_salt = dm.remove_salts_solvents(mol)
+    assert mol_no_salt.GetNumAtoms() == 0
+
     # case salt-like atoms in the molecule are unchanged
     smiles = "CN(Br)Cl"
     mol = dm.to_mol(smiles)
@@ -931,5 +939,22 @@ def test_remove_solvent():
     # case solvent-like atoms in the molecule are unchanged
     smiles = "CCOc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
-    mol_no_salt = dm.remove_salts_solvents(mol)
-    assert mol_no_salt.GetNumAtoms() == mol.GetNumAtoms()
+    mol_no_solvent = dm.remove_salts_solvents(mol)
+    assert mol_no_solvent.GetNumAtoms() == mol.GetNumAtoms()
+
+    # case solvent is larger than molecule of interest
+    smiles = (
+        "CC(CCC1=CC=C(C=C1)O)NCCC2=CC(=C(C=C2)O)O.C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C(=O)O)O)O)O)O)O)O"
+    )
+    smi_compound = "CC(CCc1ccc(O)cc1)NCCc1ccc(O)c(O)c1"
+    mol = dm.to_mol(smiles)
+
+    # largest fragment removes the wrong unit
+    largest_fragment = dm.keep_largest_fragment(mol)
+    assert dm.to_smiles(largest_fragment, canonical=True) != smi_compound
+
+    # define the solvent to be removed
+    mol_no_solvent = dm.remove_salts_solvents(
+        mol, defnData="C(C1C(C(C(C(O1)OC(C(CO)O)C(C(C(=O)O)O)O)O)O)O)O", defnFormat="smiles"
+    )
+    assert dm.to_smiles(mol_no_solvent, canonical=True) == smi_compound

@@ -38,7 +38,6 @@ from .convert import from_smarts
 from .log import without_rdkit_log
 from ._version import is_lower_than_current_rdkit_version
 
-
 PERIODIC_TABLE = Chem.rdchem.GetPeriodicTable()
 TRIPLE_BOND = Chem.rdchem.BondType.TRIPLE
 DOUBLE_BOND = Chem.rdchem.BondType.DOUBLE
@@ -1382,15 +1381,37 @@ def get_atom_positions(
     return positions
 
 
-def remove_salts_solvents(mol: Mol) -> Mol:
+def remove_salts_solvents(
+    mol: Mol,
+    defnData: str = None,
+    defnFormat: str = "smarts",
+    dontRemoveEverything: bool = False,
+    sanitize: bool = True,
+) -> Mol:
     """Remove all salts and solvents from the molecule.
+       In most cases when dealing with small drug-like molecules, the salt/solvent units are smaller
+       than the parent molecule. `dm.mol.keep_largest_fragment` can be applied in that scenario.
+       However, in some cases the molecules of interested is smaller than the salt/solvent units,
+       it's recommended to define the salt/solvent units and apply `remove_salt_solvent` to remove
+       unwanted salt/solvent. A predefined salts and solvents are listed in file "datamol/data/salts_solvents.smi".
+       User can also define the salt/solvent units by passing string to argument `dafnData` and `defnFormat`.
 
     Args:
         mol: A molecule.
+        defnData: A string to define salts and solvents. Use "\n" as seperator for multiple units.
+        defnFormat: "smarts" or "smiles" when define the above salt/solvent units.
+        sanitize: Whether sanitize molecule after removing salt/solvent units.
+        dontRemoveEverything: When set to `True`, the last salt/solvent will remain when the molecule is consisted by
+                              multiple salt/solvent units.
+
 
     See Also:
         <rdkit.Chem.SaltRemover.SaltRemover>
-        "datamol/data/salts_solvents.smi"
+        <datamol.mol.keep_largest_fragment>
     """
     mol_copy = copy_mol(mol)
-    return SALT_SOLVENT_REMOVER.StripMol(mol_copy)
+    if defnData is None:
+        remover = SALT_SOLVENT_REMOVER
+    else:
+        remover = SaltRemover(defnData=defnData, defnFormat=defnFormat)
+    return remover.StripMol(mol_copy, dontRemoveEverything=dontRemoveEverything, sanitize=sanitize)
