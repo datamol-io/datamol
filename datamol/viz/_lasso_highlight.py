@@ -334,7 +334,6 @@ def _draw_multi_matches(
     else:
         _color_list = color_list
 
-    print(len(_color_list), len(indices_set_lists))
     if len(_color_list) < len(indices_set_lists):
         colors_to_add = []
         for i in range(len(indices_set_lists) - len(_color_list)):
