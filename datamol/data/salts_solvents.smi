@@ -1,0 +1,249 @@
+//////////////////////////////////// PART 1  /////////////////////////////////////////////
+// Salts data from Rdkit
+// https://github.com/rdkit/rdkit/blob/master/Data/Salts.txt
+
+// $Id: Salts.txt 198 2006-12-15 18:06:48Z landrgr1 $
+// Created by Greg Landrum, December 2006
+//  Definitions from Thomas Zoller
+//
+//  Version history:
+//     15 Dec, 2006:     created (GL)
+
+// Notes:
+//  1) don't include charges
+//  2) The search for salts is a substructure search where the substructure
+//     must match the entire fragment, so we don't need to be choosy about bond
+//     types
+//  3) The matching is done in order, so if you put the more complex stuff at the
+//     bottom the "don't remove the last fragment" algorithm has a chance of
+//     of returning something sensible
+
+// start with simple inorganics:
+[Cl,Br,I]
+[Li,Na,K,Ca,Mg]
+[O,N]
+
+// "complex" inorganics
+[N](=O)(O)O
+[P](=O)(O)(O)O
+[P](F)(F)(F)(F)(F)F
+[S](=O)(=O)(O)O
+[CH3][S](=O)(=O)(O)
+c1cc([CH3])ccc1[S](=O)(=O)(O)	p-Toluene sulfonate
+
+// organics
+[CH3]C(=O)O	  Acetic acid
+FC(F)(F)C(=O)O	  TFA
+OC(=O)C=CC(=O)O	  Fumarate/Maleate
+OC(=O)C(=O)O	  Oxalate
+OC(=O)C(O)C(O)C(=O)O	  Tartrate
+C1CCCCC1[NH]C1CCCCC1	  Dicylcohexylammonium
+
+//  Copyright (c) 2010, Novartis Institutes for BioMedical Research Inc.
+//  All rights reserved.
+//
+// Redistribution and use in source and binary forms, with or without
+// modification, are permitted provided that the following conditions are
+// met:
+//
+//     * Redistributions of source code must retain the above copyright
+//       notice, this list of conditions and the following disclaimer.
+//     * Redistributions in binary form must reproduce the above
+//       copyright notice, this list of conditions and the following
+//       disclaimer in the documentation and/or other materials provided
+//       with the distribution.
+//     * Neither the name of Novartis Institutes for BioMedical Research Inc.
+//       nor the names of its contributors may be used to endorse or promote
+//       products derived from this software without specific prior written permission.
+//
+// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+// "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+// LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+// A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+// OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+// SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+// LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+// DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+// THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+// (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+///////////////////////////// PART 2  /////////////////////////////////////////////
+// Salt data from Chembl structure pipeline
+// Version: 2022.09
+// https://github.com/chembl/ChEMBL_Structure_Pipeline/tree/master/chembl_structure_pipeline/data
+F[B-](F)(F)F	Tetrafluoroboranuide
+NC(CCCNC(=N)N)C(=O)O	Arginine
+CN(C)CCO	Deanol
+CCN(CC)CCO	2-(Diethylamino)ethanol
+NCCO	Ethanolamine
+CNCC(O)C(O)C(O)C(O)CO	DiMeglumine
+CC(=O)O	Acetate
+CC(=O)NCC(=O)O	Aceturate
+CCCCCCCCCCCCCCCCCC(=O)O	Stearate
+OC(=O)CCCCC(=O)O	Adipate
+[Al]	Aluminium
+N	Ammonium
+OCC(O)C1OC(=O)C(=C1O)O	Ascorbate
+NC(CC(=O)O)C(=O)O	Aspartate
+[Ba]	Barium
+C(Cc1ccccc1)NCc2ccccc2	Benethamine
+C(CNCc1ccccc1)NCc2ccccc2	Benzathine
+OC(=O)c1ccccc1	Benzoate
+OS(=O)(=O)c1ccccc1	Besylate
+[Bi]	Bismuth
+Br	Bromide
+CCCC=O	Butyraldehyde
+CCCC(=O)OCC	Ethyl Butanoate
+[Ca]	Calcium
+CC1(C)C2CCC1(CS(=O)(=O)O)C(=O)C2	Camsylate
+OC(=O)O	Carbonate
+Cl	Chloride
+C[N+](C)(C)CCO	Choline
+OC(=O)CC(O)(CC(=O)O)C(=O)O	Citrate
+OS(=O)(=O)c1ccc(Cl)cc1	Closylate
+OS(=O)(=O)NC1CCCCC1	Cyclamate
+OC(=O)C(Cl)Cl	Dichloroacetate
+CCNCC	Diethylamine
+CC(C)(N)CO	Dimethylethanolamine
+OCCNCCO	Diolamine
+NCCN	Edamine
+OS(=O)(=O)CCS(=O)(=O)O	Edisylate
+OCCN1CCCC1	Epolamine
+CC(C)(C)N	Erbumine
+CCCCCCCCCCCCOS(=O)(=O)O	Estolate
+CCS(=O)(=O)O	Esylate
+CCOS(=O)(=O)O	Ethylsulfate
+F	Fluoride
+OC=O	Formate
+OCC(O)C(O)C(O)C(O)C(O)C(=O)O	Gluceptate
+OCC(O)C(O)C(O)C(O)C(=O)O	Gluconate
+OC1OC(C(O)C(O)C1O)C(=O)O	Glucuronate
+NC(CCC(=O)O)C(=O)O	Glutamate
+OCC(O)CO	Glycerate
+OCC(O)COP(=O)(O)O	Glycerophosphate
+F[P](F)(F)(F)(F)F	Hexafluorophosphate
+OP=O	Hypophosphite
+I	Iodide
+OCCS(=O)(=O)O	Isethionate
+[K]	Potassium
+CC(O)C(=O)O	Lactate
+OCC(O)C(OC1OC(CO)C(O)C(O)C1O)C(O)C(O)C(=O)O	Lactobionate
+[Li]	Lithium
+NCCCCC(N)C(=O)O	Lysine
+OC(CC(=O)O)C(=O)O	Malate
+OC(=O)C=CC(=O)O	Maleate and Fumarate
+CS(=O)(=O)O	Mesylate
+OP(=O)=O	Metaphosphate
+COS(=O)(=O)O	Methosulfate
+[Mg]	Magnesium
+OP(=O)(O)F	Monofluorophosphate
+[Na]	Sodium
+OS(=O)(=O)c1cccc2c(cccc12)S(=O)(=O)O	Napadisilate
+OS(=O)(=O)c1ccc2ccccc2c1	Napsylate
+O[N](=O)O	Nitrate
+OC(=O)C(=O)O	Oxalate
+CCCCCCCCCCCCCCCC(=O)O	Palmitate
+OC(=O)c1cc2ccccc2c(Cc3c(O)c(cc4ccccc34)C(=O)O)c1O	Pamoate
+OCl(=O)(=O)=O	Perchlorate
+Nc1ccc(cc1)P(=O)(O)O	Phosphanilate
+OP(=O)(O)O	Phosphate
+Oc1c(cc(cc1[N+](=O)[O-])[N+](=O)[O-])[N+](=O)[O-]	Picrate
+C1CNCCN1	Piperazine
+CC(O)CO	Propylene Glycol
+O=C1NS(=O)(=O)c2ccccc12	Saccharin
+OC(=O)c1ccccc1O	Salicylate
+[Ag]	Silver
+[Sr]	Strontium
+OC(=O)CCC(=O)O	Succinate
+OS(=O)(=O)O	Sulfate
+OC(=O)c1cccc(c1O)S(=O)(=O)O	Sulfosalicylate
+[S-2]	Sulphide
+OC(=O)c1ccc(cc1)C(=O)O	Terephthalate
+Cc1ccc(cc1)S(=O)(=O)O	Tosylate
+Oc1cc(Cl)c(Cl)cc1Cl	Triclofenate
+CCN(CC)CC	Triethylamine
+OC(=O)C(c1ccccc1)(c2ccccc2)c3ccccc3	Trifenatate
+OC(=O)C(F)(F)F	Triflutate
+NC(CO)(CO)CO	Tromethamine
+CCCCC1CCC(CC1)C(=O)O	Buciclate
+CCCC(=O)O	Butyrate
+CCCCCC(=O)O	Caproate
+CC12CCC(CC1)(C=C2)C(=O)O	Cyclotate
+OC(=O)CCC1CCCC1	Cypionate
+CN(C)CCC(=O)O	Daproate
+OC(=O)CN(CCN(CC(=O)O)CC(=O)O)CC(=O)O	EDTA
+CCCCCCCCC=CCCCCCCCC(=O)O	Elaidate and oleate
+CCCCCCC(=O)O	Enanthate
+CCOC(=O)O	Etabonate
+COCCO	Ethanediol
+OC(=O)CNC(=O)c1ccccc1	Etiprate
+CCC(CC)C(=O)OCO	Etzadroxil
+CCCCCCCCCCCCCCOP(=O)(O)O	Fostedate
+OC(=O)c1occc1	Furoate
+OC(=O)c1ccccc1C(=O)c2ccc(O)cc2	Hybenzate
+CCCCCCCCCCCC(=O)O	Laurate
+CC=C(C)C(=O)O	Mebutate
+COC(=O)CC(O)(CCCC(C)(C)O)C(=O)O	Mepesuccinate
+OC(=O)c1cccc(c1)S(=O)(=O)O	Metazoate
+CSCCC(N)C(=O)C	Methionil
+OC(=O)c1cccnc1	Nicotinate
+OO	Peroxide
+OC(=O)CCc1ccccc1	Phenpropionate
+OC(=O)Cc1ccccc1	Phenylacetate
+CC(C)(C)C(=O)O	Pivalate
+CCC(=O)O	Propionate
+CC(C)(C)CC(=O)O	Tebutate
+OCCN(CCO)CCO	Trolamine
+CCCCCCCCCCC(=O)O	Undecylate
+OC(=O)CCCCCCCCC=C	Undecylenate
+CCCCC(=O)O	Valerate
+O	Water
+OC(=O)c1ccc2ccccc2c1O	Xinafoate
+[Zn]	Zinc
+c1c[nH]cn1	Imidazole
+OCCN1CCOCC1	4-(2-Hydroxyethyl)morpholine
+CC(=O)Nc1ccc(cc1)C(=O)O	4-Acetamidobenzoic acid
+CC1(C)C(CCC1(C)C(=O)O)C(=O)O	Camphoric acid
+CCCCCCCCCC(=O)O	Capric acid
+CCCCCCCC(=O)O	Caprylic acid
+OC(=O)C=Cc1ccccc1	Cinnamic acid
+OC(C(O)C(O)C(=O)O)C(O)C(=O)O	Mucic acid
+OC(=O)c1cc(O)ccc1O	Gentisic acid
+OC(=O)CCCC(=O)O	Glutaric acid
+OC(=O)CCC(=O)C(=O)O	2-Oxoglutaric acid
+OCC(=O)O	Glycolic acid
+CC(C)C(=O)O	Isobutyric acid
+OC(C(=O)O)c1ccccc1	Mandelic acid
+OC(=O)c1cc(=O)nc(=O)n1	Orotic acid
+OC(=O)C1CCC(=O)N1	Pyroglutamic acid
+OC(C(O)C(=O)O)C(=O)O	Tartrate
+SC#N	Thiocyanic acid
+CI	Methyl Iodide
+OS(=O)O	Sulfurous Acid
+C1CCC(CC1)NC2CCCCC2	Dicyclohexylamine
+OS(=O)(=O)C(F)(F)F	Triflate
+Cc1cc(C)c(c(C)c1)S(=O)(=O)O	Mesitylene sulfonate
+OC(=O)CC(=O)O	Malonic acid
+OS(=O)(=O)F	Fluorosulfuric acid
+CC(=O)OS(=O)(=O)O	Acetylsulfate
+[H]	Proton
+[Rb]	Rubidium
+[Cs]	Cesium
+[Fr]	Francium
+[Be]	Beryllium
+[Ra]	Radium
+C(=O)C(O)C(O)C(O)C(O)C(=O)O	Glucuronate open form
+CC(O)CN(C)C	Dimepranol
+
+// Solvent data from Chembl structure pipeline
+// Version: 2019
+// https://github.com/chembl/ChEMBL_Structure_Pipeline/tree/master/chembl_structure_pipeline/data
+[OH2]	WATER
+ClCCl	DICHLOROMETHANE
+ClC(Cl)Cl	TRICHLOROMETHANE
+CCOC(=O)C	ETHYL ACETATE
+CO	METHANOL
+CC(C)O	PROPAN-2-OL
+CC(=O)C	ACETONE
+CS(=O)C	DMSO
+CCO	ETHANOL

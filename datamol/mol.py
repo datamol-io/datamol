@@ -26,7 +26,9 @@ from rdkit.Chem.Scaffolds import MurckoScaffold
 
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
+from rdkit.Chem.SaltRemover import SaltRemover
 
+import datamol
 from . import _sanifix4
 from .types import Mol
 from .convert import to_inchikey_non_standard
@@ -36,7 +38,6 @@ from .convert import from_smarts
 from .log import without_rdkit_log
 from ._version import is_lower_than_current_rdkit_version
 
-
 PERIODIC_TABLE = Chem.rdchem.GetPeriodicTable()
 TRIPLE_BOND = Chem.rdchem.BondType.TRIPLE
 DOUBLE_BOND = Chem.rdchem.BondType.DOUBLE
@@ -44,6 +45,8 @@ SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
 UNSPECIFIED_BOND = Chem.rdchem.BondType.UNSPECIFIED
+SALT_SOLVENT_PATH = datamol.data.open_datamol_data_file("salts_solvents.smi").name
+SALT_SOLVENT_REMOVER = SaltRemover(defnFilename=SALT_SOLVENT_PATH)
 
 
 def copy_mol(mol: Mol) -> Mol:
@@ -1376,3 +1379,41 @@ def get_atom_positions(
         positions = positions[mapped_indices, :]
 
     return positions
+
+
+def remove_salts_solvents(
+    mol: Mol,
+    defn_data: str = None,
+    defn_format: str = "smarts",
+    dont_remove_everything: bool = False,
+    sanitize: bool = True,
+) -> Mol:
+    """Remove all salts and solvents from the molecule.
+       In most cases when dealing with small drug-like molecules, the salt/solvent units are smaller
+       than the parent molecule. `dm.mol.keep_largest_fragment` can be applied in that scenario.
+       However, in some cases the molecules of interested is smaller than the salt/solvent units,
+       it's recommended to define the salt/solvent units and apply `remove_salt_solvent` to remove
+       unwanted salt/solvent. A predefined salts and solvents are listed in file "datamol/data/salts_solvents.smi".
+       User can also define the salt/solvent units by passing string to argument `dafnData` and `defnFormat`.
+
+    Args:
+        mol: A molecule.
+        defn_data: A string to define salts and solvents. Use "\n" as seperator for multiple units.
+        defn_format: "smarts" or "smiles" when define the above salt/solvent units.
+        sanitize: Whether sanitize molecule after removing salt/solvent units.
+        dont_remove_everything: When set to `True`, the last salt/solvent will remain when the molecule is consisted by
+                              multiple salt/solvent units.
+
+
+    See Also:
+        <rdkit.Chem.SaltRemover.SaltRemover>
+        <datamol.mol.keep_largest_fragment>
+    """
+    mol_copy = copy_mol(mol)
+    if defn_data is None:
+        remover = SALT_SOLVENT_REMOVER
+    else:
+        remover = SaltRemover(defnData=defn_data, defnFormat=defn_format)
+    return remover.StripMol(
+        mol_copy, dontRemoveEverything=dont_remove_everything, sanitize=sanitize
+    )
