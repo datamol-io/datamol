@@ -159,7 +159,7 @@ class MolsCircleGrid:
         self.use_svg = use_svg
         self.line_width = line_width
         self.ring_color = ring_color
-        self.ring_mol_start_angles_degrees= ring_mol_start_angles_degrees
+        self.ring_mol_start_angles_degrees = ring_mol_start_angles_degrees
         self.ring_color_rdkit: Optional[RDKitColor] = to_rdkit_color(ring_color)
         self.ring_mol_highlight_atoms = ring_mol_highlight_atoms
         self.ring_mol_highlight_bonds = ring_mol_highlight_bonds
