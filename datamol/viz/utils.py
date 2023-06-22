@@ -137,8 +137,10 @@ def image_to_file(
 def to_rdkit_color(color: Optional[DatamolColor]) -> Optional[RDKitColor]:
     """If required convert a datamol color (rgb, rgba or hex string) to an RDKit
     color (rgb or rgba).
+
+    Args:
+        color: A datamol color: hex, rgb, rgba or None.
     """
     if isinstance(color, str):
         return mcolors.to_rgba(color)  # type: ignore
-    else:
-        return color
+    return color
