@@ -307,7 +307,7 @@ class MolsCircleGrid:
             ni = len(mols)
 
             if self.ring_mol_start_angles_degrees is not None:
-                rand_unit = self.ring_mol_start_angles_degrees[i]
+                rand_unit = np.deg2rad(self.ring_mol_start_angles_degrees[i])
             else:
                 rand_unit = rng.random() * 2 * math.pi
 
