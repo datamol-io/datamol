@@ -196,7 +196,7 @@ def generate(
 
     if energies is not None:
         minE = np.min(energies)
-        # Add the energy as a property to each conformers
+        # Add the energy as a property to each conformer
         [
             (
                 conf.SetDoubleProp(f"rdkit_{forcefield}_energy", energy),
