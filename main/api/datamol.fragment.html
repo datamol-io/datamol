@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.graph.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1136,6 +1136,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1149,6 +1150,8 @@
   <div class="doc doc-contents ">
   
       <p>Fragment molecule by applying brics first, then fall back to frag.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1220,9 +1223,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
@@ -1270,10 +1273,11 @@
 
     <span class="k">return</span> <span class="n">frags</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1288,6 +1292,8 @@
   <div class="doc doc-contents ">
   
       <p>Run BRICS on the molecules and potentially fix dummy atoms.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1373,9 +1379,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -1433,10 +1439,11 @@
 
     <span class="k">return</span> <span class="n">frags</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1451,6 +1458,8 @@
   <div class="doc doc-contents ">
   
       <p>Generate all possible fragmentation of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1522,9 +1531,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
 <span class="normal">49</span>
@@ -1590,10 +1599,11 @@
         <span class="k">return</span> <span class="n">frags</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">mol</span><span class="p">]</span> <span class="o">+</span> <span class="n">frags</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1608,6 +1618,8 @@
   <div class="doc doc-contents ">
   
       <p>Cut molecules to perform mmpa analysis later</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1652,6 +1664,8 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1674,9 +1688,9 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">187</span>
 <span class="normal">188</span>
 <span class="normal">189</span>
 <span class="normal">190</span>
@@ -1762,10 +1776,11 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p>
 
     <span class="k">return</span> <span class="n">outlines</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1780,6 +1795,8 @@ using the default rdkit pattern: [#6+0;!$(<em>=, #[!#6])]!@!=!#[</em>]"</p>
   <div class="doc doc-contents ">
   
       <p>Fragment molecule on specific bonds suitable for a MMPA analysis.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1867,6 +1884,8 @@ This is equivalent to enabling the addition of new fragments.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1889,9 +1908,9 @@ This is equivalent to enabling the addition of new fragments.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">136</span>
 <span class="normal">137</span>
 <span class="normal">138</span>
 <span class="normal">139</span>
@@ -1989,10 +2008,11 @@ This is equivalent to enabling the addition of new fragments.</p>
         <span class="p">)</span>
     <span class="k">return</span> <span class="nb">set</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2007,6 +2027,8 @@ This is equivalent to enabling the addition of new fragments.</p>
   <div class="doc doc-contents ">
   
       <p>Fragment the molecule using the recap algorithm.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2078,9 +2100,9 @@ This is equivalent to enabling the addition of new fragments.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 81</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_fragment.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 81</span>
 <span class="normal"> 82</span>
 <span class="normal"> 83</span>
 <span class="normal"> 84</span>
@@ -2134,7 +2156,7 @@ This is equivalent to enabling the addition of new fragments.</p>
         <span class="k">return</span> <span class="n">frags</span>
     <span class="k">return</span> <span class="p">[</span><span class="n">mol</span><span class="p">]</span> <span class="o">+</span> <span class="n">frags</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2174,6 +2196,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -2196,6 +2219,8 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
 <li>only a list of unique molecule is internally maintained</li>
 </ol>
 </details>
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2252,9 +2277,9 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">433</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">433</span>
 <span class="normal">434</span>
 <span class="normal">435</span>
 <span class="normal">436</span>
@@ -2356,10 +2381,11 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
             <span class="k">yield</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
             <span class="n">yield_counter</span> <span class="o">+=</span> <span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2375,9 +2401,9 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
   
       <p>Breaks a molecules into a list of fragment.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">281</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">281</span>
 <span class="normal">282</span>
 <span class="normal">283</span>
 <span class="normal">284</span>
@@ -2575,10 +2601,11 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
         <span class="k">return</span> <span class="n">leaves_smiles</span><span class="p">,</span> <span class="n">allNodes</span><span class="p">,</span> <span class="n">G</span>
     <span class="k">return</span> <span class="n">leaves_smiles</span><span class="p">,</span> <span class="n">allNodes</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2594,9 +2621,9 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
   
       <p>Build a super molecule from a list of fragments</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">382</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/fragment/_assemble.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">382</span>
 <span class="normal">383</span>
 <span class="normal">384</span>
 <span class="normal">385</span>
@@ -2694,7 +2721,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
                     <span class="n">seen</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">mSmi</span><span class="p">)</span>
                     <span class="k">yield</span> <span class="n">m</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2747,10 +2774,10 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

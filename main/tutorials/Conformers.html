@@ -17,7 +17,7 @@
         <link rel="next" href="Visualization.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -2507,10 +2507,10 @@ params.numThreads = 1</div>
                     </div>
                 </clipboard-copy>
             </div>
-            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># EMbed conformers</span>
+            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Embed conformers</span>
 <span class="n">confs</span> <span class="o">=</span> <span class="n">rdDistGeom</span><span class="o">.</span><span class="n">EmbedMultipleConfs</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="n">numConfs</span><span class="o">=</span><span class="mi">50</span><span class="p">,</span> <span class="n">params</span><span class="o">=</span><span class="n">params</span><span class="p">)</span>
 </pre></div>
-<div id="cell-8" class="clipboard-copy-txt"># EMbed conformers
+<div id="cell-8" class="clipboard-copy-txt"># Embed conformers
 confs = rdDistGeom.EmbedMultipleConfs(m2, numConfs=50, params=params)</div>
         
         </div>
@@ -2605,7 +2605,7 @@ confs = rdDistGeom.EmbedMultipleConfs(m2, numConfs=50, params=params)</div>
     <span class="n">ff</span> <span class="o">=</span> <span class="n">rdForceFieldHelpers</span><span class="o">.</span><span class="n">UFFGetMoleculeForceField</span><span class="p">(</span><span class="n">m2</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="n">conf</span><span class="o">.</span><span class="n">GetId</span><span class="p">())</span>
     <span class="n">energies</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">ff</span><span class="o">.</span><span class="n">CalcEnergy</span><span class="p">())</span>
 <span class="n">energies</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
-<span class="c1"># Add the energy as a property to each conformers</span>
+<span class="c1"># Add the energy as a property to each conformer</span>
 <span class="p">[</span><span class="n">conf</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="s2">&quot;rdkit_uff_energy&quot;</span><span class="p">,</span> <span class="n">energy</span><span class="p">)</span> <span class="k">for</span> <span class="n">energy</span><span class="p">,</span> <span class="n">conf</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">energies</span><span class="p">,</span> <span class="n">m2</span><span class="o">.</span><span class="n">GetConformers</span><span class="p">())]</span>
 
 <span class="c1"># Now we reorder conformers according to their energies,</span>
@@ -2626,7 +2626,7 @@ for conf in m2.GetConformers():
     ff = rdForceFieldHelpers.UFFGetMoleculeForceField(m2, confId=conf.GetId())
     energies.append(ff.CalcEnergy())
 energies = np.array(energies)
-# Add the energy as a property to each conformers
+# Add the energy as a property to each conformer
 [conf.SetDoubleProp("rdkit_uff_energy", energy) for energy, conf in zip(energies, m2.GetConformers())]
 
 # Now we reorder conformers according to their energies,
@@ -3360,10 +3360,10 @@ rmsd</div>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

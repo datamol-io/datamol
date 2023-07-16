@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.io.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1052,6 +1052,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1065,6 +1066,8 @@
   <div class="doc doc-contents ">
   
       <p>Get all simple path between two atoms of a molecule</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1137,6 +1140,8 @@ Defaults to False.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1159,9 +1164,9 @@ Defaults to False.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/graph.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/graph.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
 <span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
@@ -1239,10 +1244,11 @@ Defaults to False.</p>
 
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1269,6 +1275,8 @@ but explicit in the other.</p>
   <p>Explicit hydrogens might lead to too many matches, since for an atom with 2
 hydrogens, they can be re-ordered in any way.</p>
 </details>
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1355,6 +1363,8 @@ No other properties are defined by the <code>datamol.graph.to_graph</code> funct
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1397,9 +1407,9 @@ No other properties are defined by the <code>datamol.graph.to_graph</code> funct
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/graph.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/graph.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">100</span>
 <span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
@@ -1551,10 +1561,11 @@ No other properties are defined by the <code>datamol.graph.to_graph</code> funct
 
     <span class="k">return</span> <span class="n">matches</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1584,6 +1595,8 @@ but explicit in the other.</li>
 hydrogens, they can be re-ordered in any way.</li>
 </ul>
 </div>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1700,6 +1713,8 @@ Different warnings are raised depending on the value of <code>ambiguous_match_mo
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1750,9 +1765,9 @@ Pring a warning.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/graph.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">178</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/graph.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">178</span>
 <span class="normal">179</span>
 <span class="normal">180</span>
 <span class="normal">181</span>
@@ -2098,10 +2113,11 @@ Pring a warning.</li>
 
     <span class="k">return</span> <span class="n">reordered_mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2117,6 +2133,8 @@ Pring a warning.</li>
   
       <p>Convert a molecule to a network x graph. A list of properties are added
 to every nodes and edges.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2146,6 +2164,8 @@ to every nodes and edges.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2168,9 +2188,9 @@ to every nodes and edges.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/graph.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/graph.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">22</span>
 <span class="normal">23</span>
 <span class="normal">24</span>
 <span class="normal">25</span>
@@ -2240,7 +2260,7 @@ to every nodes and edges.</p>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">mol_graph</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2293,10 +2313,10 @@ to every nodes and edges.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

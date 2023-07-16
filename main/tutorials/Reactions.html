@@ -17,7 +17,7 @@
         <link rel="next" href="Scaffolds.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -2116,11 +2116,11 @@ Licensed under the Apache License, Version 2.0.
                     </div>
                 </clipboard-copy>
             </div>
-            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Define a reaction from rxn block finle</span>
+            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Define a reaction from rxn block file</span>
 <span class="n">rxn</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">rxn_from_block_file</span><span class="p">(</span><span class="s2">&quot;data/ReactionBlock.rxn&quot;</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">rxn</span>
 </pre></div>
-<div id="cell-2" class="clipboard-copy-txt"># Define a reaction from rxn block finle
+<div id="cell-2" class="clipboard-copy-txt"># Define a reaction from rxn block file
 rxn = dm.reactions.rxn_from_block_file("data/ReactionBlock.rxn", sanitize=True)
 rxn</div>
         
@@ -2247,7 +2247,7 @@ class="
                     </div>
                 </clipboard-copy>
             </div>
-            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Apply reaction and snitize the products</span>
+            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># Apply reaction and sanitize the products</span>
 <span class="n">prod_mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span>
     <span class="n">rxn</span><span class="o">=</span><span class="n">rxn</span><span class="p">,</span>
     <span class="n">reactants</span><span class="o">=</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;CC(=O)O&quot;</span><span class="p">),</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;NC&quot;</span><span class="p">)),</span>
@@ -2258,7 +2258,7 @@ class="
 <span class="p">)</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">prod_mols</span><span class="p">)</span>
 </pre></div>
-<div id="cell-4" class="clipboard-copy-txt"># Apply reaction and snitize the products
+<div id="cell-4" class="clipboard-copy-txt"># Apply reaction and sanitize the products
 prod_mols = dm.reactions.apply_reaction(
     rxn=rxn,
     reactants=(dm.to_mol("CC(=O)O"), dm.to_mol("NC")),
@@ -2609,12 +2609,12 @@ class="
                     </div>
                 </clipboard-copy>
             </div>
-            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># One reaction to attach multiple specified attchment points</span>
+            <div class="highlight-ipynb hl-python "><pre><span></span><span class="c1"># One reaction to attach multiple specified attachment points</span>
 <span class="n">rxn2</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">rxn_from_smarts</span><span class="p">(</span><span class="s2">&quot;[1*][*:1].[2*][*:4].([1*][*:2].[2*][*:3])&gt;&gt;([*:1][*:2].[*:3][*:4])&quot;</span><span class="p">)</span>
 <span class="n">res2</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">reactions</span><span class="o">.</span><span class="n">apply_reaction</span><span class="p">(</span><span class="n">rxn2</span><span class="p">,</span> <span class="p">(</span><span class="n">frag1</span><span class="p">,</span> <span class="n">frag2</span><span class="p">,</span> <span class="n">scaffold</span><span class="p">),</span> <span class="n">product_index</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 <span class="n">dm</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">res2</span><span class="p">)</span>
 </pre></div>
-<div id="cell-9" class="clipboard-copy-txt"># One reaction to attach multiple specified attchment points
+<div id="cell-9" class="clipboard-copy-txt"># One reaction to attach multiple specified attachment points
 rxn2 = dm.reactions.rxn_from_smarts("[1*][*:1].[2*][*:4].([1*][*:2].[2*][*:3])>>([*:1][*:2].[*:3][*:4])")
 res2 = dm.reactions.apply_reaction(rxn2, (frag1, frag2, scaffold), product_index=0)
 dm.to_image(res2)</div>
@@ -2743,10 +2743,10 @@ class="
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

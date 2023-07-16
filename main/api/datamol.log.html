@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.molar.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1042,7 +1042,7 @@
 
 
 <h3 id="datamol.log.without_rdkit_log" class="doc doc-heading">
-        <code>without_rdkit_log</code>
+          <code>without_rdkit_log</code>
 
 
 <a href="#datamol.log.without_rdkit_log" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -1059,10 +1059,9 @@
     <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">&quot;CCCCO&quot;</span><span class="p">)</span>  <span class="c1"># potential RDKit logs won&#39;t show</span>
 </code></pre></div>
 
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/log.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
+            <details class="quote">
+              <summary>Source code in <code>datamol/log.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 5</span>
 <span class="normal"> 6</span>
 <span class="normal"> 7</span>
 <span class="normal"> 8</span>
@@ -1176,7 +1175,7 @@
     <span class="k">def</span> <span class="fm">__exit__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_apply_log_status</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">previous_status</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
@@ -1199,6 +1198,7 @@
 </div>
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1213,9 +1213,9 @@
   
       <p>Disable all rdkit logs.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/log.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/log.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">64</span>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">disable_rdkit_log</span><span class="p">():</span>
@@ -1223,10 +1223,11 @@
     <span class="k">for</span> <span class="n">log_level</span> <span class="ow">in</span> <span class="n">RDLogger</span><span class="o">.</span><span class="n">_levels</span><span class="p">:</span>
         <span class="n">rdBase</span><span class="o">.</span><span class="n">DisableLog</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1242,9 +1243,9 @@
   
       <p>Enable all rdkit logs.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/log.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/log.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">70</span>
 <span class="normal">71</span>
 <span class="normal">72</span>
 <span class="normal">73</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enable_rdkit_log</span><span class="p">():</span>
@@ -1252,7 +1253,7 @@
     <span class="k">for</span> <span class="n">log_level</span> <span class="ow">in</span> <span class="n">RDLogger</span><span class="o">.</span><span class="n">_levels</span><span class="p">:</span>
         <span class="n">rdBase</span><span class="o">.</span><span class="n">EnableLog</span><span class="p">(</span><span class="n">log_level</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1305,10 +1306,10 @@
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

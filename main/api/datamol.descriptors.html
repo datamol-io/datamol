@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.fp.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1136,6 +1136,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1150,9 +1151,9 @@
   
       <p>Calculate the number of aromatic atoms.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">88</span>
 <span class="normal">89</span>
 <span class="normal">90</span>
 <span class="normal">91</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
@@ -1160,10 +1161,11 @@
     <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">_AROMATIC_QUERY</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1178,6 +1180,8 @@
   <div class="doc doc-contents ">
   
       <p>Calculate the aromatic proportion: # aromatic atoms/#atoms total.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1208,9 +1212,9 @@
   </table>
       <p>Only heavy atoms are considered.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 94</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 94</span>
 <span class="normal"> 95</span>
 <span class="normal"> 96</span>
 <span class="normal"> 97</span>
@@ -1228,10 +1232,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">/</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumHeavyAtoms</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1246,6 +1251,8 @@
   <div class="doc doc-contents ">
   
       <p>Compute the number of charged atoms in a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1274,6 +1281,8 @@
         </tr>
     </tbody>
   </table>
+
+
 
   <p><strong>Returns:</strong></p>
   <table>
@@ -1297,9 +1306,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
 <span class="normal">144</span>
@@ -1319,10 +1328,11 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">at</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()])</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1338,6 +1348,8 @@
   
       <p>Compute the number of rigid bonds in a molecule.</p>
 <p>Rigid bonds are bonds that are not single and not in rings.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1367,6 +1379,8 @@
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1389,9 +1403,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
@@ -1419,10 +1433,11 @@
     <span class="n">n_rigid_bonds</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumBonds</span><span class="p">()</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">non_rigid_bonds_count</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">n_rigid_bonds</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1437,6 +1452,8 @@
   <div class="doc doc-contents ">
   
       <p>Compute the number of stereocenters in a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1466,6 +1483,8 @@
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1488,9 +1507,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
 <span class="normal">106</span>
 <span class="normal">107</span>
 <span class="normal">108</span>
@@ -1522,10 +1541,11 @@
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">n</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1540,6 +1560,8 @@
   <div class="doc doc-contents ">
   
       <p>Compute the number of unspecified stereocenters in a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1569,6 +1591,8 @@
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1591,9 +1615,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">123</span>
 <span class="normal">124</span>
 <span class="normal">125</span>
 <span class="normal">126</span>
@@ -1625,7 +1649,7 @@
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">n</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1656,6 +1680,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1670,6 +1695,8 @@
   
       <p>Return a descriptor function by name either from
 <code>rdkit.Chem import Descriptors</code> or <code>rdkit.Chem.rdMolDescriptors</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1699,9 +1726,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
 <span class="normal">43</span>
 <span class="normal">44</span>
@@ -1733,10 +1760,11 @@
 
     <span class="k">return</span> <span class="n">fn</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1751,6 +1779,8 @@
   <div class="doc doc-contents ">
   
       <p>Compute a list of opiniated molecular properties on a list of molecules.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1811,6 +1841,8 @@ function.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1833,9 +1865,9 @@ function.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
@@ -1911,10 +1943,11 @@ function.</p>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1929,6 +1962,8 @@ function.</p>
   <div class="doc doc-contents ">
   
       <p>Compute a list of opiniated molecular properties.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1989,6 +2024,8 @@ function.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2011,9 +2048,9 @@ function.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
 <span class="normal"> 86</span>
 <span class="normal"> 87</span>
 <span class="normal"> 88</span>
@@ -2077,7 +2114,7 @@ function.</p>
 
     <span class="k">return</span> <span class="n">props</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2130,10 +2167,10 @@ function.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.viz.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -1222,6 +1222,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1236,6 +1237,8 @@
   
       <p>Copy one directory to another location across different filesystem (local, S3, GCS, etc).</p>
 <p>Note that if both FS from source and destination are the same, progress won't be shown.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1378,9 +1381,9 @@ size is <code>None</code>, it is set to 2048.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">323</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">323</span>
 <span class="normal">324</span>
 <span class="normal">325</span>
 <span class="normal">326</span>
@@ -1558,10 +1561,11 @@ size is <code>None</code>, it is set to 2048.</p>
         <span class="n">scheduler</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1577,6 +1581,8 @@ size is <code>None</code>, it is set to 2048.</p>
   
       <p>Copy one file to another location across different filesystem (local, S3, GCS, etc).</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1591,7 +1597,7 @@ size is <code>None</code>, it is set to 2048.</p>
         <tr>
           <td><code>source</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1605,7 +1611,7 @@ size is <code>None</code>, it is set to 2048.</p>
         <tr>
           <td><code>destination</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1676,9 +1682,9 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
 <span class="normal">190</span>
 <span class="normal">191</span>
 <span class="normal">192</span>
@@ -1866,10 +1872,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
                 <span class="k">if</span> <span class="n">pbar</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
                     <span class="n">pbar</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1886,6 +1893,8 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       <p>Check whether a file or a directory exists.</p>
 <p>Important: File-like object always exists.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -1900,7 +1909,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -1914,9 +1923,9 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
@@ -1934,10 +1943,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1952,6 +1962,8 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
   <div class="doc doc-contents ">
   
       <p>Get the basename of a file or a folder.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1981,9 +1993,9 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
@@ -2003,10 +2015,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
     <span class="n">clean_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">str</span><span class="p">(</span><span class="n">clean_path</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2021,6 +2034,8 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
   <div class="doc doc-contents ">
   
       <p>Get a local cache directory for a given application name.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2079,9 +2094,9 @@ already exist.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
@@ -2119,10 +2134,11 @@ already exist.</p>
 
     <span class="k">return</span> <span class="n">cache_dir</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2138,6 +2154,8 @@ already exist.</p>
   
       <p>Get the extension of a file.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2166,9 +2184,9 @@ already exist.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
@@ -2184,10 +2202,11 @@ already exist.</p>
     <span class="n">basename</span> <span class="o">=</span> <span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">basename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2203,6 +2222,8 @@ already exist.</p>
   
       <p>Get the fsspec mapper.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2231,9 +2252,9 @@ already exist.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
@@ -2247,10 +2268,11 @@ already exist.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2266,6 +2288,8 @@ already exist.</p>
   
       <p>Return the name of the path protocol.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2294,9 +2318,9 @@ already exist.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
@@ -2334,10 +2358,11 @@ already exist.</p>
         <span class="k">return</span> <span class="n">protocol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">protocol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2354,9 +2379,9 @@ already exist.</p>
       <p>Get the size of a file given its path. Return None if the
 size can't be retrieved.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">167</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">167</span>
 <span class="normal">168</span>
 <span class="normal">169</span>
 <span class="normal">170</span>
@@ -2396,10 +2421,11 @@ size can't be retrieved.</p>
 
     <span class="k">return</span> <span class="n">file_size</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2414,6 +2440,8 @@ size can't be retrieved.</p>
   <div class="doc doc-contents ">
   
       <p>Find files by glob-matching.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2443,9 +2471,9 @@ size can't be retrieved.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
 <span class="normal">311</span>
 <span class="normal">312</span>
 <span class="normal">313</span>
@@ -2467,10 +2495,11 @@ size can't be retrieved.</p>
     <span class="n">paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_unstrip_protocol</span><span class="p">(</span><span class="n">d</span><span class="p">,</span> <span class="n">fs</span><span class="p">)</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">paths</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2486,6 +2515,8 @@ size can't be retrieved.</p>
   
       <p>Check whether a file exists.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2500,7 +2531,7 @@ size can't be retrieved.</p>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -2514,9 +2545,9 @@ size can't be retrieved.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
@@ -2546,10 +2577,11 @@ size can't be retrieved.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2565,6 +2597,8 @@ size can't be retrieved.</p>
   
       <p>Check whether a file exists.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2579,7 +2613,7 @@ size can't be retrieved.</p>
         <tr>
           <td><code>path</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, os.<span title="os.PathLike">PathLike</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>, io.<span title="io.IOBase">IOBase</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -2593,9 +2627,9 @@ size can't be retrieved.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
 <span class="normal"> 94</span>
 <span class="normal"> 95</span>
 <span class="normal"> 96</span>
@@ -2625,10 +2659,11 @@ size can't be retrieved.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">False</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2644,18 +2679,19 @@ size can't be retrieved.</p>
   
       <p>Check whether a path is local.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
 <span class="normal">149</span>
 <span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a path is local.&quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2671,6 +2707,8 @@ size can't be retrieved.</p>
   
       <p>Join paths together. The first element determine the
 filesystem to use (and so the separator.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2700,9 +2738,9 @@ filesystem to use (and so the separator.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
@@ -2726,10 +2764,11 @@ filesystem to use (and so the separator.</p>
     <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_paths</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">full_path</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2744,6 +2783,8 @@ filesystem to use (and so the separator.</p>
   <div class="doc doc-contents ">
   
       <p>Return the md5 hash of a file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2773,9 +2814,9 @@ filesystem to use (and so the separator.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">297</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">297</span>
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
@@ -2797,10 +2838,11 @@ filesystem to use (and so the separator.</p>
         <span class="n">file_hash_str</span> <span class="o">=</span> <span class="n">file_hash</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">file_hash_str</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2815,6 +2857,8 @@ filesystem to use (and so the separator.</p>
   <div class="doc doc-contents ">
   
       <p>Create a directory.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2859,9 +2903,9 @@ already exists.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/utils/fs.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span>
@@ -2881,7 +2925,7 @@ already exists.</p>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_path</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
     <span class="n">fs</span><span class="o">.</span><span class="n">mkdirs</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="n">exist_ok</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2934,10 +2978,10 @@ already exists.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

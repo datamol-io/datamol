@@ -17,7 +17,7 @@
         <link rel="next" href="Filesystem.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
     
     
       
@@ -2049,7 +2049,7 @@ Licensed under the Apache License, Version 2.0.
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<p>This tutorial will highligh the major viz related features of Datamol.</p>
+<p>This tutorial will highlight the major viz related features of Datamol.</p>
 
 </div>
 </div>
@@ -2628,13 +2628,13 @@ mols = cluster_mols[1]</div>
 </div>
 <div class="jp-InputArea jp-Cell-inputArea"><div class="jp-InputPrompt jp-InputArea-prompt">
 </div><div class="jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput " data-mime-type="text/markdown">
-<h4 id="lasso-highlighting">Lasso Highlighting<a class="anchor-link" href="#lasso-highlighting">&#182;</a></h4><p>The code below will show how the lasso highlight function should be used. The signature for this function is</p>
-<pre><code>def lasso_highlight_image(
-    target_molecule: Union[str, dm.Mol],
-    search_molecules: Union[str, List[str], dm.Mol, List[dm.Mol]],
-     mol_size: Optional[Tuple[int, int]] = (300, 300)
-    ) -&gt; Image:
-</code></pre>
+<h4 id="lasso-highlighting">Lasso Highlighting<a class="anchor-link" href="#lasso-highlighting">&#182;</a></h4><p>The code below will show how the lasso highlight function should be used. The signature for this function is:</p>
+<div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
+    <span class="n">target_molecule</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
+    <span class="n">search_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
+     <span class="n">mol_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="p">(</span><span class="mi">300</span><span class="p">,</span> <span class="mi">300</span><span class="p">)</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Image</span><span class="p">:</span>
+</pre></div>
 <p>The mol_size is the size of the image returned and the target molecule is accepted in the smiles format or mol object and the substructure search as smarts string or mol object.</p>
 <p>It is quite difficult to test the production of images so the edge cases will be entered here with a brief description of each.</p>
 <p>An edge case is that you can only search for up to 6 substructures unless more colors are added to the code.</p>
@@ -5581,10 +5581,10 @@ atom_matches = [item for sublist in atom_matches for item in sublist]</div>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>
