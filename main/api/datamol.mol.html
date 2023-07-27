@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.reactions.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -3647,7 +3647,7 @@ atom map numbers given by the <code>molAtomMapNumber</code> atom property.</p>
         <span class="p">[</span><span class="s2">&quot;molAtomMapNumber&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
+            <span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
             <span class="s2">&quot;Set it before calling this function or set `from_atom_map_numbers` to `False`.&quot;</span>
         <span class="p">)</span>
 
@@ -3845,7 +3845,7 @@ have the same molhash.</li>
         <span class="n">hash_scheme_enum</span> <span class="o">=</span> <span class="n">RegistrationHash</span><span class="o">.</span><span class="n">HashScheme</span><span class="o">.</span><span class="n">TAUTOMER_INSENSITIVE_LAYERS</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;`hash_scheme` is invalid. Please choose from: &#39;all&#39;, &#39;no_stereo&#39; or &#39;no_tautomers&#39;.&quot;</span>
+            <span class="s2">&quot;`hash_scheme` is invalid. Please choose from: &#39;all&#39;, &#39;no_stereo&#39; or &#39;no_tautomers&#39;.&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># Generate the hash</span>
@@ -5628,7 +5628,7 @@ molecule already contains hydrogens.</p>
         <span class="c1"># Detect multiple conformers</span>
         <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The molecule contains multiple conformers. Only the first one will be preserved.&quot;</span>
+                <span class="s2">&quot;The molecule contains multiple conformers. Only the first one will be preserved.&quot;</span>
             <span class="p">)</span>
 
         <span class="c1"># Try catch to avoid occasional aromaticity errors</span>
@@ -5785,7 +5785,7 @@ molecule already contains hydrogens.</p>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">smiles</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">smiles</span>
@@ -6216,7 +6216,7 @@ the default atom indices order is assumed.</p>
         <span class="p">[</span><span class="s2">&quot;molAtomMapNumber&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
+            <span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
             <span class="s2">&quot;Set it before calling this function or set `from_atom_map_numbers` to `False`.&quot;</span>
         <span class="p">)</span>
 
@@ -6258,7 +6258,7 @@ the default atom indices order is assumed.</p>
 
 
 <h3 id="datamol.mol.set_dative_bonds" class="doc doc-heading">
-<code class="highlight language-python"><span class="n">set_dative_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">from_atoms</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">)</span></code>
+<code class="highlight language-python"><span class="n">set_dative_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">from_atoms</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span></code>
 
 <a href="#datamol.mol.set_dative_bonds" class="headerlink" title="Permanent link">&para;</a></h3>
 
@@ -6307,7 +6307,7 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
             </div>
           </td>
           <td>
-                <code>7, 8</code>
+                <code>(7, 8)</code>
           </td>
         </tr>
     </tbody>

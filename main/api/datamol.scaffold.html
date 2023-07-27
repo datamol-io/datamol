@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.similarity.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1441,7 +1441,7 @@ and the R-groups decomposition row.</li>
         <span class="n">scf</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">GetScaffoldForMol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">scf</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MakeScaffoldGeneric</span><span class="p">(</span><span class="n">scf</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
         <span class="k">if</span> <span class="n">ignore_non_ring</span><span class="p">:</span>
@@ -1529,7 +1529,7 @@ and the R-groups decomposition row.</li>
                 <span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">scaff</span> <span class="o">=</span> <span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">AdjustQueryProperties</span><span class="p">(</span><span class="n">core</span><span class="p">,</span> <span class="n">core_query_param</span><span class="p">),</span> <span class="n">rgroups</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
         <span class="c1"># if user wants a dataframe turned on...</span>

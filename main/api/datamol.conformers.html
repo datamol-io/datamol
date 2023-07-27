@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.convert.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -2966,7 +2966,9 @@ in place.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
@@ -2994,9 +2996,7 @@ in place.</p>
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
+<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">use_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">digits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3094,7 +3094,9 @@ in place.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">86</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span>
 <span class="normal">89</span>
@@ -3104,9 +3106,7 @@ in place.</p>
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the coordinate of a conformer of a molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -3214,7 +3214,9 @@ in place.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
@@ -3246,9 +3248,7 @@ in place.</p>
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">keep_conformers</span><span class="p">(</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">keep_conformers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">indices_to_keep</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">assign_id</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -3407,7 +3407,9 @@ and -1 to use all cores.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
@@ -3472,9 +3474,7 @@ and -1 to use all cores.</p>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sasa</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>

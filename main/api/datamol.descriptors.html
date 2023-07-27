@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.fp.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1537,7 +1537,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">rdmolops</span><span class="o">.</span><span class="n">FindPotentialStereo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">CalcNumAtomStereoCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">n</span>
 </code></pre></div></td></tr></table></div>
@@ -1645,7 +1645,7 @@
     <span class="k">try</span><span class="p">:</span>
         <span class="n">rdmolops</span><span class="o">.</span><span class="n">FindPotentialStereo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
         <span class="n">n</span> <span class="o">=</span> <span class="n">rdMolDescriptors</span><span class="o">.</span><span class="n">CalcNumUnspecifiedAtomStereoCenters</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">pass</span>
     <span class="k">return</span> <span class="n">n</span>
 </code></pre></div></td></tr></table></div>

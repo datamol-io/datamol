@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.log.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -2049,7 +2049,8 @@ of the amido-imidol tautomerism.</p>
 
             <details class="quote">
               <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">214</span>
+<span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
@@ -2223,9 +2224,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">386</span>
 <span class="normal">387</span>
 <span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IsomerEnumerator</span><span class="p">:</span>
+<span class="normal">389</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IsomerEnumerator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementation of the isomer enumeration algorithm described in  https://doi.org/10.1186/s13321-017-0252-9</span>
 
@@ -2378,7 +2377,6 @@ of the amido-imidol tautomerism.</p>
                             <span class="k">break</span>
                         <span class="n">new_mol</span> <span class="o">=</span> <span class="n">new_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                         <span class="c1"># sanitize mol</span>
-                        <span class="n">tmp_sm</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                         <span class="n">new_mol</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                         <span class="c1"># need to clean twice, not sure why</span>
                         <span class="n">_</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
@@ -2506,7 +2504,8 @@ of the amido-imidol tautomerism.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">224</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">223</span>
+<span class="normal">224</span>
 <span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
@@ -2528,8 +2527,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">243</span>
 <span class="normal">244</span>
 <span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">246</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">allow_cycle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">allow_double_bond</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -2662,7 +2660,8 @@ of the amido-imidol tautomerism.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">316</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
+<span class="normal">316</span>
 <span class="normal">317</span>
 <span class="normal">318</span>
 <span class="normal">319</span>
@@ -2735,9 +2734,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">386</span>
 <span class="normal">387</span>
 <span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate</span><span class="p">(</span>
+<span class="normal">389</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2789,7 +2786,6 @@ of the amido-imidol tautomerism.</p>
                         <span class="k">break</span>
                     <span class="n">new_mol</span> <span class="o">=</span> <span class="n">new_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="c1"># sanitize mol</span>
-                    <span class="n">tmp_sm</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                     <span class="n">new_mol</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                     <span class="c1"># need to clean twice, not sure why</span>
                     <span class="n">_</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>

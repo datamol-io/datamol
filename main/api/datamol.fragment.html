@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.graph.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.18">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1265,7 +1265,7 @@
     <span class="n">frags</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">frags</span> <span class="o">=</span> <span class="n">brics</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">fix</span><span class="o">=</span><span class="n">fix</span><span class="p">,</span> <span class="n">remove_parent</span><span class="o">=</span><span class="n">remove_parent</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">pass</span>
 
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">frags</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
@@ -2563,7 +2563,7 @@ This differs from rdkit BRICSBuild implementation that requires the presence of 
                     <span class="n">prod</span><span class="o">.</span><span class="n">sanitized</span> <span class="o">=</span> <span class="kc">True</span>
                     <span class="k">try</span><span class="p">:</span>
                         <span class="n">Chem</span><span class="o">.</span><span class="n">SanitizeMol</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span>
-                    <span class="k">except</span><span class="p">:</span>
+                    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                         <span class="k">if</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">prod</span><span class="p">)</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                             <span class="n">seqOk</span> <span class="o">=</span> <span class="kc">False</span>
                             <span class="k">break</span>
