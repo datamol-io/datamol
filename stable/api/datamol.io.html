@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.isomers.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1220,6 +1220,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1234,6 +1235,8 @@
   
       <p>Open a dataframe file whatever its filetype from
 <code>csv, excel, parquet, json, sdf</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1277,9 +1280,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">641</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">641</span>
 <span class="normal">642</span>
 <span class="normal">643</span>
 <span class="normal">644</span>
@@ -1337,10 +1340,11 @@
 
     <span class="k">return</span> <span class="n">data</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1355,6 +1359,8 @@
   <div class="doc doc-contents ">
   
       <p>Read a CSV file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1427,6 +1433,8 @@ Avoid when loading a very large file.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1449,9 +1457,9 @@ Avoid when loading a very large file.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">28</span>
 <span class="normal">29</span>
 <span class="normal">30</span>
 <span class="normal">31</span>
@@ -1503,10 +1511,11 @@ Avoid when loading a very large file.</p>
 
     <span class="k">return</span> <span class="n">df</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1521,6 +1530,8 @@ Avoid when loading a very large file.</p>
   <div class="doc doc-contents ">
   
       <p>Read an excel file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1607,6 +1618,8 @@ Avoid when loading a very large file.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1629,9 +1642,9 @@ Avoid when loading a very large file.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">56</span>
 <span class="normal">57</span>
 <span class="normal">58</span>
 <span class="normal">59</span>
@@ -1687,10 +1700,11 @@ Avoid when loading a very large file.</p>
 
     <span class="k">return</span> <span class="n">df</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1705,6 +1719,8 @@ Avoid when loading a very large file.</p>
   <div class="doc doc-contents ">
   
       <p>Read a Mol2 File</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1791,9 +1807,9 @@ instead of returning None.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
 <span class="normal">281</span>
@@ -1885,10 +1901,11 @@ instead of returning None.</p>
     <span class="n">mols</span><span class="o">.</span><span class="n">reverse</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">mols</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1904,6 +1921,8 @@ instead of returning None.</p>
   
       <p>Read a Mol block.</p>
 <p>Note that potential molecule properties are <strong>not</strong> read.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1990,9 +2009,9 @@ instead of returning None.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">326</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">326</span>
 <span class="normal">327</span>
 <span class="normal">328</span>
 <span class="normal">329</span>
@@ -2054,10 +2073,11 @@ instead of returning None.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2072,6 +2092,8 @@ instead of returning None.</p>
   <div class="doc doc-contents ">
   
       <p>Read a PDB string block.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2157,9 +2179,9 @@ instead of returning None.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">391</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">391</span>
 <span class="normal">392</span>
 <span class="normal">393</span>
 <span class="normal">394</span>
@@ -2209,10 +2231,11 @@ instead of returning None.</p>
     <span class="p">)</span>
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2227,6 +2250,8 @@ instead of returning None.</p>
   <div class="doc doc-contents ">
   
       <p>Read a PDB file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2312,6 +2337,8 @@ instead of returning None.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2334,9 +2361,9 @@ instead of returning None.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">429</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">429</span>
 <span class="normal">430</span>
 <span class="normal">431</span>
 <span class="normal">432</span>
@@ -2396,10 +2423,11 @@ instead of returning None.</p>
         <span class="p">)</span>
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2416,6 +2444,8 @@ instead of returning None.</p>
       <p>Read an SDF file.</p>
 <p>Note: This function is meant to be used with dataset that fit <em>in-memory</em>.
 For a more advanced usage we suggest you to use directly <code>Chem.ForwardSDMolSupplier</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2604,9 +2634,9 @@ parallelization. Set to -1 to use all available cores. Only relevant is <code>as
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">159</span>
 <span class="normal">160</span>
 <span class="normal">161</span>
 <span class="normal">162</span>
@@ -2758,10 +2788,11 @@ parallelization. Set to -1 to use all available cores. Only relevant is <code>as
 
     <span class="k">return</span> <span class="n">mols</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2785,6 +2816,8 @@ default settings which changes:</p>
 </ul>
 <p>By modifying the args of <code>dm.read_csv()</code>, you will be able to read an <code>.smi</code> files.</p>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -2799,7 +2832,7 @@ default settings which changes:</p>
         <tr>
           <td><code>urlpath</code></td>
           <td>
-                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, <span title="fsspec.utils">fsspec</span>.<span title="fsspec.utils.core">core</span>.<span title="fsspec.utils.core.OpenFile">OpenFile</span>]</code>
+                <code><span title="typing.Union">Union</span>[str, pathlib.<span title="pathlib.Path">Path</span>, io.<span title="io.IOBase">IOBase</span>, fsspec.<span title="fsspec.core">core</span>.<span title="fsspec.core.OpenFile">OpenFile</span>]</code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -2813,9 +2846,9 @@ default settings which changes:</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">523</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">523</span>
 <span class="normal">524</span>
 <span class="normal">525</span>
 <span class="normal">526</span>
@@ -2891,10 +2924,11 @@ default settings which changes:</p>
 
     <span class="k">return</span> <span class="n">mols</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2910,6 +2944,8 @@ default settings which changes:</p>
   
       <p>Save a dataframe file whatever its filetype from
 <code>csv, excel, parquet, json, sdf</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2967,9 +3003,9 @@ default settings which changes:</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">672</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">672</span>
 <span class="normal">673</span>
 <span class="normal">674</span>
 <span class="normal">675</span>
@@ -3029,10 +3065,11 @@ default settings which changes:</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file type of </span><span class="si">{</span><span class="n">path</span><span class="si">}</span><span class="s2"> is not supported.&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3048,6 +3085,8 @@ default settings which changes:</p>
   
       <p>Convert a molecule to a mol block string.</p>
 <p>Note that any molecule properties are lost.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3135,9 +3174,9 @@ with more than 999 atoms or bonds).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">359</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">359</span>
 <span class="normal">360</span>
 <span class="normal">361</span>
 <span class="normal">362</span>
@@ -3197,10 +3236,11 @@ with more than 999 atoms or bonds).</p>
 
     <span class="k">return</span> <span class="n">molblock</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3215,6 +3255,8 @@ with more than 999 atoms or bonds).</p>
   <div class="doc doc-contents ">
   
       <p>Convert a molecule to a PDB string block.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3258,9 +3300,9 @@ with more than 999 atoms or bonds).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">418</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">418</span>
 <span class="normal">419</span>
 <span class="normal">420</span>
 <span class="normal">421</span>
@@ -3278,10 +3320,11 @@ with more than 999 atoms or bonds).</p>
     <span class="n">molblock</span> <span class="o">=</span> <span class="n">rdmolfiles</span><span class="o">.</span><span class="n">MolToPDBBlock</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">confId</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">molblock</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3296,6 +3339,8 @@ with more than 999 atoms or bonds).</p>
   <div class="doc doc-contents ">
   
       <p>Save a molecule to a PDB file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3353,9 +3398,9 @@ with more than 999 atoms or bonds).</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">461</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">461</span>
 <span class="normal">462</span>
 <span class="normal">463</span>
 <span class="normal">464</span>
@@ -3387,10 +3432,11 @@ with more than 999 atoms or bonds).</p>
         <span class="n">f</span> <span class="o">=</span> <span class="n">cast</span><span class="p">(</span><span class="n">IO</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
         <span class="n">f</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">molblock</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3405,6 +3451,8 @@ with more than 999 atoms or bonds).</p>
   <div class="doc doc-contents ">
   
       <p>Write molecules to a file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3477,9 +3525,9 @@ precedence over <code>smiles_column</code>.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">237</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">237</span>
 <span class="normal">238</span>
 <span class="normal">239</span>
 <span class="normal">240</span>
@@ -3557,10 +3605,11 @@ precedence over <code>smiles_column</code>.</p>
                 <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3583,6 +3632,8 @@ default settings which changes:</p>
 <li>The headers of the column are not included.</li>
 </ul>
 <p>By modifying the args of <code>dm.to_csv()</code>, you will be able to save a SMI compatible file.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3640,9 +3691,9 @@ default settings which changes:</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">479</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">479</span>
 <span class="normal">480</span>
 <span class="normal">481</span>
 <span class="normal">482</span>
@@ -3726,10 +3777,11 @@ default settings which changes:</p>
                 <span class="n">writer</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
             <span class="n">writer</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3745,6 +3797,8 @@ default settings which changes:</p>
   
       <p>Write molecules to an Excel file with a molecule column as an RDKit rendered
 image.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3819,9 +3873,9 @@ the molecule images are not written.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/io.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">563</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/io.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">563</span>
 <span class="normal">564</span>
 <span class="normal">565</span>
 <span class="normal">566</span>
@@ -3885,7 +3939,7 @@ the molecule images are not written.</p>
     <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">urlpath</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s2">&quot;wb&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">PandasTools</span><span class="o">.</span><span class="n">SaveXlsxFromFrame</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="n">f</span><span class="p">,</span> <span class="n">molCol</span><span class="o">=</span><span class="n">mol_column</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">mol_size</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -3938,10 +3992,10 @@ the molecule images are not written.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.similarity.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1024,6 +1024,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1038,6 +1039,8 @@
   
       <p>Generate fuzzy scaffold with enforceable group that needs to appear
 in the core, forcing to keep the full side chain if required</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1137,6 +1140,8 @@ in the core, forcing to keep the full side chain if required</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1190,9 +1195,9 @@ and the R-groups decomposition row.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 77</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 77</span>
 <span class="normal"> 78</span>
 <span class="normal"> 79</span>
 <span class="normal"> 80</span>
@@ -1436,7 +1441,7 @@ and the R-groups decomposition row.</li>
         <span class="n">scf</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">GetScaffoldForMol</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
         <span class="k">try</span><span class="p">:</span>
             <span class="n">scf</span> <span class="o">=</span> <span class="n">MurckoScaffold</span><span class="o">.</span><span class="n">MakeScaffoldGeneric</span><span class="p">(</span><span class="n">scf</span><span class="p">)</span>
-        <span class="k">except</span><span class="p">:</span>
+        <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
             <span class="k">pass</span>
 
         <span class="k">if</span> <span class="n">ignore_non_ring</span><span class="p">:</span>
@@ -1524,7 +1529,7 @@ and the R-groups decomposition row.</li>
                 <span class="p">]</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">scaff</span> <span class="o">=</span> <span class="n">trim_side_chain</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">AdjustQueryProperties</span><span class="p">(</span><span class="n">core</span><span class="p">,</span> <span class="n">core_query_param</span><span class="p">),</span> <span class="n">rgroups</span><span class="p">)</span>
-            <span class="k">except</span><span class="p">:</span>
+            <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
                 <span class="k">continue</span>
             <span class="n">all_scaffolds</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">scaff</span><span class="p">))</span>
         <span class="c1"># if user wants a dataframe turned on...</span>
@@ -1550,10 +1555,11 @@ and the R-groups decomposition row.</li>
     <span class="n">df_groups</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">&quot;scf&quot;</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">scf2groups</span><span class="o">.</span><span class="n">keys</span><span class="p">()),</span> <span class="kc">True</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">all_scaffolds</span><span class="p">,</span> <span class="n">df_infos_t</span><span class="p">,</span> <span class="n">df_groups</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1569,9 +1575,9 @@ and the R-groups decomposition row.</li>
   
       <p>Trim list of side chain from a molecule.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/scaffold/_fuzzy.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">32</span>
 <span class="normal">33</span>
 <span class="normal">34</span>
 <span class="normal">35</span>
@@ -1657,7 +1663,7 @@ and the R-groups decomposition row.</li>
 
     <span class="k">return</span> <span class="n">keep_largest_fragment</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -1710,10 +1716,10 @@ and the R-groups decomposition row.</li>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

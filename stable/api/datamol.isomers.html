@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.log.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1134,6 +1134,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1147,6 +1148,8 @@
   <div class="doc doc-contents ">
   
       <p>Get the canonical tautomer of the current molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1176,9 +1179,9 @@
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
 <span class="normal">196</span>
@@ -1194,10 +1197,11 @@
     <span class="n">enumerator</span> <span class="o">=</span> <span class="n">rdMolStandardize</span><span class="o">.</span><span class="n">TautomerEnumerator</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">enumerator</span><span class="o">.</span><span class="n">Canonicalize</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1214,6 +1218,8 @@
       <p>Enumerate the stereocenters and bonds of the current molecule.</p>
 <p>Original source: the <code>openff-toolkit</code> lib.</p>
 <p>Warning: this function can be computationnaly intensive.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1318,9 +1324,9 @@ markings on the bonds.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 52</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 52</span>
 <span class="normal"> 53</span>
 <span class="normal"> 54</span>
 <span class="normal"> 55</span>
@@ -1452,10 +1458,11 @@ markings on the bonds.</p>
 
     <span class="k">return</span> <span class="n">variants</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1471,6 +1478,8 @@ markings on the bonds.</p>
   
       <p>Enumerate the structural isomers of the input molecule</p>
 <p>Warning: this function can be computationnaly intensive.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1586,9 +1595,9 @@ computation is not stopped when the duration is reached.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
 <span class="normal">123</span>
@@ -1702,10 +1711,11 @@ computation is not stopped when the duration is reached.</p>
 
     <span class="k">return</span> <span class="n">isomers</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1720,6 +1730,8 @@ computation is not stopped when the duration is reached.</p>
   <div class="doc doc-contents ">
   
       <p>Enumerate the possible tautomers of the current molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1825,9 +1837,9 @@ of the amido-imidol tautomerism.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
@@ -1897,10 +1909,11 @@ of the amido-imidol tautomerism.</p>
     <span class="n">tautomers</span> <span class="o">=</span> <span class="n">enumerator</span><span class="o">.</span><span class="n">Enumerate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">list</span><span class="p">(</span><span class="n">tautomers</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1915,6 +1928,8 @@ of the amido-imidol tautomerism.</p>
   <div class="doc doc-contents ">
   
       <p>Removes all stereochemistry info from the molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1958,9 +1973,9 @@ of the amido-imidol tautomerism.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
 <span class="normal">180</span>
 <span class="normal">181</span>
 <span class="normal">182</span>
@@ -1984,7 +1999,7 @@ of the amido-imidol tautomerism.</p>
     <span class="n">rdmolops</span><span class="o">.</span><span class="n">RemoveStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2019,7 +2034,7 @@ of the amido-imidol tautomerism.</p>
 
 
 <h3 id="datamol.isomers._structural.IsomerEnumerator" class="doc doc-heading">
-        <code>IsomerEnumerator</code>
+          <code>IsomerEnumerator</code>
 
 
 <a href="#datamol.isomers._structural.IsomerEnumerator" class="headerlink" title="Permanent link">&para;</a></h3>
@@ -2032,10 +2047,10 @@ of the amido-imidol tautomerism.</p>
 <p>..note::
     Due to the chemical reaction used, atom mapping will not be preserved !</p>
 
-
-        <details class="quote">
-          <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-          <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
+            <details class="quote">
+              <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">214</span>
+<span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
@@ -2209,9 +2224,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">386</span>
 <span class="normal">387</span>
 <span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IsomerEnumerator</span><span class="p">:</span>
+<span class="normal">389</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">IsomerEnumerator</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    Implementation of the isomer enumeration algorithm described in  https://doi.org/10.1186/s13321-017-0252-9</span>
 
@@ -2364,7 +2377,6 @@ of the amido-imidol tautomerism.</p>
                             <span class="k">break</span>
                         <span class="n">new_mol</span> <span class="o">=</span> <span class="n">new_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                         <span class="c1"># sanitize mol</span>
-                        <span class="n">tmp_sm</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                         <span class="n">new_mol</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                         <span class="c1"># need to clean twice, not sure why</span>
                         <span class="n">_</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
@@ -2389,11 +2401,12 @@ of the amido-imidol tautomerism.</p>
                             <span class="k">yield</span> <span class="n">new_smiles</span>
                             <span class="n">_max_mols</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
-        </details>
+            </details>
 
   
 
   <div class="doc doc-children">
+
 
 
 
@@ -2416,6 +2429,8 @@ of the amido-imidol tautomerism.</p>
   <div class="doc doc-contents ">
   
       <p>Structural isomer enumeration</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2487,9 +2502,10 @@ of the amido-imidol tautomerism.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">224</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">223</span>
+<span class="normal">224</span>
 <span class="normal">225</span>
 <span class="normal">226</span>
 <span class="normal">227</span>
@@ -2511,8 +2527,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">243</span>
 <span class="normal">244</span>
 <span class="normal">245</span>
-<span class="normal">246</span>
-<span class="normal">247</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">246</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">allow_cycle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">allow_double_bond</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -2537,10 +2552,11 @@ of the amido-imidol tautomerism.</p>
     <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">rxn_cache</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No isomeric transformation matches your&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2555,6 +2571,8 @@ of the amido-imidol tautomerism.</p>
   <div class="doc doc-contents ">
   
       <p>Enumerate the list of isomers of the current mol</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2640,9 +2658,10 @@ of the amido-imidol tautomerism.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">316</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_structural.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
+<span class="normal">316</span>
 <span class="normal">317</span>
 <span class="normal">318</span>
 <span class="normal">319</span>
@@ -2715,9 +2734,7 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">386</span>
 <span class="normal">387</span>
 <span class="normal">388</span>
-<span class="normal">389</span>
-<span class="normal">390</span>
-<span class="normal">391</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate</span><span class="p">(</span>
+<span class="normal">389</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">depth</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2769,7 +2786,6 @@ of the amido-imidol tautomerism.</p>
                         <span class="k">break</span>
                     <span class="n">new_mol</span> <span class="o">=</span> <span class="n">new_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
                     <span class="c1"># sanitize mol</span>
-                    <span class="n">tmp_sm</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                     <span class="n">new_mol</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
                     <span class="c1"># need to clean twice, not sure why</span>
                     <span class="n">_</span><span class="p">,</span> <span class="n">new_smiles</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_clean</span><span class="p">(</span><span class="n">new_mol</span><span class="p">)</span>
@@ -2794,7 +2810,7 @@ of the amido-imidol tautomerism.</p>
                         <span class="k">yield</span> <span class="n">new_smiles</span>
                         <span class="n">_max_mols</span> <span class="o">-=</span> <span class="mi">1</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2856,10 +2872,10 @@ of the amido-imidol tautomerism.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

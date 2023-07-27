@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.reactions.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1584,6 +1584,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1597,6 +1598,8 @@
   <div class="doc doc-contents ">
   
       <p>Adds hydrogens to the molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1683,9 +1686,9 @@ Useful for PDB files.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1055</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1055</span>
 <span class="normal">1056</span>
 <span class="normal">1057</span>
 <span class="normal">1058</span>
@@ -1737,10 +1740,11 @@ Useful for PDB files.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1757,6 +1761,8 @@ Useful for PDB files.</p>
       <p>Remove all atoms that are essentially disconnected singleton nodes in the molecular graph.
 For example, the chlorine atom and methane fragment will be removed in Cl.[N:1]1=CC(O)=CC2CCCCC12.CC.C",
 but not the ethane fragment.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1786,9 +1792,9 @@ but not the ethane fragment.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">635</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">635</span>
 <span class="normal">636</span>
 <span class="normal">637</span>
 <span class="normal">638</span>
@@ -1822,10 +1828,11 @@ but not the ethane fragment.</p>
         <span class="n">em</span><span class="o">.</span><span class="n">RemoveAtom</span><span class="p">(</span><span class="n">a_idx</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">em</span><span class="o">.</span><span class="n">GetMol</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1840,6 +1847,8 @@ but not the ethane fragment.</p>
   <div class="doc doc-contents ">
   
       <p>Add the <code>molAtomMapNumber</code> property to each atoms.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1883,9 +1892,9 @@ but not the ethane fragment.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">915</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">915</span>
 <span class="normal">916</span>
 <span class="normal">917</span>
 <span class="normal">918</span>
@@ -1913,10 +1922,11 @@ but not the ethane fragment.</p>
         <span class="n">atom</span><span class="o">.</span><span class="n">SetProp</span><span class="p">(</span><span class="s2">&quot;molAtomMapNumber&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">atom</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">()))</span>
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1932,6 +1942,8 @@ but not the ethane fragment.</p>
   
       <p>Return a list of existing bond indices between a list of
 atom indices.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1975,9 +1987,9 @@ atom indices.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">931</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">931</span>
 <span class="normal">932</span>
 <span class="normal">933</span>
 <span class="normal">934</span>
@@ -2043,10 +2055,11 @@ atom indices.</p>
 
     <span class="k">return</span> <span class="n">bonds</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2061,6 +2074,8 @@ atom indices.</p>
   <div class="doc doc-contents ">
   
       <p>Clear the <code>molAtomMapNumber</code> property of the atom's molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2104,9 +2119,9 @@ atom indices.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">905</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">905</span>
 <span class="normal">906</span>
 <span class="normal">907</span>
 <span class="normal">908</span>
@@ -2122,10 +2137,11 @@ atom indices.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">clear_atom_props</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">copy</span><span class="o">=</span><span class="n">copy</span><span class="p">,</span> <span class="n">property_keys</span><span class="o">=</span><span class="s2">&quot;molAtomMapNumber&quot;</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2140,6 +2156,8 @@ atom indices.</p>
   <div class="doc doc-contents ">
   
       <p>Clear atom properties from a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2226,9 +2244,9 @@ It not set, all the properties are cleared.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">868</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">868</span>
 <span class="normal">869</span>
 <span class="normal">870</span>
 <span class="normal">871</span>
@@ -2298,10 +2316,11 @@ It not set, all the properties are cleared.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2316,6 +2335,8 @@ It not set, all the properties are cleared.</p>
   <div class="doc doc-contents ">
   
       <p>Clear properties from a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2402,9 +2423,9 @@ It not set, all the properties are cleared.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">834</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">834</span>
 <span class="normal">835</span>
 <span class="normal">836</span>
 <span class="normal">837</span>
@@ -2468,10 +2489,11 @@ It not set, all the properties are cleared.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2487,6 +2509,8 @@ It not set, all the properties are cleared.</p>
   
       <p>Compute the list of ring system in a molecule. This is based on RDKit's cookbook:
 <a href="https://www.rdkit.org/docs/Cookbook.html#rings-aromaticity-and-kekulization">https://www.rdkit.org/docs/Cookbook.html#rings-aromaticity-and-kekulization</a></p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2530,6 +2554,8 @@ It not set, all the properties are cleared.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2552,9 +2578,9 @@ It not set, all the properties are cleared.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1181</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1181</span>
 <span class="normal">1182</span>
 <span class="normal">1183</span>
 <span class="normal">1184</span>
@@ -2604,10 +2630,11 @@ It not set, all the properties are cleared.</p>
         <span class="n">systems</span> <span class="o">=</span> <span class="n">nSystems</span>
     <span class="k">return</span> <span class="n">systems</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2622,6 +2649,8 @@ It not set, all the properties are cleared.</p>
   <div class="doc doc-contents ">
   
       <p>Copy a molecule and return a new one.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2651,9 +2680,9 @@ It not set, all the properties are cleared.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
@@ -2667,10 +2696,11 @@ It not set, all the properties are cleared.</p>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">return</span> <span class="n">copy</span><span class="o">.</span><span class="n">deepcopy</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2686,6 +2716,8 @@ It not set, all the properties are cleared.</p>
   
       <p>Copy properties from one source molecule to another destination
 molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2757,9 +2789,9 @@ molecule.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">814</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">814</span>
 <span class="normal">815</span>
 <span class="normal">816</span>
 <span class="normal">817</span>
@@ -2795,10 +2827,11 @@ molecule.</p>
     <span class="n">props</span> <span class="o">=</span> <span class="n">source</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">(</span><span class="n">includePrivate</span><span class="o">=</span><span class="n">include_private</span><span class="p">,</span> <span class="n">includeComputed</span><span class="o">=</span><span class="n">include_computed</span><span class="p">)</span>
     <span class="n">set_mol_props</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="n">props</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2814,6 +2847,8 @@ molecule.</p>
   
       <p>Remove one single bond from the input bond. Note that you should
 first kekulize your molecules and remove non-standard bond.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2843,9 +2878,9 @@ first kekulize your molecules and remove non-standard bond.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">550</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">550</span>
 <span class="normal">551</span>
 <span class="normal">552</span>
 <span class="normal">553</span>
@@ -2873,10 +2908,11 @@ first kekulize your molecules and remove non-standard bond.</p>
         <span class="k">return</span> <span class="kc">None</span>
     <span class="k">return</span> <span class="n">bond</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2891,6 +2927,8 @@ first kekulize your molecules and remove non-standard bond.</p>
   <div class="doc doc-contents ">
   
       <p>Fix error in molecule using a greedy approach.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2976,6 +3014,8 @@ first kekulize your molecules and remove non-standard bond.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2998,9 +3038,9 @@ first kekulize your molecules and remove non-standard bond.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">668</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">668</span>
 <span class="normal">669</span>
 <span class="normal">670</span>
 <span class="normal">671</span>
@@ -3076,10 +3116,11 @@ first kekulize your molecules and remove non-standard bond.</p>
 
     <span class="k">return</span> <span class="n">m</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3095,6 +3136,8 @@ first kekulize your molecules and remove non-standard bond.</p>
   
       <p>Identify and try to fix valence issues by removing any supplemental bond
 that should not be in the graph.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3152,6 +3195,8 @@ that should not be in the graph.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3184,9 +3229,9 @@ that should not be in the graph.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">566</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">566</span>
 <span class="normal">567</span>
 <span class="normal">568</span>
 <span class="normal">569</span>
@@ -3320,10 +3365,11 @@ that should not be in the graph.</p>
 
     <span class="k">return</span> <span class="n">m</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3338,6 +3384,8 @@ that should not be in the graph.</p>
   <div class="doc doc-contents ">
   
       <p>Fix valence issues that are due to incorrect charges.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3381,6 +3429,8 @@ that should not be in the graph.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3403,9 +3453,9 @@ that should not be in the graph.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">497</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">497</span>
 <span class="normal">498</span>
 <span class="normal">499</span>
 <span class="normal">500</span>
@@ -3461,10 +3511,11 @@ that should not be in the graph.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3479,6 +3530,8 @@ that should not be in the graph.</p>
   <div class="doc doc-contents ">
   
       <p>Return the atom positions of a given molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3537,9 +3590,9 @@ atom map numbers given by the <code>molAtomMapNumber</code> atom property.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1347</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1347</span>
 <span class="normal">1348</span>
 <span class="normal">1349</span>
 <span class="normal">1350</span>
@@ -3594,7 +3647,7 @@ atom map numbers given by the <code>molAtomMapNumber</code> atom property.</p>
         <span class="p">[</span><span class="s2">&quot;molAtomMapNumber&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
+            <span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
             <span class="s2">&quot;Set it before calling this function or set `from_atom_map_numbers` to `False`.&quot;</span>
         <span class="p">)</span>
 
@@ -3609,10 +3662,11 @@ atom map numbers given by the <code>molAtomMapNumber</code> atom property.</p>
 
     <span class="k">return</span> <span class="n">positions</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3635,6 +3689,8 @@ chemically “the same”, they should have the same hash.</p>
 have the same molhash.</li>
 <li>Canonicalizes S group data (for example, polymer data).</li>
 </ul>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3681,6 +3737,8 @@ have the same molhash.</li>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3703,9 +3761,9 @@ have the same molhash.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">169</span>
 <span class="normal">170</span>
 <span class="normal">171</span>
 <span class="normal">172</span>
@@ -3787,16 +3845,17 @@ have the same molhash.</li>
         <span class="n">hash_scheme_enum</span> <span class="o">=</span> <span class="n">RegistrationHash</span><span class="o">.</span><span class="n">HashScheme</span><span class="o">.</span><span class="n">TAUTOMER_INSENSITIVE_LAYERS</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;`hash_scheme` is invalid. Please choose from: &#39;all&#39;, &#39;no_stereo&#39; or &#39;no_tautomers&#39;.&quot;</span>
+            <span class="s2">&quot;`hash_scheme` is invalid. Please choose from: &#39;all&#39;, &#39;no_stereo&#39; or &#39;no_tautomers&#39;.&quot;</span>
         <span class="p">)</span>
 
     <span class="c1"># Generate the hash</span>
     <span class="k">return</span> <span class="n">RegistrationHash</span><span class="o">.</span><span class="n">GetMolHash</span><span class="p">(</span><span class="n">all_layers</span><span class="o">=</span><span class="n">all_layers</span><span class="p">,</span> <span class="n">hash_scheme</span><span class="o">=</span><span class="n">hash_scheme_enum</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3811,6 +3870,8 @@ have the same molhash.</li>
   <div class="doc doc-contents ">
   
       <p>Check if an atom connection is not valid or all the atom of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3854,6 +3915,8 @@ have the same molhash.</li>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3876,9 +3939,9 @@ have the same molhash.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">527</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">527</span>
 <span class="normal">528</span>
 <span class="normal">529</span>
 <span class="normal">530</span>
@@ -3920,10 +3983,11 @@ have the same molhash.</li>
         <span class="n">a</span><span class="o">.</span><span class="n">GetExplicitValence</span><span class="p">()</span> <span class="o">&gt;</span> <span class="nb">max</span><span class="p">(</span><span class="n">PERIODIC_TABLE</span><span class="o">.</span><span class="n">GetValenceList</span><span class="p">(</span><span class="n">a</span><span class="o">.</span><span class="n">GetSymbol</span><span class="p">()))</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3938,6 +4002,8 @@ have the same molhash.</li>
   <div class="doc doc-contents ">
   
       <p>Check if atom is a transition metal.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3967,9 +4033,9 @@ have the same molhash.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">740</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">740</span>
 <span class="normal">741</span>
 <span class="normal">742</span>
 <span class="normal">743</span>
@@ -3985,10 +4051,11 @@ have the same molhash.</li>
     <span class="n">n</span> <span class="o">=</span> <span class="n">at</span><span class="o">.</span><span class="n">GetAtomicNum</span><span class="p">()</span>
     <span class="k">return</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">22</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">29</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">40</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">47</span><span class="p">)</span> <span class="ow">or</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;=</span> <span class="mi">72</span> <span class="ow">and</span> <span class="n">n</span> <span class="o">&lt;=</span> <span class="mi">79</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4004,9 +4071,9 @@ have the same molhash.</li>
   
       <p>Only keep largest fragment of each molecule.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">731</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">731</span>
 <span class="normal">732</span>
 <span class="normal">733</span>
 <span class="normal">734</span>
@@ -4020,10 +4087,11 @@ have the same molhash.</li>
         <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">m</span><span class="p">:</span> <span class="n">m</span><span class="o">.</span><span class="n">GetNumAtoms</span><span class="p">(),</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4038,6 +4106,8 @@ have the same molhash.</li>
   <div class="doc doc-contents ">
   
       <p>Make the atom in a scaffold or molecule generic.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4081,9 +4151,9 @@ have the same molhash.</li>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1154</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1154</span>
 <span class="normal">1155</span>
 <span class="normal">1156</span>
 <span class="normal">1157</span>
@@ -4133,10 +4203,11 @@ have the same molhash.</li>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4153,6 +4224,8 @@ have the same molhash.</li>
       <p>Protect a list of atoms or substruct in a molecule.</p>
 <p>The _protected attributes of a molecule is used by RDKit in several functions, especially for reactions
 where "protected" atoms are disallowed from taking part in reactions.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4224,9 +4297,9 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1015</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1015</span>
 <span class="normal">1016</span>
 <span class="normal">1017</span>
 <span class="normal">1018</span>
@@ -4302,10 +4375,11 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
 
     <span class="k">return</span> <span class="n">mol_copy</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4320,6 +4394,8 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
   <div class="doc doc-contents ">
   
       <p>Randomize the position of the atoms in a mol.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4349,6 +4425,8 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -4371,9 +4449,9 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">246</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">246</span>
 <span class="normal">247</span>
 <span class="normal">248</span>
 <span class="normal">249</span>
@@ -4403,10 +4481,11 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">atom_indices</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rdmolops</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">atom_indices</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4422,9 +4501,9 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
   
       <p>Remove dummy atoms from molecules.</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">654</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">654</span>
 <span class="normal">655</span>
 <span class="normal">656</span>
 <span class="normal">657</span>
@@ -4448,10 +4527,11 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
         <span class="n">out</span> <span class="o">=</span> <span class="n">rdmolops</span><span class="o">.</span><span class="n">DeleteSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">out</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4466,6 +4546,8 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
   <div class="doc doc-contents ">
   
       <p>Removes hydrogens from a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4537,9 +4619,9 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1083</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1083</span>
 <span class="normal">1084</span>
 <span class="normal">1085</span>
 <span class="normal">1086</span>
@@ -4583,10 +4665,11 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4621,9 +4704,9 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
     &lt;datamol.mol.keep_largest_fragment&gt;
 </code></pre>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1384</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1384</span>
 <span class="normal">1385</span>
 <span class="normal">1386</span>
 <span class="normal">1387</span>
@@ -4695,10 +4778,11 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
         <span class="n">mol_copy</span><span class="p">,</span> <span class="n">dontRemoveEverything</span><span class="o">=</span><span class="n">dont_remove_everything</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="n">sanitize</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4714,6 +4798,8 @@ where "protected" atoms are disallowed from taking part in reactions.</p>
   
       <p>Reorder the atoms in a mol. It ensures a single atom order for the same molecule,
 regardless of its original representation.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4785,6 +4871,8 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -4807,9 +4895,9 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">215</span>
 <span class="normal">216</span>
 <span class="normal">217</span>
 <span class="normal">218</span>
@@ -4867,10 +4955,11 @@ regardless of its original representation.</p>
     <span class="n">new_order</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">([(</span><span class="n">y</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">new_order</span><span class="p">)])</span>
     <span class="k">return</span> <span class="n">rdmolops</span><span class="o">.</span><span class="n">RenumberAtoms</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="p">[</span><span class="n">y</span> <span class="k">for</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span> <span class="ow">in</span> <span class="n">new_order</span><span class="p">])</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -4885,6 +4974,8 @@ regardless of its original representation.</p>
   <div class="doc doc-contents ">
   
       <p>Remove dummy atoms from molecules.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -4956,6 +5047,8 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -4978,9 +5071,9 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">708</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">708</span>
 <span class="normal">709</span>
 <span class="normal">710</span>
 <span class="normal">711</span>
@@ -5022,10 +5115,11 @@ regardless of its original representation.</p>
     <span class="n">out</span> <span class="o">=</span> <span class="n">rdmolops</span><span class="o">.</span><span class="n">ReplaceSubstructs</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">du</span><span class="p">,</span> <span class="n">replacement</span><span class="p">,</span> <span class="n">replaceAll</span><span class="o">=</span><span class="n">replace_all</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">out</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -5041,6 +5135,8 @@ regardless of its original representation.</p>
   
       <p>Check two molecules are the same by comparing their InChiKey.</p>
 <p>Invalid molecules (None) are always considered as not the same.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5098,9 +5194,9 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
@@ -5144,10 +5240,11 @@ regardless of its original representation.</p>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol1</span><span class="p">)</span> <span class="o">==</span> <span class="n">to_inchikey</span><span class="p">(</span><span class="n">mol2</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -5162,6 +5259,8 @@ regardless of its original representation.</p>
   <div class="doc doc-contents ">
   
       <p>Sanitize a list of molecules and return the first valid molecule seen in the list.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5220,6 +5319,8 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -5242,9 +5343,9 @@ regardless of its original representation.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">379</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">379</span>
 <span class="normal">380</span>
 <span class="normal">381</span>
 <span class="normal">382</span>
@@ -5278,10 +5379,11 @@ regardless of its original representation.</p>
             <span class="k">return</span> <span class="n">mol</span>
     <span class="k">return</span> <span class="kc">None</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -5303,6 +5405,8 @@ Optionally, it can neutralize the charge of the molecule.</p>
 a warning will be displayed if more than one conformer is detected.</p>
 <p>Note #2: The molecule's properties will be preserved but the atom's
 properties will be lost.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5390,6 +5494,8 @@ molecule already contains hydrogens.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -5412,9 +5518,9 @@ molecule already contains hydrogens.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span>
@@ -5522,7 +5628,7 @@ molecule already contains hydrogens.</p>
         <span class="c1"># Detect multiple conformers</span>
         <span class="k">if</span> <span class="n">verbose</span> <span class="ow">and</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;The molecule contains multiple conformers. Only the first one will be preserved.&quot;</span>
+                <span class="s2">&quot;The molecule contains multiple conformers. Only the first one will be preserved.&quot;</span>
             <span class="p">)</span>
 
         <span class="c1"># Try catch to avoid occasional aromaticity errors</span>
@@ -5538,10 +5644,11 @@ molecule already contains hydrogens.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -5556,6 +5663,8 @@ molecule already contains hydrogens.</p>
   <div class="doc doc-contents ">
   
       <p>Takes SMILES string and returns its sanitized version.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -5599,6 +5708,8 @@ molecule already contains hydrogens.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -5621,9 +5732,9 @@ molecule already contains hydrogens.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">349</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">349</span>
 <span class="normal">350</span>
 <span class="normal">351</span>
 <span class="normal">352</span>
@@ -5674,15 +5785,16 @@ molecule already contains hydrogens.</p>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">smiles</span> <span class="o">=</span> <span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">isomeric</span><span class="o">=</span><span class="n">isomeric</span><span class="p">)</span>
-    <span class="k">except</span><span class="p">:</span>
+    <span class="k">except</span> <span class="ne">Exception</span><span class="p">:</span>
         <span class="k">return</span> <span class="kc">None</span>
 
     <span class="k">return</span> <span class="n">smiles</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -5757,6 +5869,8 @@ data structure when working with Quantum Mechanics dataset.</p>
 <span class="c1"># or `dm.viz.conformers(new_mol)`.</span>
 </code></pre></div>
 
+
+
   <p><strong>Parameters:</strong></p>
   <table>
     <thead>
@@ -5785,7 +5899,7 @@ data structure when working with Quantum Mechanics dataset.</p>
         <tr>
           <td><code>positions</code></td>
           <td>
-                <code><span title="numpy.typing">npt</span>.<span title="numpy.typing.ArrayLike">ArrayLike</span></code>
+                <code><span title="numpy">npt</span>.<span title="numpy.ArrayLike">ArrayLike</span></code>
           </td>
           <td>
             <div class="doc-md-description">
@@ -5857,9 +5971,9 @@ the default atom indices order is assumed.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1208</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1208</span>
 <span class="normal">1209</span>
 <span class="normal">1210</span>
 <span class="normal">1211</span>
@@ -6102,7 +6216,7 @@ the default atom indices order is assumed.</p>
         <span class="p">[</span><span class="s2">&quot;molAtomMapNumber&quot;</span> <span class="ow">in</span> <span class="n">a</span><span class="o">.</span><span class="n">GetPropsAsDict</span><span class="p">()</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()]</span>
     <span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
+            <span class="s2">&quot;The atoms of the input molecule does not contain the molAtomMapNumber property.&quot;</span>
             <span class="s2">&quot;Set it before calling this function or set `from_atom_map_numbers` to `False`.&quot;</span>
         <span class="p">)</span>
 
@@ -6133,10 +6247,11 @@ the default atom indices order is assumed.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6152,6 +6267,8 @@ the default atom indices order is assumed.</p>
   
       <p>Replaces some single bonds between metals and atoms with atomic numbers in fromAtoms
 with dative bonds. The replacement is only done if the atom has "too many" bonds.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -6196,6 +6313,8 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -6218,9 +6337,9 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">750</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">750</span>
 <span class="normal">751</span>
 <span class="normal">752</span>
 <span class="normal">753</span>
@@ -6272,10 +6391,11 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
                 <span class="n">rwmol</span><span class="o">.</span><span class="n">AddBond</span><span class="p">(</span><span class="n">nbr</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">metal</span><span class="o">.</span><span class="n">GetIdx</span><span class="p">(),</span> <span class="n">DATIVE_BOND</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">rwmol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6290,6 +6410,8 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
   <div class="doc doc-contents ">
   
       <p>Set properties to a mol from a dict.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -6347,9 +6469,9 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">778</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">778</span>
 <span class="normal">779</span>
 <span class="normal">780</span>
 <span class="normal">781</span>
@@ -6417,10 +6539,11 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6437,6 +6560,8 @@ By default, only Nitrogen (7) and Oxygen (8) are considered.</p>
       <p>This function returns a standardized version the given molecule. It relies on the
 RDKit <a href="https://www.rdkit.org/docs/source/rdkit.Chem.MolStandardize.rdMolStandardize.html"><code>rdMolStandardize</code> module</a>
 which is largely inspired from <a href="https://github.com/mcs07/MolVS">MolVS</a>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -6567,6 +6692,8 @@ corresponding negative charge to ensure a net zero charge.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -6589,9 +6716,9 @@ corresponding negative charge to ensure a net zero charge.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">417</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">417</span>
 <span class="normal">418</span>
 <span class="normal">419</span>
 <span class="normal">420</span>
@@ -6747,10 +6874,11 @@ corresponding negative charge to ensure a net zero charge.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6766,6 +6894,8 @@ corresponding negative charge to ensure a net zero charge.</p>
   
       <p>Apply smile standardization procedure. This is a convenient function wrapped arrounf RDKit
 smiles standardizer and tautomeric canonicalization.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -6809,6 +6939,8 @@ smiles standardizer and tautomeric canonicalization.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -6831,9 +6963,9 @@ smiles standardizer and tautomeric canonicalization.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">398</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">398</span>
 <span class="normal">399</span>
 <span class="normal">400</span>
 <span class="normal">401</span>
@@ -6867,10 +6999,11 @@ smiles standardizer and tautomeric canonicalization.</p>
         <span class="n">smiles</span> <span class="o">=</span> <span class="n">canonicalize_tautomer_smiles</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">smiles</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6886,6 +7019,8 @@ smiles standardizer and tautomeric canonicalization.</p>
   
       <p>Strip a molecule to its core, i.e. remove all atoms not in the core.
 This method 'guess' the molecular core, by finding the ring system.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -6929,9 +7064,9 @@ This method 'guess' the molecular core, by finding the ring system.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1107</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1107</span>
 <span class="normal">1108</span>
 <span class="normal">1109</span>
 <span class="normal">1110</span>
@@ -6979,10 +7114,11 @@ This method 'guess' the molecular core, by finding the ring system.</p>
 
     <span class="k">return</span> <span class="n">scaffold</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -6998,6 +7134,8 @@ This method 'guess' the molecular core, by finding the ring system.</p>
   
       <p>Perform a substructure match using <code>GetSubstructMatches</code> but instead
 of returning only the atom indices also return the bond indices.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -7055,6 +7193,8 @@ of returning only the atom indices also return the bond indices.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -7087,9 +7227,9 @@ of returning only the atom indices also return the bond indices.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 966</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 966</span>
 <span class="normal"> 967</span>
 <span class="normal"> 968</span>
 <span class="normal"> 969</span>
@@ -7183,10 +7323,11 @@ of returning only the atom indices also return the bond indices.</p>
 
     <span class="k">return</span> <span class="n">atom_matches</span><span class="p">,</span> <span class="n">bond_matches</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -7201,6 +7342,8 @@ of returning only the atom indices also return the bond indices.</p>
   <div class="doc doc-contents ">
   
       <p>Convert an input molecule (smiles representation) into a <code>Mol</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -7359,6 +7502,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -7391,9 +7536,9 @@ a single atom order for the same molecule, regardless of its original SMILES rep
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 61</span>
 <span class="normal"> 62</span>
 <span class="normal"> 63</span>
 <span class="normal"> 64</span>
@@ -7521,10 +7666,11 @@ a single atom order for the same molecule, regardless of its original SMILES rep
 
     <span class="k">return</span> <span class="n">_mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -7539,6 +7685,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
   <div class="doc doc-contents ">
   
       <p>Neutralize the charge of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -7568,6 +7716,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -7590,9 +7740,9 @@ a single atom order for the same molecule, regardless of its original SMILES rep
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">263</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">263</span>
 <span class="normal">264</span>
 <span class="normal">265</span>
 <span class="normal">266</span>
@@ -7632,10 +7782,11 @@ a single atom order for the same molecule, regardless of its original SMILES rep
             <span class="n">a</span><span class="o">.</span><span class="n">UpdatePropertyCache</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -7650,6 +7801,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
   <div class="doc doc-contents ">
   
       <p>Extract the Murcko scaffold from a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -7693,9 +7846,9 @@ a single atom order for the same molecule, regardless of its original SMILES rep
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1133</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1133</span>
 <span class="normal">1134</span>
 <span class="normal">1135</span>
 <span class="normal">1136</span>
@@ -7733,10 +7886,11 @@ a single atom order for the same molecule, regardless of its original SMILES rep
 
     <span class="k">return</span> <span class="n">scf</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -7754,6 +7908,8 @@ a single atom order for the same molecule, regardless of its original SMILES rep
 <p>The ID is an MD5 hash of the non-standard InChiKey provided
 by <code>dm.to_inchikey_non_standard()</code>. It guarantees uniqueness for
 different tautomeric forms of the same molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -7783,9 +7939,9 @@ different tautomeric forms of the same molecule.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/mol.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/mol.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">151</span>
 <span class="normal">152</span>
 <span class="normal">153</span>
 <span class="normal">154</span>
@@ -7817,7 +7973,7 @@ different tautomeric forms of the same molecule.</p>
 
     <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">(</span><span class="n">ik</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="s2">&quot;utf-8&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -7870,10 +8026,10 @@ different tautomeric forms of the same molecule.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>

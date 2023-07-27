@@ -17,7 +17,7 @@
         <link rel="next" href="datamol.convert.html">
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.4.3, mkdocs-material-9.1.16">
+      <meta name="generator" content="mkdocs-1.5.0, mkdocs-material-9.1.19">
     
     
       
@@ -25,7 +25,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.26e3688c.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.eebd395e.min.css">
       
       
 
@@ -1150,6 +1150,7 @@
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -1165,6 +1166,8 @@
       <p>Align a list of molecules to a reference molecule.</p>
 <p>Note that using the <code>O3A</code> backend, hydrogens will be added at the beginning of the procedure
 and removed at the end of the procedure.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1251,6 +1254,8 @@ will be used as reference.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -1283,9 +1288,9 @@ will be used as reference.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">378</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">378</span>
 <span class="normal">379</span>
 <span class="normal">380</span>
 <span class="normal">381</span>
@@ -1497,10 +1502,11 @@ will be used as reference.</p>
 
     <span class="k">return</span> <span class="n">mol_probes</span><span class="p">,</span> <span class="n">scores</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1515,6 +1521,8 @@ will be used as reference.</p>
   <div class="doc doc-contents ">
   
       <p>Cluster the conformers of a molecule according to an RMS threshold in Angstrom.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1589,9 +1597,9 @@ the conformers of the cluster. Defaults to True.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">258</span>
 <span class="normal">259</span>
 <span class="normal">260</span>
 <span class="normal">261</span>
@@ -1659,10 +1667,11 @@ the conformers of the cluster. Defaults to True.</p>
 
     <span class="k">return</span> <span class="n">return_centroids</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_clusters</span><span class="p">,</span> <span class="n">centroids</span><span class="o">=</span><span class="n">centroids</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -1696,6 +1705,8 @@ the conformers of the cluster. Defaults to True.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
 <span class="c1"># {&#39;rdkit_UFF_energy&#39;: 35.64074017773132,&#39;rdkit_UFF_delta_energy&#39;: 0.24682258222552633}</span>
 </code></pre></div>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -1893,7 +1904,7 @@ Disable to generate conformers much faster.</p>
             </div>
           </td>
           <td>
-                <code>np.inf</code>
+                <code><span title="numpy">np</span>.<span title="numpy.inf">inf</span></code>
           </td>
         </tr>
         <tr>
@@ -1907,7 +1918,7 @@ Disable to generate conformers much faster.</p>
             </div>
           </td>
           <td>
-                <code>np.inf</code>
+                <code><span title="numpy">np</span>.<span title="numpy.inf">inf</span></code>
           </td>
         </tr>
         <tr>
@@ -2019,6 +2030,8 @@ for more details.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -2041,9 +2054,9 @@ for more details.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 27</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 27</span>
 <span class="normal"> 28</span>
 <span class="normal"> 29</span>
 <span class="normal"> 30</span>
@@ -2422,7 +2435,7 @@ for more details.</p>
 
     <span class="k">if</span> <span class="n">energies</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">minE</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">energies</span><span class="p">)</span>
-        <span class="c1"># Add the energy as a property to each conformers</span>
+        <span class="c1"># Add the energy as a property to each conformer</span>
         <span class="p">[</span>
             <span class="p">(</span>
                 <span class="n">conf</span><span class="o">.</span><span class="n">SetDoubleProp</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;rdkit_</span><span class="si">{</span><span class="n">forcefield</span><span class="si">}</span><span class="s2">_energy&quot;</span><span class="p">,</span> <span class="n">energy</span><span class="p">),</span>
@@ -2459,10 +2472,11 @@ for more details.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2478,6 +2492,8 @@ for more details.</p>
   
       <p>Given a list of cluster indices, return one single molecule
 with only the centroid of the clusters of a list of molecules per cluster.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2537,9 +2553,9 @@ the conformers of the cluster.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">315</span>
 <span class="normal">316</span>
 <span class="normal">317</span>
 <span class="normal">318</span>
@@ -2611,10 +2627,11 @@ the conformers of the cluster.</p>
             <span class="n">mols</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">m</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">mols</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2629,6 +2646,8 @@ the conformers of the cluster.</p>
   <div class="doc doc-contents ">
   
       <p>Compute the RMSD between all the conformers of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2658,9 +2677,9 @@ the conformers of the cluster.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">294</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">294</span>
 <span class="normal">295</span>
 <span class="normal">296</span>
 <span class="normal">297</span>
@@ -2698,10 +2717,11 @@ the conformers of the cluster.</p>
             <span class="n">rmsds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">rmsd</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">rmsds</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">n_confs</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -2717,6 +2737,8 @@ the conformers of the cluster.</p>
   
       <p>Move a given conformer of a molecule to a new position. The transformation is performed
 in place.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2774,9 +2796,9 @@ in place.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">353</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_conformers.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">353</span>
 <span class="normal">354</span>
 <span class="normal">355</span>
 <span class="normal">356</span>
@@ -2822,7 +2844,7 @@ in place.</p>
     <span class="c1"># Transform</span>
     <span class="n">rdMolTransforms</span><span class="o">.</span><span class="n">TransformConformer</span><span class="p">(</span><span class="n">conf</span><span class="p">,</span> <span class="n">T</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -2853,6 +2875,7 @@ in place.</p>
 
 
 
+
 <div class="doc doc-object doc-function">
 
 
@@ -2866,6 +2889,8 @@ in place.</p>
   <div class="doc doc-contents ">
   
       <p>Compute the center of mass of a conformer of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -2939,9 +2964,11 @@ in place.</p>
       <p>Returns
     cm: Center of mass or geometrical center</p>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">101</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
@@ -2969,9 +2996,7 @@ in place.</p>
 <span class="normal">126</span>
 <span class="normal">127</span>
 <span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
+<span class="normal">129</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">center_of_mass</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">use_atoms</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">digits</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3003,10 +3028,11 @@ in place.</p>
 
     <span class="k">return</span> <span class="n">center</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3021,6 +3047,8 @@ in place.</p>
   <div class="doc doc-contents ">
   
       <p>Get the coordinate of a conformer of a molecule.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3064,9 +3092,11 @@ in place.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">86</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">84</span>
+<span class="normal">85</span>
+<span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span>
 <span class="normal">89</span>
@@ -3076,9 +3106,7 @@ in place.</p>
 <span class="normal">93</span>
 <span class="normal">94</span>
 <span class="normal">95</span>
-<span class="normal">96</span>
-<span class="normal">97</span>
-<span class="normal">98</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
+<span class="normal">96</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_coords</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the coordinate of a conformer of a molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -3092,10 +3120,11 @@ in place.</p>
     <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">conf</span><span class="o">.</span><span class="n">GetPositions</span><span class="p">()</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3110,6 +3139,8 @@ in place.</p>
   <div class="doc doc-contents ">
   
       <p>Keep on the specified conformer(s) in <code>indices_to_keep</code>.</p>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3181,9 +3212,11 @@ in place.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">134</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
 <span class="normal">137</span>
@@ -3215,9 +3248,7 @@ in place.</p>
 <span class="normal">163</span>
 <span class="normal">164</span>
 <span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">keep_conformers</span><span class="p">(</span>
+<span class="normal">166</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">keep_conformers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">indices_to_keep</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">assign_id</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -3253,10 +3284,11 @@ in place.</p>
 
     <span class="k">return</span> <span class="n">mol</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
+
 
 <div class="doc doc-object doc-function">
 
@@ -3289,6 +3321,8 @@ called <code>rdkit_free_sasa</code>.</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">props</span><span class="p">)</span>
 <span class="c1"># {&#39;rdkit_uff_energy&#39;: 1.7649408317784008}</span>
 </code></pre></div>
+
+
 
   <p><strong>Parameters:</strong></p>
   <table>
@@ -3347,6 +3381,8 @@ and -1 to use all cores.</p>
     </tbody>
   </table>
 
+
+
   <p><strong>Returns:</strong></p>
   <table>
     <thead>
@@ -3369,9 +3405,11 @@ and -1 to use all cores.</p>
     </tbody>
   </table>
 
-      <details class="quote">
-        <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
-        <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
+          <details class="quote">
+            <summary>Source code in <code>datamol/conformers/_features.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">14</span>
+<span class="normal">15</span>
+<span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
@@ -3436,9 +3474,7 @@ and -1 to use all cores.</p>
 <span class="normal">78</span>
 <span class="normal">79</span>
 <span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
+<span class="normal">81</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="nd">@decorators</span><span class="o">.</span><span class="n">disable_on_os</span><span class="p">(</span><span class="s2">&quot;win&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">sasa</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3507,7 +3543,7 @@ and -1 to use all cores.</p>
     <span class="n">sasa_values</span> <span class="o">=</span> <span class="n">runner</span><span class="p">(</span><span class="n">_get_sasa</span><span class="p">,</span> <span class="n">conf_ids</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sasa_values</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
-      </details>
+          </details>
   </div>
 
 </div>
@@ -3560,10 +3596,10 @@ and -1 to use all cores.</p>
       <div class="md-dialog__inner md-typeset"></div>
     </div>
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.208ed371.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.74e28a9f.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.a51614de.min.js"></script>
+      <script src="../assets/javascripts/bundle.220ee61c.min.js"></script>
       
         
           <script src="../assets/js/google-analytics.js"></script>
