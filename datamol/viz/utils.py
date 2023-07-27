@@ -54,8 +54,8 @@ def prepare_mol_for_drawing(mol: Optional[dm.Mol], kekulize: bool = True) -> Opt
 
 def is_ipython_session() -> bool:
     try:
-        kernel_name = get_ipython().__class__.__name__  # type: ignore
-        module_name = get_ipython().__class__.__module__  # type: ignore
+        kernel_name = get_ipython().__class__.__name__  # noqa: F821 # type: ignore
+        module_name = get_ipython().__class__.__module__  # noqa: F821 # type: ignore
 
         if kernel_name == "ZMQInteractiveShell" or module_name == "google.colab._shell":
             return True

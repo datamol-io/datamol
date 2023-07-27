@@ -205,7 +205,7 @@ def hash_mol(mol: Mol, hash_scheme: str = "all") -> str:
         hash_scheme_enum = RegistrationHash.HashScheme.TAUTOMER_INSENSITIVE_LAYERS
     else:
         raise ValueError(
-            f"`hash_scheme` is invalid. Please choose from: 'all', 'no_stereo' or 'no_tautomers'."
+            "`hash_scheme` is invalid. Please choose from: 'all', 'no_stereo' or 'no_tautomers'."
         )
 
     # Generate the hash
@@ -329,7 +329,7 @@ def sanitize_mol(
         # Detect multiple conformers
         if verbose and mol.GetNumConformers() > 1:
             logger.warning(
-                f"The molecule contains multiple conformers. Only the first one will be preserved."
+                "The molecule contains multiple conformers. Only the first one will be preserved."
             )
 
         # Try catch to avoid occasional aromaticity errors
@@ -370,7 +370,7 @@ def sanitize_smiles(smiles: Optional[str], isomeric: bool = True) -> Optional[st
 
     try:
         smiles = to_smiles(mol, isomeric=isomeric)
-    except:
+    except Exception:
         return None
 
     return smiles
@@ -1312,7 +1312,7 @@ def set_atom_positions(
         ["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()]
     ):
         raise ValueError(
-            f"The atoms of the input molecule does not contain the molAtomMapNumber property."
+            "The atoms of the input molecule does not contain the molAtomMapNumber property."
             "Set it before calling this function or set `from_atom_map_numbers` to `False`."
         )
 
@@ -1365,7 +1365,7 @@ def get_atom_positions(
         ["molAtomMapNumber" in a.GetPropsAsDict() for a in mol.GetAtoms()]
     ):
         raise ValueError(
-            f"The atoms of the input molecule does not contain the molAtomMapNumber property."
+            "The atoms of the input molecule does not contain the molAtomMapNumber property."
             "Set it before calling this function or set `from_atom_map_numbers` to `False`."
         )
 

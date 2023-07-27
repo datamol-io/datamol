@@ -10,14 +10,13 @@ from typing import Union
 from typing import List
 from typing import overload
 from typing import Literal
-from typing import cast
 
 import sys
 import io
 
 try:
     import importlib.resources as importlib_resources
-except:
+except ImportError:
     import importlib_resources
 
 import pandas as pd
@@ -44,7 +43,9 @@ def open_datamol_data_file(
         else:
             mode = "r"
 
-        file_context_manager = importlib_resources.files(dm_module).joinpath(filename).open(mode=mode)
+        file_context_manager = (
+            importlib_resources.files(dm_module).joinpath(filename).open(mode=mode)
+        )
 
     # NOTE(hadim): we assume the file always exists
     file_context_manager = cast(io.TextIOWrapper, file_context_manager)
@@ -127,7 +128,9 @@ def solubility(as_df: Literal[False] = False, mol_column: Optional[str] = "mol")
 
 
 @overload
-def solubility(as_df: bool = True, mol_column: Optional[str] = "mol") -> Union[List[Mol], pd.DataFrame]:
+def solubility(
+    as_df: bool = True, mol_column: Optional[str] = "mol"
+) -> Union[List[Mol], pd.DataFrame]:
     ...
 
 
@@ -191,6 +194,7 @@ def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
         data = from_df(data)
 
     return data
+
 
 @overload
 def chembl_samples(as_df: Literal[True] = True) -> pd.DataFrame:

@@ -1,5 +1,4 @@
 import datamol as dm
-import pandas as pd
 
 
 def test_fuzzy_scaffolding():

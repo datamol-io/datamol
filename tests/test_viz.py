@@ -24,7 +24,7 @@ def _convert_ipython_to_array(image):
     try:
         image_obj = Image.open(io.BytesIO(image_obj))
         return np.array(image_obj)
-    except:
+    except Exception:
         return np.array(image)
 
 

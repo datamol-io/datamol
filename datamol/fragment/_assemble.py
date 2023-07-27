@@ -264,7 +264,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
         try:
             mSmi = dm.to_smiles(m)
             mol = dm.to_mol(mSmi)
-        except:
+        except Exception:
             pass
         if mol is None:
             try:
@@ -272,7 +272,7 @@ def _run_at_all_rct(rxn, mol1, mol2):
                 mol = dm.sanitize_mol(mol)
                 mSmi = dm.to_smiles(m)
                 mol = dm.to_mol(mSmi)
-            except:
+            except Exception:
                 pass
         if mSmi:
             yield mol, mSmi
@@ -340,7 +340,7 @@ def break_mol(
                     prod.sanitized = True
                     try:
                         Chem.SanitizeMol(prod)
-                    except:
+                    except Exception:
                         if dm.sanitize_mol(prod) is None:
                             seqOk = False
                             break

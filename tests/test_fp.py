@@ -1,5 +1,3 @@
-import warnings
-
 import pytest
 
 import datamol as dm

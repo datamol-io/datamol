@@ -39,11 +39,12 @@ def datadir(request):
     return DATA_DIR_PATH
 
 
-from _pytest.logging import caplog as _caplog  # Mandatory for the below monkeypatch function.
+# Mandatory for the below monkeypatch function.
+from _pytest.logging import caplog as _caplog  # noqa: E402, F401
 
 
 @pytest.fixture
-def caplog(_caplog):
+def caplog(_caplog):  # noqa: F811
     """Monkeypatching the pytest caplog to work with loguru.
 
     See https://loguru.readthedocs.io/en/latest/resources/migration.html#making-things-work-with-pytest-and-caplog

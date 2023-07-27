@@ -1,10 +1,8 @@
-from typing import Optional, Union
+from typing import Union
 from typing import List
 from typing import Optional
 
 import numpy as np
-
-from rdkit import Chem
 
 from ..types import Mol
 from ..utils.jobs import JobRunner

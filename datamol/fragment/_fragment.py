@@ -124,7 +124,7 @@ def anybreak(
     frags = []
     try:
         frags = brics(mol, fix=fix, remove_parent=remove_parent, sanitize=sanitize)
-    except:
+    except Exception:
         pass
 
     if len(frags) == 0:

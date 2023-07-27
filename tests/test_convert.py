@@ -226,7 +226,7 @@ def test_to_cxsmiles():
 
 def test_to_smiles_fail():
     smiles = dm.to_smiles(55, allow_to_fail=False)
-    assert smiles == None
+    assert smiles is None
 
     # NOTE(hadim): ideally you want to catch only `Boost.Python.ArgumentError` here.
     with pytest.raises(Exception):
