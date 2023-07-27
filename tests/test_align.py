@@ -13,30 +13,32 @@ def test_template_align():
     assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     template = data.iloc[0]["smiles"]
-    data["aligned_mol"] = data["smiles"].apply(lambda x: dm.align.template_align(x, template=template))
-    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() is True
+    data["aligned_mol"] = data["smiles"].apply(
+        lambda x: dm.align.template_align(x, template=template)
+    )
+    assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     template = data.iloc[0]["mol"]
     data["aligned_mol"] = data["mol"].apply(
         lambda x: dm.align.template_align(x, template=template, auto_select_coord_gen=True)
     )
-    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() is True
+    assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     template = data.iloc[0]["mol"]
     data["aligned_mol"] = data["mol"].apply(
         lambda x: dm.align.template_align(x, template=template, use_depiction=False)
     )
-    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() is True
+    assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     template = None
     data["aligned_mol"] = data["mol"].apply(lambda x: dm.align.template_align(x, template=template))
-    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() is True
+    assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     template = None
     data["aligned_mol"] = data["mol"].apply(
         lambda x: dm.align.template_align(x, template=template, copy=False)
     )
-    assert data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all() is True
+    assert bool(data["aligned_mol"].apply(lambda x: isinstance(x, dm.Mol)).all()) is True
 
     assert dm.align.template_align(None) is None
 
