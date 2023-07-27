@@ -1,5 +1,3 @@
-import unittest
-
 import numpy as np
 
 import datamol as dm

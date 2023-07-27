@@ -38,3 +38,15 @@ def test_solubility():
         "smiles",
         "split",
     ]
+
+
+def test_chembl_drugs():
+    data = dm.data.chembl_drugs()
+    assert data.shape == (1935, 1)
+    assert list(data.columns) == ["smiles"]
+
+
+def test_chembl_samples():
+    data = dm.data.chembl_samples()
+    assert data.shape == (2000, 1)
+    assert list(data.columns) == ["smiles"]

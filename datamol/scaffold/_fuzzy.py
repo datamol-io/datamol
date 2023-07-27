@@ -140,7 +140,7 @@ def fuzzy_scaffolding(
         scf = MurckoScaffold.GetScaffoldForMol(m)
         try:
             scf = MurckoScaffold.MakeScaffoldGeneric(scf)
-        except:
+        except Exception:
             pass
 
         if ignore_non_ring:
@@ -228,7 +228,7 @@ def fuzzy_scaffolding(
                 ]
             try:
                 scaff = trim_side_chain(mol, AdjustQueryProperties(core, core_query_param), rgroups)
-            except:
+            except Exception:
                 continue
             all_scaffolds.add(to_smiles(scaff))
         # if user wants a dataframe turned on...

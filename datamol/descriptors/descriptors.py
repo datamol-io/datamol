@@ -115,7 +115,7 @@ def n_stereo_centers(mol: Mol) -> int:
     try:
         rdmolops.FindPotentialStereo(mol, cleanIt=False)
         n = rdMolDescriptors.CalcNumAtomStereoCenters(mol)
-    except:
+    except Exception:
         pass
     return n
 
@@ -133,7 +133,7 @@ def n_stereo_centers_unspecified(mol: Mol) -> int:
     try:
         rdmolops.FindPotentialStereo(mol, cleanIt=False)
         n = rdMolDescriptors.CalcNumUnspecifiedAtomStereoCenters(mol)
-    except:
+    except Exception:
         pass
     return n
 

@@ -10,14 +10,13 @@ from typing import Union
 from typing import List
 from typing import overload
 from typing import Literal
-from typing import cast
 
 import sys
 import io
 
 try:
     import importlib.resources as importlib_resources
-except:
+except ImportError:
     import importlib_resources
 
 import pandas as pd
@@ -170,3 +169,53 @@ def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
         return data
 
     return from_df(data, mol_column=mol_column)
+
+
+@overload
+def chembl_drugs(as_df: Literal[True] = True) -> pd.DataFrame:
+    ...
+
+
+@overload
+def chembl_drugs(as_df: Literal[False] = False) -> List[Mol]:
+    ...
+
+
+def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
+    """A list of ~2k molecules from ChEMBL (all drugs).
+
+    Originally, proposed by Patrick Walters at <https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill>.
+    """
+
+    with open_datamol_data_file("chembl_drugs.csv") as f:
+        data = pd.read_csv(f)
+
+    if not as_df:
+        data = from_df(data)
+
+    return data
+
+
+@overload
+def chembl_samples(as_df: Literal[True] = True) -> pd.DataFrame:
+    ...
+
+
+@overload
+def chembl_samples(as_df: Literal[False] = False) -> List[Mol]:
+    ...
+
+
+def chembl_samples(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
+    """A list of ~2k molecules from ChEMBL.
+
+    Originally, proposed by Patrick Walters at <https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill>.
+    """
+
+    with open_datamol_data_file("chembl_samples.csv") as f:
+        data = pd.read_csv(f)
+
+    if not as_df:
+        data = from_df(data)
+
+    return data

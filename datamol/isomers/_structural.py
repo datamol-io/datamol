@@ -1,7 +1,6 @@
 from typing import Optional
 import collections
 from rdkit import Chem
-from rdkit.Chem import rdChemReactions
 import datamol as dm
 
 
@@ -365,7 +364,6 @@ class IsomerEnumerator:
                             break
                         new_mol = new_mols[0]
                         # sanitize mol
-                        tmp_sm = dm.to_smiles(new_mol)
                         new_mol, new_smiles = self._clean(new_mol)
                         # need to clean twice, not sure why
                         _, new_smiles = self._clean(new_mol)

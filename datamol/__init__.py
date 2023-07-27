@@ -33,6 +33,8 @@ _lazy_imports_obj = {
     "freesolv": "datamol.data",
     "cdk2": "datamol.data",
     "solubility": "datamol.data",
+    "chembl_drugs": "datamol.data",
+    "chembl_samples": "datamol.data",
     # log
     "enable_rdkit_log": "datamol.log",
     "disable_rdkit_log": "datamol.log",
@@ -224,6 +226,8 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .data import freesolv
     from .data import cdk2
     from .data import solubility
+    from .data import chembl_drugs
+    from .data import chembl_samples
 
     from .log import enable_rdkit_log
     from .log import disable_rdkit_log

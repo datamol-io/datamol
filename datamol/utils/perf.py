@@ -1,7 +1,4 @@
-from typing import Optional
-
 import time
-import signal
 
 from loguru import logger
 

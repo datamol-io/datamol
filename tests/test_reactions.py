@@ -1,5 +1,4 @@
 import datamol as dm
-import numpy as np
 
 REACTION_BLOCK = """$RXN
 
@@ -122,13 +121,13 @@ def test_rxn_to_block_file(tmp_path):
 def test_is_reaction_ok():
     smarts = "[1*][*:1].[1*][*:2]>>[*:1][*:2]"
     rxn = dm.reactions.rxn_from_smarts(smarts)
-    assert dm.reactions.is_reaction_ok(rxn) == True
+    assert dm.reactions.is_reaction_ok(rxn) is True
 
 
 def test_is_reaction_ok_with_logs(caplog):
     smarts = "[1*][*:1].[1*][*:2]>>[*:1][*:2]"
     rxn = dm.reactions.rxn_from_smarts(smarts)
-    assert dm.reactions.is_reaction_ok(rxn, enable_logs=True) == True
+    assert dm.reactions.is_reaction_ok(rxn, enable_logs=True) is True
 
     assert "Number of" in caplog.text
 
@@ -142,13 +141,13 @@ def test_apply_reaction():
         rxn=rxn, reactants=(scf, frag), product_index=0, single_product_group=True
     )
     assert len([prod]) == 1
-    assert isinstance(prod, dm.Mol) == True
+    assert isinstance(prod, dm.Mol) is True
 
     prod = dm.reactions.apply_reaction(
         rxn=rxn, reactants=(scf, frag), single_product_group=False, as_smiles=True
     )
     assert len(prod) >= 1
-    assert isinstance(prod, list) == True
+    assert isinstance(prod, list) is True
 
 
 def test_apply_reaction_invalid():
@@ -168,10 +167,10 @@ def test_can_react():
         "[*:1]O[C:2](=[O])[#6:3].[Nh:4]>>[N:4][C:2](=[O])[#6:3].[*:1][Oh]"
     )
     mol = dm.to_mol("Nc1ccccc1")
-    assert dm.reactions.can_react(rxn, mol) == True
+    assert dm.reactions.can_react(rxn, mol) is True
 
     mol = dm.to_mol("CC")
-    assert dm.reactions.can_react(rxn, mol) == False
+    assert dm.reactions.can_react(rxn, mol) is False
 
 
 def test_inverse_reaction():
@@ -227,7 +226,7 @@ def test_select_reaction_output():
         as_smiles=False,
         sanitize=True,
     )
-    assert isinstance(prod, dm.mol.Mol) == True
+    assert isinstance(prod, dm.mol.Mol) is True
 
 
 def test_select_reaction_output_invalid():

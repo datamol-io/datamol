@@ -553,7 +553,7 @@ def lasso_highlight_image(
 
     try:
         drawer.DrawMolecules(mols_to_draw, legends=legends, **kwargs)
-    except Exception as e:
+    except Exception:
         raise ValueError(
             "Failed to draw molecules. Some arguments neither match expected MolDrawOptions, nor DrawMolecule inputs. Please check the input arguments."
         )
