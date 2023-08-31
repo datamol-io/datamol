@@ -34,9 +34,9 @@ def test_esol_from_data():
     # series
     v = dm.predictors.esol_from_data(data.iloc[0])
     v = float(v)
-    assert type(v) == float
+    assert isinstance(v, float)
 
     # dict
     v = dm.predictors.esol_from_data(data.iloc[0].to_dict())
     v = float(v)
-    assert type(v) == float
+    assert isinstance(v, float)
