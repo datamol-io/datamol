@@ -325,3 +325,18 @@ def test_conformer_energy():
     e3 = mol3.GetConformer(3).GetPropsAsDict()
     assert np.isclose(e3["rdkit_MMFF94s_noEstat_energy"], 38.217380, atol=1)
     assert np.isclose(e3["rdkit_MMFF94s_noEstat_delta_energy"], 0.0, atol=0.1)
+
+
+def test_conformer_no_rotatable_bonds():
+    mol = dm.to_mol("c1ccccc1")
+
+    random.seed(42)
+    np.random.seed(42)
+    mol1 = dm.conformers.generate(mol, minimize_energy=True)
+
+    random.seed(42)
+    np.random.seed(42)
+    mol2 = dm.conformers.generate(mol, minimize_energy=True, eratio=3)
+
+    # `eratio` should be ignored for this molecule as it has no rotatable bonds
+    assert mol1.GetNumConformers() == mol2.GetNumConformers()

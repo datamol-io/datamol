@@ -91,7 +91,8 @@ def generate(
             ["ETDG", "ETKDG", "ETKDGv2", "ETKDGv3"]. If None, "ETKDGv3" is used.
         forcefield: molecular forcefield to use, one of ['UFF','MMFF94s','MMFF94s_noEstat']
         ewindow: maximum energy above minimum energy conformer to output
-        eratio: max delta-energy divided by rotatable bonds for conformers
+        eratio: max delta-energy divided by rotatable bonds for conformers.
+            Ignored if the molecule has no rotatable bonds.
         energy_iterations: Maximum number of iterations during the energy minimization procedure.
             It corresponds to the `maxIters` argument in RDKit.
         warning_not_converged: Wether to log a warning when the number of not converged conformers
@@ -211,7 +212,8 @@ def generate(
         ordered_conformers = [
             conf
             for E, conf in sorted(zip(energies, mol_clone.GetConformers()), key=lambda x: x[0])
-            if E - minE <= ewindow and (E - minE) / rotatable_bonds <= eratio
+            if E - minE <= ewindow
+            and (rotatable_bonds == 0 or (E - minE) / rotatable_bonds <= eratio)
         ]
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
