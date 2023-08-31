@@ -326,6 +326,7 @@ def test_conformer_energy():
     assert np.isclose(e3["rdkit_MMFF94s_noEstat_energy"], 38.217380, atol=1)
     assert np.isclose(e3["rdkit_MMFF94s_noEstat_delta_energy"], 0.0, atol=0.1)
 
+
 def test_conformer_no_rotatable_bonds():
     mol = dm.to_mol("c1ccccc1")
 
