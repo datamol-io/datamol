@@ -171,7 +171,8 @@ def test_glob(tmp_path):
         with open(tmp_file, "w") as f:
             f.write("hello")
 
-    assert len(dm.utils.fs.glob(tmp_path / "*.txt")) == 5
+    tmp_path_regex = tmp_path / "*.txt"
+    assert len(dm.utils.fs.glob(tmp_path_regex)) == 5
 
 
 def test_copy_file(tmp_path):
