@@ -314,6 +314,7 @@ def glob(path: str, detail: bool = False, **kwargs) -> List[str]:
         path: A glob-style path.
     """
     # Get the list of paths
+    path = str(path)
     fs = get_mapper(path).fs
     paths = fs.glob(path, detail=detail, **kwargs)
     paths = [fsspec.utils._unstrip_protocol(d, fs) for d in paths]

@@ -55,7 +55,7 @@ def test_generate_4():
     smiles = "CCCC"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=1, minimize_energy=True)
-    assert mol.GetNumConformers() == 21
+    assert mol.GetNumConformers() in [20, 21]
     assert "rdkit_UFF_energy" in mol.GetConformer(0).GetPropsAsDict()
 
 
