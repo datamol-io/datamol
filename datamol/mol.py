@@ -45,8 +45,7 @@ SINGLE_BOND = Chem.rdchem.BondType.SINGLE
 AROMATIC_BOND = Chem.rdchem.BondType.AROMATIC
 DATIVE_BOND = Chem.rdchem.BondType.DATIVE
 UNSPECIFIED_BOND = Chem.rdchem.BondType.UNSPECIFIED
-with datamol.data.open_datamol_data_file("salts_solvents.smi") as file_obj:
-    SALT_SOLVENT_PATH = file_obj.name
+SALT_SOLVENT_PATH = datamol.data.datamol_data_file_path("salts_solvents.smi")
 SALT_SOLVENT_REMOVER = SaltRemover(defnFilename=SALT_SOLVENT_PATH)
 
 
