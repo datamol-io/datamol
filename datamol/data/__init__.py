@@ -27,15 +27,17 @@ from ..io import read_sdf
 from ..convert import from_df
 from ..convert import render_mol_df
 
+
 @functools.lru_cache()
 def datamol_data_file_path(filename: str, dm_module: str = "datamol.data") -> str:
     if sys.version_info < (3, 9, 0):
-        with importlib_resources.path("datamol.data", filename) as p:
+        with importlib_resources.path(dm_module, filename) as p:
             data_path = p
     else:
         data_path = importlib_resources.files(dm_module).joinpath(filename)
 
     return str(data_path)
+
 
 def open_datamol_data_file(
     filename: str,
