@@ -197,14 +197,11 @@ def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
     """A list of ~2.5k molecules from ChEMBL (all approved drugs) in SMILES format.
     Includes metadata indicating year of first approval, molecule chembl id, molecule type and pref_name.
 
-    List was generated with Get_ChEMBL_Approved_Drugs.ipynb, originally from medchem repo https://github.com/datamol-io/medchem/tree/e03ab8087592754645ffe12986a98b344f594547
-    This notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.
-    Notebook can be found in datamol ./notebooks/
-    Resulting file converted from parquet to csv using pandas (read_parquet -> to_csv).
+    List was generated with [Get_ChEMBL_Approved_Drugs.ipynb](notebooks/Get_ChEMBL_Approved_Drugs.ipynb) on 2023-10-18.
+    The notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.
     """
-
-    with open_datamol_data_file("chembl_approved_drugs.csv") as f:
-        data = pd.read_csv(f)
+    with open_datamol_data_file("chembl_approved_drugs.parquet") as f:
+        data = pd.read_parquet(f)
 
     if not as_df:
         data = from_df(data)
