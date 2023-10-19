@@ -200,7 +200,7 @@ def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
     List was generated with [Get_ChEMBL_Approved_Drugs.ipynb](../notebooks/Get_ChEMBL_Approved_Drugs.ipynb) on 2023-10-18.
     The notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.
     """
-    with open_datamol_data_file("chembl_approved_drugs.parquet") as f:
+    with open_datamol_data_file("chembl_approved_drugs.parquet", open_binary=True) as f:
         data = pd.read_parquet(f)
 
     if not as_df:
