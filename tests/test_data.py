@@ -42,8 +42,14 @@ def test_solubility():
 
 def test_chembl_drugs():
     data = dm.data.chembl_drugs()
-    assert data.shape == (1935, 1)
-    assert list(data.columns) == ["smiles"]
+    assert data.shape == (2628, 5)
+    assert list(data.columns) == [
+        "first_approval",
+        "molecule_chembl_id",
+        "molecule_type",
+        "pref_name",
+        "smiles",
+    ]
 
 
 def test_chembl_samples():

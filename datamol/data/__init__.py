@@ -194,13 +194,14 @@ def chembl_drugs(as_df: Literal[False] = False) -> List[Mol]:
 
 
 def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
-    """A list of ~2k molecules from ChEMBL (all drugs).
+    """A list of ~2.5k molecules from ChEMBL (all approved drugs) in SMILES format.
+    Includes metadata indicating year of first approval, molecule chembl id, molecule type and pref_name.
 
-    Originally, proposed by Patrick Walters at <https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill>.
+    List was generated with ['Get_ChEMBL_Approved_Drugs.ipynb'](https://github.com/datamol-io/datamol/notebooks/Get_ChEMBL_Approved_Drugs.ipynb) on 2023-10-18.
+    The notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.
     """
-
-    with open_datamol_data_file("chembl_drugs.csv") as f:
-        data = pd.read_csv(f)
+    with open_datamol_data_file("chembl_approved_drugs.parquet", open_binary=True) as f:
+        data = pd.read_parquet(f)
 
     if not as_df:
         data = from_df(data)
