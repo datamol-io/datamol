@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.2, mkdocs-material-9.3.1">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.3.1">
     
     
       
@@ -1433,8 +1433,10 @@
 
   <div class="doc doc-contents ">
   
-      <p>A list of ~2k molecules from ChEMBL (all drugs).</p>
-<p>Originally, proposed by Patrick Walters at <a href="https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill">https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill</a>.</p>
+      <p>A list of ~2.5k molecules from ChEMBL (all approved drugs) in SMILES format.
+Includes metadata indicating year of first approval, molecule chembl id, molecule type and pref_name.</p>
+<p>List was generated with <a href="https://github.com/datamol-io/datamol/notebooks/Get_ChEMBL_Approved_Drugs.ipynb">'Get_ChEMBL_Approved_Drugs.ipynb'</a> on 2023-10-18.
+The notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/data/__init__.py</code></summary>
@@ -1450,14 +1452,16 @@
 <span class="normal">205</span>
 <span class="normal">206</span>
 <span class="normal">207</span>
-<span class="normal">208</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chembl_drugs</span><span class="p">(</span><span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of ~2k molecules from ChEMBL (all drugs).</span>
+<span class="normal">208</span>
+<span class="normal">209</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chembl_drugs</span><span class="p">(</span><span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of ~2.5k molecules from ChEMBL (all approved drugs) in SMILES format.</span>
+<span class="sd">    Includes metadata indicating year of first approval, molecule chembl id, molecule type and pref_name.</span>
 
-<span class="sd">    Originally, proposed by Patrick Walters at &lt;https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill&gt;.</span>
+<span class="sd">    List was generated with [&#39;Get_ChEMBL_Approved_Drugs.ipynb&#39;](https://github.com/datamol-io/datamol/notebooks/Get_ChEMBL_Approved_Drugs.ipynb) on 2023-10-18.</span>
+<span class="sd">    The notebook works with the chembl_webresource_client api to collect chembl IDs and metadata, then focuses on small molecules with valid SMILES and first approval date.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-
-    <span class="k">with</span> <span class="n">open_datamol_data_file</span><span class="p">(</span><span class="s2">&quot;chembl_drugs.csv&quot;</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
-        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+    <span class="k">with</span> <span class="n">open_datamol_data_file</span><span class="p">(</span><span class="s2">&quot;chembl_approved_drugs.parquet&quot;</span><span class="p">,</span> <span class="n">open_binary</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_parquet</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">as_df</span><span class="p">:</span>
         <span class="n">data</span> <span class="o">=</span> <span class="n">from_df</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -1488,8 +1492,7 @@
 
           <details class="quote">
             <summary>Source code in <code>datamol/data/__init__.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">221</span>
-<span class="normal">222</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">222</span>
 <span class="normal">223</span>
 <span class="normal">224</span>
 <span class="normal">225</span>
@@ -1500,7 +1503,8 @@
 <span class="normal">230</span>
 <span class="normal">231</span>
 <span class="normal">232</span>
-<span class="normal">233</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chembl_samples</span><span class="p">(</span><span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
+<span class="normal">233</span>
+<span class="normal">234</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">chembl_samples</span><span class="p">(</span><span class="n">as_df</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;A list of ~2k molecules from ChEMBL.</span>
 
 <span class="sd">    Originally, proposed by Patrick Walters at &lt;https://github.com/PatWalters/practical_cheminformatics_posts/tree/b4dae239a8b942dab3a41e637ac55d4491aee96f/molskill&gt;.</span>
