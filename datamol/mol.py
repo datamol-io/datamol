@@ -401,7 +401,6 @@ def standardize_smiles(smiles: str) -> str:
 
     Args:
         smiles: Smiles to standardize
-        tautomer: Whether to canonicalize tautomers
 
     Returns:
         standard_smiles: the standardized smiles
