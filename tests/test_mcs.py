@@ -12,11 +12,6 @@ def test_find_mcs():
     mols = [dm.to_mol(s) for s in smiles_list]
     smarts = dm.find_mcs(mols=mols, timeout=2)
 
-    # Load/export SMARTS to check RDKit versions compatibility.
-    excepted_smarts = "[#6&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#7&!R]-&!@[#6&!R]-&!@[#6&!R]-&!@[#8&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]2:&@[#7&R]:&@[#6&R]:&@[#7&R]:&@[#6&R](:&@[#6&R]:&@2:&@[#6&R]:&@[#6&R]:&@1-&!@[#7&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#6&!R]=&!@[#6&!R])-&!@[#7&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]:&@[#6&R](:&@[#6&R]:&@[#6&R]:&@1-&!@[#9&!R])-&!@[#35&!R]"
-    excepted_smarts_mol = dm.from_smarts(excepted_smarts)
-    excepted_smarts = dm.to_smarts(excepted_smarts_mol)
+    excepted_hash = "762f483ac10cc0f45c5aa2c790f9ef52f8dfb337"
 
-    print(smarts)
-
-    assert smarts == excepted_smarts
+    assert dm.hash_mol(dm.from_smarts(smarts)) == excepted_hash

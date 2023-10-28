@@ -91,7 +91,9 @@ def test_cache_dir():
 
 def test_get_mapper(tmp_path):
     fsmapper = dm.utils.fs.get_mapper(str(tmp_path / "test.txt"))
-    assert fsmapper.fs.protocol == ("file", "local")
+
+    # NOTE(hadim): depends the fsspec version
+    assert fsmapper.fs.protocol in ["file", ("file", "local")]
 
 
 @pytest.mark.skip_platform("win")
