@@ -25,7 +25,6 @@ from rdkit.Chem import rdGeometry
 from rdkit.Chem.Scaffolds import MurckoScaffold
 
 from rdkit.Chem.MolStandardize import rdMolStandardize
-from rdkit.Chem.MolStandardize import canonicalize_tautomer_smiles
 from rdkit.Chem.SaltRemover import SaltRemover
 
 import datamol
@@ -395,22 +394,19 @@ def sanitize_first(mols: List[Mol], charge_neutral: bool = False, sanifix: bool 
     return None
 
 
-def standardize_smiles(smiles: str, tautomer: bool = False) -> str:
+def standardize_smiles(smiles: str) -> str:
     r"""
     Apply smile standardization procedure. This is a convenient function wrapped arrounf RDKit
     smiles standardizer and tautomeric canonicalization.
 
     Args:
         smiles: Smiles to standardize
-        tautomer: Whether to canonicalize tautomers
 
     Returns:
         standard_smiles: the standardized smiles
     """
 
     smiles = rdMolStandardize.StandardizeSmiles(smiles)
-    if tautomer:
-        smiles = canonicalize_tautomer_smiles(smiles)
     return smiles
 
 

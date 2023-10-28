@@ -17,7 +17,7 @@ def test_copy_files(tmp_path):
     dm.utils.fs.copy_file(source_path, destination_path)
 
     with open(destination_path) as f:
-        f.read() == content
+        assert f.read() == content
 
 
 def test_copy_dir(tmp_path):
@@ -49,10 +49,10 @@ def test_copy_dir(tmp_path):
     assert dm.utils.fs.is_file(file2_path)
 
     with open(file1_path) as f:
-        f.read() == content
+        assert f.read() == content
 
     with open(file2_path) as f:
-        f.read() == content
+        assert f.read() == content
 
 
 def test_mkdir(tmp_path):
@@ -91,7 +91,9 @@ def test_cache_dir():
 
 def test_get_mapper(tmp_path):
     fsmapper = dm.utils.fs.get_mapper(str(tmp_path / "test.txt"))
-    assert fsmapper.fs.protocol == "file"
+
+    # NOTE(hadim): depends the fsspec version
+    assert fsmapper.fs.protocol in ["file", ("file", "local")]
 
 
 @pytest.mark.skip_platform("win")
