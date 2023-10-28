@@ -12,6 +12,12 @@ def test_find_mcs():
     mols = [dm.to_mol(s) for s in smiles_list]
     smarts = dm.find_mcs(mols=mols, timeout=2)
 
-    excepted_hash = "762f483ac10cc0f45c5aa2c790f9ef52f8dfb337"
+    # NOTE(hadim): hash are different given different RDKit version
+    expected_hashes = [
+        # RDKit >= 2023.09
+        "762f483ac10cc0f45c5aa2c790f9ef52f8dfb337",
+        # RDKit <= 2023.03
+        "49eff32e405d17980fad428cf4063ec52e2c5fda",
+    ]
 
-    assert dm.hash_mol(dm.from_smarts(smarts)) == excepted_hash
+    assert dm.hash_mol(dm.from_smarts(smarts)) in expected_hashes
