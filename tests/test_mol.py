@@ -302,7 +302,7 @@ def test_sanitize_smiles_none():
 
 def test_standardize_smiles_tautomer():
     smiles = "C1=CC=CN=C1"
-    std_smiles = dm.standardize_smiles(smiles, tautomer=True)
+    std_smiles = dm.standardize_smiles(smiles)
     assert "c1ccncc1" == std_smiles
 
 

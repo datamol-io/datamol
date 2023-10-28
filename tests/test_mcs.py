@@ -13,7 +13,7 @@ def test_find_mcs():
     smarts = dm.find_mcs(mols=mols, timeout=2)
 
     # Load/export SMARTS to check RDKit versions compatibility.
-    excepted_smarts = "[#6&!R]-&!@[#6&!R]-&!@[#8&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]2:&@[#7&R]:&@[#6&R]:&@[#7&R]:&@[#6&R](:&@[#6&R]:&@2:&@[#6&R]:&@[#6&R]:&@1-&!@[#7&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#6&!R]=&!@[#6&!R])-&!@[#7&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@[#6&R]:&@1"
+    excepted_smarts = "[#6&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#7&!R]-&!@[#6&!R]-&!@[#6&!R]-&!@[#8&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]2:&@[#7&R]:&@[#6&R]:&@[#7&R]:&@[#6&R](:&@[#6&R]:&@2:&@[#6&R]:&@[#6&R]:&@1-&!@[#7&!R]-&!@[#6&!R](=&!@[#8&!R])-&!@[#6&!R]=&!@[#6&!R])-&!@[#7&!R]-&!@[#6&R]1:&@[#6&R]:&@[#6&R]:&@[#6&R](:&@[#6&R]:&@[#6&R]:&@1-&!@[#9&!R])-&!@[#35&!R]"
     excepted_smarts_mol = dm.from_smarts(excepted_smarts)
     excepted_smarts = dm.to_smarts(excepted_smarts_mol)
 

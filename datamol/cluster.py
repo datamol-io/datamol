@@ -242,7 +242,9 @@ def assign_to_centroids(
     features = dm.parallelized(feature_fn, all_mols, n_jobs=n_jobs)
 
     def distij(i, j, features=features):
-        return 1.0 - DataStructs.cDataStructs.TanimotoSimilarity(features[int(i)], features[int(j)])
+        return 1.0 - DataStructs.cDataStructs.TanimotoSimilarity(
+            features[int(i.item())], features[int(j.item())]
+        )
 
     if dist_fn is None:
         dist_fn = distij
