@@ -42,6 +42,12 @@ def test_enumerate_stereo_timeout():
     # machines so we here we just check the code can run without errors
     dm.enumerate_stereoisomers(mol, n_variants=2, timeout_seconds=1)
 
+def test_count_stereoisomers():
+    num_isomers_1 = dm.count_stereoisomers(dm.to_mol("CC=CC"), undefined_only=True)
+    num_isomers_2 = dm.count_stereoisomers(dm.to_mol("CC=CC"), undefined_only=False)
+    assert num_isomers_1 == num_isomers_2
+
+    assert dm.count_stereoisomers(dm.to_mol('Br/C=C\\Br'), undefined_only=True) == 1
 
 def test_enumerate_structural():
     mol = dm.to_mol("CCCCC")  # pentane has only three structural isomers

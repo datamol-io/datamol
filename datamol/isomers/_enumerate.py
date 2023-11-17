@@ -140,7 +140,9 @@ def count_stereoisomers(
 
     # in case any bonds/centers are missing stereo chem flag it here
     Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
-    Chem.FindPotentialStereoBonds(mol, cleanIt=clean_it)  # type: ignore
+    # lu: this impac the result when `undefined_only` set to True
+    if not undefined_only:
+        Chem.FindPotentialStereoBonds(mol, cleanIt=clean_it)
 
     # set up the options
     stereo_opts = StereoEnumerationOptions(
