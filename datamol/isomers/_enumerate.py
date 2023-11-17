@@ -5,6 +5,7 @@ from rdkit.Chem import rdmolops
 
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.EnumerateStereoisomers import EnumerateStereoisomers
+from rdkit.Chem.EnumerateStereoisomers import GetStereoisomerCount
 from rdkit.Chem.EnumerateStereoisomers import StereoEnumerationOptions
 
 import datamol as dm
@@ -115,6 +116,42 @@ def enumerate_stereoisomers(
         variants.append(isomer)
 
     return variants
+
+
+def count_stereoisomers(
+    mol: dm.Mol, undefined_only: bool = False, rationalise: bool = True, clean_it: bool = True
+):
+    """Get an estimate (upper bound) of the number of possible stereoisomers for a molecule.
+
+    Warning: this function is an estimtion, therefore it might be less accurate than enumrerating the stereoisomers.
+
+    Args:
+        mol: The molecule whose state we should enumerate.
+        n_variants: The maximum amount of molecules that should be returned.
+        undefined_only: If we should enumerate all stereocenters and bonds or only those
+            with undefined stereochemistry.
+        rationalise: If we should try to build and rationalise the molecule to ensure it
+            can exist.
+        clean_it: A flag for assigning stereochemistry. If True, it will remove previous stereochemistry
+            markings on the bonds.
+    """
+    # safety first
+    mol = dm.copy_mol(mol)
+
+    # in case any bonds/centers are missing stereo chem flag it here
+    Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
+    Chem.FindPotentialStereoBonds(mol, cleanIt=clean_it)  # type: ignore
+
+    # set up the options
+    stereo_opts = StereoEnumerationOptions(
+        tryEmbedding=rationalise,
+        onlyUnassigned=undefined_only,
+        unique=True,
+    )
+
+    num_variants = GetStereoisomerCount(mol, options=stereo_opts)
+
+    return num_variants
 
 
 def enumerate_structisomers(
