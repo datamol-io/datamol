@@ -135,6 +135,7 @@ _lazy_imports_obj = {
     "save_df": "datamol.io",
     # isomers
     "enumerate_stereoisomers": "datamol.isomers",
+    "count_stereoisomers": "datamol.isomers",
     "enumerate_tautomers": "datamol.isomers",
     "enumerate_structisomers": "datamol.isomers",
     "canonical_tautomer": "datamol.isomers",
@@ -329,6 +330,7 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .io import open_df
 
     from .isomers import enumerate_stereoisomers
+    from .isomers import count_stereoisomers
     from .isomers import enumerate_tautomers
     from .isomers import enumerate_structisomers
     from .isomers import canonical_tautomer
