@@ -84,7 +84,7 @@ def enumerate_stereoisomers(
     # in case any bonds/centers are missing stereo chem flag it here
     Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
     # lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`
-    Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only)
+    Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only and clean_it)
 
     # set up the options
     stereo_opts = StereoEnumerationOptions(
@@ -142,7 +142,7 @@ def count_stereoisomers(
     # in case any bonds/centers are missing stereo chem flag it here
     Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
     # lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`
-    Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only)
+    Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only and clean_it)
 
     # set up the options
     stereo_opts = StereoEnumerationOptions(
