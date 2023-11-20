@@ -958,6 +958,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#datamol.isomers._enumerate.count_stereoisomers" class="md-nav__link">
+    count_stereoisomers()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamol.isomers._enumerate.enumerate_stereoisomers" class="md-nav__link">
     enumerate_stereoisomers()
   </a>
@@ -1294,6 +1301,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#datamol.isomers._enumerate.count_stereoisomers" class="md-nav__link">
+    count_stereoisomers()
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#datamol.isomers._enumerate.enumerate_stereoisomers" class="md-nav__link">
     enumerate_stereoisomers()
   </a>
@@ -1443,14 +1457,14 @@
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
-<span class="normal">194</span>
-<span class="normal">195</span>
-<span class="normal">196</span>
-<span class="normal">197</span>
-<span class="normal">198</span>
-<span class="normal">199</span>
-<span class="normal">200</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">canonical_tautomer</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">257</span>
+<span class="normal">258</span>
+<span class="normal">259</span>
+<span class="normal">260</span>
+<span class="normal">261</span>
+<span class="normal">262</span>
+<span class="normal">263</span>
+<span class="normal">264</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">canonical_tautomer</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the canonical tautomer of the current molecule.</span>
 
 <span class="sd">    Args:</span>
@@ -1458,6 +1472,271 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">enumerator</span> <span class="o">=</span> <span class="n">rdMolStandardize</span><span class="o">.</span><span class="n">TautomerEnumerator</span><span class="p">()</span>
     <span class="k">return</span> <span class="n">enumerator</span><span class="o">.</span><span class="n">Canonicalize</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+          </details>
+  </div>
+
+</div>
+
+
+<div class="doc doc-object doc-function">
+
+
+
+
+<h3 id="datamol.isomers._enumerate.count_stereoisomers" class="doc doc-heading">
+          <code class="highlight language-python"><span class="n">count_stereoisomers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_variants</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">undefined_only</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rationalise</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">timeout_seconds</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">clean_it</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">precise</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></code>
+
+<a href="#datamol.isomers._enumerate.count_stereoisomers" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+  <div class="doc doc-contents ">
+  
+      <p>Get the number of possible stereoisomers for a molecule.</p>
+<p>Warning: By default, this function compute an estimtion number based on the stereo bonds which
+gives an upper bound of possible stereoisomers. By setting <code>precise=True</code>, the number is computed
+by enumrerating the stereoisomers. However, it can be computationnaly intensive.</p>
+
+
+
+  <p><strong>Parameters:</strong></p>
+  <table>
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Description</th>
+        <th>Default</th>
+      </tr>
+    </thead>
+    <tbody>
+        <tr>
+          <td><code>mol</code></td>
+          <td>
+                <code><span title="datamol.Mol">Mol</span></code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The molecule whose state we should enumerate.</p>
+            </div>
+          </td>
+          <td>
+              <em>required</em>
+          </td>
+        </tr>
+        <tr>
+          <td><code>n_variants</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The maximum amount of molecules that should be returned.</p>
+            </div>
+          </td>
+          <td>
+                <code>20</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>undefined_only</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>If we should enumerate all stereocenters and bonds or only those
+with undefined stereochemistry.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>rationalise</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>If we should try to build and rationalise the molecule to ensure it
+can exist.</p>
+            </div>
+          </td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>timeout_seconds</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The maximum amount of time to spend on enumeration. None
+will disable the timeout. Note that the timeout might be inaccurate as a running single variant
+computation is not stopped when the duration is reached.</p>
+            </div>
+          </td>
+          <td>
+                <code>None</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>clean_it</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>A flag for assigning stereochemistry. If True, it will remove previous stereochemistry
+markings on the bonds.</p>
+            </div>
+          </td>
+          <td>
+                <code>True</code>
+          </td>
+        </tr>
+        <tr>
+          <td><code>precise</code></td>
+          <td>
+                <code>bool</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>Whether compute counts by enumerate the stereoisomers using <code>enumerate_stereoisomers</code>.</p>
+            </div>
+          </td>
+          <td>
+                <code>False</code>
+          </td>
+        </tr>
+    </tbody>
+  </table>
+
+          <details class="quote">
+            <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span>
+<span class="normal">125</span>
+<span class="normal">126</span>
+<span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span>
+<span class="normal">136</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span>
+<span class="normal">154</span>
+<span class="normal">155</span>
+<span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span>
+<span class="normal">172</span>
+<span class="normal">173</span>
+<span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">count_stereoisomers</span><span class="p">(</span>
+    <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
+    <span class="n">n_variants</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
+    <span class="n">undefined_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+    <span class="n">rationalise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">timeout_seconds</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">clean_it</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
+    <span class="n">precise</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the number of possible stereoisomers for a molecule.</span>
+
+<span class="sd">    Warning: By default, this function compute an estimtion number based on the stereo bonds which</span>
+<span class="sd">    gives an upper bound of possible stereoisomers. By setting `precise=True`, the number is computed</span>
+<span class="sd">    by enumrerating the stereoisomers. However, it can be computationnaly intensive.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        mol: The molecule whose state we should enumerate.</span>
+<span class="sd">        n_variants: The maximum amount of molecules that should be returned.</span>
+<span class="sd">        undefined_only: If we should enumerate all stereocenters and bonds or only those</span>
+<span class="sd">            with undefined stereochemistry.</span>
+<span class="sd">        rationalise: If we should try to build and rationalise the molecule to ensure it</span>
+<span class="sd">            can exist.</span>
+<span class="sd">        timeout_seconds: The maximum amount of time to spend on enumeration. None</span>
+<span class="sd">            will disable the timeout. Note that the timeout might be inaccurate as a running single variant</span>
+<span class="sd">            computation is not stopped when the duration is reached.</span>
+<span class="sd">        clean_it: A flag for assigning stereochemistry. If True, it will remove previous stereochemistry</span>
+<span class="sd">            markings on the bonds.</span>
+<span class="sd">        precise: Whether compute counts by enumerate the stereoisomers using `enumerate_stereoisomers`.</span>
+
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">precise</span><span class="p">:</span>
+        <span class="n">num_variants</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span>
+            <span class="n">enumerate_stereoisomers</span><span class="p">(</span>
+                <span class="n">mol</span><span class="o">=</span><span class="n">mol</span><span class="p">,</span>
+                <span class="n">n_variants</span><span class="o">=</span><span class="n">n_variants</span><span class="p">,</span>
+                <span class="n">undefined_only</span><span class="o">=</span><span class="n">undefined_only</span><span class="p">,</span>
+                <span class="n">rationalise</span><span class="o">=</span><span class="n">rationalise</span><span class="p">,</span>
+                <span class="n">timeout_seconds</span><span class="o">=</span><span class="n">timeout_seconds</span><span class="p">,</span>
+                <span class="n">clean_it</span><span class="o">=</span><span class="n">clean_it</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="c1"># safety first</span>
+        <span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">copy_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+
+        <span class="c1"># in case any bonds/centers are missing stereo chem flag it here</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">flagPossibleStereoCenters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="n">clean_it</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+        <span class="c1"># lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`</span>
+        <span class="n">Chem</span><span class="o">.</span><span class="n">FindPotentialStereoBonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="ow">not</span> <span class="n">undefined_only</span> <span class="ow">and</span> <span class="n">clean_it</span><span class="p">)</span>
+
+        <span class="c1"># set up the options</span>
+        <span class="n">stereo_opts</span> <span class="o">=</span> <span class="n">StereoEnumerationOptions</span><span class="p">(</span>
+            <span class="n">tryEmbedding</span><span class="o">=</span><span class="n">rationalise</span><span class="p">,</span>
+            <span class="n">onlyUnassigned</span><span class="o">=</span><span class="n">undefined_only</span><span class="p">,</span>
+            <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="p">)</span>
+
+        <span class="n">num_variants</span> <span class="o">=</span> <span class="n">GetStereoisomerCount</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">options</span><span class="o">=</span><span class="n">stereo_opts</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">num_variants</span>
 </code></pre></div></td></tr></table></div>
           </details>
   </div>
@@ -1589,8 +1868,7 @@ markings on the bonds.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 52</span>
-<span class="normal"> 53</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 53</span>
 <span class="normal"> 54</span>
 <span class="normal"> 55</span>
 <span class="normal"> 56</span>
@@ -1654,7 +1932,9 @@ markings on the bonds.</p>
 <span class="normal">114</span>
 <span class="normal">115</span>
 <span class="normal">116</span>
-<span class="normal">117</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_stereoisomers</span><span class="p">(</span>
+<span class="normal">117</span>
+<span class="normal">118</span>
+<span class="normal">119</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_stereoisomers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">n_variants</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="n">undefined_only</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1687,7 +1967,8 @@ markings on the bonds.</p>
 
     <span class="c1"># in case any bonds/centers are missing stereo chem flag it here</span>
     <span class="n">Chem</span><span class="o">.</span><span class="n">AssignStereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">flagPossibleStereoCenters</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="n">clean_it</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
-    <span class="n">Chem</span><span class="o">.</span><span class="n">FindPotentialStereoBonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="n">clean_it</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
+    <span class="c1"># lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`</span>
+    <span class="n">Chem</span><span class="o">.</span><span class="n">FindPotentialStereoBonds</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="ow">not</span> <span class="n">undefined_only</span> <span class="ow">and</span> <span class="n">clean_it</span><span class="p">)</span>
 
     <span class="c1"># set up the options</span>
     <span class="n">stereo_opts</span> <span class="o">=</span> <span class="n">StereoEnumerationOptions</span><span class="p">(</span>
@@ -1861,63 +2142,63 @@ computation is not stopped when the duration is reached.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span>
-<span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span>
-<span class="normal">141</span>
-<span class="normal">142</span>
-<span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span>
-<span class="normal">153</span>
-<span class="normal">154</span>
-<span class="normal">155</span>
-<span class="normal">156</span>
-<span class="normal">157</span>
-<span class="normal">158</span>
-<span class="normal">159</span>
-<span class="normal">160</span>
-<span class="normal">161</span>
-<span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span>
-<span class="normal">165</span>
-<span class="normal">166</span>
-<span class="normal">167</span>
-<span class="normal">168</span>
-<span class="normal">169</span>
-<span class="normal">170</span>
-<span class="normal">171</span>
-<span class="normal">172</span>
-<span class="normal">173</span>
-<span class="normal">174</span>
-<span class="normal">175</span>
-<span class="normal">176</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_structisomers</span><span class="p">(</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">184</span>
+<span class="normal">185</span>
+<span class="normal">186</span>
+<span class="normal">187</span>
+<span class="normal">188</span>
+<span class="normal">189</span>
+<span class="normal">190</span>
+<span class="normal">191</span>
+<span class="normal">192</span>
+<span class="normal">193</span>
+<span class="normal">194</span>
+<span class="normal">195</span>
+<span class="normal">196</span>
+<span class="normal">197</span>
+<span class="normal">198</span>
+<span class="normal">199</span>
+<span class="normal">200</span>
+<span class="normal">201</span>
+<span class="normal">202</span>
+<span class="normal">203</span>
+<span class="normal">204</span>
+<span class="normal">205</span>
+<span class="normal">206</span>
+<span class="normal">207</span>
+<span class="normal">208</span>
+<span class="normal">209</span>
+<span class="normal">210</span>
+<span class="normal">211</span>
+<span class="normal">212</span>
+<span class="normal">213</span>
+<span class="normal">214</span>
+<span class="normal">215</span>
+<span class="normal">216</span>
+<span class="normal">217</span>
+<span class="normal">218</span>
+<span class="normal">219</span>
+<span class="normal">220</span>
+<span class="normal">221</span>
+<span class="normal">222</span>
+<span class="normal">223</span>
+<span class="normal">224</span>
+<span class="normal">225</span>
+<span class="normal">226</span>
+<span class="normal">227</span>
+<span class="normal">228</span>
+<span class="normal">229</span>
+<span class="normal">230</span>
+<span class="normal">231</span>
+<span class="normal">232</span>
+<span class="normal">233</span>
+<span class="normal">234</span>
+<span class="normal">235</span>
+<span class="normal">236</span>
+<span class="normal">237</span>
+<span class="normal">238</span>
+<span class="normal">239</span>
+<span class="normal">240</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_structisomers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">n_variants</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="n">allow_cycle</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -2104,8 +2385,7 @@ of the amido-imidol tautomerism.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
-<span class="normal">16</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">16</span>
 <span class="normal">17</span>
 <span class="normal">18</span>
 <span class="normal">19</span>
@@ -2138,7 +2418,8 @@ of the amido-imidol tautomerism.</p>
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_tautomers</span><span class="p">(</span>
+<span class="normal">49</span>
+<span class="normal">50</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">enumerate_tautomers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">n_variants</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">20</span><span class="p">,</span>
     <span class="n">max_transforms</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1000</span><span class="p">,</span>
@@ -2241,18 +2522,18 @@ of the amido-imidol tautomerism.</p>
 
           <details class="quote">
             <summary>Source code in <code>datamol/isomers/_enumerate.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">179</span>
-<span class="normal">180</span>
-<span class="normal">181</span>
-<span class="normal">182</span>
-<span class="normal">183</span>
-<span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span>
-<span class="normal">187</span>
-<span class="normal">188</span>
-<span class="normal">189</span>
-<span class="normal">190</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">remove_stereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">243</span>
+<span class="normal">244</span>
+<span class="normal">245</span>
+<span class="normal">246</span>
+<span class="normal">247</span>
+<span class="normal">248</span>
+<span class="normal">249</span>
+<span class="normal">250</span>
+<span class="normal">251</span>
+<span class="normal">252</span>
+<span class="normal">253</span>
+<span class="normal">254</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">remove_stereochemistry</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Removes all stereochemistry info from the molecule.</span>
 
 <span class="sd">    Args:</span>
