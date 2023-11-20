@@ -5,6 +5,7 @@ from rdkit.Chem import rdmolops
 
 from rdkit.Chem.MolStandardize import rdMolStandardize
 from rdkit.Chem.EnumerateStereoisomers import EnumerateStereoisomers
+from rdkit.Chem.EnumerateStereoisomers import GetStereoisomerCount
 from rdkit.Chem.EnumerateStereoisomers import StereoEnumerationOptions
 
 import datamol as dm
@@ -82,7 +83,8 @@ def enumerate_stereoisomers(
 
     # in case any bonds/centers are missing stereo chem flag it here
     Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
-    Chem.FindPotentialStereoBonds(mol, cleanIt=clean_it)  # type: ignore
+    # lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`
+    Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only and clean_it)
 
     # set up the options
     stereo_opts = StereoEnumerationOptions(
@@ -115,6 +117,68 @@ def enumerate_stereoisomers(
         variants.append(isomer)
 
     return variants
+
+
+def count_stereoisomers(
+    mol: dm.Mol,
+    n_variants: int = 20,
+    undefined_only: bool = False,
+    rationalise: bool = True,
+    timeout_seconds: int = None,
+    clean_it: bool = True,
+    precise: bool = False,
+):
+    """Get the number of possible stereoisomers for a molecule.
+
+    Warning: By default, this function compute an estimtion number based on the stereo bonds which
+    gives an upper bound of possible stereoisomers. By setting `precise=True`, the number is computed
+    by enumrerating the stereoisomers. However, it can be computationnaly intensive.
+
+    Args:
+        mol: The molecule whose state we should enumerate.
+        n_variants: The maximum amount of molecules that should be returned.
+        undefined_only: If we should enumerate all stereocenters and bonds or only those
+            with undefined stereochemistry.
+        rationalise: If we should try to build and rationalise the molecule to ensure it
+            can exist.
+        timeout_seconds: The maximum amount of time to spend on enumeration. None
+            will disable the timeout. Note that the timeout might be inaccurate as a running single variant
+            computation is not stopped when the duration is reached.
+        clean_it: A flag for assigning stereochemistry. If True, it will remove previous stereochemistry
+            markings on the bonds.
+        precise: Whether compute counts by enumerate the stereoisomers using `enumerate_stereoisomers`.
+
+    """
+    if precise:
+        num_variants = len(
+            enumerate_stereoisomers(
+                mol=mol,
+                n_variants=n_variants,
+                undefined_only=undefined_only,
+                rationalise=rationalise,
+                timeout_seconds=timeout_seconds,
+                clean_it=clean_it,
+            )
+        )
+    else:
+        # safety first
+        mol = dm.copy_mol(mol)
+
+        # in case any bonds/centers are missing stereo chem flag it here
+        Chem.AssignStereochemistry(mol, force=False, flagPossibleStereoCenters=True, cleanIt=clean_it)  # type: ignore
+        # lu: do not clean (overwrite bond stereo information) when set `undefined_only=Ture`
+        Chem.FindPotentialStereoBonds(mol, cleanIt=not undefined_only and clean_it)
+
+        # set up the options
+        stereo_opts = StereoEnumerationOptions(
+            tryEmbedding=rationalise,
+            onlyUnassigned=undefined_only,
+            unique=True,
+        )
+
+        num_variants = GetStereoisomerCount(mol, options=stereo_opts)
+
+    return num_variants
 
 
 def enumerate_structisomers(
