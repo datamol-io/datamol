@@ -124,7 +124,7 @@ def count_stereoisomers(
     n_variants: int = 20,
     undefined_only: bool = False,
     rationalise: bool = True,
-    timeout_seconds=None,
+    timeout_seconds: int = None,
     clean_it: bool = True,
     precise: bool = False,
 ):
