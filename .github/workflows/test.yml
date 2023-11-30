@@ -16,9 +16,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: ["3.10", "3.11"]
-        os: ["ubuntu-latest", "macos-latest", "windows-latest"]
-        rdkit-version: ["2023.03", "2023.09"]
+        # NOTE(hadim): temporary for pixi testing
+        # python-version: ["3.10", "3.11"]
+        # os: ["ubuntu-latest", "macos-latest", "windows-latest"]
+        # rdkit-version: ["2023.03", "2023.09"]
+        python-version: ["3.11"]
+        os: ["ubuntu-latest"]
+        rdkit-version: ["2023.09"]
 
     runs-on: ${{ matrix.os }}
     timeout-minutes: 30
