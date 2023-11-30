@@ -65,3 +65,6 @@ site/
 
 .idea/
 __pycache__
+# pixi environments
+.pixi
+
