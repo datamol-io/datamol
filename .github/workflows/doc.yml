@@ -44,4 +44,4 @@ jobs:
           git fetch origin gh-pages
 
           echo "Build and deploy the doc on main"
-          mike deploy --push --force main
+          mike deploy --push main
