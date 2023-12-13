@@ -122,26 +122,23 @@ def to_image(
             _kwargs[k] = v
 
     # Check if we are in a Jupyter notebook or IPython display context
+    # If so, conditionally add the maxMols argument
     in_notebook = get_ipython() is not None
 
-    # Create a dictionary of arguments for the MolsToGridImage function
-    draw_args = {
-        "mols": mols,
-        "legends": legends,
-        "molsPerRow": n_cols,
-        "useSVG": use_svg,
-        "subImgSize": mol_size,
-        "highlightAtomLists": _highlight_atom,
-        "highlightBondLists": _highlight_bond,
-        "drawOptions": draw_options,
-        **_kwargs,
-    }
-
-    # Conditionally add the maxMols argument if in a notebook
     if in_notebook:
-        draw_args["maxMols"] = max_mols
+        _kwargs["maxMols"] = max_mols
 
-    image = Draw.MolsToGridImage(**draw_args)
+    image = Draw.MolsToGridImage(
+        mols,
+        legends=legends,
+        molsPerRow=n_cols,
+        useSVG=use_svg,
+        subImgSize=mol_size,
+        highlightAtomLists=_highlight_atom,
+        highlightBondLists=_highlight_bond,
+        drawOptions=draw_options,
+        **_kwargs,
+    )
 
     if outfile is not None:
         image_to_file(image, outfile, as_svg=use_svg)
