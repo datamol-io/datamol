@@ -129,6 +129,7 @@ def to_image(
         highlightAtomLists=_highlight_atom,
         highlightBondLists=_highlight_bond,
         drawOptions=draw_options,
+        maxMols=max_mols,
         **_kwargs,
     )
 
