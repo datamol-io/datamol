@@ -17,6 +17,30 @@ def test_from_mol():
     assert dm.lasso_highlight_image(mol, smarts_list)
 
 
+def test_with_highlight():
+    smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
+    mol = dm.to_mol(smi)
+    smarts_list = "CONN"
+    highlight_atoms = [4, 5, 6]
+    highlight_bonds = [1, 2, 3, 4]
+    highlight_atom_colors = {4: (230, 230, 250), 5: (230, 230, 250), 6: (230, 230, 250)}
+    highlight_bond_colors = {
+        1: (230, 230, 250),
+        2: (230, 230, 250),
+        3: (230, 230, 250),
+        4: (230, 230, 250),
+    }
+    assert dm.lasso_highlight_image(
+        mol,
+        smarts_list,
+        highlight_atoms=highlight_atoms,
+        highlight_bonds=highlight_bonds,
+        highlight_atom_colors=highlight_atom_colors,
+        highlight_bond_colors=highlight_bond_colors,
+        continuousHighlight=False,
+    )
+
+
 def test_original_working_solution_list_single_str():
     smi = "CO[C@@H](O)C1=C(O[C@H](F)Cl)C(C#N)=C1ONNC[NH3+]"
     smarts_list = ["CONN"]
