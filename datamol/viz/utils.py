@@ -143,4 +143,8 @@ def to_rdkit_color(color: Optional[DatamolColor]) -> Optional[RDKitColor]:
     """
     if isinstance(color, str):
         return mcolors.to_rgba(color)  # type: ignore
+
+    if len(color) in [3, 4] and any(x > 1 for x in color):
+        return tuple(x / 255 if i < 3 else x for i, x in enumerate(color))
+
     return color
