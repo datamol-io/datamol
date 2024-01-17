@@ -569,12 +569,14 @@ def lasso_highlight_image(
         highlight_bond_colors = [highlight_bond_colors] * len(target_molecules)
 
     # make sure we are using rdkit colors
-    highlight_atom_colors = [
-        {k: to_rdkit_color(v) for k, v in _.items()} for _ in highlight_atom_colors
-    ]
-    highlight_bond_colors = [
-        {k: to_rdkit_color(v) for k, v in _.items()} for _ in highlight_bond_colors
-    ]
+    if highlight_atom_colors is not None:
+        highlight_atom_colors = [
+            {k: to_rdkit_color(v) for k, v in _.items()} for _ in highlight_atom_colors
+        ]
+    if highlight_bond_colors is not None:
+        highlight_bond_colors = [
+            {k: to_rdkit_color(v) for k, v in _.items()} for _ in highlight_bond_colors
+        ]
 
     kwargs["highlightAtoms"] = highlight_atoms
     kwargs["highlightBonds"] = highlight_bonds
@@ -604,10 +606,14 @@ def lasso_highlight_image(
         offset_y = int(h_pos * mol_size[1])
 
         ind_kwargs = kwargs.copy()
-        ind_kwargs["highlightAtoms"] = kwargs["highlightAtoms"][ind]
-        ind_kwargs["highlightAtomColors"] = kwargs["highlightAtomColors"][ind]
-        ind_kwargs["highlightBonds"] = kwargs["highlightBonds"][ind]
-        ind_kwargs["highlightBondColors"] = kwargs["highlightBondColors"][ind]
+        if isinstance(ind_kwargs["highlightAtoms"], list):
+            ind_kwargs["highlightAtoms"] = ind_kwargs["highlightAtoms"][ind]
+        if isinstance(ind_kwargs["highlightAtomColors"], list):
+            ind_kwargs["highlightAtomColors"] = ind_kwargs["highlightAtomColors"][ind]
+        if isinstance(ind_kwargs["highlightBonds"], list):
+            ind_kwargs["highlightBonds"] = ind_kwargs["highlightBonds"][ind]
+        if isinstance(ind_kwargs["highlightBondColors"], list):
+            ind_kwargs["highlightBondColors"] = ind_kwargs["highlightBondColors"][ind]
         drawer.SetOffset(offset_x, offset_y)
         drawer.DrawMolecule(mol, legend=legends[ind], **ind_kwargs)
         offset = None
