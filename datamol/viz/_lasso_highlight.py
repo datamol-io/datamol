@@ -569,7 +569,6 @@ def lasso_highlight_image(
         highlight_bond_colors = [highlight_bond_colors] * len(target_molecules)
 
     # make sure we are using rdkit colors
-    print(highlight_atom_colors[0][4], to_rdkit_color(highlight_atom_colors[0][4]))
     highlight_atom_colors = [
         {k: to_rdkit_color(v) for k, v in _.items()} for _ in highlight_atom_colors
     ]
@@ -582,7 +581,6 @@ def lasso_highlight_image(
     kwargs["highlightAtomColors"] = highlight_atom_colors
     kwargs["highlightBondColors"] = highlight_bond_colors
 
-    print(kwargs)
     try:
         drawer.DrawMolecules(
             mols_to_draw,
