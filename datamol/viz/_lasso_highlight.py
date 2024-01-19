@@ -412,7 +412,7 @@ def lasso_highlight_image(
     Args:
         target_molecules:  One or a list of molecules to be highlighted.
         search_molecules: The substructure to be highlighted.
-        atom_indices: Atom indices to be highlighted substructure.
+        atom_indices: Atom indices to be highlighted as substructure using the lasso visualization.
         legends: A string or a list of string as legend for every molecules.
         n_cols: Number of molecules per column.
         mol_size: The size of the image to be returned
@@ -425,8 +425,8 @@ def lasso_highlight_image(
         line_width: width of drawn lines.
         scale_padding: Padding around the molecule when drawing to scale.
         verbose: Whether to print the verbose information.
-        highlight_atoms: The atoms to highlight, a list for each molecule.
-        highlight_bonds: The bonds to highlight, a list for each molecule.
+        highlight_atoms: The atoms to highlight, a list for each molecule. It's the `highlightAtoms` argument of the RDKit drawer object.
+        highlight_bonds: The bonds to highlight, a list for each molecule. It's the `highlightBonds` argument of the RDKit drawer object.
         highlight_atom_colors: The colors to use for highlighting atoms, a list of dict mapping atom index to color for each molecule.
         highlight_bond_colors: The colors to use for highlighting bonds, a list of dict mapping bond index to color for each molecule.
         **kwargs: Additional arguments to pass to the drawing function. See RDKit
