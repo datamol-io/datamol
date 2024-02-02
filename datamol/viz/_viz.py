@@ -130,8 +130,10 @@ def to_image(
     if in_notebook:
         _kwargs["maxMols"] = max_mols_ipython
         if max_mols > max_mols_ipython:
-            logger.warning(f"You have set max_mols to {max_mols}, which is higher than max_mols_ipython ({max_mols_ipython}). "
-                           "Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment.")
+            logger.warning(
+                f"You have set max_mols to {max_mols}, which is higher than max_mols_ipython ({max_mols_ipython}). "
+                "Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment."
+            )
 
     image = Draw.MolsToGridImage(
         mols,
