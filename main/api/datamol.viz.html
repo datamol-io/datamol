@@ -18,7 +18,7 @@
       
       
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.4">
+      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.6">
     
     
       
@@ -1658,6 +1658,20 @@
           </td>
         </tr>
         <tr>
+          <td><code>max_mols_ipython</code></td>
+          <td>
+                <code>int</code>
+          </td>
+          <td>
+            <div class="doc-md-description">
+              <p>The maximum number of molecules to display when running within an IPython environment.</p>
+            </div>
+          </td>
+          <td>
+                <code>50</code>
+          </td>
+        </tr>
+        <tr>
           <td><code>copy</code></td>
           <td>
                 <code>bool</code>
@@ -1780,8 +1794,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 
           <details class="quote">
             <summary>Source code in <code>datamol/viz/_viz.py</code></summary>
-            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 15</span>
-<span class="normal"> 16</span>
+            <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 16</span>
 <span class="normal"> 17</span>
 <span class="normal"> 18</span>
 <span class="normal"> 19</span>
@@ -1902,7 +1915,22 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">134</span>
 <span class="normal">135</span>
 <span class="normal">136</span>
-<span class="normal">137</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
+<span class="normal">137</span>
+<span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">legends</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -1912,6 +1940,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">highlight_bond</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">max_mols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">32</span><span class="p">,</span>
+    <span class="n">max_mols_ipython</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">50</span><span class="p">,</span>
     <span class="n">copy</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">bond_indices</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1934,6 +1963,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">        highlight_bond: The bonds to highlight.</span>
 <span class="sd">        outfile: Path where to save the image (local or remote path).</span>
 <span class="sd">        max_mols: The maximum number of molecules to display.</span>
+<span class="sd">        max_mols_ipython: The maximum number of molecules to display when running within an IPython environment.</span>
 <span class="sd">        copy: Whether to copy the molecules or not.</span>
 <span class="sd">        indices: Whether to draw the atom indices.</span>
 <span class="sd">        bond_indices: Whether to draw the bond indices.</span>
@@ -2009,6 +2039,18 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="nb">setattr</span><span class="p">(</span><span class="n">draw_options</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">_kwargs</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+    <span class="c1"># Check if we are in a Jupyter notebook or IPython display context</span>
+    <span class="c1"># If so, conditionally add the maxMols argument</span>
+    <span class="n">in_notebook</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">is_ipython_session</span><span class="p">()</span>
+
+    <span class="k">if</span> <span class="n">in_notebook</span><span class="p">:</span>
+        <span class="n">_kwargs</span><span class="p">[</span><span class="s2">&quot;maxMols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_mols_ipython</span>
+        <span class="k">if</span> <span class="n">max_mols</span> <span class="o">&gt;</span> <span class="n">max_mols_ipython</span><span class="p">:</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
+                <span class="sa">f</span><span class="s2">&quot;You have set max_mols to </span><span class="si">{</span><span class="n">max_mols</span><span class="si">}</span><span class="s2">, which is higher than max_mols_ipython (</span><span class="si">{</span><span class="n">max_mols_ipython</span><span class="si">}</span><span class="s2">). &quot;</span>
+                <span class="s2">&quot;Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment.&quot;</span>
+            <span class="p">)</span>
 
     <span class="n">image</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
         <span class="n">mols</span><span class="p">,</span>
@@ -4676,10 +4718,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.c011b7c0.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.7389ff0e.min.js"></script>
+      <script src="../assets/javascripts/bundle.e1c3ead8.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
