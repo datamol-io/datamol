@@ -141,6 +141,12 @@ def to_rdkit_color(color: Optional[DatamolColor]) -> Optional[RDKitColor]:
     Args:
         color: A datamol color: hex, rgb, rgba or None.
     """
+    if color is None:
+        return None
+
     if isinstance(color, str):
         return mcolors.to_rgba(color)  # type: ignore
+    if isinstance(color, (tuple, list)) and len(color) in [3, 4] and any(x > 1 for x in color):
+        return tuple(x / 255 if i < 3 else x for i, x in enumerate(color))
+
     return color
