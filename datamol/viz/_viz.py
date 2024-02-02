@@ -3,6 +3,7 @@ from typing import List
 from typing import Tuple
 from typing import Optional
 from typing import Any
+from loguru import logger
 
 from rdkit.Chem import Draw
 
@@ -22,6 +23,7 @@ def to_image(
     highlight_bond: Optional[List[List[int]]] = None,
     outfile: Optional[str] = None,
     max_mols: int = 32,
+    max_mols_ipython: int = 50,
     copy: bool = True,
     indices: bool = False,
     bond_indices: bool = False,
@@ -44,6 +46,7 @@ def to_image(
         highlight_bond: The bonds to highlight.
         outfile: Path where to save the image (local or remote path).
         max_mols: The maximum number of molecules to display.
+        max_mols_ipython: The maximum number of molecules to display when running within an IPython environment.
         copy: Whether to copy the molecules or not.
         indices: Whether to draw the atom indices.
         bond_indices: Whether to draw the bond indices.
@@ -119,6 +122,18 @@ def to_image(
             setattr(draw_options, k, v)
         else:
             _kwargs[k] = v
+
+    # Check if we are in a Jupyter notebook or IPython display context
+    # If so, conditionally add the maxMols argument
+    in_notebook = dm.viz.utils.is_ipython_session()
+
+    if in_notebook:
+        _kwargs["maxMols"] = max_mols_ipython
+        if max_mols > max_mols_ipython:
+            logger.warning(
+                f"You have set max_mols to {max_mols}, which is higher than max_mols_ipython ({max_mols_ipython}). "
+                "Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment."
+            )
 
     image = Draw.MolsToGridImage(
         mols,
