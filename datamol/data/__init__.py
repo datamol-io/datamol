@@ -66,18 +66,15 @@ def open_datamol_data_file(
 
 
 @overload
-def freesolv(as_df: Literal[True] = True) -> pd.DataFrame:
-    ...
+def freesolv(as_df: Literal[True] = True) -> pd.DataFrame: ...
 
 
 @overload
-def freesolv(as_df: Literal[False] = False) -> List[Mol]:
-    ...
+def freesolv(as_df: Literal[False] = False) -> List[Mol]: ...
 
 
 @overload
-def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
-    ...
+def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]: ...
 
 
 def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
@@ -102,18 +99,17 @@ def freesolv(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
 
 
 @overload
-def cdk2(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame:
-    ...
+def cdk2(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame: ...
 
 
 @overload
-def cdk2(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]:
-    ...
+def cdk2(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]: ...
 
 
 @overload
-def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol") -> Union[List[Mol], pd.DataFrame]:
-    ...
+def cdk2(
+    as_df: bool = True, mol_column: Optional[str] = "mol"
+) -> Union[List[Mol], pd.DataFrame]: ...
 
 
 def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
@@ -130,20 +126,17 @@ def cdk2(as_df: bool = True, mol_column: Optional[str] = "mol"):
 
 
 @overload
-def solubility(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame:
-    ...
+def solubility(as_df: Literal[True] = True, mol_column: Optional[str] = "mol") -> pd.DataFrame: ...
 
 
 @overload
-def solubility(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]:
-    ...
+def solubility(as_df: Literal[False] = False, mol_column: Optional[str] = "mol") -> List[Mol]: ...
 
 
 @overload
 def solubility(
     as_df: bool = True, mol_column: Optional[str] = "mol"
-) -> Union[List[Mol], pd.DataFrame]:
-    ...
+) -> Union[List[Mol], pd.DataFrame]: ...
 
 
 def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
@@ -184,13 +177,11 @@ def solubility(as_df: bool = True, mol_column: Optional[str] = "mol"):
 
 
 @overload
-def chembl_drugs(as_df: Literal[True] = True) -> pd.DataFrame:
-    ...
+def chembl_drugs(as_df: Literal[True] = True) -> pd.DataFrame: ...
 
 
 @overload
-def chembl_drugs(as_df: Literal[False] = False) -> List[Mol]:
-    ...
+def chembl_drugs(as_df: Literal[False] = False) -> List[Mol]: ...
 
 
 def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
@@ -210,13 +201,11 @@ def chembl_drugs(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:
 
 
 @overload
-def chembl_samples(as_df: Literal[True] = True) -> pd.DataFrame:
-    ...
+def chembl_samples(as_df: Literal[True] = True) -> pd.DataFrame: ...
 
 
 @overload
-def chembl_samples(as_df: Literal[False] = False) -> List[Mol]:
-    ...
+def chembl_samples(as_df: Literal[False] = False) -> List[Mol]: ...
 
 
 def chembl_samples(as_df: bool = True) -> Union[List[Mol], pd.DataFrame]:

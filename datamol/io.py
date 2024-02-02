@@ -116,8 +116,7 @@ def read_sdf(
     max_num_mols: Optional[int] = ...,
     discard_invalid: bool = ...,
     n_jobs: Optional[int] = ...,
-) -> List[Mol]:
-    ...
+) -> List[Mol]: ...
 
 
 @overload
@@ -134,8 +133,7 @@ def read_sdf(
     max_num_mols: Optional[int] = ...,
     discard_invalid: bool = ...,
     n_jobs: Optional[int] = ...,
-) -> pd.DataFrame:
-    ...
+) -> pd.DataFrame: ...
 
 
 @overload
@@ -152,8 +150,7 @@ def read_sdf(
     max_num_mols: Optional[int] = ...,
     discard_invalid: bool = ...,
     n_jobs: Optional[int] = ...,
-) -> Union[List[Mol], pd.DataFrame]:
-    ...
+) -> Union[List[Mol], pd.DataFrame]: ...
 
 
 def read_sdf(
