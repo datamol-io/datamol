@@ -183,7 +183,7 @@ _FP_DEFAULT_ARGS = {
         "countSimulation": False,
         "countBounds": None,
         "fpSize": 2048,
-        "numBitsPerFeature": 2,
+        "numBitsPerFeature": 1,
         "atomInvariantsGenerator": None,
     },
 }
