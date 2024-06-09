@@ -11,9 +11,11 @@ from rdkit.Chem import Crippen
 
 from .. import Mol
 from ..convert import from_smarts
+from ..log import no_rdkit_log
 from .._version import is_lower_than_current_rdkit_version
 
 
+@no_rdkit_log
 def _sasscorer(mol: Mol):
     sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
     try:

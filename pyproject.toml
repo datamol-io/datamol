@@ -44,7 +44,7 @@ dependencies = [
     "packaging",
     "typing-extensions",
     "importlib-resources",
-    "rdkit",
+    "rdkit>=2024.03.3",
 ]
 
 [project.urls]

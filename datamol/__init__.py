@@ -29,7 +29,7 @@ _lazy_imports_obj = {
     "parallelized_with_batches": "datamol.utils",
     "JobRunner": "datamol.utils",
     "fs": "datamol.utils",
-    # log
+    # data
     "freesolv": "datamol.data",
     "cdk2": "datamol.data",
     "solubility": "datamol.data",
@@ -39,6 +39,7 @@ _lazy_imports_obj = {
     "enable_rdkit_log": "datamol.log",
     "disable_rdkit_log": "datamol.log",
     "without_rdkit_log": "datamol.log",
+    "no_rdkit_log": "datamol.log",
     # mol
     "PERIODIC_TABLE": "datamol.mol",
     "TRIPLE_BOND": "datamol.mol",
@@ -233,6 +234,7 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .log import enable_rdkit_log
     from .log import disable_rdkit_log
     from .log import without_rdkit_log
+    from .log import no_rdkit_log
 
     from .mol import PERIODIC_TABLE
     from .mol import TRIPLE_BOND
