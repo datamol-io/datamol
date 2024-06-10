@@ -1,5 +1,6 @@
 from rdkit import RDLogger
 from rdkit import rdBase
+from functools import wraps
 
 
 class without_rdkit_log:
@@ -71,3 +72,53 @@ def enable_rdkit_log():
     """Enable all rdkit logs."""
     for log_level in RDLogger._levels:
         rdBase.EnableLog(log_level)
+
+
+def no_rdkit_log(
+    func=None,
+    *,
+    mute_errors: bool = True,
+    mute_warning: bool = True,
+    mute_info: bool = True,
+    mute_debug: bool = True,
+    enable: bool = True,
+):
+    """Decorator to disable RDKit logs.
+
+    This decorator can be used to suppress RDKit logs when executing a specific function.
+    By default, all log levels (error, warning, info, and debug) are muted.
+
+    Args:
+        mute_errors : Whether to mute error logs (default is True).
+        mute_warning : Whether to mute warning logs (default is True).
+        mute_info : Whether to mute info logs (default is True).
+        mute_debug : Whether to mute debug logs (default is True).
+        enable: Whether to enable the log muting (default is True). If set to False, no logs will be muted.
+
+    Example:
+    ```python
+    @no_rdkit_log()
+    def example_function():
+        # Your function code here
+        pass
+
+    example_function()  # RDKit logs won't show during this function's execution
+    ```
+    """
+
+    if func is None:
+        return lambda f: no_rdkit_log(
+            f,
+            mute_errors=mute_errors,
+            mute_warning=mute_warning,
+            mute_info=mute_info,
+            mute_debug=mute_debug,
+            enable=enable,
+        )
+
+    @wraps(func)
+    def wrapper(*args, **kwargs):
+        with without_rdkit_log(mute_errors, mute_warning, mute_info, mute_debug, enable):
+            return func(*args, **kwargs)
+
+    return wrapper
