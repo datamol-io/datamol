@@ -34,7 +34,7 @@ jobs:
 
     steps:
       - name: Checkout the code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup mamba
         uses: mamba-org/setup-micromamba@v1
@@ -54,7 +54,7 @@ jobs:
         run: pytest
 
       - name: Codecov Upload
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         with:
           files: ./coverage.xml
           flags: unittests
