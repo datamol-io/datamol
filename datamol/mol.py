@@ -58,7 +58,7 @@ def copy_mol(mol: Mol) -> Mol:
 
 
 def to_mol(
-    mol: Union[str, Mol],
+    mol: Union[str, bytes, Mol],
     add_hs: bool = False,
     explicit_only: bool = False,
     ordered: bool = False,
@@ -72,7 +72,7 @@ def to_mol(
     """Convert an input molecule (smiles representation) into a `Mol`.
 
     Args:
-        mol: A SMILES or a molecule.
+        mol: A SMILES, a binary string from Mol.ToBinary(), or a molecule.
         add_hs: Whether hydrogens should be added the molecule after the SMILES has been parsed.
         explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True.
@@ -91,8 +91,8 @@ def to_mol(
         None is returned so make sure that you handle this case on your own.
     """
 
-    if not isinstance(mol, (str, Mol)):
-        raise ValueError(f"Input should be a Mol or a string instead of '{type(mol)}'")
+    if not isinstance(mol, (str, bytes, Mol)):
+        raise ValueError(f"Input should be a Mol, a string, or bytes instead of '{type(mol)}'")
 
     if isinstance(mol, str):
         smiles_params = rdmolfiles.SmilesParserParams()
@@ -106,6 +106,8 @@ def to_mol(
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
+    elif isinstance(mol, bytes):
+        _mol = Chem.Mol(mol)
     else:
         _mol = mol
 

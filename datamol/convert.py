@@ -1,3 +1,4 @@
+from typing import Dict
 from typing import Union
 from typing import List
 from typing import Optional
@@ -5,6 +6,7 @@ from typing import cast
 from typing import Sequence
 
 import re
+import json
 
 from loguru import logger
 
@@ -12,6 +14,7 @@ import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdmolfiles
+from rdkit.Chem import rdMolInterchange
 from rdkit.Chem import PandasTools
 
 import selfies as sf
@@ -361,6 +364,22 @@ def from_smarts(smarts: Optional[str]) -> Optional[Mol]:
     return Chem.MolFromSmarts(smarts)  # type: ignore
 
 
+def to_binary(mol: Mol) -> Optional[bytes]:
+    """Convert a mol to a binary string.
+
+    Note that the molecular information to be stored in the binary string
+    is dependent on the RDKit pickling options.
+
+    Args:
+        mol: a molecule.
+    """
+
+    if mol is None:
+        return None
+
+    return mol.ToBinary()  # type: ignore
+
+
 def to_df(
     mols: Sequence[Mol],
     smiles_column: Optional[str] = "smiles",
@@ -512,6 +531,31 @@ def render_mol_df(df: pd.DataFrame):
         # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
         # https://github.com/rdkit/rdkit/issues/3563 is fixed.
         _ChangeMoleculeRendering(df)
+
+
+def to_dict(mols: Sequence[Mol]) -> Dict:
+    """Convert a list of mols to a dataframe using each mol properties
+    as a column.
+
+    For the reverse operation, you might to check `dm.from_df()`.
+
+    Args:
+        mols: a molecule.
+    """
+
+    return json.loads(rdMolInterchange.MolsToJSON(mols))
+
+
+def from_dict(mol_dict: Dict) -> List[Mol]:
+    """Convert a dict to a list of mols.
+
+    For the reverse operation, you might to check `dm.to_dict()`.
+
+    Args:
+        mol_dict: a dict.
+    """
+
+    return rdMolInterchange.JSONToMols(json.dumps(mol_dict))
 
 
 def _ChangeMoleculeRendering(frame=None, renderer="PNG"):

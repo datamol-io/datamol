@@ -135,6 +135,29 @@ def test_inchi():
     assert dm.from_inchi(None) is None
 
 
+def test_to_binary(datadir):
+    smiles = "CC(=O)Oc1ccccc1C(=O)O"
+    mol = dm.to_mol(smiles)
+
+    binary_string = dm.to_binary(mol)
+    assert isinstance(binary_string, bytes)
+    new_mol = dm.to_mol(binary_string)
+    assert dm.same_mol(mol, new_mol)
+
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mol = mols[0]
+
+    binary_string = dm.to_binary(mol)
+    assert isinstance(binary_string, bytes)
+    new_mol = dm.to_mol(binary_string)
+    assert dm.same_mol(mol, new_mol)
+    assert (
+        np.sum(np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions()))
+        < 1e-5
+    )
+
+
 def test_to_df(datadir):
     data_path = datadir / "TUBB3-observations.sdf"
     mols = dm.read_sdf(data_path)
@@ -216,6 +239,34 @@ def test_to_df_smiles_warning(datadir, caplog):
         "The SMILES column name provided ('smiles') is already present in the properties of the molecules"
         in caplog.text
     )
+
+
+def test_to_dict(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mols_dict = dm.to_dict(mols)
+
+    assert len(mols_dict["molecules"]) == 10
+    for mol_dict in mols_dict["molecules"]:
+        assert "conformers" in mol_dict
+        assert "properties" in mol_dict
+        assert len(mol_dict["properties"]) == 11
+
+
+def test_from_dict(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mols_dict = dm.to_dict(mols)
+    new_mols = dm.from_dict(mols_dict)
+
+    for mol, new_mol in zip(mols, new_mols):
+        assert dm.same_mol(mol, new_mol)
+        assert (
+            np.sum(
+                np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions())
+            )
+            < 1e-5
+        )
 
 
 def test_to_cxsmiles():
