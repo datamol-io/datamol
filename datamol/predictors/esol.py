@@ -10,7 +10,6 @@ from ..descriptors.descriptors import mw
 from ..descriptors.descriptors import n_rotatable_bonds
 from ..descriptors.descriptors import n_aromatic_atoms_proportion
 
-
 _ESOL_INTERCEPT = 0.26121066137801696
 _ESOL_COEF = {
     "mw": -0.0066138847738667125,

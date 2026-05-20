@@ -1,11 +1,9 @@
-"""A set of utility functions to convert between various units and formats used in drug discovery.
-"""
+"""A set of utility functions to convert between various units and formats used in drug discovery."""
 
 from typing import Union
 from typing import Iterable
 
 import numpy as np
-
 
 _MOLAR_SCALES = {"M": 1, "mM": 1e-3, "uM": 1e-6, "nM": 1e-9, "pM": 1e-12, "fM": 1e-15}
 

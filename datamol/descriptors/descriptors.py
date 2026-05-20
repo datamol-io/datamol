@@ -19,7 +19,7 @@ from .._version import is_lower_than_current_rdkit_version
 def _sasscorer(mol: Mol):
     sys.path.append(os.path.join(RDConfig.RDContribDir, "SA_Score"))
     try:
-        import sascorer  # type:ignore
+        import sascorer  # type: ignore
     except ImportError:
         raise ImportError(
             "Could not import sascorer. If you installed rdkit-pypi with `pip`, please uninstall it and reinstall rdkit with `conda` or `mamba`."

@@ -1,5 +1,4 @@
-"""The `fs` module makes it easier to work with all type of path (the ones supported by `fsspec`).
-"""
+"""The `fs` module makes it easier to work with all type of path (the ones supported by `fsspec`)."""
 
 from typing import Union
 from typing import Optional

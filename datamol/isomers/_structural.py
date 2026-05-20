@@ -3,7 +3,6 @@ import collections
 from rdkit import Chem
 import datamol as dm
 
-
 IsomerReaction = collections.namedtuple(
     "IsomerReaction",
     ["name", "smarts", "reverse", "acyclic", "triplebond", "doublebond", "use"],

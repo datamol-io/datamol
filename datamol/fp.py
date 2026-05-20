@@ -190,7 +190,7 @@ _FP_DEFAULT_ARGS = {
 
 
 def fp_to_array(
-    fp: Union[np.ndarray, SparseBitVect, ExplicitBitVect, UIntSparseIntVect]
+    fp: Union[np.ndarray, SparseBitVect, ExplicitBitVect, UIntSparseIntVect],
 ) -> np.ndarray:
     """Convert rdkit fingerprint to numpy array.
 

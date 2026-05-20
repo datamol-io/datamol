@@ -2,7 +2,6 @@ import time
 
 from loguru import logger
 
-
 duration_intervals = (
     ("weeks", 604800),  # 60 * 60 * 24 * 7
     ("days", 86400),  # 60 * 60 * 24

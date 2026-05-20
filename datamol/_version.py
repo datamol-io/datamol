@@ -10,7 +10,6 @@ except ModuleNotFoundError:
 import rdkit
 import packaging.version
 
-
 try:
     __version__ = version("datamol")
 except PackageNotFoundError:

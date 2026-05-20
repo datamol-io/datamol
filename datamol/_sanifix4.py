@@ -5,7 +5,6 @@ Original code from rdkit [James Davidson]
 
 from rdkit import Chem, RDLogger
 
-
 logger = RDLogger.logger()
 
 

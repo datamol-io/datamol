@@ -15,7 +15,6 @@ from rdkit.Chem import rdChemReactions
 
 import datamol as dm
 
-
 ATTACHING_RXN = rdChemReactions.ReactionFromSmarts("[*;h:1]>>[*:1][*]")
 
 
