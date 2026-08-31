@@ -221,7 +221,10 @@ def test_to_df_smiles_warning(datadir, caplog):
 def test_to_cxsmiles():
     mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
     smiles = dm.to_smiles(mol, cxsmiles=True)
-    assert smiles == "OC1=CC2CCCCC2[N:1]=C1 |atomProp:9.molAtomMapNumber.1|"
+    roundtrip = dm.to_mol(smiles)
+    assert roundtrip is not None
+    assert [atom.GetAtomMapNum() for atom in roundtrip.GetAtoms()].count(1) == 1
+    assert dm.to_smiles(roundtrip) == dm.to_smiles(mol)
 
 
 def test_to_smiles_fail():

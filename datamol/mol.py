@@ -30,6 +30,8 @@ from rdkit.Chem.SaltRemover import SaltRemover
 import datamol
 from . import _sanifix4
 from .types import Mol
+from .types import _get_explicit_valence
+from .types import _get_implicit_valence
 from .convert import to_inchikey_non_standard
 from .convert import to_inchikey
 from .convert import to_smiles
@@ -273,7 +275,7 @@ def to_neutral(mol: Optional[Mol]) -> Optional[Mol]:
 
     for a in mol.GetAtoms():
         if a.GetFormalCharge() < 0 or (
-            a.GetExplicitValence() >= PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
+            _get_explicit_valence(a) >= PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
             and a.GetFormalCharge() > 0
         ):
             a.SetFormalCharge(0)
@@ -511,8 +513,8 @@ def fix_valence_charge(mol: Mol, inplace: bool = False) -> Optional[Mol]:
         mol.UpdatePropertyCache(False)
         for a in mol.GetAtoms():
             n_electron = (
-                a.GetImplicitValence()
-                + a.GetExplicitValence()
+                _get_implicit_valence(a)
+                + _get_explicit_valence(a)
                 - PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
             )
             a.SetFormalCharge(n_electron)
@@ -538,8 +540,8 @@ def incorrect_valence(a: Union[Mol, Chem.rdchem.Atom], update: bool = False) -> 
     if update:
         m = a.GetOwningMol()
         m.UpdatePropertyCache(False)
-    return (a.GetImplicitValence() == 0) and (
-        a.GetExplicitValence() > max(PERIODIC_TABLE.GetValenceList(a.GetSymbol()))
+    return (_get_implicit_valence(a) == 0) and (
+        _get_explicit_valence(a) > max(PERIODIC_TABLE.GetValenceList(a.GetSymbol()))
     )
 
 
@@ -639,7 +641,7 @@ def adjust_singleton(mol: Mol) -> Optional[Mol]:
     to_rem = []
     em = rdchem.RWMol(mol)
     for atom in mol.GetAtoms():
-        if atom.GetExplicitValence() == 0:
+        if _get_explicit_valence(atom) == 0:
             to_rem.append(atom.GetIdx())
     to_rem.sort(reverse=True)
     for a_idx in to_rem:
@@ -762,7 +764,7 @@ def set_dative_bonds(mol: Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional
     for metal in metals:
         for nbr in metal.GetNeighbors():
             if (nbr.GetAtomicNum() in from_atoms or nbr.GetSymbol() in from_atoms) and (
-                nbr.GetExplicitValence() > PERIODIC_TABLE.GetDefaultValence(nbr.GetAtomicNum())
+                _get_explicit_valence(nbr) > PERIODIC_TABLE.GetDefaultValence(nbr.GetAtomicNum())
                 and rwmol.GetBondBetweenAtoms(nbr.GetIdx(), metal.GetIdx()).GetBondType()
                 == SINGLE_BOND
             ):

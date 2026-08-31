@@ -51,6 +51,7 @@ nav:
     - datamol.viz: api/datamol.viz.md
 
   - Contribute: contribute.md
+  - Migrating to 1.x: migration.md
   - License: license.md
 
 theme:
@@ -95,12 +96,7 @@ plugins:
   - mkdocstrings:
       handlers:
         python:
-          setup_commands:
-            - import sys
-            - sys.path.append("docs")
-            - sys.path.append("datamol")
           options:
-            new_path_syntax: true
             show_root_heading: false
             heading_level: 3
             show_root_full_path: false

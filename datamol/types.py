@@ -1,5 +1,4 @@
-# NOTE(hadim): typing_extensions can be replaced by typing once we drop support for Python 3.9.
-from typing_extensions import TypeAlias
+from typing import TypeAlias
 from typing import Union
 from typing import Tuple
 
@@ -14,3 +13,17 @@ Bond: TypeAlias = Chem.rdchem.Bond
 
 RDKitColor = Union[Tuple[float, float, float, float], Tuple[float, float, float]]
 DatamolColor = Union[RDKitColor, str]
+
+
+def _get_explicit_valence(atom: Atom) -> int:
+    """Return an atom's explicit valence across supported RDKit versions."""
+    if hasattr(atom, "GetValence"):
+        return atom.GetValence(Chem.ValenceType.EXPLICIT)
+    return atom.GetExplicitValence()
+
+
+def _get_implicit_valence(atom: Atom) -> int:
+    """Return an atom's implicit valence across supported RDKit versions."""
+    if hasattr(atom, "GetValence"):
+        return atom.GetValence(Chem.ValenceType.IMPLICIT)
+    return atom.GetImplicitValence()

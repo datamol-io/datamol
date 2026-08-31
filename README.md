@@ -52,6 +52,14 @@ Use conda:
 mamba install -c conda-forge datamol
 ```
 
+Or install from PyPI:
+
+```bash
+python -m pip install datamol
+```
+
+The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
+
 ## Quick API Tour
 
 ```python
@@ -105,6 +113,7 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
+| `1.x` (development) | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
 | `0.12.x`  | `[3.10, 3.11]`      | `[2023.03, 2023.09]`          |
 | `0.11.x`  | `[3.9, 3.10, 3.11]` | `[2022.09, 2023.03]`          |
 | `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |
@@ -121,13 +130,14 @@ See below the associated versions of Python and RDKit, for which a minor version
 The CI runs tests and performs code quality checks for the following combinations:
 
 - The three major platforms: Windows, OSX and Linux.
-- The two latest Python versions.
-- The two latest RDKit versions.
+- Python 3.11 through 3.14 on Linux.
+- The supported RDKit release series from 2024.09 through 2026.03.
+- The latest supported stack on Windows and macOS.
 
 |                                         | `main`                                                                                                                                                                    |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Lib build & Testing                     | [![test](https://github.com/datamol-io/datamol/actions/workflows/test.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/test.yml)                   |
-| Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
+| Code Sanity (formatting and linting)     | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
 | Documentation Build                     | [![doc](https://github.com/datamol-io/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/doc.yml)                      |
 
 ## License

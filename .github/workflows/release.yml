@@ -1,126 +1,76 @@
 name: release
 
 on:
-  workflow_dispatch:
-    inputs:
-      release-version:
-        description: "A valid Semver version string"
-        required: true
+  release:
+    types: [published]
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
 
 jobs:
-  release:
-    # Do not release if not triggered from the default branch
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    defaults:
-      run:
-        shell: bash -l {0}
-
+    timeout-minutes: 15
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
-
-      - name: Setup mamba
-        uses: mamba-org/setup-micromamba@v1
+      - name: Checkout release tag
+        uses: actions/checkout@v7
         with:
-          environment-file: env.yml
-          environment-name: my_env
-          cache-environment: true
-          cache-downloads: true
-          create-args: >-
-            pip
-            semver
-            python-build
-            setuptools_scm
+          fetch-depth: 0
 
-      - name: Check the version is valid semver
-        run: |
-          RELEASE_VERSION="${{ inputs.release-version }}"
-
-          {
-            pysemver check $RELEASE_VERSION
-          } || {
-            echo "The version '$RELEASE_VERSION' is not a valid Semver version string."
-            echo "Please use a valid semver version string. More details at https://semver.org/"
-            echo "The release process is aborted."
-            exit 1
-          }
-
-      - name: Check the version is higher than the latest one
-        run: |
-          # Retrieve the git tags first
-          git fetch --prune --unshallow --tags &> /dev/null
-
-          RELEASE_VERSION="${{ inputs.release-version }}"
-          LATEST_VERSION=$(git describe --abbrev=0 --tags)
-
-          IS_HIGHER_VERSION=$(pysemver compare $RELEASE_VERSION $LATEST_VERSION)
-
-          if [ "$IS_HIGHER_VERSION" != "1" ]; then
-            echo "The version '$RELEASE_VERSION' is not higher than the latest version '$LATEST_VERSION'."
-            echo "The release process is aborted."
-            exit 1
-          fi
-
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v4
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set up Python
+        uses: actions/setup-python@v6
         with:
-          toTag: "main"
+          python-version: "3.14"
 
-      - name: Configure git
+      - name: Build distributions
         run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          python -m pip install --upgrade build twine
+          python -m build
+          twine check dist/*
 
-      - name: Create and push git tag
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Upload distributions
+        uses: actions/upload-artifact@v7
+        with:
+          name: python-distributions
+          path: dist/
+
+  test-package:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.14"
+
+      - name: Download distributions
+        uses: actions/download-artifact@v8
+        with:
+          name: python-distributions
+          path: dist/
+
+      - name: Install and import wheel
         run: |
-          # Tag the release
-          git tag -a "${{ inputs.release-version }}" -m "Release version ${{ inputs.release-version }}"
+          python -m pip install dist/*.whl
+          python -c "import datamol; print(datamol.__version__)"
 
-          # Checkout the git tag
-          git checkout "${{ inputs.release-version }}"
+  publish:
+    needs: test-package
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/datamol
+    permissions:
+      id-token: write
+    steps:
+      - name: Download distributions
+        uses: actions/download-artifact@v8
+        with:
+          name: python-distributions
+          path: dist/
 
-          # Push the modified changelogs
-          git push origin main
-
-          # Push the tags
-          git push origin "${{ inputs.release-version }}"
-
-      - name: Install library
-        run: python -m pip install --no-deps .
-
-      - name: Build the wheel and sdist
-        run: python -m build --no-isolation
-
-      - name: Publish package to PyPI
+      - name: Publish to PyPI
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
           packages-dir: dist/
-
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
-        with:
-          tag_name: ${{ inputs.release-version }}
-          body: ${{steps.github_release.outputs.changelog}}
-
-      - name: Deploy the doc
-        run: |
-          echo "Get the gh-pages branch"
-          git fetch origin gh-pages
-
-          echo "Build and deploy the doc on ${{ inputs.release-version }}"
-          mike deploy --push stable
-          mike deploy --push ${{ inputs.release-version }}

@@ -11,7 +11,6 @@ from PIL import Image
 
 import datamol as dm
 
-
 # NOTE(hadim): rdkit returns different image objects
 # according to the Python process context (Jupyter notebook vs terminal).
 # In consequence, those tests will fail if they are executed within a
@@ -116,11 +115,11 @@ def test_conformers():
 
     # one conformer
     view = dm.viz.conformers(mol)
-    assert type(view) == nv.widget.NGLWidget
+    assert isinstance(view, nv.widget.NGLWidget)
 
     # multiple conformers
     view = dm.viz.conformers(mol, n_confs=12)
-    assert type(view) == widgets.GridspecLayout
+    assert isinstance(view, widgets.GridspecLayout)
 
 
 @pytest.mark.skipif(

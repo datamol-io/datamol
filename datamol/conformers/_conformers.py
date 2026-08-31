@@ -63,7 +63,7 @@ def generate(
     # Get the 3D atom positions of the first conformer
     positions = mol.GetConformer(0).GetPositions()
 
-    # If minimization has been enabled (default to True)
+    # If minimization has been enabled
     # you can access the computed energy.
     conf = mol.GetConformer(1)
     props = conf.GetPropsAsDict()

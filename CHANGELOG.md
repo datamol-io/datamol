@@ -1,5 +1,23 @@
 # Datamol Changelogs
 
+## Next major release
+
+**Changed:**
+
+- Require Python 3.11+ and RDKit 2024.09+.
+- Declare maintained optional dependency groups for I/O, visualisation, testing,
+  documentation and development.
+- Update the test suite for chemically equivalent RDKit serialisations and stable
+  conformer invariants across supported RDKit releases.
+- Separate core tests, tutorial notebooks, documentation and distribution checks in CI.
+- Publish releases through PyPI Trusted Publishing rather than a long-lived API token.
+
+**Fixed:**
+
+- Preserve `datamol.open_df(..., verbose=...)` compatibility with pandas 3.
+- Use the current RDKit valence API and remove its deprecated valence calls.
+- Accept SMARTS strings in `enforce_subs` when generating fuzzy scaffolds (PR #243).
+
 ## v0.10.3
 
 **Authors:**

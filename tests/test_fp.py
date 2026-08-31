@@ -54,7 +54,7 @@ def test_all_fps():
 
     print(fp_infos)
 
-    assert fp_infos == {
+    expected = {
         "maccs": {"size": 167, "bits_sum": 21},
         "ecfp": {"size": 2048, "bits_sum": 31},
         "fcfp": {"size": 2048, "bits_sum": 22},
@@ -72,6 +72,10 @@ def test_all_fps():
         "atompair-count": {"size": 2048, "bits_sum": 78},
         "rdkit-count": {"size": 2048, "bits_sum": 301},
     }
+    assert fp_infos.keys() == expected.keys()
+    for fp_type, info in fp_infos.items():
+        assert info["size"] == expected[fp_type]["size"]
+        assert info["bits_sum"] == pytest.approx(expected[fp_type]["bits_sum"])
 
 
 def test_fp_invalid_input():
