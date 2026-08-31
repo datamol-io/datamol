@@ -374,6 +374,31 @@ def copy_dir(
     detailed_paths = source_fs.find(source, withdirs=True, detail=True)
     detailed_paths = list(detailed_paths.values())
 
+    # Some listing-based filesystems (notably HTTP auto-indexes) report the
+    # requested directory itself as a file in addition to its children. Treat
+    # that entry as a directory marker so that relative output paths are kept
+    # while avoiding an attempt to copy the listing page as a regular file.
+    source_key = source_fs._strip_protocol(source).rstrip("/")
+    has_children = any(
+        source_fs._strip_protocol(path["name"]).startswith(f"{source_key}/")
+        for path in detailed_paths
+    )
+    if has_children:
+        detailed_paths = [
+            (
+                {
+                    **path,
+                    "type": "directory",
+                }
+                if (
+                    path["type"] != "directory"
+                    and source_fs._strip_protocol(path["name"]).rstrip("/") == source_key
+                )
+                else path
+            )
+            for path in detailed_paths
+        ]
+
     # Get list of input types
     input_types = [d["type"] for d in detailed_paths]
 
