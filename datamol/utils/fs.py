@@ -412,7 +412,9 @@ def copy_dir(
     def _copy_source_to_destination(input_path, input_type, output_path):
         # A directory
         if input_type == "directory":
-            destination_fs.mkdir(output_path)
+            # File copies may create their parent concurrently with directory
+            # entries, so directory creation must be idempotent.
+            destination_fs.makedirs(output_path, exist_ok=True)
 
         # A file
         else:

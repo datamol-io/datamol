@@ -41,6 +41,7 @@ _FP_FUNCS = {
     "erg": rdReducedGraphs.GetErGFingerprint,
     # NOTE(hadim): bad for pickling?
     "estate": lambda x, **args: EStateFingerprinter.FingerprintMol(x)[0],
+    "avalon": pyAvalonTools.GetAvalonFP,
     "avalon-count": pyAvalonTools.GetAvalonCountFP,
     **_FP_GENERATORS,
 }

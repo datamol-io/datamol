@@ -15,6 +15,7 @@ def test_list_fp():
     assert set(dm.list_supported_fingerprints().keys()) == {
         "atompair",
         "atompair-count",
+        "avalon",
         "avalon-count",
         "ecfp",
         "fcfp",
@@ -65,6 +66,7 @@ def test_all_fps():
         "layered": {"size": 2048, "bits_sum": 335},
         "erg": {"size": 315, "bits_sum": 23.4},
         "estate": {"size": 79, "bits_sum": 13},
+        "avalon": {"size": 512, "bits_sum": 54},
         "avalon-count": {"size": 512, "bits_sum": 168},
         "ecfp-count": {"size": 2048, "bits_sum": 42},
         "fcfp-count": {"size": 2048, "bits_sum": 35},

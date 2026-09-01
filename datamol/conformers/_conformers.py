@@ -168,7 +168,12 @@ def generate(
                     f"Conformers embedding failed for {convert.to_smiles(mol)}. Returning None because ignore_failure is set."
                 )
             return None
-        raise ValueError(f"Conformers embedding failed for {convert.to_smiles(mol)}")
+        raise ValueError(
+            f"Conformers embedding failed for {convert.to_smiles(mol)}. "
+            "The stereochemical constraints may be impossible to satisfy; if losing "
+            "stereochemical enforcement is acceptable, retry with "
+            "`enforce_chirality=False`."
+        )
 
     energies = None
 
@@ -218,20 +223,26 @@ def generate(
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
-    # Align conformers to each others
-    if align_conformers:
-        rdMolAlign.AlignMolConformers(mol)
+    # Remove hydrogens before RMS pruning so the cutoff applies to the molecule
+    # returned to the caller. Including temporary hydrogens can otherwise hide
+    # duplicate heavy-atom conformers.
+    if add_hs:
+        mol = dm_mol.remove_hs(mol)
 
     if rms_cutoff is not None:
         mol = cluster(
             mol,
             rms_cutoff=rms_cutoff,
-            already_aligned=align_conformers,
+            # Pairwise optimal RMS values are required for pruning. Conformers
+            # aligned independently to a common reference are not necessarily
+            # optimally aligned to one another.
+            already_aligned=False,
             centroids=True,
         )  # type: ignore
 
-    if add_hs:
-        mol = dm_mol.remove_hs(mol)
+    # Align the final, pruned set of conformers to each other.
+    if align_conformers:
+        rdMolAlign.AlignMolConformers(mol)
 
     return mol
 

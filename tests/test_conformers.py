@@ -63,6 +63,30 @@ def test_generate_4():
     )
 
 
+def test_generate_rms_cutoff_applies_to_returned_heavy_atom_conformers():
+    mol = dm.to_mol("CCCCCC")
+    mol = dm.conformers.generate(
+        mol,
+        n_confs=50,
+        rms_cutoff=0.25,
+        minimize_energy=True,
+        align_conformers=True,
+    )
+
+    rmsd = dm.conformers.rmsd(mol)
+    pairwise_rmsd = rmsd[np.triu_indices_from(rmsd, k=1)]
+    assert np.all(pairwise_rmsd >= 0.25)
+
+
+def test_generate_reports_unsatisfied_stereochemical_constraints():
+    # This SMILES requests trans double bonds in a small ring. Modern RDKit
+    # correctly rejects that impossible stereochemical geometry.
+    mol = dm.to_mol("[H]/C1=C(\\[H])C([H])([H])/N=C(\\[H])OC([H])([H])C1=O")
+
+    with pytest.raises(ValueError, match="enforce_chirality=False"):
+        dm.conformers.generate(mol, n_confs=1)
+
+
 @pytest.mark.skip_platform("win")
 def test_sasa():
     with pytest.raises(ValueError):

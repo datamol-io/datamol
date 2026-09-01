@@ -34,12 +34,21 @@ def test_descriptors():
 
         dm.descriptors.n_aliphatic_carbocycles(mol)
         dm.descriptors.n_aliphatic_heterocyles(mol)
+        assert dm.descriptors.n_aliphatic_heterocycles(
+            mol
+        ) == dm.descriptors.n_aliphatic_heterocyles(mol)
         dm.descriptors.n_aliphatic_rings(mol)
         dm.descriptors.n_aromatic_carbocycles(mol)
         dm.descriptors.n_aromatic_heterocyles(mol)
+        assert dm.descriptors.n_aromatic_heterocycles(mol) == dm.descriptors.n_aromatic_heterocyles(
+            mol
+        )
         dm.descriptors.n_aromatic_rings(mol)
         dm.descriptors.n_saturated_carbocycles(mol)
         dm.descriptors.n_saturated_heterocyles(mol)
+        assert dm.descriptors.n_saturated_heterocycles(
+            mol
+        ) == dm.descriptors.n_saturated_heterocyles(mol)
         dm.descriptors.n_saturated_rings(mol)
 
 

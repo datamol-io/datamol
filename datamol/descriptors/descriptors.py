@@ -60,14 +60,17 @@ n_spiro_atoms = rdMolDescriptors.CalcNumSpiroAtoms
 
 n_aliphatic_carbocycles = rdMolDescriptors.CalcNumAliphaticCarbocycles
 n_aliphatic_heterocyles = rdMolDescriptors.CalcNumAliphaticHeterocycles
+n_aliphatic_heterocycles = n_aliphatic_heterocyles
 n_aliphatic_rings = rdMolDescriptors.CalcNumAliphaticRings
 
 n_aromatic_carbocycles = rdMolDescriptors.CalcNumAromaticCarbocycles
 n_aromatic_heterocyles = rdMolDescriptors.CalcNumAromaticHeterocycles
+n_aromatic_heterocycles = n_aromatic_heterocyles
 n_aromatic_rings = rdMolDescriptors.CalcNumAromaticRings
 
 n_saturated_carbocycles = rdMolDescriptors.CalcNumSaturatedCarbocycles
 n_saturated_heterocyles = rdMolDescriptors.CalcNumSaturatedHeterocycles
+n_saturated_heterocycles = n_saturated_heterocyles
 n_saturated_rings = rdMolDescriptors.CalcNumSaturatedRings
 
 
