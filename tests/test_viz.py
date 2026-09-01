@@ -18,13 +18,11 @@ import datamol as dm
 
 
 def _convert_ipython_to_array(image):
-    """convert ipython image to numpy array"""
-    image_obj = base64.b64decode(str(image._repr_png_()))
-    try:
-        image_obj = Image.open(io.BytesIO(image_obj))
-        return np.array(image_obj)
-    except Exception:
-        return np.array(image)
+    """Convert an IPython PNG representation to a NumPy array."""
+    image_data = image._repr_png_()
+    if isinstance(image_data, str):
+        image_data = base64.b64decode(image_data)
+    return np.array(Image.open(io.BytesIO(image_data)))
 
 
 def test_to_image():
@@ -37,8 +35,6 @@ def test_to_image():
     legends = [dm.to_smiles(mol) for mol in mols]
     image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200), use_svg=False)
     image = _convert_ipython_to_array(image)
-
-    print(type(image))
 
     image = np.array(image)
 
