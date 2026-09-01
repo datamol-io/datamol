@@ -83,17 +83,12 @@ def template_align(
     if remove_confs:
         _mol.RemoveAllConformers()
 
-    # EN: to make this more general and robust, we need to first check whether the template
-    # has 2D coordinates or not. If it does not, we need to compute them.
-    # This is a very rare edge case if requests are comming from the UI, but better to check than not xD
+    # Alignment requires template coordinates; generate them when absent.
     if _template.GetNumConformers() == 0:
         _template = compute_2d_coords(_template)
 
-    # EN: now we can align the molecule to the template
-    # but first, we should avoid MCS as much as possible, because it's expensive
-    # so if the template is a subgraph of the molecule, no need to perform any MCS
-    # Another reason for this, is to avoid inconsistency in alignment between molecules that are
-    # supergraph of the template vs molecules that are subgraph of the template.
+    # Prefer a direct substructure match: MCS is slower and can produce a
+    # different alignment for molecules that already contain the full template.
     pattern = _template
     if not _mol.HasSubstructMatch(_template):
         pattern = None
@@ -107,7 +102,7 @@ def template_align(
             rdDepictor.UsingCoordGen(use_depiction) if auto_select_coord_gen else nullcontext()
         )
         with coordgen_context:
-            # we would need to compute 2d coordinates for the molecules if it doesn't have any
+            # Generate molecule coordinates only when needed.
             if _mol.GetNumConformers() == 0:
                 _mol = compute_2d_coords(_mol)
 
@@ -247,10 +242,5 @@ def auto_align_many(
             props["dm.auto_align_many.cluster_id"] = cluster_id
             props["dm.auto_align_many.core"] = core
             dm.set_mol_props(mol, props)
-
-    # EN: you can discard the mol_groups (or keep it and match the values
-    # to molecular line notation, so you will not have to reocompute the above)
-    # and convert the mols into cxsmiles if you want
-    # return mols, mol_groups
 
     return mols

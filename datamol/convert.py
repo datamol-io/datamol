@@ -423,15 +423,14 @@ def to_df(
         else:
             return {}
 
-    # EN: You cannot use `processes` here because all properties will be lost
-    # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
-    # But this has less overhead
+    # Threads preserve RDKit molecule properties without the PropertyMol
+    # serialization overhead required by process workers.
     props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs, scheduler="threads")
     props_df = pd.DataFrame(props)
     if smiles_column is not None and smiles_column in props_df.columns:
         logger.warning(
             f"The SMILES column name provided ('{smiles_column}') is already present in the properties"
-            " of the molecules. THe returned dataframe will two columns with the same name."
+            " of the molecules. The returned dataframe will have two columns with the same name."
         )
 
     # Concat the df with the properties df
@@ -456,7 +455,7 @@ def from_df(
 ) -> List[Mol]:
     """Convert a dataframe to a list of mols.
 
-    For the reverse operation, you might to check `dm.to_df()`.
+    For the reverse operation, see `dm.to_df()`.
 
     Note:
         If `smiles_column` is used to build the molecules, this property

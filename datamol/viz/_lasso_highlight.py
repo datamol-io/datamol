@@ -555,8 +555,8 @@ def lasso_highlight_image(
         max_scale_val.y = max(max_scale_val.y, max(coordinates[:, 1]))
         mols_to_draw.append(mol)
 
-    # Setting up the coordinate system by drawing the molecules as a grid
-    # EN: the following is edge-case free after trying 6 different logics, but may break if RDKit changes the way it draws molecules
+    # Use RDKit's grid drawing coordinates as the reference frame for highlights.
+    # This depends on RDKit's drawing-coordinate convention.
     scaling_val = Point2D(scale_padding, scale_padding)
 
     if isinstance(highlight_atoms, list) and isinstance(highlight_atoms[0], int):
