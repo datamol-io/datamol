@@ -12,15 +12,14 @@ Visit our website at <https://datamol.io>.
 
 ## Installation
 
-Use conda:
+Add Datamol to a uv-managed project:
 
 ```bash
-mamba install -c conda-forge datamol
+uv add datamol
 ```
 
-_**Tips:** You can replace `mamba` by `conda`._
-
-_**Note:** We highly recommend using a [Conda Python distribution](https://github.com/conda-forge/miniforge) to install Datamol. The package is also pip installable if you need it: `python -m pip install datamol`._
+Pip and conda-forge remain supported: `python -m pip install datamol` or
+`mamba install -c conda-forge datamol`.
 
 The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
 

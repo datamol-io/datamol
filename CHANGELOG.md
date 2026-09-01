@@ -10,7 +10,10 @@
 - Update the test suite for chemically equivalent RDKit serialisations and stable
   conformer invariants across supported RDKit releases.
 - Separate core tests, tutorial notebooks, documentation and distribution checks in CI.
-- Publish releases through PyPI Trusted Publishing rather than a long-lived API token.
+- Use uv for development, CI, isolated wheel/source smoke tests and publishing.
+- Publish releases through PyPI Trusted Publishing with PEP 740 attestations
+  rather than a long-lived API token; retain conda-forge as a bot-updated
+  downstream channel.
 
 **Fixed:**
 

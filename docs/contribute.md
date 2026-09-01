@@ -5,17 +5,17 @@ The below documents the development lifecycle of Datamol.
 ## Setup a dev environment
 
 ```bash
-mamba env create -n datamol -f env.yml
-mamba activate datamol
+uv sync --all-extras
 ```
 
-The environment installs Datamol in editable mode with the test, documentation,
-I/O, visualisation and development dependency groups.
+This creates an isolated `.venv` and installs Datamol in editable mode with the
+test, documentation, I/O, visualisation and development extras. `env.yml`
+remains available for contributors who need a Conda environment.
 
 Run the same formatting and lint checks used by CI before committing:
 
 ```bash
-pre-commit run --all-files
+uv run pre-commit run --all-files
 ```
 
 ## Setup a dev environment with dev container
@@ -30,7 +30,8 @@ Datamol uses Github Actions to:
 
 - **Build and test** `datamol`.
   - Python 3.11 through 3.14 and the supported RDKit release series are tested.
-  - The current stack is also tested on Linux, macOS and Windows.
+  - The current stack is also tested on Linux x86-64, Windows x86-64,
+    macOS Apple Silicon and macOS Intel.
   - Tutorial notebooks run in a dedicated job so failures are easier to diagnose.
 - **Check** the code:
   - Formatting with `black`.
@@ -41,8 +42,13 @@ Datamol uses Github Actions to:
 ## Run tests
 
 ```bash
-pytest
+uv run python -m pytest -m "not integration"
+uv run python -m pytest -m integration --no-cov -n 0
 ```
+
+The first command is the fast core suite. The second executes the maintained
+tutorials and is the same integration command used by the dedicated GitHub
+Actions job.
 
 ## Build the documentation
 
@@ -50,7 +56,7 @@ You can build and serve the documentation locally with:
 
 ```bash
 # Build and serve the doc
-mike serve
+uv run mike serve
 ```
 
 ### Multi-versioning
@@ -63,7 +69,13 @@ Everything is automated using GitHub Actions.
 
 Create and publish a GitHub release from a version tag after the release commit has
 landed on `main`. The [`release` workflow](https://github.com/datamol-io/datamol/actions/workflows/release.yml)
-builds and validates both distributions, tests the wheel in a clean environment,
-and publishes it through PyPI Trusted Publishing. The `pypi` GitHub environment
+builds and validates both the wheel and source distribution with `uv`, tests
+both in clean environments, generates PEP 740 attestations, and publishes them
+through PyPI Trusted Publishing. The `pypi` GitHub environment
 and matching PyPI trusted publisher must be configured once by a repository
 administrator; no long-lived PyPI API token is stored in GitHub.
+
+The existing conda-forge feedstock remains the Conda release channel. After a
+PyPI release, conda-forge's update bot proposes the new version; maintainers
+review its dependencies and tests in the feedstock rather than duplicating a
+Conda upload inside this repository's release workflow.

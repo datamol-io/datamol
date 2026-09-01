@@ -29,9 +29,19 @@ pandas 3 removed the `verbose` argument from `pandas.read_csv`. For compatibilit
 deprecation warning when the installed pandas version no longer supports it. Other
 unknown reader arguments continue to raise an error.
 
+`fold_count_fp` now accepts both sparse and explicit RDKit bit vectors, as its
+public type contract already indicated. Datamol remains the canonical home for
+general fingerprint folding and conformer alignment; downstream packages such
+as Molfeat reuse these primitives rather than maintaining divergent copies.
+
 ## Development and releases
 
-Create the development environment with `mamba env create -n datamol -f env.yml`.
-The CI tests the supported Python and RDKit series, tutorial notebooks, documentation,
-formatting and package distributions separately. Releases are built from published
-GitHub releases and uploaded to PyPI with short-lived OpenID Connect credentials.
+Create the development environment with `uv sync --all-extras`; `env.yml`
+remains a supported Conda alternative. The CI uses the same uv-based install
+path and tests the supported Python and RDKit series on Linux x86-64, Windows
+x86-64, macOS Apple Silicon and macOS Intel. Tutorial notebooks,
+documentation, formatting and package distributions run separately. Releases
+are built from published GitHub releases, smoke-tested as both wheels and source
+distributions, attested, and uploaded to PyPI with short-lived OpenID Connect
+credentials. The conda-forge feedstock continues to consume PyPI releases via
+its update bot and remains a supported downstream distribution.

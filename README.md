@@ -46,16 +46,17 @@ Visit <https://docs.datamol.io>.
 
 ## Installation
 
-Use conda:
+Add Datamol to a uv-managed project:
 
 ```bash
-mamba install -c conda-forge datamol
+uv add datamol
 ```
 
-Or install from PyPI:
+Pip and conda-forge remain supported:
 
 ```bash
 python -m pip install datamol
+mamba install -c conda-forge datamol
 ```
 
 The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
@@ -133,10 +134,10 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 The CI runs tests and performs code quality checks for the following combinations:
 
-- The three major platforms: Windows, OSX and Linux.
+- Linux x86-64, Windows x86-64, macOS Apple Silicon and macOS Intel.
 - Python 3.11 through 3.14 on Linux.
 - The supported RDKit release series from 2024.09 through 2026.03.
-- The latest supported stack on Windows and macOS.
+- The latest supported stack on every operating-system and architecture lane.
 
 |                                         | `main`                                                                                                                                                                    |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |

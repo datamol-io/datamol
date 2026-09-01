@@ -1,6 +1,7 @@
 import pytest
 
 import datamol as dm
+from rdkit import DataStructs
 
 
 def test_to_fp():
@@ -91,3 +92,25 @@ def test_fp_invalid_input():
     args["mol"] = "dsdsdsd"
     with pytest.raises(ValueError):
         dm.to_fp(**args)
+
+
+def test_fold_count_fp_supports_explicit_bit_vectors():
+    fingerprint = DataStructs.ExplicitBitVect(16)
+    fingerprint.SetBitsFromList([1, 5, 9])
+
+    folded = dm.fold_count_fp(fingerprint, dim=4)
+    binary = dm.fold_count_fp(fingerprint, dim=4, binary=True)
+
+    assert folded.tolist() == [0, 3, 0, 0]
+    assert binary.tolist() == [0, 1, 0, 0]
+
+
+@pytest.mark.parametrize(
+    "fingerprint",
+    [DataStructs.ExplicitBitVect(16), DataStructs.UIntSparseIntVect(16)],
+)
+def test_fold_count_fp_supports_empty_fingerprints(fingerprint):
+    folded = dm.fold_count_fp(fingerprint, dim=4)
+
+    assert folded.dtype.kind == "i"
+    assert folded.tolist() == [0, 0, 0, 0]

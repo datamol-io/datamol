@@ -22,16 +22,18 @@ jobs:
     timeout-minutes: 20
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
+          version: "0.12.8"
           python-version: "3.14"
-          cache: pip
+          activate-environment: true
+          enable-cache: true
 
       - name: Install documentation dependencies
-        run: python -m pip install --upgrade ".[docs,io,viz]"
+        run: uv pip install --editable ".[docs,io,viz]"
 
       - name: Build documentation
         run: mkdocs build --strict
@@ -45,18 +47,20 @@ jobs:
       contents: write
     steps:
       - name: Checkout
-        uses: actions/checkout@v7
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
 
-      - name: Set up Python
-        uses: actions/setup-python@v6
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
+          version: "0.12.8"
           python-version: "3.14"
-          cache: pip
+          activate-environment: true
+          enable-cache: true
 
       - name: Install documentation dependencies
-        run: python -m pip install --upgrade ".[docs,io,viz]"
+        run: uv pip install --editable ".[docs,io,viz]"
 
       - name: Configure Git
         run: |
