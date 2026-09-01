@@ -14,12 +14,20 @@ from rdkit import Chem
 from rdkit.Chem import rdmolfiles
 from rdkit.Chem import PandasTools
 
-import selfies as sf
-
 from .types import Mol
 
 # NOTE(hadim): it's not possible to use `from .mol import ...` because of circular imports
 import datamol as dm
+
+
+def _import_selfies():
+    try:
+        import selfies
+    except ImportError:
+        raise ImportError(
+            'SELFIES conversion requires the selfies extra: python -m pip install "datamol[selfies]"'
+        ) from None
+    return selfies
 
 
 def to_smiles(
@@ -102,6 +110,7 @@ def to_selfies(mol: Union[str, Mol]) -> Optional[str]:
         selfies: SELFIES string.
     """
 
+    sf = _import_selfies()
     if isinstance(mol, Mol):
         mol = to_smiles(mol)
 
@@ -125,6 +134,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Mol]
     Returns:
         smiles or mol.
     """
+    sf = _import_selfies()
     if selfies is None:
         return None
 

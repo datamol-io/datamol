@@ -24,6 +24,10 @@ _**Note:** We highly recommend using a [Conda Python distribution](https://githu
 
 The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
 
+Install optional capabilities only when needed: `datamol[io]` for S3, Google
+Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
+`datamol[selfies]` for SELFIES conversion.
+
 ## Quick API Tour
 
 ```python
