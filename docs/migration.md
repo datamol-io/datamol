@@ -34,6 +34,10 @@ public type contract already indicated. Datamol remains the canonical home for
 general fingerprint folding and conformer alignment; downstream packages such
 as Molfeat reuse these primitives rather than maintaining divergent copies.
 
+`template_align(..., auto_select_coord_gen=True)` now scopes RDKit's CoordGen
+preference to the alignment call. It no longer changes the process-wide RDKit
+depiction preference for subsequent calls.
+
 ## Development and releases
 
 Create the development environment with `uv sync --all-extras`; `env.yml`

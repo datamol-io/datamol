@@ -3,6 +3,7 @@ from typing import Union
 from typing import Sequence
 from typing import Any
 
+from contextlib import nullcontext
 from packaging import version
 from collections import defaultdict as ddict
 
@@ -102,25 +103,26 @@ def template_align(
             pattern = dm.from_smarts(mcs_smarts)
 
     if pattern is not None:
-        if auto_select_coord_gen:
-            rdDepictor.SetPreferCoordGen(use_depiction)
+        coordgen_context = (
+            rdDepictor.UsingCoordGen(use_depiction) if auto_select_coord_gen else nullcontext()
+        )
+        with coordgen_context:
+            # we would need to compute 2d coordinates for the molecules if it doesn't have any
+            if _mol.GetNumConformers() == 0:
+                _mol = compute_2d_coords(_mol)
 
-        # we would need to compute 2d coordinates for the molecules if it doesn't have any
-        if _mol.GetNumConformers() == 0:
-            _mol = compute_2d_coords(_mol)
-
-        if use_depiction:
-            rdDepictor.GenerateDepictionMatching2DStructure(
-                _mol,
-                reference=_template,
-                refPatt=pattern,
-                acceptFailure=True,
-                allowRGroups=True,
-            )
-        else:
-            query_match = _mol.GetSubstructMatch(pattern)
-            template_match = _template.GetSubstructMatch(pattern)
-            rdMolAlign.AlignMol(_mol, _template, atomMap=list(zip(query_match, template_match)))
+            if use_depiction:
+                rdDepictor.GenerateDepictionMatching2DStructure(
+                    _mol,
+                    reference=_template,
+                    refPatt=pattern,
+                    acceptFailure=True,
+                    allowRGroups=True,
+                )
+            else:
+                query_match = _mol.GetSubstructMatch(pattern)
+                template_match = _template.GetSubstructMatch(pattern)
+                rdMolAlign.AlignMol(_mol, _template, atomMap=list(zip(query_match, template_match)))
 
     return _mol
 
