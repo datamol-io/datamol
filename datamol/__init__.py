@@ -108,6 +108,9 @@ _lazy_imports_obj = {
     "render_mol_df": "datamol.convert",
     "to_inchi_non_standard": "datamol.convert",
     "to_inchikey_non_standard": "datamol.convert",
+    "to_dict": "datamol.convert",
+    "from_dict": "datamol.convert",
+    "to_binary": "datamol.convert",
     # fp
     "to_fp": "datamol.fp",
     "fp_to_array": "datamol.fp",
@@ -304,6 +307,9 @@ if TYPE_CHECKING or os.environ.get("DATAMOL_DISABLE_LAZY_LOADING", "0") == "1":
     from .convert import render_mol_df
     from .convert import to_inchi_non_standard
     from .convert import to_inchikey_non_standard
+    from .convert import to_dict
+    from .convert import from_dict
+    from .convert import to_binary
 
     from .fp import to_fp
     from .fp import fp_to_array
