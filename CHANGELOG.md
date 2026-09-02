@@ -14,12 +14,22 @@
 - Publish releases through PyPI Trusted Publishing with PEP 740 attestations
   rather than a long-lived API token; retain conda-forge as a bot-updated
   downstream channel.
+- Use correctly spelled `heterocycles` keys in the default descriptor set. The
+  misspelled public callables remain available with deprecation warnings.
+
+**Added:**
+
+- Add RDKit binary and property-dictionary molecule interchange helpers from
+  PR #238, preserving the original contributor's commit.
 
 **Fixed:**
 
 - Preserve `datamol.open_df(..., verbose=...)` compatibility with pandas 3.
 - Use the current RDKit valence API and remove its deprecated valence calls.
 - Accept SMARTS strings in `enforce_subs` when generating fuzzy scaffolds (PR #243).
+- Enforce conformer RMS cutoffs with optimal, symmetry-aware pairwise alignment.
+- Report impossible stereochemical embedding constraints clearly and allow the
+  caller to opt out of chirality enforcement.
 
 ## v0.10.3
 

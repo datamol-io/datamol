@@ -64,10 +64,10 @@ def test_generate_4():
 
 
 def test_generate_rms_cutoff_applies_to_returned_heavy_atom_conformers():
-    mol = dm.to_mol("CCCCCC")
+    mol = dm.to_mol("N(c1n[nH]c(C2CC2)c1)c1nc(Nc2ccc(CC#N)cc2)ncc1")
     mol = dm.conformers.generate(
         mol,
-        n_confs=50,
+        n_confs=30,
         rms_cutoff=0.25,
         minimize_energy=True,
         align_conformers=True,
@@ -85,6 +85,9 @@ def test_generate_reports_unsatisfied_stereochemical_constraints():
 
     with pytest.raises(ValueError, match="enforce_chirality=False"):
         dm.conformers.generate(mol, n_confs=1)
+
+    rescued = dm.conformers.generate(mol, n_confs=1, enforce_chirality=False)
+    assert rescued.GetNumConformers() == 1
 
 
 @pytest.mark.skip_platform("win")
@@ -112,6 +115,8 @@ def test_rmsd():
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     rmsd = dm.conformers.rmsd(mol)
     assert rmsd.shape == (50, 50)
+    assert np.array_equal(rmsd, rmsd.T)
+    assert np.all(np.diag(rmsd) == 0)
 
 
 def test_cluster():
@@ -120,34 +125,34 @@ def test_cluster():
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
-    assert len(clustered_mol) == 2
     cluster_sizes = [cluster.GetNumConformers() for cluster in clustered_mol]
     assert sum(cluster_sizes) == 50
-    assert cluster_sizes[0] > cluster_sizes[1] > 0
+    assert cluster_sizes == sorted(cluster_sizes, reverse=True)
+    assert all(size > 0 for size in cluster_sizes)
 
     # centroids
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None)
     clustered_mol = dm.conformers.cluster(mol, centroids=True)
-    assert clustered_mol.GetNumConformers() == 2
+    assert 0 < clustered_mol.GetNumConformers() <= 50
 
     # no centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     clustered_mol = dm.conformers.cluster(mol, centroids=False)
-    assert len(clustered_mol) == 2
     cluster_sizes = [cluster.GetNumConformers() for cluster in clustered_mol]
     assert sum(cluster_sizes) == 50
-    assert cluster_sizes[0] > cluster_sizes[1] > 0
+    assert cluster_sizes == sorted(cluster_sizes, reverse=True)
+    assert all(size > 0 for size in cluster_sizes)
 
     # centroids - minimize
     smiles = "O=C(C)Oc1ccccc1C(=O)O"
     mol = dm.to_mol(smiles)
     mol = dm.conformers.generate(mol, rms_cutoff=None, minimize_energy=True)
     clustered_mol = dm.conformers.cluster(mol, centroids=True)
-    assert clustered_mol.GetNumConformers() == 2
+    assert 0 < clustered_mol.GetNumConformers() <= 50
 
 
 def test_get_coords():

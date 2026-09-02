@@ -1,8 +1,9 @@
 # Migrating to Datamol 1.x
 
 Datamol 1.x refreshes the supported scientific Python stack without adding new
-features. The goal is to preserve Datamol's public behaviour while removing
-compatibility code for dependency versions that are no longer maintained.
+feature domains. The goal is to preserve Datamol's public behaviour while removing
+compatibility code for dependency versions that are no longer maintained and
+integrating existing community contributions.
 
 ## Supported runtime
 
@@ -37,6 +38,19 @@ as Molfeat reuse these primitives rather than maintaining divergent copies.
 `template_align(..., auto_select_coord_gen=True)` now scopes RDKit's CoordGen
 preference to the alignment call. It no longer changes the process-wide RDKit
 depiction preference for subsequent calls.
+
+Conformer RMS calculations and pruning now use RDKit's optimal, symmetry-aware
+pairwise alignment. This fixes cases where the returned conformers violated the
+requested RMS cutoff. Existing code that deliberately pre-aligns conformers can
+keep the faster common-frame calculation with `cluster(..., already_aligned=True)`.
+
+The default descriptor keys `n_aliphatic_heterocyles`,
+`n_aromatic_heterocyles`, and `n_saturated_heterocyles` are corrected to use
+`heterocycles`. The misspelled function names remain as deprecated aliases for
+the 1.x transition.
+
+Molecules can now be exchanged using RDKit binary and property-dictionary
+representations through `to_binary`, `to_dict`, and `from_dict` (PR #238).
 
 ## Development and releases
 

@@ -28,13 +28,13 @@ from .descriptors import qed
 from .descriptors import clogp
 from .descriptors import sas
 from .descriptors import n_aliphatic_carbocycles
-from .descriptors import n_aliphatic_heterocyles
+from .descriptors import n_aliphatic_heterocycles
 from .descriptors import n_aliphatic_rings
 from .descriptors import n_aromatic_carbocycles
-from .descriptors import n_aromatic_heterocyles
+from .descriptors import n_aromatic_heterocycles
 from .descriptors import n_aromatic_rings
 from .descriptors import n_saturated_carbocycles
-from .descriptors import n_saturated_heterocyles
+from .descriptors import n_saturated_heterocycles
 from .descriptors import n_saturated_rings
 
 
@@ -71,13 +71,13 @@ _DEFAULT_PROPERTIES_FN = {
     "clogp": clogp,
     "sas": sas,
     "n_aliphatic_carbocycles": n_aliphatic_carbocycles,
-    "n_aliphatic_heterocyles": n_aliphatic_heterocyles,
+    "n_aliphatic_heterocycles": n_aliphatic_heterocycles,
     "n_aliphatic_rings": n_aliphatic_rings,
     "n_aromatic_carbocycles": n_aromatic_carbocycles,
-    "n_aromatic_heterocyles": n_aromatic_heterocyles,
+    "n_aromatic_heterocycles": n_aromatic_heterocycles,
     "n_aromatic_rings": n_aromatic_rings,
     "n_saturated_carbocycles": n_saturated_carbocycles,
-    "n_saturated_heterocyles": n_saturated_heterocyles,
+    "n_saturated_heterocycles": n_saturated_heterocycles,
     "n_saturated_rings": n_saturated_rings,
 }
 
