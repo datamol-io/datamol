@@ -1,4 +1,4 @@
-from typing import Dict
+from typing import Any
 from typing import Union
 from typing import List
 from typing import Optional
@@ -374,8 +374,8 @@ def from_smarts(smarts: Optional[str]) -> Optional[Mol]:
     return Chem.MolFromSmarts(smarts)  # type: ignore
 
 
-def to_binary(mol: Mol) -> Optional[bytes]:
-    """Convert a mol to a binary string.
+def to_binary(mol: Optional[Mol]) -> Optional[bytes]:
+    """Convert a molecule to RDKit's binary representation.
 
     Note that the molecular information to be stored in the binary string
     is dependent on the RDKit pickling options.
@@ -542,29 +542,28 @@ def render_mol_df(df: pd.DataFrame):
         _ChangeMoleculeRendering(df)
 
 
-def to_dict(mols: Sequence[Mol]) -> Dict:
-    """Convert a list of mols to a dataframe using each mol properties
-    as a column.
+def to_dict(mols: Sequence[Mol]) -> dict[str, Any]:
+    """Convert molecules to an RDKit JSON-compatible dictionary.
 
-    For the reverse operation, you might to check `dm.from_df()`.
+    For the reverse operation, see `dm.from_dict()`.
 
     Args:
-        mols: a molecule.
+        mols: molecules to serialize.
     """
 
     return json.loads(rdMolInterchange.MolsToJSON(mols))
 
 
-def from_dict(mol_dict: Dict) -> List[Mol]:
-    """Convert a dict to a list of mols.
+def from_dict(mol_dict: dict[str, Any]) -> List[Mol]:
+    """Convert an RDKit JSON-compatible dictionary to molecules.
 
     For the reverse operation, you might to check `dm.to_dict()`.
 
     Args:
-        mol_dict: a dict.
+        mol_dict: serialized molecules from `dm.to_dict()`.
     """
 
-    return rdMolInterchange.JSONToMols(json.dumps(mol_dict))
+    return list(rdMolInterchange.JSONToMols(json.dumps(mol_dict)))
 
 
 def _ChangeMoleculeRendering(frame=None, renderer="PNG"):

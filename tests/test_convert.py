@@ -156,6 +156,8 @@ def test_to_binary(datadir):
         np.sum(np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions()))
         < 1e-5
     )
+    assert dm.to_binary(None) is None
+    assert dm.to_mol(b"not an RDKit molecule") is None
 
 
 def test_to_df(datadir):
@@ -259,14 +261,20 @@ def test_from_dict(datadir):
     mols_dict = dm.to_dict(mols)
     new_mols = dm.from_dict(mols_dict)
 
+    assert isinstance(new_mols, list)
     for mol, new_mol in zip(mols, new_mols):
         assert dm.same_mol(mol, new_mol)
+        assert mol.GetPropsAsDict() == new_mol.GetPropsAsDict()
         assert (
             np.sum(
                 np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions())
             )
             < 1e-5
         )
+
+    stereo_mol = dm.to_mol("F/C=C/Cl")
+    [stereo_roundtrip] = dm.from_dict(dm.to_dict([stereo_mol]))
+    assert dm.to_smiles(stereo_roundtrip) == dm.to_smiles(stereo_mol)
 
 
 def test_to_cxsmiles():

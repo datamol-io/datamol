@@ -109,7 +109,10 @@ def to_mol(
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
     elif isinstance(mol, bytes):
-        _mol = Chem.Mol(mol)
+        try:
+            _mol = Chem.Mol(mol)
+        except RuntimeError:
+            _mol = None
     else:
         _mol = mol
 
