@@ -44,6 +44,20 @@ Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh
 
 Visit <https://docs.datamol.io>.
 
+## Updates
+
+The upcoming Datamol 1.x release modernizes the supported scientific Python
+stack while keeping the library focused on reliable molecular processing. It
+adds RDKit binary and property-dictionary interchange, enforces conformer RMS
+cutoffs with symmetry-aware alignment, fixes reported RDKit compatibility
+issues, and separates optional I/O and visualization dependencies from the
+core installation.
+
+See the [complete changelog](CHANGELOG.md) for all notable changes and the
+[1.x migration guide](docs/migration.md) for compatibility and transition
+details. These updates are currently developed and validated on the `dev`
+branch; the latest PyPI and conda-forge releases remain the stable versions.
+
 ## Installation
 
 Add Datamol to a uv-managed project:

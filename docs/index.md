@@ -10,6 +10,14 @@ Datamol is a python library to work with molecules. It's a layer built on top of
 
 Visit our website at <https://datamol.io>.
 
+## Updates
+
+The upcoming 1.x release refreshes the Python and RDKit stack, separates
+optional dependencies, and fixes molecule interchange and conformer handling.
+See the [changelog](https://github.com/datamol-io/datamol/blob/dev/CHANGELOG.md)
+and [migration guide](migration.md) for the major changes and upgrade details.
+This work is on `dev` and is not yet a published release.
+
 ## Installation
 
 Add Datamol to a uv-managed project:
