@@ -23,7 +23,7 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/dn/conda-forge/datamol)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datamol)](https://pypi.org/project/datamol/)
-[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-io/datamol/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-io/datamol)](https://github.com/datamol-io/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-io/datamol)](https://github.com/datamol-io/datamol/network/members)
 [![Codecov](https://codecov.io/gh/datamol-io/datamol/branch/main/graph/badge.svg?token=2ETG8SA7IG)](https://codecov.io/gh/datamol-io/datamol)
@@ -55,8 +55,10 @@ core installation.
 
 See the [complete changelog](CHANGELOG.md) for all notable changes and the
 [1.x migration guide](docs/migration.md) for compatibility and transition
-details. These updates are currently developed and validated on the `dev`
-branch; the latest PyPI and conda-forge releases remain the stable versions.
+details. These notes describe the upcoming major release; PyPI and conda-forge
+still provide the published stable versions.
+
+Release maintainers: see the [manual release guide](docs/releasing.md).
 
 ## Installation
 

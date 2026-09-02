@@ -37,7 +37,7 @@ Datamol uses Github Actions to:
   - Formatting with `black`.
   - Linting with `ruff`.
   - Building and validating the wheel and source distribution.
-- **Documentation**: build on pull requests, and deploy from `main` and published releases.
+- **Documentation**: build on pull requests, and deploy from `main` and successful manual releases.
 
 ## Run tests
 
@@ -62,18 +62,16 @@ uv run mike serve
 ### Multi-versioning
 
 The documentation is built for every pull request and deployed for pushes to
-`main` and published releases using [mike](https://github.com/jimporter/mike).
+`main` and successful manual releases using [mike](https://github.com/jimporter/mike).
 Everything is automated using GitHub Actions.
 
 ## Release a new version
 
-Create and publish a GitHub release from a version tag after the release commit has
-landed on `main`. The [`release` workflow](https://github.com/datamol-io/datamol/actions/workflows/release.yml)
-builds and validates both the wheel and source distribution with `uv`, tests
-both in clean environments, generates PEP 740 attestations, and publishes them
-through PyPI Trusted Publishing. The `pypi` GitHub environment
-and matching PyPI trusted publisher must be configured once by a repository
-administrator; no long-lived PyPI API token is stored in GitHub.
+Run the `release` action manually from `main`, with the intended version and
+`dry-run` unchecked when ready to publish. The existing `PYPI_API_TOKEN`
+secret authenticates PyPI uploads. Tests, package validation and documentation
+must pass first. See the [release guide](releasing.md) for the rehearsal,
+prerelease and recovery steps.
 
 The existing conda-forge feedstock remains the Conda release channel. After a
 PyPI release, conda-forge's update bot proposes the new version; maintainers

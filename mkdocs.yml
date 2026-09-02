@@ -52,6 +52,7 @@ nav:
 
   - Contribute: contribute.md
   - Migrating to 1.x: migration.md
+  - Releasing: releasing.md
   - License: license.md
 
 theme:

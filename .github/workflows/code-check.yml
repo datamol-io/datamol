@@ -6,6 +6,7 @@ on:
   pull_request:
     branches: [main, dev]
   workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
@@ -34,13 +35,22 @@ jobs:
         run: uv pip install --editable ".[dev]"
 
       - name: Check formatting
-        run: black --check datamol tests
+        run: black --check datamol tests .github/scripts
 
       - name: Lint
-        run: ruff check datamol tests
+        run: ruff check datamol tests .github/scripts
+
+      - name: Test release validation
+        run: python -m unittest discover -s .github/scripts -p 'test_*.py'
 
       - name: Build distributions
         run: uv build --no-sources
 
       - name: Validate distributions
         run: uvx twine check dist/*
+
+      - name: Smoke-test wheel
+        run: uv run --isolated --no-project --with dist/*.whl python -I .github/scripts/smoke_test.py
+
+      - name: Smoke-test source distribution
+        run: uv run --isolated --no-project --with dist/*.tar.gz python -I .github/scripts/smoke_test.py

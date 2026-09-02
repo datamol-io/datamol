@@ -1,28 +1,79 @@
 name: release
 
 on:
-  release:
-    types: [published]
+  workflow_dispatch:
+    inputs:
+      release-version:
+        description: "Version to release (e.g. 1.0.0 or 1.0.0rc1, without v)"
+        required: true
+        type: string
+      dry-run:
+        description: "Build and test only; do not publish or create a tag"
+        type: boolean
+        default: true
 
 permissions:
   contents: read
 
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
-  build:
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
     steps:
-      - name: Checkout release tag
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+
+      - name: Validate release request
+        id: version
+        env:
+          RELEASE_VERSION: ${{ inputs.release-version }}
+          DRY_RUN: ${{ inputs.dry-run }}
+        run: python3 .github/scripts/verify_release.py
+
+  tests:
+    needs: validate
+    uses: ./.github/workflows/test.yml
+
+  quality:
+    needs: validate
+    uses: ./.github/workflows/code-check.yml
+
+  build:
+    needs: [validate, tests, quality]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      EXPECTED_VERSION: ${{ needs.validate.outputs.version }}
+    steps:
+      - name: Checkout release commit
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Tag the checked commit locally
+        run: |
+          if git show-ref --verify --quiet "refs/tags/$EXPECTED_VERSION"; then
+            test "$(git rev-list -n 1 "$EXPECTED_VERSION")" = "$GITHUB_SHA"
+          else
+            git tag "$EXPECTED_VERSION" "$GITHUB_SHA"
+          fi
 
       - name: Set up uv and Python
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
           version: "0.12.8"
           python-version: "3.14"
+          activate-environment: true
           enable-cache: false
 
       - name: Build distributions
@@ -32,10 +83,15 @@ jobs:
         run: uvx twine check dist/*
 
       - name: Smoke-test wheel
-        run: uv run --isolated --no-project --with dist/*.whl python -c "import datamol; print(datamol.__version__)"
+        run: uv run --isolated --no-project --with dist/*.whl python -I .github/scripts/smoke_test.py
 
       - name: Smoke-test source distribution
-        run: uv run --isolated --no-project --with dist/*.tar.gz python -c "import datamol; print(datamol.__version__)"
+        run: uv run --isolated --no-project --with dist/*.tar.gz python -I .github/scripts/smoke_test.py
+
+      - name: Build release documentation
+        run: |
+          uv pip install --editable ".[docs,io,viz]"
+          mkdocs build --strict
 
       - name: Upload distributions
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -44,12 +100,14 @@ jobs:
           path: dist/
 
   publish:
+    if: ${{ !inputs.dry-run }}
     needs: build
     runs-on: ubuntu-latest
     environment:
       name: pypi
       url: https://pypi.org/p/datamol
     permissions:
+      contents: read
       id-token: write
     steps:
       - name: Set up uv
@@ -68,4 +126,67 @@ jobs:
         uses: astral-sh/attest-action@f589a42a7efb6fe400b4f400de60b4bc90390027 # v0.0.6
 
       - name: Publish to PyPI
-        run: uv publish
+        env:
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
+        run: |
+          test -n "$UV_PUBLISH_TOKEN" || { echo "PYPI_API_TOKEN is missing"; exit 1; }
+          uv publish --trusted-publishing never
+
+  github-release:
+    needs: [validate, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub release from the tested commit
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          PRERELEASE: ${{ needs.validate.outputs.prerelease }}
+        run: |
+          args=(--target "$GITHUB_SHA" --title "$RELEASE_VERSION" --generate-notes)
+          if [ "$PRERELEASE" = "true" ]; then
+            args+=(--prerelease --latest=false)
+          fi
+          gh release create "$RELEASE_VERSION" "${args[@]}"
+
+  documentation:
+    needs: [validate, github-release]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    concurrency:
+      group: documentation-deploy
+      cancel-in-progress: false
+    steps:
+      - name: Checkout published commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14"
+          activate-environment: true
+          enable-cache: true
+
+      - name: Install documentation dependencies
+        run: uv pip install --editable ".[docs,io,viz]"
+
+      - name: Deploy versioned documentation
+        env:
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          PRERELEASE: ${{ needs.validate.outputs.prerelease }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$PRERELEASE" = "true" ]; then
+            mike deploy --push "$RELEASE_VERSION"
+          else
+            mike deploy --push --update-aliases "$RELEASE_VERSION" stable
+          fi

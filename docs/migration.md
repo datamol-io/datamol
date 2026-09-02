@@ -58,8 +58,7 @@ Create the development environment with `uv sync --all-extras`; `env.yml`
 remains a supported Conda alternative. The CI uses the same uv-based install
 path and tests the supported Python and RDKit series on Linux x86-64, Windows
 x86-64, macOS Apple Silicon and macOS Intel. Tutorial notebooks,
-documentation, formatting and package distributions run separately. Releases
-are built from published GitHub releases, smoke-tested as both wheels and source
-distributions, attested, and uploaded to PyPI with short-lived OpenID Connect
-credentials. The conda-forge feedstock continues to consume PyPI releases via
-its update bot and remains a supported downstream distribution.
+documentation, formatting and package distributions run separately. Publication
+remains a manual action using `PYPI_API_TOKEN`, with full release validation
+and isolated distribution tests. See the [release guide](releasing.md),
+including the separate conda-forge recipe updates.

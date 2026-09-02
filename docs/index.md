@@ -16,7 +16,7 @@ The upcoming 1.x release refreshes the Python and RDKit stack, separates
 optional dependencies, and fixes molecule interchange and conformer handling.
 See the [changelog](https://github.com/datamol-io/datamol/blob/dev/CHANGELOG.md)
 and [migration guide](migration.md) for the major changes and upgrade details.
-This work is on `dev` and is not yet a published release.
+These changes are not yet a published release.
 
 ## Installation
 

@@ -5,8 +5,6 @@ on:
     branches: [main, dev]
   pull_request:
     branches: [main, dev]
-  release:
-    types: [published]
   workflow_dispatch:
 
 permissions:
@@ -39,8 +37,11 @@ jobs:
         run: mkdocs build --strict
 
   deploy:
-    if: github.event_name == 'release' || (github.event_name == 'push' && github.ref_name == 'main')
+    if: github.event_name == 'push' && github.ref_name == 'main'
     needs: build
+    concurrency:
+      group: documentation-deploy
+      cancel-in-progress: false
     runs-on: ubuntu-latest
     timeout-minutes: 20
     permissions:
@@ -70,9 +71,3 @@ jobs:
       - name: Deploy development documentation
         if: github.event_name == 'push'
         run: mike deploy --push main
-
-      - name: Deploy release documentation
-        if: github.event_name == 'release'
-        env:
-          RELEASE_TAG: ${{ github.event.release.tag_name }}
-        run: mike deploy --push --update-aliases "$RELEASE_TAG" stable
