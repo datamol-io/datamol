@@ -10,11 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://docs.datamol.io/main/index.html">
+        <link rel="canonical" href="https://docs.datamol.io/main/migration.html">
       
       
+        <link rel="prev" href="contribute.html">
       
-        <link rel="next" href="usage.html">
+      
+        <link rel="next" href="releasing.html">
       
       
         
@@ -25,7 +27,7 @@
     
     
       
-        <title>datamol</title>
+        <title>Migrating to 1.x - datamol</title>
       
     
     
@@ -74,7 +76,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#overview" class="md-skip">
+        <a href="#upgrading-to-datamol-0130" class="md-skip">
           Skip to content
         </a>
       
@@ -111,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Overview
+              Migrating to 1.x
             
           </span>
         </div>
@@ -194,10 +196,8 @@
   
   
   
-    
   
-  
-    <li class="md-tabs__item md-tabs__item--active">
+    <li class="md-tabs__item">
       <a href="index.html" class="md-tabs__link">
         
   
@@ -293,8 +293,10 @@
   
   
   
+    
   
-    <li class="md-tabs__item">
+  
+    <li class="md-tabs__item md-tabs__item--active">
       <a href="migration.html" class="md-tabs__link">
         
   
@@ -394,37 +396,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Overview
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="index.html" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="index.html" class="md-nav__link">
         
   
   
@@ -440,81 +415,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Updates
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Installation
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#quick-api-tour" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Quick API Tour
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-cite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to cite
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compatibilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compatibilities
-      
-    </span>
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -1591,10 +1491,37 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="migration.html" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="migration.html" class="md-nav__link md-nav__link--active">
         
   
   
@@ -1610,6 +1537,59 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#supported-runtime" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Supported runtime
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependency-driven-output-changes" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dependency-driven output changes
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#development-and-releases" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Development and releases
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -1695,10 +1675,10 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#updates" class="md-nav__link">
+  <a href="#supported-runtime" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Updates
+        Supported runtime
       
     </span>
   </a>
@@ -1706,10 +1686,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
+  <a href="#dependency-driven-output-changes" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Installation
+        Dependency-driven output changes
       
     </span>
   </a>
@@ -1717,32 +1697,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#quick-api-tour" class="md-nav__link">
+  <a href="#development-and-releases" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Quick API Tour
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#how-to-cite" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        How to cite
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#compatibilities" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Compatibilities
+        Development and releases
       
     </span>
   </a>
@@ -1769,140 +1727,58 @@
   
 
 
-<h1 id="overview">Overview<a class="headerlink" href="#overview" title="Permanent link">&para;</a></h1>
-<p>Datamol is a python library to work with molecules. It's a layer built on top of <a href="https://www.rdkit.org/">RDKit</a> and aims to be as light as possible.</p>
+<h1 id="upgrading-to-datamol-0130">Upgrading to Datamol 0.13.0<a class="headerlink" href="#upgrading-to-datamol-0130" title="Permanent link">&para;</a></h1>
+<p>Datamol 0.13.0 refreshes the supported scientific Python stack without adding new
+feature domains. The goal is to preserve Datamol's public behaviour while removing
+compatibility code for dependency versions that are no longer maintained and
+integrating existing community contributions.</p>
+<h2 id="supported-runtime">Supported runtime<a class="headerlink" href="#supported-runtime" title="Permanent link">&para;</a></h2>
 <ul>
-<li>🐍 Simple pythonic API</li>
-<li>⚗️ RDKit first: all you manipulate are <code>rdkit.Chem.Mol</code> objects.</li>
-<li>✅ Manipulating molecules often rely on many options; Datamol provides good defaults by design.</li>
-<li>🧠 Performance matters: built-in efficient parallelization when possible with optional progress bar.</li>
-<li>🕹️ Modern IO: out-of-the-box support for remote paths using <code>fsspec</code> to read and write multiple formats (sdf, xlsx, csv, etc).</li>
+<li>Python 3.11 or newer is required.</li>
+<li>RDKit 2024.09 or newer is required.</li>
+<li>NumPy 1.26, pandas 2.2 and scikit-learn 1.4 are the minimum supported series.</li>
 </ul>
-<p>Visit our website at <a href="https://datamol.io">https://datamol.io</a>.</p>
-<h2 id="updates">Updates<a class="headerlink" href="#updates" title="Permanent link">&para;</a></h2>
-<p>Datamol 0.13.0 refreshes the Python and RDKit stack, separates optional
-dependencies, and fixes molecule interchange and conformer handling. See the
-<a href="https://github.com/datamol-io/datamol/blob/main/CHANGELOG.md">changelog</a> and
-<a href="migration.html">upgrade guide</a> for the changes and upgrade details.</p>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>Add Datamol to a uv-managed project:</p>
-<div class="highlight"><pre><span></span><code>uv<span class="w"> </span>add<span class="w"> </span>datamol
-</code></pre></div>
-<p>Pip and conda-forge remain supported: <code>python -m pip install datamol</code> or
-<code>mamba install -c conda-forge datamol</code>.</p>
-<p>Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.</p>
-<p>Install optional capabilities only when needed: <code>datamol[io]</code> for S3, Google
-Cloud, Excel and Parquet; <code>datamol[viz]</code> for plotting and 3D notebooks; and
-<code>datamol[selfies]</code> for SELFIES conversion.</p>
-<h2 id="quick-api-tour">Quick API Tour<a class="headerlink" href="#quick-api-tour" title="Permanent link">&para;</a></h2>
-<div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">datamol</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dm</span>
-
-<span class="c1"># Common functions</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">"O=C(C)Oc1ccccc1C(=O)O"</span><span class="p">,</span> <span class="n">sanitize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">fp</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">selfies</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_selfies</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">inchi</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_inchi</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># Standardize and sanitize</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="s2">"O=C(C)Oc1ccccc1C(=O)O"</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">fix_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">sanitize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">standardize_mol</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># Dataframe manipulation</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">freesolv</span><span class="p">()</span>
-<span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">from_df</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
-
-<span class="c1"># 2D viz</span>
-<span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smiles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">[:</span><span class="mi">10</span><span class="p">]]</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">to_image</span><span class="p">(</span><span class="n">mols</span><span class="p">[:</span><span class="mi">10</span><span class="p">],</span> <span class="n">legends</span><span class="o">=</span><span class="n">legends</span><span class="p">)</span>
-
-<span class="c1"># Generate conformers</span>
-<span class="n">smiles</span> <span class="o">=</span> <span class="s2">"O=C(C)Oc1ccccc1C(=O)O"</span>
-<span class="n">mol</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">smiles</span><span class="p">)</span>
-<span class="n">mol_with_conformers</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">generate</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-
-<span class="c1"># 3D viz (using nglview)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">conformers</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">n_confs</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
-
-<span class="c1"># Compute SASA from conformers</span>
-<span class="n">sasa</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">conformers</span><span class="o">.</span><span class="n">sasa</span><span class="p">(</span><span class="n">mol_with_conformers</span><span class="p">)</span>
-
-<span class="c1"># Easy IO</span>
-<span class="n">mols</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">read_sdf</span><span class="p">(</span><span class="s2">"s3://my-awesome-data-lake/smiles.sdf"</span><span class="p">,</span> <span class="n">as_df</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">dm</span><span class="o">.</span><span class="n">to_sdf</span><span class="p">(</span><span class="n">mols</span><span class="p">,</span> <span class="s2">"gs://data-bucket/smiles.sdf"</span><span class="p">)</span>
-</code></pre></div>
-<h2 id="how-to-cite">How to cite<a class="headerlink" href="#how-to-cite" title="Permanent link">&para;</a></h2>
-<p>Please cite Datamol if you use it in your research: <a href="https://zenodo.org/badge/latestdoi/341603042"><img alt="DOI" src="https://zenodo.org/badge/341603042.svg" /></a>.</p>
-<h2 id="compatibilities">Compatibilities<a class="headerlink" href="#compatibilities" title="Permanent link">&para;</a></h2>
-<p>Version compatibilities are an essential topic for production-software stacks. We are cautious about documenting compatibility between <code>datamol</code>, <code>python</code> and <code>rdkit</code>.</p>
-<p>See below the associated versions of Python and RDKit, for which a minor version of Datamol <strong>has been tested</strong> during its whole lifecycle. <em>It does not mean other combinations does not work but that those are not tested.</em></p>
-<table>
-<thead>
-<tr>
-<th><code>datamol</code></th>
-<th><code>python</code></th>
-<th><code>rdkit</code></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>0.13.x</code></td>
-<td><code>[3.11, 3.12, 3.13, 3.14]</code></td>
-<td><code>[2024.09, 2025.03, 2025.09, 2026.03]</code></td>
-</tr>
-<tr>
-<td><code>0.12.x</code></td>
-<td><code>[3.10, 3.11]</code></td>
-<td><code>[2023.03, 2023.09]</code></td>
-</tr>
-<tr>
-<td><code>0.11.x</code></td>
-<td><code>[3.9, 3.10, 3.11]</code></td>
-<td><code>[2022.09, 2023.03]</code></td>
-</tr>
-<tr>
-<td><code>0.10.x</code></td>
-<td><code>[3.9, 3.10, 3.11]</code></td>
-<td><code>[2022.03, 2022.09]</code></td>
-</tr>
-<tr>
-<td><code>0.9.x</code></td>
-<td><code>[3.9, 3.10, 3.11]</code></td>
-<td><code>[2022.03, 2022.09]</code></td>
-</tr>
-<tr>
-<td><code>0.8.x</code></td>
-<td><code>[3.8, 3.9, 3.10]</code></td>
-<td><code>[2021.09, 2022.03, 2022.09]</code></td>
-</tr>
-<tr>
-<td><code>0.7.x</code></td>
-<td><code>[3.8, 3.9]</code></td>
-<td><code>[2021.09, 2022.03]</code></td>
-</tr>
-<tr>
-<td><code>0.6.x</code></td>
-<td><code>[3.8, 3.9]</code></td>
-<td><code>[2021.09]</code></td>
-</tr>
-<tr>
-<td><code>0.5.x</code></td>
-<td><code>[3.8, 3.9]</code></td>
-<td><code>[2021.03, 2021.09]</code></td>
-</tr>
-<tr>
-<td><code>0.4.x</code></td>
-<td><code>[3.8, 3.9]</code></td>
-<td><code>[2020.09, 2021.03]</code></td>
-</tr>
-<tr>
-<td><code>0.3.x</code></td>
-<td><code>[3.8, 3.9]</code></td>
-<td><code>[2020.09, 2021.03]</code></td>
-</tr>
-</tbody>
-</table>
+<p>Install the core package with <code>python -m pip install datamol</code>. Optional dependency
+groups are available for I/O (<code>datamol[io]</code>), visualisation (<code>datamol[viz]</code>),
+and SELFIES conversion (<code>datamol[selfies]</code>). Matplotlib, Pillow, nglview and
+SELFIES no longer make every core installation heavier. HTTP I/O remains
+available in the default installation.</p>
+<h2 id="dependency-driven-output-changes">Dependency-driven output changes<a class="headerlink" href="#dependency-driven-output-changes" title="Permanent link">&para;</a></h2>
+<p>Recent RDKit releases may choose a different, but chemically equivalent, canonical
+SMILES or CXSMILES representation. Conformer embedding and clustering can also
+retain a different number of conformers between RDKit releases. Code should compare
+chemical structure and conformer invariants rather than version-specific strings,
+energies or cluster counts.</p>
+<p>pandas 3 removed the <code>verbose</code> argument from <code>pandas.read_csv</code>. For compatibility,
+<code>datamol.open_df(..., verbose=...)</code> accepts and ignores that argument with a
+deprecation warning when the installed pandas version no longer supports it. Other
+unknown reader arguments continue to raise an error.</p>
+<p><code>fold_count_fp</code> now accepts both sparse and explicit RDKit bit vectors, as its
+public type contract already indicated. Datamol remains the canonical home for
+general fingerprint folding and conformer alignment; downstream packages such
+as Molfeat reuse these primitives rather than maintaining divergent copies.</p>
+<p><code>template_align(..., auto_select_coord_gen=True)</code> now scopes RDKit's CoordGen
+preference to the alignment call. It no longer changes the process-wide RDKit
+depiction preference for subsequent calls.</p>
+<p>Conformer RMS calculations and pruning now use RDKit's optimal, symmetry-aware
+pairwise alignment. This fixes cases where the returned conformers violated the
+requested RMS cutoff. Existing code that deliberately pre-aligns conformers can
+keep the faster common-frame calculation with <code>cluster(..., already_aligned=True)</code>.</p>
+<p>The default descriptor keys <code>n_aliphatic_heterocyles</code>,
+<code>n_aromatic_heterocyles</code>, and <code>n_saturated_heterocyles</code> are corrected to use
+<code>heterocycles</code>. The misspelled function names remain as deprecated aliases for
+the 1.x transition.</p>
+<p>Molecules can now be exchanged using RDKit binary and property-dictionary
+representations through <code>to_binary</code>, <code>to_dict</code>, and <code>from_dict</code> (PR #238).</p>
+<h2 id="development-and-releases">Development and releases<a class="headerlink" href="#development-and-releases" title="Permanent link">&para;</a></h2>
+<p>Create the development environment with <code>uv sync --all-extras</code>; <code>env.yml</code>
+remains a supported Conda alternative. The CI uses the same uv-based install
+path and tests the supported Python and RDKit series on Linux x86-64, Windows
+x86-64, macOS Apple Silicon and macOS Intel. Tutorial notebooks,
+documentation, formatting and package distributions run separately. Publication
+remains a manual action using <code>PYPI_API_TOKEN</code>, with full release validation
+and isolated distribution tests. See the <a href="releasing.html">release guide</a>,
+including the separate conda-forge recipe updates.</p>
 
 
 

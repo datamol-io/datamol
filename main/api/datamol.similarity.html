@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://docs.datamol.io/main/api/datamol.similarity.html">
+      
       
         <link rel="prev" href="datamol.scaffold.html">
       
@@ -17,8 +19,11 @@
         <link rel="next" href="datamol.utils.html">
       
       
+        
+      
+      
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -53,11 +58,10 @@
     
       <link rel="stylesheet" href="../assets/css/tweak-width.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +101,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,36 +121,38 @@
     </div>
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -157,13 +163,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -189,9 +196,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../index.html" class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +215,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../usage.html" class="md-tabs__link">
         
+  
   
     
   
@@ -223,11 +234,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../tutorials/The_Basics.html" class="md-tabs__link">
           
+  
   
   Tutorials
 
@@ -240,6 +253,7 @@
         
   
   
+  
     
   
   
@@ -248,6 +262,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="datamol.align.html" class="md-tabs__link">
           
+  
   
   API
 
@@ -261,9 +276,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../contribute.html" class="md-tabs__link">
         
+  
   
     
   
@@ -278,9 +295,49 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../migration.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Migrating to 1.x
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../releasing.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Releasing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../license.html" class="md-tabs__link">
         
+  
   
     
   
@@ -325,7 +382,7 @@
       <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -345,9 +402,16 @@
       <a href="../index.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -365,9 +429,16 @@
       <a href="../usage.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -381,6 +452,7 @@
   
   
   
+    
     
     
     
@@ -400,9 +472,16 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -411,7 +490,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Tutorials
+            
+  
+    Tutorials
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -425,9 +508,16 @@
       <a href="../tutorials/The_Basics.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     The Basics
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -446,9 +536,16 @@
       <a href="../tutorials/Preprocessing.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pre-Processing Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -467,9 +564,16 @@
       <a href="../tutorials/Descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -488,9 +592,16 @@
       <a href="../tutorials/Reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Chemical Reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,9 +620,16 @@
       <a href="../tutorials/Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generate Scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -530,9 +648,16 @@
       <a href="../tutorials/Aligning.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Aligning Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -551,9 +676,16 @@
       <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fuzzy Scaffolds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -572,9 +704,16 @@
       <a href="../tutorials/Clustering.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Clustering Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -593,9 +732,16 @@
       <a href="../tutorials/Fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fragmenting Compounds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -614,9 +760,16 @@
       <a href="../tutorials/Conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generating Conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -635,9 +788,16 @@
       <a href="../tutorials/Visualization.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Visualization
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -656,9 +816,16 @@
       <a href="../tutorials/Filesystem.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Datamol Filesystem Module
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -685,6 +852,7 @@
     
     
     
+    
       
         
         
@@ -702,9 +870,16 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -713,7 +888,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -727,9 +906,16 @@
       <a href="datamol.align.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.align
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -748,9 +934,16 @@
       <a href="datamol.cluster.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.cluster
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -769,9 +962,16 @@
       <a href="datamol.conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -790,9 +990,16 @@
       <a href="datamol.convert.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.convert
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -811,9 +1018,16 @@
       <a href="datamol.data.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.data
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -832,9 +1046,16 @@
       <a href="datamol.descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -853,9 +1074,16 @@
       <a href="datamol.fp.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -874,9 +1102,16 @@
       <a href="datamol.fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fragment
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -895,9 +1130,16 @@
       <a href="datamol.graph.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.graph
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -916,9 +1158,16 @@
       <a href="datamol.io.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.io
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -937,9 +1186,16 @@
       <a href="datamol.isomers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.isomers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -958,9 +1214,16 @@
       <a href="datamol.log.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.log
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -979,9 +1242,16 @@
       <a href="datamol.molar.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.molar
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1000,9 +1270,16 @@
       <a href="datamol.mol.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.mol
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1021,9 +1298,16 @@
       <a href="datamol.reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1042,9 +1326,16 @@
       <a href="datamol.scaffold.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1072,9 +1363,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -1083,9 +1381,16 @@
       <a href="datamol.similarity.html" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1108,7 +1413,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity" class="md-nav__link">
     <span class="md-ellipsis">
-      similarity
+      
+        similarity
+      
     </span>
   </a>
   
@@ -1117,7 +1424,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity.cdist" class="md-nav__link">
     <span class="md-ellipsis">
-      cdist
+      
+        cdist
+      
     </span>
   </a>
   
@@ -1126,7 +1435,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity.pdist" class="md-nav__link">
     <span class="md-ellipsis">
-      pdist
+      
+        pdist
+      
     </span>
   </a>
   
@@ -1151,9 +1462,16 @@
       <a href="datamol.utils.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1172,9 +1490,16 @@
       <a href="datamol.utils.fs.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1193,9 +1518,16 @@
       <a href="datamol.viz.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1221,9 +1553,70 @@
       <a href="../contribute.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribute
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1241,9 +1634,16 @@
       <a href="../license.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     License
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1280,7 +1680,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity" class="md-nav__link">
     <span class="md-ellipsis">
-      similarity
+      
+        similarity
+      
     </span>
   </a>
   
@@ -1289,7 +1691,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity.cdist" class="md-nav__link">
     <span class="md-ellipsis">
-      cdist
+      
+        cdist
+      
     </span>
   </a>
   
@@ -1298,7 +1702,9 @@
         <li class="md-nav__item">
   <a href="#datamol.similarity.pdist" class="md-nav__link">
     <span class="md-ellipsis">
-      pdist
+      
+        pdist
+      
     </span>
   </a>
   
@@ -1314,9 +1720,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1334,7 +1742,15 @@
 
 
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
 
 
 
@@ -1355,7 +1771,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute the tanimoto distance between the fingerprints of each pair of
+        <p>Compute the tanimoto distance between the fingerprints of each pair of
 molecules of the two collections of inputs.</p>
 
 
@@ -1371,9 +1787,11 @@ molecules of the two collections of inputs.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mols1</code></td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, <span title="datamol.Mol">Mol</span>]]</code>
+                <code>mols1</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="datamol.Mol">Mol</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1385,9 +1803,11 @@ molecules of the two collections of inputs.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>mols2</code></td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, <span title="datamol.Mol">Mol</span>]]</code>
+                <code>mols2</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="datamol.Mol">Mol</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1399,9 +1819,11 @@ molecules of the two collections of inputs.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_jobs</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>n_jobs</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1414,9 +1836,11 @@ parallelization. Set to -1 to use all available cores.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>distances_chunk</code></td>
             <td>
-                  <code>bool</code>
+                <code>distances_chunk</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1428,9 +1852,11 @@ parallelization. Set to -1 to use all available cores.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>distances_chunk_memory</code></td>
             <td>
-                  <code>int</code>
+                <code>distances_chunk_memory</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1442,9 +1868,11 @@ parallelization. Set to -1 to use all available cores.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>distances_n_jobs</code></td>
             <td>
-                  <code>int</code>
+                <code>distances_n_jobs</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1456,7 +1884,9 @@ parallelization. Set to -1 to use all available cores.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**fp_args</code></td>
+            <td>
+                <code>**fp_args</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -1495,7 +1925,8 @@ parallelization. Set to -1 to use all available cores.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/similarity.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 52</span>
 <span class="normal"> 53</span>
@@ -1550,7 +1981,7 @@ parallelization. Set to -1 to use all available cores.</p>
 <span class="normal">102</span>
 <span class="normal">103</span>
 <span class="normal">104</span>
-<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">cdist</span><span class="p">(</span>
+<span class="normal">105</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">cdist</span><span class="p">(</span>
     <span class="n">mols1</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">mols2</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
@@ -1559,7 +1990,7 @@ parallelization. Set to -1 to use all available cores.</p>
     <span class="n">distances_n_jobs</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="o">**</span><span class="n">fp_args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the tanimoto distance between the fingerprints of each pair of</span>
+<span class="w">    </span><span class="sd">"""Compute the tanimoto distance between the fingerprints of each pair of</span>
 <span class="sd">    molecules of the two collections of inputs.</span>
 
 <span class="sd">    Args:</span>
@@ -1574,7 +2005,7 @@ parallelization. Set to -1 to use all available cores.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        distmat</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">fps1</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span>
         <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">),</span>
@@ -1595,13 +2026,13 @@ parallelization. Set to -1 to use all available cores.</p>
         <span class="n">distances</span> <span class="o">=</span> <span class="n">pairwise_distances_chunked</span><span class="p">(</span>
             <span class="n">fps1_array</span><span class="p">,</span>
             <span class="n">fps2_array</span><span class="p">,</span>
-            <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">,</span>
+            <span class="n">metric</span><span class="o">=</span><span class="s2">"jaccard"</span><span class="p">,</span>
             <span class="n">n_jobs</span><span class="o">=</span><span class="n">distances_n_jobs</span><span class="p">,</span>
             <span class="n">working_memory</span><span class="o">=</span><span class="n">distances_chunk_memory</span><span class="p">,</span>
         <span class="p">)</span>
         <span class="n">distances_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">distances</span><span class="p">))</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">distances_array</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">fps1_array</span><span class="p">,</span> <span class="n">fps2_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
+        <span class="n">distances_array</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">cdist</span><span class="p">(</span><span class="n">fps1_array</span><span class="p">,</span> <span class="n">fps2_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">"jaccard"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">distances_array</span>
 </code></pre></div></td></tr></table></div>
@@ -1621,7 +2052,7 @@ parallelization. Set to -1 to use all available cores.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Compute the pairwise tanimoto distance between the fingerprints of all the
+        <p>Compute the pairwise tanimoto distance between the fingerprints of all the
 molecules in the input set.</p>
 
 
@@ -1637,9 +2068,11 @@ molecules in the input set.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mols</code></td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, <span title="datamol.Mol">Mol</span>]]</code>
+                <code>mols</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="datamol.Mol">Mol</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1651,9 +2084,11 @@ molecules in the input set.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_jobs</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>n_jobs</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1666,9 +2101,11 @@ parallelization. Set to -1 to use all available cores.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>squareform</code></td>
             <td>
-                  <code>bool</code>
+                <code>squareform</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1681,7 +2118,9 @@ form (1D vector).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**fp_args</code></td>
+            <td>
+                <code>**fp_args</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -1720,7 +2159,8 @@ form (1D vector).</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/similarity.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">15</span>
 <span class="normal">16</span>
@@ -1756,13 +2196,13 @@ form (1D vector).</p>
 <span class="normal">46</span>
 <span class="normal">47</span>
 <span class="normal">48</span>
-<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">pdist</span><span class="p">(</span>
+<span class="normal">49</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">pdist</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]],</span>
     <span class="n">n_jobs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">1</span><span class="p">,</span>
     <span class="n">squareform</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="o">**</span><span class="n">fp_args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the pairwise tanimoto distance between the fingerprints of all the</span>
+<span class="w">    </span><span class="sd">"""Compute the pairwise tanimoto distance between the fingerprints of all the</span>
 <span class="sd">    molecules in the input set.</span>
 
 <span class="sd">    Args:</span>
@@ -1775,7 +2215,7 @@ form (1D vector).</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        dist_mat</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">fps</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">parallelized</span><span class="p">(</span>
         <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">to_fp</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">),</span>
@@ -1785,10 +2225,10 @@ form (1D vector).</p>
 
     <span class="n">fps_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">fps</span><span class="p">)</span>
 
-    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">fps_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">&quot;jaccard&quot;</span><span class="p">)</span>
+    <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">pdist</span><span class="p">(</span><span class="n">fps_array</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="s2">"jaccard"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">squareform</span><span class="p">:</span>
-        <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s2">&quot;tomatrix&quot;</span><span class="p">)</span>
+        <span class="n">dist_mat</span> <span class="o">=</span> <span class="n">distance</span><span class="o">.</span><span class="n">squareform</span><span class="p">(</span><span class="n">dist_mat</span><span class="p">,</span> <span class="n">force</span><span class="o">=</span><span class="s2">"tomatrix"</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">dist_mat</span>
 </code></pre></div></td></tr></table></div>
@@ -1833,7 +2273,7 @@ form (1D vector).</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2020 - 2023 datamol.io
+      Copyright 2020 - 2026 datamol.io
     </div>
   
   
@@ -1854,10 +2294,13 @@ form (1D vector).</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

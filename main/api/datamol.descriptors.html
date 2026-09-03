@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://docs.datamol.io/main/api/datamol.descriptors.html">
+      
       
         <link rel="prev" href="datamol.data.html">
       
@@ -17,8 +19,11 @@
         <link rel="next" href="datamol.fp.html">
       
       
+        
+      
+      
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -53,11 +58,10 @@
     
       <link rel="stylesheet" href="../assets/css/tweak-width.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +101,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,36 +121,38 @@
     </div>
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -157,13 +163,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -189,9 +196,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../index.html" class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +215,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../usage.html" class="md-tabs__link">
         
+  
   
     
   
@@ -223,11 +234,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../tutorials/The_Basics.html" class="md-tabs__link">
           
+  
   
   Tutorials
 
@@ -240,6 +253,7 @@
         
   
   
+  
     
   
   
@@ -248,6 +262,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="datamol.align.html" class="md-tabs__link">
           
+  
   
   API
 
@@ -261,9 +276,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../contribute.html" class="md-tabs__link">
         
+  
   
     
   
@@ -278,9 +295,49 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../migration.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Migrating to 1.x
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../releasing.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Releasing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../license.html" class="md-tabs__link">
         
+  
   
     
   
@@ -325,7 +382,7 @@
       <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -345,9 +402,16 @@
       <a href="../index.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -365,9 +429,16 @@
       <a href="../usage.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -381,6 +452,7 @@
   
   
   
+    
     
     
     
@@ -400,9 +472,16 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -411,7 +490,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Tutorials
+            
+  
+    Tutorials
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -425,9 +508,16 @@
       <a href="../tutorials/The_Basics.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     The Basics
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -446,9 +536,16 @@
       <a href="../tutorials/Preprocessing.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pre-Processing Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -467,9 +564,16 @@
       <a href="../tutorials/Descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -488,9 +592,16 @@
       <a href="../tutorials/Reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Chemical Reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,9 +620,16 @@
       <a href="../tutorials/Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generate Scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -530,9 +648,16 @@
       <a href="../tutorials/Aligning.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Aligning Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -551,9 +676,16 @@
       <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fuzzy Scaffolds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -572,9 +704,16 @@
       <a href="../tutorials/Clustering.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Clustering Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -593,9 +732,16 @@
       <a href="../tutorials/Fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fragmenting Compounds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -614,9 +760,16 @@
       <a href="../tutorials/Conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generating Conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -635,9 +788,16 @@
       <a href="../tutorials/Visualization.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Visualization
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -656,9 +816,16 @@
       <a href="../tutorials/Filesystem.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Datamol Filesystem Module
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -685,6 +852,7 @@
     
     
     
+    
       
         
         
@@ -702,9 +870,16 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -713,7 +888,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -727,9 +906,16 @@
       <a href="datamol.align.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.align
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -748,9 +934,16 @@
       <a href="datamol.cluster.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.cluster
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -769,9 +962,16 @@
       <a href="datamol.conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -790,9 +990,16 @@
       <a href="datamol.convert.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.convert
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -811,9 +1018,16 @@
       <a href="datamol.data.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.data
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -841,9 +1055,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -852,9 +1073,16 @@
       <a href="datamol.descriptors.html" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -877,7 +1105,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      descriptors
+      
+        descriptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_aliphatic_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_aliphatic_heterocyles
+      
     </span>
   </a>
   
@@ -886,7 +1127,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_aromatic_atoms" class="md-nav__link">
     <span class="md-ellipsis">
-      n_aromatic_atoms
+      
+        n_aromatic_atoms
+      
     </span>
   </a>
   
@@ -895,7 +1138,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_aromatic_atoms_proportion" class="md-nav__link">
     <span class="md-ellipsis">
-      n_aromatic_atoms_proportion
+      
+        n_aromatic_atoms_proportion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_aromatic_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_aromatic_heterocyles
+      
     </span>
   </a>
   
@@ -904,7 +1160,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_charged_atoms" class="md-nav__link">
     <span class="md-ellipsis">
-      n_charged_atoms
+      
+        n_charged_atoms
+      
     </span>
   </a>
   
@@ -913,7 +1171,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_rigid_bonds" class="md-nav__link">
     <span class="md-ellipsis">
-      n_rigid_bonds
+      
+        n_rigid_bonds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_saturated_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_saturated_heterocyles
+      
     </span>
   </a>
   
@@ -922,7 +1193,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_stereo_centers" class="md-nav__link">
     <span class="md-ellipsis">
-      n_stereo_centers
+      
+        n_stereo_centers
+      
     </span>
   </a>
   
@@ -931,7 +1204,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_stereo_centers_unspecified" class="md-nav__link">
     <span class="md-ellipsis">
-      n_stereo_centers_unspecified
+      
+        n_stereo_centers_unspecified
+      
     </span>
   </a>
   
@@ -940,7 +1215,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute" class="md-nav__link">
     <span class="md-ellipsis">
-      compute
+      
+        compute
+      
     </span>
   </a>
   
@@ -949,7 +1226,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.any_rdkit_descriptor" class="md-nav__link">
     <span class="md-ellipsis">
-      any_rdkit_descriptor
+      
+        any_rdkit_descriptor
+      
     </span>
   </a>
   
@@ -958,7 +1237,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.batch_compute_many_descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      batch_compute_many_descriptors
+      
+        batch_compute_many_descriptors
+      
     </span>
   </a>
   
@@ -967,7 +1248,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.compute_many_descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      compute_many_descriptors
+      
+        compute_many_descriptors
+      
     </span>
   </a>
   
@@ -992,9 +1275,16 @@
       <a href="datamol.fp.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1013,9 +1303,16 @@
       <a href="datamol.fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fragment
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1034,9 +1331,16 @@
       <a href="datamol.graph.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.graph
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1055,9 +1359,16 @@
       <a href="datamol.io.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.io
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1076,9 +1387,16 @@
       <a href="datamol.isomers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.isomers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1097,9 +1415,16 @@
       <a href="datamol.log.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.log
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1118,9 +1443,16 @@
       <a href="datamol.molar.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.molar
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1139,9 +1471,16 @@
       <a href="datamol.mol.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.mol
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1160,9 +1499,16 @@
       <a href="datamol.reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1181,9 +1527,16 @@
       <a href="datamol.scaffold.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1202,9 +1555,16 @@
       <a href="datamol.similarity.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1223,9 +1583,16 @@
       <a href="datamol.utils.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1244,9 +1611,16 @@
       <a href="datamol.utils.fs.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1265,9 +1639,16 @@
       <a href="datamol.viz.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1293,9 +1674,70 @@
       <a href="../contribute.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribute
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1313,9 +1755,16 @@
       <a href="../license.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     License
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1352,7 +1801,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      descriptors
+      
+        descriptors
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_aliphatic_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_aliphatic_heterocyles
+      
     </span>
   </a>
   
@@ -1361,7 +1823,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_aromatic_atoms" class="md-nav__link">
     <span class="md-ellipsis">
-      n_aromatic_atoms
+      
+        n_aromatic_atoms
+      
     </span>
   </a>
   
@@ -1370,7 +1834,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_aromatic_atoms_proportion" class="md-nav__link">
     <span class="md-ellipsis">
-      n_aromatic_atoms_proportion
+      
+        n_aromatic_atoms_proportion
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_aromatic_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_aromatic_heterocyles
+      
     </span>
   </a>
   
@@ -1379,7 +1856,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_charged_atoms" class="md-nav__link">
     <span class="md-ellipsis">
-      n_charged_atoms
+      
+        n_charged_atoms
+      
     </span>
   </a>
   
@@ -1388,7 +1867,20 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_rigid_bonds" class="md-nav__link">
     <span class="md-ellipsis">
-      n_rigid_bonds
+      
+        n_rigid_bonds
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#datamol.descriptors.descriptors.n_saturated_heterocyles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        n_saturated_heterocyles
+      
     </span>
   </a>
   
@@ -1397,7 +1889,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_stereo_centers" class="md-nav__link">
     <span class="md-ellipsis">
-      n_stereo_centers
+      
+        n_stereo_centers
+      
     </span>
   </a>
   
@@ -1406,7 +1900,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.descriptors.n_stereo_centers_unspecified" class="md-nav__link">
     <span class="md-ellipsis">
-      n_stereo_centers_unspecified
+      
+        n_stereo_centers_unspecified
+      
     </span>
   </a>
   
@@ -1415,7 +1911,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute" class="md-nav__link">
     <span class="md-ellipsis">
-      compute
+      
+        compute
+      
     </span>
   </a>
   
@@ -1424,7 +1922,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.any_rdkit_descriptor" class="md-nav__link">
     <span class="md-ellipsis">
-      any_rdkit_descriptor
+      
+        any_rdkit_descriptor
+      
     </span>
   </a>
   
@@ -1433,7 +1933,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.batch_compute_many_descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      batch_compute_many_descriptors
+      
+        batch_compute_many_descriptors
+      
     </span>
   </a>
   
@@ -1442,7 +1944,9 @@
         <li class="md-nav__item">
   <a href="#datamol.descriptors.compute.compute_many_descriptors" class="md-nav__link">
     <span class="md-ellipsis">
-      compute_many_descriptors
+      
+        compute_many_descriptors
+      
     </span>
   </a>
   
@@ -1458,9 +1962,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1478,7 +1984,15 @@
 
 
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
 
 
 
@@ -1491,6 +2005,43 @@
 <div class="doc doc-object doc-function">
 
 
+<h3 id="datamol.descriptors.descriptors.n_aliphatic_heterocyles" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">n_aliphatic_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+<a href="#datamol.descriptors.descriptors.n_aliphatic_heterocyles" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Deprecated misspelling of :func:<code>n_aliphatic_heterocycles</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">75</span>
+<span class="normal">76</span>
+<span class="normal">77</span>
+<span class="normal">78</span>
+<span class="normal">79</span>
+<span class="normal">80</span>
+<span class="normal">81</span>
+<span class="normal">82</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_aliphatic_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Deprecated misspelling of :func:`n_aliphatic_heterocycles`."""</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">"`n_aliphatic_heterocyles` is deprecated; use `n_aliphatic_heterocycles`."</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_aliphatic_heterocycles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
 <h3 id="datamol.descriptors.descriptors.n_aromatic_atoms" class="doc doc-heading">
             <code class="highlight language-python"><span class="n">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
 
@@ -1499,15 +2050,16 @@
 
     <div class="doc doc-contents ">
 
-      <p>Calculate the number of aromatic atoms.</p>
+        <p>Calculate the number of aromatic atoms.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">90</span>
-<span class="normal">91</span>
-<span class="normal">92</span>
-<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the number of aromatic atoms.&quot;&quot;&quot;</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">121</span>
+<span class="normal">122</span>
+<span class="normal">123</span>
+<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the number of aromatic atoms."""</span>
     <span class="n">matches</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">_AROMATIC_QUERY</span><span class="p">)</span>
     <span class="k">return</span> <span class="nb">len</span><span class="p">(</span><span class="n">matches</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -1527,7 +2079,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Calculate the aromatic proportion: # aromatic atoms/#atoms total.</p>
+        <p>Calculate the aromatic proportion: # aromatic atoms/#atoms total.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1542,7 +2094,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -1557,27 +2111,65 @@
           </tr>
       </tbody>
     </table>
-      <p>Only heavy atoms are considered.</p>
+        <p>Only heavy atoms are considered.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
-<span class="normal"> 97</span>
-<span class="normal"> 98</span>
-<span class="normal"> 99</span>
-<span class="normal">100</span>
-<span class="normal">101</span>
-<span class="normal">102</span>
-<span class="normal">103</span>
-<span class="normal">104</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_aromatic_atoms_proportion</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculate the aromatic proportion: # aromatic atoms/#atoms total.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+<span class="normal">128</span>
+<span class="normal">129</span>
+<span class="normal">130</span>
+<span class="normal">131</span>
+<span class="normal">132</span>
+<span class="normal">133</span>
+<span class="normal">134</span>
+<span class="normal">135</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_aromatic_atoms_proportion</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Calculate the aromatic proportion: # aromatic atoms/#atoms total.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
 
 <span class="sd">    Only heavy atoms are considered.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">n_aromatic_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span> <span class="o">/</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumHeavyAtoms</span><span class="p">()</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="datamol.descriptors.descriptors.n_aromatic_heterocyles" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">n_aromatic_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+<a href="#datamol.descriptors.descriptors.n_aromatic_heterocyles" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Deprecated misspelling of :func:<code>n_aromatic_heterocycles</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">85</span>
+<span class="normal">86</span>
+<span class="normal">87</span>
+<span class="normal">88</span>
+<span class="normal">89</span>
+<span class="normal">90</span>
+<span class="normal">91</span>
+<span class="normal">92</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_aromatic_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Deprecated misspelling of :func:`n_aromatic_heterocycles`."""</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">"`n_aromatic_heterocyles` is deprecated; use `n_aromatic_heterocycles`."</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_aromatic_heterocycles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1595,7 +2187,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute the number of charged atoms in a molecule.</p>
+        <p>Compute the number of charged atoms in a molecule.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1610,7 +2202,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -1638,7 +2232,7 @@
       <tbody>
           <tr class="doc-section-item">
 <td><code>n_charged_atoms</code></td>            <td>
-                  <code>int</code>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1649,26 +2243,27 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span>
-<span class="normal">146</span>
-<span class="normal">147</span>
-<span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span>
-<span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_charged_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the number of charged atoms in a molecule.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">174</span>
+<span class="normal">175</span>
+<span class="normal">176</span>
+<span class="normal">177</span>
+<span class="normal">178</span>
+<span class="normal">179</span>
+<span class="normal">180</span>
+<span class="normal">181</span>
+<span class="normal">182</span>
+<span class="normal">183</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_charged_atoms</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compute the number of charged atoms in a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        n_charged_atoms: number of charged atoms in the molecule</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="nb">sum</span><span class="p">([</span><span class="n">at</span><span class="o">.</span><span class="n">GetFormalCharge</span><span class="p">()</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">for</span> <span class="n">at</span> <span class="ow">in</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetAtoms</span><span class="p">()])</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1687,7 +2282,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute the number of rigid bonds in a molecule.</p>
+        <p>Compute the number of rigid bonds in a molecule.</p>
 <p>Rigid bonds are bonds that are not single and not in rings.</p>
 
 
@@ -1703,7 +2298,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -1731,7 +2328,7 @@
       <tbody>
           <tr class="doc-section-item">
 <td><code>n_rigid_bonds</code></td>            <td>
-                  <code>int</code>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1742,23 +2339,24 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">74</span>
-<span class="normal">75</span>
-<span class="normal">76</span>
-<span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span>
-<span class="normal">80</span>
-<span class="normal">81</span>
-<span class="normal">82</span>
-<span class="normal">83</span>
-<span class="normal">84</span>
-<span class="normal">85</span>
-<span class="normal">86</span>
-<span class="normal">87</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_rigid_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the number of rigid bonds in a molecule.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">105</span>
+<span class="normal">106</span>
+<span class="normal">107</span>
+<span class="normal">108</span>
+<span class="normal">109</span>
+<span class="normal">110</span>
+<span class="normal">111</span>
+<span class="normal">112</span>
+<span class="normal">113</span>
+<span class="normal">114</span>
+<span class="normal">115</span>
+<span class="normal">116</span>
+<span class="normal">117</span>
+<span class="normal">118</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_rigid_bonds</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compute the number of rigid bonds in a molecule.</span>
 
 <span class="sd">    Rigid bonds are bonds that are not single and not in rings.</span>
 
@@ -1767,10 +2365,47 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        n_rigid_bonds: number of rigid bonds in the molecule</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">non_rigid_bonds_count</span> <span class="o">=</span> <span class="n">from_smarts</span><span class="p">(</span><span class="s2">&quot;*-&amp;!@*&quot;</span><span class="p">)</span>
+<span class="sd">    """</span>
+    <span class="n">non_rigid_bonds_count</span> <span class="o">=</span> <span class="n">from_smarts</span><span class="p">(</span><span class="s2">"*-&amp;!@*"</span><span class="p">)</span>
     <span class="n">n_rigid_bonds</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumBonds</span><span class="p">()</span> <span class="o">-</span> <span class="nb">len</span><span class="p">(</span><span class="n">mol</span><span class="o">.</span><span class="n">GetSubstructMatches</span><span class="p">(</span><span class="n">non_rigid_bonds_count</span><span class="p">))</span>
     <span class="k">return</span> <span class="n">n_rigid_bonds</span>
+</code></pre></div></td></tr></table></div>
+            </details>
+    </div>
+
+</div>
+
+<div class="doc doc-object doc-function">
+
+
+<h3 id="datamol.descriptors.descriptors.n_saturated_heterocyles" class="doc doc-heading">
+            <code class="highlight language-python"><span class="n">n_saturated_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span></code>
+
+<a href="#datamol.descriptors.descriptors.n_saturated_heterocyles" class="headerlink" title="Permanent link">&para;</a></h3>
+
+
+    <div class="doc doc-contents ">
+
+        <p>Deprecated misspelling of :func:<code>n_saturated_heterocycles</code>.</p>
+
+
+            <details class="mkdocstrings-source">
+              <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 95</span>
+<span class="normal"> 96</span>
+<span class="normal"> 97</span>
+<span class="normal"> 98</span>
+<span class="normal"> 99</span>
+<span class="normal">100</span>
+<span class="normal">101</span>
+<span class="normal">102</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_saturated_heterocyles</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Deprecated misspelling of :func:`n_saturated_heterocycles`."""</span>
+    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span>
+        <span class="s2">"`n_saturated_heterocyles` is deprecated; use `n_saturated_heterocycles`."</span><span class="p">,</span>
+        <span class="ne">DeprecationWarning</span><span class="p">,</span>
+        <span class="n">stacklevel</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span>
+    <span class="p">)</span>
+    <span class="k">return</span> <span class="n">n_saturated_heterocycles</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -1788,7 +2423,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute the number of stereocenters in a molecule.</p>
+        <p>Compute the number of stereocenters in a molecule.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1803,7 +2438,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -1831,7 +2468,7 @@
       <tbody>
           <tr class="doc-section-item">
 <td><code>n_stero_center</code></td>            <td>
-                  <code>int</code>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1842,32 +2479,33 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">107</span>
-<span class="normal">108</span>
-<span class="normal">109</span>
-<span class="normal">110</span>
-<span class="normal">111</span>
-<span class="normal">112</span>
-<span class="normal">113</span>
-<span class="normal">114</span>
-<span class="normal">115</span>
-<span class="normal">116</span>
-<span class="normal">117</span>
-<span class="normal">118</span>
-<span class="normal">119</span>
-<span class="normal">120</span>
-<span class="normal">121</span>
-<span class="normal">122</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_stereo_centers</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the number of stereocenters in a molecule.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">138</span>
+<span class="normal">139</span>
+<span class="normal">140</span>
+<span class="normal">141</span>
+<span class="normal">142</span>
+<span class="normal">143</span>
+<span class="normal">144</span>
+<span class="normal">145</span>
+<span class="normal">146</span>
+<span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span>
+<span class="normal">150</span>
+<span class="normal">151</span>
+<span class="normal">152</span>
+<span class="normal">153</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_stereo_centers</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compute the number of stereocenters in a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        n_stero_center: number of stereocenters in the molecule</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">rdmolops</span><span class="o">.</span><span class="n">FindPotentialStereo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1892,7 +2530,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute the number of unspecified stereocenters in a molecule.</p>
+        <p>Compute the number of unspecified stereocenters in a molecule.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1907,7 +2545,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -1935,7 +2575,7 @@
       <tbody>
           <tr class="doc-section-item">
 <td><code>n_stereo_centers_unspecified</code></td>            <td>
-                  <code>int</code>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1946,32 +2586,33 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/descriptors.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">125</span>
-<span class="normal">126</span>
-<span class="normal">127</span>
-<span class="normal">128</span>
-<span class="normal">129</span>
-<span class="normal">130</span>
-<span class="normal">131</span>
-<span class="normal">132</span>
-<span class="normal">133</span>
-<span class="normal">134</span>
-<span class="normal">135</span>
-<span class="normal">136</span>
-<span class="normal">137</span>
-<span class="normal">138</span>
-<span class="normal">139</span>
-<span class="normal">140</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">n_stereo_centers_unspecified</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the number of unspecified stereocenters in a molecule.</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">156</span>
+<span class="normal">157</span>
+<span class="normal">158</span>
+<span class="normal">159</span>
+<span class="normal">160</span>
+<span class="normal">161</span>
+<span class="normal">162</span>
+<span class="normal">163</span>
+<span class="normal">164</span>
+<span class="normal">165</span>
+<span class="normal">166</span>
+<span class="normal">167</span>
+<span class="normal">168</span>
+<span class="normal">169</span>
+<span class="normal">170</span>
+<span class="normal">171</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">n_stereo_centers_unspecified</span><span class="p">(</span><span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Compute the number of unspecified stereocenters in a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        n_stereo_centers_unspecified: number of unspecified stereocenters in the molecule</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="n">rdmolops</span><span class="o">.</span><span class="n">FindPotentialStereo</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">cleanIt</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -2002,7 +2643,15 @@
 
 
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
 
 
 
@@ -2023,7 +2672,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Return a descriptor function by name either from
+        <p>Return a descriptor function by name either from
 <code>rdkit.Chem import Descriptors</code> or <code>rdkit.Chem.rdMolDescriptors</code>.</p>
 
 
@@ -2039,9 +2688,11 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>name</code></td>
             <td>
-                  <code>str</code>
+                <code>name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2055,7 +2706,8 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">41</span>
 <span class="normal">42</span>
@@ -2072,20 +2724,20 @@
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
-<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">any_rdkit_descriptor</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return a descriptor function by name either from</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">any_rdkit_descriptor</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Callable</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Return a descriptor function by name either from</span>
 <span class="sd">    `rdkit.Chem import Descriptors` or `rdkit.Chem.rdMolDescriptors`.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        name: Descriptor name.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">Descriptors</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">fn</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">rdMolDescriptors</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Descriptor </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> not found.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Descriptor </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2"> not found."</span><span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fn</span>
 </code></pre></div></td></tr></table></div>
@@ -2105,7 +2757,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Compute a list of opiniated molecular properties on a list of molecules.</p>
+        <p>Compute a list of opiniated molecular properties on a list of molecules.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2120,7 +2772,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mols</code></td>
+            <td>
+                <code>mols</code>
+            </td>
             <td>
                   <code><span title="typing.List">List</span>[<span title="datamol.Mol">Mol</span>]</code>
             </td>
@@ -2134,9 +2788,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>properties_fn</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[str, <span title="typing.Union">Union</span>[<span title="typing.Callable">Callable</span>, str]]]</code>
+                <code>properties_fn</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Union">Union</span>[<span title="typing.Callable">Callable</span>, <span title="str">str</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2151,9 +2807,11 @@ function.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>add_properties</code></td>
             <td>
-                  <code>bool</code>
+                <code>add_properties</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2190,7 +2848,8 @@ function.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">119</span>
 <span class="normal">120</span>
@@ -2229,7 +2888,7 @@ function.</p>
 <span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
-<span class="normal">156</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">batch_compute_many_descriptors</span><span class="p">(</span>
+<span class="normal">156</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">batch_compute_many_descriptors</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">add_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
@@ -2238,7 +2897,7 @@ function.</p>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">progress_leave</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute a list of opiniated molecular properties on a list of molecules.</span>
+<span class="w">    </span><span class="sd">"""Compute a list of opiniated molecular properties on a list of molecules.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: A list of molecules.</span>
@@ -2250,7 +2909,7 @@ function.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A dataframe of computed properties with one row per input molecules.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">compute_fn</span> <span class="o">=</span> <span class="n">functools</span><span class="o">.</span><span class="n">partial</span><span class="p">(</span>
         <span class="n">compute_many_descriptors</span><span class="p">,</span>
@@ -2284,7 +2943,7 @@ function.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Compute a list of opiniated molecular properties.</p>
+        <p>Compute a list of opiniated molecular properties.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2299,7 +2958,9 @@ function.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="datamol.Mol">Mol</span></code>
             </td>
@@ -2313,9 +2974,11 @@ function.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>properties_fn</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[str, <span title="typing.Union">Union</span>[<span title="typing.Callable">Callable</span>, str]]]</code>
+                <code>properties_fn</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Dict">Dict</span>[<span title="str">str</span>, <span title="typing.Union">Union</span>[<span title="typing.Callable">Callable</span>, <span title="str">str</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2330,9 +2993,11 @@ function.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>add_properties</code></td>
             <td>
-                  <code>bool</code>
+                <code>add_properties</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2358,7 +3023,7 @@ function.</p>
       <tbody>
           <tr class="doc-section-item">
             <td>
-                  <code>dict</code>
+                  <code><span title="dict">dict</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2369,7 +3034,8 @@ function.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/descriptors/compute.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 85</span>
 <span class="normal"> 86</span>
@@ -2402,12 +3068,12 @@ function.</p>
 <span class="normal">113</span>
 <span class="normal">114</span>
 <span class="normal">115</span>
-<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">compute_many_descriptors</span><span class="p">(</span>
+<span class="normal">116</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">compute_many_descriptors</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Mol</span><span class="p">,</span>
     <span class="n">properties_fn</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">Callable</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">add_properties</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute a list of opiniated molecular properties.</span>
+<span class="w">    </span><span class="sd">"""Compute a list of opiniated molecular properties.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: A molecule.</span>
@@ -2419,7 +3085,7 @@ function.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        Computed properties as a dict.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="n">properties_fn</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">properties_fn</span> <span class="o">=</span> <span class="n">_DEFAULT_PROPERTIES_FN</span>
@@ -2476,7 +3142,7 @@ function.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2020 - 2023 datamol.io
+      Copyright 2020 - 2026 datamol.io
     </div>
   
   
@@ -2497,10 +3163,13 @@ function.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://docs.datamol.io/main/api/datamol.fp.html">
+      
       
         <link rel="prev" href="datamol.descriptors.html">
       
@@ -17,8 +19,11 @@
         <link rel="next" href="datamol.fragment.html">
       
       
+        
+      
+      
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -53,11 +58,10 @@
     
       <link rel="stylesheet" href="../assets/css/tweak-width.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +101,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,36 +121,38 @@
     </div>
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -157,13 +163,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -189,9 +196,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../index.html" class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +215,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../usage.html" class="md-tabs__link">
         
+  
   
     
   
@@ -223,11 +234,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../tutorials/The_Basics.html" class="md-tabs__link">
           
+  
   
   Tutorials
 
@@ -240,6 +253,7 @@
         
   
   
+  
     
   
   
@@ -248,6 +262,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="datamol.align.html" class="md-tabs__link">
           
+  
   
   API
 
@@ -261,9 +276,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../contribute.html" class="md-tabs__link">
         
+  
   
     
   
@@ -278,9 +295,49 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../migration.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Migrating to 1.x
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../releasing.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Releasing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../license.html" class="md-tabs__link">
         
+  
   
     
   
@@ -325,7 +382,7 @@
       <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -345,9 +402,16 @@
       <a href="../index.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -365,9 +429,16 @@
       <a href="../usage.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -381,6 +452,7 @@
   
   
   
+    
     
     
     
@@ -400,9 +472,16 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -411,7 +490,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Tutorials
+            
+  
+    Tutorials
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -425,9 +508,16 @@
       <a href="../tutorials/The_Basics.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     The Basics
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -446,9 +536,16 @@
       <a href="../tutorials/Preprocessing.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pre-Processing Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -467,9 +564,16 @@
       <a href="../tutorials/Descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -488,9 +592,16 @@
       <a href="../tutorials/Reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Chemical Reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,9 +620,16 @@
       <a href="../tutorials/Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generate Scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -530,9 +648,16 @@
       <a href="../tutorials/Aligning.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Aligning Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -551,9 +676,16 @@
       <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fuzzy Scaffolds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -572,9 +704,16 @@
       <a href="../tutorials/Clustering.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Clustering Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -593,9 +732,16 @@
       <a href="../tutorials/Fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fragmenting Compounds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -614,9 +760,16 @@
       <a href="../tutorials/Conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generating Conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -635,9 +788,16 @@
       <a href="../tutorials/Visualization.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Visualization
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -656,9 +816,16 @@
       <a href="../tutorials/Filesystem.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Datamol Filesystem Module
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -685,6 +852,7 @@
     
     
     
+    
       
         
         
@@ -702,9 +870,16 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -713,7 +888,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -727,9 +906,16 @@
       <a href="datamol.align.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.align
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -748,9 +934,16 @@
       <a href="datamol.cluster.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.cluster
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -769,9 +962,16 @@
       <a href="datamol.conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -790,9 +990,16 @@
       <a href="datamol.convert.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.convert
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -811,9 +1018,16 @@
       <a href="datamol.data.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.data
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -832,9 +1046,16 @@
       <a href="datamol.descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -862,9 +1083,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -873,9 +1101,16 @@
       <a href="datamol.fp.html" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -898,7 +1133,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp" class="md-nav__link">
     <span class="md-ellipsis">
-      fp
+      
+        fp
+      
     </span>
   </a>
   
@@ -907,7 +1144,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.fold_count_fp" class="md-nav__link">
     <span class="md-ellipsis">
-      fold_count_fp
+      
+        fold_count_fp
+      
     </span>
   </a>
   
@@ -916,7 +1155,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.fp_to_array" class="md-nav__link">
     <span class="md-ellipsis">
-      fp_to_array
+      
+        fp_to_array
+      
     </span>
   </a>
   
@@ -925,7 +1166,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.list_supported_fingerprints" class="md-nav__link">
     <span class="md-ellipsis">
-      list_supported_fingerprints
+      
+        list_supported_fingerprints
+      
     </span>
   </a>
   
@@ -934,7 +1177,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.to_fp" class="md-nav__link">
     <span class="md-ellipsis">
-      to_fp
+      
+        to_fp
+      
     </span>
   </a>
   
@@ -959,9 +1204,16 @@
       <a href="datamol.fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fragment
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -980,9 +1232,16 @@
       <a href="datamol.graph.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.graph
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1001,9 +1260,16 @@
       <a href="datamol.io.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.io
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1022,9 +1288,16 @@
       <a href="datamol.isomers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.isomers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1043,9 +1316,16 @@
       <a href="datamol.log.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.log
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1064,9 +1344,16 @@
       <a href="datamol.molar.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.molar
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1085,9 +1372,16 @@
       <a href="datamol.mol.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.mol
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1106,9 +1400,16 @@
       <a href="datamol.reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1127,9 +1428,16 @@
       <a href="datamol.scaffold.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1148,9 +1456,16 @@
       <a href="datamol.similarity.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1169,9 +1484,16 @@
       <a href="datamol.utils.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1190,9 +1512,16 @@
       <a href="datamol.utils.fs.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1211,9 +1540,16 @@
       <a href="datamol.viz.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1239,9 +1575,70 @@
       <a href="../contribute.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribute
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1259,9 +1656,16 @@
       <a href="../license.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     License
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1298,7 +1702,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp" class="md-nav__link">
     <span class="md-ellipsis">
-      fp
+      
+        fp
+      
     </span>
   </a>
   
@@ -1307,7 +1713,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.fold_count_fp" class="md-nav__link">
     <span class="md-ellipsis">
-      fold_count_fp
+      
+        fold_count_fp
+      
     </span>
   </a>
   
@@ -1316,7 +1724,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.fp_to_array" class="md-nav__link">
     <span class="md-ellipsis">
-      fp_to_array
+      
+        fp_to_array
+      
     </span>
   </a>
   
@@ -1325,7 +1735,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.list_supported_fingerprints" class="md-nav__link">
     <span class="md-ellipsis">
-      list_supported_fingerprints
+      
+        list_supported_fingerprints
+      
     </span>
   </a>
   
@@ -1334,7 +1746,9 @@
         <li class="md-nav__item">
   <a href="#datamol.fp.to_fp" class="md-nav__link">
     <span class="md-ellipsis">
-      to_fp
+      
+        to_fp
+      
     </span>
   </a>
   
@@ -1350,9 +1764,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1370,7 +1786,15 @@
 
 
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
 
 
 
@@ -1391,7 +1815,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Fast folding of a count fingerprint to the specified dimension.</p>
+        <p>Fast folding of a count fingerprint to the specified dimension.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1406,7 +1830,9 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>fp</code></td>
+            <td>
+                <code>fp</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="rdkit.DataStructs.cDataStructs.SparseBitVect">SparseBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.ExplicitBitVect">ExplicitBitVect</span>]</code>
             </td>
@@ -1420,9 +1846,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>dim</code></td>
             <td>
-                  <code>int</code>
+                <code>dim</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1434,9 +1862,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>binary</code></td>
             <td>
-                  <code>bool</code>
+                <code>binary</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1473,10 +1903,10 @@
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/fp.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">313</span>
-<span class="normal">314</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">314</span>
 <span class="normal">315</span>
 <span class="normal">316</span>
 <span class="normal">317</span>
@@ -1522,12 +1952,18 @@
 <span class="normal">357</span>
 <span class="normal">358</span>
 <span class="normal">359</span>
-<span class="normal">360</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fold_count_fp</span><span class="p">(</span>
+<span class="normal">360</span>
+<span class="normal">361</span>
+<span class="normal">362</span>
+<span class="normal">363</span>
+<span class="normal">364</span>
+<span class="normal">365</span>
+<span class="normal">366</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fold_count_fp</span><span class="p">(</span>
     <span class="n">fp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">],</span>
     <span class="n">dim</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">1024</span><span class="p">,</span>
     <span class="n">binary</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Fast folding of a count fingerprint to the specified dimension.</span>
+<span class="w">    </span><span class="sd">"""Fast folding of a count fingerprint to the specified dimension.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        fp: A fingerprint.</span>
@@ -1536,7 +1972,7 @@
 
 <span class="sd">    Returns:</span>
 <span class="sd">        folded: returns folded array to the provided dimension.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span>
         <span class="n">fp</span><span class="p">,</span>
         <span class="p">(</span>
@@ -1548,22 +1984,27 @@
     <span class="p">):</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">GetNonzeroElements</span><span class="p">()</span>
 
-    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">):</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="p">(</span><span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">)):</span>
         <span class="n">on_bits</span> <span class="o">=</span> <span class="n">fp</span><span class="o">.</span><span class="n">GetOnBits</span><span class="p">()</span>
         <span class="n">tmp</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">on_bits</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">on_bits</span><span class="p">))))</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The fingerprint is of wrong type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-    <span class="c1"># ON bits dict to (i, v)</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">keys</span><span class="p">()))</span> <span class="o">%</span> <span class="n">dim</span>
-    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">values</span><span class="p">()))</span>
-
-    <span class="c1"># Fold indices</span>
-    <span class="n">i</span> <span class="o">=</span> <span class="n">i</span> <span class="o">%</span> <span class="n">dim</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The fingerprint is of wrong type: </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># Create the folded fp</span>
-    <span class="n">folded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">&quot;int&quot;</span><span class="p">)</span>
+    <span class="n">folded</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">dim</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="s2">"int"</span><span class="p">)</span>
+
+    <span class="c1"># Empty fingerprints occur for valid feature definitions, for example when</span>
+    <span class="c1"># a molecule has no matching pharmacophore pair. Return the correctly</span>
+    <span class="c1"># shaped all-zero vector before NumPy infers a floating-point index dtype.</span>
+    <span class="k">if</span> <span class="ow">not</span> <span class="n">tmp</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">folded</span>
+
+    <span class="c1"># ON bits dict to (i, v)</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">keys</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span> <span class="o">%</span> <span class="n">dim</span>
+    <span class="n">v</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fromiter</span><span class="p">(</span><span class="n">tmp</span><span class="o">.</span><span class="n">values</span><span class="p">(),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">int64</span><span class="p">)</span>
+
+    <span class="c1"># Fold indices</span>
     <span class="n">np</span><span class="o">.</span><span class="n">add</span><span class="o">.</span><span class="n">at</span><span class="p">(</span><span class="n">folded</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">binary</span><span class="p">:</span>
@@ -1587,7 +2028,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Convert rdkit fingerprint to numpy array.</p>
+        <p>Convert rdkit fingerprint to numpy array.</p>
 
 
 <details class="note" open>
@@ -1608,7 +2049,9 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>fp</code></td>
+            <td>
+                <code>fp</code>
+            </td>
             <td>
                   <code><span title="typing.Union">Union</span>[<span title="numpy.ndarray">ndarray</span>, <span title="rdkit.DataStructs.cDataStructs.SparseBitVect">SparseBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.ExplicitBitVect">ExplicitBitVect</span>, <span title="rdkit.DataStructs.cDataStructs.UIntSparseIntVect">UIntSparseIntVect</span>]</code>
             </td>
@@ -1624,10 +2067,10 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/fp.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">192</span>
-<span class="normal">193</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">193</span>
 <span class="normal">194</span>
 <span class="normal">195</span>
 <span class="normal">196</span>
@@ -1671,10 +2114,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
 <span class="normal">234</span>
 <span class="normal">235</span>
 <span class="normal">236</span>
-<span class="normal">237</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">fp_to_array</span><span class="p">(</span>
-    <span class="n">fp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">,</span> <span class="n">UIntSparseIntVect</span><span class="p">]</span>
+<span class="normal">237</span>
+<span class="normal">238</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">fp_to_array</span><span class="p">(</span>
+    <span class="n">fp</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">,</span> <span class="n">UIntSparseIntVect</span><span class="p">],</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert rdkit fingerprint to numpy array.</span>
+<span class="w">    </span><span class="sd">"""Convert rdkit fingerprint to numpy array.</span>
 
 <span class="sd">    Note:</span>
 <span class="sd">        This implementation has shown to be faster than using `DataStructs.ConvertToNumpyArray`</span>
@@ -1682,7 +2126,7 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
 
 <span class="sd">    Args:</span>
 <span class="sd">        fp: The fingerprint.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">):</span>
         <span class="n">fp_out</span> <span class="o">=</span> <span class="n">fp</span>
@@ -1694,7 +2138,7 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
         <span class="n">fp_out</span> <span class="o">=</span> <span class="n">tmp</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">fp</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">):</span>
-        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">ToBitString</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="s2">&quot;u1&quot;</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
+        <span class="n">fp_out</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">frombuffer</span><span class="p">(</span><span class="n">fp</span><span class="o">.</span><span class="n">ToBitString</span><span class="p">()</span><span class="o">.</span><span class="n">encode</span><span class="p">(),</span> <span class="s2">"u1"</span><span class="p">)</span> <span class="o">-</span> <span class="nb">ord</span><span class="p">(</span><span class="s2">"0"</span><span class="p">)</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span>
         <span class="n">fp</span><span class="p">,</span>
@@ -1712,8 +2156,8 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
 
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The fingerprint of type &#39;</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s2">&#39; is not supported. &quot;</span>
-            <span class="s2">&quot;Please open a ticket at https://github.com/datamol-io/datamol/issues.&quot;</span>
+            <span class="sa">f</span><span class="s2">"The fingerprint of type '</span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">fp</span><span class="p">)</span><span class="si">}</span><span class="s2">' is not supported. "</span>
+            <span class="s2">"Please open a ticket at https://github.com/datamol-io/datamol/issues."</span>
         <span class="p">)</span>
 
     <span class="k">return</span> <span class="n">fp_out</span>
@@ -1734,15 +2178,16 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
 
     <div class="doc doc-contents ">
 
-      <p>Return the supported fingerprints in datamol.</p>
+        <p>Return the supported fingerprints in datamol.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/fp.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">307</span>
-<span class="normal">308</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">308</span>
 <span class="normal">309</span>
-<span class="normal">310</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">list_supported_fingerprints</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the supported fingerprints in datamol.&quot;&quot;&quot;</span>
+<span class="normal">310</span>
+<span class="normal">311</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">list_supported_fingerprints</span><span class="p">():</span>
+<span class="w">    </span><span class="sd">"""Return the supported fingerprints in datamol."""</span>
 
     <span class="k">return</span> <span class="n">_FP_FUNCS</span>
 </code></pre></div></td></tr></table></div>
@@ -1755,14 +2200,14 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
 
 
 <h3 id="datamol.fp.to_fp" class="doc doc-heading">
-            <code class="highlight language-python"><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s1">&#39;ecfp&#39;</span><span class="p">,</span> <span class="n">fold_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span></code>
+            <code class="highlight language-python"><span class="n">to_fp</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">as_array</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fp_type</span><span class="o">=</span><span class="s1">'ecfp'</span><span class="p">,</span> <span class="n">fold_size</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">fp_args</span><span class="p">)</span></code>
 
 <a href="#datamol.fp.to_fp" class="headerlink" title="Permanent link">&para;</a></h3>
 
 
     <div class="doc doc-contents ">
 
-      <p>Compute the molecular fingerprint given a molecule or a SMILES.</p>
+        <p>Compute the molecular fingerprint given a molecule or a SMILES.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1777,9 +2222,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="rdkit.Chem.rdchem.Mol">Mol</span>]</code>
+                <code>mol</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="rdkit.Chem.rdchem.Mol">Mol</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1791,9 +2238,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>as_array</code></td>
             <td>
-                  <code>bool</code>
+                <code>as_array</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1805,9 +2254,11 @@ by a factor of ~4. See <a href="https://github.com/rdkit/rdkit/discussions/3863"
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>fp_type</code></td>
             <td>
-                  <code>str</code>
+                <code>fp_type</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1820,9 +2271,11 @@ complete list.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>fold_size</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>fold_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1835,7 +2288,9 @@ always a numpy array.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**fp_args</code></td>
+            <td>
+                <code>**fp_args</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -1874,10 +2329,10 @@ always a numpy array.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/fp.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">240</span>
-<span class="normal">241</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">241</span>
 <span class="normal">242</span>
 <span class="normal">243</span>
 <span class="normal">244</span>
@@ -1940,14 +2395,15 @@ always a numpy array.</p>
 <span class="normal">301</span>
 <span class="normal">302</span>
 <span class="normal">303</span>
-<span class="normal">304</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_fp</span><span class="p">(</span>
+<span class="normal">304</span>
+<span class="normal">305</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_fp</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">],</span>
     <span class="n">as_array</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">fp_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;ecfp&quot;</span><span class="p">,</span>
+    <span class="n">fp_type</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"ecfp"</span><span class="p">,</span>
     <span class="n">fold_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">fp_args</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">SparseBitVect</span><span class="p">,</span> <span class="n">ExplicitBitVect</span><span class="p">]]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Compute the molecular fingerprint given a molecule or a SMILES.</span>
+<span class="w">    </span><span class="sd">"""Compute the molecular fingerprint given a molecule or a SMILES.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule or a SMILES.</span>
@@ -1960,15 +2416,15 @@ always a numpy array.</p>
 
 <span class="sd">    Returns:</span>
 <span class="sd">        A fingerprint vector or None</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1"># Get fp function</span>
     <span class="n">fp_func</span> <span class="o">=</span> <span class="n">_FP_FUNCS</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">fp_type</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="n">fp_func</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The fingerprint &#39;</span><span class="si">{</span><span class="n">fp_type</span><span class="si">}</span><span class="s2">&#39; is not available. Use `dm.list_supported_fingerprints()` to &quot;</span>
-            <span class="s2">&quot;get a complete list of the available fingerprints.&quot;</span>
+            <span class="sa">f</span><span class="s2">"The fingerprint '</span><span class="si">{</span><span class="n">fp_type</span><span class="si">}</span><span class="s2">' is not available. Use `dm.list_supported_fingerprints()` to "</span>
+            <span class="s2">"get a complete list of the available fingerprints."</span>
         <span class="p">)</span>
 
     <span class="c1"># Convert input to mol if needed</span>
@@ -1978,7 +2434,7 @@ always a numpy array.</p>
         <span class="n">mol_obj</span> <span class="o">=</span> <span class="n">mol</span>
 
     <span class="k">if</span> <span class="n">mol_obj</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;It seems like the input molecule &#39;</span><span class="si">{</span><span class="n">mol</span><span class="si">}</span><span class="s2">&#39; is invalid.&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"It seems like the input molecule '</span><span class="si">{</span><span class="n">mol</span><span class="si">}</span><span class="s2">' is invalid."</span><span class="p">)</span>
 
     <span class="n">mol</span> <span class="o">=</span> <span class="n">mol_obj</span>
 
@@ -1989,7 +2445,7 @@ always a numpy array.</p>
     <span class="c1"># Compute the fingerprint</span>
     <span class="k">if</span> <span class="n">fp_type</span> <span class="ow">in</span> <span class="n">_FP_GENERATORS</span><span class="p">:</span>
         <span class="n">fp_func</span> <span class="o">=</span> <span class="n">fp_func</span><span class="p">(</span><span class="o">**</span><span class="n">fp_args</span><span class="p">)</span>
-        <span class="k">if</span> <span class="n">fp_type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">&quot;-count&quot;</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">fp_type</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s2">"-count"</span><span class="p">):</span>
             <span class="n">fp</span> <span class="o">=</span> <span class="n">fp_func</span><span class="o">.</span><span class="n">GetCountFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">fp</span> <span class="o">=</span> <span class="n">fp_func</span><span class="o">.</span><span class="n">GetFingerprint</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
@@ -2047,7 +2503,7 @@ always a numpy array.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2020 - 2023 datamol.io
+      Copyright 2020 - 2026 datamol.io
     </div>
   
   
@@ -2068,10 +2524,13 @@ always a numpy array.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

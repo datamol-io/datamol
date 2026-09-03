@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://docs.datamol.io/main/api/datamol.viz.html">
+      
       
         <link rel="prev" href="datamol.utils.fs.html">
       
@@ -17,8 +19,11 @@
         <link rel="next" href="../contribute.html">
       
       
+        
+      
+      
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -53,11 +58,10 @@
     
       <link rel="stylesheet" href="../assets/css/tweak-width.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +101,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,36 +121,38 @@
     </div>
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -157,13 +163,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -189,9 +196,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../index.html" class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +215,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../usage.html" class="md-tabs__link">
         
+  
   
     
   
@@ -223,11 +234,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../tutorials/The_Basics.html" class="md-tabs__link">
           
+  
   
   Tutorials
 
@@ -240,6 +253,7 @@
         
   
   
+  
     
   
   
@@ -248,6 +262,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="datamol.align.html" class="md-tabs__link">
           
+  
   
   API
 
@@ -261,9 +276,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../contribute.html" class="md-tabs__link">
         
+  
   
     
   
@@ -278,9 +295,49 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../migration.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Migrating to 1.x
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../releasing.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Releasing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../license.html" class="md-tabs__link">
         
+  
   
     
   
@@ -325,7 +382,7 @@
       <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -345,9 +402,16 @@
       <a href="../index.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -365,9 +429,16 @@
       <a href="../usage.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -381,6 +452,7 @@
   
   
   
+    
     
     
     
@@ -400,9 +472,16 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -411,7 +490,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Tutorials
+            
+  
+    Tutorials
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -425,9 +508,16 @@
       <a href="../tutorials/The_Basics.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     The Basics
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -446,9 +536,16 @@
       <a href="../tutorials/Preprocessing.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pre-Processing Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -467,9 +564,16 @@
       <a href="../tutorials/Descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -488,9 +592,16 @@
       <a href="../tutorials/Reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Chemical Reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,9 +620,16 @@
       <a href="../tutorials/Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generate Scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -530,9 +648,16 @@
       <a href="../tutorials/Aligning.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Aligning Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -551,9 +676,16 @@
       <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fuzzy Scaffolds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -572,9 +704,16 @@
       <a href="../tutorials/Clustering.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Clustering Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -593,9 +732,16 @@
       <a href="../tutorials/Fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fragmenting Compounds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -614,9 +760,16 @@
       <a href="../tutorials/Conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generating Conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -635,9 +788,16 @@
       <a href="../tutorials/Visualization.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Visualization
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -656,9 +816,16 @@
       <a href="../tutorials/Filesystem.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Datamol Filesystem Module
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -685,6 +852,7 @@
     
     
     
+    
       
         
         
@@ -702,9 +870,16 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -713,7 +888,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -727,9 +906,16 @@
       <a href="datamol.align.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.align
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -748,9 +934,16 @@
       <a href="datamol.cluster.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.cluster
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -769,9 +962,16 @@
       <a href="datamol.conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -790,9 +990,16 @@
       <a href="datamol.convert.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.convert
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -811,9 +1018,16 @@
       <a href="datamol.data.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.data
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -832,9 +1046,16 @@
       <a href="datamol.descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -853,9 +1074,16 @@
       <a href="datamol.fp.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -874,9 +1102,16 @@
       <a href="datamol.fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fragment
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -895,9 +1130,16 @@
       <a href="datamol.graph.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.graph
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -916,9 +1158,16 @@
       <a href="datamol.io.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.io
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -937,9 +1186,16 @@
       <a href="datamol.isomers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.isomers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -958,9 +1214,16 @@
       <a href="datamol.log.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.log
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -979,9 +1242,16 @@
       <a href="datamol.molar.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.molar
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1000,9 +1270,16 @@
       <a href="datamol.mol.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.mol
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1021,9 +1298,16 @@
       <a href="datamol.reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1042,9 +1326,16 @@
       <a href="datamol.scaffold.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1063,9 +1354,16 @@
       <a href="datamol.similarity.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1084,9 +1382,16 @@
       <a href="datamol.utils.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1105,9 +1410,16 @@
       <a href="datamol.utils.fs.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1135,9 +1447,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -1146,9 +1465,16 @@
       <a href="datamol.viz.html" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1171,7 +1497,9 @@
         <li class="md-nav__item">
   <a href="#vizualize-molecule-in-2d-or-3d" class="md-nav__link">
     <span class="md-ellipsis">
-      Vizualize molecule in 2D or 3D
+      
+        Vizualize molecule in 2D or 3D
+      
     </span>
   </a>
   
@@ -1181,7 +1509,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.to_image" class="md-nav__link">
     <span class="md-ellipsis">
-      to_image
+      
+        to_image
+      
     </span>
   </a>
   
@@ -1190,7 +1520,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.conformers" class="md-nav__link">
     <span class="md-ellipsis">
-      conformers
+      
+        conformers
+      
     </span>
   </a>
   
@@ -1204,7 +1536,9 @@
         <li class="md-nav__item">
   <a href="#specific-plotting-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Specific plotting functions
+      
+        Specific plotting functions
+      
     </span>
   </a>
   
@@ -1214,7 +1548,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid" class="md-nav__link">
     <span class="md-ellipsis">
-      MolsCircleGrid
+      
+        MolsCircleGrid
+      
     </span>
   </a>
   
@@ -1223,7 +1559,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.__call__" class="md-nav__link">
     <span class="md-ellipsis">
-      __call__
+      
+        __call__
+      
     </span>
   </a>
   
@@ -1232,7 +1570,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.__init__" class="md-nav__link">
     <span class="md-ellipsis">
-      __init__
+      
+        __init__
+      
     </span>
   </a>
   
@@ -1241,7 +1581,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.draw" class="md-nav__link">
     <span class="md-ellipsis">
-      draw
+      
+        draw
+      
     </span>
   </a>
   
@@ -1250,7 +1592,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.circle_grid" class="md-nav__link">
     <span class="md-ellipsis">
-      circle_grid
+      
+        circle_grid
+      
     </span>
   </a>
   
@@ -1264,7 +1608,9 @@
         <li class="md-nav__item">
   <a href="#vizualize-2d-molecule-with-highlighted-substructures" class="md-nav__link">
     <span class="md-ellipsis">
-      Vizualize 2D molecule with highlighted substructures
+      
+        Vizualize 2D molecule with highlighted substructures
+      
     </span>
   </a>
   
@@ -1274,7 +1620,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.lasso_highlight_image" class="md-nav__link">
     <span class="md-ellipsis">
-      lasso_highlight_image
+      
+        lasso_highlight_image
+      
     </span>
   </a>
   
@@ -1311,9 +1659,70 @@
       <a href="../contribute.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribute
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1331,9 +1740,16 @@
       <a href="../license.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     License
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1370,7 +1786,9 @@
         <li class="md-nav__item">
   <a href="#vizualize-molecule-in-2d-or-3d" class="md-nav__link">
     <span class="md-ellipsis">
-      Vizualize molecule in 2D or 3D
+      
+        Vizualize molecule in 2D or 3D
+      
     </span>
   </a>
   
@@ -1380,7 +1798,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.to_image" class="md-nav__link">
     <span class="md-ellipsis">
-      to_image
+      
+        to_image
+      
     </span>
   </a>
   
@@ -1389,7 +1809,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.conformers" class="md-nav__link">
     <span class="md-ellipsis">
-      conformers
+      
+        conformers
+      
     </span>
   </a>
   
@@ -1403,7 +1825,9 @@
         <li class="md-nav__item">
   <a href="#specific-plotting-functions" class="md-nav__link">
     <span class="md-ellipsis">
-      Specific plotting functions
+      
+        Specific plotting functions
+      
     </span>
   </a>
   
@@ -1413,7 +1837,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid" class="md-nav__link">
     <span class="md-ellipsis">
-      MolsCircleGrid
+      
+        MolsCircleGrid
+      
     </span>
   </a>
   
@@ -1422,7 +1848,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.__call__" class="md-nav__link">
     <span class="md-ellipsis">
-      __call__
+      
+        __call__
+      
     </span>
   </a>
   
@@ -1431,7 +1859,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.__init__" class="md-nav__link">
     <span class="md-ellipsis">
-      __init__
+      
+        __init__
+      
     </span>
   </a>
   
@@ -1440,7 +1870,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.MolsCircleGrid.draw" class="md-nav__link">
     <span class="md-ellipsis">
-      draw
+      
+        draw
+      
     </span>
   </a>
   
@@ -1449,7 +1881,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.circle_grid" class="md-nav__link">
     <span class="md-ellipsis">
-      circle_grid
+      
+        circle_grid
+      
     </span>
   </a>
   
@@ -1463,7 +1897,9 @@
         <li class="md-nav__item">
   <a href="#vizualize-2d-molecule-with-highlighted-substructures" class="md-nav__link">
     <span class="md-ellipsis">
-      Vizualize 2D molecule with highlighted substructures
+      
+        Vizualize 2D molecule with highlighted substructures
+      
     </span>
   </a>
   
@@ -1473,7 +1909,9 @@
           <li class="md-nav__item">
   <a href="#datamol.viz.lasso_highlight_image" class="md-nav__link">
     <span class="md-ellipsis">
-      lasso_highlight_image
+      
+        lasso_highlight_image
+      
     </span>
   </a>
   
@@ -1494,9 +1932,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1513,7 +1953,7 @@
 <a id="datamol.viz.to_image"></a>
     <div class="doc doc-contents first">
 
-      <p>Generate an image out of a molecule or a list of molecules.</p>
+        <p>Generate an image out of a molecule or a list of molecules.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1528,9 +1968,11 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mols</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="datamol.Mol">Mol</span>, str]], <span title="datamol.Mol">Mol</span>, str]</code>
+                <code>mols</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="datamol.Mol">Mol</span>, <span title="str">str</span>]], <span title="datamol.Mol">Mol</span>, <span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1542,9 +1984,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>legends</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, None]], str, None]</code>
+                <code>legends</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, None]], <span title="str">str</span>, None]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1556,9 +2000,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_cols</code></td>
             <td>
-                  <code>int</code>
+                <code>n_cols</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1570,9 +2016,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>use_svg</code></td>
             <td>
-                  <code>bool</code>
+                <code>use_svg</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1584,9 +2032,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>mol_size</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.Tuple">Tuple</span>[int, int], int]</code>
+                <code>mol_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="typing.Tuple">Tuple</span>[<span title="int">int</span>, <span title="int">int</span>], <span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1598,9 +2048,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_atom</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>highlight_atom</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1612,9 +2064,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_bond</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>highlight_bond</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1626,9 +2080,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>outfile</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[str]</code>
+                <code>outfile</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1640,9 +2096,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>max_mols</code></td>
             <td>
-                  <code>int</code>
+                <code>max_mols</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1654,9 +2112,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>max_mols_ipython</code></td>
             <td>
-                  <code>int</code>
+                <code>max_mols_ipython</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1668,9 +2128,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>copy</code></td>
             <td>
-                  <code>bool</code>
+                <code>copy</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1682,9 +2144,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>indices</code></td>
             <td>
-                  <code>bool</code>
+                <code>indices</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1696,9 +2160,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>bond_indices</code></td>
             <td>
-                  <code>bool</code>
+                <code>bond_indices</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1710,9 +2176,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>bond_line_width</code></td>
             <td>
-                  <code>int</code>
+                <code>bond_line_width</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1724,9 +2192,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>legend_fontsize</code></td>
             <td>
-                  <code>int</code>
+                <code>legend_fontsize</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1738,9 +2208,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>kekulize</code></td>
             <td>
-                  <code>bool</code>
+                <code>kekulize</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1752,9 +2224,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>align</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="datamol.Mol">Mol</span>, str, bool]</code>
+                <code>align</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="datamol.Mol">Mol</span>, <span title="str">str</span>, <span title="bool">bool</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1770,7 +2244,9 @@ For a more custom alignment, we suggest using directly the module <code>dm.align
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**kwargs</code></td>
+            <td>
+                <code>**kwargs</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -1788,7 +2264,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_viz.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 16</span>
 <span class="normal"> 17</span>
@@ -1926,7 +2403,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">149</span>
 <span class="normal">150</span>
 <span class="normal">151</span>
-<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">to_image</span><span class="p">(</span>
+<span class="normal">152</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">to_image</span><span class="p">(</span>
     <span class="n">mols</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">legends</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]],</span> <span class="nb">str</span><span class="p">,</span> <span class="kc">None</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">4</span><span class="p">,</span>
@@ -1947,7 +2424,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">align</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Generate an image out of a molecule or a list of molecules.</span>
+<span class="w">    </span><span class="sd">"""Generate an image out of a molecule or a list of molecules.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mols: One or a list of molecules.</span>
@@ -1974,7 +2451,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">        **kwargs: Additional arguments to pass to the drawing function. See RDKit</span>
 <span class="sd">            documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">mol_size</span> <span class="o">=</span> <span class="p">(</span><span class="n">mol_size</span><span class="p">,</span> <span class="n">mol_size</span><span class="p">)</span>
@@ -2017,7 +2494,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="k">if</span> <span class="n">highlight_bond</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">highlight_bond</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
         <span class="n">_highlight_bond</span> <span class="o">=</span> <span class="p">[</span><span class="n">highlight_bond</span><span class="p">]</span>
 
-    <span class="c1"># Don&#39;t make the image bigger than it</span>
+    <span class="c1"># Don't make the image bigger than it</span>
     <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">n_cols</span><span class="p">:</span>
         <span class="n">n_cols</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">mols</span><span class="p">)</span>
 
@@ -2041,11 +2518,11 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">in_notebook</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">viz</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">is_ipython_session</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">in_notebook</span><span class="p">:</span>
-        <span class="n">_kwargs</span><span class="p">[</span><span class="s2">&quot;maxMols&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_mols_ipython</span>
+        <span class="n">_kwargs</span><span class="p">[</span><span class="s2">"maxMols"</span><span class="p">]</span> <span class="o">=</span> <span class="n">max_mols_ipython</span>
         <span class="k">if</span> <span class="n">max_mols</span> <span class="o">&gt;</span> <span class="n">max_mols_ipython</span><span class="p">:</span>
             <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;You have set max_mols to </span><span class="si">{</span><span class="n">max_mols</span><span class="si">}</span><span class="s2">, which is higher than max_mols_ipython (</span><span class="si">{</span><span class="n">max_mols_ipython</span><span class="si">}</span><span class="s2">). &quot;</span>
-                <span class="s2">&quot;Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment.&quot;</span>
+                <span class="sa">f</span><span class="s2">"You have set max_mols to </span><span class="si">{</span><span class="n">max_mols</span><span class="si">}</span><span class="s2">, which is higher than max_mols_ipython (</span><span class="si">{</span><span class="n">max_mols_ipython</span><span class="si">}</span><span class="s2">). "</span>
+                <span class="s2">"Consider increasing max_mols_ipython if you want to display all molecules in an IPython environment."</span>
             <span class="p">)</span>
 
     <span class="n">image</span> <span class="o">=</span> <span class="n">Draw</span><span class="o">.</span><span class="n">MolsToGridImage</span><span class="p">(</span>
@@ -2076,7 +2553,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <a id="datamol.viz.conformers"></a>
     <div class="doc doc-contents first">
 
-      <p>Visualize the conformer(s) of a molecule.</p>
+        <p>Visualize the conformer(s) of a molecule.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2091,7 +2568,9 @@ documentation related to <code>MolDrawOptions</code> for more details at
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>mol</code></td>
+            <td>
+                <code>mol</code>
+            </td>
             <td>
                   <code><span title="rdkit.Chem.rdchem.Mol">Mol</span></code>
             </td>
@@ -2105,9 +2584,11 @@ documentation related to <code>MolDrawOptions</code> for more details at
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>conf_id</code></td>
             <td>
-                  <code>int</code>
+                <code>conf_id</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2120,9 +2601,11 @@ the first conformer. Only works if <code>n_confs</code> is None.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_confs</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[int, <span title="typing.List">List</span>[int]]]</code>
+                <code>n_confs</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="int">int</span>, <span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2136,9 +2619,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>align_conf</code></td>
             <td>
-                  <code>bool</code>
+                <code>align_conf</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2150,9 +2635,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_cols</code></td>
             <td>
-                  <code>int</code>
+                <code>n_cols</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2164,9 +2651,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>sync_views</code></td>
             <td>
-                  <code>bool</code>
+                <code>sync_views</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2178,9 +2667,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>remove_hs</code></td>
             <td>
-                  <code>bool</code>
+                <code>remove_hs</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2192,9 +2683,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>width</code></td>
             <td>
-                  <code>str</code>
+                <code>width</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2208,7 +2701,8 @@ conformer is displayed. When -1, show all conformers.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_conformers.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 32</span>
 <span class="normal"> 33</span>
@@ -2288,7 +2782,7 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="normal">107</span>
 <span class="normal">108</span>
 <span class="normal">109</span>
-<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">conformers</span><span class="p">(</span>
+<span class="normal">110</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">conformers</span><span class="p">(</span>
     <span class="n">mol</span><span class="p">:</span> <span class="n">Chem</span><span class="o">.</span><span class="n">rdchem</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
     <span class="n">conf_id</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">,</span>
     <span class="n">n_confs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2296,9 +2790,9 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="n">n_cols</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">3</span><span class="p">,</span>
     <span class="n">sync_views</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
     <span class="n">remove_hs</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
-    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;auto&quot;</span><span class="p">,</span>
+    <span class="n">width</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">"auto"</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Visualize the conformer(s) of a molecule.</span>
+<span class="w">    </span><span class="sd">"""Visualize the conformer(s) of a molecule.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        mol: a molecule.</span>
@@ -2311,15 +2805,15 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="sd">        n_cols: Number of columns. Defaults to 3.</span>
 <span class="sd">        sync_views: Wether to sync the multiple views.</span>
 <span class="sd">        remove_hs: Wether to remove the hydrogens of the conformers.</span>
-<span class="sd">        width: The width of the returned view. Defaults to &quot;auto&quot;.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">        width: The width of the returned view. Defaults to "auto".</span>
+<span class="sd">    """</span>
 
     <span class="n">widgets</span> <span class="o">=</span> <span class="n">_get_ipywidgets</span><span class="p">()</span>
     <span class="n">nv</span> <span class="o">=</span> <span class="n">_get_nglview</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetNumConformers</span><span class="p">()</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`.&quot;</span>
+            <span class="s2">"The molecule has 0 conformers. You can generate conformers with `dm.conformers.generate(mol)`."</span>
         <span class="p">)</span>
 
     <span class="c1"># Clone the molecule</span>
@@ -2357,7 +2851,7 @@ conformer is displayed. When -1, show all conformers.</p>
     <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">conf_id</span><span class="p">,</span> <span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">n_confs</span><span class="p">,</span> <span class="n">widget_coords</span><span class="p">)):</span>
         <span class="n">view</span> <span class="o">=</span> <span class="n">nv</span><span class="o">.</span><span class="n">show_rdkit</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">conf_id</span><span class="o">=</span><span class="n">conf_id</span><span class="p">)</span>
         <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">width</span> <span class="o">=</span> <span class="n">width</span>
-        <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_self</span> <span class="o">=</span> <span class="s2">&quot;stretch&quot;</span>
+        <span class="n">view</span><span class="o">.</span><span class="n">layout</span><span class="o">.</span><span class="n">align_self</span> <span class="o">=</span> <span class="s2">"stretch"</span>
         <span class="n">grid</span><span class="p">[</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">]</span> <span class="o">=</span> <span class="n">view</span>
         <span class="n">views</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">view</span><span class="p">)</span>
 
@@ -2382,7 +2876,15 @@ conformer is displayed. When -1, show all conformers.</p>
     <div class="doc doc-contents first">
 
 
-              <details class="quote">
+
+
+
+
+
+
+
+
+              <details class="mkdocstrings-source">
                 <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
                 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 96</span>
 <span class="normal"> 97</span>
@@ -2673,8 +3175,8 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="normal">382</span>
 <span class="normal">383</span>
 <span class="normal">384</span>
-<span class="normal">385</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span> <span class="nc">MolsCircleGrid</span><span class="p">:</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">385</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">class</span><span class="w"> </span><span class="nc">MolsCircleGrid</span><span class="p">:</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">center_mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">ring_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span>
@@ -2695,7 +3197,7 @@ conformer is displayed. When -1, show all conformers.</p>
         <span class="n">layout_random_seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
         <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
+<span class="w">        </span><span class="sd">"""Show molecules in concentric rings, with one molecule at the center</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            center_mol: Molecule at center of the rings</span>
@@ -2723,10 +3225,10 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="sd">            **kwargs: Additional arguments to pass to the drawing function. See RDKit</span>
 <span class="sd">                documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">                https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="k">assert</span> <span class="n">dm</span><span class="o">.</span><span class="n">is_greater_than_current_rdkit_version</span><span class="p">(</span>
-            <span class="s2">&quot;2023.03&quot;</span>
-        <span class="p">),</span> <span class="s2">&quot;MolsCircleGrid requires RDKit version &gt;= 2022.09&quot;</span>
+            <span class="s2">"2023.03"</span>
+        <span class="p">),</span> <span class="s2">"MolsCircleGrid requires RDKit version &gt;= 2022.09"</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span> <span class="o">=</span> <span class="n">center_mol</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">ring_mols</span> <span class="o">=</span> <span class="n">ring_mols</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
@@ -2753,12 +3255,12 @@ conformer is displayed. When -1, show all conformers.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">_format_activity_mapper</span><span class="p">(</span><span class="n">act_mapper</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_initialize_drawing</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_format_activity_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">act_mapper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Format the activity mapper to a dictionary of legends</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_format_activity_mapper</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">act_mapper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Format the activity mapper to a dictionary of legends</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            act_mapper: dictionary of activity for each molecule</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_legends</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">act_mapper</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">if</span> <span class="n">act_mapper</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
@@ -2771,17 +3273,17 @@ conformer is displayed. When -1, show all conformers.</p>
             <span class="n">txt</span> <span class="o">=</span> <span class="p">[]</span>
             <span class="k">for</span> <span class="n">prop</span><span class="p">,</span> <span class="n">propval</span> <span class="ow">in</span> <span class="n">v</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
                 <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">propval</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
-                    <span class="n">propval</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="si">{:.2f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">propval</span><span class="p">)</span>
-                <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">prop</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">propval</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="n">txt</span> <span class="o">=</span> <span class="s2">&quot;</span><span class="se">\n</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
+                    <span class="n">propval</span> <span class="o">=</span> <span class="s2">"</span><span class="si">{:.2f}</span><span class="s2">"</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">propval</span><span class="p">)</span>
+                <span class="n">txt</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">prop</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">propval</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+            <span class="n">txt</span> <span class="o">=</span> <span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">txt</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">_legends</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">txt</span>
 
-    <span class="k">def</span> <span class="nf">_initialize_drawing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">drawing_options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Initialize the canvas for drawing and perform all preparation for input molecules</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_initialize_drawing</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">**</span><span class="n">drawing_options</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Initialize the canvas for drawing and perform all preparation for input molecules</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            drawing_options: drawing options for the canvas</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
 
         <span class="c1"># prepare and align all the molecules first</span>
         <span class="n">all_mols</span> <span class="o">=</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span><span class="p">]</span> <span class="o">+</span> <span class="p">[</span><span class="n">mol</span> <span class="k">for</span> <span class="n">mols</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring_mols</span> <span class="k">for</span> <span class="n">mol</span> <span class="ow">in</span> <span class="n">mols</span><span class="p">]</span>
@@ -2820,7 +3322,7 @@ conformer is displayed. When -1, show all conformers.</p>
             <span class="k">if</span> <span class="n">ind</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
                 <span class="n">sizer_options</span><span class="o">.</span><span class="n">scalingFactor</span> <span class="o">=</span> <span class="n">current_scaling_factor</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring_scaler</span>
             <span class="n">mol_id</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">unique_id</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">_size_info</span><span class="p">[</span><span class="n">mol_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">sizer</span><span class="o">.</span><span class="n">GetMolSize</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_legends</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mol_id</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">))</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">_size_info</span><span class="p">[</span><span class="n">mol_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">sizer</span><span class="o">.</span><span class="n">GetMolSize</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_legends</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">mol_id</span><span class="p">,</span> <span class="s2">""</span><span class="p">))</span>
 
         <span class="c1"># compute the minimum size of the canvas based on the size of the molecules</span>
         <span class="n">max_width</span> <span class="o">=</span> <span class="nb">max</span><span class="p">([</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_info</span><span class="o">.</span><span class="n">values</span><span class="p">()])</span>
@@ -2850,24 +3352,24 @@ conformer is displayed. When -1, show all conformers.</p>
             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw_options</span><span class="p">,</span> <span class="n">k</span><span class="p">):</span>
                 <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">draw_options</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
-                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown drawing option: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Unknown drawing option: </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">line_width</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">SetLineWidth</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">line_width</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">SetFillPolys</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw the circular molecule and save to file if outfile is provided</span>
+    <span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Draw the circular molecule and save to file if outfile is provided</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            outfile: output file name</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">outfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
             <span class="n">image_to_file</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">as_svg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_svg</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">image</span>
 
-    <span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create and draw the circular molecule image&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Create and draw the circular molecule image"""</span>
         <span class="n">radius_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_circles</span><span class="p">()</span>
 
         <span class="c1"># draw the center mol</span>
@@ -2920,8 +3422,8 @@ conformer is displayed. When -1, show all conformers.</p>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">drawer_to_image</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="nf">_draw_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Drawing the circular rings around the center molecule&quot;&quot;&quot;</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_circles</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Drawing the circular rings around the center molecule"""</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">ring_count</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">[]</span>
         <span class="n">radius_step</span> <span class="o">=</span> <span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">size</span><span class="p">)</span> <span class="o">-</span> <span class="nb">min</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">mol_size</span><span class="p">)</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="bp">self</span><span class="o">.</span><span class="n">_global_legend_size</span><span class="p">)</span> <span class="o">//</span> <span class="p">(</span>
@@ -2938,28 +3440,28 @@ conformer is displayed. When -1, show all conformers.</p>
             <span class="n">radius_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">radius</span> <span class="o">+</span> <span class="n">radius_step</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">radius_list</span>
 
-    <span class="k">def</span> <span class="nf">_draw_mol_at</span><span class="p">(</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_draw_mol_at</span><span class="p">(</span>
         <span class="bp">self</span><span class="p">,</span>
         <span class="n">mol</span><span class="p">:</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span>
         <span class="n">mol_center</span><span class="p">:</span> <span class="n">Point2D</span><span class="p">,</span>
         <span class="n">highlight_atom</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
         <span class="n">highlight_bond</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Draw molecule at a given position</span>
+<span class="w">        </span><span class="sd">"""Draw molecule at a given position</span>
 
 <span class="sd">        Args:</span>
 <span class="sd">            mol: input molecule</span>
 <span class="sd">            mol_center: coordinate of the center of the molecule</span>
 <span class="sd">            highlight_atom: list of atom indices to be highlighted</span>
 <span class="sd">            highlight_bond: list of bond indices to be highlighted</span>
-<span class="sd">        &quot;&quot;&quot;</span>
+<span class="sd">        """</span>
         <span class="c1"># we offset the drawer such that the image will be drawn at the center</span>
         <span class="n">width</span><span class="p">,</span> <span class="n">height</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_size_info</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">unique_id</span><span class="p">(</span><span class="n">mol</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">SetOffset</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">mol_center</span><span class="o">.</span><span class="n">x</span> <span class="o">-</span> <span class="n">width</span> <span class="o">/</span> <span class="mi">2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">mol_center</span><span class="o">.</span><span class="n">y</span> <span class="o">-</span> <span class="n">height</span> <span class="o">/</span> <span class="mi">2</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">SetColour</span><span class="p">((</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">canvas</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span>
             <span class="n">mol</span><span class="p">,</span>
-            <span class="n">legend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_legends</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">unique_id</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="s2">&quot;&quot;</span><span class="p">),</span>
+            <span class="n">legend</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_legends</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">dm</span><span class="o">.</span><span class="n">unique_id</span><span class="p">(</span><span class="n">mol</span><span class="p">),</span> <span class="s2">""</span><span class="p">),</span>
             <span class="n">highlightAtoms</span><span class="o">=</span><span class="n">highlight_atom</span><span class="p">,</span>
             <span class="n">highlightBonds</span><span class="o">=</span><span class="n">highlight_bond</span><span class="p">,</span>
         <span class="p">)</span>
@@ -2968,7 +3470,8 @@ conformer is displayed. When -1, show all conformers.</p>
 
 
 
-  <div class="doc doc-children">
+<div class="doc doc-children">
+
 
 
 
@@ -2989,7 +3492,7 @@ conformer is displayed. When -1, show all conformers.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Draw the circular molecule and save to file if outfile is provided</p>
+        <p>Draw the circular molecule and save to file if outfile is provided</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3004,9 +3507,11 @@ conformer is displayed. When -1, show all conformers.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>outfile</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[str]</code>
+                <code>outfile</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3020,7 +3525,8 @@ conformer is displayed. When -1, show all conformers.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">278</span>
 <span class="normal">279</span>
@@ -3031,12 +3537,12 @@ conformer is displayed. When -1, show all conformers.</p>
 <span class="normal">284</span>
 <span class="normal">285</span>
 <span class="normal">286</span>
-<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Draw the circular molecule and save to file if outfile is provided</span>
+<span class="normal">287</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__call__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">outfile</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Draw the circular molecule and save to file if outfile is provided</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        outfile: output file name</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">image</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">draw</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">outfile</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">image_to_file</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">outfile</span><span class="p">,</span> <span class="n">as_svg</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">use_svg</span><span class="p">)</span>
@@ -3058,7 +3564,7 @@ conformer is displayed. When -1, show all conformers.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Show molecules in concentric rings, with one molecule at the center</p>
+        <p>Show molecules in concentric rings, with one molecule at the center</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3073,9 +3579,11 @@ conformer is displayed. When -1, show all conformers.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>center_mol</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, str]</code>
+                <code>center_mol</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, <span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3087,9 +3595,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_mols</code></td>
             <td>
-                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, str]]]</code>
+                <code>ring_mols</code>
+            </td>
+            <td>
+                  <code><span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, <span title="str">str</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3101,9 +3611,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>legend</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[str]</code>
+                <code>legend</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3115,9 +3627,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>margin</code></td>
             <td>
-                  <code>int</code>
+                <code>margin</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3129,9 +3643,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_scaler</code></td>
             <td>
-                  <code>float</code>
+                <code>ring_scaler</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3143,9 +3659,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>act_mapper</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[dict]</code>
+                <code>act_mapper</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="dict">dict</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3157,9 +3675,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>align</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, str, bool]]</code>
+                <code>align</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="datamol.types.Mol">Mol</span>, <span title="str">str</span>, <span title="bool">bool</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3175,9 +3695,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>use_svg</code></td>
             <td>
-                  <code>bool</code>
+                <code>use_svg</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3189,9 +3711,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>line_width</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[float]</code>
+                <code>line_width</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="float">float</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3203,9 +3727,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>center_mol_highlight_atoms</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[int]]</code>
+                <code>center_mol_highlight_atoms</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3217,9 +3743,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>center_mol_highlight_bonds</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[int]]</code>
+                <code>center_mol_highlight_bonds</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3231,9 +3759,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_mol_highlight_atoms</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>ring_mol_highlight_atoms</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3245,9 +3775,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_mol_highlight_bonds</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>ring_mol_highlight_bonds</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3259,7 +3791,9 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_color</code></td>
+            <td>
+                <code>ring_color</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[<span title="datamol.types.DatamolColor">DatamolColor</span>]</code>
             </td>
@@ -3273,9 +3807,11 @@ conformer is displayed. When -1, show all conformers.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>ring_mol_start_angles_degrees</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[float]]</code>
+                <code>ring_mol_start_angles_degrees</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="float">float</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3288,9 +3824,11 @@ rings. If None then a random position will be used.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>kekulize</code></td>
             <td>
-                  <code>bool</code>
+                <code>kekulize</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3302,9 +3840,11 @@ rings. If None then a random position will be used.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>layout_random_seed</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>layout_random_seed</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3316,7 +3856,9 @@ rings. If None then a random position will be used.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**kwargs</code></td>
+            <td>
+                <code>**kwargs</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -3334,7 +3876,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 97</span>
 <span class="normal"> 98</span>
@@ -3413,7 +3956,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">171</span>
 <span class="normal">172</span>
 <span class="normal">173</span>
-<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
+<span class="normal">174</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="fm">__init__</span><span class="p">(</span>
     <span class="bp">self</span><span class="p">,</span>
     <span class="n">center_mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">ring_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span>
@@ -3434,7 +3977,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">layout_random_seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
+<span class="w">    </span><span class="sd">"""Show molecules in concentric rings, with one molecule at the center</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        center_mol: Molecule at center of the rings</span>
@@ -3462,10 +4005,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">        **kwargs: Additional arguments to pass to the drawing function. See RDKit</span>
 <span class="sd">            documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">assert</span> <span class="n">dm</span><span class="o">.</span><span class="n">is_greater_than_current_rdkit_version</span><span class="p">(</span>
-        <span class="s2">&quot;2023.03&quot;</span>
-    <span class="p">),</span> <span class="s2">&quot;MolsCircleGrid requires RDKit version &gt;= 2022.09&quot;</span>
+        <span class="s2">"2023.03"</span>
+    <span class="p">),</span> <span class="s2">"MolsCircleGrid requires RDKit version &gt;= 2022.09"</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">center_mol</span> <span class="o">=</span> <span class="n">center_mol</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">ring_mols</span> <span class="o">=</span> <span class="n">ring_mols</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">ring_mols</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)):</span>
@@ -3508,9 +4051,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
 
     <div class="doc doc-contents ">
 
-      <p>Create and draw the circular molecule image</p>
+        <p>Create and draw the circular molecule image</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">289</span>
 <span class="normal">290</span>
@@ -3564,8 +4108,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">338</span>
 <span class="normal">339</span>
 <span class="normal">340</span>
-<span class="normal">341</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create and draw the circular molecule image&quot;&quot;&quot;</span>
+<span class="normal">341</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">draw</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Create and draw the circular molecule image"""</span>
     <span class="n">radius_list</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_draw_circles</span><span class="p">()</span>
 
     <span class="c1"># draw the center mol</span>
@@ -3638,7 +4182,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <a id="datamol.viz.circle_grid"></a>
     <div class="doc doc-contents first">
 
-      <p>Show molecules in concentric rings, with one molecule at the center
+        <p>Show molecules in concentric rings, with one molecule at the center
 Args:
     center_mol: Molecule at center of the rings
     ring_mols: List of molecule for each level of concentric rings around the center mol
@@ -3666,7 +4210,8 @@ Args:
         documentation related to <code>MolDrawOptions</code> for more details at
         <a href="https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html">https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html</a>.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_circle_grid.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">24</span>
 <span class="normal">25</span>
@@ -3737,7 +4282,7 @@ Args:
 <span class="normal">90</span>
 <span class="normal">91</span>
 <span class="normal">92</span>
-<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">circle_grid</span><span class="p">(</span>
+<span class="normal">93</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">circle_grid</span><span class="p">(</span>
     <span class="n">center_mol</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
     <span class="n">ring_mols</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Mol</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]],</span>
     <span class="n">act_mapper</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -3757,7 +4302,7 @@ Args:
     <span class="n">layout_random_seed</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="mi">19</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Show molecules in concentric rings, with one molecule at the center</span>
+<span class="w">    </span><span class="sd">"""Show molecules in concentric rings, with one molecule at the center</span>
 <span class="sd">    Args:</span>
 <span class="sd">        center_mol: Molecule at center of the rings</span>
 <span class="sd">        ring_mols: List of molecule for each level of concentric rings around the center mol</span>
@@ -3785,7 +4330,7 @@ Args:
 <span class="sd">            documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
 
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">grid</span> <span class="o">=</span> <span class="n">MolsCircleGrid</span><span class="p">(</span>
         <span class="n">center_mol</span><span class="p">,</span>
@@ -3821,7 +4366,7 @@ Args:
 <a id="datamol.viz.lasso_highlight_image"></a>
     <div class="doc doc-contents first">
 
-      <p>Create an image of a list of molecules with substructure matches using lasso-based highlighting.
+        <p>Create an image of a list of molecules with substructure matches using lasso-based highlighting.
 Substructure matching is optional and it's also possible to pass a list of list of atom indices to highlight.</p>
 
 
@@ -3837,9 +4382,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>target_molecules</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="datamol.Mol">Mol</span>, <span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, <span title="datamol.Mol">Mol</span>]]]</code>
+                <code>target_molecules</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="datamol.Mol">Mol</span>, <span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="datamol.Mol">Mol</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3851,9 +4398,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>search_molecules</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="typing.List">List</span>[str], <span title="datamol.Mol">Mol</span>, <span title="typing.List">List</span>[<span title="datamol.Mol">Mol</span>]]</code>
+                <code>search_molecules</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="typing.List">List</span>[<span title="str">str</span>], <span title="datamol.Mol">Mol</span>, <span title="typing.List">List</span>[<span title="datamol.Mol">Mol</span>]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3865,9 +4414,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>atom_indices</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="typing.List">List</span>[int], <span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]]</code>
+                <code>atom_indices</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="int">int</span>], <span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3879,9 +4430,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>legends</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[str, None]], str, None]</code>
+                <code>legends</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="typing.List">List</span>[<span title="typing.Union">Union</span>[<span title="str">str</span>, None]], <span title="str">str</span>, None]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3893,9 +4446,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>n_cols</code></td>
             <td>
-                  <code>int</code>
+                <code>n_cols</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3907,9 +4462,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>mol_size</code></td>
             <td>
-                  <code><span title="typing.Tuple">Tuple</span>[int, int]</code>
+                <code>mol_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Tuple">Tuple</span>[<span title="int">int</span>, <span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3921,9 +4478,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>use_svg</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[bool]</code>
+                <code>use_svg</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="bool">bool</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3935,9 +4494,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>draw_mols_same_scale</code></td>
             <td>
-                  <code>bool</code>
+                <code>draw_mols_same_scale</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3949,9 +4510,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>r_min</code></td>
             <td>
-                  <code>float</code>
+                <code>r_min</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3963,9 +4526,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>r_dist</code></td>
             <td>
-                  <code>float</code>
+                <code>r_dist</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3977,9 +4542,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>relative_bond_width</code></td>
             <td>
-                  <code>float</code>
+                <code>relative_bond_width</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3991,7 +4558,9 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>color_list</code></td>
+            <td>
+                <code>color_list</code>
+            </td>
             <td>
                   <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="datamol.types.DatamolColor">DatamolColor</span>]]</code>
             </td>
@@ -4005,9 +4574,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>line_width</code></td>
             <td>
-                  <code>int</code>
+                <code>line_width</code>
+            </td>
+            <td>
+                  <code><span title="int">int</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4019,9 +4590,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>scale_padding</code></td>
             <td>
-                  <code>float</code>
+                <code>scale_padding</code>
+            </td>
+            <td>
+                  <code><span title="float">float</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4033,9 +4606,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>verbose</code></td>
             <td>
-                  <code>bool</code>
+                <code>verbose</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4047,9 +4622,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_atoms</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>highlight_atoms</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4061,9 +4638,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_bonds</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[int]]]</code>
+                <code>highlight_bonds</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.List">List</span>[<span title="int">int</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4075,9 +4654,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_atom_colors</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, <span title="datamol.types.DatamolColor">DatamolColor</span>]]]</code>
+                <code>highlight_atom_colors</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[<span title="int">int</span>, <span title="datamol.types.DatamolColor">DatamolColor</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4089,9 +4670,11 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>highlight_bond_colors</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[int, <span title="datamol.types.DatamolColor">DatamolColor</span>]]]</code>
+                <code>highlight_bond_colors</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="typing.List">List</span>[<span title="typing.Dict">Dict</span>[<span title="int">int</span>, <span title="datamol.types.DatamolColor">DatamolColor</span>]]]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -4103,7 +4686,9 @@ Substructure matching is optional and it's also possible to pass a list of list 
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>**kwargs</code></td>
+            <td>
+                <code>**kwargs</code>
+            </td>
             <td>
                   <code><span title="typing.Any">Any</span></code>
             </td>
@@ -4121,7 +4706,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/viz/_lasso_highlight.py</code></summary>
               <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">387</span>
 <span class="normal">388</span>
@@ -4382,7 +4968,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="normal">643</span>
 <span class="normal">644</span>
 <span class="normal">645</span>
-<span class="normal">646</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">lasso_highlight_image</span><span class="p">(</span>
+<span class="normal">646</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">lasso_highlight_image</span><span class="p">(</span>
     <span class="n">target_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]],</span>
     <span class="n">search_molecules</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="n">atom_indices</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span> <span class="n">List</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="nb">int</span><span class="p">]]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -4404,8 +4990,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="n">highlight_bond_colors</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">List</span><span class="p">[</span><span class="n">Dict</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="n">DatamolColor</span><span class="p">]]]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
     <span class="o">**</span><span class="n">kwargs</span><span class="p">:</span> <span class="n">Any</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create an image of a list of molecules with substructure matches using lasso-based highlighting.</span>
-<span class="sd">    Substructure matching is optional and it&#39;s also possible to pass a list of list of atom indices to highlight.</span>
+<span class="w">    </span><span class="sd">"""Create an image of a list of molecules with substructure matches using lasso-based highlighting.</span>
+<span class="sd">    Substructure matching is optional and it's also possible to pass a list of list of atom indices to highlight.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        target_molecules:  One or a list of molecules to be highlighted.</span>
@@ -4418,19 +5004,19 @@ documentation related to <code>MolDrawOptions</code> for more details at
 <span class="sd">        draw_mols_same_scale: Whether to draw all the molecules on the same scale. This has the same effect as the `drawMolsSameScale` of the drawing options (which cannot be applied).</span>
 <span class="sd">        r_min: Radius of the smallest circle around atoms. Length is relative to average bond length (1 = avg. bond len).</span>
 <span class="sd">        r_dist: Incremental increase of radius for the next substructure.</span>
-<span class="sd">        relative_bond_width: Distance of line to &quot;bond&quot; (line segment between the two atoms). Size is relative to `atom_radius`.</span>
+<span class="sd">        relative_bond_width: Distance of line to "bond" (line segment between the two atoms). Size is relative to `atom_radius`.</span>
 <span class="sd">        color_list: List of tuples with RGBA or RGB values specifying the color of the highlighting.</span>
 <span class="sd">        line_width: width of drawn lines.</span>
 <span class="sd">        scale_padding: Padding around the molecule when drawing to scale.</span>
 <span class="sd">        verbose: Whether to print the verbose information.</span>
-<span class="sd">        highlight_atoms: The atoms to highlight, a list for each molecule. It&#39;s the `highlightAtoms` argument of the RDKit drawer object.</span>
-<span class="sd">        highlight_bonds: The bonds to highlight, a list for each molecule. It&#39;s the `highlightBonds` argument of the RDKit drawer object.</span>
+<span class="sd">        highlight_atoms: The atoms to highlight, a list for each molecule. It's the `highlightAtoms` argument of the RDKit drawer object.</span>
+<span class="sd">        highlight_bonds: The bonds to highlight, a list for each molecule. It's the `highlightBonds` argument of the RDKit drawer object.</span>
 <span class="sd">        highlight_atom_colors: The colors to use for highlighting atoms, a list of dict mapping atom index to color for each molecule.</span>
 <span class="sd">        highlight_bond_colors: The colors to use for highlighting bonds, a list of dict mapping bond index to color for each molecule.</span>
 <span class="sd">        **kwargs: Additional arguments to pass to the drawing function. See RDKit</span>
 <span class="sd">            documentation related to `MolDrawOptions` for more details at</span>
 <span class="sd">            https://www.rdkit.org/docs/source/rdkit.Chem.Draw.rdMolDraw2D.html.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="c1">## Step 0: Input validation</span>
 
@@ -4449,7 +5035,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
 
         <span class="k">if</span> <span class="n">search_molecules</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">search_molecules</span><span class="p">[</span><span class="n">i</span><span class="p">],</span> <span class="n">dm</span><span class="o">.</span><span class="n">Mol</span><span class="p">):</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;Please enter valid search molecules or smarts: </span><span class="si">{</span><span class="n">search_molecules</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span>
+                <span class="sa">f</span><span class="s2">"Please enter valid search molecules or smarts: </span><span class="si">{</span><span class="n">search_molecules</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span>
             <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_molecules</span><span class="p">,</span> <span class="p">(</span><span class="nb">list</span><span class="p">,</span> <span class="nb">tuple</span><span class="p">)):</span>
@@ -4464,7 +5050,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="n">n_rows</span> <span class="o">+=</span> <span class="mi">1</span>
 
     <span class="k">if</span> <span class="n">legends</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-        <span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_molecules</span><span class="p">)</span>
+        <span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="s2">""</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_molecules</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">legends</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
         <span class="n">legends</span> <span class="o">=</span> <span class="p">[</span><span class="n">legends</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">target_molecules</span><span class="p">)</span>
 
@@ -4508,7 +5094,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="k">for</span> <span class="n">mol_idx</span><span class="p">,</span> <span class="n">target_molecule</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">target_molecules</span><span class="p">):</span>
         <span class="c1"># check if the input is valid</span>
         <span class="k">if</span> <span class="n">target_molecule</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Please enter a valid target molecule or smiles&quot;</span><span class="p">)</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"Please enter a valid target molecule or smiles"</span><span class="p">)</span>
 
         <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
             <span class="n">target_molecule</span> <span class="o">=</span> <span class="n">dm</span><span class="o">.</span><span class="n">to_mol</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">)</span>
@@ -4525,7 +5111,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
                 <span class="n">atom_idx_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">matched_atoms</span><span class="p">)</span>
                 <span class="n">target_color_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">color_idx</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">color_list</span><span class="p">))</span>
             <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span>
-                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;No matching substructures found for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">search_mol</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="sa">f</span><span class="s2">"No matching substructures found for </span><span class="si">{</span><span class="n">dm</span><span class="o">.</span><span class="n">to_smarts</span><span class="p">(</span><span class="n">search_mol</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
         <span class="c1">## Add the atom indices to the list if any</span>
         <span class="k">if</span> <span class="n">atom_indices</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
@@ -4542,7 +5128,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="n">mol</span> <span class="o">=</span> <span class="n">prepare_mol_for_drawing</span><span class="p">(</span><span class="n">target_molecule</span><span class="p">,</span> <span class="n">kekulize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
         <span class="k">if</span> <span class="n">mol</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-                <span class="sa">f</span><span class="s2">&quot;A molecule </span><span class="si">{</span><span class="n">mol_idx</span><span class="si">}</span><span class="s2"> has failed to be prepared by `prepare_mol_for_drawing`.&quot;</span>
+                <span class="sa">f</span><span class="s2">"A molecule </span><span class="si">{</span><span class="n">mol_idx</span><span class="si">}</span><span class="s2"> has failed to be prepared by `prepare_mol_for_drawing`."</span>
             <span class="p">)</span>
 
         <span class="n">conf</span> <span class="o">=</span> <span class="n">mol</span><span class="o">.</span><span class="n">GetConformer</span><span class="p">()</span>
@@ -4553,8 +5139,8 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="n">max_scale_val</span><span class="o">.</span><span class="n">y</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">max_scale_val</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="nb">max</span><span class="p">(</span><span class="n">coordinates</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">]))</span>
         <span class="n">mols_to_draw</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">mol</span><span class="p">)</span>
 
-    <span class="c1"># Setting up the coordinate system by drawing the molecules as a grid</span>
-    <span class="c1"># EN: the following is edge-case free after trying 6 different logics, but may break if RDKit changes the way it draws molecules</span>
+    <span class="c1"># Use RDKit's grid drawing coordinates as the reference frame for highlights.</span>
+    <span class="c1"># This depends on RDKit's drawing-coordinate convention.</span>
     <span class="n">scaling_val</span> <span class="o">=</span> <span class="n">Point2D</span><span class="p">(</span><span class="n">scale_padding</span><span class="p">,</span> <span class="n">scale_padding</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">highlight_atoms</span><span class="p">,</span> <span class="nb">list</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">highlight_atoms</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="nb">int</span><span class="p">):</span>
@@ -4576,10 +5162,10 @@ documentation related to <code>MolDrawOptions</code> for more details at
             <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">to_rdkit_color</span><span class="p">(</span><span class="n">v</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">_</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="n">highlight_bond_colors</span>
         <span class="p">]</span>
 
-    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_atoms</span>
-    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBonds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_bonds</span>
-    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtomColors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_atom_colors</span>
-    <span class="n">kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBondColors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_bond_colors</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"highlightAtoms"</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_atoms</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"highlightBonds"</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_bonds</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"highlightAtomColors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_atom_colors</span>
+    <span class="n">kwargs</span><span class="p">[</span><span class="s2">"highlightBondColors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">highlight_bond_colors</span>
 
     <span class="k">try</span><span class="p">:</span>
         <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecules</span><span class="p">(</span>
@@ -4590,7 +5176,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
     <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
         <span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="s2">&quot;Failed to draw molecules. Some arguments neither match expected MolDrawOptions, nor DrawMolecule inputs. Please check the input arguments.&quot;</span>
+            <span class="s2">"Failed to draw molecules. Some arguments neither match expected MolDrawOptions, nor DrawMolecule inputs. Please check the input arguments."</span>
         <span class="p">)</span>
     <span class="n">drawer</span><span class="o">.</span><span class="n">ClearDrawing</span><span class="p">()</span>
     <span class="k">if</span> <span class="n">draw_mols_same_scale</span><span class="p">:</span>
@@ -4604,14 +5190,14 @@ documentation related to <code>MolDrawOptions</code> for more details at
         <span class="n">offset_y</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">h_pos</span> <span class="o">*</span> <span class="n">mol_size</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
 
         <span class="n">ind_kwargs</span> <span class="o">=</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtoms&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtoms&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtoms&quot;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtomColors&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtomColors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightAtomColors&quot;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBonds&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBonds&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBonds&quot;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBondColors&quot;</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
-            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBondColors&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">&quot;highlightBondColors&quot;</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtoms"</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtoms"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtoms"</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtomColors"</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtomColors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightAtomColors"</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBonds"</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBonds"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBonds"</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBondColors"</span><span class="p">],</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBondColors"</span><span class="p">]</span> <span class="o">=</span> <span class="n">ind_kwargs</span><span class="p">[</span><span class="s2">"highlightBondColors"</span><span class="p">][</span><span class="n">ind</span><span class="p">]</span>
         <span class="n">drawer</span><span class="o">.</span><span class="n">SetOffset</span><span class="p">(</span><span class="n">offset_x</span><span class="p">,</span> <span class="n">offset_y</span><span class="p">)</span>
         <span class="n">drawer</span><span class="o">.</span><span class="n">DrawMolecule</span><span class="p">(</span><span class="n">mol</span><span class="p">,</span> <span class="n">legend</span><span class="o">=</span><span class="n">legends</span><span class="p">[</span><span class="n">ind</span><span class="p">],</span> <span class="o">**</span><span class="n">ind_kwargs</span><span class="p">)</span>
         <span class="n">offset</span> <span class="o">=</span> <span class="kc">None</span>
@@ -4637,7 +5223,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
                 <span class="n">offset</span><span class="o">=</span><span class="n">offset</span><span class="p">,</span>
             <span class="p">)</span>
         <span class="k">elif</span> <span class="n">verbose</span><span class="p">:</span>
-            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">&quot;No matches found for the given search molecules&quot;</span><span class="p">)</span>
+            <span class="n">logger</span><span class="o">.</span><span class="n">warning</span><span class="p">(</span><span class="s2">"No matches found for the given search molecules"</span><span class="p">)</span>
 
     <span class="n">drawer</span><span class="o">.</span><span class="n">FinishDrawing</span><span class="p">()</span>
     <span class="c1"># NOTE(hadim): process the drawer object to return the image type matching the same behavior as RDkit and `datamol.to_image()`</span>
@@ -4676,7 +5262,7 @@ documentation related to <code>MolDrawOptions</code> for more details at
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2020 - 2023 datamol.io
+      Copyright 2020 - 2026 datamol.io
     </div>
   
   
@@ -4697,10 +5283,13 @@ documentation related to <code>MolDrawOptions</code> for more details at
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       

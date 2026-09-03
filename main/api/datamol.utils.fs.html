@@ -10,6 +10,8 @@
       
       
       
+        <link rel="canonical" href="https://docs.datamol.io/main/api/datamol.utils.fs.html">
+      
       
         <link rel="prev" href="datamol.utils.html">
       
@@ -17,8 +19,11 @@
         <link rel="next" href="datamol.viz.html">
       
       
+        
+      
+      
       <link rel="icon" href="../images/logo-black.png">
-      <meta name="generator" content="mkdocs-1.5.3, mkdocs-material-9.5.20">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
     
     
       
@@ -26,7 +31,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/main.66ac8b77.min.css">
+      <link rel="stylesheet" href="../assets/stylesheets/main.ec1eaa64.min.css">
       
       
 
@@ -53,11 +58,10 @@
     
       <link rel="stylesheet" href="../assets/css/tweak-width.css">
     
-    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce((e,_)=>(e<<5)-e+_.charCodeAt(0),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
 
-    
     
     
   </head>
@@ -97,7 +101,7 @@
     </a>
     <label class="md-header__button md-icon" for="__drawer">
       
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2Z"/></svg>
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
     </label>
     <div class="md-header__title" data-md-component="header-title">
       <div class="md-header__ellipsis">
@@ -117,36 +121,38 @@
     </div>
     
     
-      <script>var media,input,key,value,palette=__md_get("__palette");if(palette&&palette.color){"(prefers-color-scheme)"===palette.color.media&&(media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']"),palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent"));for([key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
     
     
     
-      <label class="md-header__button md-icon" for="__search">
-        
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
-      </label>
-      <div class="md-search" data-md-component="search" role="dialog">
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
   <label class="md-search__overlay" for="__search"></label>
   <div class="md-search__inner" role="search">
     <form class="md-search__form" name="search">
       <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
       <label class="md-search__icon md-icon" for="__search">
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
         
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12Z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
       </label>
       <nav class="md-search__options" aria-label="Search">
         
         <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
           
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41Z"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
         </button>
       </nav>
       
     </form>
     <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
         <div class="md-search-result" data-md-component="search-result">
           <div class="md-search-result__meta">
             Initializing search
@@ -157,13 +163,14 @@
     </div>
   </div>
 </div>
+      
     
     
       <div class="md-header__source">
         <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -189,9 +196,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../index.html" class="md-tabs__link">
         
+  
   
     
   
@@ -206,9 +215,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../usage.html" class="md-tabs__link">
         
+  
   
     
   
@@ -223,11 +234,13 @@
   
   
   
+  
     
     
       <li class="md-tabs__item">
         <a href="../tutorials/The_Basics.html" class="md-tabs__link">
           
+  
   
   Tutorials
 
@@ -240,6 +253,7 @@
         
   
   
+  
     
   
   
@@ -248,6 +262,7 @@
       <li class="md-tabs__item md-tabs__item--active">
         <a href="datamol.align.html" class="md-tabs__link">
           
+  
   
   API
 
@@ -261,9 +276,11 @@
   
   
   
+  
     <li class="md-tabs__item">
       <a href="../contribute.html" class="md-tabs__link">
         
+  
   
     
   
@@ -278,9 +295,49 @@
   
   
   
+  
+    <li class="md-tabs__item">
+      <a href="../migration.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Migrating to 1.x
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../releasing.html" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Releasing
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
     <li class="md-tabs__item">
       <a href="../license.html" class="md-tabs__link">
         
+  
   
     
   
@@ -325,7 +382,7 @@
       <a href="https://github.com/datamol-io/datamol" title="Go to repository" class="md-source" data-md-component="source">
   <div class="md-source__icon md-icon">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2024 Fonticons, Inc.--><path d="M439.55 236.05 244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
   </div>
   <div class="md-source__repository">
     datamol-io/datamol
@@ -345,9 +402,16 @@
       <a href="../index.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Overview
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -365,9 +429,16 @@
       <a href="../usage.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Usage
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -381,6 +452,7 @@
   
   
   
+    
     
     
     
@@ -400,9 +472,16 @@
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     Tutorials
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -411,7 +490,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
-            Tutorials
+            
+  
+    Tutorials
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -425,9 +508,16 @@
       <a href="../tutorials/The_Basics.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     The Basics
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -446,9 +536,16 @@
       <a href="../tutorials/Preprocessing.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Pre-Processing Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -467,9 +564,16 @@
       <a href="../tutorials/Descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -488,9 +592,16 @@
       <a href="../tutorials/Reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Chemical Reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -509,9 +620,16 @@
       <a href="../tutorials/Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generate Scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -530,9 +648,16 @@
       <a href="../tutorials/Aligning.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Aligning Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -551,9 +676,16 @@
       <a href="../tutorials/Fuzzy_Scaffolds.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fuzzy Scaffolds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -572,9 +704,16 @@
       <a href="../tutorials/Clustering.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Clustering Molecules
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -593,9 +732,16 @@
       <a href="../tutorials/Fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Fragmenting Compounds
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -614,9 +760,16 @@
       <a href="../tutorials/Conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Generating Conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -635,9 +788,16 @@
       <a href="../tutorials/Visualization.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Visualization
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -656,9 +816,16 @@
       <a href="../tutorials/Filesystem.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Datamol Filesystem Module
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -685,6 +852,7 @@
     
     
     
+    
       
         
         
@@ -702,9 +870,16 @@
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="">
             
   
+  
   <span class="md-ellipsis">
+    
+  
     API
+  
+
+    
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -713,7 +888,11 @@
         <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
-            API
+            
+  
+    API
+  
+
           </label>
           <ul class="md-nav__list" data-md-scrollfix>
             
@@ -727,9 +906,16 @@
       <a href="datamol.align.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.align
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -748,9 +934,16 @@
       <a href="datamol.cluster.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.cluster
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -769,9 +962,16 @@
       <a href="datamol.conformers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.conformers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -790,9 +990,16 @@
       <a href="datamol.convert.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.convert
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -811,9 +1018,16 @@
       <a href="datamol.data.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.data
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -832,9 +1046,16 @@
       <a href="datamol.descriptors.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.descriptors
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -853,9 +1074,16 @@
       <a href="datamol.fp.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fp
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -874,9 +1102,16 @@
       <a href="datamol.fragment.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.fragment
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -895,9 +1130,16 @@
       <a href="datamol.graph.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.graph
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -916,9 +1158,16 @@
       <a href="datamol.io.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.io
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -937,9 +1186,16 @@
       <a href="datamol.isomers.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.isomers
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -958,9 +1214,16 @@
       <a href="datamol.log.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.log
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -979,9 +1242,16 @@
       <a href="datamol.molar.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.molar
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1000,9 +1270,16 @@
       <a href="datamol.mol.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.mol
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1021,9 +1298,16 @@
       <a href="datamol.reactions.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.reactions
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1042,9 +1326,16 @@
       <a href="datamol.scaffold.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.scaffold
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1063,9 +1354,16 @@
       <a href="datamol.similarity.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.similarity
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1084,9 +1382,16 @@
       <a href="datamol.utils.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1114,9 +1419,16 @@
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
           <span class="md-nav__icon md-icon"></span>
@@ -1125,9 +1437,16 @@
       <a href="datamol.utils.fs.html" class="md-nav__link md-nav__link--active">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.utils.fs
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1150,7 +1469,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs" class="md-nav__link">
     <span class="md-ellipsis">
-      fs
+      
+        fs
+      
     </span>
   </a>
   
@@ -1159,7 +1480,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.copy_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      copy_dir
+      
+        copy_dir
+      
     </span>
   </a>
   
@@ -1168,7 +1491,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.copy_file" class="md-nav__link">
     <span class="md-ellipsis">
-      copy_file
+      
+        copy_file
+      
     </span>
   </a>
   
@@ -1177,7 +1502,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.exists" class="md-nav__link">
     <span class="md-ellipsis">
-      exists
+      
+        exists
+      
     </span>
   </a>
   
@@ -1186,7 +1513,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_basename" class="md-nav__link">
     <span class="md-ellipsis">
-      get_basename
+      
+        get_basename
+      
     </span>
   </a>
   
@@ -1195,7 +1524,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_cache_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      get_cache_dir
+      
+        get_cache_dir
+      
     </span>
   </a>
   
@@ -1204,7 +1535,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_extension" class="md-nav__link">
     <span class="md-ellipsis">
-      get_extension
+      
+        get_extension
+      
     </span>
   </a>
   
@@ -1213,7 +1546,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_mapper" class="md-nav__link">
     <span class="md-ellipsis">
-      get_mapper
+      
+        get_mapper
+      
     </span>
   </a>
   
@@ -1222,7 +1557,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_protocol" class="md-nav__link">
     <span class="md-ellipsis">
-      get_protocol
+      
+        get_protocol
+      
     </span>
   </a>
   
@@ -1231,7 +1568,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_size" class="md-nav__link">
     <span class="md-ellipsis">
-      get_size
+      
+        get_size
+      
     </span>
   </a>
   
@@ -1240,7 +1579,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.glob" class="md-nav__link">
     <span class="md-ellipsis">
-      glob
+      
+        glob
+      
     </span>
   </a>
   
@@ -1249,7 +1590,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      is_dir
+      
+        is_dir
+      
     </span>
   </a>
   
@@ -1258,7 +1601,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_file" class="md-nav__link">
     <span class="md-ellipsis">
-      is_file
+      
+        is_file
+      
     </span>
   </a>
   
@@ -1267,7 +1612,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_local_path" class="md-nav__link">
     <span class="md-ellipsis">
-      is_local_path
+      
+        is_local_path
+      
     </span>
   </a>
   
@@ -1276,7 +1623,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.join" class="md-nav__link">
     <span class="md-ellipsis">
-      join
+      
+        join
+      
     </span>
   </a>
   
@@ -1285,7 +1634,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.md5" class="md-nav__link">
     <span class="md-ellipsis">
-      md5
+      
+        md5
+      
     </span>
   </a>
   
@@ -1294,7 +1645,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.mkdir" class="md-nav__link">
     <span class="md-ellipsis">
-      mkdir
+      
+        mkdir
+      
     </span>
   </a>
   
@@ -1319,9 +1672,16 @@
       <a href="datamol.viz.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     datamol.viz
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1347,9 +1707,70 @@
       <a href="../contribute.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     Contribute
+  
+
+    
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../migration.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Migrating to 1.x
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../releasing.html" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Releasing
+  
+
+    
+  </span>
+  
   
 
       </a>
@@ -1367,9 +1788,16 @@
       <a href="../license.html" class="md-nav__link">
         
   
+  
   <span class="md-ellipsis">
+    
+  
     License
+  
+
+    
   </span>
+  
   
 
       </a>
@@ -1406,7 +1834,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs" class="md-nav__link">
     <span class="md-ellipsis">
-      fs
+      
+        fs
+      
     </span>
   </a>
   
@@ -1415,7 +1845,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.copy_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      copy_dir
+      
+        copy_dir
+      
     </span>
   </a>
   
@@ -1424,7 +1856,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.copy_file" class="md-nav__link">
     <span class="md-ellipsis">
-      copy_file
+      
+        copy_file
+      
     </span>
   </a>
   
@@ -1433,7 +1867,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.exists" class="md-nav__link">
     <span class="md-ellipsis">
-      exists
+      
+        exists
+      
     </span>
   </a>
   
@@ -1442,7 +1878,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_basename" class="md-nav__link">
     <span class="md-ellipsis">
-      get_basename
+      
+        get_basename
+      
     </span>
   </a>
   
@@ -1451,7 +1889,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_cache_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      get_cache_dir
+      
+        get_cache_dir
+      
     </span>
   </a>
   
@@ -1460,7 +1900,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_extension" class="md-nav__link">
     <span class="md-ellipsis">
-      get_extension
+      
+        get_extension
+      
     </span>
   </a>
   
@@ -1469,7 +1911,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_mapper" class="md-nav__link">
     <span class="md-ellipsis">
-      get_mapper
+      
+        get_mapper
+      
     </span>
   </a>
   
@@ -1478,7 +1922,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_protocol" class="md-nav__link">
     <span class="md-ellipsis">
-      get_protocol
+      
+        get_protocol
+      
     </span>
   </a>
   
@@ -1487,7 +1933,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.get_size" class="md-nav__link">
     <span class="md-ellipsis">
-      get_size
+      
+        get_size
+      
     </span>
   </a>
   
@@ -1496,7 +1944,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.glob" class="md-nav__link">
     <span class="md-ellipsis">
-      glob
+      
+        glob
+      
     </span>
   </a>
   
@@ -1505,7 +1955,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_dir" class="md-nav__link">
     <span class="md-ellipsis">
-      is_dir
+      
+        is_dir
+      
     </span>
   </a>
   
@@ -1514,7 +1966,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_file" class="md-nav__link">
     <span class="md-ellipsis">
-      is_file
+      
+        is_file
+      
     </span>
   </a>
   
@@ -1523,7 +1977,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.is_local_path" class="md-nav__link">
     <span class="md-ellipsis">
-      is_local_path
+      
+        is_local_path
+      
     </span>
   </a>
   
@@ -1532,7 +1988,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.join" class="md-nav__link">
     <span class="md-ellipsis">
-      join
+      
+        join
+      
     </span>
   </a>
   
@@ -1541,7 +1999,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.md5" class="md-nav__link">
     <span class="md-ellipsis">
-      md5
+      
+        md5
+      
     </span>
   </a>
   
@@ -1550,7 +2010,9 @@
         <li class="md-nav__item">
   <a href="#datamol.utils.fs.mkdir" class="md-nav__link">
     <span class="md-ellipsis">
-      mkdir
+      
+        mkdir
+      
     </span>
   </a>
   
@@ -1566,9 +2028,11 @@
           
           
             <div class="md-content" data-md-component="content">
+              
               <article class="md-content__inner md-typeset">
                 
                   
+
 
   
   
@@ -1584,11 +2048,19 @@
 <a id="datamol.utils.fs"></a>
     <div class="doc doc-contents first">
 
-      <p>The <code>fs</code> module makes it easier to work with all type of path (the ones supported by <code>fsspec</code>).</p>
+        <p>The <code>fs</code> module makes it easier to work with all type of path (the ones supported by <code>fsspec</code>).</p>
 
 
 
-  <div class="doc doc-children">
+
+
+
+
+
+
+
+<div class="doc doc-children">
+
 
 
 
@@ -1609,7 +2081,7 @@
 
     <div class="doc doc-contents ">
 
-      <p>Copy one directory to another location across different filesystem (local, S3, GCS, etc).</p>
+        <p>Copy one directory to another location across different filesystem (local, S3, GCS, etc).</p>
 <p>Note that if both FS from source and destination are the same, progress won't be shown.</p>
 
 
@@ -1625,9 +2097,11 @@
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>source</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="pathlib.Path">Path</span>]</code>
+                <code>source</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1639,9 +2113,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>destination</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="pathlib.Path">Path</span>]</code>
+                <code>destination</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1653,9 +2129,11 @@
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>chunk_size</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>chunk_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1668,9 +2146,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>force</code></td>
             <td>
-                  <code>bool</code>
+                <code>force</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1682,9 +2162,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1696,9 +2178,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>leave_progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>leave_progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1710,9 +2194,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>file_progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>file_progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1724,9 +2210,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>file_leave_progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>file_leave_progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1738,9 +2226,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>chunk_size</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>chunk_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1754,9 +2244,11 @@ size is <code>None</code>, it is set to 2048.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">324</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">323</span>
+<span class="normal">324</span>
 <span class="normal">325</span>
 <span class="normal">326</span>
 <span class="normal">327</span>
@@ -1844,7 +2336,33 @@ size is <code>None</code>, it is set to 2048.</p>
 <span class="normal">409</span>
 <span class="normal">410</span>
 <span class="normal">411</span>
-<span class="normal">412</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copy_dir</span><span class="p">(</span>
+<span class="normal">412</span>
+<span class="normal">413</span>
+<span class="normal">414</span>
+<span class="normal">415</span>
+<span class="normal">416</span>
+<span class="normal">417</span>
+<span class="normal">418</span>
+<span class="normal">419</span>
+<span class="normal">420</span>
+<span class="normal">421</span>
+<span class="normal">422</span>
+<span class="normal">423</span>
+<span class="normal">424</span>
+<span class="normal">425</span>
+<span class="normal">426</span>
+<span class="normal">427</span>
+<span class="normal">428</span>
+<span class="normal">429</span>
+<span class="normal">430</span>
+<span class="normal">431</span>
+<span class="normal">432</span>
+<span class="normal">433</span>
+<span class="normal">434</span>
+<span class="normal">435</span>
+<span class="normal">436</span>
+<span class="normal">437</span>
+<span class="normal">438</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">copy_dir</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">],</span>
     <span class="n">force</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
@@ -1854,9 +2372,9 @@ size is <code>None</code>, it is set to 2048.</p>
     <span class="n">file_leave_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy one directory to another location across different filesystem (local, S3, GCS, etc).</span>
+<span class="w">    </span><span class="sd">"""Copy one directory to another location across different filesystem (local, S3, GCS, etc).</span>
 
-<span class="sd">    Note that if both FS from source and destination are the same, progress won&#39;t be shown.</span>
+<span class="sd">    Note that if both FS from source and destination are the same, progress won't be shown.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        source: Path to the source directory.</span>
@@ -1869,7 +2387,7 @@ size is <code>None</code>, it is set to 2048.</p>
 <span class="sd">        file_progress: Whether to display a progress bar for each file.</span>
 <span class="sd">        file_leave_progress: Whether to hide the progress bar once a file copy is done.</span>
 <span class="sd">        chunk_size: See `dm.utils.fs.copy_file`.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">source</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">)</span>
     <span class="n">destination</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">destination</span><span class="p">)</span>
@@ -1880,11 +2398,11 @@ size is <code>None</code>, it is set to 2048.</p>
     <span class="c1"># Sanity check</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">source</span><span class="p">):</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-            <span class="sa">f</span><span class="s2">&quot;The directory being copied does not exist or is not a directory: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&quot;</span>
+            <span class="sa">f</span><span class="s2">"The directory being copied does not exist or is not a directory: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">"</span>
         <span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">destination</span><span class="p">):</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The destination folder to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The destination folder to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="c1"># If both fs are the same then we just rely on the internal `copy` method</span>
     <span class="c1"># which is much faster.</span>
@@ -1898,20 +2416,47 @@ size is <code>None</code>, it is set to 2048.</p>
     <span class="n">detailed_paths</span> <span class="o">=</span> <span class="n">source_fs</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="n">withdirs</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">detail</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">detailed_paths</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">detailed_paths</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
 
+    <span class="c1"># Some listing-based filesystems (notably HTTP auto-indexes) report the</span>
+    <span class="c1"># requested directory itself as a file in addition to its children. Treat</span>
+    <span class="c1"># that entry as a directory marker so that relative output paths are kept</span>
+    <span class="c1"># while avoiding an attempt to copy the listing page as a regular file.</span>
+    <span class="n">source_key</span> <span class="o">=</span> <span class="n">source_fs</span><span class="o">.</span><span class="n">_strip_protocol</span><span class="p">(</span><span class="n">source</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span>
+    <span class="n">has_children</span> <span class="o">=</span> <span class="nb">any</span><span class="p">(</span>
+        <span class="n">source_fs</span><span class="o">.</span><span class="n">_strip_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">source_key</span><span class="si">}</span><span class="s2">/"</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">detailed_paths</span>
+    <span class="p">)</span>
+    <span class="k">if</span> <span class="n">has_children</span><span class="p">:</span>
+        <span class="n">detailed_paths</span> <span class="o">=</span> <span class="p">[</span>
+            <span class="p">(</span>
+                <span class="p">{</span>
+                    <span class="o">**</span><span class="n">path</span><span class="p">,</span>
+                    <span class="s2">"type"</span><span class="p">:</span> <span class="s2">"directory"</span><span class="p">,</span>
+                <span class="p">}</span>
+                <span class="k">if</span> <span class="p">(</span>
+                    <span class="n">path</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="o">!=</span> <span class="s2">"directory"</span>
+                    <span class="ow">and</span> <span class="n">source_fs</span><span class="o">.</span><span class="n">_strip_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">[</span><span class="s2">"name"</span><span class="p">])</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="o">==</span> <span class="n">source_key</span>
+                <span class="p">)</span>
+                <span class="k">else</span> <span class="n">path</span>
+            <span class="p">)</span>
+            <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">detailed_paths</span>
+        <span class="p">]</span>
+
     <span class="c1"># Get list of input types</span>
-    <span class="n">input_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">detailed_paths</span><span class="p">]</span>
+    <span class="n">input_types</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">"type"</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">detailed_paths</span><span class="p">]</span>
 
     <span class="c1"># Get list of input path + add protocol if needed</span>
-    <span class="n">input_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">detailed_paths</span><span class="p">]</span>
+    <span class="n">input_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">d</span><span class="p">[</span><span class="s2">"name"</span><span class="p">]</span> <span class="k">for</span> <span class="n">d</span> <span class="ow">in</span> <span class="n">detailed_paths</span><span class="p">]</span>
     <span class="n">input_paths</span> <span class="o">=</span> <span class="p">[</span><span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">_unstrip_protocol</span><span class="p">(</span><span class="n">p</span><span class="p">,</span> <span class="n">source_fs</span><span class="p">)</span> <span class="k">for</span> <span class="n">p</span> <span class="ow">in</span> <span class="n">input_paths</span><span class="p">]</span>
 
     <span class="c1"># Build all the output paths</span>
     <span class="n">output_paths</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">other_paths</span><span class="p">(</span><span class="n">input_paths</span><span class="p">,</span> <span class="n">destination</span><span class="p">)</span>  <span class="c1"># type: ignore</span>
 
-    <span class="k">def</span> <span class="nf">_copy_source_to_destination</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
+    <span class="k">def</span><span class="w"> </span><span class="nf">_copy_source_to_destination</span><span class="p">(</span><span class="n">input_path</span><span class="p">,</span> <span class="n">input_type</span><span class="p">,</span> <span class="n">output_path</span><span class="p">):</span>
         <span class="c1"># A directory</span>
-        <span class="k">if</span> <span class="n">input_type</span> <span class="o">==</span> <span class="s2">&quot;directory&quot;</span><span class="p">:</span>
-            <span class="n">destination_fs</span><span class="o">.</span><span class="n">mkdir</span><span class="p">(</span><span class="n">output_path</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">input_type</span> <span class="o">==</span> <span class="s2">"directory"</span><span class="p">:</span>
+            <span class="c1"># File copies may create their parent concurrently with directory</span>
+            <span class="c1"># entries, so directory creation must be idempotent.</span>
+            <span class="n">destination_fs</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">output_path</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
         <span class="c1"># A file</span>
         <span class="k">else</span><span class="p">:</span>
@@ -1928,10 +2473,10 @@ size is <code>None</code>, it is set to 2048.</p>
     <span class="n">parallelized</span><span class="p">(</span>
         <span class="n">_copy_source_to_destination</span><span class="p">,</span>
         <span class="n">inputs_list</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">input_paths</span><span class="p">,</span> <span class="n">input_types</span><span class="p">,</span> <span class="n">output_paths</span><span class="p">)),</span>
-        <span class="n">arg_type</span><span class="o">=</span><span class="s2">&quot;args&quot;</span><span class="p">,</span>
+        <span class="n">arg_type</span><span class="o">=</span><span class="s2">"args"</span><span class="p">,</span>
         <span class="n">progress</span><span class="o">=</span><span class="n">progress</span><span class="p">,</span>
         <span class="n">tqdm_kwargs</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">leave</span><span class="o">=</span><span class="n">leave_progress</span><span class="p">),</span>
-        <span class="n">scheduler</span><span class="o">=</span><span class="s2">&quot;threads&quot;</span><span class="p">,</span>
+        <span class="n">scheduler</span><span class="o">=</span><span class="s2">"threads"</span><span class="p">,</span>
     <span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -1950,7 +2495,7 @@ size is <code>None</code>, it is set to 2048.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Copy one file to another location across different filesystem (local, S3, GCS, etc).</p>
+        <p>Copy one file to another location across different filesystem (local, S3, GCS, etc).</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -1965,9 +2510,11 @@ size is <code>None</code>, it is set to 2048.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>source</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="pathlib.Path">Path</span>, <span title="io.IOBase">IOBase</span>, <span title="fsspec.core.OpenFile">OpenFile</span>]</code>
+                <code>source</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>, <span title="io.IOBase">IOBase</span>, <span title="fsspec.core.OpenFile">OpenFile</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1979,9 +2526,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>destination</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="pathlib.Path">Path</span>, <span title="io.IOBase">IOBase</span>, <span title="fsspec.core.OpenFile">OpenFile</span>]</code>
+                <code>destination</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="pathlib.Path">Path</span>, <span title="io.IOBase">IOBase</span>, <span title="fsspec.core.OpenFile">OpenFile</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -1993,9 +2542,11 @@ size is <code>None</code>, it is set to 2048.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>chunk_size</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[int]</code>
+                <code>chunk_size</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="int">int</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2008,9 +2559,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>force</code></td>
             <td>
-                  <code>bool</code>
+                <code>force</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2022,9 +2575,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2036,9 +2591,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>leave_progress</code></td>
             <td>
-                  <code>bool</code>
+                <code>leave_progress</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2052,9 +2609,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">189</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">188</span>
+<span class="normal">189</span>
 <span class="normal">190</span>
 <span class="normal">191</span>
 <span class="normal">192</span>
@@ -2146,8 +2705,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 <span class="normal">278</span>
 <span class="normal">279</span>
 <span class="normal">280</span>
-<span class="normal">281</span>
-<span class="normal">282</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">copy_file</span><span class="p">(</span>
+<span class="normal">281</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">copy_file</span><span class="p">(</span>
     <span class="n">source</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
     <span class="n">destination</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">],</span>
     <span class="n">chunk_size</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
@@ -2155,7 +2713,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
     <span class="n">progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
     <span class="n">leave_progress</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Copy one file to another location across different filesystem (local, S3, GCS, etc).</span>
+<span class="w">    </span><span class="sd">"""Copy one file to another location across different filesystem (local, S3, GCS, etc).</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        source: path or file-like object to copy from.</span>
@@ -2165,35 +2723,35 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 <span class="sd">        force: whether to overwrite the destination file if it exists.</span>
 <span class="sd">        progress: whether to display a progress bar.</span>
 <span class="sd">        leave_progress: whether to hide the progress bar once the copy is done.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="n">progress</span> <span class="ow">and</span> <span class="n">chunk_size</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">chunk_size</span> <span class="o">=</span> <span class="mi">1024</span> <span class="o">*</span> <span class="mi">1024</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
-        <span class="n">source_file</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="s2">&quot;rb&quot;</span><span class="p">)</span>
+        <span class="n">source_file</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">source</span><span class="p">),</span> <span class="s2">"rb"</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">source_file</span> <span class="o">=</span> <span class="n">source</span>
 
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">destination</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="c1"># adapt the file mode of the destination depending on the source file.</span>
-        <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">&quot;wb&quot;</span>
-        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">):</span>
-            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">&quot;wb&quot;</span> <span class="k">if</span> <span class="s2">&quot;b&quot;</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="s2">&quot;mode&quot;</span><span class="p">)</span> <span class="k">else</span> <span class="s2">&quot;w&quot;</span>
+        <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">"wb"</span>
+        <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="s2">"mode"</span><span class="p">):</span>
+            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">"wb"</span> <span class="k">if</span> <span class="s2">"b"</span> <span class="ow">in</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="s2">"mode"</span><span class="p">)</span> <span class="k">else</span> <span class="s2">"w"</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">BytesIO</span><span class="p">):</span>
-            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">&quot;wb&quot;</span>
+            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">"wb"</span>
         <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">source_file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">StringIO</span><span class="p">):</span>
-            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">&quot;w&quot;</span>
+            <span class="n">destination_mode</span> <span class="o">=</span> <span class="s2">"w"</span>
 
         <span class="n">destination_file</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">destination</span><span class="p">),</span> <span class="n">destination_mode</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="n">destination_file</span> <span class="o">=</span> <span class="n">destination</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">is_file</span><span class="p">(</span><span class="n">source_file</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The file being copied does not exist or is not a file: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The file being copied does not exist or is not a file: </span><span class="si">{</span><span class="n">source</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">force</span> <span class="ow">and</span> <span class="n">is_file</span><span class="p">(</span><span class="n">destination_file</span><span class="p">):</span>  <span class="c1"># type: ignore</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The destination file to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">"The destination file to copy already exists: </span><span class="si">{</span><span class="n">destination</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
 
     <span class="k">with</span> <span class="n">source_file</span> <span class="k">as</span> <span class="n">source_stream</span><span class="p">:</span>
         <span class="k">with</span> <span class="n">destination_file</span> <span class="k">as</span> <span class="n">destination_stream</span><span class="p">:</span>
@@ -2215,8 +2773,8 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 
                     <span class="k">if</span> <span class="n">tqdm</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
                         <span class="k">raise</span> <span class="ne">ImportError</span><span class="p">(</span>
-                            <span class="s2">&quot;If the progress bar is enabled, you must have `tqdm` &quot;</span>
-                            <span class="s2">&quot;installed: `conda install tqdm`.&quot;</span>
+                            <span class="s2">"If the progress bar is enabled, you must have `tqdm` "</span>
+                            <span class="s2">"installed: `conda install tqdm`."</span>
                         <span class="p">)</span>
                     <span class="k">else</span><span class="p">:</span>
                         <span class="c1"># init progress bar</span>
@@ -2224,7 +2782,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
                             <span class="n">total</span><span class="o">=</span><span class="n">source_size</span><span class="p">,</span>
                             <span class="n">leave</span><span class="o">=</span><span class="n">leave_progress</span><span class="p">,</span>
                             <span class="n">disable</span><span class="o">=</span><span class="ow">not</span> <span class="n">progress</span><span class="p">,</span>
-                            <span class="n">unit</span><span class="o">=</span><span class="s2">&quot;B&quot;</span><span class="p">,</span>
+                            <span class="n">unit</span><span class="o">=</span><span class="s2">"B"</span><span class="p">,</span>
                             <span class="n">unit_divisor</span><span class="o">=</span><span class="mi">1024</span><span class="p">,</span>
                             <span class="n">unit_scale</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
                         <span class="p">)</span>
@@ -2258,7 +2816,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 
     <div class="doc doc-contents ">
 
-      <p>Check whether a file or a directory exists.</p>
+        <p>Check whether a file or a directory exists.</p>
 <p>Important: File-like object always exists.</p>
 
 
@@ -2274,9 +2832,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2290,24 +2850,25 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">82</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">81</span>
+<span class="normal">82</span>
 <span class="normal">83</span>
 <span class="normal">84</span>
 <span class="normal">85</span>
 <span class="normal">86</span>
 <span class="normal">87</span>
 <span class="normal">88</span>
-<span class="normal">89</span>
-<span class="normal">90</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a file or a directory exists.</span>
+<span class="normal">89</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">exists</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Check whether a file or a directory exists.</span>
 
 <span class="sd">    Important: File-like object always exists.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">)</span> <span class="ow">or</span> <span class="n">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2326,7 +2887,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 
     <div class="doc doc-contents ">
 
-      <p>Get the basename of a file or a folder.</p>
+        <p>Get the basename of a file or a folder.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2341,9 +2902,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2357,9 +2920,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">60</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">59</span>
+<span class="normal">60</span>
 <span class="normal">61</span>
 <span class="normal">62</span>
 <span class="normal">63</span>
@@ -2367,13 +2932,12 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 <span class="normal">65</span>
 <span class="normal">66</span>
 <span class="normal">67</span>
-<span class="normal">68</span>
-<span class="normal">69</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the basename of a file or a folder.</span>
+<span class="normal">68</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Get the basename of a file or a folder.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="n">mapper</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="n">clean_path</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="n">mapper</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="p">)</span>
@@ -2395,7 +2959,7 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
 
     <div class="doc doc-contents ">
 
-      <p>Get a local cache directory for a given application name.</p>
+        <p>Get a local cache directory for a given application name.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2410,9 +2974,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>app_name</code></td>
             <td>
-                  <code>str</code>
+                <code>app_name</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2424,9 +2990,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>suffix</code></td>
             <td>
-                  <code><span title="typing.Optional">Optional</span>[str]</code>
+                <code>suffix</code>
+            </td>
+            <td>
+                  <code><span title="typing.Optional">Optional</span>[<span title="str">str</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2438,9 +3006,11 @@ size is <code>None</code>, it is set to 1MB (1024 * 1024).</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>create</code></td>
             <td>
-                  <code>bool</code>
+                <code>create</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2455,9 +3025,11 @@ already exist.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">30</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">29</span>
+<span class="normal">30</span>
 <span class="normal">31</span>
 <span class="normal">32</span>
 <span class="normal">33</span>
@@ -2474,16 +3046,15 @@ already exist.</p>
 <span class="normal">44</span>
 <span class="normal">45</span>
 <span class="normal">46</span>
-<span class="normal">47</span>
-<span class="normal">48</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_cache_dir</span><span class="p">(</span><span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get a local cache directory for a given application name.</span>
+<span class="normal">47</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_cache_dir</span><span class="p">(</span><span class="n">app_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">suffix</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span> <span class="n">create</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Get a local cache directory for a given application name.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        app_name: The name of the application.</span>
 <span class="sd">        suffix: A subdirectory appended to the cache dir.</span>
 <span class="sd">        create: Whether to create the directory and its parents if it does not</span>
 <span class="sd">            already exist.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="n">cache_dir</span> <span class="o">=</span> <span class="n">pathlib</span><span class="o">.</span><span class="n">Path</span><span class="p">(</span><span class="n">platformdirs</span><span class="o">.</span><span class="n">user_cache_dir</span><span class="p">(</span><span class="n">appname</span><span class="o">=</span><span class="n">app_name</span><span class="p">))</span>
 
@@ -2511,7 +3082,7 @@ already exist.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Get the extension of a file.</p>
+        <p>Get the extension of a file.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2526,9 +3097,11 @@ already exist.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2542,23 +3115,24 @@ already exist.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">72</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">71</span>
+<span class="normal">72</span>
 <span class="normal">73</span>
 <span class="normal">74</span>
 <span class="normal">75</span>
 <span class="normal">76</span>
 <span class="normal">77</span>
-<span class="normal">78</span>
-<span class="normal">79</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the extension of a file.</span>
+<span class="normal">78</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_extension</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Get the extension of a file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">basename</span> <span class="o">=</span> <span class="n">get_basename</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">basename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="k">return</span> <span class="n">basename</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"."</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -2576,7 +3150,7 @@ already exist.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Get the fsspec mapper.</p>
+        <p>Get the fsspec mapper.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2591,9 +3165,11 @@ already exist.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2607,20 +3183,21 @@ already exist.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">51</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">50</span>
+<span class="normal">51</span>
 <span class="normal">52</span>
 <span class="normal">53</span>
 <span class="normal">54</span>
 <span class="normal">55</span>
-<span class="normal">56</span>
-<span class="normal">57</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the fsspec mapper.</span>
+<span class="normal">56</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Get the fsspec mapper.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">return</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span>
 </code></pre></div></td></tr></table></div>
             </details>
@@ -2639,7 +3216,7 @@ already exist.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Return the name of the path protocol.</p>
+        <p>Return the name of the path protocol.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2654,9 +3231,11 @@ already exist.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2670,9 +3249,11 @@ already exist.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">127</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">126</span>
+<span class="normal">127</span>
 <span class="normal">128</span>
 <span class="normal">129</span>
 <span class="normal">130</span>
@@ -2689,23 +3270,22 @@ already exist.</p>
 <span class="normal">141</span>
 <span class="normal">142</span>
 <span class="normal">143</span>
-<span class="normal">144</span>
-<span class="normal">145</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fsspec</span><span class="o">.</span><span class="n">AbstractFileSystem</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the name of the path protocol.</span>
+<span class="normal">144</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_protocol</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">fs</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">fsspec</span><span class="o">.</span><span class="n">AbstractFileSystem</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Return the name of the path protocol.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
 
     <span class="k">if</span> <span class="n">fs</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
         <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
 
     <span class="n">protocol</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">protocol</span>  <span class="c1"># type: ignore</span>
 
-    <span class="k">if</span> <span class="s2">&quot;s3&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;s3&quot;</span>
-    <span class="k">elif</span> <span class="s2">&quot;gs&quot;</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
-        <span class="k">return</span> <span class="s2">&quot;gs&quot;</span>
+    <span class="k">if</span> <span class="s2">"s3"</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"s3"</span>
+    <span class="k">elif</span> <span class="s2">"gs"</span> <span class="ow">in</span> <span class="n">protocol</span><span class="p">:</span>
+        <span class="k">return</span> <span class="s2">"gs"</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">(</span><span class="nb">tuple</span><span class="p">,</span> <span class="nb">list</span><span class="p">)):</span>
         <span class="k">return</span> <span class="n">protocol</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="k">return</span> <span class="n">protocol</span>
@@ -2726,12 +3306,14 @@ already exist.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Get the size of a file given its path. Return None if the
+        <p>Get the size of a file given its path. Return None if the
 size can't be retrieved.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">167</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">166</span>
+<span class="normal">167</span>
 <span class="normal">168</span>
 <span class="normal">169</span>
 <span class="normal">170</span>
@@ -2749,15 +3331,14 @@ size can't be retrieved.</p>
 <span class="normal">182</span>
 <span class="normal">183</span>
 <span class="normal">184</span>
-<span class="normal">185</span>
-<span class="normal">186</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Get the size of a file given its path. Return None if the</span>
-<span class="sd">    size can&#39;t be retrieved.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="normal">185</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">get_size</span><span class="p">(</span><span class="n">file</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Get the size of a file given its path. Return None if the</span>
+<span class="sd">    size can't be retrieved.</span>
+<span class="sd">    """</span>
 
-    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">):</span>
-        <span class="n">fs_local</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;file&quot;</span><span class="p">)</span>
-        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs_local</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">&quot;name&quot;</span><span class="p">))</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">)</span> <span class="ow">and</span> <span class="nb">hasattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">):</span>
+        <span class="n">fs_local</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">"file"</span><span class="p">)</span>
+        <span class="n">file_size</span> <span class="o">=</span> <span class="n">fs_local</span><span class="o">.</span><span class="n">size</span><span class="p">(</span><span class="nb">getattr</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="s2">"name"</span><span class="p">))</span>
 
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="p">(</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">)):</span>
         <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">file</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
@@ -2787,7 +3368,7 @@ size can't be retrieved.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Find files by glob-matching.</p>
+        <p>Find files by glob-matching.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2802,9 +3383,11 @@ size can't be retrieved.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code>str</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2818,9 +3401,11 @@ size can't be retrieved.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">310</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">309</span>
+<span class="normal">310</span>
 <span class="normal">311</span>
 <span class="normal">312</span>
 <span class="normal">313</span>
@@ -2830,13 +3415,12 @@ size can't be retrieved.</p>
 <span class="normal">317</span>
 <span class="normal">318</span>
 <span class="normal">319</span>
-<span class="normal">320</span>
-<span class="normal">321</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">glob</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">detail</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Find files by glob-matching.</span>
+<span class="normal">320</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">glob</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">detail</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Find files by glob-matching.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: A glob-style path.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="c1"># Get the list of paths</span>
     <span class="n">path</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
@@ -2860,7 +3444,7 @@ size can't be retrieved.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Check whether a file exists.</p>
+        <p>Check whether a file exists.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2875,9 +3459,11 @@ size can't be retrieved.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2891,9 +3477,11 @@ size can't be retrieved.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">110</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">109</span>
+<span class="normal">110</span>
 <span class="normal">111</span>
 <span class="normal">112</span>
 <span class="normal">113</span>
@@ -2906,13 +3494,12 @@ size can't be retrieved.</p>
 <span class="normal">120</span>
 <span class="normal">121</span>
 <span class="normal">122</span>
-<span class="normal">123</span>
-<span class="normal">124</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
+<span class="normal">123</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_dir</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Check whether a file exists.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isdir</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
@@ -2939,7 +3526,7 @@ size can't be retrieved.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Check whether a file exists.</p>
+        <p>Check whether a file exists.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -2954,9 +3541,11 @@ size can't be retrieved.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
+                <code>path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>, <span title="fsspec.core.OpenFile">OpenFile</span>, <span title="io.IOBase">IOBase</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -2970,9 +3559,11 @@ size can't be retrieved.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 93</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"> 92</span>
+<span class="normal"> 93</span>
 <span class="normal"> 94</span>
 <span class="normal"> 95</span>
 <span class="normal"> 96</span>
@@ -2985,13 +3576,12 @@ size can't be retrieved.</p>
 <span class="normal">103</span>
 <span class="normal">104</span>
 <span class="normal">105</span>
-<span class="normal">106</span>
-<span class="normal">107</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a file exists.</span>
+<span class="normal">106</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_file</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">,</span> <span class="n">io</span><span class="o">.</span><span class="n">IOBase</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Check whether a file exists.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        path: a path supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">core</span><span class="o">.</span><span class="n">OpenFile</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">path</span><span class="o">.</span><span class="n">fs</span><span class="o">.</span><span class="n">isfile</span><span class="p">(</span><span class="n">path</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
 
@@ -3018,15 +3608,16 @@ size can't be retrieved.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Check whether a path is local.</p>
+        <p>Check whether a path is local.</p>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">148</span>
-<span class="normal">149</span>
-<span class="normal">150</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Check whether a path is local.&quot;&quot;&quot;</span>
-    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="s2">&quot;file&quot;</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">147</span>
+<span class="normal">148</span>
+<span class="normal">149</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">is_local_path</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Check whether a path is local."""</span>
+    <span class="k">return</span> <span class="n">get_protocol</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">))</span> <span class="o">==</span> <span class="s2">"file"</span>
 </code></pre></div></td></tr></table></div>
             </details>
     </div>
@@ -3044,7 +3635,7 @@ size can't be retrieved.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Join paths together. The first element determine the
+        <p>Join paths together. The first element determine the
 filesystem to use (and so the separator.</p>
 
 
@@ -3060,9 +3651,11 @@ filesystem to use (and so the separator.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>*paths</code></td>
             <td>
-                  <code>str</code>
+                <code>*paths</code>
+            </td>
+            <td>
+                  <code><span title="str">str</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3076,9 +3669,11 @@ filesystem to use (and so the separator.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">153</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">152</span>
+<span class="normal">153</span>
 <span class="normal">154</span>
 <span class="normal">155</span>
 <span class="normal">156</span>
@@ -3088,15 +3683,14 @@ filesystem to use (and so the separator.</p>
 <span class="normal">160</span>
 <span class="normal">161</span>
 <span class="normal">162</span>
-<span class="normal">163</span>
-<span class="normal">164</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Join paths together. The first element determine the</span>
+<span class="normal">163</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">join</span><span class="p">(</span><span class="o">*</span><span class="n">paths</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Join paths together. The first element determine the</span>
 <span class="sd">    filesystem to use (and so the separator.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        *paths: a list of paths supported by `fsspec` such as local, s3, gcs, etc.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">_paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
+<span class="sd">    """</span>
+    <span class="n">_paths</span> <span class="o">=</span> <span class="p">[</span><span class="nb">str</span><span class="p">(</span><span class="n">path</span><span class="p">)</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s2">"/"</span><span class="p">)</span> <span class="k">for</span> <span class="n">path</span> <span class="ow">in</span> <span class="n">paths</span><span class="p">]</span>
     <span class="n">source_path</span> <span class="o">=</span> <span class="n">_paths</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="n">source_path</span><span class="p">)</span><span class="o">.</span><span class="n">fs</span>
     <span class="n">full_path</span> <span class="o">=</span> <span class="n">fs</span><span class="o">.</span><span class="n">sep</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">_paths</span><span class="p">)</span>
@@ -3118,7 +3712,7 @@ filesystem to use (and so the separator.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Return the md5 hash of a file.</p>
+        <p>Return the md5 hash of a file.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3133,9 +3727,11 @@ filesystem to use (and so the separator.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>filepath</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>filepath</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3149,9 +3745,11 @@ filesystem to use (and so the separator.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">297</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">296</span>
+<span class="normal">297</span>
 <span class="normal">298</span>
 <span class="normal">299</span>
 <span class="normal">300</span>
@@ -3160,13 +3758,12 @@ filesystem to use (and so the separator.</p>
 <span class="normal">303</span>
 <span class="normal">304</span>
 <span class="normal">305</span>
-<span class="normal">306</span>
-<span class="normal">307</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Return the md5 hash of a file.</span>
+<span class="normal">306</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">md5</span><span class="p">(</span><span class="n">filepath</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">]):</span>
+<span class="w">    </span><span class="sd">"""Return the md5 hash of a file.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        filepath: The path to the file to compute the MD5 hash on.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="k">with</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span> <span class="k">as</span> <span class="n">f</span><span class="p">:</span>
         <span class="n">file_hash</span> <span class="o">=</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">md5</span><span class="p">()</span>
         <span class="n">file_hash</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">read</span><span class="p">())</span>  <span class="c1"># type: ignore</span>
@@ -3189,7 +3786,7 @@ filesystem to use (and so the separator.</p>
 
     <div class="doc doc-contents ">
 
-      <p>Create a directory.</p>
+        <p>Create a directory.</p>
 
 
 <p><span class="doc-section-title">Parameters:</span></p>
@@ -3204,9 +3801,11 @@ filesystem to use (and so the separator.</p>
       </thead>
       <tbody>
           <tr class="doc-section-item">
-            <td><code>dir_path</code></td>
             <td>
-                  <code><span title="typing.Union">Union</span>[str, <span title="os.PathLike">PathLike</span>]</code>
+                <code>dir_path</code>
+            </td>
+            <td>
+                  <code><span title="typing.Union">Union</span>[<span title="str">str</span>, <span title="os.PathLike">PathLike</span>]</code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3218,9 +3817,11 @@ filesystem to use (and so the separator.</p>
             </td>
           </tr>
           <tr class="doc-section-item">
-            <td><code>exist_ok</code></td>
             <td>
-                  <code>bool</code>
+                <code>exist_ok</code>
+            </td>
+            <td>
+                  <code><span title="bool">bool</span></code>
             </td>
             <td>
               <div class="doc-md-description">
@@ -3235,9 +3836,11 @@ already exists.</p>
       </tbody>
     </table>
 
-            <details class="quote">
+
+            <details class="mkdocstrings-source">
               <summary>Source code in <code>datamol/utils/fs.py</code></summary>
-              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">285</span>
+              <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">284</span>
+<span class="normal">285</span>
 <span class="normal">286</span>
 <span class="normal">287</span>
 <span class="normal">288</span>
@@ -3245,15 +3848,14 @@ already exists.</p>
 <span class="normal">290</span>
 <span class="normal">291</span>
 <span class="normal">292</span>
-<span class="normal">293</span>
-<span class="normal">294</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span> <span class="nf">mkdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">exist_ok</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Create a directory.</span>
+<span class="normal">293</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="k">def</span><span class="w"> </span><span class="nf">mkdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">PathLike</span><span class="p">],</span> <span class="n">exist_ok</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""Create a directory.</span>
 
 <span class="sd">    Args:</span>
 <span class="sd">        dir_path: The path of the directory to create.</span>
 <span class="sd">        exist_ok: Whether to ignore the error if the directory</span>
 <span class="sd">            already exists.</span>
-<span class="sd">    &quot;&quot;&quot;</span>
+<span class="sd">    """</span>
     <span class="n">fs</span> <span class="o">=</span> <span class="n">get_mapper</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_path</span><span class="p">))</span><span class="o">.</span><span class="n">fs</span>
     <span class="n">fs</span><span class="o">.</span><span class="n">mkdirs</span><span class="p">(</span><span class="nb">str</span><span class="p">(</span><span class="n">dir_path</span><span class="p">),</span> <span class="n">exist_ok</span><span class="o">=</span><span class="n">exist_ok</span><span class="p">)</span>
 </code></pre></div></td></tr></table></div>
@@ -3298,7 +3900,7 @@ already exists.</p>
       <div class="md-copyright">
   
     <div class="md-copyright__highlight">
-      Copyright 2020 - 2023 datamol.io
+      Copyright 2020 - 2026 datamol.io
     </div>
   
   
@@ -3319,10 +3921,13 @@ already exists.</p>
     </div>
     
     
-    <script id="__config" type="application/json">{"base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.b8dbb3d2.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.tabs", "navigation.expand"], "search": "../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": {"provider": "mike"}}</script>
     
     
-      <script src="../assets/javascripts/bundle.dd8806f2.min.js"></script>
+      <script src="../assets/javascripts/bundle.d7400e89.min.js"></script>
       
         <script src="../assets/js/google-analytics.js"></script>
       
