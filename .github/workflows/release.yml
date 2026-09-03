@@ -90,7 +90,7 @@ jobs:
 
       - name: Build release documentation
         run: |
-          uv pip install --editable ".[docs,io,viz]"
+          uv pip install --editable ".[docs]"
           mkdocs build --strict
 
       - name: Upload distributions
@@ -174,7 +174,7 @@ jobs:
           enable-cache: true
 
       - name: Install documentation dependencies
-        run: uv pip install --editable ".[docs,io,viz]"
+        run: uv pip install --editable ".[docs]"
 
       - name: Deploy versioned documentation
         env:

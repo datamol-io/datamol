@@ -11,11 +11,9 @@ integrating existing community contributions.
 - RDKit 2024.09 or newer is required.
 - NumPy 1.26, pandas 2.2 and scikit-learn 1.4 are the minimum supported series.
 
-Install the core package with `python -m pip install datamol`. Optional dependency
-groups are available for I/O (`datamol[io]`), visualisation (`datamol[viz]`),
-and SELFIES conversion (`datamol[selfies]`). Matplotlib, Pillow, nglview and
-SELFIES no longer make every core installation heavier. HTTP I/O remains
-available in the default installation.
+Install Datamol with `python -m pip install datamol`. The single package bundles
+everything needed at runtime — cloud/Excel/Parquet I/O, visualization and
+SELFIES conversion — so there are no feature extras to select.
 
 ## Dependency-driven output changes
 
