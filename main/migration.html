@@ -1738,11 +1738,9 @@ integrating existing community contributions.</p>
 <li>RDKit 2024.09 or newer is required.</li>
 <li>NumPy 1.26, pandas 2.2 and scikit-learn 1.4 are the minimum supported series.</li>
 </ul>
-<p>Install the core package with <code>python -m pip install datamol</code>. Optional dependency
-groups are available for I/O (<code>datamol[io]</code>), visualisation (<code>datamol[viz]</code>),
-and SELFIES conversion (<code>datamol[selfies]</code>). Matplotlib, Pillow, nglview and
-SELFIES no longer make every core installation heavier. HTTP I/O remains
-available in the default installation.</p>
+<p>Install Datamol with <code>python -m pip install datamol</code>. The single package bundles
+everything needed at runtime — cloud/Excel/Parquet I/O, visualization and
+SELFIES conversion — so there are no feature extras to select.</p>
 <h2 id="dependency-driven-output-changes">Dependency-driven output changes<a class="headerlink" href="#dependency-driven-output-changes" title="Permanent link">&para;</a></h2>
 <p>Recent RDKit releases may choose a different, but chemically equivalent, canonical
 SMILES or CXSMILES representation. Conformer embedding and clustering can also

@@ -1790,10 +1790,9 @@ dependencies, and fixes molecule interchange and conformer handling. See the
 </code></pre></div>
 <p>Pip and conda-forge remain supported: <code>python -m pip install datamol</code> or
 <code>mamba install -c conda-forge datamol</code>.</p>
-<p>Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.</p>
-<p>Install optional capabilities only when needed: <code>datamol[io]</code> for S3, Google
-Cloud, Excel and Parquet; <code>datamol[viz]</code> for plotting and 3D notebooks; and
-<code>datamol[selfies]</code> for SELFIES conversion.</p>
+<p>Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer. Cloud
+I/O (S3, Google Cloud), Excel/Parquet, visualization and SELFIES support are all
+included by default — there are no feature extras to install.</p>
 <h2 id="quick-api-tour">Quick API Tour<a class="headerlink" href="#quick-api-tour" title="Permanent link">&para;</a></h2>
 <div class="highlight"><pre><span></span><code><span class="kn">import</span><span class="w"> </span><span class="nn">datamol</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">dm</span>
 
