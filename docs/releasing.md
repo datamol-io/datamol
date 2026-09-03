@@ -47,8 +47,8 @@ release channel. Its update bot proposes version changes after PyPI publication,
 but maintainers must review dependencies and run the recipe tests there.
 The package release action does not publish to conda-forge.
 
-Raise Python to 3.11+, update the RDKit and scientific-stack bounds, and remove
-I/O, visualization and SELFIES dependencies from the core recipe.
+Raise Python to 3.11+, update the RDKit and scientific-stack bounds, and include
+the I/O, visualization and SELFIES dependencies in the core recipe.
 
 Do not merge a version-only feedstock update for this release. Its
 dependency metadata and import/CLI tests must reflect the new installation

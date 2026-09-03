@@ -63,7 +63,7 @@ jobs:
       - name: Install dependencies
         run: |
           uv pip install "rdkit==${{ matrix.rdkit-version }}"
-          uv pip install --editable ".[test,io,viz]"
+          uv pip install --editable ".[test]"
 
       - name: Run core tests
         run: python -m pytest -m "not integration"
@@ -93,7 +93,7 @@ jobs:
           enable-cache: true
 
       - name: Install dependencies
-        run: uv pip install --editable ".[test,io,viz]"
+        run: uv pip install --editable ".[test]"
 
       - name: Run tutorial notebooks
         run: python -m pytest -m integration --no-cov -n 0

@@ -10,16 +10,16 @@ for earlier release notes.
 
 - Refresh Datamol for Python 3.11–3.14 and RDKit 2024.09–2026.03 without
   expanding its feature scope.
-- Make the default installation lighter through explicit I/O, visualization
-  and SELFIES extras.
+- Bundle all runtime capabilities (I/O, visualization and SELFIES) in the single
+  `datamol` install; there are no feature extras to select.
 - Strengthen molecule interchange and conformer handling across current RDKit
   releases.
 
 ### Changed
 
 - Require Python 3.11+ and RDKit 2024.09+.
-- Declare maintained optional dependency groups for I/O, visualisation, testing,
-  documentation and development.
+- Include the I/O, visualization and SELFIES dependencies in the core package;
+  keep only testing, documentation and development dependency groups.
 - Update the test suite for chemically equivalent RDKit serialisations and stable
   conformer invariants across supported RDKit releases.
 - Use correctly spelled `heterocycles` keys in the default descriptor set. The

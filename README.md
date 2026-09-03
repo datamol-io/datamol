@@ -72,11 +72,9 @@ python -m pip install datamol
 mamba install -c conda-forge datamol
 ```
 
-Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.
-
-Install optional capabilities only when needed: `datamol[io]` for S3, Google
-Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
-`datamol[selfies]` for SELFIES conversion.
+Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer. Cloud
+I/O (S3, Google Cloud), Excel/Parquet, visualization and SELFIES support are all
+included by default — there are no feature extras to install.
 
 ## Quick API Tour
 

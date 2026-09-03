@@ -44,41 +44,30 @@ dependencies = [
     "scikit-learn>=1.4",
     "packaging>=23.2",
     "rdkit>=2024.9.1",
-]
-
-[project.optional-dependencies]
-io = [
+    # I/O backends: cloud filesystems, Excel and Parquet.
     "gcsfs>=2024.3",
-    "openpyxl>=3.1",
-    "pyarrow>=15",
     "s3fs>=2024.3",
+    "openpyxl>=3.1",
     "xlsxwriter>=3.2",
-]
-viz = [
+    "pyarrow>=15",
+    # Visualization.
     "matplotlib>=3.8",
     "networkx>=3.2",
     "nglview>=3.1",
     "pillow>=10",
+    # SELFIES conversion.
+    "selfies>=2.1",
 ]
-selfies = ["selfies>=2.1"]
+
+[project.optional-dependencies]
 test = [
-    "gcsfs>=2024.3",
     "ipykernel>=6.29",
     "ipywidgets>=8.1",
     "nbconvert>=7.16",
     "nbformat>=5.10",
-    "networkx>=3.2",
-    "nglview>=3.1",
-    "openpyxl>=3.1",
-    "pyarrow>=15",
     "pytest>=8",
     "pytest-cov>=6",
     "pytest-xdist>=3.6",
-    "s3fs>=2024.3",
-    "selfies>=2.1",
-    "matplotlib>=3.8",
-    "pillow>=10",
-    "xlsxwriter>=3.2",
 ]
 docs = [
     "markdown-include>=0.8.1",

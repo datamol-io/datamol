@@ -24,12 +24,10 @@ import datamol as dm
 
 
 def _import_selfies():
-    try:
-        import selfies
-    except ImportError:
-        raise ImportError(
-            'SELFIES conversion requires the selfies extra: python -m pip install "datamol[selfies]"'
-        ) from None
+    # `selfies` is a runtime dependency; imported lazily to keep it off the
+    # `import datamol` path since SELFIES conversion is used only on demand.
+    import selfies
+
     return selfies
 
 
