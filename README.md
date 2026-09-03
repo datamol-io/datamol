@@ -46,7 +46,7 @@ Visit <https://docs.datamol.io>.
 
 ## Updates
 
-The upcoming Datamol 1.x release modernizes the supported scientific Python
+Datamol 0.13.0 modernizes the supported scientific Python
 stack while keeping the library focused on reliable molecular processing. It
 adds RDKit binary and property-dictionary interchange, enforces conformer RMS
 cutoffs with symmetry-aware alignment, fixes reported RDKit compatibility
@@ -54,11 +54,8 @@ issues, and separates optional I/O and visualization dependencies from the
 core installation.
 
 See the [complete changelog](CHANGELOG.md) for all notable changes and the
-[1.x migration guide](docs/migration.md) for compatibility and transition
-details. These notes describe the upcoming major release; PyPI and conda-forge
-still provide the published stable versions.
-
-Release maintainers: see the [manual release guide](docs/releasing.md).
+[0.13.0 upgrade guide](docs/migration.md) for compatibility and transition
+details.
 
 ## Installation
 
@@ -75,7 +72,7 @@ python -m pip install datamol
 mamba install -c conda-forge datamol
 ```
 
-The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
+Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.
 
 Install optional capabilities only when needed: `datamol[io]` for S3, Google
 Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
@@ -134,7 +131,7 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
-| `1.x` (development) | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
+| `0.13.x`  | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
 | `0.12.x`  | `[3.10, 3.11]`      | `[2023.03, 2023.09]`          |
 | `0.11.x`  | `[3.9, 3.10, 3.11]` | `[2022.09, 2023.03]`          |
 | `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |

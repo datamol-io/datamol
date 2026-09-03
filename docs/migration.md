@@ -1,6 +1,6 @@
-# Migrating to Datamol 1.x
+# Upgrading to Datamol 0.13.0
 
-Datamol 1.x refreshes the supported scientific Python stack without adding new
+Datamol 0.13.0 refreshes the supported scientific Python stack without adding new
 feature domains. The goal is to preserve Datamol's public behaviour while removing
 compatibility code for dependency versions that are no longer maintained and
 integrating existing community contributions.

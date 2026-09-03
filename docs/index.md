@@ -12,11 +12,10 @@ Visit our website at <https://datamol.io>.
 
 ## Updates
 
-The upcoming 1.x release refreshes the Python and RDKit stack, separates
-optional dependencies, and fixes molecule interchange and conformer handling.
-See the [changelog](https://github.com/datamol-io/datamol/blob/dev/CHANGELOG.md)
-and [migration guide](migration.md) for the major changes and upgrade details.
-These changes are not yet a published release.
+Datamol 0.13.0 refreshes the Python and RDKit stack, separates optional
+dependencies, and fixes molecule interchange and conformer handling. See the
+[changelog](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.md) and
+[upgrade guide](migration.md) for the changes and upgrade details.
 
 ## Installation
 
@@ -29,7 +28,7 @@ uv add datamol
 Pip and conda-forge remain supported: `python -m pip install datamol` or
 `mamba install -c conda-forge datamol`.
 
-The next major release requires Python 3.11 or newer and RDKit 2024.09 or newer.
+Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.
 
 Install optional capabilities only when needed: `datamol[io]` for S3, Google
 Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
@@ -88,7 +87,7 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
-| `1.x` (development) | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
+| `0.13.x`  | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
 | `0.12.x`  | `[3.10, 3.11]`      | `[2023.03, 2023.09]`          |
 | `0.11.x`  | `[3.9, 3.10, 3.11]` | `[2022.09, 2023.03]`          |
 | `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |

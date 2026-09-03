@@ -108,7 +108,6 @@ jobs:
       url: https://pypi.org/p/datamol
     permissions:
       contents: read
-      id-token: write
     steps:
       - name: Set up uv
         uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
@@ -122,10 +121,9 @@ jobs:
           name: dist
           path: dist/
 
-      - name: Generate PEP 740 attestations
-        uses: astral-sh/attest-action@f589a42a7efb6fe400b4f400de60b4bc90390027 # v0.0.6
-
       - name: Publish to PyPI
+        # Token-based upload. PyPI rejects PEP 740 attestations on token uploads
+        # (they require Trusted Publishing), so none are generated or sent.
         env:
           UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
@@ -188,5 +186,9 @@ jobs:
           if [ "$PRERELEASE" = "true" ]; then
             mike deploy --push "$RELEASE_VERSION"
           else
+            # `stable` may exist as a legacy standalone version from earlier
+            # deploys; mike refuses to reuse a version name as an alias, so drop
+            # it first. Harmless when `stable` is absent or already an alias.
+            mike delete stable 2>/dev/null || true
             mike deploy --push --update-aliases "$RELEASE_VERSION" stable
           fi
