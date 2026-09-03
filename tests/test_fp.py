@@ -1,6 +1,7 @@
 import pytest
 
 import datamol as dm
+from rdkit import DataStructs
 
 
 def test_to_fp():
@@ -15,6 +16,7 @@ def test_list_fp():
     assert set(dm.list_supported_fingerprints().keys()) == {
         "atompair",
         "atompair-count",
+        "avalon",
         "avalon-count",
         "ecfp",
         "fcfp",
@@ -54,7 +56,7 @@ def test_all_fps():
 
     print(fp_infos)
 
-    assert fp_infos == {
+    expected = {
         "maccs": {"size": 167, "bits_sum": 21},
         "ecfp": {"size": 2048, "bits_sum": 31},
         "fcfp": {"size": 2048, "bits_sum": 22},
@@ -65,6 +67,7 @@ def test_all_fps():
         "layered": {"size": 2048, "bits_sum": 335},
         "erg": {"size": 315, "bits_sum": 23.4},
         "estate": {"size": 79, "bits_sum": 13},
+        "avalon": {"size": 512, "bits_sum": 54},
         "avalon-count": {"size": 512, "bits_sum": 168},
         "ecfp-count": {"size": 2048, "bits_sum": 42},
         "fcfp-count": {"size": 2048, "bits_sum": 35},
@@ -72,6 +75,10 @@ def test_all_fps():
         "atompair-count": {"size": 2048, "bits_sum": 78},
         "rdkit-count": {"size": 2048, "bits_sum": 301},
     }
+    assert fp_infos.keys() == expected.keys()
+    for fp_type, info in fp_infos.items():
+        assert info["size"] == expected[fp_type]["size"]
+        assert info["bits_sum"] == pytest.approx(expected[fp_type]["bits_sum"])
 
 
 def test_fp_invalid_input():
@@ -85,3 +92,25 @@ def test_fp_invalid_input():
     args["mol"] = "dsdsdsd"
     with pytest.raises(ValueError):
         dm.to_fp(**args)
+
+
+def test_fold_count_fp_supports_explicit_bit_vectors():
+    fingerprint = DataStructs.ExplicitBitVect(16)
+    fingerprint.SetBitsFromList([1, 5, 9])
+
+    folded = dm.fold_count_fp(fingerprint, dim=4)
+    binary = dm.fold_count_fp(fingerprint, dim=4, binary=True)
+
+    assert folded.tolist() == [0, 3, 0, 0]
+    assert binary.tolist() == [0, 1, 0, 0]
+
+
+@pytest.mark.parametrize(
+    "fingerprint",
+    [DataStructs.ExplicitBitVect(16), DataStructs.UIntSparseIntVect(16)],
+)
+def test_fold_count_fp_supports_empty_fingerprints(fingerprint):
+    folded = dm.fold_count_fp(fingerprint, dim=4)
+
+    assert folded.dtype.kind == "i"
+    assert folded.tolist() == [0, 0, 0, 0]

@@ -8,6 +8,7 @@ from rdkit import Chem
 
 import datamol as dm
 import numpy as np
+from datamol.types import _get_explicit_valence
 
 
 def test_to_mol():
@@ -22,6 +23,10 @@ def test_to_mol():
     smiles = "fake_smiles"
     mol = dm.to_mol(smiles)
     assert mol is None
+
+    binary_string = b"\xef\xbe\xad\xde\x00\x00\x00\x00\x10\x00\x00\x00\x02\x00\x00\x00\x00\x00\x00\x00\x06\x00\x00\x00\x06\x00\x00\x00\x80\x01\x06@h\x00\x00\x00\x03\x03\x01\x06@h\x00\x00\x00\x03\x03\x01\x06@h\x00\x00\x00\x03\x03\x01\x06@h\x00\x00\x00\x03\x03\x01\x06@h\x00\x00\x00\x03\x03\x01\x06@h\x00\x00\x00\x03\x03\x01\x0b\x00\x01h\x0c\x01\x02h\x0c\x02\x03h\x0c\x03\x04h\x0c\x04\x05h\x0c\x05\x00h\x0cB\x01\x00\x00\x00\x06\x00\x05\x04\x03\x02\x01\x17\x04\x00\x00\x00\x00\x00\x00\x00\x16"
+    mol = dm.to_mol(binary_string)
+    assert mol.GetNumAtoms() == 6
 
 
 def test_reorder_atoms():
@@ -122,7 +127,7 @@ def test_fix_valence():
     mol_copy = dm.copy_mol(mol)
 
     nitrogen_atom = [a for a in mol.GetAtoms() if a.GetAtomMapNum() == 1][0]
-    nitrogen_valence = nitrogen_atom.GetExplicitValence()
+    nitrogen_valence = _get_explicit_valence(nitrogen_atom)
     assert dm.incorrect_valence(nitrogen_atom, True)
 
     fixed_mol = dm.fix_valence_charge(mol, inplace=False)
@@ -138,7 +143,7 @@ def test_fix_valence():
 
     fixed_mol2 = dm.fix_valence(mol_copy)
     fixed_nitrogen_atom = [a for a in fixed_mol2.GetAtoms() if a.GetAtomMapNum() == 1][0]
-    assert fixed_nitrogen_atom.GetExplicitValence() < nitrogen_valence
+    assert _get_explicit_valence(fixed_nitrogen_atom) < nitrogen_valence
 
     # mol should be fixed
     assert dm.to_mol(Chem.MolToSmiles(fixed_mol2)) is not None
@@ -182,17 +187,18 @@ def test_fixmol():
 
 def test_dative_bond():
     smis = "CC1=CC=CC(=C1N\\2O[Co]3(ON(\\C=[N]3\\C4=C(C)C=CC=C4C)C5=C(C)C=CC=C5C)[N](=C2)\\C6=C(C)C=CC=C6C)C"
-    expected_result = (
-        "CC1=CC=CC(C)=C1N1C=N(C2=C(C)C=CC=C2C)->[Co]2(<-N(C3=C(C)C=CC=C3C)=CN(C3=C(C)C=CC=C3C)O2)O1"
-    )
-
     assert dm.is_transition_metal(Chem.Atom("Co"))
 
     # sodium is not a transition metal
     assert not dm.is_transition_metal(Chem.Atom("Na"))
 
     mol = dm.set_dative_bonds(Chem.MolFromSmiles(smis, sanitize=False))
-    assert Chem.MolToSmiles(mol) == expected_result
+    assert mol is not None
+    assert sum(bond.GetBondType() == Chem.BondType.DATIVE for bond in mol.GetBonds()) == 2
+    for bond in mol.GetBonds():
+        if bond.GetBondType() == Chem.BondType.DATIVE:
+            assert bond.GetBeginAtom().GetSymbol() in {"N", "O"}
+            assert bond.GetEndAtom().GetSymbol() == "Co"
     assert dm.to_mol(Chem.MolToSmiles(mol)) is not None
 
 

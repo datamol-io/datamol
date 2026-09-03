@@ -11,14 +11,9 @@ from typing import List
 from typing import overload
 from typing import Literal
 
-import sys
 import io
 import functools
-
-try:
-    import importlib.resources as importlib_resources
-except ImportError:
-    import importlib_resources
+import importlib.resources as importlib_resources
 
 import pandas as pd
 
@@ -30,12 +25,7 @@ from ..convert import render_mol_df
 
 @functools.lru_cache()
 def datamol_data_file_path(filename: str, dm_module: str = "datamol.data") -> str:
-    if sys.version_info < (3, 9, 0):
-        with importlib_resources.path(dm_module, filename) as p:
-            data_path = p
-    else:
-        data_path = importlib_resources.files(dm_module).joinpath(filename)
-
+    data_path = importlib_resources.files(dm_module).joinpath(filename)
     return str(data_path)
 
 
@@ -44,20 +34,12 @@ def open_datamol_data_file(
     open_binary: bool = False,
     dm_module: str = "datamol.data",
 ):
-    if sys.version_info < (3, 9, 0):
-        if open_binary:
-            file_context_manager = importlib_resources.open_binary(dm_module, filename)
-        else:
-            file_context_manager = importlib_resources.open_text(dm_module, filename)
+    if open_binary:
+        mode = "rb"
     else:
-        if open_binary:
-            mode = "rb"
-        else:
-            mode = "r"
+        mode = "r"
 
-        file_context_manager = (
-            importlib_resources.files(dm_module).joinpath(filename).open(mode=mode)
-        )
+    file_context_manager = importlib_resources.files(dm_module).joinpath(filename).open(mode=mode)
 
     # NOTE(hadim): we assume the file always exists
     file_context_manager = cast(io.TextIOWrapper, file_context_manager)

@@ -33,3 +33,37 @@ def test_fuzzy_scaffolding():
     # the same length. the reason there are 3 not two is because it could have
     # extra columns where a cell may have none values.
     assert len(df_scf2groups.columns) == 3
+
+
+def test_fuzzy_scaffolding_with_enforce_subs():
+    """Test that enforce_subs accepts string (SMILES/SMARTS) arguments.
+
+    Regression test for https://github.com/datamol-io/datamol/issues/119
+    where passing strings to enforce_subs caused a TypeError in
+    GetSubstructMatch which expects an RDKit Mol object.
+    """
+    smiles = [
+        "Cc1ccc(NC(=O)Cn2cccn2)c(Br)c1",
+        "COc1ccc(OC(C)C(=O)N=c2sccn2C)cc1",
+        "CC(NC(=O)CSCc1cccs1)C1CCCO1",
+        "CC1CCCCN1C(=O)CN1CCC[C@@H](N)C1",
+        "COc1ccc(OC(C)C(=O)N=c2sccn2C)cc1",
+    ]
+
+    mols = [dm.to_mol(s) for s in smiles]
+
+    # Pass enforce_subs as strings (SMILES) — should not raise
+    all_scaffolds, df_scf2infos, df_scf2groups = dm.scaffold.fuzzy_scaffolding(
+        mols, enforce_subs=["c1ccccc1", "C1CCCO1"]
+    )
+
+    assert isinstance(all_scaffolds, set)
+    assert len(all_scaffolds) >= 1
+    assert len(df_scf2infos.index) == len(df_scf2groups.index)
+
+    # Pass enforce_subs as SMARTS strings — should also not raise
+    all_scaffolds2, _, _ = dm.scaffold.fuzzy_scaffolding(
+        mols, enforce_subs=["[cR1]1[cR1][cR1][cR1][cR1][cR1]1"]
+    )
+
+    assert isinstance(all_scaffolds2, set)

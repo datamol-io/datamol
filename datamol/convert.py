@@ -1,3 +1,4 @@
+from typing import Any
 from typing import Union
 from typing import List
 from typing import Optional
@@ -5,6 +6,7 @@ from typing import cast
 from typing import Sequence
 
 import re
+import json
 
 from loguru import logger
 
@@ -12,14 +14,23 @@ import pandas as pd
 
 from rdkit import Chem
 from rdkit.Chem import rdmolfiles
+from rdkit.Chem import rdMolInterchange
 from rdkit.Chem import PandasTools
-
-import selfies as sf
 
 from .types import Mol
 
 # NOTE(hadim): it's not possible to use `from .mol import ...` because of circular imports
 import datamol as dm
+
+
+def _import_selfies():
+    try:
+        import selfies
+    except ImportError:
+        raise ImportError(
+            'SELFIES conversion requires the selfies extra: python -m pip install "datamol[selfies]"'
+        ) from None
+    return selfies
 
 
 def to_smiles(
@@ -102,6 +113,7 @@ def to_selfies(mol: Union[str, Mol]) -> Optional[str]:
         selfies: SELFIES string.
     """
 
+    sf = _import_selfies()
     if isinstance(mol, Mol):
         mol = to_smiles(mol)
 
@@ -125,6 +137,7 @@ def from_selfies(selfies: str, as_mol: bool = False) -> Optional[Union[str, Mol]
     Returns:
         smiles or mol.
     """
+    sf = _import_selfies()
     if selfies is None:
         return None
 
@@ -361,6 +374,22 @@ def from_smarts(smarts: Optional[str]) -> Optional[Mol]:
     return Chem.MolFromSmarts(smarts)  # type: ignore
 
 
+def to_binary(mol: Optional[Mol]) -> Optional[bytes]:
+    """Convert a molecule to RDKit's binary representation.
+
+    Note that the molecular information to be stored in the binary string
+    is dependent on the RDKit pickling options.
+
+    Args:
+        mol: a molecule.
+    """
+
+    if mol is None:
+        return None
+
+    return mol.ToBinary()  # type: ignore
+
+
 def to_df(
     mols: Sequence[Mol],
     smiles_column: Optional[str] = "smiles",
@@ -413,15 +442,14 @@ def to_df(
         else:
             return {}
 
-    # EN: You cannot use `processes` here because all properties will be lost
-    # An alternative would be https://www.rdkit.org/docs/source/rdkit.Chem.PropertyMol.html
-    # But this has less overhead
+    # Threads preserve RDKit molecule properties without the PropertyMol
+    # serialization overhead required by process workers.
     props = dm.parallelized(_mol_to_prop_dict, mols, n_jobs=n_jobs, scheduler="threads")
     props_df = pd.DataFrame(props)
     if smiles_column is not None and smiles_column in props_df.columns:
         logger.warning(
             f"The SMILES column name provided ('{smiles_column}') is already present in the properties"
-            " of the molecules. THe returned dataframe will two columns with the same name."
+            " of the molecules. The returned dataframe will have two columns with the same name."
         )
 
     # Concat the df with the properties df
@@ -446,7 +474,7 @@ def from_df(
 ) -> List[Mol]:
     """Convert a dataframe to a list of mols.
 
-    For the reverse operation, you might to check `dm.to_df()`.
+    For the reverse operation, see `dm.to_df()`.
 
     Note:
         If `smiles_column` is used to build the molecules, this property
@@ -512,6 +540,30 @@ def render_mol_df(df: pd.DataFrame):
         # NOTE(hadim): replace by `PandaTools.ChangeMoleculeRendering` once
         # https://github.com/rdkit/rdkit/issues/3563 is fixed.
         _ChangeMoleculeRendering(df)
+
+
+def to_dict(mols: Sequence[Mol]) -> dict[str, Any]:
+    """Convert molecules to an RDKit JSON-compatible dictionary.
+
+    For the reverse operation, see `dm.from_dict()`.
+
+    Args:
+        mols: molecules to serialize.
+    """
+
+    return json.loads(rdMolInterchange.MolsToJSON(mols))
+
+
+def from_dict(mol_dict: dict[str, Any]) -> List[Mol]:
+    """Convert an RDKit JSON-compatible dictionary to molecules.
+
+    For the reverse operation, you might to check `dm.to_dict()`.
+
+    Args:
+        mol_dict: serialized molecules from `dm.to_dict()`.
+    """
+
+    return list(rdMolInterchange.JSONToMols(json.dumps(mol_dict)))
 
 
 def _ChangeMoleculeRendering(frame=None, renderer="PNG"):

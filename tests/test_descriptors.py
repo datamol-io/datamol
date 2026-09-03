@@ -33,13 +33,22 @@ def test_descriptors():
         dm.descriptors.n_spiro_atoms(mol)
 
         dm.descriptors.n_aliphatic_carbocycles(mol)
-        dm.descriptors.n_aliphatic_heterocyles(mol)
+        with pytest.warns(DeprecationWarning, match="n_aliphatic_heterocycles"):
+            assert dm.descriptors.n_aliphatic_heterocycles(
+                mol
+            ) == dm.descriptors.n_aliphatic_heterocyles(mol)
         dm.descriptors.n_aliphatic_rings(mol)
         dm.descriptors.n_aromatic_carbocycles(mol)
-        dm.descriptors.n_aromatic_heterocyles(mol)
+        with pytest.warns(DeprecationWarning, match="n_aromatic_heterocycles"):
+            assert dm.descriptors.n_aromatic_heterocycles(
+                mol
+            ) == dm.descriptors.n_aromatic_heterocyles(mol)
         dm.descriptors.n_aromatic_rings(mol)
         dm.descriptors.n_saturated_carbocycles(mol)
-        dm.descriptors.n_saturated_heterocyles(mol)
+        with pytest.warns(DeprecationWarning, match="n_saturated_heterocycles"):
+            assert dm.descriptors.n_saturated_heterocycles(
+                mol
+            ) == dm.descriptors.n_saturated_heterocyles(mol)
         dm.descriptors.n_saturated_rings(mol)
 
 
@@ -62,13 +71,13 @@ def test_compute_many_descriptors():
             "clogp": 4.810600000000004,
             "sas": 2.670786229594949,
             "n_aliphatic_carbocycles": 0.0,
-            "n_aliphatic_heterocyles": 0.0,
+            "n_aliphatic_heterocycles": 0.0,
             "n_aliphatic_rings": 0.0,
             "n_aromatic_carbocycles": 1.0,
-            "n_aromatic_heterocyles": 1.0,
+            "n_aromatic_heterocycles": 1.0,
             "n_aromatic_rings": 2.0,
             "n_saturated_carbocycles": 0.0,
-            "n_saturated_heterocyles": 0.0,
+            "n_saturated_heterocycles": 0.0,
             "n_saturated_rings": 0.0,
         }
     )
@@ -142,13 +151,13 @@ def test_batch_compute_many_descriptors():
         "clogp",
         "sas",
         "n_aliphatic_carbocycles",
-        "n_aliphatic_heterocyles",
+        "n_aliphatic_heterocycles",
         "n_aliphatic_rings",
         "n_aromatic_carbocycles",
-        "n_aromatic_heterocyles",
+        "n_aromatic_heterocycles",
         "n_aromatic_rings",
         "n_saturated_carbocycles",
-        "n_saturated_heterocyles",
+        "n_saturated_heterocycles",
         "n_saturated_rings",
     }
     assert props.shape == (30, 22)

@@ -2,6 +2,7 @@ import pytest
 
 import pandas as pd
 import datamol as dm
+from rdkit.Chem import rdDepictor
 
 
 def test_template_align():
@@ -43,6 +44,25 @@ def test_template_align():
     assert dm.align.template_align(None) is None
 
 
+@pytest.mark.parametrize(
+    "use_depiction,initial_preference",
+    [(True, False), (False, True)],
+)
+def test_template_align_restores_coordgen_preference(use_depiction, initial_preference):
+    original_preference = rdDepictor.GetPreferCoordGen()
+    rdDepictor.SetPreferCoordGen(initial_preference)
+    try:
+        dm.align.template_align(
+            "CCc1ccccc1",
+            template="c1ccccc1",
+            use_depiction=use_depiction,
+            auto_select_coord_gen=True,
+        )
+        assert rdDepictor.GetPreferCoordGen() is initial_preference
+    finally:
+        rdDepictor.SetPreferCoordGen(original_preference)
+
+
 def test_auto_align_many():
     data: pd.DataFrame = dm.solubility(as_df=True)  # type: ignore
     data = data.iloc[:16].copy()  # type: ignore
@@ -70,7 +90,7 @@ def test_auto_align_many():
         assert "dm.auto_align_many.cluster_id" in props.columns
         assert "dm.auto_align_many.core" in props.columns
         assert props["dm.auto_align_many.cluster_id"].dtype.name == "int64"
-        assert props["dm.auto_align_many.core"].dtype.name == "object"
+        assert pd.api.types.is_string_dtype(props["dm.auto_align_many.core"])
 
         assert props["dm.auto_align_many.cluster_id"].unique().shape[0] == excepted_cluster_size[i]
 

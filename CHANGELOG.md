@@ -1,5 +1,70 @@
 # Datamol Changelogs
 
+This file records user-visible changes. See the [migration guide](docs/migration.md)
+for upgrade instructions and [GitHub releases](https://github.com/datamol-io/datamol/releases)
+for earlier release notes.
+
+## 0.13.0 - 2026-09-03
+
+### Highlights
+
+- Refresh Datamol for Python 3.11–3.14 and RDKit 2024.09–2026.03 without
+  expanding its feature scope.
+- Make the default installation lighter through explicit I/O, visualization
+  and SELFIES extras.
+- Strengthen molecule interchange and conformer handling across current RDKit
+  releases.
+
+### Changed
+
+- Require Python 3.11+ and RDKit 2024.09+.
+- Declare maintained optional dependency groups for I/O, visualisation, testing,
+  documentation and development.
+- Update the test suite for chemically equivalent RDKit serialisations and stable
+  conformer invariants across supported RDKit releases.
+- Use correctly spelled `heterocycles` keys in the default descriptor set. The
+  misspelled public callables remain available with deprecation warnings.
+- Centralize count-fingerprint folding in `fold_count_fp`; it now accepts both
+  sparse and explicit RDKit vectors, including empty fingerprints.
+- Scope the RDKit CoordGen preference used by `template_align()` to the current
+  call instead of changing process-wide depiction behavior.
+- Compute conformer RMS values and pruning with optimal, symmetry-aware
+  pairwise alignment. Callers with pre-aligned conformers can opt into the
+  faster common-frame calculation.
+
+### Added
+
+- Add RDKit binary and property-dictionary molecule interchange helpers from
+  PR #238, preserving the original contributor's commit.
+- Add the missing non-count Avalon fingerprint variant.
+
+### Deprecated
+
+- Deprecate the misspelled descriptor callables
+  `n_aliphatic_heterocyles`, `n_aromatic_heterocyles` and
+  `n_saturated_heterocyles`; use their `heterocycles` equivalents.
+
+### Fixed
+
+- Preserve `datamol.open_df(..., verbose=...)` compatibility with pandas 3.
+- Use the current RDKit valence API and remove its deprecated valence calls.
+- Accept SMARTS strings in `enforce_subs` when generating fuzzy scaffolds (PR #243).
+- Report impossible stereochemical embedding constraints clearly and allow the
+  caller to opt out of chirality enforcement.
+- Preserve binary IPython PNG representations instead of treating them as text.
+- Copy directory roots represented by file-like filesystem objects correctly.
+
+### Compatibility and delivery
+
+- Validate Linux, Windows, macOS Apple Silicon and macOS Intel, with separate
+  jobs for core tests, optional features, notebooks, documentation and package
+  smoke tests.
+- Keep publication manual through the `release` action and `PYPI_API_TOKEN`,
+  with PEP 740 attestations. Release tests and isolated wheel/source checks
+  gate publication; prereleases never replace the stable documentation.
+- Add a non-publishing dry run and a [release guide](docs/releasing.md).
+  Conda-forge remains a separate channel requiring recipe updates.
+
 ## v0.10.3
 
 **Authors:**

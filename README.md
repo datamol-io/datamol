@@ -23,7 +23,7 @@
 [![PyPI - Downloads](https://img.shields.io/pypi/dm/datamol)](https://pypi.org/project/datamol/)
 [![Conda](https://img.shields.io/conda/dn/conda-forge/datamol)](https://anaconda.org/conda-forge/datamol)
 [![PyPI - Python Version](https://img.shields.io/pypi/pyversions/datamol)](https://pypi.org/project/datamol/)
-[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://github.com/datamol-io/datamol/blob/main/LICENSE)
+[![license](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![GitHub Repo stars](https://img.shields.io/github/stars/datamol-io/datamol)](https://github.com/datamol-io/datamol/stargazers)
 [![GitHub Repo stars](https://img.shields.io/github/forks/datamol-io/datamol)](https://github.com/datamol-io/datamol/network/members)
 [![Codecov](https://codecov.io/gh/datamol-io/datamol/branch/main/graph/badge.svg?token=2ETG8SA7IG)](https://codecov.io/gh/datamol-io/datamol)
@@ -44,13 +44,39 @@ Visit [![Binder](http://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh
 
 Visit <https://docs.datamol.io>.
 
+## Updates
+
+Datamol 0.13.0 modernizes the supported scientific Python
+stack while keeping the library focused on reliable molecular processing. It
+adds RDKit binary and property-dictionary interchange, enforces conformer RMS
+cutoffs with symmetry-aware alignment, fixes reported RDKit compatibility
+issues, and separates optional I/O and visualization dependencies from the
+core installation.
+
+See the [complete changelog](CHANGELOG.md) for all notable changes and the
+[0.13.0 upgrade guide](docs/migration.md) for compatibility and transition
+details.
+
 ## Installation
 
-Use conda:
+Add Datamol to a uv-managed project:
 
 ```bash
+uv add datamol
+```
+
+Pip and conda-forge remain supported:
+
+```bash
+python -m pip install datamol
 mamba install -c conda-forge datamol
 ```
+
+Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.
+
+Install optional capabilities only when needed: `datamol[io]` for S3, Google
+Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
+`datamol[selfies]` for SELFIES conversion.
 
 ## Quick API Tour
 
@@ -105,6 +131,7 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
+| `0.13.x`  | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
 | `0.12.x`  | `[3.10, 3.11]`      | `[2023.03, 2023.09]`          |
 | `0.11.x`  | `[3.9, 3.10, 3.11]` | `[2022.09, 2023.03]`          |
 | `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |
@@ -120,14 +147,15 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 The CI runs tests and performs code quality checks for the following combinations:
 
-- The three major platforms: Windows, OSX and Linux.
-- The two latest Python versions.
-- The two latest RDKit versions.
+- Linux x86-64, Windows x86-64, macOS Apple Silicon and macOS Intel.
+- Python 3.11 through 3.14 on Linux.
+- The supported RDKit release series from 2024.09 through 2026.03.
+- The latest supported stack on every operating-system and architecture lane.
 
 |                                         | `main`                                                                                                                                                                    |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Lib build & Testing                     | [![test](https://github.com/datamol-io/datamol/actions/workflows/test.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/test.yml)                   |
-| Code Sanity (linting and type analysis) | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
+| Code Sanity (formatting and linting)     | [![code-check](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/code-check.yml) |
 | Documentation Build                     | [![doc](https://github.com/datamol-io/datamol/actions/workflows/doc.yml/badge.svg)](https://github.com/datamol-io/datamol/actions/workflows/doc.yml)                      |
 
 ## License

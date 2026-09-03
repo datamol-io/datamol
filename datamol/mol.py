@@ -30,6 +30,8 @@ from rdkit.Chem.SaltRemover import SaltRemover
 import datamol
 from . import _sanifix4
 from .types import Mol
+from .types import _get_explicit_valence
+from .types import _get_implicit_valence
 from .convert import to_inchikey_non_standard
 from .convert import to_inchikey
 from .convert import to_smiles
@@ -58,7 +60,7 @@ def copy_mol(mol: Mol) -> Mol:
 
 
 def to_mol(
-    mol: Union[str, Mol],
+    mol: Union[str, bytes, Mol],
     add_hs: bool = False,
     explicit_only: bool = False,
     ordered: bool = False,
@@ -72,7 +74,7 @@ def to_mol(
     """Convert an input molecule (smiles representation) into a `Mol`.
 
     Args:
-        mol: A SMILES or a molecule.
+        mol: A SMILES, a binary string from Mol.ToBinary(), or a molecule.
         add_hs: Whether hydrogens should be added the molecule after the SMILES has been parsed.
         explicit_only: Whether to only add explicit hydrogen or both
             (implicit and explicit). when `add_hs` is set to True.
@@ -91,8 +93,8 @@ def to_mol(
         None is returned so make sure that you handle this case on your own.
     """
 
-    if not isinstance(mol, (str, Mol)):
-        raise ValueError(f"Input should be a Mol or a string instead of '{type(mol)}'")
+    if not isinstance(mol, (str, bytes, Mol)):
+        raise ValueError(f"Input should be a Mol, a string, or bytes instead of '{type(mol)}'")
 
     if isinstance(mol, str):
         smiles_params = rdmolfiles.SmilesParserParams()
@@ -106,6 +108,11 @@ def to_mol(
 
         if not sanitize and _mol is not None:
             _mol.UpdatePropertyCache(False)
+    elif isinstance(mol, bytes):
+        try:
+            _mol = Chem.Mol(mol)
+        except RuntimeError:
+            _mol = None
     else:
         _mol = mol
 
@@ -273,7 +280,7 @@ def to_neutral(mol: Optional[Mol]) -> Optional[Mol]:
 
     for a in mol.GetAtoms():
         if a.GetFormalCharge() < 0 or (
-            a.GetExplicitValence() >= PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
+            _get_explicit_valence(a) >= PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
             and a.GetFormalCharge() > 0
         ):
             a.SetFormalCharge(0)
@@ -511,8 +518,8 @@ def fix_valence_charge(mol: Mol, inplace: bool = False) -> Optional[Mol]:
         mol.UpdatePropertyCache(False)
         for a in mol.GetAtoms():
             n_electron = (
-                a.GetImplicitValence()
-                + a.GetExplicitValence()
+                _get_implicit_valence(a)
+                + _get_explicit_valence(a)
                 - PERIODIC_TABLE.GetDefaultValence(a.GetSymbol())
             )
             a.SetFormalCharge(n_electron)
@@ -538,8 +545,8 @@ def incorrect_valence(a: Union[Mol, Chem.rdchem.Atom], update: bool = False) -> 
     if update:
         m = a.GetOwningMol()
         m.UpdatePropertyCache(False)
-    return (a.GetImplicitValence() == 0) and (
-        a.GetExplicitValence() > max(PERIODIC_TABLE.GetValenceList(a.GetSymbol()))
+    return (_get_implicit_valence(a) == 0) and (
+        _get_explicit_valence(a) > max(PERIODIC_TABLE.GetValenceList(a.GetSymbol()))
     )
 
 
@@ -639,7 +646,7 @@ def adjust_singleton(mol: Mol) -> Optional[Mol]:
     to_rem = []
     em = rdchem.RWMol(mol)
     for atom in mol.GetAtoms():
-        if atom.GetExplicitValence() == 0:
+        if _get_explicit_valence(atom) == 0:
             to_rem.append(atom.GetIdx())
     to_rem.sort(reverse=True)
     for a_idx in to_rem:
@@ -762,7 +769,7 @@ def set_dative_bonds(mol: Mol, from_atoms: Tuple[int, int] = (7, 8)) -> Optional
     for metal in metals:
         for nbr in metal.GetNeighbors():
             if (nbr.GetAtomicNum() in from_atoms or nbr.GetSymbol() in from_atoms) and (
-                nbr.GetExplicitValence() > PERIODIC_TABLE.GetDefaultValence(nbr.GetAtomicNum())
+                _get_explicit_valence(nbr) > PERIODIC_TABLE.GetDefaultValence(nbr.GetAtomicNum())
                 and rwmol.GetBondBetweenAtoms(nbr.GetIdx(), metal.GetIdx()).GetBondType()
                 == SINGLE_BOND
             ):

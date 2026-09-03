@@ -1,49 +1,56 @@
-name: code-check
+name: code-quality
 
 on:
   push:
-    branches: ["main"]
-    tags: ["*"]
+    branches: [main, dev]
   pull_request:
-    branches:
-      - "*"
-      - "!gh-pages"
+    branches: [main, dev]
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: code-quality-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  python-format-black:
-    name: Python lint [black]
+  quality:
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          python-version: "3.10"
+          version: "0.12.8"
+          python-version: "3.14"
+          activate-environment: true
+          enable-cache: true
 
-      - name: Install black
-        run: |
-          pip install black>=24
+      - name: Install quality tools
+        run: uv pip install --editable ".[dev]"
+
+      - name: Check formatting
+        run: black --check datamol tests .github/scripts
 
       - name: Lint
-        run: black --check .
+        run: ruff check datamol tests .github/scripts
 
-  python-lint-ruff:
-    name: Python lint [ruff]
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
+      - name: Test release validation
+        run: python -m unittest discover -s .github/scripts -p 'test_*.py'
 
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+      - name: Build distributions
+        run: uv build --no-sources
 
-      - name: Install ruff
-        run: |
-          pip install ruff
+      - name: Validate distributions
+        run: uvx twine check dist/*
 
-      - name: Lint
-        run: ruff .
+      - name: Smoke-test wheel
+        run: uv run --isolated --no-project --with dist/*.whl python -I .github/scripts/smoke_test.py
+
+      - name: Smoke-test source distribution
+        run: uv run --isolated --no-project --with dist/*.tar.gz python -I .github/scripts/smoke_test.py

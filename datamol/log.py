@@ -89,10 +89,10 @@ def no_rdkit_log(
     By default, all log levels (error, warning, info, and debug) are muted.
 
     Args:
-        mute_errors : Whether to mute error logs (default is True).
-        mute_warning : Whether to mute warning logs (default is True).
-        mute_info : Whether to mute info logs (default is True).
-        mute_debug : Whether to mute debug logs (default is True).
+        mute_errors: Whether to mute error logs (default is True).
+        mute_warning: Whether to mute warning logs (default is True).
+        mute_info: Whether to mute info logs (default is True).
+        mute_debug: Whether to mute debug logs (default is True).
         enable: Whether to enable the log muting (default is True). If set to False, no logs will be muted.
 
     Example:

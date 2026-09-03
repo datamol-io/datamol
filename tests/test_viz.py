@@ -11,7 +11,6 @@ from PIL import Image
 
 import datamol as dm
 
-
 # NOTE(hadim): rdkit returns different image objects
 # according to the Python process context (Jupyter notebook vs terminal).
 # In consequence, those tests will fail if they are executed within a
@@ -19,13 +18,11 @@ import datamol as dm
 
 
 def _convert_ipython_to_array(image):
-    """convert ipython image to numpy array"""
-    image_obj = base64.b64decode(str(image._repr_png_()))
-    try:
-        image_obj = Image.open(io.BytesIO(image_obj))
-        return np.array(image_obj)
-    except Exception:
-        return np.array(image)
+    """Convert an IPython PNG representation to a NumPy array."""
+    image_data = image._repr_png_()
+    if isinstance(image_data, str):
+        image_data = base64.b64decode(image_data)
+    return np.array(Image.open(io.BytesIO(image_data)))
 
 
 def test_to_image():
@@ -38,8 +35,6 @@ def test_to_image():
     legends = [dm.to_smiles(mol) for mol in mols]
     image = dm.viz.to_image(mols, legends=legends, n_cols=4, mol_size=(200, 200), use_svg=False)
     image = _convert_ipython_to_array(image)
-
-    print(type(image))
 
     image = np.array(image)
 
@@ -116,11 +111,11 @@ def test_conformers():
 
     # one conformer
     view = dm.viz.conformers(mol)
-    assert type(view) == nv.widget.NGLWidget
+    assert isinstance(view, nv.widget.NGLWidget)
 
     # multiple conformers
     view = dm.viz.conformers(mol, n_confs=12)
-    assert type(view) == widgets.GridspecLayout
+    assert isinstance(view, widgets.GridspecLayout)
 
 
 @pytest.mark.skipif(

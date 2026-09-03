@@ -55,6 +55,32 @@ def test_copy_dir(tmp_path):
         assert f.read() == content
 
 
+def test_copy_dir_ignores_file_like_root_entry(tmp_path, monkeypatch):
+    source_name = f"file-like-root-{tmp_path.name}"
+    source = f"memory://{source_name}"
+    source_fs = dm.fs.get_mapper(source).fs
+    source_fs.makedirs(f"/{source_name}", exist_ok=True)
+    with source_fs.open(f"/{source_name}/content.txt", "w") as stream:
+        stream.write("content")
+
+    original_find = source_fs.find
+
+    def find_with_file_like_root(path, **kwargs):
+        entries = original_find(path, **kwargs)
+        entries[f"/{source_name}"] = {
+            "name": f"/{source_name}",
+            "size": 0,
+            "type": "file",
+        }
+        return entries
+
+    monkeypatch.setattr(source_fs, "find", find_with_file_like_root)
+    destination = tmp_path / "copied"
+    dm.fs.copy_dir(source, destination)
+
+    assert (destination / "content.txt").read_text() == "content"
+
+
 def test_mkdir(tmp_path):
     source_path = tmp_path / "source_dir"
     source_path_subdir = source_path / "a_subdir"

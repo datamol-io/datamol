@@ -18,12 +18,15 @@ from .descriptors import n_NO
 from .descriptors import formal_charge
 from .descriptors import n_aliphatic_carbocycles
 from .descriptors import n_aliphatic_heterocyles
+from .descriptors import n_aliphatic_heterocycles
 from .descriptors import n_aliphatic_rings
 from .descriptors import n_aromatic_carbocycles
 from .descriptors import n_aromatic_heterocyles
+from .descriptors import n_aromatic_heterocycles
 from .descriptors import n_aromatic_rings
 from .descriptors import n_saturated_carbocycles
 from .descriptors import n_saturated_heterocyles
+from .descriptors import n_saturated_heterocycles
 from .descriptors import n_saturated_rings
 from .descriptors import n_aromatic_atoms
 from .descriptors import n_aromatic_atoms_proportion

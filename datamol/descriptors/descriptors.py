@@ -1,5 +1,6 @@
 import sys
 import os
+import warnings
 
 from rdkit.Chem import Descriptors
 from rdkit.Chem import rdMolDescriptors
@@ -59,16 +60,46 @@ n_NO = Lipinski.NOCount
 n_spiro_atoms = rdMolDescriptors.CalcNumSpiroAtoms
 
 n_aliphatic_carbocycles = rdMolDescriptors.CalcNumAliphaticCarbocycles
-n_aliphatic_heterocyles = rdMolDescriptors.CalcNumAliphaticHeterocycles
+n_aliphatic_heterocycles = rdMolDescriptors.CalcNumAliphaticHeterocycles
 n_aliphatic_rings = rdMolDescriptors.CalcNumAliphaticRings
 
 n_aromatic_carbocycles = rdMolDescriptors.CalcNumAromaticCarbocycles
-n_aromatic_heterocyles = rdMolDescriptors.CalcNumAromaticHeterocycles
+n_aromatic_heterocycles = rdMolDescriptors.CalcNumAromaticHeterocycles
 n_aromatic_rings = rdMolDescriptors.CalcNumAromaticRings
 
 n_saturated_carbocycles = rdMolDescriptors.CalcNumSaturatedCarbocycles
-n_saturated_heterocyles = rdMolDescriptors.CalcNumSaturatedHeterocycles
+n_saturated_heterocycles = rdMolDescriptors.CalcNumSaturatedHeterocycles
 n_saturated_rings = rdMolDescriptors.CalcNumSaturatedRings
+
+
+def n_aliphatic_heterocyles(mol: Mol) -> int:
+    """Deprecated misspelling of :func:`n_aliphatic_heterocycles`."""
+    warnings.warn(
+        "`n_aliphatic_heterocyles` is deprecated; use `n_aliphatic_heterocycles`.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return n_aliphatic_heterocycles(mol)
+
+
+def n_aromatic_heterocyles(mol: Mol) -> int:
+    """Deprecated misspelling of :func:`n_aromatic_heterocycles`."""
+    warnings.warn(
+        "`n_aromatic_heterocyles` is deprecated; use `n_aromatic_heterocycles`.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return n_aromatic_heterocycles(mol)
+
+
+def n_saturated_heterocyles(mol: Mol) -> int:
+    """Deprecated misspelling of :func:`n_saturated_heterocycles`."""
+    warnings.warn(
+        "`n_saturated_heterocyles` is deprecated; use `n_saturated_heterocycles`.",
+        DeprecationWarning,
+        stacklevel=2,
+    )
+    return n_saturated_heterocycles(mol)
 
 
 def n_rigid_bonds(mol: Mol) -> int:

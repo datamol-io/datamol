@@ -14,6 +14,8 @@ NOTEBOOK_PATHS = sorted(list(NOTEBOOK_DIR.glob("*.ipynb")))
 # Discard `Filesystem.ipynb` because it takes too long to run.
 NOTEBOOK_PATHS = list(filter(lambda x: "Filesystem.ipynb" != x.name, NOTEBOOK_PATHS))
 
+pytestmark = [pytest.mark.integration, pytest.mark.notebook]
+
 
 @pytest.mark.skip_platform("win")
 @pytest.mark.parametrize("nb_path", NOTEBOOK_PATHS, ids=[str(n.name) for n in NOTEBOOK_PATHS])

@@ -4,123 +4,191 @@ on:
   workflow_dispatch:
     inputs:
       release-version:
-        description: "A valid Semver version string"
+        description: "Version to release (e.g. 1.0.0 or 1.0.0rc1, without v)"
         required: true
+        type: string
+      dry-run:
+        description: "Build and test only; do not publish or create a tag"
+        type: boolean
+        default: true
 
 permissions:
-  contents: write
-  pull-requests: write
+  contents: read
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
 
 jobs:
-  release:
-    # Do not release if not triggered from the default branch
-    if: github.ref == format('refs/heads/{0}', github.event.repository.default_branch)
-
+  validate:
     runs-on: ubuntu-latest
-    timeout-minutes: 30
-
-    defaults:
-      run:
-        shell: bash -l {0}
-
+    timeout-minutes: 5
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+      prerelease: ${{ steps.version.outputs.prerelease }}
     steps:
-      - name: Checkout the code
-        uses: actions/checkout@v4
-
-      - name: Setup mamba
-        uses: mamba-org/setup-micromamba@v1
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          environment-file: env.yml
-          environment-name: my_env
-          cache-environment: true
-          cache-downloads: true
-          create-args: >-
-            pip
-            semver
-            python-build
-            setuptools_scm
+          persist-credentials: false
 
-      - name: Check the version is valid semver
+      - name: Validate release request
+        id: version
+        env:
+          RELEASE_VERSION: ${{ inputs.release-version }}
+          DRY_RUN: ${{ inputs.dry-run }}
+        run: python3 .github/scripts/verify_release.py
+
+  tests:
+    needs: validate
+    uses: ./.github/workflows/test.yml
+
+  quality:
+    needs: validate
+    uses: ./.github/workflows/code-check.yml
+
+  build:
+    needs: [validate, tests, quality]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    env:
+      EXPECTED_VERSION: ${{ needs.validate.outputs.version }}
+    steps:
+      - name: Checkout release commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Tag the checked commit locally
         run: |
-          RELEASE_VERSION="${{ inputs.release-version }}"
-
-          {
-            pysemver check $RELEASE_VERSION
-          } || {
-            echo "The version '$RELEASE_VERSION' is not a valid Semver version string."
-            echo "Please use a valid semver version string. More details at https://semver.org/"
-            echo "The release process is aborted."
-            exit 1
-          }
-
-      - name: Check the version is higher than the latest one
-        run: |
-          # Retrieve the git tags first
-          git fetch --prune --unshallow --tags &> /dev/null
-
-          RELEASE_VERSION="${{ inputs.release-version }}"
-          LATEST_VERSION=$(git describe --abbrev=0 --tags)
-
-          IS_HIGHER_VERSION=$(pysemver compare $RELEASE_VERSION $LATEST_VERSION)
-
-          if [ "$IS_HIGHER_VERSION" != "1" ]; then
-            echo "The version '$RELEASE_VERSION' is not higher than the latest version '$LATEST_VERSION'."
-            echo "The release process is aborted."
-            exit 1
+          if git show-ref --verify --quiet "refs/tags/$EXPECTED_VERSION"; then
+            test "$(git rev-list -n 1 "$EXPECTED_VERSION")" = "$GITHUB_SHA"
+          else
+            git tag "$EXPECTED_VERSION" "$GITHUB_SHA"
           fi
 
-      - name: Build Changelog
-        id: github_release
-        uses: mikepenz/release-changelog-builder-action@v4
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          python-version: "3.14"
+          activate-environment: true
+          enable-cache: false
+
+      - name: Build distributions
+        run: uv build --no-sources
+
+      - name: Validate metadata
+        run: uvx twine check dist/*
+
+      - name: Smoke-test wheel
+        run: uv run --isolated --no-project --with dist/*.whl python -I .github/scripts/smoke_test.py
+
+      - name: Smoke-test source distribution
+        run: uv run --isolated --no-project --with dist/*.tar.gz python -I .github/scripts/smoke_test.py
+
+      - name: Build release documentation
+        run: |
+          uv pip install --editable ".[docs,io,viz]"
+          mkdocs build --strict
+
+      - name: Upload distributions
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: dist
+          path: dist/
+
+  publish:
+    if: ${{ !inputs.dry-run }}
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: pypi
+      url: https://pypi.org/p/datamol
+    permissions:
+      contents: read
+    steps:
+      - name: Set up uv
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+        with:
+          version: "0.12.8"
+          enable-cache: false
+
+      - name: Download distributions
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: dist
+          path: dist/
+
+      - name: Publish to PyPI
+        # Token-based upload. PyPI rejects PEP 740 attestations on token uploads
+        # (they require Trusted Publishing), so none are generated or sent.
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          toTag: "main"
-
-      - name: Configure git
+          UV_PUBLISH_TOKEN: ${{ secrets.PYPI_API_TOKEN }}
         run: |
-          git config --global user.name "${GITHUB_ACTOR}"
-          git config --global user.email "${GITHUB_ACTOR}@users.noreply.github.com"
+          test -n "$UV_PUBLISH_TOKEN" || { echo "PYPI_API_TOKEN is missing"; exit 1; }
+          uv publish --trusted-publishing never
 
-      - name: Create and push git tag
+  github-release:
+    needs: [validate, publish]
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+    steps:
+      - name: Create GitHub release from the tested commit
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          PRERELEASE: ${{ needs.validate.outputs.prerelease }}
         run: |
-          # Tag the release
-          git tag -a "${{ inputs.release-version }}" -m "Release version ${{ inputs.release-version }}"
+          args=(--target "$GITHUB_SHA" --title "$RELEASE_VERSION" --generate-notes)
+          if [ "$PRERELEASE" = "true" ]; then
+            args+=(--prerelease --latest=false)
+          fi
+          gh release create "$RELEASE_VERSION" "${args[@]}"
 
-          # Checkout the git tag
-          git checkout "${{ inputs.release-version }}"
-
-          # Push the modified changelogs
-          git push origin main
-
-          # Push the tags
-          git push origin "${{ inputs.release-version }}"
-
-      - name: Install library
-        run: python -m pip install --no-deps .
-
-      - name: Build the wheel and sdist
-        run: python -m build --no-isolation
-
-      - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+  documentation:
+    needs: [validate, github-release]
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    permissions:
+      contents: write
+    concurrency:
+      group: documentation-deploy
+      cancel-in-progress: false
+    steps:
+      - name: Checkout published commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          password: ${{ secrets.PYPI_API_TOKEN }}
-          packages-dir: dist/
+          fetch-depth: 0
 
-      - name: Create GitHub Release
-        uses: softprops/action-gh-release@de2c0eb89ae2a093876385947365aca7b0e5f844
+      - name: Set up uv and Python
+        uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
         with:
-          tag_name: ${{ inputs.release-version }}
-          body: ${{steps.github_release.outputs.changelog}}
+          version: "0.12.8"
+          python-version: "3.14"
+          activate-environment: true
+          enable-cache: true
 
-      - name: Deploy the doc
+      - name: Install documentation dependencies
+        run: uv pip install --editable ".[docs,io,viz]"
+
+      - name: Deploy versioned documentation
+        env:
+          RELEASE_VERSION: ${{ needs.validate.outputs.version }}
+          PRERELEASE: ${{ needs.validate.outputs.prerelease }}
         run: |
-          echo "Get the gh-pages branch"
-          git fetch origin gh-pages
-
-          echo "Build and deploy the doc on ${{ inputs.release-version }}"
-          mike deploy --push stable
-          mike deploy --push ${{ inputs.release-version }}
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          if [ "$PRERELEASE" = "true" ]; then
+            mike deploy --push "$RELEASE_VERSION"
+          else
+            # `stable` may exist as a legacy standalone version from earlier
+            # deploys; mike refuses to reuse a version name as an alias, so drop
+            # it first. Harmless when `stable` is absent or already an alias.
+            mike delete stable 2>/dev/null || true
+            mike deploy --push --update-aliases "$RELEASE_VERSION" stable
+          fi

@@ -63,7 +63,7 @@ def generate(
     # Get the 3D atom positions of the first conformer
     positions = mol.GetConformer(0).GetPositions()
 
-    # If minimization has been enabled (default to True)
+    # If minimization has been enabled
     # you can access the computed energy.
     conf = mol.GetConformer(1)
     props = conf.GetPropsAsDict()
@@ -168,7 +168,12 @@ def generate(
                     f"Conformers embedding failed for {convert.to_smiles(mol)}. Returning None because ignore_failure is set."
                 )
             return None
-        raise ValueError(f"Conformers embedding failed for {convert.to_smiles(mol)}")
+        raise ValueError(
+            f"Conformers embedding failed for {convert.to_smiles(mol)}. "
+            "The stereochemical constraints may be impossible to satisfy; if losing "
+            "stereochemical enforcement is acceptable, retry with "
+            "`enforce_chirality=False`."
+        )
 
     energies = None
 
@@ -218,20 +223,27 @@ def generate(
         mol.RemoveAllConformers()
         [mol.AddConformer(conf, assignId=True) for conf in ordered_conformers]
 
-    # Align conformers to each others
-    if align_conformers:
-        rdMolAlign.AlignMolConformers(mol)
+    # Remove hydrogens before RMS pruning so the cutoff applies to the molecule
+    # returned to the caller. Including temporary hydrogens can otherwise hide
+    # duplicate heavy-atom conformers.
+    if add_hs:
+        mol = dm_mol.remove_hs(mol)
 
     if rms_cutoff is not None:
         mol = cluster(
             mol,
             rms_cutoff=rms_cutoff,
-            already_aligned=align_conformers,
+            # Pairwise optimal RMS values are required for pruning. Conformers
+            # aligned independently to a common reference are not necessarily
+            # optimally aligned to one another.
+            already_aligned=False,
             centroids=True,
+            num_threads=num_threads,
         )  # type: ignore
 
-    if add_hs:
-        mol = dm_mol.remove_hs(mol)
+    # Align the final, pruned set of conformers to each other.
+    if align_conformers:
+        rdMolAlign.AlignMolConformers(mol)
 
     return mol
 
@@ -262,6 +274,7 @@ def cluster(
     rms_cutoff: float = 1,
     already_aligned: bool = False,
     centroids: bool = True,
+    num_threads: int = 1,
 ):
     """Cluster the conformers of a molecule according to an RMS threshold in Angstrom.
 
@@ -269,17 +282,22 @@ def cluster(
         mol: a molecule
         rms_cutoff: The RMS cutoff in Angstrom.
         already_aligned: Whether or not the conformers are aligned. If False,
-            they will be aligmned furing the RMS computation.
+            an optimal symmetry-aware alignment is used for each pair.
         centroids: If True, return one molecule with centroid conformers
             only. If False return a list of molecules per cluster with all
             the conformers of the cluster. Defaults to True.
+        num_threads: Number of threads used for optimal pairwise RMS calculations.
     """
 
     # Clone molecule
     mol = copy.deepcopy(mol)
 
-    # Compute RMS
-    dmat = AllChem.GetConformerRMSMatrix(mol, prealigned=already_aligned)
+    # Use symmetry-aware optimal pairwise RMS values unless the conformers have
+    # already been placed in a common reference frame.
+    if already_aligned:
+        dmat = AllChem.GetConformerRMSMatrix(mol, prealigned=True)
+    else:
+        dmat = rdMolAlign.GetAllConformerBestRMS(mol, numThreads=num_threads)
 
     # Cluster
     conf_clusters = Butina.ClusterData(
@@ -293,11 +311,12 @@ def cluster(
     return return_centroids(mol, conf_clusters, centroids=centroids)
 
 
-def rmsd(mol: Mol) -> np.ndarray:
+def rmsd(mol: Mol, num_threads: int = 1) -> np.ndarray:
     """Compute the RMSD between all the conformers of a molecule.
 
     Args:
         mol: a molecule
+        num_threads: Number of threads used for optimal pairwise RMS calculations.
     """
 
     if mol.GetNumConformers() <= 1:
@@ -306,12 +325,12 @@ def rmsd(mol: Mol) -> np.ndarray:
         )
 
     n_confs = mol.GetNumConformers()
-    rmsds = []
-    for i in range(n_confs):
-        for j in range(n_confs):
-            rmsd = rdMolAlign.AlignMol(prbMol=mol, refMol=mol, prbCid=i, refCid=j)
-            rmsds.append(rmsd)
-    return np.array(rmsds).reshape(n_confs, n_confs)
+    condensed = rdMolAlign.GetAllConformerBestRMS(mol, numThreads=num_threads)
+    rmsds = np.zeros((n_confs, n_confs))
+    lower = np.tril_indices(n_confs, k=-1)
+    rmsds[lower] = condensed
+    rmsds[(lower[1], lower[0])] = condensed
+    return rmsds
 
 
 def return_centroids(

@@ -7,6 +7,7 @@ from rdkit.Chem.AllChem import RenumberAtoms  # type: ignore
 from loguru import logger
 
 import datamol as dm
+from .types import _get_implicit_valence
 
 
 def _get_networkx():
@@ -40,7 +41,7 @@ def to_graph(mol: dm.Mol):
             chiral_tag=atom.GetChiralTag(),
             hybridization=atom.GetHybridization(),
             num_explicit_hs=atom.GetNumExplicitHs(),
-            implicit_valence=atom.GetImplicitValence(),
+            implicit_valence=_get_implicit_valence(atom),
             degree=atom.GetDegree(),
             symbol=atom.GetSymbol(),
             ring_atom=atom.IsInRing(),

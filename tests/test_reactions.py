@@ -65,10 +65,13 @@ def test_num_attachment_points():
 
 def test_open_attach_points():
     mol = dm.to_mol("CC")
-    smiles_open = dm.to_smiles(
-        dm.reactions._attachments.open_attach_points(mol, bond_type=dm.SINGLE_BOND), canonical=True
-    )
-    assert smiles_open == dm.to_smiles(dm.to_mol("*CC*"), canonical=True)
+    opened = dm.reactions._attachments.open_attach_points(mol, bond_type=dm.SINGLE_BOND)
+    attachment_atoms = [atom for atom in opened.GetAtoms() if atom.GetSymbol() == "*"]
+    assert len(attachment_atoms) == 2
+    assert all(atom.GetDegree() == 1 for atom in attachment_atoms)
+    for atom in attachment_atoms:
+        atom.SetAtomMapNum(0)
+    assert dm.to_smiles(opened, canonical=True) == dm.to_smiles(dm.to_mol("*CC*"), canonical=True)
 
 
 def test_rxn_from_smarts():

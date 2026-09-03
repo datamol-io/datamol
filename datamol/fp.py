@@ -41,6 +41,7 @@ _FP_FUNCS = {
     "erg": rdReducedGraphs.GetErGFingerprint,
     # NOTE(hadim): bad for pickling?
     "estate": lambda x, **args: EStateFingerprinter.FingerprintMol(x)[0],
+    "avalon": pyAvalonTools.GetAvalonFP,
     "avalon-count": pyAvalonTools.GetAvalonCountFP,
     **_FP_GENERATORS,
 }
@@ -336,22 +337,27 @@ def fold_count_fp(
     ):
         tmp = fp.GetNonzeroElements()
 
-    elif isinstance(fp, SparseBitVect):
+    elif isinstance(fp, (SparseBitVect, ExplicitBitVect)):
         on_bits = fp.GetOnBits()
         tmp = dict(zip(on_bits, np.ones(len(on_bits))))
 
     else:
         raise ValueError(f"The fingerprint is of wrong type: {type(fp)}")
 
-    # ON bits dict to (i, v)
-    i = np.array(list(tmp.keys())) % dim
-    v = np.array(list(tmp.values()))
-
-    # Fold indices
-    i = i % dim
-
     # Create the folded fp
     folded = np.zeros(dim, dtype="int")
+
+    # Empty fingerprints occur for valid feature definitions, for example when
+    # a molecule has no matching pharmacophore pair. Return the correctly
+    # shaped all-zero vector before NumPy infers a floating-point index dtype.
+    if not tmp:
+        return folded
+
+    # ON bits dict to (i, v)
+    i = np.fromiter(tmp.keys(), dtype=np.int64) % dim
+    v = np.fromiter(tmp.values(), dtype=np.int64)
+
+    # Fold indices
     np.add.at(folded, i, v)
 
     if binary:

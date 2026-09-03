@@ -110,6 +110,17 @@ def fuzzy_scaffolding(
     if enforce_subs is None:
         enforce_subs = []
 
+    # Convert string substructures to RDKit Mol objects for use in GetSubstructMatch.
+    # The parameter accepts List[str] (SMILES or SMARTS) but GetSubstructMatch requires Mol.
+    enforce_subs_mols = []
+    for sub in enforce_subs:
+        if isinstance(sub, str):
+            mol_sub = Chem.MolFromSmarts(sub)
+            if mol_sub is not None:
+                enforce_subs_mols.append(mol_sub)
+        else:
+            enforce_subs_mols.append(sub)
+
     if additional_templates is None:
         additional_templates = []
 
@@ -220,11 +231,11 @@ def fuzzy_scaffolding(
             ]
 
             rgroups = [gp[f"R{k}"] for k in acceptable_groups if f"R{k}" in gp.keys()]
-            if enforce_subs is not None:
+            if enforce_subs_mols:
                 rgroups = [
                     rgp
                     for rgp in rgroups
-                    if not any([len(rgp.GetSubstructMatch(frag)) > 0 for frag in enforce_subs])
+                    if not any([len(rgp.GetSubstructMatch(frag)) > 0 for frag in enforce_subs_mols])
                 ]
             try:
                 scaff = trim_side_chain(mol, AdjustQueryProperties(core, core_query_param), rgroups)

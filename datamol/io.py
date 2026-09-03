@@ -12,6 +12,8 @@ import os
 import io
 import tempfile
 import pathlib
+import inspect
+import warnings
 
 from rdkit.Chem import PandasTools
 from rdkit.Chem import rdmolfiles  # type: ignore
@@ -648,6 +650,16 @@ def open_df(path: str, **kwargs: Any) -> pd.DataFrame:
 
     data = None
     if filetype == "csv":
+        # ``verbose`` was accepted by pandas until version 3.0. Keep existing
+        # datamol calls working while avoiding the much riskier option of
+        # silently dropping arbitrary unsupported keyword arguments.
+        if "verbose" in kwargs and "verbose" not in inspect.signature(pd.read_csv).parameters:
+            kwargs.pop("verbose")
+            warnings.warn(
+                "The 'verbose' argument is no longer supported by pandas and is ignored.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
         data = pd.read_csv(path, **kwargs)
     elif filetype == "excel":
         data = pd.read_excel(path, **kwargs)

@@ -7,6 +7,8 @@ import operator
 import datamol as dm
 from rdkit import Chem
 
+from ..types import _get_implicit_valence
+
 ATTACHMENT_POINT_TOKEN = "*"
 ATTACHMENT_POINT_NUM_REGEXP = r"\[{}:?(\d*)\]".format(re.escape(ATTACHMENT_POINT_TOKEN))
 ATTACHMENT_POINT_REGEXP = r"(?:{0}|\[{0}[^\]]*\])".format(re.escape(ATTACHMENT_POINT_TOKEN))
@@ -113,7 +115,7 @@ def open_attach_points(
             (a.GetIdx(), a)
             for a in emol.GetAtoms()
             if a.GetSymbol() != ATTACHMENT_POINT_TOKEN
-            and a.GetImplicitValence() > 0
+            and _get_implicit_valence(a) > 0
             and (not a.HasProp("_protected") or a.GetProp("_protected") != "1")
         ]
         atoms.sort(reverse=True, key=operator.itemgetter(0))

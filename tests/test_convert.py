@@ -135,6 +135,31 @@ def test_inchi():
     assert dm.from_inchi(None) is None
 
 
+def test_to_binary(datadir):
+    smiles = "CC(=O)Oc1ccccc1C(=O)O"
+    mol = dm.to_mol(smiles)
+
+    binary_string = dm.to_binary(mol)
+    assert isinstance(binary_string, bytes)
+    new_mol = dm.to_mol(binary_string)
+    assert dm.same_mol(mol, new_mol)
+
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mol = mols[0]
+
+    binary_string = dm.to_binary(mol)
+    assert isinstance(binary_string, bytes)
+    new_mol = dm.to_mol(binary_string)
+    assert dm.same_mol(mol, new_mol)
+    assert (
+        np.sum(np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions()))
+        < 1e-5
+    )
+    assert dm.to_binary(None) is None
+    assert dm.to_mol(b"not an RDKit molecule") is None
+
+
 def test_to_df(datadir):
     data_path = datadir / "TUBB3-observations.sdf"
     mols = dm.read_sdf(data_path)
@@ -218,10 +243,47 @@ def test_to_df_smiles_warning(datadir, caplog):
     )
 
 
+def test_to_dict(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mols_dict = dm.to_dict(mols)
+
+    assert len(mols_dict["molecules"]) == 10
+    for mol_dict in mols_dict["molecules"]:
+        assert "conformers" in mol_dict
+        assert "properties" in mol_dict
+        assert len(mol_dict["properties"]) == 11
+
+
+def test_from_dict(datadir):
+    data_path = datadir / "TUBB3-observations.sdf"
+    mols = dm.read_sdf(data_path)
+    mols_dict = dm.to_dict(mols)
+    new_mols = dm.from_dict(mols_dict)
+
+    assert isinstance(new_mols, list)
+    for mol, new_mol in zip(mols, new_mols):
+        assert dm.same_mol(mol, new_mol)
+        assert mol.GetPropsAsDict() == new_mol.GetPropsAsDict()
+        assert (
+            np.sum(
+                np.abs(mol.GetConformer(0).GetPositions() - new_mol.GetConformer(0).GetPositions())
+            )
+            < 1e-5
+        )
+
+    stereo_mol = dm.to_mol("F/C=C/Cl")
+    [stereo_roundtrip] = dm.from_dict(dm.to_dict([stereo_mol]))
+    assert dm.to_smiles(stereo_roundtrip) == dm.to_smiles(stereo_mol)
+
+
 def test_to_cxsmiles():
     mol = dm.to_mol("OC1=CC2CCCCC2[N:1]=C1")
     smiles = dm.to_smiles(mol, cxsmiles=True)
-    assert smiles == "OC1=CC2CCCCC2[N:1]=C1 |atomProp:9.molAtomMapNumber.1|"
+    roundtrip = dm.to_mol(smiles)
+    assert roundtrip is not None
+    assert [atom.GetAtomMapNum() for atom in roundtrip.GetAtoms()].count(1) == 1
+    assert dm.to_smiles(roundtrip) == dm.to_smiles(mol)
 
 
 def test_to_smiles_fail():

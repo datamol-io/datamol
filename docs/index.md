@@ -10,17 +10,29 @@ Datamol is a python library to work with molecules. It's a layer built on top of
 
 Visit our website at <https://datamol.io>.
 
+## Updates
+
+Datamol 0.13.0 refreshes the Python and RDKit stack, separates optional
+dependencies, and fixes molecule interchange and conformer handling. See the
+[changelog](https://github.com/datamol-io/datamol/blob/main/CHANGELOG.md) and
+[upgrade guide](migration.md) for the changes and upgrade details.
+
 ## Installation
 
-Use conda:
+Add Datamol to a uv-managed project:
 
 ```bash
-mamba install -c conda-forge datamol
+uv add datamol
 ```
 
-_**Tips:** You can replace `mamba` by `conda`._
+Pip and conda-forge remain supported: `python -m pip install datamol` or
+`mamba install -c conda-forge datamol`.
 
-_**Note:** We highly recommend using a [Conda Python distribution](https://github.com/conda-forge/miniforge) to install Datamol. The package is also pip installable if you need it: `pip install datamol`._
+Datamol 0.13.0 requires Python 3.11 or newer and RDKit 2024.09 or newer.
+
+Install optional capabilities only when needed: `datamol[io]` for S3, Google
+Cloud, Excel and Parquet; `datamol[viz]` for plotting and 3D notebooks; and
+`datamol[selfies]` for SELFIES conversion.
 
 ## Quick API Tour
 
@@ -75,6 +87,7 @@ See below the associated versions of Python and RDKit, for which a minor version
 
 | `datamol` | `python`            | `rdkit`                       |
 | --------- | ------------------- | ----------------------------- |
+| `0.13.x`  | `[3.11, 3.12, 3.13, 3.14]` | `[2024.09, 2025.03, 2025.09, 2026.03]` |
 | `0.12.x`  | `[3.10, 3.11]`      | `[2023.03, 2023.09]`          |
 | `0.11.x`  | `[3.9, 3.10, 3.11]` | `[2022.09, 2023.03]`          |
 | `0.10.x`  | `[3.9, 3.10, 3.11]` | `[2022.03, 2022.09]`          |

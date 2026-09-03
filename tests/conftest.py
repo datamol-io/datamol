@@ -4,7 +4,6 @@ from loguru import logger
 
 import pytest
 
-
 DATA_DIR_PATH = pathlib.Path(__file__).parent.resolve() / "data"
 
 
