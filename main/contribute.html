@@ -1877,10 +1877,10 @@ uv<span class="w"> </span>run<span class="w"> </span>mike<span class="w"> </span
 Everything is automated using GitHub Actions.</p>
 <h2 id="release-a-new-version">Release a new version<a class="headerlink" href="#release-a-new-version" title="Permanent link">&para;</a></h2>
 <p>Run the <code>release</code> action manually from <code>main</code>, with the intended version and
-<code>dry-run</code> unchecked when ready to publish. The existing <code>PYPI_API_TOKEN</code>
-secret authenticates PyPI uploads. Tests, package validation and documentation
-must pass first. See the <a href="releasing.html">release guide</a> for the rehearsal,
-prerelease and recovery steps.</p>
+<code>dry-run</code> unchecked when ready to publish. PyPI Trusted Publishing authenticates
+the upload without a long-lived repository secret. Tests, package validation
+and documentation must pass first. See the <a href="releasing.html">release guide</a> for
+the rehearsal, prerelease and recovery steps.</p>
 <p>The existing conda-forge feedstock remains the Conda release channel. After a
 PyPI release, conda-forge's update bot proposes the new version; maintainers
 review its dependencies and tests in the feedstock rather than duplicating a

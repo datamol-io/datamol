@@ -1736,9 +1736,8 @@ GitHub Release does not upload a package to PyPI.</p>
    for example <code>## 0.13.0 - YYYY-MM-DD</code>. Date the release and update README
    and website wording that still calls it unreleased or specific to <code>dev</code>.</li>
 <li>Merge the release changes into <code>main</code>, preserving contributor history.</li>
-<li>Confirm that the repository secret <code>PYPI_API_TOKEN</code> contains a valid PyPI
-   token authorized for <code>datamol</code>. The workflow checks that the secret is
-   present but cannot validate its scope without contacting PyPI.</li>
+<li>Confirm that PyPI's Trusted Publisher matches the <code>datamol-io/datamol</code>
+   repository, <code>.github/workflows/release.yml</code> workflow and <code>pypi</code> environment.</li>
 </ol>
 <h2 id="run-the-release-action">Run the release action<a class="headerlink" href="#run-the-release-action" title="Permanent link">&para;</a></h2>
 <p>Open <strong>Actions → release → Run workflow</strong>. Select <code>main</code>, enter
@@ -1754,8 +1753,10 @@ and quality workflows on the selected commit, and builds the distributions.
 Both wheel and source installations are checked with Python's isolated mode,
 including their version and import location. Documentation must also build
 successfully before anything is uploaded.</p>
-<p>The publish job uploads the artifacts to PyPI using <code>PYPI_API_TOKEN</code>. PyPI
-rejects PEP 740 attestations on token-based uploads, so none are generated.</p>
+<p>The publish job uses PyPI Trusted Publishing: GitHub exchanges its short-lived
+OpenID Connect identity for a project-scoped PyPI token. No long-lived PyPI
+credential is stored in GitHub. The action also generates and uploads PEP 740
+attestations for both distributions.</p>
 <p>Only after PyPI succeeds does the action create the GitHub tag and Release
 at the tested commit, then deploy versioned documentation. A prerelease never
 moves the <code>stable</code> documentation alias. A failed upload leaves that alias
