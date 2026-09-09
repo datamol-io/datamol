@@ -57,6 +57,6 @@ remains a supported Conda alternative. The CI uses the same uv-based install
 path and tests the supported Python and RDKit series on Linux x86-64, Windows
 x86-64, macOS Apple Silicon and macOS Intel. Tutorial notebooks,
 documentation, formatting and package distributions run separately. Publication
-remains a manual action using `PYPI_API_TOKEN`, with full release validation
-and isolated distribution tests. See the [release guide](releasing.md),
+remains a manual action using PyPI Trusted Publishing, with full release
+validation and isolated distribution tests. See the [release guide](releasing.md),
 including the separate conda-forge recipe updates.

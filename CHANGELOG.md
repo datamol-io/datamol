@@ -59,9 +59,10 @@ for earlier release notes.
 - Validate Linux, Windows, macOS Apple Silicon and macOS Intel, with separate
   jobs for core tests, optional features, notebooks, documentation and package
   smoke tests.
-- Keep publication manual through the `release` action and `PYPI_API_TOKEN`,
-  with PEP 740 attestations. Release tests and isolated wheel/source checks
-  gate publication; prereleases never replace the stable documentation.
+- Keep publication manual through the `release` action and authenticate with
+  PyPI Trusted Publishing, with PEP 740 attestations. Release tests and isolated
+  wheel/source checks gate publication; prereleases never replace the stable
+  documentation.
 - Add a non-publishing dry run and a [release guide](docs/releasing.md).
   Conda-forge remains a separate channel requiring recipe updates.
 

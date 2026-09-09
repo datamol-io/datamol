@@ -68,10 +68,10 @@ Everything is automated using GitHub Actions.
 ## Release a new version
 
 Run the `release` action manually from `main`, with the intended version and
-`dry-run` unchecked when ready to publish. The existing `PYPI_API_TOKEN`
-secret authenticates PyPI uploads. Tests, package validation and documentation
-must pass first. See the [release guide](releasing.md) for the rehearsal,
-prerelease and recovery steps.
+`dry-run` unchecked when ready to publish. PyPI Trusted Publishing authenticates
+the upload without a long-lived repository secret. Tests, package validation
+and documentation must pass first. See the [release guide](releasing.md) for
+the rehearsal, prerelease and recovery steps.
 
 The existing conda-forge feedstock remains the Conda release channel. After a
 PyPI release, conda-forge's update bot proposes the new version; maintainers

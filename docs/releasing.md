@@ -9,9 +9,8 @@ GitHub Release does not upload a package to PyPI.
    for example `## 0.13.0 - YYYY-MM-DD`. Date the release and update README
    and website wording that still calls it unreleased or specific to `dev`.
 2. Merge the release changes into `main`, preserving contributor history.
-3. Confirm that the repository secret `PYPI_API_TOKEN` contains a valid PyPI
-   token authorized for `datamol`. The workflow checks that the secret is
-   present but cannot validate its scope without contacting PyPI.
+3. Confirm that PyPI's Trusted Publisher matches the `datamol-io/datamol`
+   repository, `.github/workflows/release.yml` workflow and `pypi` environment.
 
 ## Run the release action
 
@@ -31,8 +30,10 @@ Both wheel and source installations are checked with Python's isolated mode,
 including their version and import location. Documentation must also build
 successfully before anything is uploaded.
 
-The publish job uploads the artifacts to PyPI using `PYPI_API_TOKEN`. PyPI
-rejects PEP 740 attestations on token-based uploads, so none are generated.
+The publish job uses PyPI Trusted Publishing: GitHub exchanges its short-lived
+OpenID Connect identity for a project-scoped PyPI token. No long-lived PyPI
+credential is stored in GitHub. The action also generates and uploads PEP 740
+attestations for both distributions.
 
 Only after PyPI succeeds does the action create the GitHub tag and Release
 at the tested commit, then deploy versioned documentation. A prerelease never
