@@ -12,6 +12,19 @@ def test_to_fp():
     assert dm.to_fp(mol).sum() == 31
 
 
+@pytest.mark.parametrize("smiles", ["C", "CCO", "c1ccccc1"])
+@pytest.mark.parametrize("fp_type", ["ecfp-count", "atompair-count", "topological-count"])
+def test_to_fp_short_molecule_counts(smiles, fp_type):
+    fingerprint = dm.to_fp(smiles, fp_type=fp_type, as_array=False)
+    array = dm.to_fp(smiles, fp_type=fp_type)
+
+    assert array.dtype.kind == "i"
+    assert array.shape == (fingerprint.GetLength(),)
+    assert array.sum() == sum(fingerprint.GetNonzeroElements().values())
+    for index, count in fingerprint.GetNonzeroElements().items():
+        assert array[index] == count
+
+
 def test_list_fp():
     assert set(dm.list_supported_fingerprints().keys()) == {
         "atompair",

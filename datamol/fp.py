@@ -225,7 +225,9 @@ def fp_to_array(
         ),
     ):
         tmp = np.zeros(fp.GetLength(), dtype=int)
-        bit_idx, values = np.array(list(fp.GetNonzeroElements().items())).T
+        elements = fp.GetNonzeroElements()
+        bit_idx = np.fromiter(elements.keys(), dtype=int)
+        values = np.fromiter(elements.values(), dtype=int)
         tmp[bit_idx] = values
         fp_out = tmp
 
